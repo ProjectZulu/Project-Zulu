@@ -1,0 +1,68 @@
+package projectzulu.common.core;
+
+public class Sounds {
+    public static final String SOUND_RESOURCE_LOCATION = "mods/sounds/";
+    //public static final String SOUND_RESOURCE_LOCATION = "/Minecraft Modding/MCP Forge FML/jars/bin/minecraft.jar/mods/sounds";
+
+    public static String[] soundFiles = {
+    	SOUND_RESOURCE_LOCATION + "armadillodeath.ogg",
+    	SOUND_RESOURCE_LOCATION + "armadillohurt.ogg",
+    	SOUND_RESOURCE_LOCATION + "armadilloliving.ogg",
+    	SOUND_RESOURCE_LOCATION + "lizardhurt.ogg",
+    	SOUND_RESOURCE_LOCATION + "mummyroar.ogg",
+    	SOUND_RESOURCE_LOCATION + "sandwormroar.ogg",
+    	SOUND_RESOURCE_LOCATION + "summonwhispers.ogg",
+    	SOUND_RESOURCE_LOCATION + "MummyShortRoar.ogg",
+    	SOUND_RESOURCE_LOCATION + "vulturehurt.ogg",
+    	SOUND_RESOURCE_LOCATION + "treeenthurt.ogg",
+    	SOUND_RESOURCE_LOCATION + "treeentliving.ogg",
+    	SOUND_RESOURCE_LOCATION + "mammothhurt.ogg",
+    	SOUND_RESOURCE_LOCATION + "mammothliving.ogg",
+    	SOUND_RESOURCE_LOCATION + "foxhurtsound.ogg",
+    	SOUND_RESOURCE_LOCATION + "boarliving1.ogg",
+    	SOUND_RESOURCE_LOCATION + "boarliving2.ogg",
+    	SOUND_RESOURCE_LOCATION + "mimicliving.ogg",
+    	SOUND_RESOURCE_LOCATION + "bearliving.ogg",
+    	SOUND_RESOURCE_LOCATION + "crocoodileliving.ogg",
+    	SOUND_RESOURCE_LOCATION + "froghurt.ogg",
+    	SOUND_RESOURCE_LOCATION + "frogliving.ogg",
+    	SOUND_RESOURCE_LOCATION + "penguinhurt.ogg",
+    	SOUND_RESOURCE_LOCATION + "beaverliving.ogg",
+    	SOUND_RESOURCE_LOCATION + "ostrichhurtsound.ogg",
+    	SOUND_RESOURCE_LOCATION + "ostrichlivingsound.ogg",
+    	SOUND_RESOURCE_LOCATION + "rhinohurtsound.ogg",
+    	SOUND_RESOURCE_LOCATION + "rhinolivingsound.ogg",
+    	SOUND_RESOURCE_LOCATION + "mammothstomp.ogg",
+    	SOUND_RESOURCE_LOCATION + "rabbitdead1.ogg",
+    	SOUND_RESOURCE_LOCATION + "bird1.ogg",
+    	SOUND_RESOURCE_LOCATION + "bird2.ogg",
+    	SOUND_RESOURCE_LOCATION + "bird3.ogg",
+    	SOUND_RESOURCE_LOCATION + "bird4.ogg",
+    	SOUND_RESOURCE_LOCATION + "bird5.ogg",
+    	SOUND_RESOURCE_LOCATION + "birdhurt1.ogg",
+    	SOUND_RESOURCE_LOCATION + "birdhurt2.ogg",
+    	SOUND_RESOURCE_LOCATION + "birdplop1.ogg",
+    	SOUND_RESOURCE_LOCATION + "gorillageneric1.ogg",
+    	SOUND_RESOURCE_LOCATION + "gorillahurt1.ogg",
+    	SOUND_RESOURCE_LOCATION + "elephanthurtsound.ogg",
+    	SOUND_RESOURCE_LOCATION + "elephantlivingsound.ogg",
+    	SOUND_RESOURCE_LOCATION + "horse1.ogg",
+    	SOUND_RESOURCE_LOCATION + "horse2.ogg",
+    	SOUND_RESOURCE_LOCATION + "horse3.ogg",
+    	SOUND_RESOURCE_LOCATION + "horse4.ogg",
+    	SOUND_RESOURCE_LOCATION + "horsehurt1.ogg",
+    	SOUND_RESOURCE_LOCATION + "pelicanhurt.ogg",
+    	SOUND_RESOURCE_LOCATION + "pelicanliving1.ogg",
+    	SOUND_RESOURCE_LOCATION + "pelicanliving2.ogg",
+    	SOUND_RESOURCE_LOCATION + "pelicanliving3.ogg",
+    	SOUND_RESOURCE_LOCATION + "eaglehurt1.ogg",
+    	SOUND_RESOURCE_LOCATION + "eagleliving1.ogg",
+    	SOUND_RESOURCE_LOCATION + "eagleliving2.ogg",
+    	SOUND_RESOURCE_LOCATION + "hornbillhurt1.ogg",
+    	SOUND_RESOURCE_LOCATION + "hornbillliving1.ogg",
+    	SOUND_RESOURCE_LOCATION + "hornbillliving2.ogg",
+    	SOUND_RESOURCE_LOCATION + "hornbillliving3.ogg"
+    	};
+}
+
+
