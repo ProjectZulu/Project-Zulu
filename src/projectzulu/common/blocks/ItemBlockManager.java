@@ -495,6 +495,27 @@ public enum ItemBlockManager {
 		@Override
 		protected void loadCustomConfig(Configuration config) {}
 	},
+	/* Note That this utilizing most of the Vanilla Features, just Changes enough to introduce custom TileEntity */
+	CustomBrewingStand{
+		@Override
+		protected boolean isBlock() { return true;	}
+		
+		@Override
+		protected void create() {
+			Block.blocksList[Block.brewingStand.blockID] = null;
+			ItemBlockList.customBrewingStand = Optional.of(
+					(new BlockZuluBrewingStand(117)).setHardness(0.5F).setLightValue(0.125F).setBlockName("brewingStand").setRequiresSelfNotify()
+					);
+		}
+		
+		@Override
+		protected void register() {
+	        GameRegistry.registerTileEntity(TileEntityZuluBrewingStand.class, "TileEntityZuluBrewingStand");   
+		}
+
+		@Override
+		protected void loadCustomConfig(Configuration config) {}
+	},
 	Ankh{
 		@Override
 		protected boolean isBlock() { return false;	}
@@ -697,16 +718,16 @@ public enum ItemBlockManager {
 		protected void create() {
 			ItemBlockList.genericCraftingItems1 = Optional.of(
 					new ItemGenerics(blockID, 10).setItemName("genericCraftingItems1"));
-			}
+		}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.genericCraftingItems1.get();
-	        LanguageRegistry.addName(new ItemStack(item,1,0), "Poison Droplet");
-	        LanguageRegistry.addName(new ItemStack(item,1,1), "Tusk");
-	        LanguageRegistry.addName(new ItemStack(item,1,2), "Raw Fiber");
+			Item item = ItemBlockList.genericCraftingItems1.get();	        
+			for (ItemGenerics.Properties property : ItemGenerics.Properties.values()) {
+				LanguageRegistry.addName(new ItemStack(item, 1, property.meta), property.name);
+			}
 		}
-
+		
 		@Override
 		protected void loadCustomConfig(Configuration config) {}
 	},

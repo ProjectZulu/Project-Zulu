@@ -20,20 +20,35 @@ public class ItemCoconutItem extends Item{
 //		setPotionEffect("-0-1+2-3+10&8-8+9"); // Tier 2 Waterbreathing
 //		setPotionEffect("-0-1+2-3+10&4-4"); // Tier 1 Waterbreathing
 
-		/*Cleansing setPotionEffect*/
-//		setPotionEffect("0-1+2+3+10&8-8+9"); // Tier 2 Cleansing
-//		setPotionEffect("0-1+2+3+10&4-4"); // Tier 1 Cleansing
-	
+		/*Curse setPotionEffect*/
+//		setPotionEffect("-0+1+2+3+10&8-8+9"); // Tier 2 Curse
+//		setPotionEffect("-0+1+2+3+10&4-4"); // Tier 1 Curse
 		/*Cleansing setPotionEffect*/
 //		setPotionEffect("0+1+2+3+10&8-8+9"); // Tier 2 Cleansing
 //		setPotionEffect("0+1+2+3+10&4-4"); // Tier 1 Cleansing
 		
+		/*DigSlow setPotionEffect*/
+//		setPotionEffect("-0+1+2-3+10&8-8+9"); // Tier 2 DigSlow
+//		setPotionEffect("-0+1+2-3+10&4-4"); // Tier 1 DigSlow
 		/*DigSpeed setPotionEffect*/
 //		setPotionEffect("0+1+2-3+10&8-8+9"); // Tier 2 DigSpeed
 //		setPotionEffect("0+1+2-3+10&4-4"); // Tier 1 DigSpeed
+		
+		/*Slowfall setPotionEffect*/
+//		setPotionEffect("-0+1-2-3+10&8-8+9"); // Tier 2 Slowfall
+//		setPotionEffect("-0+1-2-3+10&4-4"); // Tier 1 Slowfall
 		/*Jump setPotionEffect*/
 //		setPotionEffect("0+1-2-3+10&8-8+9"); // Tier 2 Jump
 //		setPotionEffect("0+1-2-3+10&4-4"); // Tier 1 Jump
+		
+		/* Protection setPotionEffect */
+//		setPotionEffect("-0-1+2+3+10&8-8+9"); // Tier 2 Protection
+//		setPotionEffect("-0-1+2+3+10&4-4"); // Tier 1 Protection
+		/* Thorn setPotionEffect */
+//		setPotionEffect("0-1+2+3+10&8-8+9"); // Tier 2 Thorn
+//		setPotionEffect("0-1+2+3+10&4-4"); // Tier 1 Thorn
+		
+
 		
 		/**
 		 * Tier 2 Potions

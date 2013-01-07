@@ -13,19 +13,13 @@ public class PotionIncendiary extends PotionZulu{
 	
 	@Override
 	public void performEffect(EntityLiving par1EntityLiving, int par2) {
-		System.out.println("performEffect");
 		par1EntityLiving.setFire(par2);
-
 		super.performEffect(par1EntityLiving, par2);
 	}
 	
 	@Override
 	public void affectEntity(EntityLiving par1EntityLiving, EntityLiving par2EntityLiving, int par3, double par4) {
-		System.out.println("Affect Entity Values");
-		System.out.println(par3);
-		System.out.println(par4);
 		par2EntityLiving.setFire(20*3);
-
 		super.affectEntity(par1EntityLiving, par2EntityLiving, par3, par4);
 	}
 	
@@ -39,10 +33,5 @@ public class PotionIncendiary extends PotionZulu{
 	public boolean isReady(int par1, int par2) {
 		System.out.println("isReady");
 		return true;
-//		int var3;
-//		var3 = 25 >> par2;
-//		return var3 > 0 ? par1 % var3 == 0 : true;
-		
-//		return super.isReady(par1, par2);
 	}
 }

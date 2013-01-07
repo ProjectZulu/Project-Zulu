@@ -72,7 +72,6 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
  	public void registerTileEntityUniversalFlowerPotSpecialRender(){
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityUniversalFlowerPot.class, new TileEntityUniversalFlowerPotRenderer());
 	}
-
 	
 	@Override
 	public int registerBlockCustomRender(ISimpleBlockRenderingHandler renderClass){
