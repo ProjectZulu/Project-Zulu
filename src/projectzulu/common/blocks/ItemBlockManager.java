@@ -788,10 +788,9 @@ public enum ItemBlockManager {
 				block.blockCreated = true;
 			}
 	}
-
+	
 	protected abstract void create();
-
-
+	
 	public static void init() throws InstantiationException,
 	IllegalAccessException{
 		for (final ItemBlockManager block : values())

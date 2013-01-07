@@ -89,7 +89,9 @@ public class ProjectZulu_Blocks {
 			e.printStackTrace();
 		}
 		ProjectZuluLog.info("Finished ItemBlock Init ");
-
+		ProjectZuluLog.info("Starting Potion Init ");
+		PotionManager.loadSettings(zuluConfig);
+		ProjectZuluLog.info("Finsished Potion Init ");
         zuluConfig.save();
 	}
 	
@@ -127,7 +129,7 @@ public class ProjectZulu_Blocks {
 
 		mod_ProjectZulu.proxy.registerBlockRenders();
         NetworkRegistry.instance().registerGuiHandler(mod_ProjectZulu.modInstance, new ZuluGuiHandler());
-        		
+        
 		/* War Axe Declaration */
 //		TickRegistry.registerScheduledTickHandler(new RenderCustomArmorTicker(), Side.CLIENT);
 //		goldScaleIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/goldscale");
@@ -136,150 +138,15 @@ public class ProjectZulu_Blocks {
 //		MinecraftForgeClient.registerItemRenderer(vikingHelmetID+256, new ItemRendererVikingHelmet());
 	}
 	
-	public static final Potion bubbling = (new PotionZulu(21, true, 3484199, 1, 2)).setPotionName("potion.bubbling");
-	public static final Potion incendiary = (new PotionIncendiary(22, true, 3484199)).setPotionName("potion.incendiary");
-	public static final Potion slowfall = (new PotionSlowFall(23, true, 3484199)).setPotionName("potion.slowfall");
-	public static final Potion cleansing = (new PotionCleansing(24, true, 3484199)).setPotionName("potion.cleansing");
-	public static final Potion curse = (new PotionCurse(25, true, 3484199)).setPotionName("potion.curse");
-	public static final Potion thorn = (new PotionThorns(26, true, 3484199)).setPotionName("potion.thorn");
-	
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event){
 		ItemBlockRecipeManager.setupBlockModuleRecipies();
 		LanguageRegistry.instance().addStringLocalization("itemGroup.projectZuluTab", "en_US", "Project Zulu");
 		
-//		/**
-//		 * Setup Potions
-//		 */
-		MinecraftForge.EVENT_BUS.register(new PotionEventHookContainerClass());
-        TickRegistry.registerTickHandler(new PotionCleansingTicker(), Side.SERVER);
+		ProjectZuluLog.info("Starting Potion Setup ");
+		PotionManager.setupAndRegisterPotions();
 		ZuluPotionHelper.setVanillaPotionProperties();
-		
-		LanguageRegistry.instance().addStringLocalization("potion.bubbling.postfix", "Bubbling Potion");
-		LanguageRegistry.instance().addStringLocalization("potion.bubbling", "Shiny!");
-		
-		LanguageRegistry.instance().addStringLocalization("potion.incendiary.postfix", "Incendiary Potion");
-		LanguageRegistry.instance().addStringLocalization("potion.incendiary", "Incendiary");
-		
-		LanguageRegistry.instance().addStringLocalization("potion.slowfall.postfix", "Slowfall Potion");
-		LanguageRegistry.instance().addStringLocalization("potion.slowfall", "Slowfall");
-		
-		LanguageRegistry.instance().addStringLocalization("potion.cleansing.postfix", "Cleansing Potion");
-		LanguageRegistry.instance().addStringLocalization("potion.cleansing", "Cleansing");
-		
-		LanguageRegistry.instance().addStringLocalization("potion.curse.postfix", "Cursed Potion");
-		LanguageRegistry.instance().addStringLocalization("potion.curse", "Curse");		
-		
-		LanguageRegistry.instance().addStringLocalization("potion.thorn.postfix", "Thorn Potion");
-		LanguageRegistry.instance().addStringLocalization("potion.thorn", "Thorn");		
-
-		/* Add additional Potions */
-		Field fieldPotionRequirement;
-		HashMap potionRequirements;
-		Field fieldField_77928_m;
-		HashMap field_77928_m;
-		try {
-			fieldPotionRequirement = PotionHelper.class.getDeclaredField("potionRequirements");
-			fieldPotionRequirement.setAccessible(true);
-			fieldField_77928_m = PotionHelper.class.getDeclaredField("field_77928_m");
-			fieldField_77928_m.setAccessible(true);
-			
-			potionRequirements = (HashMap) fieldPotionRequirement.get(PotionHelper.class);	
-			field_77928_m = (HashMap) fieldField_77928_m.get(PotionHelper.class);
-			
-			/* Bubbling Potion */
-			potionRequirements.put(bubbling.getId(), "!0 & !1 & !2 & !3 & 8");
-			
-			/**
-			 * Base Potions, b13
-			 */
-			/* Custom Potion: incindiary */
-			potionRequirements.put(incendiary.getId(), "0 & 1 & !2 & !3 & 5 & !6 & !10");
-	        field_77928_m.put(Integer.valueOf(incendiary.getId()), "9");	
-			/* Fire Resistance: Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.fireResistance.getId()), "0 & 1 & !2 & !3 & !5 & !10 & 0+6+9+9");
-			/* Swiftness/moveSpeed: Tier 1 & 2 Potion */
-			potionRequirements.put(Integer.valueOf(Potion.moveSpeed.getId()), "!0 & 1 & !2 & !3 & !10 & 1+6+9+9");
-			field_77928_m.put(Potion.moveSpeed.getId(), "5+9");
-			/* Slowness : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.moveSlowdown.getId()), "!0 & 1 & !2 & 3 & !10 & 3+6+9+9");
-			field_77928_m.put(Potion.moveSlowdown.getId(), "5+9");
-			
-			
-			/* Tier 2 Vanilla Potions */
-			/* Night Vision: Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.nightVision.getId()), "!0 & 1 & 2 & !3 & !5 & !10 & 2+6+9+9");
-	        /* Invisibility: Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.invisibility.getId()), "!0 & 1 & 2 & !3 & 5 & !10 & 5+9");
-			/* Blindness: Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.blindness.getId()), "!0 & 1 & 2 & 3 & !10 & 2+6+9+9");
-			/* Regeneration: Tier 1 & 2 Potion */
-			potionRequirements.put(Integer.valueOf(Potion.regeneration.getId()), "0 & !1 & !2 & !3 & !10 & 0+6+9+9");
-			field_77928_m.put(Potion.regeneration.getId(), "5+9");
-			/* Strength / DamageBoost: Tier 1 & 2 Potion */
-			potionRequirements.put(Integer.valueOf(Potion.damageBoost.getId()), "0 & !1 & !2 & 3 & !10 & 3+6+9+9");
-			field_77928_m.put(Potion.damageBoost.getId(), "5+9");
-			/* Weakness: Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.weakness.getId()), "!0 & !1 & !2 & 3 & !10 & 3+6+9+9");
-	        
-	        
-			/* Poison : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.poison.getId()), "!0 & !1 & 2 & !3 & !10 & 2+6+9+9");
-	        field_77928_m.put(Integer.valueOf(Potion.poison.getId()), "5+9");
-			/* Heal : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.heal.getId()), "0 & !1 & 2 & !3 & !10");
-	        field_77928_m.put(Integer.valueOf(Potion.heal.getId()), "5+9");
-			/* Harm : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.harm.getId()), "!0 & !1 & 2 & 3 & !10");
-	        field_77928_m.put(Integer.valueOf(Potion.harm.getId()), "5+9");
-	        
-	        /**
-	         * Extra Potions, b10
-	         */
-			/* Leap : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.jump.getId()), "0 & 1 & !2 & !3 & 10 & 1+6+9+9");
-	        field_77928_m.put(Integer.valueOf(Potion.jump.getId()), "5+9");
-			/* slowfall : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(slowfall.getId()), "!0 & 1 & !2 & !3 & 10 & 1+6+9+9");
-	        field_77928_m.put(Integer.valueOf(slowfall.getId()), "5+9");
-	        
-			/* Digsped : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.digSpeed.getId()), "0 & 1 & 2 & !3 & 10 & 1+6+9+9");
-	        field_77928_m.put(Integer.valueOf(Potion.digSpeed.getId()), "5+9");
-			/* Digsped : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.digSlowdown.getId()), "!0 & 1 & 2 & !3 & 10 & 1+6+9+9");
-	        field_77928_m.put(Integer.valueOf(Potion.digSlowdown.getId()), "5+9");	
-	        
-			/* Cleansing : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(cleansing.getId()), "0 & 1 & 2 & 3 & 10 & 1+6+9+9");
-	        field_77928_m.put(Integer.valueOf(cleansing.getId()), "5+9");
-			/* Curse : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(curse.getId()), "!0 & 1 & 2 & 3 & 10 & 1+6+9+9");
-	        field_77928_m.put(Integer.valueOf(curse.getId()), "5+9");
-	        
-			/* Thorn : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(thorn.getId()), "0 & !1 & 2 & 3 & 10 & 2+6+9+9");
-	        field_77928_m.put(Integer.valueOf(thorn.getId()), "5+9");
-			/* Resistance : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.resistance.getId()), "!0 & !1 & 2 & 3 & 2+6+9+9");
-	        field_77928_m.put(Integer.valueOf(Potion.resistance.getId()), "5+9");
-	        
-			/* WaterBreathing : Tier 1 & 2 Potion */
-	        potionRequirements.put(Integer.valueOf(Potion.waterBreathing.getId()), "!0 & !1 & 2 & !3 & 10 & 2+6+9+9");
-//	        field_77928_m.put(Integer.valueOf(Potion.waterBreathing.getId()), "5+9");	        
-		} catch (IllegalArgumentException e) {
-			ProjectZuluLog.warning("Bad Things Are Happening Accessing PotionRequirement Hashmap: IllegalArgumentException");
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			ProjectZuluLog.warning("Bad Things Are Happening Accessing PotionRequirement Hashmap : IllegalAccessException");
-			e.printStackTrace();
-		} catch (NoSuchFieldException e1) {
-			ProjectZuluLog.warning("Bad Things Are Happening setting PotionRequirement Hashmap public : NoSuchFieldException");
-			e1.printStackTrace();
-		} catch (SecurityException e1) {
-			ProjectZuluLog.warning("Bad Things Are Happening setting PotionRequirement Hashmap public : SecurityException");
-			e1.printStackTrace();
-		}
+		ProjectZuluLog.info("Finsished Potion Setup ");
 	}
 	
 	
