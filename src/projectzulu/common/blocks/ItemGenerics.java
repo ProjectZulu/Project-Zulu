@@ -18,26 +18,32 @@ public class ItemGenerics extends Item{
 		RawFiber("Raw Fiber", 2, 24),
 		
 		/* Potion Effect Ingredients */
-		BlackLichen("Black Lichen", 20, 240, "0-1+2+3+10&4-4", "0-1+2+3+10&8-8+9"), // Cleanse
+		BlackLichen("Black Lichen", 20, 240),
 		Pulp("Pulp", 21, 241),
 		Salt("Salt", 22, 242),
-		Antennae("Antennae", 23, 243, "-0+1+2+3+10&4-4", "-0+1+2+3+10&8-8+9"), // Blindness
+		Antennae("Antennae", 23, 243, "-0+1+2+3&4-4+13", "-0+1+2+3+10&8-8+9+13"), // Blindness
 		ShinyBauble("Shiny Bauble", 24, 244, "+8&4-4"),
 		Talon("Talon", 25, 245, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"), // Strength+
 		PlantStalk("Plant Stalk", 26, 246), 
-		Bark("Bark", 27, 247, "-0-1+2+3+10&4-4", "-0-1+2+3+10&8-8+9"), // Protection
-		SmallHeart("Small Heart", 28, 248, "0+1+2-3+10&4-4", "0+1+2-3+10&8-8+9"), //DigSpeed+
+		Bark("Bark", 27, 247),//, "-0-1+2+3+10&4-4", "-0-1+2+3+10&8-8+9"), // Protection
+		SmallHeart("Small Heart", 28, 248, "0+1+2-3+10&4-4", "0+1+2-3+10&8-8+9"), // DigSpeed+
 		LargeHeart("Large Heart", 29, 249, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"), // Strength+
 		Gill("Gill", 30, 250, "-0-1+2-3+10&4-4", "-0-1+2-3+10&8-8+9"), // Underwater Breathing
-		Ectoplasm("Ectoplasm", 31, 251, "0-1+2+3+10&4-4", "0-1+2+3+10&8-8+9"), // Curse
+		Ectoplasm("Ectoplasm", 31, 251),
 		FrogLegs("Frog Legs", 32, 252, "0+1-2-3+10&4-4", "0+1-2-3+10&8-8+9"), // Jump
-		RabbitsFoot("Rabbits Feet", 33, 253, "0+1-2-3+10&4-4", "0+1-2-3+10&8-8+9"); // Jump
-		//Salt + Small heart = DigSpeef-
-		//Salt + Large heart = Strength-
-		//Milk + Pulp  = Cleanse
-		//Milk + Pulp + Ectoplasm = Curse
-		//Cactus + Pulp = Thorns
-		//Cactus + Pulp + Barl/Scale = Protection
+		RabbitsFoot("Rabbits Feet", 33, 253, "0+1-2-3+10&4-4", "0+1-2-3+10&8-8+9"), // Jump
+		
+		PricklyPowder("Prickly Powder", 34, 224, "0-1+2+3+10&4-4", "0-1+2+3+10&8-8+9"), // Thorns
+		PowderSlush("Powder Slush", 35, 225, "0-1+2+3+10&4-4", "0-1+2+3+10&8-8+9"), // Cleanse
+		GlowingGoo("Glowing Goo", 36, 226, "-0+1+2+3+10&4-4", "-0+1+2+3+10&8-8+9"), // Green Goo
+		SmallUnhealthyHeart("Small Unhealthy Heart", 37, 254, "0+1+2-3+10&4-4", "0+1+2-3+10&8-8+9"), // DigSpeed-
+		LargeUnhealthyHeart("Large Unhealthy Heart", 38, 255, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"); // Strength-
+		//   Cactus + Pulp = Thorns   					:   Prickly Powder <X>
+		//   Cactus + Pulp + Bark/Scale = Protection	:	
+		//   Milk + Pulp  = Cleanse  					:   Powder Slush <X>
+		//   Milk + Pulp + Ectoplasm = Curse   			:   Green Goo <X>
+		//   Salt + Small heart = DigSpeef-  			:   Small Unhealthy Heart 
+		//   Salt + Large heart = Strength-  			:   Large Unhealthy Heart
 		
 		String name;
 		int meta; public int meta(){ return meta; }
@@ -75,7 +81,10 @@ public class ItemGenerics extends Item{
 	}
 	
 	@Override
-	public boolean isPotionIngredient() { return false; }
+	public boolean isPotionIngredient() { return true; }
+	@Override
+	public String getPotionEffect() { return ""; }
+	
 	public boolean isPotionIngredient(int brewingIndex, ItemStack ingredientItemStack) {
 		if(getPotionEffect(brewingIndex, ingredientItemStack) != null){
 			return true;

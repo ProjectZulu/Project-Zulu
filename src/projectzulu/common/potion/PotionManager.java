@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.potion.ZuluPotionHelper;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.API.ItemBlockList;
@@ -108,8 +109,8 @@ public enum PotionManager {
 	int potionID;
 	static boolean replaceVanillaBrewingStand = true;
 	static boolean alterVanillaPotionRequirements = true;
-	public static boolean disablePotionModule = false;
-	public static boolean disableNullPotionHandler = false;
+	public static boolean potionModuleEnabled = true;
+	public static boolean enableNullPotionHandler = true;
 
 	protected abstract void setupPotion(HashMap potionRequirements, HashMap field_77928_m);
 	protected abstract void registerPotion();
@@ -117,10 +118,10 @@ public enum PotionManager {
 		this.potionID = potionID;
 	}
 	public static void loadSettings(Configuration config){
-		disablePotionModule = config.get("Potion Controls", "disablePotionModule", disablePotionModule).getBoolean(disablePotionModule);
+		potionModuleEnabled = config.get("Potion Controls", "Potion Module Enabled", potionModuleEnabled).getBoolean(potionModuleEnabled);
 		replaceVanillaBrewingStand = config.get("Potion Controls", "Replace Vanilla Brewing Stand", replaceVanillaBrewingStand).getBoolean(replaceVanillaBrewingStand);
 		alterVanillaPotionRequirements = config.get("Potion Controls", "Alter Vanilla Potion Requirements", alterVanillaPotionRequirements).getBoolean(alterVanillaPotionRequirements);
-		disableNullPotionHandler = config.get("Potion Controls", "Disable Null Potion Handler", disableNullPotionHandler).getBoolean(disableNullPotionHandler);
+		enableNullPotionHandler = config.get("Potion Controls", "Enable Null Potion Handler", enableNullPotionHandler).getBoolean(enableNullPotionHandler);
 		for (PotionManager potion : PotionManager.values()) {
 			potion.potionID = config.get("Potion Controls."+potion.toString(), "PotionID", potion.potionID).getInt(potion.potionID);
 		}
@@ -168,7 +169,21 @@ public enum PotionManager {
 		/** Replace Vanilla Brewing Stand TileEntity
 		 * Note That this utilizing most of the Vanilla Features, just Changes enough to introduce custom TileEntity */
 		if(replaceVanillaBrewingStand){
+			/* Remove Vanilla Brewing Stand and Tile Entity */
 			Block.blocksList[Block.brewingStand.blockID] = null;
+			try {
+				Field fieldnameToClassMap = TileEntity.class.getDeclaredField("nameToClassMap");
+				fieldnameToClassMap.setAccessible(true);
+				HashMap nameToClassMap = (HashMap) fieldnameToClassMap.get(TileEntity.class);	
+				if(nameToClassMap.containsKey("Cauldron")){
+					nameToClassMap.remove("Cauldron");
+				}
+			} catch (Exception e) {
+				ProjectZuluLog.warning("Bad Things Are Happening tryin to Access TileEntityNameMap Hashmap public");
+				e.printStackTrace();
+			}
+
+			/* Sub in Our Own Brewing Stand and Tile Entity */
 			ItemBlockList.customBrewingStand = Optional.of(
 					(new BlockZuluBrewingStand(117)).setHardness(0.5F).setLightValue(0.125F).setBlockName("brewingStand").setRequiresSelfNotify()
 					);

@@ -138,7 +138,7 @@ public class ProjectZulu_Blocks {
 		ItemBlockRecipeManager.setupBlockModuleRecipies();
 		LanguageRegistry.instance().addStringLocalization("itemGroup.projectZuluTab", "en_US", "Project Zulu");
 		
-		if(PotionManager.disablePotionModule){
+		if(!PotionManager.potionModuleEnabled){
 			ProjectZuluLog.info("Skipping Potion Setup, Potion Module Disabled");
 		}else{
 			ProjectZuluLog.info("Starting Potion Setup ");
@@ -147,7 +147,7 @@ public class ProjectZulu_Blocks {
 		}
 		
 		/* Turn on NullPotionHandler */
-		if(!PotionManager.disableNullPotionHandler){
+		if(PotionManager.enableNullPotionHandler){
 			MinecraftForge.EVENT_BUS.register(new EventHandleNullPotions());
 		}
 	}

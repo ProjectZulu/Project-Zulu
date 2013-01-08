@@ -162,7 +162,6 @@ public class EventHookContainerClass {
 	
 	@ForgeSubscribe
 	public void PlayerDeathTest(LivingDeathEvent event){
-		
 //		if( (Loader.isModLoaded(DefaultProps.MobsModId) && event.entity instanceof EntityCreeper) ){
 //			World worldObj = event.entity.worldObj;
 //			EntityCreeper Creeper = (EntityCreeper)event.entity;
@@ -240,7 +239,6 @@ public class EventHookContainerClass {
 	 */
 	@ForgeSubscribe
 	public void treeEntDefendForest(BreakSpeed event){
-		
 		if(Loader.isModLoaded(DefaultProps.MobsModId)){
 			if(event.entity != null && event.entity instanceof EntityPlayer && event.block.blockID == Block.wood.blockID){
 				EntityPlayer player = (EntityPlayer)(event.entity);

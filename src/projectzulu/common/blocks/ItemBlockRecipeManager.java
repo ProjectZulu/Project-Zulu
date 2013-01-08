@@ -80,18 +80,50 @@ public class ItemBlockRecipeManager {
 			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.aloeVera.get(), 2), new ItemStack(ItemBlockList.tumbleweed.get()));
 		}
 		
-		/* Misc Generic Craftables */
+		/**
+		 *  Misc Generic Craftables 
+		 */
 		if(ItemBlockList.genericCraftingItems1.isPresent()){
+			/* 3 Tusks --> Spike */
 			if(ItemBlockList.spike.isPresent()){
 				GameRegistry.addRecipe(new ItemStack(ItemBlockList.spike.get()), new Object[]{
 					"   ","   ","TTT", 'T', new ItemStack(ItemBlockList.genericCraftingItems1.get(), 1, ItemGenerics.Properties.Tusk.meta()) });
 			}
 			
+			/* 4 Raw Fiber --> String  */
 			GameRegistry.addShapelessRecipe(new ItemStack(Item.silk),
 					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
 					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
 					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
 					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()));
+			
+			/*   Cactus + Pulp = Thorns   					:   Prickly Powder */
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.PricklyPowder.meta()),
+					new ItemStack(Block.cactus), new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Pulp.meta()));
+			/*   Milk + Pulp + Black Lichen  = Cleanse  					:   Powder Slush */
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.PowderSlush.meta()),
+					new ItemStack(Item.bucketMilk), new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Pulp.meta()), 
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.BlackLichen.meta()));
+			/*   Milk + Pulp + Ectoplasm = Curse   			:   Glowing Goo */
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.GlowingGoo.meta()),
+					new ItemStack(Item.bucketMilk), new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Pulp.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Ectoplasm.meta()));
+			/*   Powder Slush + Ectoplasm = Curse   			:   Glowing Goo */
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.GlowingGoo.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.PowderSlush.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Ectoplasm.meta()));
+			/*   Salt + Small heart = DigSpeef-  			:   Small Unhealthy Heart */
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.SmallUnhealthyHeart.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.SmallHeart.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Salt.meta()));
+			/*   Salt + Large heart = Strength-  			:   Large Unhealthy Heart */
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.LargeUnhealthyHeart.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.LargeHeart.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Salt.meta()));
+			/* Paper --> Pulp */
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Pulp.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.LargeHeart.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Salt.meta()));
 		}
 		
 		if(ItemBlockList.furPelt.isPresent()){

@@ -88,8 +88,7 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
             ItemStack var1 = this.brewingItemStacks[3];
             
             
-            if ( !Item.itemsList[var1.itemID].isPotionIngredient() || (var1.getItem() instanceof ItemGenerics 
-            		&& ((ItemGenerics)var1.getItem()).isPotionIngredient(this.brewingItemStacks[0].getItemDamage(), var1) ) ){
+            if ( !Item.itemsList[var1.itemID].isPotionIngredient() ){
                 return false;
             }
             else
@@ -209,7 +208,6 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
     			String potionEffect = (brewingIndex & 1 << 10) > 0 ? "+14&10" : "+14&13-13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
     		}
-    		//Gunpowder 10 should be 13? for Other
     	}
         return ingredientItemStack == null ? brewingIndex : (Item.itemsList[ingredientItemStack.itemID].isPotionIngredient() ? PotionHelper.applyIngredient(brewingIndex, Item.itemsList[ingredientItemStack.itemID].getPotionEffect()) : brewingIndex);
     }
