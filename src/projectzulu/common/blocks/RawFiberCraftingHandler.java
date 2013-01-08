@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import projectzulu.common.core.ItemBlockList;
+import projectzulu.common.API.ItemBlockList;
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class RawFiberCraftingHandler implements ICraftingHandler{
@@ -39,8 +39,7 @@ public class RawFiberCraftingHandler implements ICraftingHandler{
 
 		if(!contsinsFur) return;
 		
-//		ItemStack itemToPlace = new ItemStack(ItemBlockList.genericCraftingItems1.get().shiftedIndex, 1, 2);
-		ItemStack itemToPlace = new ItemStack(ItemBlockList.genericCraftingItems1.get(), 2, 2);
+		ItemStack itemToPlace = new ItemStack(ItemBlockList.genericCraftingItems1.get(), 2, ItemGenerics.Properties.RawFiber.meta());
 
 		if(furInSlot == 4){
 			craftMatrix.setInventorySlotContents(1, itemToPlace);
@@ -51,10 +50,7 @@ public class RawFiberCraftingHandler implements ICraftingHandler{
 	}
 	
 	@Override
-	public void onSmelting(EntityPlayer player, ItemStack item) {
-		// TODO Auto-generated method stub
-
-	}
+	public void onSmelting(EntityPlayer player, ItemStack item) {}
 }
 
 

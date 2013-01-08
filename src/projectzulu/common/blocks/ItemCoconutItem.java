@@ -1,7 +1,6 @@
 package projectzulu.common.blocks;
 
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
 import projectzulu.common.ProjectZulu_Blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

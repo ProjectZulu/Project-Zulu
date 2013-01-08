@@ -1,10 +1,9 @@
-package projectzulu.common;
+package projectzulu.common.potion;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.potion.Potion;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.potion.Potion;
 
 public class PotionZulu extends Potion{
 

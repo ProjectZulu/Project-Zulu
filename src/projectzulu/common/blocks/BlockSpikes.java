@@ -16,7 +16,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.mod_ProjectZulu;
-import projectzulu.common.core.ItemBlockList;
+import projectzulu.common.API.ItemBlockList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,11 +24,9 @@ public class BlockSpikes extends Block{
 
 	public BlockSpikes(int i){
 		super(i, Material.iron);
-		//		setTickRandomly(true);
         this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
 		this.disableStats();
 		this.setRequiresSelfNotify();
-//        float var4 = 0.2F;
         this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
         blockIndexInTexture = 33;
 	}
@@ -48,14 +46,11 @@ public class BlockSpikes extends Block{
 		}else{
 			return 33;
 		}
-		
-//		return super.getBlockTextureFromSideAndMetadata(par1, par2);
 	}
 	
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
 			int par2, int par3, int par4) {
-		// TODO Auto-generated method stub
         if(par1iBlockAccess.getBlockId(par2, par3-1, par4) == Block.fence.blockID || par1iBlockAccess.getBlockId(par2, par3-1, par4) == Block.netherFence.blockID ){
         	this.setBlockBounds(0.375f, 0.0F, 0.375f, 0.625f, 0.4f, 0.625f);
             
@@ -78,9 +73,7 @@ public class BlockSpikes extends Block{
         	}
 			
 		}else{
-		
 			int blockMeta = par1iBlockAccess.getBlockMetadata(par2, par3, par4);
-			
 			switch ( par1iBlockAccess.getBlockMetadata(par2, par3, par4) ) {
 			case 0:
 		        this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
@@ -177,21 +170,14 @@ public class BlockSpikes extends Block{
 				|| (par5Entity.prevPosX > par2+0.5 && par5Entity.posX < par2+0.5)
 				|| (par5Entity.prevPosZ > par4+0.5 && par5Entity.posZ < par4+0.5) 
 				) ){
-//		if(par5Entity instanceof EntityLiving && (par5Entity.posX != par5Entity.prevPosX) ){
-
-//			ModLoader.getMinecraftInstance().thePlayer.addChatMessage( "Falled Upon by Collide" );
-			
 			/* Check if Spikes are Poison, If So Also Apply Posion with Damage*/
 			if(par1World.getBlockMetadata(par2, par3, par4) > 5 && par1World.getBlockMetadata(par2, par3, par4) < 12){
-//				ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Poison");
             	((EntityLiving)par5Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 40, 1));
 			}
 			if( par1World.getBlockMetadata(par2, par3, par4) > 11 ){
-//				ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Slow");
             	((EntityLiving)par5Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 40, 4));
 			}
 			par5Entity.attackEntityFrom(DamageSource.generic, 2);
-
 		}
 
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
@@ -201,15 +187,18 @@ public class BlockSpikes extends Block{
 	public boolean onBlockActivated(World par1World, int par2, int par3,
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
-		// TODO Auto-generated method stub
+
+		/* Check if Item is Poison Droplet, is so Make Poisonous */
 		if( par5EntityPlayer.inventory.getCurrentItem() != null && ItemBlockList.genericCraftingItems1.isPresent() && par5EntityPlayer.inventory.getCurrentItem().getItem().shiftedIndex == ItemBlockList.genericCraftingItems1.get().shiftedIndex
-				&& par5EntityPlayer.inventory.getCurrentItem().getItemDamage() == 0 
+				&& par5EntityPlayer.inventory.getCurrentItem().getItemDamage() == ItemGenerics.Properties.PoisonDroplet.meta() 
 				&& ( par1World.getBlockMetadata(par2, par3, par4) < 6 || par1World.getBlockMetadata(par2, par3, par4) > 11 ) ){
 			
+			/* Consume if Not Creative */
 			if(!par5EntityPlayer.capabilities.isCreativeMode){
 				par5EntityPlayer.inventory.getCurrentItem().stackSize = par5EntityPlayer.inventory.getCurrentItem().stackSize - 1;
 			}
 			
+			/* If not Poison (meta<6) increase by 6, if sticky(>11) reduce by 6*/
 			if(par1World.getBlockMetadata(par2, par3, par4) < 6){
 				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6 );
 			}else{
@@ -217,16 +206,20 @@ public class BlockSpikes extends Block{
 			}
 		}
 		
+		/* Check if Item is Sticky Droplet, is so Make Sticky */
 		if( par5EntityPlayer.inventory.getCurrentItem() != null && par5EntityPlayer.inventory.getCurrentItem().getItem().shiftedIndex == Item.slimeBall.shiftedIndex
 				&& ( par1World.getBlockMetadata(par2, par3, par4) < 12 ) ){
+			
+			/* Consume if Not Creative */
 			if(!par5EntityPlayer.capabilities.isCreativeMode){
 				par5EntityPlayer.inventory.getCurrentItem().stackSize = par5EntityPlayer.inventory.getCurrentItem().stackSize - 1;
 			}
+			
+			/* If not Poison or Sticky (meta<6) increase by 12, if Poison(>6 & <11) increase by 6*/
 			if( par1World.getBlockMetadata(par2, par3, par4) < 6 ){
 				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 12 );
 			}else{
 				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6 );
-
 			}
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,

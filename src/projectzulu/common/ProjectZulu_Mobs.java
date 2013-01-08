@@ -2,10 +2,9 @@ package projectzulu.common;
 
 import java.io.File;
 
-import net.minecraft.network.packet.Packet;
-import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
+import projectzulu.common.mobs.CustomEntityManager;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -16,7 +15,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid = "ProjectZulu|Mobs", name = "Project Zulu Mobs", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
+@Mod(modid = DefaultProps.MobsModId, name = "Project Zulu Mobs", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class ProjectZulu_Mobs {

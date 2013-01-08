@@ -1,6 +1,5 @@
-package projectzulu.common;
+package projectzulu.common.core;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -22,11 +21,10 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.blocks.TileEntityTombstone;
-import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import projectzulu.common.mobs.EntityTreeEnt;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 
 public class EventHookContainerClass {

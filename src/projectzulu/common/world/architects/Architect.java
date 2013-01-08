@@ -3,8 +3,8 @@ package projectzulu.common.world.architects;
 import java.util.ArrayList;
 import java.util.Random;
 
-import projectzulu.common.world.BlockWithMeta;
 import projectzulu.common.world.CellIndexDirection;
+import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
 import projectzulu.common.world.blueprints.Blueprint;
 
 /**

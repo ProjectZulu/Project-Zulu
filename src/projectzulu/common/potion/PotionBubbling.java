@@ -1,4 +1,4 @@
-package projectzulu.common;
+package projectzulu.common.potion;
 
 public class PotionBubbling extends PotionZulu{
 	

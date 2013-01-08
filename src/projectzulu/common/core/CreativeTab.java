@@ -2,6 +2,7 @@ package projectzulu.common.core;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import projectzulu.common.API.ItemBlockList;
 
 public class CreativeTab extends CreativeTabs{
 

@@ -3,10 +3,10 @@ package projectzulu.common.world.blueprints;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import projectzulu.common.core.ItemBlockList;
-import projectzulu.common.world.BlockWithMeta;
+import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.world.CellIndexDirection;
-import projectzulu.common.world.HauntedArmorWithMeta;
+import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
+import projectzulu.common.world.BlockDataObjects.HauntedArmorWithMeta;
 
 public class BlueprintScatteredTombstonesAndFlowers extends Blueprint{
 	@Override

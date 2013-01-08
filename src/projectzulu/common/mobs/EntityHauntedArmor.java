@@ -2,27 +2,21 @@ package projectzulu.common.mobs;
 
 import java.util.EnumSet;
 
-import projectzulu.common.core.CustomEntityList;
-import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
-import projectzulu.common.mobs.entityai.EntityAIFollowParent;
-import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
-import projectzulu.common.mobs.entityai.EntityAIMate;
-import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
-import projectzulu.common.mobs.entityai.EntityAIPanic;
-import projectzulu.common.mobs.entityai.EntityAIStayStill;
-import projectzulu.common.mobs.entityai.EntityAITempt;
-import projectzulu.common.mobs.entityai.EntityAIWander;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.core.ProjectZuluLog;
+import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
+import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
+import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
+import projectzulu.common.mobs.entityai.EntityAIPanic;
+import projectzulu.common.mobs.entityai.EntityAIStayStill;
+import projectzulu.common.mobs.entityai.EntityAIWander;
 
 public class EntityHauntedArmor extends EntityGenericAnimal implements IMob{
 

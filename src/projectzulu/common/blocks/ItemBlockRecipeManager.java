@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import projectzulu.common.mod_ProjectZulu;
-import projectzulu.common.core.ItemBlockList;
+import projectzulu.common.API.ItemBlockList;
 import cpw.mods.fml.common.ICraftingHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -79,29 +79,31 @@ public class ItemBlockRecipeManager {
 		if(ItemBlockList.aloeVera.isPresent() && ItemBlockList.tumbleweed.isPresent()){
 			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.aloeVera.get(), 2), new ItemStack(ItemBlockList.tumbleweed.get()));
 		}
-
-
+		
 		/* Misc Generic Craftables */
 		if(ItemBlockList.genericCraftingItems1.isPresent()){
 			if(ItemBlockList.spike.isPresent()){
 				GameRegistry.addRecipe(new ItemStack(ItemBlockList.spike.get()), new Object[]{
-					"   ","   ","TTT", 'T', new ItemStack(ItemBlockList.genericCraftingItems1.get(), 1, 1) });
+					"   ","   ","TTT", 'T', new ItemStack(ItemBlockList.genericCraftingItems1.get(), 1, ItemGenerics.Properties.Tusk.meta()) });
 			}
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(Item.silk),
-					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,2),new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,2),
-					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,2),new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,2));
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
+					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()));
 		}
+		
 		if(ItemBlockList.furPelt.isPresent()){
 			if(ItemBlockList.genericCraftingItems1.isPresent()){
 				GameRegistry.registerCraftingHandler(new RawFiberCraftingHandler());
 			}
 			GameRegistry.addShapelessRecipe(new ItemStack(Item.leather), new ItemStack(ItemBlockList.furPelt.get()));
 		}
+		
 		if(!mod_ProjectZulu.replaceFlowerPot && ItemBlockList.universalFlowerPot.isPresent()){
 			GameRegistry.addShapelessRecipe(new ItemStack(Item.flowerPot), new ItemStack(ItemBlockList.universalFlowerPot.get()));
 			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.universalFlowerPot.get()), new ItemStack(Item.flowerPot));
-
 		}
 
 	}

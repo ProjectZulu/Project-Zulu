@@ -11,11 +11,11 @@ import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.blocks.heads.BlockMobHeads;
 import projectzulu.common.blocks.heads.ItemMobHeads;
 import projectzulu.common.blocks.heads.TileEntityMobHeads;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.Optional;
@@ -490,27 +490,6 @@ public enum ItemBlockManager {
 	        GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");   
 	        mod_ProjectZulu.proxy.registerTileEntityUniversalFlowerPotSpecialRender();
 
-		}
-
-		@Override
-		protected void loadCustomConfig(Configuration config) {}
-	},
-	/* Note That this utilizing most of the Vanilla Features, just Changes enough to introduce custom TileEntity */
-	CustomBrewingStand{
-		@Override
-		protected boolean isBlock() { return true;	}
-		
-		@Override
-		protected void create() {
-			Block.blocksList[Block.brewingStand.blockID] = null;
-			ItemBlockList.customBrewingStand = Optional.of(
-					(new BlockZuluBrewingStand(117)).setHardness(0.5F).setLightValue(0.125F).setBlockName("brewingStand").setRequiresSelfNotify()
-					);
-		}
-		
-		@Override
-		protected void register() {
-	        GameRegistry.registerTileEntity(TileEntityZuluBrewingStand.class, "TileEntityZuluBrewingStand");   
 		}
 
 		@Override

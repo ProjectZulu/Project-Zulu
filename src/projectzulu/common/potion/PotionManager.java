@@ -1,19 +1,24 @@
-package projectzulu.common;
+package projectzulu.common.potion;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
+import net.minecraft.block.Block;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionHelper;
+import net.minecraft.potion.ZuluPotionHelper;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.API.PotionList;
+import projectzulu.common.blocks.BlockZuluBrewingStand;
+import projectzulu.common.blocks.TileEntityZuluBrewingStand;
 import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 public enum PotionManager {
 	bubbling(21) {
@@ -61,7 +66,7 @@ public enum PotionManager {
 	cleansing(24) {
 		@Override
 		protected void setupPotion(HashMap potionRequirements, HashMap field_77928_m) {
-			PotionList.cleansing = Optional.of((new PotionCleansing(potionID, true, 3484199)).setPotionName("potion.+cleansing"));
+			PotionList.cleansing = Optional.of((new PotionCleansing(potionID, true, 3484199)).setPotionName("potion.cleansing"));
 	        potionRequirements.put(Integer.valueOf(PotionList.cleansing.get().getId()), "0 & 1 & 2 & 3 & 10 & 1+6+9+9");
 	        field_77928_m.put(Integer.valueOf(PotionList.cleansing.get().getId()), "5+9");
 		}
@@ -75,7 +80,7 @@ public enum PotionManager {
 	curse(25) {
 		@Override
 		protected void setupPotion(HashMap potionRequirements, HashMap field_77928_m) {
-			PotionList.curse = Optional.of((new PotionCurse(potionID, true, 3484199)).setPotionName("potion.+curse"));
+			PotionList.curse = Optional.of((new PotionCurse(potionID, true, 3484199)).setPotionName("potion.curse"));
 	        potionRequirements.put(Integer.valueOf(PotionList.curse.get().getId()), "!0 & 1 & 2 & 3 & 10 & 1+6+9+9");
 	        field_77928_m.put(Integer.valueOf(PotionList.curse.get().getId()), "5+9");
 		}
@@ -89,7 +94,7 @@ public enum PotionManager {
 	thorn(26) {
 		@Override
 		protected void setupPotion(HashMap potionRequirements, HashMap field_77928_m) {
-			PotionList.thorn = Optional.of((new PotionThorns(potionID, true, 3484199)).setPotionName("potion.+thorn"));
+			PotionList.thorn = Optional.of((new PotionThorns(potionID, true, 3484199)).setPotionName("potion.thorn"));
 	        potionRequirements.put(Integer.valueOf(PotionList.thorn.get().getId()), "0 & !1 & 2 & 3 & 10 & 2+6+9+9");
 	        field_77928_m.put(Integer.valueOf(PotionList.thorn.get().getId()), "5+9");
 		}
@@ -101,6 +106,10 @@ public enum PotionManager {
 		}
 	};
 	int potionID;
+	static boolean replaceVanillaBrewingStand = true;
+	static boolean alterVanillaPotionRequirements = true;
+	public static boolean disablePotionModule = false;
+	public static boolean disableNullPotionHandler = false;
 
 	protected abstract void setupPotion(HashMap potionRequirements, HashMap field_77928_m);
 	protected abstract void registerPotion();
@@ -108,12 +117,17 @@ public enum PotionManager {
 		this.potionID = potionID;
 	}
 	public static void loadSettings(Configuration config){
+		disablePotionModule = config.get("Potion Controls", "disablePotionModule", disablePotionModule).getBoolean(disablePotionModule);
+		replaceVanillaBrewingStand = config.get("Potion Controls", "Replace Vanilla Brewing Stand", replaceVanillaBrewingStand).getBoolean(replaceVanillaBrewingStand);
+		alterVanillaPotionRequirements = config.get("Potion Controls", "Alter Vanilla Potion Requirements", alterVanillaPotionRequirements).getBoolean(alterVanillaPotionRequirements);
+		disableNullPotionHandler = config.get("Potion Controls", "Disable Null Potion Handler", disableNullPotionHandler).getBoolean(disableNullPotionHandler);
 		for (PotionManager potion : PotionManager.values()) {
-			potion.potionID = config.get("Potion Controls"+potion.toString(), "PotionID", potion.potionID).getInt(potion.potionID);
+			potion.potionID = config.get("Potion Controls."+potion.toString(), "PotionID", potion.potionID).getInt(potion.potionID);
 		}
 	}
 	
-	public static void setupAndRegisterPotions(){
+	public static void setupAndRegisterPotions(){		
+		/* Add Potion Properties to potionRequirements and field_77928_m in PotionHelper*/
 		Field fieldPotionRequirement;
 		HashMap potionRequirements;
 		Field fieldField_77928_m;
@@ -133,7 +147,10 @@ public enum PotionManager {
 					potion.registerPotion();
 				}
 			}
-			alterVanillaPotionEffectRequriements(potionRequirements, field_77928_m);
+			if(alterVanillaPotionRequirements){
+				alterVanillaPotionEffectRequriements(potionRequirements, field_77928_m);	
+				ZuluPotionHelper.setVanillaPotionProperties();
+			}
 		} catch (IllegalArgumentException e) {
 			ProjectZuluLog.warning("Bad Things Are Happening Accessing PotionRequirement Hashmap: IllegalArgumentException");
 			e.printStackTrace();
@@ -147,11 +164,20 @@ public enum PotionManager {
 			ProjectZuluLog.warning("Bad Things Are Happening setting PotionRequirement Hashmap public : SecurityException");
 			e1.printStackTrace();
 		}
+		
+		/** Replace Vanilla Brewing Stand TileEntity
+		 * Note That this utilizing most of the Vanilla Features, just Changes enough to introduce custom TileEntity */
+		if(replaceVanillaBrewingStand){
+			Block.blocksList[Block.brewingStand.blockID] = null;
+			ItemBlockList.customBrewingStand = Optional.of(
+					(new BlockZuluBrewingStand(117)).setHardness(0.5F).setLightValue(0.125F).setBlockName("brewingStand").setRequiresSelfNotify()
+					);
+			GameRegistry.registerTileEntity(TileEntityZuluBrewingStand.class, "TileEntityZuluBrewingStand");   
+		}
+		
+		/** Register Events and Tickers Responsible for PotionEffect if appropriate potionEffects are declared */
 		if(PotionList.cleansing.isPresent() || PotionList.thorn.isPresent()){
 			MinecraftForge.EVENT_BUS.register(new PotionEventHookContainerClass());
-		}
-		if(PotionList.cleansing.isPresent()){
-	        TickRegistry.registerTickHandler(new PotionCleansingTicker(), Side.SERVER);
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package projectzulu.common;
+package projectzulu.common.potion;
 
 import net.minecraft.client.Minecraft;
 import cpw.mods.fml.relauncher.Side;

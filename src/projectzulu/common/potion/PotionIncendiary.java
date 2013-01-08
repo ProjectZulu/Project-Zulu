@@ -1,7 +1,6 @@
-package projectzulu.common;
+package projectzulu.common.potion;
 
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.potion.Potion;
 
 public class PotionIncendiary extends PotionZulu{
 	

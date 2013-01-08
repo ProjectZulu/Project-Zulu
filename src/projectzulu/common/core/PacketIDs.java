@@ -1,6 +1,5 @@
 package projectzulu.common.core;
 
-import projectzulu.common.mobs.EntityStates;
 
 public enum PacketIDs {
 	/* PacketID: Unknown Packet, send a Warning */

@@ -1,10 +1,10 @@
-package projectzulu.common.core;
+package projectzulu.common.blocks;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.mod_ProjectZulu;
-import projectzulu.common.blocks.ItemZuluArmor;
+import projectzulu.common.API.ItemBlockList;
 
 import com.google.common.base.Optional;
 

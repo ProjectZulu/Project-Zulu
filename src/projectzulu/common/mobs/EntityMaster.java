@@ -1,26 +1,18 @@
 package projectzulu.common.mobs;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.core.CustomEntityList;
+import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
-import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
-import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
-import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
 public class EntityMaster extends EntityGenericAnimal{

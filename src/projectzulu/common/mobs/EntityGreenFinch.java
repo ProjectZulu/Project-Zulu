@@ -1,10 +1,10 @@
 package projectzulu.common.mobs;
 
-import projectzulu.common.core.CustomEntityList;
-import projectzulu.common.core.ProjectZuluLog;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.core.ProjectZuluLog;
 
 public class EntityGreenFinch extends EntityFinch{
 

@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import projectzulu.common.core.ItemBlockList;
+import projectzulu.common.API.ItemBlockList;
 
 public class WorldGenOasis extends WorldGenerator
 {

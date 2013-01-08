@@ -2,9 +2,6 @@ package projectzulu.common.blocks;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
@@ -14,6 +11,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.tileentity.TileEntityBrewingStand;
 import net.minecraftforge.common.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
     /** The itemstacks currently placed in the slots of the brewing stand */
@@ -87,8 +86,10 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
     private boolean canBrew(){
         if (this.brewingItemStacks[3] != null && this.brewingItemStacks[3].stackSize > 0){
             ItemStack var1 = this.brewingItemStacks[3];
-
-            if (!Item.itemsList[var1.itemID].isPotionIngredient()){
+            
+            
+            if ( !Item.itemsList[var1.itemID].isPotionIngredient() || (var1.getItem() instanceof ItemGenerics 
+            		&& ((ItemGenerics)var1.getItem()).isPotionIngredient(this.brewingItemStacks[0].getItemDamage(), var1) ) ){
                 return false;
             }
             else

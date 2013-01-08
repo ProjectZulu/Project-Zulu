@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.world.StructureManager;
 import projectzulu.common.world.WorldGenOnSurface;
 import projectzulu.common.world.WorldGenReplaceTop;

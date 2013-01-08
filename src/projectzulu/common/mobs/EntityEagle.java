@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.core.CustomEntityList;
+import projectzulu.common.API.CustomEntityList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFlyingWander;

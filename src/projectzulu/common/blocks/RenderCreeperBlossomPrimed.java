@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
 
-import projectzulu.common.core.ItemBlockList;
+import projectzulu.common.API.ItemBlockList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

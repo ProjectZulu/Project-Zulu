@@ -10,9 +10,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.core.CustomEntityList;
+import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.blocks.ItemGenerics;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
@@ -156,11 +157,10 @@ public class EntityElephant extends EntityGenericAnimal{
 		int var4;
 
 		if(Loader.isModLoaded(DefaultProps.BlocksModId) && ItemBlockList.genericCraftingItems1.isPresent()){
-			entityDropItem(new ItemStack(ItemBlockList.genericCraftingItems1.get().shiftedIndex,2,1), 2);
+			entityDropItem(new ItemStack(ItemBlockList.genericCraftingItems1.get().shiftedIndex,2,ItemGenerics.Properties.Tusk.meta()), 2);
 		}
 
-		for (var4 = 0; var4 < var3; ++var4)
-		{
+		for (var4 = 0; var4 < var3; ++var4){
 			this.dropItem(Item.beefRaw.shiftedIndex,1);
 		}
 	}

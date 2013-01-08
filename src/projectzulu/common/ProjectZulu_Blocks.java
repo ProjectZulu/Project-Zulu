@@ -1,27 +1,24 @@
 package projectzulu.common;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.util.HashMap;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionHelper;
-import net.minecraft.potion.ZuluPotionHelper;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.blocks.ArmorManager;
 import projectzulu.common.blocks.ItemBlockManager;
 import projectzulu.common.blocks.ItemBlockRecipeManager;
 import projectzulu.common.blocks.RenderCampFire;
 import projectzulu.common.blocks.RenderSpike;
 import projectzulu.common.blocks.RenderUniversalFlowerPot;
 import projectzulu.common.blocks.ZuluGuiHandler;
-import projectzulu.common.core.ArmorManager;
 import projectzulu.common.core.CreativeTab;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import projectzulu.common.core.ProjectZuluLog;
+import projectzulu.common.potion.EventHandleNullPotions;
+import projectzulu.common.potion.PotionManager;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -36,8 +33,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 @Mod(modid = DefaultProps.BlocksModId, name = "Project Zulu Block and Items", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
@@ -143,10 +138,18 @@ public class ProjectZulu_Blocks {
 		ItemBlockRecipeManager.setupBlockModuleRecipies();
 		LanguageRegistry.instance().addStringLocalization("itemGroup.projectZuluTab", "en_US", "Project Zulu");
 		
-		ProjectZuluLog.info("Starting Potion Setup ");
-		PotionManager.setupAndRegisterPotions();
-		ZuluPotionHelper.setVanillaPotionProperties();
-		ProjectZuluLog.info("Finsished Potion Setup ");
+		if(PotionManager.disablePotionModule){
+			ProjectZuluLog.info("Skipping Potion Setup, Potion Module Disabled");
+		}else{
+			ProjectZuluLog.info("Starting Potion Setup ");
+			PotionManager.setupAndRegisterPotions();
+			ProjectZuluLog.info("Finsished Potion Setup ");
+		}
+		
+		/* Turn on NullPotionHandler */
+		if(!PotionManager.disableNullPotionHandler){
+			MinecraftForge.EVENT_BUS.register(new EventHandleNullPotions());
+		}
 	}
 	
 	

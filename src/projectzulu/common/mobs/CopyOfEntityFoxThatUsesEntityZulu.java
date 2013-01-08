@@ -4,9 +4,9 @@ import net.minecraft.entity.EnumEntitySize;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import projectzulu.common.core.CustomEntityList;
+import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import cpw.mods.fml.common.Loader;
 
 public class CopyOfEntityFoxThatUsesEntityZulu extends EntityZulu {

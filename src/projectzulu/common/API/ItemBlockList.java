@@ -1,4 +1,4 @@
-package projectzulu.common.core;
+package projectzulu.common.API;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

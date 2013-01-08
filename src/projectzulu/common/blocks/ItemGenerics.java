@@ -21,20 +21,26 @@ public class ItemGenerics extends Item{
 		BlackLichen("Black Lichen", 20, 240, "0-1+2+3+10&4-4", "0-1+2+3+10&8-8+9"), // Cleanse
 		Pulp("Pulp", 21, 241),
 		Salt("Salt", 22, 242),
-		Antennae("Antennae", 23, 243),
+		Antennae("Antennae", 23, 243, "-0+1+2+3+10&4-4", "-0+1+2+3+10&8-8+9"), // Blindness
 		ShinyBauble("Shiny Bauble", 24, 244, "+8&4-4"),
-		Talon("Talon", 25, 245),
-		PlantStalk("Plant Stalk", 26, 246),
-		Bark("Bark", 27, 247),
+		Talon("Talon", 25, 245, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"), // Strength+
+		PlantStalk("Plant Stalk", 26, 246), 
+		Bark("Bark", 27, 247, "-0-1+2+3+10&4-4", "-0-1+2+3+10&8-8+9"), // Protection
 		SmallHeart("Small Heart", 28, 248, "0+1+2-3+10&4-4", "0+1+2-3+10&8-8+9"), //DigSpeed+
 		LargeHeart("Large Heart", 29, 249, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"), // Strength+
 		Gill("Gill", 30, 250, "-0-1+2-3+10&4-4", "-0-1+2-3+10&8-8+9"), // Underwater Breathing
 		Ectoplasm("Ectoplasm", 31, 251, "0-1+2+3+10&4-4", "0-1+2+3+10&8-8+9"), // Curse
 		FrogLegs("Frog Legs", 32, 252, "0+1-2-3+10&4-4", "0+1-2-3+10&8-8+9"), // Jump
 		RabbitsFoot("Rabbits Feet", 33, 253, "0+1-2-3+10&4-4", "0+1-2-3+10&8-8+9"); // Jump
+		//Salt + Small heart = DigSpeef-
+		//Salt + Large heart = Strength-
+		//Milk + Pulp  = Cleanse
+		//Milk + Pulp + Ectoplasm = Curse
+		//Cactus + Pulp = Thorns
+		//Cactus + Pulp + Barl/Scale = Protection
 		
 		String name;
-		int meta;
+		int meta; public int meta(){ return meta; }
 		int iconIndex;
 		String defaultPotionEffect;
 		String extraPotionEffect;
@@ -69,7 +75,7 @@ public class ItemGenerics extends Item{
 	}
 	
 	@Override
-	public boolean isPotionIngredient() { return true; }
+	public boolean isPotionIngredient() { return false; }
 	public boolean isPotionIngredient(int brewingIndex, ItemStack ingredientItemStack) {
 		if(getPotionEffect(brewingIndex, ingredientItemStack) != null){
 			return true;

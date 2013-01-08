@@ -14,9 +14,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.core.CustomEntityList;
+import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.blocks.ItemGenerics;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsTarget;
@@ -173,7 +174,7 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 					break;
 				case 1:
 					if(ItemBlockList.genericCraftingItems1.isPresent()){
-						entityDropItem(new ItemStack(ItemBlockList.genericCraftingItems1.get().shiftedIndex, 0, 1), 2);
+						entityDropItem(new ItemStack(ItemBlockList.genericCraftingItems1.get().shiftedIndex, 1, ItemGenerics.Properties.PoisonDroplet.meta()), 2);
 		    		}
 					break;
 				default:

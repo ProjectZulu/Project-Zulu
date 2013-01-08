@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
-import projectzulu.common.core.CustomEntityList;
+import projectzulu.common.API.CustomEntityList;
 
 public class CopyOfEntityHorseBaseThatUsesZulu extends EntityRideableZulu{	
 	

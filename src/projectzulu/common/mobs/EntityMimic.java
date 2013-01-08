@@ -11,8 +11,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.core.DefaultProps;
-import cpw.mods.fml.common.Loader;
 
 public class EntityMimic extends EntityHerd
 {	

@@ -1,6 +1,5 @@
 package projectzulu.common.mobs;
 
-import cpw.mods.fml.common.Loader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumEntitySize;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -12,15 +11,15 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
+import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import projectzulu.common.core.ProjectZuluLog;
+import cpw.mods.fml.common.Loader;
 
 public class EntitySandWorm extends EntityMob {
 	/** deincrements, and a distance-to-home check is done at 0 */

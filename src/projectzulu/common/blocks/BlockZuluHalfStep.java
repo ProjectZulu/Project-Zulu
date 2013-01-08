@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import projectzulu.common.core.ItemBlockList;
+import projectzulu.common.API.ItemBlockList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

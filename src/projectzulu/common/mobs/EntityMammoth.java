@@ -17,9 +17,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import projectzulu.common.core.CustomEntityList;
+import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.blocks.ItemGenerics;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFollowOwner;
@@ -278,7 +279,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 				this.dropItem(ItemBlockList.furPelt.get().shiftedIndex, 1);
 			}
 			if(Loader.isModLoaded(DefaultProps.BlocksModId) && ItemBlockList.genericCraftingItems1.isPresent()){
-				entityDropItem(new ItemStack(ItemBlockList.genericCraftingItems1.get().shiftedIndex,1,1), 2);
+				entityDropItem(new ItemStack(ItemBlockList.genericCraftingItems1.get().shiftedIndex,1,ItemGenerics.Properties.Tusk.meta()), 2);
 			}
 		}
 		for (var4 = 0; var4 < var3; ++var4) {

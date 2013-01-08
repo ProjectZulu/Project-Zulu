@@ -19,8 +19,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemBlockList;
 import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.common.Loader;
 

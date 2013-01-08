@@ -1,4 +1,4 @@
-package projectzulu.common.core;
+package projectzulu.common.API;
 
 public class CustomMobData {
 	public String mobName = "";
@@ -20,5 +20,4 @@ public class CustomMobData {
 	public CustomMobData(String mobName){
 		this(mobName, 0);
 	}
-
 }
