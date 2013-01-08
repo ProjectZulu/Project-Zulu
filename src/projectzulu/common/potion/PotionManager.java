@@ -26,20 +26,20 @@ public enum PotionManager {
 		@Override
 		protected void setupPotion(HashMap potionRequirements, HashMap field_77928_m) {
 			/* Bubbling Potion */
-			PotionList.bubbling = Optional.of((new PotionZulu(potionID, true, 3484199, 1, 2)).setPotionName("potion.bubbling"));
+			PotionList.bubbling = Optional.of((new PotionZulu(potionID, true, (165 << 16) + (131 << 8) + 70, 1, 2)).setPotionName("potion.shining"));
 			potionRequirements.put(PotionList.bubbling.get().getId(), "!0 & !1 & !2 & !3 & 8");
 		}
 
 		@Override
 		protected void registerPotion() {
-			LanguageRegistry.instance().addStringLocalization("potion.bubbling.postfix", "Bubbling Potion");
-			LanguageRegistry.instance().addStringLocalization("potion.bubbling", "Shiny!");
+			LanguageRegistry.instance().addStringLocalization("potion.shining.postfix", "Shining Potion");
+			LanguageRegistry.instance().addStringLocalization("potion.shining", "Shiny!");
 		}
 	},
 	incendiary(22) {
 		@Override
 		protected void setupPotion(HashMap potionRequirements, HashMap field_77928_m) {
-			PotionList.incendiary = Optional.of((new PotionIncendiary(potionID, true, 3484199)).setPotionName("potion.incendiary"));
+			PotionList.incendiary = Optional.of((new PotionIncendiary(potionID, true, (133 << 16) + (69 << 8) + 26 )).setPotionName("potion.incendiary"));
 			potionRequirements.put(PotionList.incendiary.get().getId(), "0 & 1 & !2 & !3 & 5 & !6 & !10");
 	        field_77928_m.put(Integer.valueOf(PotionList.incendiary.get().getId()), "9");
 		}
@@ -53,7 +53,7 @@ public enum PotionManager {
 	slowfall(23) {
 		@Override
 		protected void setupPotion(HashMap potionRequirements, HashMap field_77928_m) {
-			PotionList.slowfall = Optional.of((new PotionSlowFall(potionID, true, 3484199)).setPotionName("potion.slowfall"));
+			PotionList.slowfall = Optional.of((new PotionSlowFall(potionID, true, (214 << 16) + (214 << 8) + 214)).setPotionName("potion.slowfall"));
 	        potionRequirements.put(Integer.valueOf(PotionList.slowfall.get().getId()), "!0 & 1 & !2 & !3 & 10 & 1+6+9+9");
 	        field_77928_m.put(Integer.valueOf(PotionList.slowfall.get().getId()), "5+9");
 		}
@@ -67,7 +67,7 @@ public enum PotionManager {
 	cleansing(24) {
 		@Override
 		protected void setupPotion(HashMap potionRequirements, HashMap field_77928_m) {
-			PotionList.cleansing = Optional.of((new PotionCleansing(potionID, true, 3484199)).setPotionName("potion.cleansing"));
+			PotionList.cleansing = Optional.of((new PotionCleansing(potionID, true, (141 << 16) + (153 << 8) + 79)).setPotionName("potion.cleansing"));
 	        potionRequirements.put(Integer.valueOf(PotionList.cleansing.get().getId()), "0 & 1 & 2 & 3 & 10 & 1+6+9+9");
 	        field_77928_m.put(Integer.valueOf(PotionList.cleansing.get().getId()), "5+9");
 		}
@@ -81,7 +81,7 @@ public enum PotionManager {
 	curse(25) {
 		@Override
 		protected void setupPotion(HashMap potionRequirements, HashMap field_77928_m) {
-			PotionList.curse = Optional.of((new PotionCurse(potionID, true, 3484199)).setPotionName("potion.curse"));
+			PotionList.curse = Optional.of((new PotionCurse(potionID, true, (114 << 16) + (160 << 8) + 52)).setPotionName("potion.curse"));
 	        potionRequirements.put(Integer.valueOf(PotionList.curse.get().getId()), "!0 & 1 & 2 & 3 & 10 & 1+6+9+9");
 	        field_77928_m.put(Integer.valueOf(PotionList.curse.get().getId()), "5+9");
 		}
@@ -95,7 +95,7 @@ public enum PotionManager {
 	thorn(26) {
 		@Override
 		protected void setupPotion(HashMap potionRequirements, HashMap field_77928_m) {
-			PotionList.thorn = Optional.of((new PotionThorns(potionID, true, 3484199)).setPotionName("potion.thorn"));
+			PotionList.thorn = Optional.of((new PotionThorns(potionID, true, (18 << 16) + (133 << 8) + 34)).setPotionName("potion.thorn"));
 	        potionRequirements.put(Integer.valueOf(PotionList.thorn.get().getId()), "0 & !1 & 2 & 3 & 10 & 2+6+9+9");
 	        field_77928_m.put(Integer.valueOf(PotionList.thorn.get().getId()), "5+9");
 		}
@@ -252,7 +252,7 @@ public enum PotionManager {
         field_77928_m.put(Integer.valueOf(Potion.digSlowdown.getId()), "5+9");	
         
 		/* Resistance : Tier 1 & 2 Potion */
-        potionRequirements.put(Integer.valueOf(Potion.resistance.getId()), "!0 & !1 & 2 & 3 & 2+6+9+9");
+        potionRequirements.put(Integer.valueOf(Potion.resistance.getId()), "!0 & !1 & 2 & 3 & 10 & 2+6+9+9");
         field_77928_m.put(Integer.valueOf(Potion.resistance.getId()), "5+9");
         
 		/* WaterBreathing : Tier 1 & 2 Potion */

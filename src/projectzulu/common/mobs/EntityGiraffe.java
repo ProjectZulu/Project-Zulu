@@ -142,22 +142,14 @@ public class EntityGiraffe extends EntityGenericAnimal {
 	 * Drop 0-2 items of this living's type
 	 */
 	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		int var3 = this.rand.nextInt(3 + par2)+1;
-		int var4;
-
-		for (var4 = 0; var4 < var3; ++var4)
-		{
-			if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-				if(ItemBlockList.scrapMeat.isPresent()){
-					this.dropItem(ItemBlockList.scrapMeat.get().shiftedIndex, 1);
-				}
-			}else{
-				this.dropItem(Item.beefRaw.shiftedIndex,1);
+	protected void dropFewItems(boolean par1, int par2){
+		int var3 = rand.nextInt(3 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.giraffe.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
 			}
-		}	
-
+		}
 	}
 
 	@Override

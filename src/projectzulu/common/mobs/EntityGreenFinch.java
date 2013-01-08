@@ -1,5 +1,6 @@
 package projectzulu.common.mobs;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -44,4 +45,17 @@ public class EntityGreenFinch extends EntityFinch{
 		return wasSuccesful;
 	}
 	
+	/**
+	 * Drop 0-2 items of this living's type
+	 */
+	@Override
+	protected void dropFewItems(boolean par1, int par2){
+		int var3 = rand.nextInt(1 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.greenFinch.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
+			}
+		}
+	}
 }

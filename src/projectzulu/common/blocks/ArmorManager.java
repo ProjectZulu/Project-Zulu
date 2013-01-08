@@ -13,9 +13,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 /**
  * Inspired by BlockManager Classfrom ExtrabiomesXL . See Github for Original Source: https://github.com/ExtrabiomesXL
  */
-//TODO: Get Rid of getID function, Replace with defalt Range. Forge auto gets Empty ID, just Need to Provide a sufficiently High Default 
-// Increment to try to make sure we don't occupy Block ourself, which could casue forge to grab low ID
-// Current Values USed a historical, should be changed with next Major MC Update, such that potential to break worlds if Config is lost is minimized
 public enum ArmorManager {
 	ScaleArmorHead{
 		@Override

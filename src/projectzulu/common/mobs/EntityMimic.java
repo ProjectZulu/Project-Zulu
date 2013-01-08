@@ -1,9 +1,11 @@
 package projectzulu.common.mobs;
 
+import projectzulu.common.API.CustomEntityList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumEntitySize;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
@@ -533,15 +535,16 @@ public class EntityMimic extends EntityHerd
 	 * Drop 0-2 items of this living's type
 	 */
 	protected void dropFewItems(boolean par1, int par2){
-//		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-//			this.dropItem(Item.beefRaw.shiftedIndex,1);
-//		}else{
-//			this.dropItem(Item.beefRaw.shiftedIndex,1);
-//		}
+		int var3 = rand.nextInt(1 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.mimic.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
+			}
+		}
 	}
 
-	protected void dropRareDrop(int par1)
-	{
+	protected void dropRareDrop(int par1) {
 		//        if (par1 > 0)
 		//        {
 		//            ItemStack var2 = new ItemStack(Item.bow);

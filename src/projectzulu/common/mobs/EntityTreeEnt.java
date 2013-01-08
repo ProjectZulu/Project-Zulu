@@ -142,14 +142,14 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals{
 	 * Drop 0-2 items of this living's type
 	 */
 	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		int var3 = this.rand.nextInt(2 + par2);
-		int var4;
-
-		for (var4 = 0; var4 < var3; ++var4) {
-			this.dropItem(Block.wood.blockID,3);
-		}	
-
+	protected void dropFewItems(boolean par1, int par2){
+		int var3 = rand.nextInt(2 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.treeEnt.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
+			}
+		}
 	}
 
 	@Override

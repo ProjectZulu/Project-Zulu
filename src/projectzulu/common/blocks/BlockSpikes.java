@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.mod_ProjectZulu;
 import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

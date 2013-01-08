@@ -27,15 +27,15 @@ public class PotionCurse extends PotionZulu{
 		if( (par2+1)*25+25 - effectedEntity.getRNG().nextInt(100) >= 0){
 
 			/* Element to Erase */
-			int elementToDo = numOfElemenents > 0 ? effectedEntity.worldObj.rand.nextInt(numOfElemenents) : 0;
+			int elementToAct = numOfElemenents > 0 ? effectedEntity.worldObj.rand.nextInt(numOfElemenents) : 0;
 			Iterator iterator = potionEffects.iterator();
 
 			/* Get Specific Element and assuming its not the Current Potion ID, mark it for Removal */
 			int i = 0;
 			PotionEffect potionEffectToPerform = null;
-			while (iterator.hasNext() && i <= elementToDo) {
+			while (iterator.hasNext() && i <= elementToAct) {
 				potionEffectToPerform = (PotionEffect) iterator.next();
-				if(i == elementToDo && !effectedEntity.worldObj.isRemote && potionEffectToPerform != null && potionEffectToPerform.getPotionID() != id) {
+				if(i == elementToAct && !effectedEntity.worldObj.isRemote && potionEffectToPerform != null && potionEffectToPerform.getPotionID() != id) {
 					potionEffectToPerform.performEffect(effectedEntity);
 					break;
 				}

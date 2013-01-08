@@ -10,11 +10,7 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 public class RenderSpike implements ISimpleBlockRenderingHandler{
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID,
-			RenderBlocks renderer) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess blockAccess, int par2, int par3, int par4,
@@ -602,13 +598,11 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
     
     @Override
 	public boolean shouldRender3DInInventory() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public int getRenderId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

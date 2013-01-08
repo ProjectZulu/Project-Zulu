@@ -31,7 +31,7 @@ import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
 public class EntityFox extends EntityGenericAnimal implements IAnimals {
-
+	
 	public EntityFox(World par1World) {
 		super(par1World);
 		setSize(0.6f, 1.0f);
@@ -57,12 +57,12 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
 		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
 	}
-
+	
 	@Override
 	public String getTexture() {
 		return "/mods/fox.png";
 	}
-
+	
 	@Override
 	public int getMaxHealth() {	return 12; }
 	@Override
@@ -104,7 +104,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 	protected void updateAITasks() {	
 		super.updateAITasks();
 	}
-
+	
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
@@ -168,28 +168,17 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 			return true;
 		}
 	}
-
 	
 	/**
 	 * Drop 0-2 items of this living's type
 	 */
-	protected void dropFewItems(boolean par1, int par2) {
-		int var3 = this.rand.nextInt(2 + par2);
-		int var4;
-
-		if (Loader.isModLoaded(DefaultProps.BlocksModId)) {
-			if (var3 == 0) {
-				if (ItemBlockList.furPelt.isPresent()) {
-					this.dropItem(ItemBlockList.furPelt.get().shiftedIndex, 1);
-				}
-			} else {
-				if (ItemBlockList.scrapMeat.isPresent()) {
-					this.dropItem(ItemBlockList.scrapMeat.get().shiftedIndex, 1);
-				}
+	protected void dropFewItems(boolean par1, int par2){
+		int var3 = rand.nextInt(2 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.fox.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
 			}
-		} else {
-			this.dropItem(Item.beefRaw.shiftedIndex, 1);
 		}
-
 	}
 }

@@ -12,8 +12,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
 import projectzulu.common.API.ItemBlockList;
-import projectzulu.common.blocks.ItemGenerics;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
@@ -140,22 +140,14 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
 	 * Drop 0-2 items of this living's type
 	 */
 	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		int var3 = this.rand.nextInt(2 + par2);
-		int var4;
-
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-			if(var3 == 0){
-				if(Loader.isModLoaded(DefaultProps.BlocksModId) && ItemBlockList.genericCraftingItems1.isPresent()){
-					entityDropItem(new ItemStack(ItemBlockList.genericCraftingItems1.get().shiftedIndex,1,ItemGenerics.Properties.Tusk.meta()), 2);
-				}
-			}else{
-				this.dropItem(Item.beefRaw.shiftedIndex,1);
+	protected void dropFewItems(boolean par1, int par2){
+		int var3 = rand.nextInt(3 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.rhino.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
 			}
-		}else{
-			this.dropItem(Item.beefRaw.shiftedIndex,1);
 		}
-
 	}
 
 	@Override

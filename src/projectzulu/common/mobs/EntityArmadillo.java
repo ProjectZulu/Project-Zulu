@@ -258,23 +258,11 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 	 */
 	@Override
 	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(2 + par2);
-
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-
-			var3 = this.rand.nextInt(2 + par2);
-
-			for (int i = 0; i < var3; ++i){
-				if(ItemBlockList.scaleItem.isPresent()){
-					this.dropItem(ItemBlockList.scaleItem.get().shiftedIndex, 1);
-				}
-			}
-
-			var3 = this.rand.nextInt(2 + par2);
-			for (int i = 0; i < var3; ++i){
-				if(ItemBlockList.scrapMeat.isPresent()){
-					this.dropItem(ItemBlockList.scrapMeat.get().shiftedIndex, 1);
-				}
+		int var3 = rand.nextInt(2 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.armadillo.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
 			}
 		}
 	}

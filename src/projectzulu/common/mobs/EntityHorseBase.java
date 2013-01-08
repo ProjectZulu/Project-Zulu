@@ -131,11 +131,6 @@ public class EntityHorseBase extends EntityGenericAnimal{
 		int var3 = this.rand.nextInt(3 + par2) + 1;
 		int var4;
 
-//		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-//			this.dropItem(mod_ProjectZulu.furPeltID+256, 1);
-//			entityDropItem(new ItemStack(mod_ProjectZulu.genericCraftingItems1ID+256,1,1), 2);
-//		}
-
 		for (var4 = 0; var4 < var3; ++var4) {
 			if(var4 == 2){
 				this.dropItem(Item.leather.shiftedIndex,1);

@@ -32,12 +32,10 @@ public class BossHealthDisplayTicker implements ITickHandler{
 
 	@Override
 	public EnumSet<TickType> ticks() {
-		// TODO Auto-generated method stub
 		return EnumSet.of(TickType.RENDER);
 	}
 	@Override
 	public String getLabel() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

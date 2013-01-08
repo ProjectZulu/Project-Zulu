@@ -16,8 +16,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
 import projectzulu.common.API.ItemBlockList;
-import projectzulu.common.blocks.ItemGenerics;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsTarget;
@@ -158,40 +158,11 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 	 * Drop 0-2 items of this living's type
 	 */
 	protected void dropFewItems(boolean par1, int par2) {
-		int var3 = this.rand.nextInt(2 + par2);
-		int var4;
-
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-			var3 = this.rand.nextInt(2 + par2);
-
-			for (var4 = 0; var4 < var3; ++var4)
-			{
-				switch ( rand.nextInt(2) ) {
-				case 0:
-					if(ItemBlockList.scaleItem.isPresent()){
-						this.dropItem(ItemBlockList.scaleItem.get().shiftedIndex, 1);
-		    		}
-					break;
-				case 1:
-					if(ItemBlockList.genericCraftingItems1.isPresent()){
-						entityDropItem(new ItemStack(ItemBlockList.genericCraftingItems1.get().shiftedIndex, 1, ItemGenerics.Properties.PoisonDroplet.meta()), 2);
-		    		}
-					break;
-				default:
-					if(ItemBlockList.scaleItem.isPresent()){
-						this.dropItem(ItemBlockList.scaleItem.get().shiftedIndex, 1);
-		    		}
-					break;
-				}
-			}
-		}else{
-			for (var4 = 0; var4 < var3; ++var4) {
-				if(rand.nextBoolean()){
-					this.dropItem(Item.rottenFlesh.shiftedIndex,1);
-				}else{
-					this.dropItem(Item.beefRaw.shiftedIndex,1);
-				}
-
+		int var3 = rand.nextInt(2 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.lizard.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
 			}
 		}
 	}
@@ -205,9 +176,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 	}
 
 	@Override
-	public void attackEntityWithRangedAttack(EntityLiving var1) {
-		
-		
-	}
+	public void attackEntityWithRangedAttack(EntityLiving var1) {}
 
 }

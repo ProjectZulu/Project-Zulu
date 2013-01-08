@@ -4,7 +4,9 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import projectzulu.common.API.CustomEntityList;
 import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -63,17 +65,11 @@ public class EntityCentipede extends EntityMaster implements IMob{
 	 */
 	@Override
 	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(2 + par2);
-
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-
-			var3 = this.rand.nextInt(2 + par2);
-
-			var3 = this.rand.nextInt(2 + par2);
-			for (int i = 0; i < var3; ++i){
-				if(ItemBlockList.scrapMeat.isPresent()){
-					this.dropItem(ItemBlockList.scrapMeat.get().shiftedIndex, 1);
-				}
+		int var3 = rand.nextInt(2 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.centipede.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
 			}
 		}
 	}

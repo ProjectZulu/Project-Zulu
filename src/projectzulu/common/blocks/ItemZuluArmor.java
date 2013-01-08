@@ -96,14 +96,12 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor
 	@Override
 	public float getAddToHeatTransferOnEquip(EntityPlayer player,
 			float playerTemp, float playerLocationTemp, float currentHeatRate) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public boolean getBooleanCauseFastHeatTransferOnEquip(EntityPlayer player,
 			float playerTemp, float playerLocationTemp, float currentHeatRate) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

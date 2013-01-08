@@ -92,7 +92,7 @@ public class EntityEagle extends EntityGenericAnimal{
 	protected String getLivingSound(){
 		return "mods.sounds.eagleliving";
 	}
-
+	
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
@@ -104,27 +104,18 @@ public class EntityEagle extends EntityGenericAnimal{
 	public boolean isValidBreedingItem(ItemStack itemStack) {
 		return false;
 	}
-
 	
 	/**
 	 * Drop 0-2 items of this living's type
 	 */
+	@Override
 	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(2) + this.rand.nextInt(1 + par2);
-
-		for (int var4 = 0; var4 < var3; ++var4)
-		{
-			this.dropItem(Item.feather.shiftedIndex, 1);
+		int var3 = rand.nextInt(2 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.beaver.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
+			}
 		}
-
-		if (this.isBurning())
-		{
-			this.dropItem(Item.chickenCooked.shiftedIndex, 1);
-		}
-		else
-		{
-			this.dropItem(Item.chickenRaw.shiftedIndex, 1);
-		}
-
-	}	
+	}
 }

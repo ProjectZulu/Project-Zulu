@@ -239,7 +239,6 @@ public class DisplayTemperatureTicker implements ITickHandler{
 
 	@Override
 	public String getLabel() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

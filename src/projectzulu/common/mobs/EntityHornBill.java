@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -102,19 +103,14 @@ public class EntityHornBill extends EntityGenericAnimal{
 	/**
 	 * Drop 0-2 items of this living's type
 	 */
+	@Override
 	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(2) + this.rand.nextInt(1 + par2);
-
-		for (int var4 = 0; var4 < var3; ++var4) {
-			this.dropItem(Item.feather.shiftedIndex, 1);
+		int var3 = rand.nextInt(2 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.beaver.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
+			}
 		}
-
-		if (this.isBurning()) {
-			this.dropItem(Item.chickenCooked.shiftedIndex, 1);
-		}
-		else {
-			this.dropItem(Item.chickenRaw.shiftedIndex, 1);
-		}
-
 	}
 }

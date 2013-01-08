@@ -11,11 +11,13 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
+import projectzulu.common.API.CustomEntityList;
 import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
@@ -212,24 +214,6 @@ public class EntitySandWorm extends EntityMob {
 		return newMoveSpeed;
 	}
 
-//	public void handleHealthUpdate(byte par1)
-//	{
-//		if (par1 == 4)
-//		{
-//			this.attackTimer = 10;
-//			this.worldObj.playSoundAtEntity(this, "mob.irongolem.throw", 1.0F, 1.0F);
-//		}
-//		else if (par1 == 11)
-//		{
-//			this.holdRoseTick = 400;
-//		}
-//		else
-//		{
-//			super.handleHealthUpdate(par1);
-//		}
-//	}
-
-
 	public int getAttackTimer(){
 		return this.attackTimer;
 	}
@@ -279,14 +263,11 @@ public class EntitySandWorm extends EntityMob {
 	 */
 	@Override
 	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(2 + par2);
-
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-			var3 = this.rand.nextInt(2 + par2);
-			for (int i = 0; i < var3; ++i){
-				if(ItemBlockList.scrapMeat.isPresent()){
-					this.dropItem(ItemBlockList.scrapMeat.get().shiftedIndex, 1);
-				}
+		int var3 = rand.nextInt(2 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.sandworm.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
 			}
 		}
 	}

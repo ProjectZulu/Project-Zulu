@@ -32,7 +32,6 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals{
 		this.tasks.addTask(1, new EntityAIPanic(this, this.moveSpeed));
 
 		/* Attack On Collide Declared in SubClass */
-
 		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
 		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.shiftedIndex, false));
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
@@ -56,37 +55,5 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals{
 		}else{
 			return super.isValidBreedingItem(itemStack);
 		}
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		int var3 = this.rand.nextInt(2 + par2);
-		int var4;
-		
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-			if(var3 == 0){
-				if(ItemBlockList.furPelt.isPresent()){
-					this.dropItem(ItemBlockList.furPelt.get().shiftedIndex, 1);
-				}
-			}else{
-				this.dropItem(Item.beefRaw.shiftedIndex,1);
-			}
-		}else{
-			this.dropItem(Item.beefRaw.shiftedIndex,1);
-		}
-
-	}
-	
-	@Override
-	protected void dropRareDrop(int par1) {
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-			if(ItemBlockList.mobHeads.isPresent()){
-				entityDropItem(new ItemStack(ItemBlockList.mobHeads.get().blockID,1,2), 1);
-			}
-		}
-		super.dropRareDrop(par1);
 	}
 }

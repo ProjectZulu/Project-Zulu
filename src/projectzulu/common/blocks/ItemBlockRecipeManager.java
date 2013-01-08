@@ -10,6 +10,7 @@ import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import projectzulu.common.mod_ProjectZulu;
 import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.common.ICraftingHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -97,6 +98,9 @@ public class ItemBlockRecipeManager {
 					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
 					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()));
 			
+			/* Paper --> Pulp */
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),2,ItemGenerics.Properties.Pulp.meta()),
+					new ItemStack(Item.paper));
 			/*   Cactus + Pulp = Thorns   					:   Prickly Powder */
 			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.PricklyPowder.meta()),
 					new ItemStack(Block.cactus), new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Pulp.meta()));
@@ -118,10 +122,6 @@ public class ItemBlockRecipeManager {
 					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Salt.meta()));
 			/*   Salt + Large heart = Strength-  			:   Large Unhealthy Heart */
 			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.LargeUnhealthyHeart.meta()),
-					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.LargeHeart.meta()),
-					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Salt.meta()));
-			/* Paper --> Pulp */
-			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Pulp.meta()),
 					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.LargeHeart.meta()),
 					new ItemStack(ItemBlockList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Salt.meta()));
 		}

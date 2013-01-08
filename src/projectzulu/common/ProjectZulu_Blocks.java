@@ -3,8 +3,10 @@ package projectzulu.common;
 import java.io.File;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.blocks.ArmorManager;
@@ -16,6 +18,7 @@ import projectzulu.common.blocks.RenderUniversalFlowerPot;
 import projectzulu.common.blocks.ZuluGuiHandler;
 import projectzulu.common.core.CreativeTab;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.potion.EventHandleNullPotions;
 import projectzulu.common.potion.PotionManager;
@@ -135,6 +138,10 @@ public class ProjectZulu_Blocks {
 	
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event){
+		if(ItemBlockList.genericCraftingItems1.isPresent()){
+			DungeonHooks.addDungeonLoot(new ItemStack(ItemBlockList.genericCraftingItems1.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 50, 3, 8);
+		}
+			
 		ItemBlockRecipeManager.setupBlockModuleRecipies();
 		LanguageRegistry.instance().addStringLocalization("itemGroup.projectZuluTab", "en_US", "Project Zulu");
 		

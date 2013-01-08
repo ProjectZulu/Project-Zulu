@@ -37,28 +37,15 @@ public class CommonProxyProjectZulu{
 	public int addArmor(String armor){
 		return 0;
 	}
-	
+    public void registerSoundHandler() {}
 
 
+	public void Init() {}
 
-    public void registerSoundHandler() {
-
-    }
-
-
-	public void Init() {
-
-	}
-
-	public void clientEventHooks(){
-		
-	}
+	public void clientEventHooks(){}
 
 
-	public void registerSound() {
-		// TODO Auto-generated method stub
-		
-	}	
+	public void registerSound() {}	
 	
 	//Pre-Init
 	public void registerTickers(){

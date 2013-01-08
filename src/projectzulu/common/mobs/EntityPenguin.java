@@ -132,23 +132,13 @@ public class EntityPenguin extends EntityGenericAnimal implements IAnimals {
 	 * Drop 0-2 items of this living's type
 	 */
 	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(2 + par2);
-		int var4;
-
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-			if(var3 == 0){
-				if(ItemBlockList.furPelt.isPresent()){
-					this.dropItem(ItemBlockList.furPelt.get().shiftedIndex, 1);
-				}
-			}else{
-				if(ItemBlockList.scrapMeat.isPresent()){
-					this.dropItem(ItemBlockList.scrapMeat.get().shiftedIndex, 1);
-				}
+		int var3 = rand.nextInt(2 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.penguin.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
 			}
-		}else{
-			this.dropItem(Item.beefRaw.shiftedIndex,1);
 		}
-
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.core;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class ItemGenerics extends Item{
 		ShinyBauble("Shiny Bauble", 24, 244, "+8&4-4"),
 		Talon("Talon", 25, 245, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"), // Strength+
 		PlantStalk("Plant Stalk", 26, 246), 
-		Bark("Bark", 27, 247),//, "-0-1+2+3+10&4-4", "-0-1+2+3+10&8-8+9"), // Protection
+		Bark("Bark", 27, 247, "-0-1+2+3+10&4-4", "-0-1+2+3+10&8-8+9"), // Resistance
 		SmallHeart("Small Heart", 28, 248, "0+1+2-3+10&4-4", "0+1+2-3+10&8-8+9"), // DigSpeed+
 		LargeHeart("Large Heart", 29, 249, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"), // Strength+
 		Gill("Gill", 30, 250, "-0-1+2-3+10&4-4", "-0-1+2-3+10&8-8+9"), // Underwater Breathing
@@ -35,7 +35,7 @@ public class ItemGenerics extends Item{
 		
 		PricklyPowder("Prickly Powder", 34, 224, "0-1+2+3+10&4-4", "0-1+2+3+10&8-8+9"), // Thorns
 		PowderSlush("Powder Slush", 35, 225, "0-1+2+3+10&4-4", "0-1+2+3+10&8-8+9"), // Cleanse
-		GlowingGoo("Glowing Goo", 36, 226, "-0+1+2+3+10&4-4", "-0+1+2+3+10&8-8+9"), // Green Goo
+		GlowingGoo("Glowing Goo", 36, 226, "-0+1+2+3+10&4-4", "-0+1+2+3+10&8-8+9"), // Curse
 		SmallUnhealthyHeart("Small Unhealthy Heart", 37, 254, "0+1+2-3+10&4-4", "0+1+2-3+10&8-8+9"), // DigSpeed-
 		LargeUnhealthyHeart("Large Unhealthy Heart", 38, 255, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"); // Strength-
 		//   Cactus + Pulp = Thorns   					:   Prickly Powder <X>
@@ -45,13 +45,13 @@ public class ItemGenerics extends Item{
 		//   Salt + Small heart = DigSpeef-  			:   Small Unhealthy Heart 
 		//   Salt + Large heart = Strength-  			:   Large Unhealthy Heart
 		
-		String name;
-		int meta; public int meta(){ return meta; }
-		int iconIndex;
-		String defaultPotionEffect;
-		String extraPotionEffect;
+		private String displayName; public String getDisplayName(){ return displayName; }
+		private int meta; public int meta(){ return meta; }
+		private int iconIndex;
+		private String defaultPotionEffect;
+		private String extraPotionEffect;
 		Properties(String name, int meta, int iconIndex, String defaultPotionEffect, String extraPotionEffect) {
-			this.name = name;
+			this.displayName = name;
 			this.meta = meta;
 			this.iconIndex = iconIndex;
 			this.defaultPotionEffect = defaultPotionEffect;
@@ -98,18 +98,13 @@ public class ItemGenerics extends Item{
 	* Creat Pois: 15796 0010 1101 1011 11//
 	*           : 65535 1111 1111 1111 1111
 	*/
-	public String getPotionEffect(int brewingIndex, ItemStack ingredientItemStack) {		
-		System.out.println("getPotionEffect");
-		System.out.println((brewingIndex & 1 << 8) > 0);
-		
+	public String getPotionEffect(int brewingIndex, ItemStack ingredientItemStack) {				
 		for (Properties property : Properties.values()) {
 			if(property.meta == ingredientItemStack.getItemDamage()){
 				/* If Tier 2 do a Different Potion Effect */
 				if( (brewingIndex & 1 << 8) > 0 && property.extraPotionEffect != null){
-					System.out.println(property.extraPotionEffect);
 					return property.extraPotionEffect;
 				}else{
-					System.out.println(property.defaultPotionEffect);
 					return property.defaultPotionEffect;
 				}
 			}
@@ -126,7 +121,7 @@ public class ItemGenerics extends Item{
 	public String getItemNameIS(ItemStack itemStack){
 		for (final Properties property : Properties.values()){
 			if(property.meta == itemStack.getItemDamage()){
-				return property.name;
+				return property.displayName;
 			}
 		}		
 		return "";

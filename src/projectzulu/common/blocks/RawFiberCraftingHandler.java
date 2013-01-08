@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class RawFiberCraftingHandler implements ICraftingHandler{

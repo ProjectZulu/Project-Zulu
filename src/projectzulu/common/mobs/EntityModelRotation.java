@@ -18,9 +18,7 @@ public class EntityModelRotation {
 	private int yAngleDirec = 1;
 	public int zAngleDirec = 1;
 
-	public EntityModelRotation() {
-		// TODO Auto-generated constructor stub
-	}
+	public EntityModelRotation() {}
 
 	public void setup(ModelRenderer modelRenderer){
 		rotateAngleX = modelRenderer.rotateAngleX;

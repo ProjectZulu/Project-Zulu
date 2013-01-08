@@ -16,6 +16,7 @@ import projectzulu.common.blocks.heads.BlockMobHeads;
 import projectzulu.common.blocks.heads.ItemMobHeads;
 import projectzulu.common.blocks.heads.TileEntityMobHeads;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.Optional;
@@ -703,7 +704,7 @@ public enum ItemBlockManager {
 		protected void register() {
 			Item item = ItemBlockList.genericCraftingItems1.get();	        
 			for (ItemGenerics.Properties property : ItemGenerics.Properties.values()) {
-				LanguageRegistry.addName(new ItemStack(item, 1, property.meta), property.name);
+				LanguageRegistry.addName(new ItemStack(item, 1, property.meta()), property.getDisplayName());
 			}
 		}
 		

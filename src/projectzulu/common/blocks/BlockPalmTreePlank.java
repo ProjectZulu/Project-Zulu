@@ -36,7 +36,6 @@ public class BlockPalmTreePlank extends Block
     
     @Override
     public boolean isOpaqueCube() {
-    	// TODO Auto-generated method stub
     	return true;
     }
     
