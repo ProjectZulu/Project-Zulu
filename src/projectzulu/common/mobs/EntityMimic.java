@@ -12,7 +12,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 
 public class EntityMimic extends EntityHerd
@@ -160,7 +160,7 @@ public class EntityMimic extends EntityHerd
 	 * Returns the sound this mob makes while it's alive.
 	 */
 	protected String getLivingSound(){
-		//		return "mods.sounds.treeentliving";
+		//		return "sounds.treeentliving";
 		return null;
 
 	}

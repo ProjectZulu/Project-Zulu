@@ -185,13 +185,13 @@ public class BlockJasper extends Block
     	if (countValidTorches >= 13 && par1World.canBlockSeeTheSky(par2, par3+1, par4)) {
     		
     		if( !MinecraftServer.getServer().isDedicatedServer() ){
-    			Minecraft.getMinecraft().theWorld.playSound(par2, par3, par4, "mods.sounds.summonwhispers", 10.0f, 1.0f, false);    
+    			Minecraft.getMinecraft().theWorld.playSound(par2, par3, par4, "sounds.summonwhispers", 10.0f, 1.0f, false);    
     		}
 
 //    		if( !MinecraftServer.getServer().isDedicatedServer() ){
 //    			//theMinecraft.theWorld.setWorldTime(13000);
 //    			Minecraft theMinecraft = Minecraft.getMinecraft();
-//    			theMinecraft.theWorld.playSound(par2, par3, par4, "mods.sounds.summonwhispers", 10.0f, 1.0f);    			
+//    			theMinecraft.theWorld.playSound(par2, par3, par4, "sounds.summonwhispers", 10.0f, 1.0f);    			
 //    		}
 	    	//Play Summon Sound
 	    	//Set Time to Night
@@ -228,7 +228,7 @@ public class BlockJasper extends Block
 			if( !MinecraftServer.getServer().isDedicatedServer() ){
 				
 //				World worldObj = ModLoader.getMinecraftInstance().theWorld;
-				Minecraft.getMinecraft().theWorld.playSound(par2, par3, par4, "mods.sounds.mummyroar", 10.0f, 1.0f, false);
+				Minecraft.getMinecraft().theWorld.playSound(par2, par3, par4, "sounds.mummyroar", 10.0f, 1.0f, false);
 			}
 			
     		EntityMummyPharaoh var17 = new EntityMummyPharaoh(par1World,par2,par3+3,par4);

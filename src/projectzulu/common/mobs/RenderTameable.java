@@ -45,10 +45,10 @@ public class RenderTameable extends RenderLiving {
     }
     
     protected void renderLivingNamePlate(EntityGenericAnimal tameableEntity, String par2Str, double par3, double par5, double par7, int par9){
+    	
         double var10 = tameableEntity.getDistanceSqToEntity(this.renderManager.livingPlayer);
         if (var10 <= (double)(par9 * par9)){
             FontRenderer var12 = this.getFontRendererFromRenderManager();
-//            float var13 = 1.6F;
             float var14 = mod_ProjectZulu.namePlateScale;
             GL11.glPushMatrix();
             GL11.glTranslatef((float)par3 + 0.0F, (float)par5 + tameableEntity.height, (float)par7);
@@ -57,29 +57,14 @@ public class RenderTameable extends RenderLiving {
             GL11.glRotatef(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
             GL11.glScalef(-var14, -var14, var14);
             GL11.glDisable(GL11.GL_LIGHTING);
-//            GL11.glDepthMask(false);
-//            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            
-//            GL11.glDisable(GL11.GL_TEXTURE_2D);
-//            Tessellator var15 = Tessellator.instance;
-            byte var16 = 0;
-
-//            var15.startDrawingQuads();
             
             /* Draw String */
+            byte var16 = 0;
             int var17 = var12.getStringWidth(par2Str) / 2;
-//            var15.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-//            var15.addVertex((double)(-var17 - 1), (double)(-1 + var16), 0.0D);
-//            var15.addVertex((double)(-var17 - 1), (double)(8 + var16), 0.0D);
-//            var15.addVertex((double)(var17 + 1), (double)(8 + var16), 0.0D);
-//            var15.addVertex((double)(var17 + 1), (double)(-1 + var16), 0.0D);
-//            var15.draw();
-//            GL11.glEnable(GL11.GL_TEXTURE_2D);
             var12.drawString(par2Str, -17, var16, 553648127);
             GL11.glEnable(GL11.GL_DEPTH_TEST);
-//            GL11.glDepthMask(true);
-//            var12.drawString(par2Str, -17, var16, -1);
             
+            /* Set Name Plate Opacity */
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, mod_ProjectZulu.namePlateOpacity);
@@ -163,15 +148,11 @@ public class RenderTameable extends RenderLiving {
 					if(i == 1){
 						screenLocationX += 0;
 					}
-//					int screenLocationX = -18+4+(i/2)*7;
-//					int screenLocationY = 11;
 					screenLocationX += 4;
 					screenLocationY += 0;
 					this.drawTexturedModalRect(screenLocationX, screenLocationY, iconXCoord, iconYCoord, 3, 7); //5
 				}
 			}
-
-			
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

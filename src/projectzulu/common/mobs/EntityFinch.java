@@ -4,7 +4,7 @@ import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIFlyingWander;
 import projectzulu.common.mobs.entityai.EntityAIStayStill;
@@ -57,21 +57,21 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals{
 	 * Returns the sound this mob makes while it's alive.
 	 */
 	protected String getLivingSound() {
-		return "mods.sounds.birdhurt";
+		return "sounds.birdhurt";
 	}
 
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	protected String getHurtSound() {
-		return "mods.sounds.bird";
+		return "sounds.bird";
 	}
 
 	/**
 	 * Plays step sound at given x, y, z for the entity
 	 */
 	protected void playStepSound(int par1, int par2, int par3, int par4) {
-		this.worldObj.playSoundAtEntity(this, "mods.sounds.birdplop", 1.0F, 1.0F);
+		this.worldObj.playSoundAtEntity(this, "sounds.birdplop", 1.0F, 1.0F);
 	}
 	
 	@Override

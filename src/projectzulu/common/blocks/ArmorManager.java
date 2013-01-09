@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.mod_ProjectZulu;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.ItemBlockList;
 
 import com.google.common.base.Optional;
 

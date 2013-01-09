@@ -75,13 +75,13 @@ public class EntityHorseBase extends EntityGenericAnimal{
 	 * Returns the sound this mob makes while it's alive.
 	 */
 	@Override
-	protected String getLivingSound(){ return "mods.sounds.horse"; }
+	protected String getLivingSound(){ return "sounds.horse"; }
 	
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	@Override
-	protected String getHurtSound(){ return "mods.sounds.horsehurt"; }
+	protected String getHurtSound(){ return "sounds.horsehurt"; }
 	
 	@Override
 	public boolean getCanSpawnHere() {

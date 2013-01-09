@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import projectzulu.common.mod_ProjectZulu;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.common.ICraftingHandler;
 import cpw.mods.fml.common.Loader;

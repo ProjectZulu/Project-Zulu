@@ -12,8 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.CustomEntityList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -116,7 +116,7 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals{
 	 */
 	@Override
 	protected String getLivingSound() {
-		return "mods.sounds.treeentliving";
+		return "sounds.treeentliving";
 	}
 	
 	@Override

@@ -1,16 +1,14 @@
 package projectzulu.common.mobs;
 
+import java.util.EnumSet;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTwardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
@@ -20,16 +18,16 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
+import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
+import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
+import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
-
-
-public class EntityMummyPharaoh extends EntityMob
-{	
+public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {	
 	Vec3 startingPosition;
-	
 	int stage = 1;
 	boolean transition = false;
 
@@ -62,29 +60,28 @@ public class EntityMummyPharaoh extends EntityMob
 	
 	public EntityMummyPharaoh(World par1World) {
 		super(par1World);
-		//boundingBox.setBB(boundingBox.getBoundingBox(0.00,-0.5,-7,  0.05,0.5,1.0));
-		//boundingBox.setBounds(-20,-20,-5.0,0.05,0.5,2.5);		
-		this.setSize(0.6F, 1.4F);
+		this.setSize(0.6F, 1.8F);
 		this.moveSpeed = 0.35f;
-
+		
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		//this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, this.moveSpeed, 32.0F));
+		
 		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
-		//this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, this.moveSpeed, 32.0F));
-		//this.tasks.addTask(2, new EntityAIRangedAttack(this, this.moveSpeed, 3, 60));
-		//this.tasks.addTask(2, new EntityAIKeepDistanceFromTarget(this, this.moveSpeed, 32.0F,worldObj));
-		this.tasks.addTask(6, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
-		this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed));
+		
+		this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed, 120));
 		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
-		//this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 32.0F, 0, true));
+		
+//		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+//		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 32.0F, 0, true));
+		
+		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
+		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.allOf(EntityStates.class), EntityPlayer.class, 16.0F, 0, true));
+
 	}
 	
     public EntityMummyPharaoh(World par1World, double parx, double pary, double parz){
-		super(par1World);
+    	this(par1World);
     	this.setSize(0.6F, 1.4F);
 		this.moveSpeed = 0.4f;
 		this.texture = DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
@@ -92,216 +89,101 @@ public class EntityMummyPharaoh extends EntityMob
 		setLocationAndAngles(parx, pary, parz, 1, 1);
 		setPosition(parx, pary, parz);
 		yOffset = 0.0f;
-		
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
-		//this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, this.moveSpeed, 32.0F));
-		//this.tasks.addTask(2, new EntityAIRangedAttack(this, this.moveSpeed, 3, 60));
-		//this.tasks.addTask(2, new EntityAIKeepDistanceFromTarget(this, this.moveSpeed, 32.0F,worldObj));
-		this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
-		//this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 32.0F, 0, true));
-
-		
-
     }
     
-    public ItemStack getHeldItem()
-    {
+    public ItemStack getHeldItem(){
     	return defaultHeldItem;
-    	//return null;
     }
     
-	public int getTotalArmorValue()
-	{
+	public int getTotalArmorValue(){
 		switch (stage) {
 		case 1:
 			return 4;
 		case 2:
-
 			return 6;
 		case 3:
-
 			return 8;
 		case 4:
-
 			return 10;
-
 		default:
 			return 2;
 		}
 	}
 	
     public String getTexture(){
-    	
-		switch (stage) {
-		case 1:
-			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
-		case 2:
-
-			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
-		case 3:
-
-			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
-		case 4:
-
-			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
-
-		default:
-			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
-		}
-
+    	return DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
     }
 
-
-
-	protected void entityInit()
-	{
-				
-		super.entityInit();
-	}
-
-
-
-	/**
-	 * Returns true if the newer Entity AI code should be run
-	 */
-	public boolean isAIEnabled()
-	{
-		return true;
-	}
-
-	/**
-	 * main AI tick function, replaces updateEntityActionState
-	 */
-	protected void updateAITick()
-	{
-
-		super.updateAITick();
-	}
-
-	public int getMaxHealth()
-	{
+	public int getMaxHealth(){
 		return 200;
 	}
 	
-	public int getCurrentHealth()
-	{
+	public int getCurrentHealth(){
 		return health;
 	}
 
-
-
 	/**
-	 * Decrements the entity's air supply when underwater
+	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected int decreaseAirSupply(int par1)
-	{
-		return par1;
-	}
-
-	public boolean interact(EntityPlayer par1EntityPlayer){
-			spawnMummy = !spawnMummy;
-
-		return super.interact(par1EntityPlayer);
+	protected String getHurtSound(){
+		return "sounds.MummyShortRoar";
 	}
 	
-	// When Entity Collides with player if it is Hidden, mark it as not
-	@Override
-	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
-		//isHidden = false;
-		printMessage = true;
-		super.onCollideWithPlayer(par1EntityPlayer);
-	}
-
 	/**
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
-	public void onLivingUpdate()
-	{
-		super.onLivingUpdate();
-		
-		
-		if(!worldObj.isRemote){
-			BossHealthDisplayTicker.registerEntityMummyPharaoh(this);
-			firstUpdate = false;
-		}		
-		
-//		if(firstUpdate && !worldObj.isRemote && BossHealthDisplayTicker.isEntityNull()){
-		
-//		if(!worldObj.isRemote && BossHealthDisplayTicker.isEntityNull()){
-//			BossHealthDisplayTicker.registerEntityMummyPharaoh(this);
-//			firstUpdate = false;
-//		}
-		
-		
-//		if(!worldObj.isRemote){
-//			AloeVeraTicker.healthToDisplay(this.health);
-//		}
-
-
+	//TODO: Some of THis could be moved Server Side Only
+	public void onLivingUpdate(){
+		super.onLivingUpdate();		
 		if (startingPosition == null) {
 			startingPosition = Vec3.createVectorHelper(posX,posY,posZ);
 		}
 
 		switch (stage) {
 		case 1:
-			//Stage One Update
-			//Deault AI, just attacks like a zombie
-
-			
-			//Check Stage Ends
+			/* Stage One Update: If Condition Valid Change Stage */
 			if ( health<0.9*getMaxHealth()) {
-//				ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Feel my Wrath!");
 				teleportTo(startingPosition.xCoord, startingPosition.yCoord+2, startingPosition.zCoord);
 				stage++;
 			}
 			
 			break;
 		case 2:
-			//Stage Two Update
-			
+			/* Stage Two Ability */
 			if(shootFireball == true&& !worldObj.isRemote){
 				shootFireballAtTarget();
 				shootFireball = false;
 			}
 			
-			//Check Stage Ends
+			/* Stage Two Update: If Condition Valid Change Stage */
 			if ( health<0.7*getMaxHealth()) {
 				teleportTo(startingPosition.xCoord, startingPosition.yCoord+2, startingPosition.zCoord);
-//				ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Raise my followers!");
 				stage++;
 			}
 			break;
 		case 3:
-			//Stage Four
-
+			/* Stage Three Ability */
 			if(spawnMummy == true && !worldObj.isRemote){
 				spawnMummy();
 				spawnMummy = false;
 			}
 			
+			/* Stage Three Update: If Condition Valid Change Stage */
 			if ( health<0.45*getMaxHealth()) {
 				teleportTo(startingPosition.xCoord, startingPosition.yCoord+2, startingPosition.zCoord);
-//				ModLoader.getMinecraftInstance().thePlayer.addChatMessage("How is this possible!");
 				stage++;
 			}
 			break;
 			
 		case 4:
-			//Stage Five
-			//1 In 5 Chance it teleports Randomly when attacked
-
+			/* Stage Three Ability */
 			if(spawnMummy == true && !worldObj.isRemote){
 				spawnMummy();
 				spawnMummy = false;
 			}
+			
+			/* Stage Three Ability */
 			if(shootFireball == true&& !worldObj.isRemote){
 				shootFireballAtTarget();
 				shootFireball = false;
@@ -311,45 +193,45 @@ public class EntityMummyPharaoh extends EntityMob
 			break;
 		}
 		
-		//If Spawn Timer is 0, tell Entity its Allowed to Summon a mummy
+		/* If Spawn Timer is 0, tell Entity its Allowed to Summon a Mummy */
 		if(spawnTimer == 0){
 			spawnMummy = true;
 			spawnTimer = spawnCooldown;
 		}
-		
+		spawnTimer = Math.max(spawnTimer-1, 0);
+
+		/* If Shoot Timer is 0, tell Entity its Allowed to Shoot a Fireball */
 		if(shootTimer == 0){
 			shootFireball = true;
 			shootTimer = shootCooldown;
 		}
-
 		shootTimer = Math.max(shootTimer-1, 0);
-		spawnTimer = Math.max(spawnTimer-1, 0);
+
 		counter++; 
 	} 
 
-/**
- * Called when the entity is attacked.
- */
-public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
-{
-	if (par1DamageSource.getEntity() instanceof EntityPlayer) {
-		EntityPlayer tempPlayer = (EntityPlayer)par1DamageSource.getEntity();
-		double distance = tempPlayer.getDistanceSqToEntity(this);
-		
-		if (distance > 10) {
-			int holdRand = rand.nextInt(2);
-			if (holdRand == 1) {
-			teleportTo(tempPlayer.posX+1, worldObj.getHeightValue((int)tempPlayer.posX+1, (int)tempPlayer.posZ+1), tempPlayer.posZ+1);
-			}
-		}else{
-			int holdRand = rand.nextInt(5);
-			if (holdRand == 4) {
-				teleportRandomly();
+	/**
+	 * Called when the entity is attacked.
+	 */
+	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2){
+		if (par1DamageSource.getEntity() instanceof EntityPlayer) {
+			EntityPlayer tempPlayer = (EntityPlayer)par1DamageSource.getEntity();
+			double distance = tempPlayer.getDistanceSqToEntity(this);
+
+			if (distance > 10) {
+				int holdRand = rand.nextInt(2);
+				if (holdRand == 1) {
+					teleportTo(tempPlayer.posX+1, worldObj.getHeightValue((int)tempPlayer.posX+1, (int)tempPlayer.posZ+1), tempPlayer.posZ+1);
+				}
+			}else{
+				int holdRand = rand.nextInt(5);
+				if (holdRand == 4) {
+					teleportRandomly();
+				}
 			}
 		}
+		return super.attackEntityFrom(par1DamageSource, par2);
 	}
-	return super.attackEntityFrom(par1DamageSource, par2);
-}
 
 
 	public void spawnMummy(){
@@ -452,8 +334,7 @@ public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
     /**
      * Teleport the Pharoah to a random nearby position
      */
-    protected boolean teleportRandomly()
-    {
+    protected boolean teleportRandomly() {
         double var1 = this.posX + (this.rand.nextDouble() - 0.5D) * 24.0D;
         double var5 = this.posZ + (this.rand.nextDouble() - 0.5D) * 24.0D;
         double var3 = worldObj.getHeightValue((int)var1, (int)var5);
@@ -463,8 +344,7 @@ public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
     /**
      * Teleport the Pharoah
      */
-    protected boolean teleportTo(double par1, double par3, double par5)
-    {
+    protected boolean teleportTo(double par1, double par3, double par5) {
         double var7 = this.posX;
         double var9 = this.posY;
         double var11 = this.posZ;
@@ -477,47 +357,38 @@ public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
         int var16 = MathHelper.floor_double(this.posZ);
         int var18;
 
-        if (this.worldObj.blockExists(var14, var15, var16))
-        {
+        if (this.worldObj.blockExists(var14, var15, var16)){
             boolean var17 = false;
 
-            while (!var17 && var15 > 0)
-            {
+            while (!var17 && var15 > 0){
                 var18 = this.worldObj.getBlockId(var14, var15 - 1, var16);
 
-                if (var18 != 0 && Block.blocksList[var18].blockMaterial.blocksMovement())
-                {
+                if (var18 != 0 && Block.blocksList[var18].blockMaterial.blocksMovement()){
                     var17 = true;
                 }
-                else
-                {
+                else{
                     --this.posY;
                     --var15;
                 }
             }
 
-            if (var17)
-            {
+            if (var17){
                 this.setPosition(this.posX, this.posY, this.posZ);
 
-                if (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox))
-                {
+                if (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox)){
                     var13 = true;
                 }
             }
         }
 
-        if (!var13)
-        {
+        if (!var13){
             this.setPosition(var7, var9, var11);
             return false;
         }
-        else
-        {
+        else{
             short var30 = 128;
 
-            for (var18 = 0; var18 < var30; ++var18)
-            {
+            for (var18 = 0; var18 < var30; ++var18){
                 double var19 = (double)var18 / ((double)var30 - 1.0D);
                 float var21 = (this.rand.nextFloat() - 0.5F) * 0.2F;
                 float var22 = (this.rand.nextFloat() - 0.5F) * 0.2F;
@@ -533,59 +404,27 @@ public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
             return true;
         }
     }
-    
 
-
-	
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	protected String getLivingSound()
-	{
-		return "none";
-	}
-
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	protected String getHurtSound()
-	{
-		return "mob.irongolem.hit";
-	}
-
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
-	protected String getDeathSound()
-	{
-		return "mob.irongolem.death";
-	}
 
 	/**
 	 * Plays step sound at given x, y, z for the entity
 	 */
-	protected void playStepSound(int par1, int par2, int par3, int par4)
-	{
+	protected void playStepSound(int par1, int par2, int par3, int par4){
 		this.worldObj.playSoundAtEntity(this, "mob.irongolem.walk", 1.0F, 1.0F);
 	}
 
-	public void onDeath(DamageSource damageSource){
-		super.onDeath(damageSource);
-	}
 	
 	/**
      * Get this Entity's EnumCreatureAttribute
      */
-    public EnumCreatureAttribute getCreatureAttribute()
-    {
+    public EnumCreatureAttribute getCreatureAttribute(){
         return EnumCreatureAttribute.UNDEAD;
     }
 
 	/**
 	 * Drop 0-2 items of this living's type
 	 */
-	protected void dropFewItems(boolean par1, int par2)
-	{
+	protected void dropFewItems(boolean par1, int par2){
 		int var3 = this.rand.nextInt(3);
 		int var4;
 

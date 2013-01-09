@@ -1,4 +1,4 @@
-package projectzulu.common.API;
+package projectzulu.common.api;
 
 import java.util.ArrayList;
 import java.util.List;

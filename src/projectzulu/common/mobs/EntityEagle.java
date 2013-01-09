@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -90,14 +90,14 @@ public class EntityEagle extends EntityGenericAnimal{
 	 * Returns the sound this mob makes while it's alive.
 	 */
 	protected String getLivingSound(){
-		return "mods.sounds.eagleliving";
+		return "sounds.eagleliving";
 	}
 	
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	protected String getHurtSound(){
-		return "mods.sounds.eaglehurt";
+		return "sounds.eaglehurt";
 	}
 	
 	@Override

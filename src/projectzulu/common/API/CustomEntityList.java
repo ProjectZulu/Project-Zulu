@@ -1,4 +1,4 @@
-package projectzulu.common.API;
+package projectzulu.common.api;
 
 
 import com.google.common.base.Optional;

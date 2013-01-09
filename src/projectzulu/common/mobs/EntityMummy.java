@@ -21,7 +21,7 @@ import projectzulu.common.core.DefaultProps;
 public class EntityMummy extends EntityMob{
     public EntityMummy(World par1World){
         super(par1World);
-        this.setSize(0.6F, 1.4F);
+        this.setSize(0.6F, 1.8F);
         this.moveSpeed = 0.25F;
         initializeAI();
         this.experienceValue = 0;

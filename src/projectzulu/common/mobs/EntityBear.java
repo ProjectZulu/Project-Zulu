@@ -40,7 +40,7 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals{
 	}
 
 	@Override
-	protected String getHurtSound() { return "mods.sounds.bearliving"; }
+	protected String getHurtSound() { return "sounds.bearliving"; }
 	
 	/** 
 	 * Checks if the Provided ItemStack is considered an item that should be used for Breeding

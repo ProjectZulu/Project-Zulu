@@ -19,8 +19,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.village.Village;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.CustomEntityList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.common.Loader;
 
@@ -585,7 +585,7 @@ public class CopyOfEntityVultureWorkingAsOf053 extends EntityFlying// implements
 	 */
 	protected String getLivingSound()
 	{
-		return "mods.sounds.vulturehurt";
+		return "sounds.vulturehurt";
 	}
 
 	/**

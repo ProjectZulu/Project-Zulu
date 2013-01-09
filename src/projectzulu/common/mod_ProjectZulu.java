@@ -120,7 +120,7 @@ public class mod_ProjectZulu{
 //            temperatureTicker = proxy.initializeTempTicker();
 //            GameRegistry.registerPlayerTracker(temperatureTicker);
 //        }
-		proxy.registerTickers();
+		proxy.bossHealthTicker();
 		mod_ProjectZulu.proxy.registerMobSounds();
 	}
 	

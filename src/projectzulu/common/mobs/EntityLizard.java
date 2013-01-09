@@ -13,8 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.CustomEntityList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
@@ -143,7 +143,7 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound() { return "mods.sounds.lizardhurt"; }
+	protected String getHurtSound() { return "sounds.lizardhurt"; }
 
 	/**
 	 * Plays step sound at given x, y, z for the entity

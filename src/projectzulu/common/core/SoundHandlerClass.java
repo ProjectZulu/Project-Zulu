@@ -12,16 +12,12 @@ public class SoundHandlerClass{
 
     @ForgeSubscribe
 	public void onLoadSoundSettings(SoundLoadEvent soundLoadEvent) {
-		
 		for (String soundFile : Sounds.soundFiles) {
 			try {
-				soundLoadEvent.manager.soundPoolSounds.addSound(soundFile, this.getClass().getResource("/" + soundFile));
+				soundLoadEvent.manager.soundPoolSounds.addSound("sounds/" + soundFile, this.getClass().getResource(Sounds.SOUND_RESOURCE_LOCATION + soundFile));
 				
-            }
-            // If we cannot add the custom sound file to the pool, log the
-            // exception
-            catch (Exception e) {
-                FMLCommonHandler.instance().getFMLLogger().log(Level.WARNING,"Failed loading sound file: " + soundFile);
+            }catch (Exception e) {
+            	ProjectZuluLog.warning("Failed loading sound file: " + soundFile);
             }
 		}
 	}

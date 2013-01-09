@@ -113,11 +113,9 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 	
 	//Pre-Init
 	@Override
-	public void registerTickers(){
-		//None Yet :(
-//        TickRegistry.registerTickHandler(new BossHealthDisplayTicker(), Side.CLIENT);
+	public void bossHealthTicker(){
+        TickRegistry.registerTickHandler(new BossHealthDisplayTicker(), Side.CLIENT);
 //        TickRegistry.registerTickHandler(new RenderCustomArmorTicker(), Side.CLIENT);
-//        TickRegistry.registerTickHandler(new SunShineEffectTicker(), Side.CLIENT);
 	}
 	
 	//Init

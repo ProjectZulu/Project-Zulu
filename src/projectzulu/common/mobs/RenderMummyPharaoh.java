@@ -24,17 +24,16 @@ public class RenderMummyPharaoh extends RenderLiving
         this.modelBipedMain = (ModelMummyPharaoh)modelBase;
     }
     
-    
-    public void renderMummyPharaoh(EntityMummyPharaoh par1EntityMummyPharaoh, double par2, double par4, double par6, float par8, float par9){
-    	entityMummyPharaoh = par1EntityMummyPharaoh;
-        super.doRenderLiving(par1EntityMummyPharaoh, par2, par4, par6, par8, par9);
+    public void renderMummyPharaoh(EntityMummyPharaoh entityMummyPharaoh, double par2, double par4, double par6, float par8, float par9){
+//    	this.entityMummyPharaoh = entityMummyPharaoh;
+        super.doRenderLiving(entityMummyPharaoh, par2, par4, par6, par8, par9);
+        BossHealthDisplayTicker.registerEntityMummyPharaoh(entityMummyPharaoh);
     }
     
     @Override
     protected void renderEquippedItems(EntityLiving par1EntityLiving, float par2){
         super.renderEquippedItems(par1EntityLiving, par2);
         ItemStack var3 = par1EntityLiving.getHeldItem();
-
         if (var3 != null){
             GL11.glPushMatrix();
             this.modelBipedMain.bipedRightArm.postRender(0.0625F);

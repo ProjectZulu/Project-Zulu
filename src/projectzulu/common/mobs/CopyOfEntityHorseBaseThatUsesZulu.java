@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
-import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.api.CustomEntityList;
 
 public class CopyOfEntityHorseBaseThatUsesZulu extends EntityRideableZulu{	
 	
@@ -90,19 +90,19 @@ public class CopyOfEntityHorseBaseThatUsesZulu extends EntityRideableZulu{
 	 * Returns the sound this mob makes while it's alive.
 	 */
 	@Override
-	protected String getLivingSound(){ return "mods.sounds.horse"; }
+	protected String getLivingSound(){ return "sounds.horse"; }
 	
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	@Override
-	protected String getHurtSound(){ return "mods.sounds.horsehurt"; }
+	protected String getHurtSound(){ return "sounds.horsehurt"; }
 	
 	/**
      * Plays step sound at given x, y, z for the entity
      */
 //	@Override
-//	protected void playStepSound(int par1, int par2, int par3, int par4){ this.worldObj.playSoundAtEntity(this, "mods.sounds.horseplop", 0.15F, 1.0F); }
+//	protected void playStepSound(int par1, int par2, int par3, int par4){ this.worldObj.playSoundAtEntity(this, "sounds.horseplop", 0.15F, 1.0F); }
 		
 	/**
 	 * Returns the sound this mob makes on death.

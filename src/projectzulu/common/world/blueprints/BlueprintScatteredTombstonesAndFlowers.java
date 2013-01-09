@@ -3,7 +3,7 @@ package projectzulu.common.world.blueprints;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
 import projectzulu.common.world.BlockDataObjects.HauntedArmorWithMeta;

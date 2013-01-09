@@ -11,7 +11,7 @@ import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.mod_ProjectZulu;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.blocks.heads.BlockMobHeads;
 import projectzulu.common.blocks.heads.ItemMobHeads;
 import projectzulu.common.blocks.heads.TileEntityMobHeads;

@@ -9,8 +9,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.CustomEntityList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.common.Loader;
 

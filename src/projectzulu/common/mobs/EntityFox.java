@@ -12,7 +12,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -70,7 +70,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	@Override
-	protected String getHurtSound() { return "mods.sounds.foxhurtsound"; }
+	protected String getHurtSound() { return "sounds.foxhurtsound"; }
 	
 	/**
 	 * Checks if the entity's current position is a valid location to spawn this

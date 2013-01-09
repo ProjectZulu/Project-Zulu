@@ -17,8 +17,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.CustomEntityList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -150,7 +150,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 	 * Returns the sound this mob makes while it's alive.
 	 */
 	@Override
-	protected String getLivingSound(){return "mods.sounds.mammothliving";}
+	protected String getLivingSound(){return "sounds.mammothliving";}
 
 	@Override
 	public void knockBack(Entity par1Entity, int par2, double par3, double par5) {
@@ -254,7 +254,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 			}
 		}
 		this.attackTime = 20;
-		worldObj.playSound(this.posX, this.posY, this.posZ, "mods.sounds.mammothstomp", 1.0f, 1.0f, false);
+		worldObj.playSound(this.posX, this.posY, this.posZ, "sounds.mammothstomp", 1.0f, 1.0f, false);
 	}
 	
 	@Override

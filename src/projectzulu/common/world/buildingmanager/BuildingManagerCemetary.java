@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.world.CellType;
 import projectzulu.common.world.MazeCell;
 import projectzulu.common.world.BlockDataObjects.BlockWithMeta;

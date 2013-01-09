@@ -26,16 +26,16 @@ public class SoundHookContainerClass {
     	Entity hurtEntity = livingHurtEvent.entity;
     	if(worldObj != null && hurtEntity != null && Minecraft.getMinecraft().thePlayer != null){
         	if (livingHurtEvent.entity instanceof EntitySandWorm) {
-        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "mods.sounds.sandwormroar", 1.0f, 1.0f, false);
+        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "sounds.sandwormroar", 1.0f, 1.0f, false);
     		}else if (livingHurtEvent.entity instanceof EntityMummy && 10-classRand.nextInt(10) >= 0) {
-        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "mods.sounds.MummyShortRoar", 1.0f, 1.0f, false);
+        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "sounds.MummyShortRoar", 1.0f, 1.0f, false);
     		}else if (livingHurtEvent.entity instanceof EntityMummyPharaoh && 10-classRand.nextInt(10) >= 0) {
-        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "mods.sounds.MummyShortRoar", 2.0f, 1.0f, false);
+        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "sounds.MummyShortRoar", 2.0f, 1.0f, false);
     		}
     		else if (livingHurtEvent.entity instanceof EntityTreeEnt) {
-        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "mods.sounds.treeenthurt", 1.0f, 1.0f, false);
+        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "sounds.treeenthurt", 1.0f, 1.0f, false);
     		}else if (livingHurtEvent.entity instanceof EntityMimic) {
-        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "mods.sounds.mimicliving", 1.0f, 1.0f, false);
+        		worldObj.playSound(hurtEntity.posX, hurtEntity.posY, hurtEntity.posZ, "sounds.mimicliving", 1.0f, 1.0f, false);
     		}
     	}
     }

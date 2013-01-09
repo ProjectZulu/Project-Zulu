@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.src.ModLoader;
 
 import org.lwjgl.opengl.GL11;
@@ -14,22 +15,17 @@ import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
 public class BossHealthDisplayTicker implements ITickHandler{
-	public static long inGameTicks = 0;
-	public static EntityMummyPharaoh entityMummyPharaoh;
+	public static EntityMummyPharaoh targetBoss;
 	protected float zLevel = 0.0F;
 	
-
 	public static void registerEntityMummyPharaoh(EntityMummyPharaoh newTicker){
-		entityMummyPharaoh = (EntityMummyPharaoh)newTicker;
-
+		targetBoss = (EntityMummyPharaoh)newTicker;
 	}
 	
-	public static boolean isEntityNull(){
-		return entityMummyPharaoh == null;
-
+	public static boolean validTargetPresent(EntityLiving targetBoss){
+		return targetBoss != null && !targetBoss.isDead;
 	}
-
-
+	
 	@Override
 	public EnumSet<TickType> ticks() {
 		return EnumSet.of(TickType.RENDER);
@@ -39,54 +35,44 @@ public class BossHealthDisplayTicker implements ITickHandler{
 		return null;
 	}
 
-	public void tickStart(EnumSet<TickType> type, Object... tickData)
-	{
-	}
-	public void tickEnd(EnumSet<TickType> type, Object... tickData)
-	{
-		boolean checkIfRan = false;
-		if(entityMummyPharaoh != null && !entityMummyPharaoh.isDead && ModLoader.getMinecraftInstance().thePlayer != null){
-
-		        Minecraft mc = ModLoader.getMinecraftInstance();
-				EntityMummyPharaoh var1 = entityMummyPharaoh;
-//				RenderMummyPharaoh.entityMummyPharaoh = null;
-				FontRenderer var2 = mc.fontRenderer;
-				//Need instance of render engine
-//				this.loadTexture(DefaultProps.itemSpriteSheet);
-				   GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/gui/icons.png"));			
-
-				ScaledResolution var3 = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
-				int var4 = var3.getScaledWidth();
-				short var5 = 182;
-				int var6 = var4 / 2 - var5 / 2;
-				int var7 = (int)((float)var1.getCurrentHealth() / (float)var1.getMaxHealth() * (float)(var5 + 1));
-				
-//				if(ModLoader.getMinecraftInstance().thePlayer!= null){
-//					ModLoader.getMinecraftInstance().thePlayer.addChatMessage(Integer.toString(var1.getCurrentHealth()));
-//				}
-				
-				byte var8 = 12;
-				this.drawTexturedModalRect(var6, var8, 0, 74, var5, 5);
-				this.drawTexturedModalRect(var6, var8, 0, 74, var5, 5);
-
-				if (var7 > 0)
-				{
-					this.drawTexturedModalRect(var6, var8, 0, 79, var7, 5);
-				}
-
-				String var9 = "Pharaoh health";
-				var2.drawStringWithShadow(var9, var4 / 2 - var2.getStringWidth(var9) / 2, var8 - 10, 16711935);
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-//				GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/gui/icons.png"));
-				checkIfRan = true;
+	public void tickStart(EnumSet<TickType> type, Object... tickData){}
+	public void tickEnd(EnumSet<TickType> type, Object... tickData){
+		if(validTargetPresent(targetBoss) && Minecraft.getMinecraft().thePlayer != null){
+			renderBossHealthBar(targetBoss, "Pharaoh Health");
 		}		
-		if(checkIfRan == false && entityMummyPharaoh != null){
-			entityMummyPharaoh = null;
-		}
-		inGameTicks++;
 	}
-	public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6)
-	{
+	
+	public void renderBossHealthBar(EntityGenericAnimal boss, String healthBarTitle){
+		
+        /* Get System Variables */
+		Minecraft mc = Minecraft.getMinecraft();
+		FontRenderer fontRenderer = mc.fontRenderer;
+		
+		/* Bind Health Bar Icon Image */
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/gui/icons.png"));	
+		
+		/* Draw Health Bar */
+		ScaledResolution var3 = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+		int screenWidth = var3.getScaledWidth();
+		short fullHealthBarWidth = 182;
+		int healthBarOffset = screenWidth / 2 - fullHealthBarWidth / 2;
+		int currHealthBarWidth = (int)((float)boss.getDWHealth() / (float)boss.getMaxHealth() * (float)(fullHealthBarWidth + 1));
+
+		byte healthBarHeight = 12;
+		this.drawTexturedModalRect(healthBarOffset, healthBarHeight, 0, 74, healthBarOffset, 5);
+		this.drawTexturedModalRect(healthBarOffset, healthBarHeight, 0, 74, healthBarOffset, 5);
+
+		if (currHealthBarWidth > 0){
+			this.drawTexturedModalRect(healthBarOffset, healthBarHeight, 0, 79, currHealthBarWidth, 5);
+		}
+		
+		/* Draw Health Bar Title */
+		fontRenderer.drawStringWithShadow(healthBarTitle, screenWidth / 2 - fontRenderer.getStringWidth(healthBarTitle) / 2, healthBarHeight - 10, 16711935);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	}
+	
+	
+	public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6) {
 		float var7 = 0.00390625F;
 		float var8 = 0.00390625F;
 

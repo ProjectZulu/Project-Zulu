@@ -17,7 +17,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 

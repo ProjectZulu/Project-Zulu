@@ -9,8 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.CustomEntityList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -111,14 +111,14 @@ public class EntityElephant extends EntityGenericAnimal{
 	 */
 	@Override
 	protected String getLivingSound(){
-		return "mods.sounds.elephantlivingsound";
+		return "sounds.elephantlivingsound";
 	}
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	@Override
 	protected String getHurtSound(){
-		return "mods.sounds.elephanthurtsound";
+		return "sounds.elephanthurtsound";
 	}
 
 	@Override

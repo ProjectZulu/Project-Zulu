@@ -8,7 +8,7 @@ import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.blocks.ArmorManager;
 import projectzulu.common.blocks.ItemBlockManager;
 import projectzulu.common.blocks.ItemBlockRecipeManager;

@@ -47,10 +47,7 @@ public class CommonProxyProjectZulu{
 
 	public void registerSound() {}	
 	
-	//Pre-Init
-	public void registerTickers(){
-		//None Yet :(
-	}
+	public void bossHealthTicker(){}
 	
 	
 	/**

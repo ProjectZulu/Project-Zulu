@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.world.buildingmanager.BuildingManagerCemetary;
 import projectzulu.common.world.buildingmanager.BuildingManagerLabyrinth;

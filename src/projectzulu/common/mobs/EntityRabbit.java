@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
@@ -107,14 +107,14 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
 	 */
 	@Override
 	protected String getHurtSound(){
-		return "mods.sounds.rabbithurt";
+		return "sounds.rabbithurt";
 	}
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
 	@Override
 	protected String getDeathSound(){
-		return "mods.sounds.rabbitdead";
+		return "sounds.rabbitdead";
 	}
 	
 	@Override

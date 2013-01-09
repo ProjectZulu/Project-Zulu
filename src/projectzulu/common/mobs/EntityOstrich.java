@@ -9,8 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.api.CustomEntityList;
+import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -106,12 +106,12 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){return "mods.sounds.ostrichlivingsound";}
+	protected String getLivingSound(){return "sounds.ostrichlivingsound";}
 
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound(){ return "mods.sounds.ostrichhurtsound"; }
+	protected String getHurtSound(){ return "sounds.ostrichhurtsound"; }
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
