@@ -98,10 +98,8 @@ public class mod_ProjectZulu{
 
 		ProjectZuluLog.configureLogging();
 		Configuration zuluConfig = new Configuration(  new File(event.getModConfigurationDirectory(), DefaultProps.ConfigDirectory + DefaultProps.defaultConfigFile));
-        // loading the configuration from its file
-        zuluConfig.load();
-        
-        /* General Declarations */
+		
+		zuluConfig.load();
         enableTestBlock = zuluConfig.get("Developer Debug Variables", "enableTestBlock", enableTestBlock).getBoolean(enableTestBlock);  
 //        enableTemperature = zuluConfig.get("General Controls", "enableTemperature", enableTemperature).getBoolean(enableTemperature);
         
@@ -115,8 +113,6 @@ public class mod_ProjectZulu{
         spikeRenderID = zuluConfig.get("Do Not Touch", "Spike Render ID", campFireRenderID).getInt(campFireRenderID);
         campFireRenderID = zuluConfig.get("Do Not Touch", "Campfire Render ID", campFireRenderID).getInt(campFireRenderID);
         universalFlowerPotRenderID = zuluConfig.get("Do Not Touch", "Universal Flower Pot Render ID", universalFlowerPotRenderID).getInt(universalFlowerPotRenderID);
-    	
-        /* Saving the configuration to its file */
         zuluConfig.save();
         
         /* Should Enable Temperature System ? */
@@ -130,15 +126,12 @@ public class mod_ProjectZulu{
 	
 	@Init
 	public void load(FMLInitializationEvent event){
-		//Client
 		proxy.registerRenderThings();
-
-		//Client
 		proxy.clientEventHooks();
 		
 		if(enableTestBlock){
 			testBlock = (new BlockTestBlock(testBlockID, 32)).setHardness(1.0f).setResistance(1.0f).setBlockName("testBlock");
-			GameRegistry.registerBlock(testBlock); LanguageRegistry.addName(testBlock, "Test block");
+			GameRegistry.registerBlock(testBlock, "testZuluBlock"); LanguageRegistry.addName(testBlock, "Test block");
 		}
 	}
 	

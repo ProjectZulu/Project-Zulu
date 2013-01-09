@@ -42,7 +42,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register(){
 			Block block = ItemBlockList.aloeVera.get();
-			GameRegistry.registerBlock(block, ItemAloeVera.class);
+			GameRegistry.registerBlock(block, ItemAloeVera.class, this.toString().toLowerCase());
 			LanguageRegistry.instance().addStringLocalization("tile.Aloe Vera.base_1.name", "Aloe Vera Plant");
 		}
 
@@ -62,7 +62,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.wateredDirt.get();
-			GameRegistry.registerBlock(block, ItemWateredDirt.class);
+			GameRegistry.registerBlock(block, ItemWateredDirt.class, this.toString().toLowerCase());
 		}
 
 		@Override
@@ -82,7 +82,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.tumbleweed.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Tumbleweed");			
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Tumbleweed");			
 		}
 
 		@Override
@@ -101,7 +101,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.jasper.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Jasper Block");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Jasper Block");
 			DungeonHooks.addDungeonLoot(new ItemStack(block), 5, 1, 1);
 		}
 
@@ -121,7 +121,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.palmTreeLog.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Palm Tree Log");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Log");
 			OreDictionary.registerOre("log", new ItemStack(block));
 			OreDictionary.registerOre("logWood", new ItemStack(block));
 			OreDictionary.registerOre("logPalm", new ItemStack(block));
@@ -144,7 +144,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.palmTreePlank.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Palm Tree Plank");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Plank");
 			OreDictionary.registerOre("plankWood", new ItemStack(block));
 		}
 
@@ -166,7 +166,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.palmTreeDoubleSlab.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Palm Double Slab");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Double Slab");
 			OreDictionary.registerOre("slabWood", new ItemStack(block));
 			OreDictionary.registerOre("slabPalm", new ItemStack(block));
 		}
@@ -188,7 +188,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.palmTreeSlab.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Palm Single Slab");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Single Slab");
 			OreDictionary.registerOre("slabWood", new ItemStack(block));
 			OreDictionary.registerOre("slabPalm", new ItemStack(block));
 		}
@@ -214,7 +214,7 @@ public enum ItemBlockManager {
 		protected void register() {
 			if(ItemBlockList.palmTreeStairs.isPresent()){
 				Block block = ItemBlockList.palmTreeStairs.get();
-				GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Palm Tree Stairs");
+				GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Stairs");
 				OreDictionary.registerOre("stairsWood", new ItemStack(block));
 				OreDictionary.registerOre("stairsPalm", new ItemStack(block));
 			}
@@ -236,7 +236,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.palmTreeLeaves.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Palm Tree Leaves");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Leaves");
 			OreDictionary.registerOre("leaves", new ItemStack(block));
 			OreDictionary.registerOre("leavesPalm", new ItemStack(block));
 		}
@@ -258,7 +258,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.palmTreeSapling.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Palm Tree Sapling");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Sapling");
 			OreDictionary.registerOre("sapling", new ItemStack(block));
 			OreDictionary.registerOre("saplingPalm", new ItemStack(block));
 		}
@@ -279,7 +279,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.coconut.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Coconut");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Coconut");
 		}
 
 		@Override
@@ -298,7 +298,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.quickSand.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "QuickSand");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "QuickSand");
 		}
 
 		@Override
@@ -317,7 +317,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.nightBloom.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "NightBloom");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "NightBloom");
 		}
 
 		@Override
@@ -336,7 +336,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.creeperBlossom.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Creeper Blosson");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Creeper Blosson");
 		}
 
 		@Override
@@ -355,7 +355,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.spike.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Ivory Spikes");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Ivory Spikes");
 		}
 
 		@Override
@@ -374,7 +374,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.campfire.get();
-			GameRegistry.registerBlock(block, ItemCampFire.class); LanguageRegistry.addName(block, "Campfire");
+			GameRegistry.registerBlock(block, ItemCampFire.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Campfire");
 			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_1.name", "Log Campfire");
 			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_2.name", "Stone Campfire");
 			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_3.name", "Lit Log Campfire");
@@ -399,7 +399,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.mobHeads.get();
-			GameRegistry.registerBlock(block, ItemMobHeads.class); LanguageRegistry.addName(block, "mobHeads");
+			GameRegistry.registerBlock(block, ItemMobHeads.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "mobHeads");
 			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_0.name", "Stuffed Finch");
 			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_1.name", "Alligator Head");
 			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_2.name", "Armadillo Head");
@@ -442,7 +442,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = ItemBlockList.tombstone.get();
-			GameRegistry.registerBlock(block); LanguageRegistry.addName(block, "Tombstone");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Tombstone");
 			/* Register TileEntity Render */
 			Configuration tempConfig = new Configuration(  new File(mod_ProjectZulu.modConfigDirectoryFile, DefaultProps.ConfigDirectory + DefaultProps.tempConfigFile));
 			tempConfig.load();
@@ -486,7 +486,7 @@ public enum ItemBlockManager {
 		protected void register() {
 			if(!mod_ProjectZulu.replaceFlowerPot){
 				Block block = ItemBlockList.universalFlowerPot.get();
-				GameRegistry.registerBlock(block, ItemUniversalFlowerPot.class); LanguageRegistry.addName(block, "Universal Flower Pot");			
+				GameRegistry.registerBlock(block, ItemUniversalFlowerPot.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Universal Flower Pot");			
 			}
 	        GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");   
 	        mod_ProjectZulu.proxy.registerTileEntityUniversalFlowerPotSpecialRender();
