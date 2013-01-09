@@ -114,7 +114,7 @@ public class ItemGenerics extends Item{
 	
 	@SideOnly(Side.CLIENT)
 	public String getTextureFile(){
-		return "/mods/items_projectzulu.png";
+		return DefaultProps.itemSpriteSheet;
     }
 	
 	@Override

@@ -14,7 +14,7 @@ import cpw.mods.fml.common.network.Player;
 public abstract class ZuluPacketManagerBase{
 	
 	int packetID;
-	String channel = DefaultProps.DefaultChannel;
+	String channel = DefaultProps.defaultChannel;
 	public ZuluPacketManagerBase(int packetID) {
 		this.packetID = packetID;
 	}

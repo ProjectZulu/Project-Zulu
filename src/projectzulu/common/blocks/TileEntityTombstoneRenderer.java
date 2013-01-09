@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -29,7 +30,7 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
             rotation = par1TileEntityTombstone.getBlockMetadata()*360/8;
         }
         
-        this.bindTextureByName("/mods/misc/Tombstone.png");
+        this.bindTextureByName(DefaultProps.blockDiretory+"Tombstone.png");
         
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);

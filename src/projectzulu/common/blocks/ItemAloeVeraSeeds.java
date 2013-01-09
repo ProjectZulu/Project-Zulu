@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -30,7 +31,7 @@ public class ItemAloeVeraSeeds extends Item
     @SideOnly(Side.CLIENT)
 	public String getTextureFile()
     {
-            return "/mods/items_projectzulu.png";
+            return DefaultProps.itemSpriteSheet;
     }
 
 

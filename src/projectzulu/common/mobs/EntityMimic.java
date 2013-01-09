@@ -1,6 +1,5 @@
 package projectzulu.common.mobs;
 
-import projectzulu.common.API.CustomEntityList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumEntitySize;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +12,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.core.DefaultProps;
 
 public class EntityMimic extends EntityHerd
 {	
@@ -118,7 +119,7 @@ public class EntityMimic extends EntityHerd
 
 	@Override
 	public String getTexture() {
-		this.texture = "/mods/MimicChest.png";
+		this.texture = DefaultProps.mobDiretory + "MimicChest.png";
 		return super.getTexture();
 	}
 

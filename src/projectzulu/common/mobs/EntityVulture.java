@@ -7,7 +7,6 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
@@ -85,7 +84,7 @@ public class EntityVulture extends EntityGenericAnimal {
 
 	@Override
 	public String getTexture(){
-		this.texture = "/mods/Vulture.png";
+		this.texture = DefaultProps.mobDiretory + "Vulture.png";
 		return super.getTexture();
 	}
 	

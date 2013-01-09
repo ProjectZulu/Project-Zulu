@@ -66,7 +66,7 @@ public class EntityPenguin extends EntityGenericAnimal implements IAnimals {
 	
 	@Override
 	public String getTexture() {
-		this.texture = "/mods/penguin.png";
+		this.texture = DefaultProps.mobDiretory + "penguin.png";
 		return super.getTexture();
 	}
 	

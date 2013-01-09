@@ -2,6 +2,7 @@ package projectzulu.common.blocks;
 
 import net.minecraft.item.Item;
 import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -25,7 +26,7 @@ public class ItemCoconutMilk extends Item{
 	@SideOnly(Side.CLIENT)
 	public String getTextureFile()
     {
-            return "/mods/items_projectzulu.png";
+            return DefaultProps.itemSpriteSheet;
     }
 	
 }

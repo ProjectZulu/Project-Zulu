@@ -11,6 +11,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -31,7 +32,7 @@ public class BlockTombstone extends BlockContainer{
 	
 	@SideOnly(Side.CLIENT)
 	public String getTextureFile(){
-            return "/mods/blocks_projectzulu.png";
+            return DefaultProps.blockSpriteSheet;
     }
 	
     /**

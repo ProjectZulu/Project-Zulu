@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.mod_ProjectZulu;
 import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,7 +35,7 @@ public class BlockSpikes extends Block{
 
 	@SideOnly(Side.CLIENT)
 	public String getTextureFile(){
-		return "/mods/blocks_projectzulu.png";
+		return DefaultProps.blockSpriteSheet;
 	}
 
 

@@ -87,7 +87,7 @@ public class EntityMummyPharaoh extends EntityMob
 		super(par1World);
     	this.setSize(0.6F, 1.4F);
 		this.moveSpeed = 0.4f;
-		this.texture = "/mods/Mummy_Pharaoh.png";
+		this.texture = DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
 		
 		setLocationAndAngles(parx, pary, parz, 1, 1);
 		setPosition(parx, pary, parz);
@@ -141,19 +141,19 @@ public class EntityMummyPharaoh extends EntityMob
     	
 		switch (stage) {
 		case 1:
-			return	"/mods/Mummy_Pharaoh.png";
+			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
 		case 2:
 
-			return	"/mods/Mummy_Pharaoh.png";
+			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
 		case 3:
 
-			return	"/mods/Mummy_Pharaoh.png";
+			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
 		case 4:
 
-			return	"/mods/Mummy_Pharaoh.png";
+			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
 
 		default:
-			return	"/mods/Mummy_Pharaoh.png";
+			return	DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
 		}
 
     }

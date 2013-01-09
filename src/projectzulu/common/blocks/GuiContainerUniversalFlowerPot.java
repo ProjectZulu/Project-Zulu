@@ -6,6 +6,8 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.common.core.DefaultProps;
+
 public class GuiContainerUniversalFlowerPot extends GuiContainer{
 
 	public GuiContainerUniversalFlowerPot (InventoryPlayer inventoryPlayer,
@@ -27,7 +29,7 @@ public class GuiContainerUniversalFlowerPot extends GuiContainer{
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,
 			int par3) {
 		//draw your Gui here, only thing you need to change is the path
-		int texture = mc.renderEngine.getTexture("/Project Zulu/GUI/FlowerPotGUI.png");
+		int texture = mc.renderEngine.getTexture(DefaultProps.coreDiretory + "gui/FlowerPotGUI.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(texture);
 		int x = (width - xSize) / 2;

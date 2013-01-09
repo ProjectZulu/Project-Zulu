@@ -22,7 +22,7 @@ public class ZuluPacketHandler implements IPacketHandler{
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
 		
-		if(packet.channel.equals(DefaultProps.DefaultChannel)){
+		if(packet.channel.equals(DefaultProps.defaultChannel)){
 			DataInputStream data = new DataInputStream(new ByteArrayInputStream(packet.data));
 			try {
 				PacketIDs packetID = PacketIDs.getPacketIDbyIndex(data.readInt());

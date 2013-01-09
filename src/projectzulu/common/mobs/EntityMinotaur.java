@@ -6,12 +6,10 @@ import net.minecraft.entity.EnumEntitySize;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -20,7 +18,6 @@ import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import projectzulu.common.mobs.entityai.EntityAIPanic;
 import projectzulu.common.mobs.entityai.EntityAIStayStill;
 import projectzulu.common.mobs.entityai.EntityAIWander;
-import cpw.mods.fml.common.Loader;
 
 public class EntityMinotaur extends EntityGenericAnimal implements IMob{	
 
@@ -83,7 +80,7 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob{
 
 	@Override
 	public String getTexture(){
-		this.texture = "/mods/Minotaur.png";
+		this.texture = DefaultProps.mobDiretory + "Minotaur.png";
 		return super.getTexture();
 	}
 

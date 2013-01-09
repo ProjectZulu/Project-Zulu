@@ -64,20 +64,20 @@ public class ProjectZulu_Blocks {
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		Configuration zuluConfig = new Configuration(  new File(event.getModConfigurationDirectory(), DefaultProps.ConfigDirectory + DefaultProps.defaultConfigFile) );
+		Configuration zuluConfig = new Configuration(  new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.defaultConfigFile) );
         zuluConfig.load();
         
-		scaleIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/scaleArmor");
-		goldScaleIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/goldscale");
-		ironScaleIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/ironscale");
-		diamondScaleIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/diamondscale");
+		scaleIndex = mod_ProjectZulu.proxy.addArmor("scaleArmor");
+		goldScaleIndex = mod_ProjectZulu.proxy.addArmor("goldscale");
+		ironScaleIndex = mod_ProjectZulu.proxy.addArmor("ironscale");
+		diamondScaleIndex = mod_ProjectZulu.proxy.addArmor("diamondscale");
 		
-		whiteWoolIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/whitedesertcloth");
-		redWoolIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/reddesertcloth");
-		greenWoolIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/greendesertcloth");
-		blueWoolIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/bluedesertcloth");
-		cactusIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/cactusarmor");
-		furIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/mammothfur");
+		whiteWoolIndex = mod_ProjectZulu.proxy.addArmor("whitedesertcloth");
+		redWoolIndex = mod_ProjectZulu.proxy.addArmor("reddesertcloth");
+		greenWoolIndex = mod_ProjectZulu.proxy.addArmor("greendesertcloth");
+		blueWoolIndex = mod_ProjectZulu.proxy.addArmor("bluedesertcloth");
+		cactusIndex = mod_ProjectZulu.proxy.addArmor("cactusarmor");
+		furIndex = mod_ProjectZulu.proxy.addArmor("mammothfur");
         
 		ProjectZuluLog.info("Starting ItemBlock Init ");
         try {

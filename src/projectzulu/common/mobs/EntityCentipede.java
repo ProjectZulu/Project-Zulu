@@ -7,13 +7,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import projectzulu.common.mobs.entityai.EntityAIWander;
-import cpw.mods.fml.common.Loader;
 
 public class EntityCentipede extends EntityMaster implements IMob{
 

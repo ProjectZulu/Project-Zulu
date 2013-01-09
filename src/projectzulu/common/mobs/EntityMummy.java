@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import projectzulu.common.core.DefaultProps;
 
 public class EntityMummy extends EntityMob{
     public EntityMummy(World par1World){
@@ -76,7 +77,7 @@ public class EntityMummy extends EntityMob{
 	}
 	
     public String getTexture(){
-    	return "/mods/Mummy.png";
+    	return DefaultProps.mobDiretory + "Mummy.png";
     }
     
     protected void entityInit(){

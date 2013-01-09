@@ -13,6 +13,7 @@ import projectzulu.common.blocks.TileEntityUniversalFlowerPot;
 import projectzulu.common.blocks.TileEntityUniversalFlowerPotRenderer;
 import projectzulu.common.blocks.heads.TileEntityMobHeads;
 import projectzulu.common.blocks.heads.TileEntityMobHeadsRenderer;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.SoundHandlerClass;
 import projectzulu.common.core.SoundHookContainerClass;
@@ -41,8 +42,8 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 
 	@Override
 	public void registerRenderThings(){
-		MinecraftForgeClient.preloadTexture("/mods/blocks_projectzulu.png");
-		MinecraftForgeClient.preloadTexture("/mods/items_projectzulu.png");
+		MinecraftForgeClient.preloadTexture(DefaultProps.blockSpriteSheet);
+		MinecraftForgeClient.preloadTexture(DefaultProps.itemSpriteSheet);
 		MinecraftForgeClient.preloadTexture("/mods/icons/temperature_icon.png");
 	}
 	

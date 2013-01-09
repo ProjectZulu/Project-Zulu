@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -28,7 +29,7 @@ public class BlockZuluHalfStep extends BlockZuluHalfSlab {
     
     @SideOnly(Side.CLIENT)
 	public String getTextureFile() {
-            return "/mods/blocks_projectzulu.png";
+            return DefaultProps.blockSpriteSheet;
     }
 
 

@@ -12,6 +12,7 @@ import net.minecraft.util.Vec3;
 
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.ModelFinch;
 
 public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
@@ -68,7 +69,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 		switch (skullType) {
 		case 0:
 			/* Finch */
-			textureLocation = "/mods/finch_red.png";
+			textureLocation = DefaultProps.mobDiretory + "finch_red.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.5F, 0.74F);
@@ -78,7 +79,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 1:
 			/* Crocodile */
-			textureLocation = "/mods/Crocodile.png";
+			textureLocation = DefaultProps.mobDiretory + "Crocodile.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75F, 0.55F);
@@ -88,7 +89,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 2:
 			/* Armadillo */
-			textureLocation = "/mods/Armadillo.png";
+			textureLocation = DefaultProps.mobDiretory + "Armadillo.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75F, 0.80F);
@@ -99,7 +100,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 		case 3:
 			/* Black Bear */
 			scale = 0.0625F+0;
-			textureLocation = "/mods/bearblack.png";
+			textureLocation = DefaultProps.mobDiretory + "bearblack.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75F, 0.85F);
@@ -110,7 +111,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 		case 4:
 			/* Brown Bear */
 			scale = 0.08f;
-			textureLocation = "/mods/bearbrown.png";
+			textureLocation = DefaultProps.mobDiretory + "bearbrown.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 2.0F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.90f, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  2.1F, 0.85F);
@@ -121,7 +122,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 		case 5:
 			/* Polar Bear */
 			scale = 0.1f;
-			textureLocation = "/mods/bearpolar.png";
+			textureLocation = DefaultProps.mobDiretory + "bearpolar.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  2.4F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  2.5F, 0.80F);
@@ -131,7 +132,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 6:
 			/* Beaver */
-			textureLocation = "/mods/Beaver.png";
+			textureLocation = DefaultProps.mobDiretory + "Beaver.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75F, 0.85f);
@@ -141,7 +142,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 7:
 			/* Boar */
-			textureLocation = "/mods/boar.png";
+			textureLocation = DefaultProps.mobDiretory + "boar.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75F, 0.70f);
@@ -153,7 +154,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			/* Giraffe */
 			scale = 0.035f;
 //			0.0625F
-			textureLocation = "/mods/giraffe.png";
+			textureLocation = DefaultProps.mobDiretory + "giraffe.png";
 			if(meta == 1){
 				skullState = 1;
 			}else{
@@ -169,7 +170,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 9:
 			/* Gorilla */
-			textureLocation = "/mods/gorilla1.png";
+			textureLocation = DefaultProps.mobDiretory + "gorilla1.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75F, 0.80f);
@@ -179,7 +180,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 10:
 			/* Lizard */
-			textureLocation = "/mods/Lizard.png";
+			textureLocation = DefaultProps.mobDiretory + "Lizard.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75F, 0.80f);
@@ -191,7 +192,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			/* Mammoth */
 //			scale = 0.0625F;
 			scale = 0.0575F;
-			textureLocation = "/mods/Mammoth.png";
+			textureLocation = DefaultProps.mobDiretory + "Mammoth.png";
 			if(meta == 1){
 				skullState = 1;
 			}else {
@@ -206,7 +207,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 12:
 			/* Ostrich */
-			textureLocation = "/mods/ostrich.png";
+			textureLocation = DefaultProps.mobDiretory + "ostrich.png";
 			if(meta == 1){
 				skullState = 1;
 			}else {
@@ -221,7 +222,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 13:
 			/* Penguin */
-			textureLocation = "/mods/penguin.png";
+			textureLocation = DefaultProps.mobDiretory + "penguin.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.85F, 0.75f);
@@ -231,7 +232,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 14:
 			/* Rhino */
-			textureLocation = "/mods/Rhino.png";
+			textureLocation = DefaultProps.mobDiretory + "Rhino.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75F, 0.60F);
@@ -241,7 +242,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 15:
 			/* TreeEnt */
-			textureLocation = "/mods/Treeant.png";
+			textureLocation = DefaultProps.mobDiretory + "Treeant.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75f, 0.55F);
@@ -251,7 +252,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 16:
 			/* Vulture */
-			textureLocation = "/mods/Vulture.png";
+			textureLocation = DefaultProps.mobDiretory + "Vulture.png";
 			if(meta == 1){
 				skullState = 1;
 			}else {
@@ -266,7 +267,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		case 17:
 			/* Elephant */
-			textureLocation = "/mods/elephant.png";
+			textureLocation = DefaultProps.mobDiretory + "elephant.png";
 			if(meta == 1){
 				skullState = 1;
 			}else {
@@ -282,7 +283,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			break;
 		default:
 			/* Default */
-			textureLocation = "/mods/Crocodile.png";
+			textureLocation = DefaultProps.mobDiretory + "Crocodile.png";
 			tranOffset[0] = Vec3.createVectorHelper(0.26F, 1.5F, 0.5F);
 			tranOffset[1] = Vec3.createVectorHelper(0.5F,  1.5F, 0.5F);
 			tranOffset[2] = Vec3.createVectorHelper(0.5F,  1.75F, 0.55F);

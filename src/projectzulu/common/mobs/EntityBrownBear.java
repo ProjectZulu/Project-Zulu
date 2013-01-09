@@ -40,7 +40,7 @@ public class EntityBrownBear extends EntityBear{
 	
 	@Override
 	public String getTexture() {
-		this.texture = "/mods/bearbrown.png";
+		this.texture = DefaultProps.mobDiretory + "bearbrown.png";
 		return super.getTexture();
 	}
 

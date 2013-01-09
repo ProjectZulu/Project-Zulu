@@ -7,6 +7,8 @@ import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import projectzulu.common.core.DefaultProps;
+
 
 public class RenderLizardSpit extends Render
 {
@@ -25,7 +27,7 @@ public class RenderLizardSpit extends Render
         float var10 = this.field_77002_a;
         GL11.glScalef(var10 / 1.0F, var10 / 1.0F, var10 / 1.0F);
         byte var11 = 9;
-        this.loadTexture("/mods/items_projectzulu.png");
+        this.loadTexture(DefaultProps.itemSpriteSheet);
         Tessellator var12 = Tessellator.instance;
         float var13 = (float)(var11 % 16 * 16 + 0) / 256.0F;
         float var14 = (float)(var11 % 16 * 16 + 16) / 256.0F;

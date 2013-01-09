@@ -1,9 +1,8 @@
 package projectzulu.common.core;
 
 public class Sounds {
-    public static final String SOUND_RESOURCE_LOCATION = "mods/sounds/";
-    //public static final String SOUND_RESOURCE_LOCATION = "/Minecraft Modding/MCP Forge FML/jars/bin/minecraft.jar/mods/sounds";
-
+    public static final String SOUND_RESOURCE_LOCATION = DefaultProps.coreDiretory + "sounds/";
+    
     public static String[] soundFiles = {
     	SOUND_RESOURCE_LOCATION + "armadillodeath.ogg",
     	SOUND_RESOURCE_LOCATION + "armadillohurt.ogg",

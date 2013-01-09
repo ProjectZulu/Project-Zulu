@@ -2,7 +2,6 @@ package projectzulu.common.mobs;
 
 import java.util.EnumSet;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -68,9 +67,9 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals{
 	public String getTexture() {
 		if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
 				|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-			this.texture = "/mods/Treeant_Snow.png";
+			this.texture = DefaultProps.mobDiretory + "Treeant_Snow.png";
 		}else{
-			this.texture = "/mods/Treeant.png";
+			this.texture = DefaultProps.mobDiretory + "Treeant.png";
 		}
 
 		return super.getTexture();

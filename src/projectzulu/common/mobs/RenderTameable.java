@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLiving;
 import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.core.DefaultProps;
 
 public class RenderTameable extends RenderLiving {
 	protected float zLevel = 0.1F;
@@ -85,7 +86,7 @@ public class RenderTameable extends RenderLiving {
 
             
             /* Draw Background */
-			String textureLocation = "/Project Zulu/GUI/mobnameplate.png";
+			String textureLocation = DefaultProps.coreDiretory + "gui/guielements.png";
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture( textureLocation ));
 			int iconXCoord = 0;
 			int iconYCoord = 0;

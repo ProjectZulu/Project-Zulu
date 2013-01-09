@@ -18,10 +18,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
-import cpw.mods.fml.common.Loader;
 
 public class EntitySandWorm extends EntityMob {
 	/** deincrements, and a distance-to-home check is done at 0 */
@@ -84,9 +82,9 @@ public class EntitySandWorm extends EntityMob {
 	@Override
 	public String getTexture() {
 		if (isHidden) {
-			this.texture = "/mods/SandWorm_hidden.png";
+			this.texture = DefaultProps.mobDiretory + "SandWorm_hidden.png";
 		}else{
-			this.texture = "/mods/SandWorm.png";
+			this.texture = DefaultProps.mobDiretory + "SandWorm.png";
 		}
 		return super.getTexture();
 	}

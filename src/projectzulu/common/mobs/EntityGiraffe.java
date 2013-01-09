@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -73,7 +72,7 @@ public class EntityGiraffe extends EntityGenericAnimal {
 	@Override
 	public String getTexture() {
 
-		this.texture = "/mods/giraffe.png";
+		this.texture = DefaultProps.mobDiretory + "giraffe.png";
 		return super.getTexture();
 	}
 	

@@ -2,6 +2,7 @@ package projectzulu.common.potion;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -26,7 +27,7 @@ public class PotionZulu extends Potion{
 	}
 	
 	private String getTextureFile() {
-		return "/Project Zulu/GUI/guielements.png";
+		return DefaultProps.coreDiretory + "gui/guielements.png";
 	}
 	
     /**

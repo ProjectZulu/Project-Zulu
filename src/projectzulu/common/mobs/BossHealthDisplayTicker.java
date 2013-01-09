@@ -52,7 +52,7 @@ public class BossHealthDisplayTicker implements ITickHandler{
 //				RenderMummyPharaoh.entityMummyPharaoh = null;
 				FontRenderer var2 = mc.fontRenderer;
 				//Need instance of render engine
-//				this.loadTexture("/mods/items_projectzulu.png");
+//				this.loadTexture(DefaultProps.itemSpriteSheet);
 				   GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/gui/icons.png"));			
 
 				ScaledResolution var3 = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);

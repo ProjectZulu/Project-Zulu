@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -42,7 +43,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable
     @SideOnly(Side.CLIENT)
 	public String getTextureFile()
     {
-            return "/mods/blocks_projectzulu.png";
+            return DefaultProps.blockSpriteSheet;
     }
 
     

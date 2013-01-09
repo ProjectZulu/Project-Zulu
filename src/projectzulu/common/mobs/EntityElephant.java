@@ -6,14 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
 import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
@@ -70,7 +68,7 @@ public class EntityElephant extends EntityGenericAnimal{
 
 	@Override
 	public String getTexture() {	
-		this.texture = "/mods/elephant.png";
+		this.texture = DefaultProps.mobDiretory + "elephant.png";
 		return super.getTexture();
 	}
 

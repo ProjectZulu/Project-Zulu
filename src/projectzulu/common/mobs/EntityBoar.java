@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
 import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
@@ -65,7 +64,7 @@ public class EntityBoar extends EntityGenericAnimal implements IAnimals {
 
 	@Override
 	public String getTexture(){
-		this.texture = "/mods/boar.png";
+		this.texture = DefaultProps.mobDiretory + "boar.png";
 		return super.getTexture();
 	}
 

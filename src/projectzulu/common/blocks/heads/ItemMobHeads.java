@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -26,7 +27,7 @@ public class ItemMobHeads extends ItemBlock{
 	@SideOnly(Side.CLIENT)
 	@Override
 	public String getTextureFile(){
-            return "/mods/blocks_projectzulu.png";
+            return DefaultProps.blockSpriteSheet;
     }
 	
 	/**

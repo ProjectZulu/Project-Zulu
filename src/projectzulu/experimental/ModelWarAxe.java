@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.experimental;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.experimental;
 
 import java.util.List;
 import java.util.Random;
@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -44,7 +45,7 @@ public class BlockHoloPalmTree extends Block{
 	@SideOnly(Side.CLIENT)
     public String getTextureFile()
     {
-    	return "/mods/blocks_projectzulu.png";
+    	return DefaultProps.blockSpriteSheet;
     }
     
     public int idDropped(int par1, Random par2Random, int par3)

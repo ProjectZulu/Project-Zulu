@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.API.ItemBlockList;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -49,7 +50,7 @@ public class RenderCreeperBlossomPrimed extends Render{
             GL11.glScalef(var11, var11, var11);
         }
         var10 = (1.0F - ((float)par1EntityTNTPrimed.fuse - par9 + 1.0F) / 100.0F) * 0.8F;
-    	this.loadTexture("/mods/blocks_projectzulu.png");
+    	this.loadTexture(DefaultProps.blockSpriteSheet);
         this.blockRenderer.renderBlockAsItem(ItemBlockList.creeperBlossom.get(), 2, par1EntityTNTPrimed.getBrightness(par9));
 
         if (par1EntityTNTPrimed.fuse / 5 % 2 == 0){

@@ -3,6 +3,7 @@ package projectzulu.common.blocks;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -45,7 +46,7 @@ public class ItemScaleArmor extends ItemArmor
     @SideOnly(Side.CLIENT)
     public String getTextureFile()
     {
-    	return "/mods/items_projectzulu.png";
+    	return DefaultProps.itemSpriteSheet;
     }
 
     

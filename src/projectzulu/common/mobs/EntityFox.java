@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -28,7 +27,6 @@ import projectzulu.common.mobs.entityai.EntityAIPanic;
 import projectzulu.common.mobs.entityai.EntityAIStayStill;
 import projectzulu.common.mobs.entityai.EntityAITempt;
 import projectzulu.common.mobs.entityai.EntityAIWander;
-import cpw.mods.fml.common.Loader;
 
 public class EntityFox extends EntityGenericAnimal implements IAnimals {
 	
@@ -60,7 +58,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 	
 	@Override
 	public String getTexture() {
-		return "/mods/fox.png";
+		return DefaultProps.mobDiretory + "fox.png";
 	}
 	
 	@Override

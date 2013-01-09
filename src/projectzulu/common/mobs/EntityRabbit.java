@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
-import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
@@ -20,7 +19,6 @@ import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import projectzulu.common.mobs.entityai.EntityAIPanic;
 import projectzulu.common.mobs.entityai.EntityAITempt;
 import projectzulu.common.mobs.entityai.EntityAIWander;
-import cpw.mods.fml.common.Loader;
 
 public class EntityRabbit extends EntityGenericAnimal implements IAnimals {	
 
@@ -66,7 +64,7 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
 
 	@Override
 	public String getTexture() {
-		this.texture = "/mods/rabbit.png";
+		this.texture = DefaultProps.mobDiretory + "rabbit.png";
 		return super.getTexture();
 	}
 	

@@ -6,6 +6,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 
 public class EntityHorseRandom extends EntityHorseBase{
@@ -37,58 +38,58 @@ public class EntityHorseRandom extends EntityHorseBase{
 		switch (horseType) {
 		case 0:
 			if(getSaddled()){
-				this.texture = "/mods/Horse/horse_beige_saddled.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_beige_saddled.png";
 			}else{
-				this.texture = "/mods/Horse/horse_beige.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_beige.png";
 			}
 			break;
 		case 1:
 			if(getSaddled()){
-				this.texture = "/mods/Horse/horse_black_saddled.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_black_saddled.png";
 			}else{
-				this.texture = "/mods/Horse/horse_black.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_black.png";
 			}
 			break;
 		case 2:
 			if(getSaddled()){
-				this.texture = "/mods/Horse/horse_brown_saddled.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_brown_saddled.png";
 			}else{
-				this.texture = "/mods/Horse/horse_brown.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_brown.png";
 			}
 			break;
 		case 3:
 			if(getSaddled()){
-				this.texture = "/mods/Horse/horse_dark_black_saddled.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_black_saddled.png";
 			}else{
-				this.texture = "/mods/Horse/horse_dark_black.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_black.png";
 			}
 			break;
 		case 4:
 			if(getSaddled()){
-				this.texture = "/mods/Horse/horse_dark_brown_saddled.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_brown_saddled.png";
 			}else{
-				this.texture = "/mods/Horse/horse_dark_brown.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_brown.png";
 			}
 			break;
 		case 5:
 			if(getSaddled()){
-				this.texture = "/mods/Horse/horse_grey_saddled.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_grey_saddled.png";
 			}else{
-				this.texture = "/mods/Horse/horse_grey.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_grey.png";
 			}
 			break;
 		case 6:
 			if(getSaddled()){
-				this.texture = "/mods/Horse/horse_white_saddled.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_white_saddled.png";
 			}else{
-				this.texture = "/mods/Horse/horse_white.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_white.png";
 			}
 			break;
 		default:
 			if(getSaddled()){
-				this.texture = "/mods/Horse/horse_beige_saddled.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_beige_saddled.png";
 			}else{
-				this.texture = "/mods/Horse/horse_beige.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_beige.png";
 			}
 			break;
 		}

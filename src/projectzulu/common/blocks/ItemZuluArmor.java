@@ -1,15 +1,19 @@
 package projectzulu.common.blocks;
 
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.IArmorTextureProvider;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.temperature.ITempArmor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemZuluArmor extends ItemArmor implements ITempArmor
+public class ItemZuluArmor extends ItemArmor implements ITempArmor, IArmorTextureProvider
 {
     /** Holds the 'base' maxDamage that each armorType have. */
     private static final int[] maxDamageArray = new int[] {11, 16, 15, 13};
@@ -47,7 +51,7 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor
     //Adds Custom Item png for Icons?
     @SideOnly(Side.CLIENT)
     public String getTextureFile(){
-    	return "/mods/items_projectzulu.png";
+    	return DefaultProps.itemSpriteSheet;
     }
     
     /**
@@ -103,5 +107,10 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor
 	public boolean getBooleanCauseFastHeatTransferOnEquip(EntityPlayer player,
 			float playerTemp, float playerLocationTemp, float currentHeatRate) {
 		return false;
+	}
+
+	@Override
+	public String getArmorTextureFile(ItemStack itemstack) {
+		return DefaultProps.blockDiretory + "armor_sets/" + RenderPlayer.armorFilenamePrefix[renderIndex] + "_" + (armorType == 2 ? 2 : 1) + ".png";
 	}
 }

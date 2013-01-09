@@ -9,7 +9,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -17,7 +16,6 @@ import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
 import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsTarget;
@@ -39,7 +37,7 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 		//boundingBox.setBounds(-20,-20,-5.0,0.05,0.5,2.5);		
 		//this.setSize(1.4F, 2.9F);
 		this.moveSpeed = 0.4f;
-		this.texture = "/mods/Lizard.png";
+		this.texture = DefaultProps.mobDiretory + "Lizard.png";
 
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));

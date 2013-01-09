@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,7 +25,7 @@ public class BlockTumbleweed extends Block
     @SideOnly(Side.CLIENT)
 	public String getTextureFile()
     {
-            return "/mods/blocks_projectzulu.png";
+            return DefaultProps.blockSpriteSheet;
     }
 
 	public int quantityDropped(Random random){

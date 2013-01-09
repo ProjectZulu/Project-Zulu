@@ -10,6 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.EntityMummyPharaoh;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -79,7 +80,7 @@ public class BlockJasper extends Block
 	@SideOnly(Side.CLIENT)
 	public String getTextureFile()
     {
-            return "/mods/blocks_projectzulu.png";
+            return DefaultProps.blockSpriteSheet;
     }
 
 	public int quantityDropped(Random random){

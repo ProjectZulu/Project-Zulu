@@ -97,7 +97,7 @@ public class mod_ProjectZulu{
 		modConfigDirectoryFile = event.getModConfigurationDirectory();
 
 		ProjectZuluLog.configureLogging();
-		Configuration zuluConfig = new Configuration(  new File(event.getModConfigurationDirectory(), DefaultProps.ConfigDirectory + DefaultProps.defaultConfigFile));
+		Configuration zuluConfig = new Configuration(  new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.defaultConfigFile));
 		
 		zuluConfig.load();
         enableTestBlock = zuluConfig.get("Developer Debug Variables", "enableTestBlock", enableTestBlock).getBoolean(enableTestBlock);  

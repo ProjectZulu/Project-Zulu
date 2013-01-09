@@ -8,6 +8,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFlyingWander;
@@ -54,7 +55,7 @@ public class EntityPelican extends EntityGenericAnimal{
 
 	@Override
 	public String getTexture(){
-		this.texture = "/mods/pelican.png";
+		this.texture = DefaultProps.mobDiretory + "pelican.png";
 		return super.getTexture();
 	}
 

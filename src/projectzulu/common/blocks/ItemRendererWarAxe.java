@@ -7,6 +7,8 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.experimental.ModelWarAxe;
+
 public class ItemRendererWarAxe implements IItemRenderer{
 	
 	ModelWarAxe model = new ModelWarAxe();

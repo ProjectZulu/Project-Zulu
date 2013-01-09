@@ -99,7 +99,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 	
 	@Override
 	public String getTexture() {
-		this.texture = "/mods/Armadillo.png";
+		this.texture = DefaultProps.mobDiretory + "Armadillo.png";
 		return this.texture;
 	}
 

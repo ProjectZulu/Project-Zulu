@@ -5,6 +5,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 
 public class EntityHorseDarkBrown extends EntityHorseBase{
@@ -16,9 +17,9 @@ public class EntityHorseDarkBrown extends EntityHorseBase{
 	@Override
 	public String getTexture() {
 		if(getSaddled()){
-				this.texture = "/mods/Horse/horse_dark_brown_saddled.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_brown_saddled.png";
 		}else{
-				this.texture = "/mods/Horse/horse_dark_brown.png";
+				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_brown.png";
 		}
 		return super.getTexture();
 	}

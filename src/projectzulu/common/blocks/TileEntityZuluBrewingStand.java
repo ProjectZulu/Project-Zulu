@@ -2,8 +2,6 @@ package projectzulu.common.blocks;
 
 import java.util.List;
 
-import projectzulu.common.core.ItemGenerics;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
@@ -13,6 +11,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.tileentity.TileEntityBrewingStand;
 import net.minecraftforge.common.ForgeDirection;
+import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

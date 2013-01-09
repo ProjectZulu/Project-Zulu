@@ -20,7 +20,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.API.CustomEntityList;
 import projectzulu.common.API.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFollowOwner;
@@ -100,17 +99,17 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 		if(getSaddled()){
 			if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
 					|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-				this.texture = "/mods/Mammoth_Snow_Saddle.png";
+				this.texture = DefaultProps.mobDiretory + "Mammoth_Snow_Saddle.png";
 			}else{
-				this.texture = "/mods/Mammoth_Saddle.png";
+				this.texture = DefaultProps.mobDiretory + "Mammoth_Saddle.png";
 			}
 
 		}else{
 			if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
 					|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-				this.texture = "/mods/Mammoth_Snow.png";
+				this.texture = DefaultProps.mobDiretory + "Mammoth_Snow.png";
 			}else{
-				this.texture = "/mods/Mammoth.png";
+				this.texture = DefaultProps.mobDiretory + "Mammoth.png";
 			}
 		}
 		return super.getTexture();

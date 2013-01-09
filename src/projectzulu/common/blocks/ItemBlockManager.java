@@ -444,7 +444,7 @@ public enum ItemBlockManager {
 			Block block = ItemBlockList.tombstone.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Tombstone");
 			/* Register TileEntity Render */
-			Configuration tempConfig = new Configuration(  new File(mod_ProjectZulu.modConfigDirectoryFile, DefaultProps.ConfigDirectory + DefaultProps.tempConfigFile));
+			Configuration tempConfig = new Configuration(  new File(mod_ProjectZulu.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.tempConfigFile));
 			tempConfig.load();
 			Property property = tempConfig.get("TempSettings.Tombstone", "useAlterantiveTileEntityName", false);
 			if(!property.getBoolean(false)){

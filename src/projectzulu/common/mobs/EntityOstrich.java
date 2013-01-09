@@ -65,7 +65,7 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
 
 	@Override
 	public String getTexture() {
-		this.texture = "/mods/ostrich.png";
+		this.texture = DefaultProps.mobDiretory + "ostrich.png";
 		return super.getTexture();
 	}
 	

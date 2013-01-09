@@ -5,6 +5,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.API.CustomEntityList;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 
 public class EntityRedFinch extends EntityFinch{
@@ -15,7 +16,7 @@ public class EntityRedFinch extends EntityFinch{
 	
 	@Override
 	public String getTexture() {
-		this.texture = "/mods/finch_red.png";
+		this.texture = DefaultProps.mobDiretory + "finch_red.png";
 		return super.getTexture();
 	}
 	
