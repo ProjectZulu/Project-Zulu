@@ -185,8 +185,7 @@ public class EventHookContainerClass {
 //			}
 //		}
 		
-	    if( (Loader.isModLoaded(DefaultProps.MobsModId) && mod_ProjectZulu.tombstoneOnDeath 
-	            && event.entity instanceof EntityPlayer && ItemBlockList.tombstone.isPresent() )){
+	    if( (Loader.isModLoaded(DefaultProps.MobsModId) && mod_ProjectZulu.tombstoneOnDeath && event.entity instanceof EntityPlayer && ItemBlockList.tombstone.isPresent() )){
 	        EntityPlayer player = (EntityPlayer)event.entity;
 	        World worldObj = player.worldObj;
 
