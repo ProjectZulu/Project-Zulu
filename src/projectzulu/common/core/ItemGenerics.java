@@ -21,7 +21,8 @@ public class ItemGenerics extends Item{
 		BlackLichen("Black Lichen", 20, 240),
 		Pulp("Pulp", 21, 241),
 		Salt("Salt", 22, 242),
-		Antennae("Antennae", 23, 243, "-0+1+2+3&4-4+13", "-0+1+2+3+10&8-8+9+13"), // Blindness
+		//  "-0+1+2+3&4-4+13", "-0+1+2+3+10&8-8+9+13"
+		Antennae("Antennae", 23, 243, "-0+1+2-3&4-4+13", "-0+1+2-3&8-8+9+13"), // Night Vision
 		ShinyBauble("Shiny Bauble", 24, 244, "+8&4-4"),
 		Talon("Talon", 25, 245, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"), // Strength+
 		PlantStalk("Plant Stalk", 26, 246), 
@@ -50,6 +51,7 @@ public class ItemGenerics extends Item{
 		private int iconIndex;
 		private String defaultPotionEffect;
 		private String extraPotionEffect;
+		
 		Properties(String name, int meta, int iconIndex, String defaultPotionEffect, String extraPotionEffect) {
 			this.displayName = name;
 			this.meta = meta;
