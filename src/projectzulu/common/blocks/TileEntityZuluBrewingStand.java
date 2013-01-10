@@ -177,7 +177,7 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
     		
     		/* Potion Effects For Vanilla Items */
     		if( ingredientItemStack.getItem().shiftedIndex == Item.feather.shiftedIndex){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1-2-3&8-8+9+10" : "-0+1-2-3+10&4-4";
+    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1-2-3&8-8+9+10" : "-0+1-2-3+10&4-4"; // Slowfall
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
     		}else if( ingredientItemStack.getItem().shiftedIndex == Item.blazePowder.shiftedIndex){
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2+3&4-4+13";
@@ -198,7 +198,7 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0+1-2-3&8-8+9+13" : "+0+1-2-3&4-4+13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
     		}else if( ingredientItemStack.getItem().shiftedIndex == Item.goldenCarrot.shiftedIndex){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1+2-3&8-8+9+13" : "-0+1+2-3+13&4-4";
+    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1+2-3&8-8+9+13" : "-0+1+2-3+13&4-4"; // NightVision
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
     		}
     		
