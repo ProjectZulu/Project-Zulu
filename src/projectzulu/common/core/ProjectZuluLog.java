@@ -27,5 +27,9 @@ public class ProjectZuluLog {
 	public static void warning(String format, Object... data){
         log(Level.WARNING, format, data);
     }
+	
+	public static void severe(String format, Object... data){
+        log(Level.SEVERE, format, data);
+    }
 
 }

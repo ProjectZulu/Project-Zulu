@@ -1,12 +1,15 @@
 package projectzulu.common.potion;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionHelper;
-import net.minecraft.potion.ZuluPotionHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -127,43 +130,61 @@ public enum PotionManager {
 		}
 	}
 	
-	public static void setupAndRegisterPotions(){		
+	public static void setupAndRegisterPotions() {		
 		/* Add Potion Properties to potionRequirements and field_77928_m in PotionHelper*/
-		Field fieldPotionRequirement;
+		Field fieldPotionRequirement = null;
 		HashMap potionRequirements;
-		Field fieldField_77928_m;
+		Field fieldField_77928_m = null;
 		HashMap field_77928_m;
-		try {
-			fieldPotionRequirement = PotionHelper.class.getDeclaredField("potionRequirements");
-			fieldPotionRequirement.setAccessible(true);
-			fieldField_77928_m = PotionHelper.class.getDeclaredField("field_77928_m");
-			fieldField_77928_m.setAccessible(true);
+		try {			
+			if(isUnObfuscated(PotionHelper.class.getDeclaredFields().clone(), "potionRequirements")){
+				/* Grab "potionRequirements" : OBFSC: "m" : potionRequirements --> fields.csv --> joined.srg --> m */
+				fieldPotionRequirement = PotionHelper.class.getDeclaredField("potionRequirements");
+				/* Grab "field_77928_m" : OBFSC: n */
+				fieldField_77928_m = PotionHelper.class.getDeclaredField("field_77928_m");	
+			}else{
+				/* Grab "potionRequirements" : OBFSC: "m" */
+				fieldPotionRequirement = PotionHelper.class.getDeclaredField("m");
+				/* Grab "field_77928_m" : OBFSC: n */
+				fieldField_77928_m = PotionHelper.class.getDeclaredField("n");	
+			}
 			
-			potionRequirements = (HashMap) fieldPotionRequirement.get(PotionHelper.class);	
-			field_77928_m = (HashMap) fieldField_77928_m.get(PotionHelper.class);
-			
-			for (PotionManager potion : PotionManager.values()) {
-				if(potion.potionID > 0){
-					potion.setupPotion(potionRequirements, field_77928_m);
-					potion.registerPotion();
+			if(fieldPotionRequirement != null && fieldField_77928_m != null){
+				/* Grab PotionRequirements Hashap, static so doesn't need Instance */
+				fieldPotionRequirement.setAccessible(true);
+				potionRequirements = (HashMap) fieldPotionRequirement.get(null);	
+				
+				/* Grab field_77928_m Hashap, static so doesn't need Instance */
+				fieldField_77928_m.setAccessible(true);
+				field_77928_m = (HashMap) fieldField_77928_m.get(null);
+				
+				for (PotionManager potion : PotionManager.values()) {
+					if(potion.potionID > 0){
+						potion.setupPotion(potionRequirements, field_77928_m);
+						potion.registerPotion();
+					}
+				}
+				if(alterVanillaPotionRequirements){
+					alterVanillaPotionEffectRequriements(potionRequirements, field_77928_m);
+					ZuluPotionHelper.setVanillaPotionProperties();
 				}
 			}
-			if(alterVanillaPotionRequirements){
-				alterVanillaPotionEffectRequriements(potionRequirements, field_77928_m);	
-				ZuluPotionHelper.setVanillaPotionProperties();
-			}
-		} catch (IllegalArgumentException e) {
-			ProjectZuluLog.warning("Bad Things Are Happening Accessing PotionRequirement Hashmap: IllegalArgumentException");
+			
+		}catch (NoSuchFieldException e) {
+			ProjectZuluLog.severe("Obfuscation needs to be updated to access the PotionRequirement Hashmap. Please notify modmaker Immediately.");
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			ProjectZuluLog.warning("Bad Things Are Happening Accessing PotionRequirement Hashmap : IllegalAccessException");
+		}catch (IllegalArgumentException e) {
+			ProjectZuluLog.severe("Obfuscation needs to be updated to access the PotionRequirement Hashmap. Please notify modmaker Immediately.");
 			e.printStackTrace();
-		} catch (NoSuchFieldException e1) {
-			ProjectZuluLog.warning("Bad Things Are Happening setting PotionRequirement Hashmap public : NoSuchFieldException");
-			e1.printStackTrace();
-		} catch (SecurityException e1) {
-			ProjectZuluLog.warning("Bad Things Are Happening setting PotionRequirement Hashmap public : SecurityException");
-			e1.printStackTrace();
+		}catch (IllegalAccessException e) {
+			ProjectZuluLog.severe("Obfuscation needs to be updated to access the PotionRequirement Hashmap. Please notify modmaker Immediately.");
+			e.printStackTrace();
+		}catch (SecurityException e) {
+			ProjectZuluLog.severe("Obfuscation needs to be updated to access the PotionRequirement Hashmap. Please notify modmaker Immediately.");
+			e.printStackTrace();
+		}catch (InvocationTargetException e) {
+			ProjectZuluLog.severe("Obfuscation needs to be updated to access the PotionRequirement Hashmap. Please notify modmaker Immediately.");
+			e.printStackTrace();
 		}
 		
 		/** Replace Vanilla Brewing Stand TileEntity
@@ -171,13 +192,25 @@ public enum PotionManager {
 		if(replaceVanillaBrewingStand){
 			/* Remove Vanilla Brewing Stand and Tile Entity */
 			Block.blocksList[Block.brewingStand.blockID] = null;
-			try {
-				Field fieldnameToClassMap = TileEntity.class.getDeclaredField("nameToClassMap");
-				fieldnameToClassMap.setAccessible(true);
-				HashMap nameToClassMap = (HashMap) fieldnameToClassMap.get(TileEntity.class);	
-				if(nameToClassMap.containsKey("Cauldron")){
-					nameToClassMap.remove("Cauldron");
+			try {				
+				Field fieldnameToClassMap = null;
+				if(isUnObfuscated(TileEntity.class.getDeclaredFields().clone(), "nameToClassMap")){
+					/* Grab "nameToClassMap" : OBFSC: "a" */
+					fieldnameToClassMap = TileEntity.class.getDeclaredField("nameToClassMap");
+				}else{
+					/* Grab "nameToClassMap" : OBFSC: "a" */
+					fieldnameToClassMap = TileEntity.class.getDeclaredField("a");
 				}
+				
+				if(fieldnameToClassMap != null){
+					/* Grab nameToClassMap Hashap, static so doesn't need Instance */
+					fieldnameToClassMap.setAccessible(true);
+					HashMap nameToClassMap = (HashMap) fieldnameToClassMap.get(null);
+					if(nameToClassMap.containsKey("Cauldron")){
+						nameToClassMap.remove("Cauldron");
+					}
+				}
+				
 			} catch (Exception e) {
 				ProjectZuluLog.warning("Bad Things Are Happening tryin to Access TileEntityNameMap Hashmap public");
 				e.printStackTrace();
@@ -257,5 +290,34 @@ public enum PotionManager {
         
 		/* WaterBreathing : Tier 1 & 2 Potion */
         potionRequirements.put(Integer.valueOf(Potion.waterBreathing.getId()), "!0 & !1 & 2 & !3 & 10 & 2+6+9+9");
+	}
+	
+	/**
+	 * Helper used to See if we are unObfuscated by checking for a known non-Obfuscated name
+	 * return true if unObfuscated (eclipse), false if obfuscated (Minecraft)
+	 * @param list
+	 */
+	private static boolean isUnObfuscated(Field[] fieldList, String desired){
+		for (int i = 0; i < fieldList.length; i++) {
+			if(fieldList[i].getName().equals(desired)){
+				return true;
+			}
+		}			
+		return false;
+	}
+	
+	/**
+	 * Helper used to See What the obfuscated names have changed to, so they can be set. Requires Compile + run in minecraft outside Eclipse
+	 * Is not usually used, just lookup in MCP, useful for confirming or exploring to make sure it's right
+	 * @param list
+	 */
+	private static void printFieldNamesandType(Field[] fieldList, String title){
+		System.out.println("******");
+		System.out.println("Searching " + title +" found "+ fieldList.length + " properties");
+		for (int i = 0; i < fieldList.length; i++) {
+			System.out.println("******");
+			System.out.println("Field "+ i +" is named " + fieldList[i].getName() + " of type " + fieldList[i].getGenericType());
+		}			
+		System.out.println("******");
 	}
 }
