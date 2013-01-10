@@ -7,7 +7,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IArmorTextureProvider;
 import projectzulu.common.ProjectZulu_Blocks;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.temperature.ITempArmor;
 import cpw.mods.fml.relauncher.Side;
@@ -78,19 +78,19 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor, IArmorTextur
 	@Override
 	public float getAddToLocTempOnEquip(EntityPlayer player, float playerTemp,
 			float playerLocationTemp) {
-		if( material.equals(mod_ProjectZulu.desertClothMaterial) ){
+		if( material.equals(ProjectZulu_Core.desertClothMaterial) ){
 			return -0.4f;
-		}else if( material.equals(mod_ProjectZulu.scaleMaterial) ){
+		}else if( material.equals(ProjectZulu_Core.scaleMaterial) ){
 			return -0.4f;
-		}else if( material.equals(mod_ProjectZulu.goldScaleMaterial) ){
+		}else if( material.equals(ProjectZulu_Core.goldScaleMaterial) ){
 			return -0.3f;
-		}else if( material.equals(mod_ProjectZulu.ironScaleMaterial) ){
+		}else if( material.equals(ProjectZulu_Core.ironScaleMaterial) ){
 			return -0.3f;
-		}else if( material.equals(mod_ProjectZulu.diamondScaleMaterial) ){
+		}else if( material.equals(ProjectZulu_Core.diamondScaleMaterial) ){
 			return -0.2f;
 		}
 
-		if(material.equals(mod_ProjectZulu.furMaterial)){
+		if(material.equals(ProjectZulu_Core.furMaterial)){
 			return 0.3f;
 		}
 		

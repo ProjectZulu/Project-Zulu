@@ -3,7 +3,7 @@ package projectzulu.common.blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Blocks;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemBlockList;
 
 import com.google.common.base.Optional;
@@ -18,7 +18,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.scaleArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.scaleIndex,0)).setIconIndex(16).setItemName("Scale Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,0)).setIconIndex(16).setItemName("Scale Helmet"));
 		}
 
 		@Override
@@ -32,7 +32,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.scaleArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.scaleIndex,1)).setIconIndex(17).setItemName("Scale Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,1)).setIconIndex(17).setItemName("Scale Chestplate"));	
 		}
 
 		@Override
@@ -45,7 +45,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.scaleArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.scaleIndex,2)).setIconIndex(18).setItemName("Scale Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,2)).setIconIndex(18).setItemName("Scale Leggings"));	
 		}
 
 		@Override
@@ -58,7 +58,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.scaleArmorBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.scaleIndex,3)).setIconIndex(19).setItemName("Scale Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,3)).setIconIndex(19).setItemName("Scale Boots"));	
 		}
 
 		@Override
@@ -71,7 +71,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.goldScaleArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 0)).setIconIndex(48).setItemName("goldScale Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 0)).setIconIndex(48).setItemName("goldScale Helmet"));
 		}
 
 		@Override
@@ -84,7 +84,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.goldScaleArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 1)).setIconIndex(49).setItemName("goldScale Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 1)).setIconIndex(49).setItemName("goldScale Chestplate"));	
 		}
 
 		@Override
@@ -97,7 +97,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.goldScaleArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 2)).setIconIndex(50).setItemName("goldScale Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 2)).setIconIndex(50).setItemName("goldScale Leggings"));	
 		}
 
 		@Override
@@ -110,7 +110,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.goldScaleArmorBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 3)).setIconIndex(51).setItemName("goldScale Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 3)).setIconIndex(51).setItemName("goldScale Boots"));	
 		}
 
 		@Override
@@ -123,7 +123,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.ironScaleArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,0)).setIconIndex(52).setItemName("ironScale Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,0)).setIconIndex(52).setItemName("ironScale Helmet"));
 		}
 
 		@Override
@@ -136,7 +136,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.ironScaleArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,1)).setIconIndex(53).setItemName("ironScale Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,1)).setIconIndex(53).setItemName("ironScale Chestplate"));	
 		}
 
 		@Override
@@ -149,7 +149,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.ironScaleArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,2)).setIconIndex(54).setItemName("ironScale Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,2)).setIconIndex(54).setItemName("ironScale Leggings"));	
 		}
 
 		@Override
@@ -162,7 +162,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.ironScaleArmorBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,3)).setIconIndex(55).setItemName("ironScale Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,3)).setIconIndex(55).setItemName("ironScale Boots"));	
 		}
 
 		@Override
@@ -175,7 +175,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.diamondScaleArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,0)).setIconIndex(56).setItemName("diamondScale Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,0)).setIconIndex(56).setItemName("diamondScale Helmet"));
 		}
 
 		@Override
@@ -188,7 +188,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.diamondScaleArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,1)).setIconIndex(57).setItemName("diamondScale Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,1)).setIconIndex(57).setItemName("diamondScale Chestplate"));	
 		}
 
 		@Override
@@ -201,7 +201,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.diamondScaleArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,2)).setIconIndex(58).setItemName("diamondScale Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,2)).setIconIndex(58).setItemName("diamondScale Leggings"));	
 		}
 
 		@Override
@@ -214,7 +214,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.diamondScaleArmorBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,3)).setIconIndex(59).setItemName("diamondScale Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,3)).setIconIndex(59).setItemName("diamondScale Boots"));	
 		}
 
 		@Override
@@ -227,7 +227,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.whiteClothHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,0)).setIconIndex(32).setItemName("whiteCloth Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,0)).setIconIndex(32).setItemName("whiteCloth Helmet"));
 		}
 
 		@Override
@@ -240,7 +240,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.whiteClothChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,1)).setIconIndex(33).setItemName("whiteCloth Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,1)).setIconIndex(33).setItemName("whiteCloth Chestplate"));	
 		}
 
 		@Override
@@ -253,7 +253,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.whiteClothLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,2)).setIconIndex(34).setItemName("whiteCloth Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,2)).setIconIndex(34).setItemName("whiteCloth Leggings"));	
 		}
 
 		@Override
@@ -266,7 +266,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.whiteClothBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,3)).setIconIndex(35).setItemName("whiteCloth Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,3)).setIconIndex(35).setItemName("whiteCloth Boots"));	
 		}
 
 		@Override
@@ -279,7 +279,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.redClothHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,0)).setIconIndex(36).setItemName("redCloth Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,0)).setIconIndex(36).setItemName("redCloth Helmet"));
 		}
 
 		@Override
@@ -292,7 +292,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.redClothChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,1)).setIconIndex(37).setItemName("redCloth Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,1)).setIconIndex(37).setItemName("redCloth Chestplate"));	
 		}
 
 		@Override
@@ -305,7 +305,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.redClothLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,2)).setIconIndex(38).setItemName("redCloth Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,2)).setIconIndex(38).setItemName("redCloth Leggings"));	
 		}
 
 		@Override
@@ -318,7 +318,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.redClothBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,3)).setIconIndex(39).setItemName("redCloth Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,3)).setIconIndex(39).setItemName("redCloth Boots"));	
 		}
 
 		@Override
@@ -331,7 +331,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.greenClothHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,0)).setIconIndex(40).setItemName("greenCloth Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,0)).setIconIndex(40).setItemName("greenCloth Helmet"));
 		}
 
 		@Override
@@ -344,7 +344,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.greenClothChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,1)).setIconIndex(41).setItemName("greenCloth Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,1)).setIconIndex(41).setItemName("greenCloth Chestplate"));	
 		}
 
 		@Override
@@ -357,7 +357,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.greenClothLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,2)).setIconIndex(42).setItemName("greenCloth Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,2)).setIconIndex(42).setItemName("greenCloth Leggings"));	
 		}
 
 		@Override
@@ -370,7 +370,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.greenClothBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,3)).setIconIndex(43).setItemName("greenCloth Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,3)).setIconIndex(43).setItemName("greenCloth Boots"));	
 		}
 
 		@Override
@@ -383,7 +383,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.blueClothHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,0)).setIconIndex(44).setItemName("blueCloth Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,0)).setIconIndex(44).setItemName("blueCloth Helmet"));
 		}
 
 		@Override
@@ -396,7 +396,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.blueClothChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,1)).setIconIndex(45).setItemName("blueCloth Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,1)).setIconIndex(45).setItemName("blueCloth Chestplate"));	
 		}
 
 		@Override
@@ -409,7 +409,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.blueClothLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,2)).setIconIndex(46).setItemName("blueCloth Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,2)).setIconIndex(46).setItemName("blueCloth Leggings"));	
 		}
 
 		@Override
@@ -422,7 +422,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.blueClothBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,3)).setIconIndex(47).setItemName("blueCloth Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,3)).setIconIndex(47).setItemName("blueCloth Boots"));	
 		}
 
 		@Override
@@ -435,7 +435,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.cactusArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.cactusIndex,0)).setIconIndex(60).setItemName("CactusCloth Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,0)).setIconIndex(60).setItemName("CactusCloth Helmet"));
 		}
 
 		@Override
@@ -448,7 +448,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.cactusArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.cactusIndex,1)).setIconIndex(61).setItemName("CactusCloth Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,1)).setIconIndex(61).setItemName("CactusCloth Chestplate"));	
 		}
 
 		@Override
@@ -461,7 +461,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.cactusArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.cactusIndex,2)).setIconIndex(62).setItemName("CactusCloth Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,2)).setIconIndex(62).setItemName("CactusCloth Leggings"));	
 		}
 
 		@Override
@@ -474,7 +474,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.cactusArmorBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.cactusIndex,3)).setIconIndex(63).setItemName("CactusCloth Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,3)).setIconIndex(63).setItemName("CactusCloth Boots"));	
 		}
 
 		@Override
@@ -487,7 +487,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.furArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.furIndex,0)).setIconIndex(64).setItemName("furCloth Helmet"));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,0)).setIconIndex(64).setItemName("furCloth Helmet"));
 		}
 
 		@Override
@@ -500,7 +500,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.furArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.furIndex,1)).setIconIndex(65).setItemName("furCloth Chestplate"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,1)).setIconIndex(65).setItemName("furCloth Chestplate"));	
 		}
 
 		@Override
@@ -513,7 +513,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.furArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.furIndex,2)).setIconIndex(66).setItemName("furCloth Leggings"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,2)).setIconIndex(66).setItemName("furCloth Leggings"));	
 		}
 
 		@Override
@@ -526,7 +526,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemBlockList.furArmorBoot = Optional.of(
-					(new ItemZuluArmor(blockID, mod_ProjectZulu.scaleMaterial, ProjectZulu_Blocks.furIndex,3)).setIconIndex(67).setItemName("furCloth Boots"));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,3)).setIconIndex(67).setItemName("furCloth Boots"));	
 		}
 
 		@Override

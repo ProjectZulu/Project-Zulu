@@ -20,7 +20,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
@@ -173,7 +173,7 @@ public class EntityZulu extends EntityHerd implements IAnimals {
 	}
 
 	public void onUpdate(){
-		if(worldObj.difficultySetting == 0 && mod_ProjectZulu.despawnInPeaceful){
+		if(worldObj.difficultySetting == 0 && ProjectZulu_Core.despawnInPeaceful){
 			this.setDead();
 		}
 

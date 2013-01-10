@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 /**
@@ -205,7 +205,7 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     		if (par1EntityPlayer.username.equalsIgnoreCase(this.getOwnerName())){
     			if(var2 != null){
     				if(var2.getItem().shiftedIndex == Item.paper.shiftedIndex){
-    					par1EntityPlayer.openGui(mod_ProjectZulu.modInstance, 2, par1EntityPlayer.worldObj, entityId, 0, 0);
+    					par1EntityPlayer.openGui(ProjectZulu_Core.modInstance, 2, par1EntityPlayer.worldObj, entityId, 0, 0);
     					return true;
     				}else if( getHealingValueIfValid(var2) > 0 && getHealth() < getMaxHealth() ){
     					 if (!par1EntityPlayer.capabilities.isCreativeMode) {

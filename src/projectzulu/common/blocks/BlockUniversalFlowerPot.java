@@ -5,7 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 
 public class BlockUniversalFlowerPot extends BlockContainer{
 	
@@ -30,7 +30,7 @@ public class BlockUniversalFlowerPot extends BlockContainer{
      * The type of render function that is called for this block
      */
     public int getRenderType(){
-        return mod_ProjectZulu.universalFlowerPotRenderID;
+        return ProjectZulu_Core.universalFlowerPotRenderID;
     }
 	
     /**
@@ -70,7 +70,7 @@ public class BlockUniversalFlowerPot extends BlockContainer{
 			return false;
 		}
 		//opens gui, to be implemented later
-		player.openGui(mod_ProjectZulu.modInstance, 1, world, x, y, z);
+		player.openGui(ProjectZulu_Core.modInstance, 1, world, x, y, z);
 		return true;
 	}
 	

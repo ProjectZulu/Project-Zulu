@@ -67,17 +67,17 @@ public class ProjectZulu_Blocks {
 		Configuration zuluConfig = new Configuration(  new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.defaultConfigFile) );
         zuluConfig.load();
         
-		scaleIndex = mod_ProjectZulu.proxy.addArmor("scaleArmor");
-		goldScaleIndex = mod_ProjectZulu.proxy.addArmor("goldscale");
-		ironScaleIndex = mod_ProjectZulu.proxy.addArmor("ironscale");
-		diamondScaleIndex = mod_ProjectZulu.proxy.addArmor("diamondscale");
+		scaleIndex = ProjectZulu_Core.proxy.addArmor("scaleArmor");
+		goldScaleIndex = ProjectZulu_Core.proxy.addArmor("goldscale");
+		ironScaleIndex = ProjectZulu_Core.proxy.addArmor("ironscale");
+		diamondScaleIndex = ProjectZulu_Core.proxy.addArmor("diamondscale");
 		
-		whiteWoolIndex = mod_ProjectZulu.proxy.addArmor("whitedesertcloth");
-		redWoolIndex = mod_ProjectZulu.proxy.addArmor("reddesertcloth");
-		greenWoolIndex = mod_ProjectZulu.proxy.addArmor("greendesertcloth");
-		blueWoolIndex = mod_ProjectZulu.proxy.addArmor("bluedesertcloth");
-		cactusIndex = mod_ProjectZulu.proxy.addArmor("cactusarmor");
-		furIndex = mod_ProjectZulu.proxy.addArmor("mammothfur");
+		whiteWoolIndex = ProjectZulu_Core.proxy.addArmor("whitedesertcloth");
+		redWoolIndex = ProjectZulu_Core.proxy.addArmor("reddesertcloth");
+		greenWoolIndex = ProjectZulu_Core.proxy.addArmor("greendesertcloth");
+		blueWoolIndex = ProjectZulu_Core.proxy.addArmor("bluedesertcloth");
+		cactusIndex = ProjectZulu_Core.proxy.addArmor("cactusarmor");
+		furIndex = ProjectZulu_Core.proxy.addArmor("mammothfur");
         
 		ProjectZuluLog.info("Starting ItemBlock Init ");
         try {
@@ -108,25 +108,25 @@ public class ProjectZulu_Blocks {
 		ProjectZuluLog.info("Finished ItemBlock Setup ");
 
 		if(ItemBlockList.spike.isPresent()){
-			mod_ProjectZulu.spikeRenderID = mod_ProjectZulu.spikeRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : mod_ProjectZulu.spikeRenderID;
-			RenderingRegistry.registerBlockHandler(mod_ProjectZulu.spikeRenderID, new RenderSpike() );
-			ProjectZuluLog.info("Spike Render ID Registed to %s", mod_ProjectZulu.spikeRenderID);
+			ProjectZulu_Core.spikeRenderID = ProjectZulu_Core.spikeRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.spikeRenderID;
+			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.spikeRenderID, new RenderSpike() );
+			ProjectZuluLog.info("Spike Render ID Registed to %s", ProjectZulu_Core.spikeRenderID);
 		}
 		
 		if(ItemBlockList.campfire.isPresent()){
-			mod_ProjectZulu.campFireRenderID = mod_ProjectZulu.campFireRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : mod_ProjectZulu.campFireRenderID;
-			RenderingRegistry.registerBlockHandler(mod_ProjectZulu.campFireRenderID, new RenderCampFire() );
-			ProjectZuluLog.info("Campfire Render ID Registed to %s", mod_ProjectZulu.campFireRenderID);
+			ProjectZulu_Core.campFireRenderID = ProjectZulu_Core.campFireRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.campFireRenderID;
+			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.campFireRenderID, new RenderCampFire() );
+			ProjectZuluLog.info("Campfire Render ID Registed to %s", ProjectZulu_Core.campFireRenderID);
 		}
 		
 		if(ItemBlockList.universalFlowerPot.isPresent()){
-			mod_ProjectZulu.universalFlowerPotRenderID = mod_ProjectZulu.universalFlowerPotRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : mod_ProjectZulu.universalFlowerPotRenderID;
-			RenderingRegistry.registerBlockHandler(mod_ProjectZulu.universalFlowerPotRenderID, new RenderUniversalFlowerPot() );
-			ProjectZuluLog.info("Universal Flower Pot Render ID Registed to %s", mod_ProjectZulu.universalFlowerPotRenderID);
+			ProjectZulu_Core.universalFlowerPotRenderID = ProjectZulu_Core.universalFlowerPotRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.universalFlowerPotRenderID;
+			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.universalFlowerPotRenderID, new RenderUniversalFlowerPot() );
+			ProjectZuluLog.info("Universal Flower Pot Render ID Registed to %s", ProjectZulu_Core.universalFlowerPotRenderID);
 		}
 
-		mod_ProjectZulu.proxy.registerBlockRenders();
-        NetworkRegistry.instance().registerGuiHandler(mod_ProjectZulu.modInstance, new ZuluGuiHandler());
+		ProjectZulu_Core.proxy.registerBlockRenders();
+        NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
         
 		/* War Axe Declaration */
 //		TickRegistry.registerScheduledTickHandler(new RenderCustomArmorTicker(), Side.CLIENT);

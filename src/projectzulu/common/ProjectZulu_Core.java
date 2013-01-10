@@ -32,10 +32,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = DefaultProps.CoreModId, name = "Project Zulu Core", version = DefaultProps.VERSION_STRING)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels={"Channel_Zulu"}, packetHandler = ZuluPacketHandler.class)
 
-public class mod_ProjectZulu{	
+public class ProjectZulu_Core{	
 	
 	@Instance(DefaultProps.CoreModId)
-	public static mod_ProjectZulu modInstance;
+	public static ProjectZulu_Core modInstance;
 	
 	/*
 	 * General Declarations
@@ -121,7 +121,7 @@ public class mod_ProjectZulu{
 //            GameRegistry.registerPlayerTracker(temperatureTicker);
 //        }
 		proxy.bossHealthTicker();
-		mod_ProjectZulu.proxy.registerMobSounds();
+		ProjectZulu_Core.proxy.registerMobSounds();
 	}
 	
 	@Init

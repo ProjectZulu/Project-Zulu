@@ -39,8 +39,8 @@ public class ProjectZulu_Mobs {
 
 	@Init
 	public void load(FMLInitializationEvent event){
-		mod_ProjectZulu.proxy.registerMobRenders();
-		mod_ProjectZulu.proxy.registerMobSoundEvent();
+		ProjectZulu_Core.proxy.registerMobRenders();
+		ProjectZulu_Core.proxy.registerMobSoundEvent();
 	}
 	
 	@PostInit

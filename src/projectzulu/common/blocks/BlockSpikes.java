@@ -15,7 +15,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
@@ -124,7 +124,7 @@ public class BlockSpikes extends Block{
 	}
 	
 	public int getRenderType(){
-		return mod_ProjectZulu.spikeRenderID;
+		return ProjectZulu_Core.spikeRenderID;
 	}
 
 	public boolean isOpaqueCube(){

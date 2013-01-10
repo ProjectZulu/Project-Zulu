@@ -11,8 +11,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.ProjectZulu_Mobs;
-import projectzulu.common.mod_ProjectZulu;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemBlockList;
@@ -1529,7 +1529,7 @@ public enum CustomEntityManager {
 		for (final CustomEntityManager mob : CustomEntityManager.values()) {
 			if(mob.shouldExist){
 				EntityRegistry.registerModEntity(mob.mobClass,  mob.mobName, ProjectZulu_Mobs.getNextDefaultMobID(),
-						mod_ProjectZulu.modInstance, mob.trackingRange, mob.updateFrequency, true);
+						ProjectZulu_Core.modInstance, mob.trackingRange, mob.updateFrequency, true);
 				LanguageRegistry.instance().addStringLocalization("entity.".concat(DefaultProps.CoreModId).concat(".").concat(mob.mobName).concat(".name"), "en_US", mob.mobName);
 
 				/* if Should Exist, should not Have Egg and Not Spawn (i.e. Lizard Spit) Skip to Next Mob */

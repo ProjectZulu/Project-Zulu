@@ -10,7 +10,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -93,7 +93,7 @@ public class BlockTombstone extends BlockContainer{
 		
 		
 		if(par5EntityLiving instanceof EntityPlayer){
-			((EntityPlayer)par5EntityLiving).openGui(mod_ProjectZulu.modInstance, 0, par1World, par2, par3, par4);
+			((EntityPlayer)par5EntityLiving).openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
 		} 
 		
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving);
@@ -105,7 +105,7 @@ public class BlockTombstone extends BlockContainer{
 			float par8, float par9) {
 		if(par5EntityPlayer instanceof EntityPlayer && ((EntityPlayer)par5EntityPlayer).inventory.getCurrentItem() != null
 				&& isValidItemForEditing( ((EntityPlayer)par5EntityPlayer).inventory.getCurrentItem().getItem().shiftedIndex ) ){
-			((EntityPlayer)par5EntityPlayer).openGui(mod_ProjectZulu.modInstance, 0, par1World, par2, par3, par4);
+			((EntityPlayer)par5EntityPlayer).openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
 			return true;
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,

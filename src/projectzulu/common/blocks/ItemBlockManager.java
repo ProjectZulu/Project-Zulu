@@ -10,7 +10,7 @@ import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import projectzulu.common.ProjectZulu_Blocks;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.blocks.heads.BlockMobHeads;
 import projectzulu.common.blocks.heads.ItemMobHeads;
@@ -422,7 +422,7 @@ public enum ItemBlockManager {
 			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_17.name", "Elephant Head");
 			
 	        GameRegistry.registerTileEntity(TileEntityMobHeads.class, "TileEntityMobHead");   
-	        mod_ProjectZulu.proxy.registerTileEntitySkullSpecialRender();
+	        ProjectZulu_Core.proxy.registerTileEntitySkullSpecialRender();
 
 		}
 
@@ -444,7 +444,7 @@ public enum ItemBlockManager {
 			Block block = ItemBlockList.tombstone.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Tombstone");
 			/* Register TileEntity Render */
-			Configuration tempConfig = new Configuration(  new File(mod_ProjectZulu.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.tempConfigFile));
+			Configuration tempConfig = new Configuration(  new File(ProjectZulu_Core.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.tempConfigFile));
 			tempConfig.load();
 			Property property = tempConfig.get("TempSettings.Tombstone", "useAlterantiveTileEntityName", false);
 			if(!property.getBoolean(false)){
@@ -458,7 +458,7 @@ public enum ItemBlockManager {
 				property.value = Boolean.toString(true);
 			}
 			tempConfig.save();
-	        mod_ProjectZulu.proxy.registerTileEntityTombstoneSpecialRender();
+	        ProjectZulu_Core.proxy.registerTileEntityTombstoneSpecialRender();
 
 			
 		}
@@ -472,7 +472,7 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			if(mod_ProjectZulu.replaceFlowerPot){
+			if(ProjectZulu_Core.replaceFlowerPot){
 				Block.blocksList[Block.flowerPot.blockID] = null;
 				ItemBlockList.universalFlowerPot = Optional.of(
 						new BlockUniversalFlowerPot(Block.flowerPot.blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setBlockName("Flower Pot"));
@@ -484,12 +484,12 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void register() {
-			if(!mod_ProjectZulu.replaceFlowerPot){
+			if(!ProjectZulu_Core.replaceFlowerPot){
 				Block block = ItemBlockList.universalFlowerPot.get();
 				GameRegistry.registerBlock(block, ItemUniversalFlowerPot.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Universal Flower Pot");			
 			}
 	        GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");   
-	        mod_ProjectZulu.proxy.registerTileEntityUniversalFlowerPotSpecialRender();
+	        ProjectZulu_Core.proxy.registerTileEntityUniversalFlowerPotSpecialRender();
 
 		}
 

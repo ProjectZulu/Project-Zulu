@@ -11,7 +11,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.PacketIDs;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -50,7 +50,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     }
     
     public void updateAIState() {
-    	if(worldObj.difficultySetting == 0 && mod_ProjectZulu.despawnInPeaceful && !isTamed()){
+    	if(worldObj.difficultySetting == 0 && ProjectZulu_Core.despawnInPeaceful && !isTamed()){
     		this.setDead();
     	}
     	/*AI Updates are done Before UpdateTasks such that some states can be manually triggered */

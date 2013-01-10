@@ -1,10 +1,9 @@
-package projectzulu.client;
+package projectzulu.common;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
-import projectzulu.common.CommonProxyProjectZulu;
 import projectzulu.common.blocks.EntityCreeperBlossomPrimed;
 import projectzulu.common.blocks.RenderCreeperBlossomPrimed;
 import projectzulu.common.blocks.TileEntityTombstone;

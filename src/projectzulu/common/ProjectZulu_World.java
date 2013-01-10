@@ -25,7 +25,7 @@ public class ProjectZulu_World {
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		Configuration structureConfig = new Configuration(  new File(mod_ProjectZulu.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.defaultConfigFile) );
+		Configuration structureConfig = new Configuration(  new File(ProjectZulu_Core.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.defaultConfigFile) );
 		structureConfig.load();
 		StructureManager.loadGeneralSettings(structureConfig);
 		structureConfig.save();
@@ -36,7 +36,7 @@ public class ProjectZulu_World {
 
 	@PostInit
 	public void load(FMLPostInitializationEvent event) {
-		Configuration structureBiomeConfig = new Configuration(  new File(mod_ProjectZulu.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.structureBiomeConfigFile) );
+		Configuration structureBiomeConfig = new Configuration(  new File(ProjectZulu_Core.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.structureBiomeConfigFile) );
 		structureBiomeConfig.load();
 		StructureManager.loadBiomeSettings(structureBiomeConfig);
 		structureBiomeConfig.save();

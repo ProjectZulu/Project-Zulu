@@ -21,7 +21,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.blocks.TileEntityTombstone;
 import projectzulu.common.mobs.EntityTreeEnt;
@@ -72,31 +72,31 @@ public class EventHookContainerClass {
 							break;
 						}
 
-						for (ItemStack tierarmor : mod_ProjectZulu.tier5DesertArmor) {
+						for (ItemStack tierarmor : ProjectZulu_Core.tier5DesertArmor) {
 							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
 								exhaustion-=(exhaustion-exhaustion*0.35)/4f;
 							}
 						}
 
-						for (ItemStack tierarmor : mod_ProjectZulu.tier4DesertArmor) {
+						for (ItemStack tierarmor : ProjectZulu_Core.tier4DesertArmor) {
 							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
 								exhaustion-=(exhaustion-exhaustion*0.3)/4f;
 							}
 						}
 
-						for (ItemStack tierarmor : mod_ProjectZulu.tier3DesertArmor) {
+						for (ItemStack tierarmor : ProjectZulu_Core.tier3DesertArmor) {
 							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
 								exhaustion-=(exhaustion-exhaustion*0.25)/4f;
 							}
 						}
 
-						for (ItemStack tierarmor : mod_ProjectZulu.tier2DesertArmor) {
+						for (ItemStack tierarmor : ProjectZulu_Core.tier2DesertArmor) {
 							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
 								exhaustion-=(exhaustion-exhaustion*0.2)/4f;
 							}
 						}
 
-						for (ItemStack tierarmor : mod_ProjectZulu.tier1DesertArmor) {
+						for (ItemStack tierarmor : ProjectZulu_Core.tier1DesertArmor) {
 							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
 								exhaustion-=exhaustion/4;
 							}
@@ -185,7 +185,7 @@ public class EventHookContainerClass {
 //			}
 //		}
 		
-		if( (Loader.isModLoaded(DefaultProps.MobsModId) && mod_ProjectZulu.tombstoneOnDeath 
+		if( (Loader.isModLoaded(DefaultProps.MobsModId) && ProjectZulu_Core.tombstoneOnDeath 
 				&& event.entity instanceof EntityPlayer && ItemBlockList.tombstone.isPresent() )){
 			EntityPlayer player = (EntityPlayer)event.entity;
 			World worldObj = player.worldObj;

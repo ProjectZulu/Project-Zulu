@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import projectzulu.common.mod_ProjectZulu;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.common.ICraftingHandler;
@@ -133,7 +133,7 @@ public class ItemBlockRecipeManager {
 			GameRegistry.addShapelessRecipe(new ItemStack(Item.leather), new ItemStack(ItemBlockList.furPelt.get()));
 		}
 		
-		if(!mod_ProjectZulu.replaceFlowerPot && ItemBlockList.universalFlowerPot.isPresent()){
+		if(!ProjectZulu_Core.replaceFlowerPot && ItemBlockList.universalFlowerPot.isPresent()){
 			GameRegistry.addShapelessRecipe(new ItemStack(Item.flowerPot), new ItemStack(ItemBlockList.universalFlowerPot.get()));
 			GameRegistry.addShapelessRecipe(new ItemStack(ItemBlockList.universalFlowerPot.get()), new ItemStack(Item.flowerPot));
 		}
