@@ -185,53 +185,54 @@ public class EventHookContainerClass {
 //			}
 //		}
 		
-		if( (Loader.isModLoaded(DefaultProps.MobsModId) && event.entity instanceof EntityPlayer && ItemBlockList.tombstone.isPresent())){
-			EntityPlayer player = (EntityPlayer)event.entity;
-			World worldObj = player.worldObj;
-			
-			/* Check if Location is Valid for Tombstone */
-			if(worldObj.isAirBlock((int)player.posX, (int)player.posY, (int)player.posZ)){
-				/* Place a Tombstone */
-				worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ItemBlockList.tombstone.get().blockID);
-				TileEntity tileEntity = worldObj.getBlockTileEntity((int)player.posX, (int)player.posY, (int)player.posZ);
-				if(tileEntity != null && tileEntity instanceof TileEntityTombstone ){
-					((TileEntityTombstone)tileEntity).setSignString(event.source.getDeathMessage((EntityPlayer)event.entity));
-				}
-			}
-		}
+	    if( (Loader.isModLoaded(DefaultProps.MobsModId) && mod_ProjectZulu.tombstoneOnDeath 
+	            && event.entity instanceof EntityPlayer && ItemBlockList.tombstone.isPresent() )){
+	        EntityPlayer player = (EntityPlayer)event.entity;
+	        World worldObj = player.worldObj;
+
+	        /* Check if Location is Valid for Tombstone */
+	        if(worldObj.isAirBlock((int)player.posX, (int)player.posY, (int)player.posZ)){
+	            /* Place a Tombstone */
+	            worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ItemBlockList.tombstone.get().blockID);
+	            TileEntity tileEntity = worldObj.getBlockTileEntity((int)player.posX, (int)player.posY, (int)player.posZ);
+	            if(tileEntity != null && tileEntity instanceof TileEntityTombstone ){
+	                ((TileEntityTombstone)tileEntity).setSignString(event.source.getDeathMessage((EntityPlayer)event.entity));
+	            }
+	        }
+	    }
 	}
 
-	
+
 	/* Armor Effect Only Occurs When Block/Item Package is Installed*/
 	@ForgeSubscribe
 	public void cactusArmorDamage(LivingHurtEvent event){
-		if(Loader.isModLoaded(DefaultProps.BlocksModId) && event.entity != null && event.entity instanceof EntityPlayer && event.source.getSourceOfDamage() instanceof EntityLiving){
-			EntityPlayer hurtEntity = (EntityPlayer)event.entity;
-			EntityLiving attackingEntity = (EntityLiving)event.source.getSourceOfDamage();
-			if(attackingEntity != null && event.source.getDamageType() == "mob"){
-				
-				double cactusDamage = 0;
-				if(hurtEntity.inventory.armorInventory[3] != null && ItemBlockList.cactusArmorHead.isPresent() && hurtEntity.inventory.armorInventory[3].itemID == ItemBlockList.cactusArmorHead.get().shiftedIndex){
-					cactusDamage+=0.5;
-				}
-				if(hurtEntity.inventory.armorInventory[2] != null && ItemBlockList.cactusArmorChest.isPresent() && hurtEntity.inventory.armorInventory[2].itemID == ItemBlockList.cactusArmorChest.get().shiftedIndex){
-					cactusDamage+=0.5;
-				}
-				if(hurtEntity.inventory.armorInventory[1] != null && ItemBlockList.cactusArmorLeg.isPresent() && hurtEntity.inventory.armorInventory[1].itemID == ItemBlockList.cactusArmorLeg.get().shiftedIndex){
-					cactusDamage+=0.5;
-				}
-				if(hurtEntity.inventory.armorInventory[0] != null && ItemBlockList.cactusArmorBoot.isPresent() && hurtEntity.inventory.armorInventory[0].itemID == ItemBlockList.cactusArmorBoot.get().shiftedIndex){
-					cactusDamage+=0.5;
-				}
-				
-				if(cactusDamage > 0){
-					attackingEntity.attackEntityFrom(DamageSource.causeMobDamage(hurtEntity), MathHelper.ceiling_double_int(cactusDamage));
-				}
-				
-			}
-		}
+	    if(Loader.isModLoaded(DefaultProps.BlocksModId) && event.entity != null && event.entity instanceof EntityPlayer && event.source.getSourceOfDamage() instanceof EntityLiving){
+	        EntityPlayer hurtEntity = (EntityPlayer)event.entity;
+	        EntityLiving attackingEntity = (EntityLiving)event.source.getSourceOfDamage();
+	        if(attackingEntity != null && event.source.getDamageType() == "mob"){
+
+	            double cactusDamage = 0;
+	            if(hurtEntity.inventory.armorInventory[3] != null && ItemBlockList.cactusArmorHead.isPresent() && hurtEntity.inventory.armorInventory[3].itemID == ItemBlockList.cactusArmorHead.get().shiftedIndex){
+	                cactusDamage+=0.5;
+	            }
+	            if(hurtEntity.inventory.armorInventory[2] != null && ItemBlockList.cactusArmorChest.isPresent() && hurtEntity.inventory.armorInventory[2].itemID == ItemBlockList.cactusArmorChest.get().shiftedIndex){
+	                cactusDamage+=0.5;
+	            }
+	            if(hurtEntity.inventory.armorInventory[1] != null && ItemBlockList.cactusArmorLeg.isPresent() && hurtEntity.inventory.armorInventory[1].itemID == ItemBlockList.cactusArmorLeg.get().shiftedIndex){
+	                cactusDamage+=0.5;
+	            }
+	            if(hurtEntity.inventory.armorInventory[0] != null && ItemBlockList.cactusArmorBoot.isPresent() && hurtEntity.inventory.armorInventory[0].itemID == ItemBlockList.cactusArmorBoot.get().shiftedIndex){
+	                cactusDamage+=0.5;
+	            }
+
+	            if(cactusDamage > 0){
+	                attackingEntity.attackEntityFrom(DamageSource.causeMobDamage(hurtEntity), MathHelper.ceiling_double_int(cactusDamage));
+	            }
+
+	        }
+	    }
 	}
-	
+
 	/**
 	 * Used to Notify nearby Treeents they should be attacking this Player. 
 	 * Triggered by the Player breaking Wood
@@ -239,31 +240,31 @@ public class EventHookContainerClass {
 	 */
 	@ForgeSubscribe
 	public void treeEntDefendForest(BreakSpeed event){
-		if(Loader.isModLoaded(DefaultProps.MobsModId)){
-			if(event.entity != null && event.entity instanceof EntityPlayer && event.block.blockID == Block.wood.blockID){
-				EntityPlayer player = (EntityPlayer)(event.entity);
-				World worldObj = player.worldObj;
-				AxisAlignedBB playerBounding = player.boundingBox.copy();
-				playerBounding = playerBounding.expand(24, 24, 24);
-				List<Entity> listOfTreeEnts = player.worldObj.getEntitiesWithinAABB(EntityTreeEnt.class, playerBounding);
-				if(!listOfTreeEnts.isEmpty()){
-					Iterator entIterator = listOfTreeEnts.iterator();
-					while(entIterator.hasNext()){
-						Entity entity = (Entity)entIterator.next();
-						if( ((EntityTreeEnt)entity).getAngerLevel() <= 0 && worldObj.rayTraceBlocks(worldObj.getWorldVec3Pool().getVecFromPool(player.posX, player.posY+(double)player.getEyeHeight(), player.posZ),
-								worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY, entity.posZ)) == null  ){
-							
-							if(!worldObj.isRemote){
-								((EntityTreeEnt)entity).setAttackTarget(player);
-							}
-							((EntityTreeEnt)entity).setAngerLevel(60);
-						}
-					}
-				}
-			}
-		}
-		
+	    if(Loader.isModLoaded(DefaultProps.MobsModId)){
+	        if(event.entity != null && event.entity instanceof EntityPlayer && event.block.blockID == Block.wood.blockID){
+	            EntityPlayer player = (EntityPlayer)(event.entity);
+	            World worldObj = player.worldObj;
+	            AxisAlignedBB playerBounding = player.boundingBox.copy();
+	            playerBounding = playerBounding.expand(24, 24, 24);
+	            List<Entity> listOfTreeEnts = player.worldObj.getEntitiesWithinAABB(EntityTreeEnt.class, playerBounding);
+	            if(!listOfTreeEnts.isEmpty()){
+	                Iterator entIterator = listOfTreeEnts.iterator();
+	                while(entIterator.hasNext()){
+	                    Entity entity = (Entity)entIterator.next();
+	                    if( ((EntityTreeEnt)entity).getAngerLevel() <= 0 && worldObj.rayTraceBlocks(worldObj.getWorldVec3Pool().getVecFromPool(player.posX, player.posY+(double)player.getEyeHeight(), player.posZ),
+	                            worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY, entity.posZ)) == null  ){
+
+	                        if(!worldObj.isRemote){
+	                            ((EntityTreeEnt)entity).setAttackTarget(player);
+	                        }
+	                        ((EntityTreeEnt)entity).setAngerLevel(60);
+	                    }
+	                }
+	            }
+	        }
+	    }
+
 	}
-	
-	
+
+
 }

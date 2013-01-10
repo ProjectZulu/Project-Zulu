@@ -1469,7 +1469,7 @@ public enum CustomEntityManager {
 
 	public static void loadSettings(File configDirectory){
 		/* Load Individual Mob Properties and Store them in the Mob General Config */
-		Configuration mobConfig = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.defaultConfigFile) );
+		Configuration mobConfig = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		mobConfig.load();
 		
 		/* Load Configuration Settings */
@@ -1505,7 +1505,7 @@ public enum CustomEntityManager {
 		mobConfig.save();
 		
 		/* Load Individual Mob Biome Properties and Store them in the Mob Spaw Config */
-		Configuration biomeConfig = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobDiretory) );
+		Configuration biomeConfig = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		biomeConfig.load();
 		for (final CustomEntityManager mob : CustomEntityManager.values()) {
 			/* If mob shouldn't spawn, it doesn't need to be in Biome Config */
