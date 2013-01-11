@@ -383,7 +383,8 @@ public class ItemBlockRecipeManager {
 		public void onCrafting(EntityPlayer player, ItemStack item,
 				IInventory craftMatrix) {
 
-			/*This onCrafting Handle is for Sword and Coconut Recipe
+			/*
+			 * This onCrafting Handle is for Sword and Coconut Recipe
 			 * 0-1-2
 			 * 3-4-5
 			 * 6-7-8

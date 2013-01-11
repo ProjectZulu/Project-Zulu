@@ -16,6 +16,9 @@ public class RawFiberCraftingHandler implements ICraftingHandler{
 		 * 0-1-2
 		 * 3-4-5
 		 * 6-7-8
+		 * * * *
+		 * 0-1
+		 * 2-3
 		 */
 		/* Check if Result is leather */
 		boolean isResultLeather = item.getItem().shiftedIndex == Item.leather.shiftedIndex;
@@ -42,12 +45,11 @@ public class RawFiberCraftingHandler implements ICraftingHandler{
 		
 		ItemStack itemToPlace = new ItemStack(ItemBlockList.genericCraftingItems1.get(), 2, ItemGenerics.Properties.RawFiber.meta());
 
-		if(furInSlot == 4){
+		if(furInSlot == 0){
 			craftMatrix.setInventorySlotContents(1, itemToPlace);
 		}else{
-			craftMatrix.setInventorySlotContents(4, itemToPlace);
+			craftMatrix.setInventorySlotContents(0, itemToPlace);
 		}
-
 	}
 	
 	@Override
