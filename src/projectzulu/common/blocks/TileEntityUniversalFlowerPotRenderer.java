@@ -33,8 +33,8 @@ public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRende
 			Item itemToRender = itemStackToRender.getItem();
 			
 			/* Try to See if I should render as Blocks */
-			if(itemToRender != null && Item.itemsList[itemToRender.shiftedIndex] instanceof ItemBlock && Block.blocksList[itemToRender.shiftedIndex].getRenderType() != -1){
-				Block blockToRender = Block.blocksList[itemToRender.shiftedIndex];
+			if(itemToRender != null && Item.itemsList[itemToRender.itemID] instanceof ItemBlock && Block.blocksList[itemToRender.itemID].getRenderType() != -1){
+				Block blockToRender = Block.blocksList[itemToRender.itemID];
 				int meta = itemStackToRender.getItemDamage() > 16 ? 16 : itemStackToRender.getItemDamage() < 0 ? 0 : itemStackToRender.getItemDamage();
 				
 				String textureLocation = blockToRender.getTextureFile();

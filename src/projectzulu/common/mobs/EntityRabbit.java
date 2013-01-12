@@ -35,8 +35,8 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
 //		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
 
 		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed, true));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.carrot.shiftedIndex, false, true));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.appleRed.shiftedIndex, false, true));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.carrot.itemID, false, true));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.appleRed.itemID, false, true));
 
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
 		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 40, true));
@@ -119,7 +119,7 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if( itemStack != null && (itemStack.itemID == Item.appleRed.shiftedIndex || itemStack.itemID == Item.carrot.shiftedIndex) ){
+		if( itemStack != null && (itemStack.itemID == Item.appleRed.itemID || itemStack.itemID == Item.carrot.itemID) ){
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);

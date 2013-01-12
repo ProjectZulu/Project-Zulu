@@ -226,7 +226,7 @@ public class BlockCoconut extends BlockCocoa
      */
     public int idPicked(World par1World, int par2, int par3, int par4){
     	if(ItemBlockList.coconutSeed.isPresent()){
-            return ItemBlockList.coconutSeed.get().shiftedIndex;
+            return ItemBlockList.coconutSeed.get().itemID;
     	}else{
     		return 0;
     	}

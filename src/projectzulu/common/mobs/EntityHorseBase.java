@@ -35,7 +35,7 @@ public class EntityHorseBase extends EntityGenericAnimal{
         
         this.tasks.addTask(2, new EntityAIPanic(this, this.moveSpeed));
         this.tasks.addTask(3, new EntityAIMate(this, this.moveSpeed));
-        this.tasks.addTask(4, new EntityAITempt(this, this.moveSpeed, Item.appleRed.shiftedIndex, false));
+        this.tasks.addTask(4, new EntityAITempt(this, this.moveSpeed, Item.appleRed.itemID, false));
         this.tasks.addTask(5, new EntityAIFollowParent(this, this.moveSpeed));
         
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
@@ -106,8 +106,8 @@ public class EntityHorseBase extends EntityGenericAnimal{
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && (itemStack.getItem().shiftedIndex == Item.appleRed.shiftedIndex 
-				|| itemStack.getItem().shiftedIndex == Item.carrot.shiftedIndex )){
+		if(itemStack != null && (itemStack.getItem().itemID == Item.appleRed.itemID 
+				|| itemStack.getItem().itemID == Item.carrot.itemID )){
 			return true;
 		}
 		return false;
@@ -118,9 +118,9 @@ public class EntityHorseBase extends EntityGenericAnimal{
 	 */	
 	protected int getDropItemId() {
 		if(rand.nextBoolean()){
-			return Item.rottenFlesh.shiftedIndex;
+			return Item.rottenFlesh.itemID;
 		}else{
-			return Item.beefRaw.shiftedIndex;
+			return Item.beefRaw.itemID;
 		}
 	}
 
@@ -133,9 +133,9 @@ public class EntityHorseBase extends EntityGenericAnimal{
 
 		for (var4 = 0; var4 < var3; ++var4) {
 			if(var4 == 2){
-				this.dropItem(Item.leather.shiftedIndex,1);
+				this.dropItem(Item.leather.itemID,1);
 			}else{
-				this.dropItem(Item.beefRaw.shiftedIndex,1);
+				this.dropItem(Item.beefRaw.itemID,1);
 			}
 		}
 	}

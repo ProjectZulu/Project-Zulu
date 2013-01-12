@@ -54,7 +54,7 @@ public abstract class EntityGenericRideable extends EntityGenericBreedable{
     @Override
     public boolean canBeSteered(){
     	ItemStack var1 = ((EntityPlayer)this.riddenByEntity).getHeldItem();
-    	return var1 != null && var1.itemID == Item.stick.shiftedIndex;
+    	return var1 != null && var1.itemID == Item.stick.itemID;
     }
     
     /**
@@ -63,7 +63,7 @@ public abstract class EntityGenericRideable extends EntityGenericBreedable{
     public boolean shouldIgnorePlayerRot(){
     	if(riddenByEntity != null && riddenByEntity instanceof EntityPlayer){
             ItemStack var1 = ((EntityPlayer)this.riddenByEntity).getHeldItem();
-            return var1 != null && var1.itemID != Item.stick.shiftedIndex;
+            return var1 != null && var1.itemID != Item.stick.itemID;
     	}
     	return false;
     }
@@ -90,7 +90,7 @@ public abstract class EntityGenericRideable extends EntityGenericBreedable{
 
     			 /* If Not Saddled: Try to Saddle Entity */
     		 }else if(!getSaddled() && par1EntityPlayer.inventory.getCurrentItem() != null 
-    				 && par1EntityPlayer.inventory.getCurrentItem().itemID == Item.saddle.shiftedIndex  ){
+    				 && par1EntityPlayer.inventory.getCurrentItem().itemID == Item.saddle.itemID  ){
     			 setSaddled(true);
     			 return true;
     		 }

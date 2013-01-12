@@ -39,7 +39,7 @@ public class EntityGorilla extends EntityGenericAnimal {
 //		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
 
 		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.shiftedIndex, false));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.itemID, false));
 		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Block.tallGrass.blockID, false));
 
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
@@ -142,7 +142,7 @@ public class EntityGorilla extends EntityGenericAnimal {
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && (itemStack.getItem().shiftedIndex == Item.spiderEye.shiftedIndex || itemStack.getItem().shiftedIndex == Block.tallGrass.blockID)){
+		if(itemStack != null && (itemStack.getItem().itemID == Item.spiderEye.itemID || itemStack.getItem().itemID == Block.tallGrass.blockID)){
 			return true;
 		}
 		return super.isValidBreedingItem(itemStack);

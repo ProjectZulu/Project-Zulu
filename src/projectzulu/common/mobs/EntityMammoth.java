@@ -63,7 +63,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
 		
 		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.egg.shiftedIndex, false));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.egg.itemID, false));
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
 		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
 
@@ -259,7 +259,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && itemStack.getItem().shiftedIndex == Block.leaves.blockID){
+		if(itemStack != null && itemStack.getItem().itemID == Block.leaves.blockID){
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);

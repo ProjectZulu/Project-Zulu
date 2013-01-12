@@ -54,7 +54,7 @@ public class CopyOfEntityFoxThatUsesEntityZulu extends EntityZulu {
 	
 	@Override
 	public boolean isValidFollowItem(ItemStack itemStack) {
-		if(itemStack != null && itemStack.getItem().shiftedIndex == Item.egg.shiftedIndex){
+		if(itemStack != null && itemStack.getItem().itemID == Item.egg.itemID){
 			return true;
 		}else{
 			return super.isValidFollowItem(itemStack);
@@ -83,9 +83,9 @@ public class CopyOfEntityFoxThatUsesEntityZulu extends EntityZulu {
 	protected int getDropItemId()
 	{
 		if(rand.nextBoolean()){
-			return Item.rottenFlesh.shiftedIndex;
+			return Item.rottenFlesh.itemID;
 		}else{
-			return Item.beefRaw.shiftedIndex;
+			return Item.beefRaw.itemID;
 		}
 	}
 
@@ -100,15 +100,15 @@ public class CopyOfEntityFoxThatUsesEntityZulu extends EntityZulu {
 		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
 			if(var3 == 0){
 				if(ItemBlockList.furPelt.isPresent()){
-					this.dropItem(ItemBlockList.furPelt.get().shiftedIndex, 1);
+					this.dropItem(ItemBlockList.furPelt.get().itemID, 1);
 				}
 			}else{
 				if(ItemBlockList.scrapMeat.isPresent()){
-					this.dropItem(ItemBlockList.scrapMeat.get().shiftedIndex, 1);
+					this.dropItem(ItemBlockList.scrapMeat.get().itemID, 1);
 				}
 			}
 		}else{
-			this.dropItem(Item.beefRaw.shiftedIndex,1);
+			this.dropItem(Item.beefRaw.itemID,1);
 		}
 
 	}

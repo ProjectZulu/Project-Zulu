@@ -140,7 +140,7 @@ public class EntityElephant extends EntityGenericAnimal{
 
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && itemStack.getItem().shiftedIndex == Block.leaves.blockID){
+		if(itemStack != null && itemStack.getItem().itemID == Block.leaves.blockID){
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);

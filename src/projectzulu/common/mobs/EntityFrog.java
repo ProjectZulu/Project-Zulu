@@ -35,7 +35,7 @@ public class EntityFrog extends EntityGenericAnimal implements IAnimals {
 //		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
 
 		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed, true));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.shiftedIndex, false, true));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.itemID, false, true));
 		
 		
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));		
@@ -124,7 +124,7 @@ public class EntityFrog extends EntityGenericAnimal implements IAnimals {
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && itemStack.getItem().shiftedIndex == Item.spiderEye.shiftedIndex){
+		if(itemStack != null && itemStack.getItem().itemID == Item.spiderEye.itemID){
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);

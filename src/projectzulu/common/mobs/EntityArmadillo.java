@@ -65,7 +65,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 //		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
 
 		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.shiftedIndex, false));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.itemID, false));
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
 		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
 
@@ -171,7 +171,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 			boolean isFacing = false;
 			if(tempE != null){
 				//Condition 1: Check if player is using an item, and if so is it a bow
-				int var1 = Item.bow.shiftedIndex;
+				int var1 = Item.bow.itemID;
 
 				//Condition 2: Is the player facing the target. "boolean canSee"
 				double angleEntToPlayer = Math.atan2(posX-tempE.posX, tempE.posZ-posZ)*(180.0/Math.PI)+180;
@@ -186,7 +186,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 						worldObj.getWorldVec3Pool().getVecFromPool(this.posX,this.posY,this.posZ)) == null;
 			}
 			/* If any of the conditions above failed, then Armadillo should not be in Cover */
-			if(tempE == null || canSee == false || tempE.isUsingItem() == false || isFacing == false || tempE.inventory.getCurrentItem().itemID != Item.bow.shiftedIndex){
+			if(tempE == null || canSee == false || tempE.isUsingItem() == false || isFacing == false || tempE.inventory.getCurrentItem().itemID != Item.bow.itemID){
 				inCoverTimer = Math.max(inCoverTimer - ticksToCheckAbilities, 0);
 			}else{
 				/* Reminder: This only occurs when all the above are true. */
@@ -246,7 +246,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && itemStack.getItem().shiftedIndex == Item.spiderEye.shiftedIndex){
+		if(itemStack != null && itemStack.getItem().itemID == Item.spiderEye.itemID){
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);

@@ -435,7 +435,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 
 		for (int var5 = 0; var5 < var4; ++var5)
 		{
-			this.dropItem(Item.ingotIron.shiftedIndex, 1);
+			this.dropItem(Item.ingotIron.itemID, 1);
 		}
 	}
 	@Override

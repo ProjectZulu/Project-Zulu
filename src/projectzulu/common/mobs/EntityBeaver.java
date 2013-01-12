@@ -34,7 +34,7 @@ public class EntityBeaver extends EntityGenericAnimal implements IAnimals{
 //		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
 
 //		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-//		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.shiftedIndex, false));
+//		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.itemID, false));
 //		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
 		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
 

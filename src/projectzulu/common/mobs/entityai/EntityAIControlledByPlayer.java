@@ -163,7 +163,7 @@ public class EntityAIControlledByPlayer extends EntityAIBase {
         if (!var1.capabilities.isCreativeMode && this.currentSpeed >= this.maxSpeed * 0.5F && this.thisEntity.getRNG().nextFloat() < 0.006F && !this.speedBoosted) {
             ItemStack var20 = var1.getHeldItem();
 
-            if (var20 != null && var20.itemID == Item.carrotOnAStick.shiftedIndex) {
+            if (var20 != null && var20.itemID == Item.carrotOnAStick.itemID) {
                 var20.damageItem(1, var1);
 
                 if (var20.stackSize == 0) {

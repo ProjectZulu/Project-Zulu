@@ -174,7 +174,7 @@ public class EntityMummy extends EntityMob{
      * Returns the item ID for the item the mob drops on death.
      */
     protected int getDropItemId(){
-        return Item.silk.shiftedIndex;
+        return Item.silk.itemID;
     }
 
     /**
@@ -185,7 +185,7 @@ public class EntityMummy extends EntityMob{
 //
 //        if (par1 && (this.rand.nextInt(3) == 0 || this.rand.nextInt(1 + par2) > 0))
 //        {
-//            this.dropItem(Item.spiderEye.shiftedIndex, 1);
+//            this.dropItem(Item.spiderEye.itemID, 1);
 //        }
     }
 

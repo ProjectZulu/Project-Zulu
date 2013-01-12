@@ -107,16 +107,16 @@ public class CopyOfEntityEagleThatUsesEntityZulu extends EntityZulu{
 
 		for (int var4 = 0; var4 < var3; ++var4)
 		{
-			this.dropItem(Item.feather.shiftedIndex, 1);
+			this.dropItem(Item.feather.itemID, 1);
 		}
 
 		if (this.isBurning())
 		{
-			this.dropItem(Item.chickenCooked.shiftedIndex, 1);
+			this.dropItem(Item.chickenCooked.itemID, 1);
 		}
 		else
 		{
-			this.dropItem(Item.chickenRaw.shiftedIndex, 1);
+			this.dropItem(Item.chickenRaw.itemID, 1);
 		}
 
 	}
