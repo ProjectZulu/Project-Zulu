@@ -5,7 +5,7 @@ public class DefaultProps {
 	
 	/* ModIDs, Dependencies, and Version */
 	public static final String DesiredBeforeMod = "after:ExtrabiomesXL@"; // TODO: Experimental, Needs to BE Tested
-	public static final String VERSION_STRING = "0.6.2b";
+	public static final String VERSION_STRING = "0.6.2c";
 	public static final String CoreModId = "ProjectZulu|Core";
 	public static final String BlocksModId = "ProjectZulu|Blocks";
 	public static final String MobsModId = "ProjectZulu|Mobs";
