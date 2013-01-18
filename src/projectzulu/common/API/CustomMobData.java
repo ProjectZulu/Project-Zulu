@@ -37,7 +37,7 @@ public class CustomMobData {
 	}
 	
 	public ItemStack getLootItem(Random rand){
-		int lootChance = rand.nextInt(totalWeight);
+		int lootChance = totalWeight > 0 ? rand.nextInt(totalWeight) : 0;
 		ItemStack lootItem = null;
 		for (int i = 0; i < lootWeights.size(); i++) {
 			if(lootChance - (Integer)lootWeights.get(i) <= 0){
@@ -47,7 +47,6 @@ public class CustomMobData {
 				lootChance -= (Integer)lootWeights.get(i);
 			}
 		}
-		System.out.println("End of GetLootItem");
-		return lootItem.copy();
+		return lootItem != null ? lootItem.copy() : null;
 	}
 }
