@@ -21,7 +21,7 @@ public class RawFiberCraftingHandler implements ICraftingHandler{
 		 * 2-3
 		 */
 		/* Check if Result is leather */
-		boolean isResultLeather = item.getItem().shiftedIndex == Item.leather.shiftedIndex;
+		boolean isResultLeather = item.getItem().itemID == Item.leather.itemID;
 		if (!isResultLeather) return;
 
 		/* Check if Fur Pelt is the Only Thing on the Crafting Table
@@ -33,7 +33,7 @@ public class RawFiberCraftingHandler implements ICraftingHandler{
 			if( craftMatrix.getStackInSlot(i) == null){
 				continue;
 			}
-			if(craftMatrix.getStackInSlot(i).getItem().shiftedIndex == ItemBlockList.furPelt.get().shiftedIndex && !contsinsFur){
+			if(craftMatrix.getStackInSlot(i).getItem().itemID == ItemBlockList.furPelt.get().itemID && !contsinsFur){
 				contsinsFur = true;
 				furInSlot = i;
 				continue;

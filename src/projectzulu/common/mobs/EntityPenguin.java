@@ -37,8 +37,8 @@ public class EntityPenguin extends EntityGenericAnimal implements IAnimals {
 //		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
 
 		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.fishRaw.shiftedIndex, false));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.fishCooked.shiftedIndex, false));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.fishRaw.itemID, false));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.fishCooked.itemID, false));
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
 		
 		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
@@ -121,7 +121,7 @@ public class EntityPenguin extends EntityGenericAnimal implements IAnimals {
 	 * This is overriden by each Entity if deviations from default are desired
 	 */
 	public boolean isValidBreedingItem(ItemStack itemStack){
-		if( itemStack != null && (itemStack.itemID == Item.fishRaw.shiftedIndex || itemStack.itemID == Item.fishCooked.shiftedIndex) ){
+		if( itemStack != null && (itemStack.itemID == Item.fishRaw.itemID || itemStack.itemID == Item.fishCooked.itemID) ){
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);

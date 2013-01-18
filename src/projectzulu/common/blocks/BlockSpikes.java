@@ -191,7 +191,7 @@ public class BlockSpikes extends Block{
 			float par8, float par9) {
 
 		/* Check if Item is Poison Droplet, is so Make Poisonous */
-		if( par5EntityPlayer.inventory.getCurrentItem() != null && ItemBlockList.genericCraftingItems1.isPresent() && par5EntityPlayer.inventory.getCurrentItem().getItem().shiftedIndex == ItemBlockList.genericCraftingItems1.get().shiftedIndex
+		if( par5EntityPlayer.inventory.getCurrentItem() != null && ItemBlockList.genericCraftingItems1.isPresent() && par5EntityPlayer.inventory.getCurrentItem().getItem().itemID == ItemBlockList.genericCraftingItems1.get().itemID
 				&& par5EntityPlayer.inventory.getCurrentItem().getItemDamage() == ItemGenerics.Properties.PoisonDroplet.meta() 
 				&& ( par1World.getBlockMetadata(par2, par3, par4) < 6 || par1World.getBlockMetadata(par2, par3, par4) > 11 ) ){
 			
@@ -209,7 +209,7 @@ public class BlockSpikes extends Block{
 		}
 		
 		/* Check if Item is Sticky Droplet, is so Make Sticky */
-		if( par5EntityPlayer.inventory.getCurrentItem() != null && par5EntityPlayer.inventory.getCurrentItem().getItem().shiftedIndex == Item.slimeBall.shiftedIndex
+		if( par5EntityPlayer.inventory.getCurrentItem() != null && par5EntityPlayer.inventory.getCurrentItem().getItem().itemID == Item.slimeBall.itemID
 				&& ( par1World.getBlockMetadata(par2, par3, par4) < 12 ) ){
 			
 			/* Consume if Not Creative */
@@ -245,7 +245,7 @@ public class BlockSpikes extends Block{
 	 * was called int func_85104 ~1.4.5
 	 */
 	@Override
-    public int func_85104_a(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9){
+    public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9){
         int var9 = par1World.getBlockMetadata(par2, par3, par4);
         if (par5 == 1 && this.canPlaceSpikeOn(par1World, par2, par3 - 1, par4)){
             var9 = 0;

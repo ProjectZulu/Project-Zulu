@@ -15,7 +15,7 @@ public class ZuluFuelManager implements IFuelHandler{
 	
 	@Override
 	public int getBurnTime(ItemStack fuel){
-		if(itemID == fuel.getItem().shiftedIndex){
+		if(itemID == fuel.getItem().itemID){
 			return fuelValue;
 		}
 		return 0;

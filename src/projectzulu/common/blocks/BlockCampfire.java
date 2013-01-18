@@ -140,7 +140,7 @@ public class BlockCampfire extends Block implements ITempBlock{
     	/* Make sure Player Item is not Null*/
     	if( ((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem() != null){
     		/* If Fire is not Lit and Coal is in Hand, Light Fire */
-    		if( par1World.getBlockMetadata(par2, par3, par4) < 2 && ( ((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem().getItem().shiftedIndex == (Item.coal.shiftedIndex)) ){
+    		if( par1World.getBlockMetadata(par2, par3, par4) < 2 && ( ((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem().getItem().itemID == (Item.coal.itemID)) ){
     			if( !((EntityPlayer)par5EntityPlayer).capabilities.isCreativeMode){
     				((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem().stackSize -= 1;
     			}
@@ -149,7 +149,7 @@ public class BlockCampfire extends Block implements ITempBlock{
     		}
     		
     		/* If Fire is Lit and Water is in Hand, Put out Fire */
-    		if( par1World.getBlockMetadata(par2, par3, par4) > 1 && ((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem().getItem().shiftedIndex == (Item.bucketWater.shiftedIndex) ){
+    		if( par1World.getBlockMetadata(par2, par3, par4) > 1 && ((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem().getItem().itemID == (Item.bucketWater.itemID) ){
 
     			if( !((EntityPlayer)par5EntityPlayer).capabilities.isCreativeMode){
     				((EntityPlayer)par5EntityPlayer).inventory.setInventorySlotContents(((EntityPlayer)par5EntityPlayer).inventory.currentItem, new ItemStack(Item.bucketEmpty));

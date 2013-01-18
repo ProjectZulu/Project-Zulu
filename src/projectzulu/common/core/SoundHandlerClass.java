@@ -1,10 +1,7 @@
 package projectzulu.common.core;
 
-import java.util.logging.Level;
-
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
-import cpw.mods.fml.common.FMLCommonHandler;
 
 //Ripped from EE3 on Github, god bless them.
 

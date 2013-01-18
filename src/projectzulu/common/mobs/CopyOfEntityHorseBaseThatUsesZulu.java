@@ -167,7 +167,7 @@ public class CopyOfEntityHorseBaseThatUsesZulu extends EntityRideableZulu{
 			if(riddingPlayer.inventory.getCurrentItem() != null){
 				
 				/* Only Perform Turning and Speeding When Player has Riding Item in Hand */
-				if(riddingPlayer.inventory.getCurrentItem().getItem().shiftedIndex == Item.stick.shiftedIndex){
+				if(riddingPlayer.inventory.getCurrentItem().getItem().itemID == Item.stick.itemID){
 					/* Turn Entity To Face Rider Direction */
 					float var3 = MathHelper.wrapAngleTo180_float(riddingPlayer.rotationYaw - this.ridingRotation) * 0.5F;
 					if (var3 > 5.0F){
@@ -350,7 +350,7 @@ public class CopyOfEntityHorseBaseThatUsesZulu extends EntityRideableZulu{
 			this.pathToEntity = null;
 			return true;
 		}else if(!getSaddled() && par1EntityPlayer.inventory.getCurrentItem() != null 
-				&& par1EntityPlayer.inventory.getCurrentItem().itemID == Item.saddle.shiftedIndex  ){
+				&& par1EntityPlayer.inventory.getCurrentItem().itemID == Item.saddle.itemID  ){
 			setSaddled(true);
 			return true;
 		}else{
@@ -384,8 +384,8 @@ public class CopyOfEntityHorseBaseThatUsesZulu extends EntityRideableZulu{
 
 	@Override
 	public boolean isValidFollowItem(ItemStack itemStack) {
-		if(itemStack != null && (itemStack.getItem().shiftedIndex == Item.appleRed.shiftedIndex 
-				|| itemStack.getItem().shiftedIndex == Item.carrot.shiftedIndex )){
+		if(itemStack != null && (itemStack.getItem().itemID == Item.appleRed.itemID 
+				|| itemStack.getItem().itemID == Item.carrot.itemID )){
 			return true;
 		}else{
 			return super.isValidFollowItem(itemStack);
@@ -403,9 +403,9 @@ public class CopyOfEntityHorseBaseThatUsesZulu extends EntityRideableZulu{
 	protected int getDropItemId()
 	{
 		if(rand.nextBoolean()){
-			return Item.rottenFlesh.shiftedIndex;
+			return Item.rottenFlesh.itemID;
 		}else{
-			return Item.beefRaw.shiftedIndex;
+			return Item.beefRaw.itemID;
 		}
 	}
 
@@ -425,9 +425,9 @@ public class CopyOfEntityHorseBaseThatUsesZulu extends EntityRideableZulu{
 		for (var4 = 0; var4 < var3; ++var4)
 		{
 			if(var4 == 2){
-				this.dropItem(Item.leather.shiftedIndex,1);
+				this.dropItem(Item.leather.itemID,1);
 			}else{
-				this.dropItem(Item.beefRaw.shiftedIndex,1);
+				this.dropItem(Item.beefRaw.itemID,1);
 			}
 		}
 	}

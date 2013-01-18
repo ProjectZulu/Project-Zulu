@@ -48,7 +48,7 @@ public class RenderHauntedArmor extends RenderLiving{
 				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glScalef(var4, -var4, var4);
 			}
-			else if (var3.itemID == Item.bow.shiftedIndex){
+			else if (var3.itemID == Item.bow.itemID){
 				var4 = 0.625F;
 				GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
 				GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);

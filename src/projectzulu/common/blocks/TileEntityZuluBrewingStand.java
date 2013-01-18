@@ -97,7 +97,7 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
                 boolean var2 = false;
 
                 for (int var3 = 0; var3 < 3; ++var3){
-                    if (this.brewingItemStacks[var3] != null && this.brewingItemStacks[var3].itemID == Item.potion.shiftedIndex){
+                    if (this.brewingItemStacks[var3] != null && this.brewingItemStacks[var3].itemID == Item.potion.itemID){
                         int var4 = this.brewingItemStacks[var3].getItemDamage();
                         int var5 = this.getPotionResult(var4, var1);
 
@@ -129,7 +129,7 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
             ItemStack var1 = this.brewingItemStacks[3];
 
             for (int var2 = 0; var2 < 3; ++var2){
-                if (this.brewingItemStacks[var2] != null && this.brewingItemStacks[var2].itemID == Item.potion.shiftedIndex){
+                if (this.brewingItemStacks[var2] != null && this.brewingItemStacks[var2].itemID == Item.potion.itemID){
                     int var3 = this.brewingItemStacks[var2].getItemDamage();
                     int var4 = this.getPotionResult(var3, var1);
                     List var5 = Item.potion.getEffects(var3);
@@ -176,36 +176,36 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
     		}
     		
     		/* Potion Effects For Vanilla Items */
-    		if( ingredientItemStack.getItem().shiftedIndex == Item.feather.shiftedIndex){
+    		if( ingredientItemStack.getItem().itemID == Item.feather.itemID){
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1-2-3&8-8+9+10" : "-0+1-2-3+10&4-4"; // Slowfall
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().shiftedIndex == Item.blazePowder.shiftedIndex){
+    		}else if( ingredientItemStack.getItem().itemID == Item.blazePowder.itemID){
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2+3&4-4+13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().shiftedIndex == Item.ghastTear.shiftedIndex){
+    		}else if( ingredientItemStack.getItem().itemID == Item.ghastTear.itemID){
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2-3&4-4+13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().shiftedIndex == Item.spiderEye.shiftedIndex){
+    		}else if( ingredientItemStack.getItem().itemID == Item.spiderEye.itemID){
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2-3&4-4+13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().shiftedIndex == Item.speckledMelon.shiftedIndex){
+    		}else if( ingredientItemStack.getItem().itemID == Item.speckledMelon.itemID){
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1+2-3&8-8+9+13" : "+0-1+2-3&4-4+13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().shiftedIndex == Item.sugar.shiftedIndex){
+    		}else if( ingredientItemStack.getItem().itemID == Item.sugar.itemID){
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1-2-3&8-8+9+13" : "-0+1-2-3&4-4+13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().shiftedIndex == Item.magmaCream.shiftedIndex){
+    		}else if( ingredientItemStack.getItem().itemID == Item.magmaCream.itemID){
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0+1-2-3&8-8+9+13" : "+0+1-2-3&4-4+13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().shiftedIndex == Item.goldenCarrot.shiftedIndex){
+    		}else if( ingredientItemStack.getItem().itemID == Item.goldenCarrot.itemID){
     			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1+2-3&8-8+9+13" : "-0+1+2-3+13&4-4"; // NightVision
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
     		}
     		
-    		else if( ingredientItemStack.getItem().shiftedIndex == Item.fermentedSpiderEye.shiftedIndex){
+    		else if( ingredientItemStack.getItem().itemID == Item.fermentedSpiderEye.itemID){
     			String potionEffect = (brewingIndex & 1 << 10) > 0 ? "-0&10-4+10" : "-0+3&13-4+13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().shiftedIndex == Item.gunpowder.shiftedIndex){
+    		}else if( ingredientItemStack.getItem().itemID == Item.gunpowder.itemID){
     			String potionEffect = (brewingIndex & 1 << 10) > 0 ? "+14&10" : "+14&13-13";
     			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
     		}

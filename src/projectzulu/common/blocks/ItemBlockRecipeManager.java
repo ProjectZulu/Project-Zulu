@@ -393,9 +393,9 @@ public class ItemBlockRecipeManager {
 			ItemStack shouldBeCoconut = craftMatrix.getStackInSlot(4);
 
 			if(shouldBeSword != null && shouldBeCoconut != null 
-					&& (shouldBeSword.getItem().shiftedIndex == Item.swordWood.shiftedIndex || shouldBeSword.getItem().shiftedIndex == Item.swordStone.shiftedIndex 
-					|| shouldBeSword.getItem().shiftedIndex == Item.swordSteel.shiftedIndex || shouldBeSword.getItem().shiftedIndex == Item.swordGold.shiftedIndex 
-					|| shouldBeSword.getItem().shiftedIndex == Item.swordDiamond.shiftedIndex) 
+					&& (shouldBeSword.getItem().itemID == Item.swordWood.itemID || shouldBeSword.getItem().itemID == Item.swordStone.itemID 
+					|| shouldBeSword.getItem().itemID == Item.swordSteel.itemID || shouldBeSword.getItem().itemID == Item.swordGold.itemID 
+					|| shouldBeSword.getItem().itemID == Item.swordDiamond.itemID) 
 					&& ItemBlockList.coconutItem.isPresent() && shouldBeCoconut.getItem() == ItemBlockList.coconutItem.get()){
 				//Put Sword Back
 				ItemStack tempItem1 = new ItemStack(shouldBeSword.getItem(), 2, shouldBeSword.getItemDamage()+1);

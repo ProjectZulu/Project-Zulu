@@ -3,7 +3,7 @@ package projectzulu.common.world.architects;
 import java.util.Random;
 
 import projectzulu.common.world.CellIndexDirection;
-import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
+import projectzulu.common.world.blockdataobjects.BlockWithMeta;
 import projectzulu.common.world.blueprints.BlueprintDeadEndChest;
 import projectzulu.common.world.blueprints.BlueprintLabyrinthCobweb;
 import projectzulu.common.world.blueprints.BlueprintLabyrinthHiddenWall;

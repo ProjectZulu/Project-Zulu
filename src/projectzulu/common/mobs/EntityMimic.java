@@ -526,9 +526,9 @@ public class EntityMimic extends EntityHerd
 	protected int getDropItemId()
 	{
 		if(rand.nextBoolean()){
-			return Item.rottenFlesh.shiftedIndex;
+			return Item.rottenFlesh.itemID;
 		}else{
-			return Item.beefRaw.shiftedIndex;
+			return Item.beefRaw.itemID;
 		}
 	}
 
@@ -554,7 +554,7 @@ public class EntityMimic extends EntityHerd
 		//        }
 		//        else
 		//        {
-		//            this.dropItem(Item.bow.shiftedIndex, 1);
+		//            this.dropItem(Item.bow.itemID, 1);
 		//        }
 	}
 

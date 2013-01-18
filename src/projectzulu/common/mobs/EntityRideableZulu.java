@@ -686,13 +686,13 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
 			if(var3 == 0){
 				if(ItemBlockList.furPelt.isPresent()){
-					this.dropItem(ItemBlockList.furPelt.get().shiftedIndex, 1);
+					this.dropItem(ItemBlockList.furPelt.get().itemID, 1);
 				}
 			}else{
-				this.dropItem(Item.beefRaw.shiftedIndex,1);
+				this.dropItem(Item.beefRaw.itemID,1);
 			}
 		}else{
-			this.dropItem(Item.beefRaw.shiftedIndex,1);
+			this.dropItem(Item.beefRaw.itemID,1);
 		}
 
 	}

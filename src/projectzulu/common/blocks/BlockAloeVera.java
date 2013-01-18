@@ -251,19 +251,19 @@ public class BlockAloeVera extends BlockFlower
 			return ItemBlockList.aloeVera.get().blockID;
 		}
 		case 4: {
-			return Item.dyePowder.shiftedIndex;
+			return Item.dyePowder.itemID;
 		}
 		case 5: {
-			return Item.silk.shiftedIndex;
+			return Item.silk.itemID;
 		}
 		case 6: {
-			return Item.dyePowder.shiftedIndex;
+			return Item.dyePowder.itemID;
 		}
 		case 7: {
-			return Item.dyePowder.shiftedIndex;
+			return Item.dyePowder.itemID;
 		}
 		case 8: {
-			return Item.dyePowder.shiftedIndex;
+			return Item.dyePowder.itemID;
 		}
 		default: return super.idDropped(par1, par2Random, par3);
 		}

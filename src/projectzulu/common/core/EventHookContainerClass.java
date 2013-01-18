@@ -137,16 +137,16 @@ public class EventHookContainerClass {
 				}
 
 				/* Increase Speed if Wearing Fur */
-				if(thePlayer.inventory.armorInventory[0] != null && ItemBlockList.furArmorBoot.isPresent() && thePlayer.inventory.armorInventory[0].itemID == ItemBlockList.furArmorBoot.get().shiftedIndex ){
+				if(thePlayer.inventory.armorInventory[0] != null && ItemBlockList.furArmorBoot.isPresent() && thePlayer.inventory.armorInventory[0].itemID == ItemBlockList.furArmorBoot.get().itemID ){
 					velocityModifier += 0.005;
 				}
-				if(thePlayer.inventory.armorInventory[1] != null && ItemBlockList.furArmorLeg.isPresent() && thePlayer.inventory.armorInventory[1].itemID == ItemBlockList.furArmorLeg.get().shiftedIndex){
+				if(thePlayer.inventory.armorInventory[1] != null && ItemBlockList.furArmorLeg.isPresent() && thePlayer.inventory.armorInventory[1].itemID == ItemBlockList.furArmorLeg.get().itemID){
 					velocityModifier += 0.005;
 				}
-				if(thePlayer.inventory.armorInventory[2] != null && ItemBlockList.furArmorChest.isPresent() && thePlayer.inventory.armorInventory[2].itemID == ItemBlockList.furArmorChest.get().shiftedIndex){
+				if(thePlayer.inventory.armorInventory[2] != null && ItemBlockList.furArmorChest.isPresent() && thePlayer.inventory.armorInventory[2].itemID == ItemBlockList.furArmorChest.get().itemID){
 					velocityModifier += 0.005;
 				}
-				if(thePlayer.inventory.armorInventory[3] != null && ItemBlockList.furArmorHead.isPresent() && thePlayer.inventory.armorInventory[3].itemID == ItemBlockList.furArmorHead.get().shiftedIndex){
+				if(thePlayer.inventory.armorInventory[3] != null && ItemBlockList.furArmorHead.isPresent() && thePlayer.inventory.armorInventory[3].itemID == ItemBlockList.furArmorHead.get().itemID){
 					velocityModifier += 0.005;
 				}
 
@@ -211,16 +211,16 @@ public class EventHookContainerClass {
 	        if(attackingEntity != null && event.source.getDamageType() == "mob"){
 
 	            double cactusDamage = 0;
-	            if(hurtEntity.inventory.armorInventory[3] != null && ItemBlockList.cactusArmorHead.isPresent() && hurtEntity.inventory.armorInventory[3].itemID == ItemBlockList.cactusArmorHead.get().shiftedIndex){
+	            if(hurtEntity.inventory.armorInventory[3] != null && ItemBlockList.cactusArmorHead.isPresent() && hurtEntity.inventory.armorInventory[3].itemID == ItemBlockList.cactusArmorHead.get().itemID){
 	                cactusDamage+=0.5;
 	            }
-	            if(hurtEntity.inventory.armorInventory[2] != null && ItemBlockList.cactusArmorChest.isPresent() && hurtEntity.inventory.armorInventory[2].itemID == ItemBlockList.cactusArmorChest.get().shiftedIndex){
+	            if(hurtEntity.inventory.armorInventory[2] != null && ItemBlockList.cactusArmorChest.isPresent() && hurtEntity.inventory.armorInventory[2].itemID == ItemBlockList.cactusArmorChest.get().itemID){
 	                cactusDamage+=0.5;
 	            }
-	            if(hurtEntity.inventory.armorInventory[1] != null && ItemBlockList.cactusArmorLeg.isPresent() && hurtEntity.inventory.armorInventory[1].itemID == ItemBlockList.cactusArmorLeg.get().shiftedIndex){
+	            if(hurtEntity.inventory.armorInventory[1] != null && ItemBlockList.cactusArmorLeg.isPresent() && hurtEntity.inventory.armorInventory[1].itemID == ItemBlockList.cactusArmorLeg.get().itemID){
 	                cactusDamage+=0.5;
 	            }
-	            if(hurtEntity.inventory.armorInventory[0] != null && ItemBlockList.cactusArmorBoot.isPresent() && hurtEntity.inventory.armorInventory[0].itemID == ItemBlockList.cactusArmorBoot.get().shiftedIndex){
+	            if(hurtEntity.inventory.armorInventory[0] != null && ItemBlockList.cactusArmorBoot.isPresent() && hurtEntity.inventory.armorInventory[0].itemID == ItemBlockList.cactusArmorBoot.get().itemID){
 	                cactusDamage+=0.5;
 	            }
 

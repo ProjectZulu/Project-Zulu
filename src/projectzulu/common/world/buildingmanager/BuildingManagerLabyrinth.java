@@ -9,9 +9,9 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import projectzulu.common.world.CellType;
 import projectzulu.common.world.MazeCell;
-import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
 import projectzulu.common.world.architects.Architect;
 import projectzulu.common.world.architects.ArchitectLabyrinth;
+import projectzulu.common.world.blockdataobjects.BlockWithMeta;
 
 public class BuildingManagerLabyrinth extends BuildingManager{
 

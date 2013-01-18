@@ -38,7 +38,7 @@ public class EntityCrocodile extends EntityGenericAnimal{
 //		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
 
 		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.chickenRaw.shiftedIndex, false));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.chickenRaw.itemID, false));
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
 		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
 
@@ -123,7 +123,7 @@ public class EntityCrocodile extends EntityGenericAnimal{
 
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && itemStack.getItem().shiftedIndex == Item.chickenRaw.shiftedIndex){
+		if(itemStack != null && itemStack.getItem().itemID == Item.chickenRaw.itemID){
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);

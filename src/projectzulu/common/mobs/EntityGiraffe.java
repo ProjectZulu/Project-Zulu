@@ -131,7 +131,7 @@ public class EntityGiraffe extends EntityGenericAnimal {
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && (itemStack.getItem().shiftedIndex == Block.tallGrass.blockID)){
+		if(itemStack != null && (itemStack.getItem().itemID == Block.tallGrass.blockID)){
 			return true;
 		}
 		return super.isValidBreedingItem(itemStack);

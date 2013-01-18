@@ -3,7 +3,7 @@ package projectzulu.common.world.architects;
 import java.util.Random;
 
 import projectzulu.common.world.CellIndexDirection;
-import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
+import projectzulu.common.world.blockdataobjects.BlockWithMeta;
 import projectzulu.common.world.blueprints.BlueprintCemetaryFountain;
 import projectzulu.common.world.blueprints.BlueprintCemetaryFountain2;
 import projectzulu.common.world.blueprints.BlueprintCemeteryTomb;

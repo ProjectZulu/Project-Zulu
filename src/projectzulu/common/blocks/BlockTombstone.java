@@ -80,10 +80,6 @@ public class BlockTombstone extends BlockContainer{
             throw new RuntimeException(var3);
         }
     }
-	@Override
-    public int func_85104_a(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9){
-		return super.func_85104_a(par1World, par2, par3, par4, par5, par6, par7, par8, par9);
-	}
 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving) {
@@ -104,7 +100,7 @@ public class BlockTombstone extends BlockContainer{
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 		if(par5EntityPlayer instanceof EntityPlayer && ((EntityPlayer)par5EntityPlayer).inventory.getCurrentItem() != null
-				&& isValidItemForEditing( ((EntityPlayer)par5EntityPlayer).inventory.getCurrentItem().getItem().shiftedIndex ) ){
+				&& isValidItemForEditing( ((EntityPlayer)par5EntityPlayer).inventory.getCurrentItem().getItem().itemID ) ){
 			((EntityPlayer)par5EntityPlayer).openGui(mod_ProjectZulu.modInstance, 0, par1World, par2, par3, par4);
 			return true;
 		}
@@ -113,8 +109,8 @@ public class BlockTombstone extends BlockContainer{
 	}
 	
 	private boolean isValidItemForEditing(int itemID){		
-		if(itemID == Item.pickaxeWood.shiftedIndex || itemID == Item.pickaxeStone.shiftedIndex || itemID == Item.pickaxeGold.shiftedIndex 
-				|| itemID == Item.pickaxeSteel.shiftedIndex || itemID == Item.pickaxeDiamond.shiftedIndex){
+		if(itemID == Item.pickaxeWood.itemID || itemID == Item.pickaxeStone.itemID || itemID == Item.pickaxeGold.itemID 
+				|| itemID == Item.pickaxeSteel.itemID || itemID == Item.pickaxeDiamond.itemID){
 			return true;
 		}
 		return false;

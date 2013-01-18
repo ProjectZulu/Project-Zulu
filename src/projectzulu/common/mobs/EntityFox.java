@@ -45,7 +45,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
 		
 		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.egg.shiftedIndex, false));
+		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.egg.itemID, false));
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
 		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
 
@@ -114,7 +114,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 			return false;
 		}
 		
-		if(itemStack.itemID == Item.egg.shiftedIndex ){
+		if(itemStack.itemID == Item.egg.itemID ){
 			return true;
 		}
 		return super.isValidTamingItem(itemStack);
@@ -122,7 +122,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if (itemStack != null && itemStack.getItem().shiftedIndex == Item.egg.shiftedIndex) {
+		if (itemStack != null && itemStack.getItem().itemID == Item.egg.itemID) {
 			return true;
 		} else {
 			return false;
@@ -145,7 +145,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
     		return 0;
     	}
     	
-    	if(itemStack.itemID == Item.egg.shiftedIndex) {
+    	if(itemStack.itemID == Item.egg.itemID) {
 			System.out.println(((ItemFood) Item.melon).getHealAmount());
 
     		return ((ItemFood) Item.melon).getHealAmount();

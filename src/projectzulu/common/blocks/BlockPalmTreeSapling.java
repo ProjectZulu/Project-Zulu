@@ -199,7 +199,7 @@ public class BlockPalmTreeSapling extends BlockFlower{
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
     	ItemStack itemstack = par5EntityPlayer.inventory.getCurrentItem();
-    	if(itemstack != null && itemstack.itemID == Item.dyePowder.shiftedIndex)
+    	if(itemstack != null && itemstack.itemID == Item.dyePowder.itemID)
     	{
     		if(itemstack.getItemDamage() == 15)
     		{

@@ -204,7 +204,7 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     		/* TODO: Un Tame? */
     		if (par1EntityPlayer.username.equalsIgnoreCase(this.getOwnerName())){
     			if(var2 != null){
-    				if(var2.getItem().shiftedIndex == Item.paper.shiftedIndex){
+    				if(var2.getItem().itemID == Item.paper.itemID){
     					par1EntityPlayer.openGui(mod_ProjectZulu.modInstance, 2, par1EntityPlayer.worldObj, entityId, 0, 0);
     					return true;
     				}else if( getHealingValueIfValid(var2) > 0 && getHealth() < getMaxHealth() ){

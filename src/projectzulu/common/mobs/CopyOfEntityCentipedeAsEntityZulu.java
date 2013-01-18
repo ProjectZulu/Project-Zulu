@@ -276,7 +276,7 @@ public class CopyOfEntityCentipedeAsEntityZulu extends EntityZulu implements IMo
 		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
 			for (int i = 0; i < var3; ++i){
 				if(ItemBlockList.scrapMeat.isPresent()){
-					this.dropItem(ItemBlockList.scrapMeat.get().shiftedIndex, 1);
+					this.dropItem(ItemBlockList.scrapMeat.get().itemID, 1);
 				}
 			}
 		}
