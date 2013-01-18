@@ -112,7 +112,7 @@ public class EntityEagle extends EntityGenericAnimal{
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(2 + par2);
 		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.beaver.get().getLootItem(rand);
+			ItemStack loot = CustomEntityList.eagle.get().getLootItem(rand);
 			if(loot != null){
 				entityDropItem(loot, 1);
 			}
