@@ -1537,6 +1537,7 @@ public enum CustomEntityManager {
 					continue;
 				}
 				
+				/* Search For Empty Egg Slot to Put Egg Into */
 				int eggID = ProjectZulu_Mobs.getNextDefaultEggID();
 				while(EntityList.IDtoClassMapping.containsKey(eggID)){ eggID = ProjectZulu_Mobs.getNextDefaultEggID(); }
 				EntityList.IDtoClassMapping.put(eggID, mob.mobClass); 
