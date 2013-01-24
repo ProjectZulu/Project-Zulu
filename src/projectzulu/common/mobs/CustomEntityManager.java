@@ -19,6 +19,7 @@ import projectzulu.common.api.ItemBlockList;
 import projectzulu.common.blocks.EntityCreeperBlossomPrimed;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
+import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.Optional;
 
@@ -1548,6 +1549,10 @@ public enum CustomEntityManager {
 				}
 				for (int i = 0; i < mob.biomesToSpawn.size(); i++){
 					EntityRegistry.addSpawn(mob.mobClass, mob.spawnRate, mob.minInChunk, mob.maxInChunk, mob.enumCreatureType, mob.biomesToSpawn.get(i));
+					if(mob.reportSpawningInLog){
+						ProjectZuluLog.info("Registering %s to biome %s at rates of %s,%s,%s",
+								mob.mobClass.getSimpleName(), mob.biomesToSpawn.get(i).biomeName, mob.spawnRate, mob.minInChunk, mob.maxInChunk);
+					}
 				}
 			}
 		}

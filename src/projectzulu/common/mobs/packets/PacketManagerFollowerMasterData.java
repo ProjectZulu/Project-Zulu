@@ -47,7 +47,7 @@ public class PacketManagerFollowerMasterData extends ZuluPacketManagerBase{
 
 			Entity childEntity = worldObj.getEntityByID(childEntityID);
 			Entity masterEntity = worldObj.getEntityByID(masterEntityID);
-			if(followerIndex == -1 || masterEntityID == -1 
+			if(followerIndex == -1 || masterEntityID == -1
 					|| childEntity == null || !(childEntity instanceof EntityFollower) 
 					|| masterEntity == null || !(masterEntity instanceof EntityMaster)){
 				return false;
