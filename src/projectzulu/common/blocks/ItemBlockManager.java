@@ -495,6 +495,28 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void loadCustomConfig(Configuration config) {}
+	},	
+	LimitedMobSpawner{
+		@Override
+		protected boolean isBlock() { return true;	}
+		
+		@Override
+		protected void create() {
+			ItemBlockList.limitedMobSpawner = Optional.of(
+					new BlockLimitedMobSpawner(blockID).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setBlockName("LimitedMobSpawner"));
+		}
+		
+		@Override
+		protected void register() {
+			Block block = ItemBlockList.limitedMobSpawner.get();
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "LimitedMobSpawner");
+			/* Register TileEntity Render */
+			GameRegistry.registerTileEntity(TileEntityLimitedMobSpawner.class, "TileEntityLimitedMobSpawner");
+	        ProjectZulu_Core.proxy.registerTileEntityLimitedMobSpawner();
+		}
+
+		@Override
+		protected void loadCustomConfig(Configuration config) {}
 	},
 	Ankh{
 		@Override

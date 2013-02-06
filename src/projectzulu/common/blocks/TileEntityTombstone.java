@@ -72,7 +72,7 @@ public class TileEntityTombstone extends TileEntity
     	}
     	
     }
-
+    
     public boolean isEditable(){
         return this.isEditable;
     }
@@ -121,8 +121,5 @@ public class TileEntityTombstone extends TileEntity
     			}
     		}
     	}
-    	
-    	
     }
-    
 }

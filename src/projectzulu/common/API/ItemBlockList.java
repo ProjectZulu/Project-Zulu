@@ -33,8 +33,10 @@ public enum ItemBlockList {
 	public static Optional<? extends Block>	campfire = Optional.absent();
 	public static Optional<? extends Block>	mobHeads = Optional.absent();
 	public static Optional<? extends Block>	tombstone = Optional.absent();
+	
 	public static Optional<? extends Block>	universalFlowerPot = Optional.absent();
 	public static Optional<? extends Block>	customBrewingStand = Optional.absent();
+	public static Optional<? extends Block>	limitedMobSpawner = Optional.absent();
 	
 	/* Items */
 	public static Optional<? extends Item>	ankh = Optional.absent();
@@ -104,4 +106,6 @@ public enum ItemBlockList {
 	public static Optional<? extends Item>	furArmorChest = Optional.absent();
 	public static Optional<? extends Item>	furArmorLeg = Optional.absent();
 	public static Optional<? extends Item>	furArmorBoot = Optional.absent();
+	
+	
 }

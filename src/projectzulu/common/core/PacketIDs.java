@@ -15,7 +15,9 @@ public enum PacketIDs {
 	/* Packet: Perform EntityGenericTameable Taming Effect */
 	tameParticleEffect(5),
 	/* Packet: Sync Entity Animation Time */
-	animTime(6);
+	animTime(6),
+	/* Packet: Sync Mob Spawner Settings From Client to Server */
+	mobSpawner(7);
 
 	public final int index;
 	public int index() { return index; }

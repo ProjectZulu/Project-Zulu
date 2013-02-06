@@ -32,6 +32,7 @@ public class CommonProxyProjectZulu{
  	public void registerTileEntitySkullSpecialRender(){}
  	public void registerTileEntityTombstoneSpecialRender(){}
  	public void registerTileEntityUniversalFlowerPotSpecialRender(){}
+ 	public void registerTileEntityLimitedMobSpawner(){}
 
  	
 	public int addArmor(String armor){

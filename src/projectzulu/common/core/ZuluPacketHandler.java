@@ -12,6 +12,7 @@ import projectzulu.common.blocks.TileEntityTombstone;
 import projectzulu.common.mobs.EntityGenericTameable;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
+import projectzulu.common.mobs.packets.PacketManagerMobSpawner;
 import projectzulu.common.temperature.TemperatureTicker;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -97,6 +98,15 @@ public class ZuluPacketHandler implements IPacketHandler{
 					}
 				}
 				break;
+				case mobSpawner:{
+					PacketManagerMobSpawner customPacket = new PacketManagerMobSpawner(packetID.index);
+					if(!customPacket.processPacket(new DataInputStream(new ByteArrayInputStream(packet.data)), player)){
+						ProjectZuluLog.warning("Failed to Process Packet %s", customPacket.getClass().getSimpleName());
+					}
+					break;
+				}
+				default:
+					break;
 				}
 			} catch (Exception ex) {
 				ex.printStackTrace();

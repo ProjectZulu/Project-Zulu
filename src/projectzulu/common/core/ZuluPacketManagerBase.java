@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import cpw.mods.fml.common.network.Player;
@@ -49,4 +51,34 @@ public abstract class ZuluPacketManagerBase{
 	
 	/* Processing of Packet, Return True if Succesful*/
 	public abstract boolean processPacket(DataInputStream dataStream, Player player);
+	
+    /**
+     * Reads a compressed NBTTagCompound from the InputStream
+     */
+    public static NBTTagCompound readNBTTagCompound(DataInputStream par0DataInputStream) throws IOException{
+        short var1 = par0DataInputStream.readShort();
+
+        if (var1 < 0){
+            return null;
+        }
+        else{
+            byte[] var2 = new byte[var1];
+            par0DataInputStream.readFully(var2);
+            return CompressedStreamTools.decompress(var2);
+        }
+    }
+
+    /**
+     * Writes a compressed NBTTagCompound to the OutputStream
+     */
+    protected static void writeNBTTagCompound(NBTTagCompound par0NBTTagCompound, DataOutputStream par1DataOutputStream) throws IOException{
+        if (par0NBTTagCompound == null){
+            par1DataOutputStream.writeShort(-1);
+        }
+        else{
+            byte[] var2 = CompressedStreamTools.compress(par0NBTTagCompound);
+            par1DataOutputStream.writeShort((short)var2.length);
+            par1DataOutputStream.write(var2);
+        }
+    }
 }

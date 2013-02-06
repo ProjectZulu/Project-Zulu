@@ -36,16 +36,15 @@ public class GuiTombstone extends GuiScreen
     /** The number of the line that is being edited. */
     private int editLine = 0;
 
-    public GuiTombstone(TileEntityTombstone par1TileEntitySign)
-    {
+    public GuiTombstone(TileEntityTombstone par1TileEntitySign){
         this.entitySign = par1TileEntitySign;
     }
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    @Override
+    public void initGui(){
         this.controlList.clear();
         Keyboard.enableRepeatEvents(true);
         this.controlList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, "Done"));
@@ -55,6 +54,7 @@ public class GuiTombstone extends GuiScreen
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
+    @Override
     public void onGuiClosed(){
         Keyboard.enableRepeatEvents(false);
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -90,6 +90,7 @@ public class GuiTombstone extends GuiScreen
     /**
      * Called from the main game loop to update the screen.
      */
+    @Override
     public void updateScreen(){
         ++this.updateCounter;
     }
@@ -97,6 +98,7 @@ public class GuiTombstone extends GuiScreen
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
+    @Override
     protected void actionPerformed(GuiButton par1GuiButton){
         if (par1GuiButton.enabled)
         {
@@ -111,31 +113,29 @@ public class GuiTombstone extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2){
-        if (par2 == 200)
-        {
+    @Override
+    protected void keyTyped(char keyChar, int keyID){
+        if (keyID == Keyboard.KEY_UP){
             this.editLine = this.editLine - 1 & 3;
         }
 
-        if (par2 == 208 || par2 == 28)
-        {
+        if (keyID == Keyboard.KEY_DOWN || keyID == Keyboard.KEY_RETURN){
             this.editLine = this.editLine + 1 & 3;
         }
 
-        if (par2 == 14 && this.entitySign.signText[this.editLine].length() > 0)
-        {
+        if (keyID == Keyboard.KEY_BACK && this.entitySign.signText[this.editLine].length() > 0){
             this.entitySign.signText[this.editLine] = this.entitySign.signText[this.editLine].substring(0, this.entitySign.signText[this.editLine].length() - 1);
         }
 
-        if (allowedCharacters.indexOf(par1) >= 0 && this.entitySign.signText[this.editLine].length() < 10)
-        {
-            this.entitySign.signText[this.editLine] = this.entitySign.signText[this.editLine] + par1;
+        if (allowedCharacters.indexOf(keyChar) >= 0 && this.entitySign.signText[this.editLine].length() < 10){
+            this.entitySign.signText[this.editLine] = this.entitySign.signText[this.editLine] + keyChar;
         }
     }
 
     /**
      * Draws the screen and all the components in it.
      */
+    @Override
     public void drawScreen(int par1, int par2, float par3){
         this.drawDefaultBackground();
         

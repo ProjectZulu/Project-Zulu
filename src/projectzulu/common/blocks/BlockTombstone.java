@@ -104,8 +104,7 @@ public class BlockTombstone extends BlockContainer{
 			((EntityPlayer)par5EntityPlayer).openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
 			return true;
 		}
-		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,
-				par6, par7, par8, par9);
+		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
 	}
 	
 	private boolean isValidItemForEditing(int itemID){		

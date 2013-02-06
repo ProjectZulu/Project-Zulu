@@ -6,6 +6,8 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.blocks.EntityCreeperBlossomPrimed;
 import projectzulu.common.blocks.RenderCreeperBlossomPrimed;
+import projectzulu.common.blocks.TileEntityLimitedMobSpawner;
+import projectzulu.common.blocks.TileEntityLimitedMobSpawnerRenderer;
 import projectzulu.common.blocks.TileEntityTombstone;
 import projectzulu.common.blocks.TileEntityTombstoneRenderer;
 import projectzulu.common.blocks.TileEntityUniversalFlowerPot;
@@ -72,6 +74,12 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
  	public void registerTileEntityUniversalFlowerPotSpecialRender(){
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityUniversalFlowerPot.class, new TileEntityUniversalFlowerPotRenderer());
 	}
+	
+	@Override
+ 	public void registerTileEntityLimitedMobSpawner(){
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLimitedMobSpawner.class, new TileEntityLimitedMobSpawnerRenderer());
+	}
+
 	
 	@Override
 	public int registerBlockCustomRender(ISimpleBlockRenderingHandler renderClass){

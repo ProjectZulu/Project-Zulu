@@ -32,7 +32,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = DefaultProps.CoreModId, name = "Project Zulu Core", version = DefaultProps.VERSION_STRING)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels={"Channel_Zulu"}, packetHandler = ZuluPacketHandler.class)
 
-public class ProjectZulu_Core{	
+public class ProjectZulu_Core{
 	
 	@Instance(DefaultProps.CoreModId)
 	public static ProjectZulu_Core modInstance;
@@ -88,7 +88,7 @@ public class ProjectZulu_Core{
 	public static File modConfigDirectoryFile;
 
 	
-	@SidedProxy(clientSide = "projectzulu.client.ClientProxyProjectZulu", serverSide = "projectzulu.common.CommonProxyProjectZulu")
+	@SidedProxy(clientSide = "projectzulu.common.ClientProxyProjectZulu", serverSide = "projectzulu.common.CommonProxyProjectZulu")
 	public static CommonProxyProjectZulu proxy;
 
 	@PreInit
