@@ -10,35 +10,33 @@ import org.lwjgl.util.Point;
 public class GUISelectCreatureList extends GuiScrollingList{
 	
     private GuiLimitedMobSpawner parent;
-    private List<String> creatureNames;
-    private List<String> creatureDisplayNames;
+    private List<String> listFullNames;
+    private List<String> listDisplayNames;
+    ListType listType;
     int selectedElement = -1;
     
-    public GUISelectCreatureList(GuiLimitedMobSpawner parent, List<String> creatureNames, List<String> creatureDisplayNames, int listWidth, Point screenSize, Point backgroundSize){
+    public GUISelectCreatureList(GuiLimitedMobSpawner parent, List<String> listFullNames, List<String> listDisplayNames, ListType listType, int listWidth, Point screenSize, Point backgroundSize){
     	super(parent.getMinecraft(),
     			listWidth, backgroundSize.getY()+50, // Width, Height
     			(screenSize.getY()-backgroundSize.getY())/2+15, (screenSize.getY()-backgroundSize.getY())/2+backgroundSize.getY()-20, // Top, Bottom, 
     			(screenSize.getX()-backgroundSize.getX())/2+264, // Left
     			parent.getMinecraft().fontRenderer.FONT_HEIGHT+8); // Element Height
     	this.parent = parent;
-    	this.creatureNames = creatureNames;
-    	this.creatureDisplayNames = creatureDisplayNames;
+    	this.listFullNames = listFullNames;
+    	this.listDisplayNames = listDisplayNames;
+    	this.listType = listType;
     }
     
     @Override
     protected int getSize(){
-        return creatureNames.size();
+        return listFullNames.size();
     }
 
     @Override
     protected void elementClicked(int clickedIndex, boolean var2){
-    	if(parent.lastCalledElementID != -1){
-    		if(parent.getDataField(parent.lastCalledElementID) instanceof CreatureFields){
-    			((CreatureFields)parent.getDataField(parent.lastCalledElementID)).setcreatureNameField(creatureNames.get(clickedIndex));
-    		}
-    		parent.lastCalledElementID = -1;
-    		parent.mainScreen = true;
-    		return;
+    	if(parent.lastCalledElementID != -1 && parent.getDataField(parent.lastCalledElementID) instanceof CreatureFields){
+			((CreatureFields)parent.getDataField(parent.lastCalledElementID)).setDataFromList(listFullNames.get(clickedIndex), listType);
+    		parent.closeList();
     	}
     	selectedElement = clickedIndex;
     }
@@ -65,7 +63,7 @@ public class GUISelectCreatureList extends GuiScrollingList{
     
     @Override
     protected void drawSlot(int listIndex, int var2, int var3, int var4, Tessellator tessellator) {
-    	String renderString = creatureDisplayNames.get(listIndex); //(160 << 16) + (145 << 8) + 114)
+    	String renderString = listDisplayNames.get(listIndex); //(160 << 16) + (145 << 8) + 114)
     	parent.drawString(parent.getMinecraft().fontRenderer, renderString, this.left + 3 , var3 + 2, 16777215); //Red: 0xFF2222 //Blck: 4210752
     }
     

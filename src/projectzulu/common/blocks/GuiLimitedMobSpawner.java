@@ -1,11 +1,15 @@
 package projectzulu.common.blocks;
 
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SoundPool;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.EntityList;
@@ -14,6 +18,8 @@ import net.minecraft.entity.EntityLiving;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
+
+import projectzulu.common.core.ProjectZuluLog;
 //TODO: Scrolling Text in Creature List
 //projectzuluresources\module_block\mobspawnergui.png
 public class GuiLimitedMobSpawner extends GuiScreen{
@@ -23,30 +29,23 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 	public DataFields getDataField(int index){
 		return dataFields.get(index);
 	}
-	boolean mainScreen = true;
 	boolean fieldsCreated = false;
 
 	/* Used by Scrolling Creature List to know which Field to Return a Selected String to */
 	int lastCalledElementID = -1;
-	GUISelectCreatureList scrollingCreatureList;
-	List<String> creatrueName = new ArrayList<String>();
-	List<String> creatrueDisplayName = new ArrayList<String>();
+	private ListType currentListType = ListType.NONE;
+	GUISelectCreatureList scrollingList;
+	List<String> creatureListFullName = new ArrayList<String>();
+	List<String> creatureListDisplayName = new ArrayList<String>();
+
+	List<String> soundListFullName = new ArrayList<String>();
+	List<String> soundListDisplayName = new ArrayList<String>();
 
     /** Counts the number of screen updates. */
     private int updateCounter;
     
     public GuiLimitedMobSpawner(TileEntityLimitedMobSpawner limitedMobSpawner){
     	this.limitedMobSpawner = limitedMobSpawner;
-    	creatrueName.clear();
-    	creatrueDisplayName.clear();
-    	Iterator stringToClassIterator = EntityList.stringToClassMapping.keySet().iterator();
-    	while(stringToClassIterator.hasNext()){
-    		String stringKey = (String) stringToClassIterator.next();
-    		if( EntityLiving.class.isAssignableFrom( ((Class)EntityList.stringToClassMapping.get(stringKey))) ){
-    			creatrueName.add(stringKey);
-    			creatrueDisplayName.add(StringHelper.simplifyCreatureNameForDisplay(stringKey, 10));
-    		}
-    	}
     }
     
 
@@ -80,8 +79,76 @@ public class GuiLimitedMobSpawner extends GuiScreen{
             	dataFields.get(i).createFields(i , fontRenderer, this.width, this.height, backgroundSize);
             }
         }
-        scrollingCreatureList = new GUISelectCreatureList(this, creatrueName, creatrueDisplayName, 70, new Point(this.width, this.height), backgroundSize);
-        scrollingCreatureList.registerScrollButtons(this.controlList, 7, 8);
+        switch (currentListType) {
+        case Creature:
+        	scrollingList = new GUISelectCreatureList(this, creatureListFullName, creatureListDisplayName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+            scrollingList.registerScrollButtons(this.controlList, 7, 8);
+        	break;
+		default:
+			break;
+		}
+    }
+    
+    public void openList(ListType listType, int callingElementID){
+    	lastCalledElementID = callingElementID;
+    	currentListType = listType;
+    	switch (currentListType) {
+    	case Creature:
+    		/* Create List if Empty */
+    		if(creatureListFullName != null || creatureListFullName.isEmpty()){
+    			Iterator stringToClassIterator = EntityList.stringToClassMapping.keySet().iterator();
+    	    	while(stringToClassIterator.hasNext()){
+    	    		String stringKey = (String) stringToClassIterator.next();
+    	    		if( EntityLiving.class.isAssignableFrom( ((Class)EntityList.stringToClassMapping.get(stringKey))) ){
+    	    			creatureListFullName.add(stringKey);
+    	    			creatureListDisplayName.add(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."));
+    	    		}
+    	    	}
+    		}
+            scrollingList = new GUISelectCreatureList(this, creatureListFullName, creatureListDisplayName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+            scrollingList.registerScrollButtons(this.controlList, 7, 8);
+			break;
+		case Sound:
+			if(soundListFullName != null || soundListFullName.isEmpty()){
+				SoundPool soundPool = mc.sndManager.soundPoolSounds;
+				/* Grab "potionRequirements" : OBFSC: "m" : potionRequirements --> fields.csv --> joined.srg --> m */
+				try {
+					Field fieldSoundHash = SoundPool.class.getDeclaredField("nameToSoundPoolEntriesMapping");
+					fieldSoundHash.setAccessible(true);
+					HashMap soundHash = (HashMap) fieldSoundHash.get(soundPool);
+					Iterator stringSoundIterator = soundHash.keySet().iterator();
+					while(stringSoundIterator.hasNext()){
+						String stringKey = (String) stringSoundIterator.next();
+						soundListFullName.add(stringKey);
+						soundListDisplayName.add(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."));
+					}
+				}catch (NoSuchFieldException e) {
+					ProjectZuluLog.severe("Obfuscation needs to be updated to access the SoundPool Hashmap. Please notify modmaker Immediately.");
+					e.printStackTrace();
+				}catch (IllegalArgumentException e) {
+					ProjectZuluLog.severe("Obfuscation needs to be updated to access the SoundPool Hashmap. Please notify modmaker Immediately.");
+					e.printStackTrace();
+				}catch (IllegalAccessException e) {
+					ProjectZuluLog.severe("Obfuscation needs to be updated to access the SoundPool Hashmap. Please notify modmaker Immediately.");
+					e.printStackTrace();
+				}catch (SecurityException e) {
+					ProjectZuluLog.severe("Obfuscation needs to be updated to access the SoundPool Hashmap. Please notify modmaker Immediately.");
+					e.printStackTrace();
+				}
+
+			}
+            scrollingList = new GUISelectCreatureList(this, soundListFullName, soundListDisplayName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+            scrollingList.registerScrollButtons(this.controlList, 7, 8);
+			break;
+		default:
+			throw new IllegalStateException("Trying to Open invalid List type " + listType.toString());
+		}
+    }
+    
+    public void closeList(){
+    	lastCalledElementID = -1;
+    	currentListType = ListType.NONE;
+        scrollingList = null;
     }
     
     /**
@@ -155,7 +222,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	super.keyTyped(keyChar, keyID);
     	for (DataFields dataField : dataFields) {
     		if(dataField.isEnabled()){
-    			dataField.keyboardInput(keyChar, keyID, mainScreen);
+    			dataField.keyboardInput(keyChar, keyID);
     		}
     	}
     }
@@ -164,7 +231,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     protected void mouseClicked(int par1, int par2, int par3) {
     	super.mouseClicked(par1, par2, par3);
     	for (DataFields dataField : dataFields) {
-    		dataField.mouseClicked(this, mc, par1, par2, par3, mainScreen);
+    		dataField.mouseClicked(this, mc, par1, par2, par3);
     	}
     }
     
@@ -178,14 +245,13 @@ public class GuiLimitedMobSpawner extends GuiScreen{
         fontRenderer.drawString("Edit Mob Spawner Settings", (width - fontRenderer.getStringWidth("Edit Mob Spawner Settings"))/2, (height-backgroundSize.getY())/2+8, 4210752); //White: 16777215
         super.drawScreen(par1, par2, par3);
         for (DataFields dataField : dataFields) {
-        	dataField.render(mc, par1, par2, par3, new Point(this.width, this.height), backgroundSize, mainScreen);
+        	dataField.render(mc, par1, par2, par3, new Point(this.width, this.height), backgroundSize);
         }
         
-        if(!mainScreen){
-        	scrollingCreatureList.drawBackground();
-        	scrollingCreatureList.drawScreen(new Point(this.width, this.height), backgroundSize, par1, par2, par3);
+        if(currentListType != ListType.NONE){
+        	scrollingList.drawBackground();
+        	scrollingList.drawScreen(new Point(this.width, this.height), backgroundSize, par1, par2, par3);
         }
-        
     }
     
     /**

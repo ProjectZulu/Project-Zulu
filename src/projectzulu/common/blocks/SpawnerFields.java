@@ -87,18 +87,18 @@ public class SpawnerFields implements DataFields{
 		return isEnabled;
 	}
 
-	public boolean keyboardInput(char keyChar, int keyID, boolean mainScreen){
+	public boolean keyboardInput(char keyChar, int keyID){
 		if(isEnabled){
-			return correctIfInvalid(minSpawnDelay, keyChar, keyID, mainScreen) 
-					|| correctIfInvalid(maxSpawnDelay, keyChar, keyID, mainScreen)
-					|| correctIfInvalid(maxToSpawn, keyChar, keyID, mainScreen)
-					|| correctIfInvalid(maxNearbyEntities, keyChar, keyID, mainScreen)
-					|| correctIfInvalid(requiredPlayerRange, keyChar, keyID, mainScreen);
+			return correctIfInvalid(minSpawnDelay, keyChar, keyID) 
+					|| correctIfInvalid(maxSpawnDelay, keyChar, keyID)
+					|| correctIfInvalid(maxToSpawn, keyChar, keyID)
+					|| correctIfInvalid(maxNearbyEntities, keyChar, keyID )
+					|| correctIfInvalid(requiredPlayerRange, keyChar, keyID);
 		}
 		return false;
 	}
 	
-	private boolean correctIfInvalid(GuiTextField guiTextField, char keyChar, int keyID, boolean mainScreen){
+	private boolean correctIfInvalid(GuiTextField guiTextField, char keyChar, int keyID){
 		if(guiTextField.textboxKeyTyped(keyChar, keyID)){
 			guiTextField.setText( guiTextField.getText().length() == 0? "0": CharMatcher.anyOf("0123456789").retainFrom(guiTextField.getText()));
 			return true;
@@ -106,7 +106,7 @@ public class SpawnerFields implements DataFields{
 		return false;
 	}
 	
-	public void mouseClicked(GuiLimitedMobSpawner spawnerGUI, Minecraft mc, int par1, int par2, int par3, boolean mainScreen){
+	public void mouseClicked(GuiLimitedMobSpawner spawnerGUI, Minecraft mc, int par1, int par2, int par3){
 		if(isEnabled){
 			minSpawnDelay.mouseClicked(par1, par2, par3);
 			maxSpawnDelay.mouseClicked(par1, par2, par3);
@@ -122,7 +122,7 @@ public class SpawnerFields implements DataFields{
 		}
 	}
 	
-	public void render(Minecraft mc, int par1, int par2, float par3, Point screenSize, Point backgroundSize, boolean mainScreen){
+	public void render(Minecraft mc, int par1, int par2, float par3, Point screenSize, Point backgroundSize){
 		if(isEnabled){
 			/* Draw Raw Text */
 			mc.fontRenderer.drawString(titles[0],

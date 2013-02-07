@@ -36,27 +36,7 @@ public class ProjectZulu_Core{
 	
 	@Instance(DefaultProps.CoreModId)
 	public static ProjectZulu_Core modInstance;
-	
-	/*
-	 * General Declarations
-	 */
-	public static ArrayList<ItemStack> tier1DesertArmor = new ArrayList<ItemStack>();
-	public static ArrayList<ItemStack> tier2DesertArmor = new ArrayList<ItemStack>();
-	public static ArrayList<ItemStack> tier3DesertArmor = new ArrayList<ItemStack>();
-	public static ArrayList<ItemStack> tier4DesertArmor = new ArrayList<ItemStack>();
-	public static ArrayList<ItemStack> tier5DesertArmor = new ArrayList<ItemStack>();
-	
-	public static int scaleIndex;
-	public static int whiteWoolIndex;
-	public static int redWoolIndex;
-	public static int greenWoolIndex;
-	public static int blueWoolIndex;
-	public static int goldScaleIndex;
-	public static int ironScaleIndex;
-	public static int diamondScaleIndex;
-	public static int cactusIndex;
-	public static int furIndex;
-	
+		
 	public static boolean enableTestBlock = false ; 
 	public static boolean enableTemperature = false; 
 	public static boolean tombstoneOnDeath = true; 
@@ -70,10 +50,7 @@ public class ProjectZulu_Core{
 	public static boolean despawnInPeaceful = true; 
 	public static float namePlateScale = 0.016666668F * 1.6f * 0.5f; 
 	public static float namePlateOpacity = 0.85F; 
-
 	
-	
-	TemperatureTicker temperatureTicker;
 	public static int testBlockID = 2540;
 	public static Block testBlock;
 	
@@ -117,7 +94,7 @@ public class ProjectZulu_Core{
         
         /* Should Enable Temperature System ? */
 //        if(enableTemperature){
-//            temperatureTicker = proxy.initializeTempTicker();
+//            TemperatureTicker temperatureTicker = proxy.initializeTempTicker();
 //            GameRegistry.registerPlayerTracker(temperatureTicker);
 //        }
 		proxy.bossHealthTicker();

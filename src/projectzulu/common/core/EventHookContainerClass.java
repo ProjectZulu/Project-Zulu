@@ -71,36 +71,6 @@ public class EventHookContainerClass {
 							exhaustion-=(exhaustion-exhaustion*0.4)/4f;
 							break;
 						}
-
-						for (ItemStack tierarmor : ProjectZulu_Core.tier5DesertArmor) {
-							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
-								exhaustion-=(exhaustion-exhaustion*0.35)/4f;
-							}
-						}
-
-						for (ItemStack tierarmor : ProjectZulu_Core.tier4DesertArmor) {
-							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
-								exhaustion-=(exhaustion-exhaustion*0.3)/4f;
-							}
-						}
-
-						for (ItemStack tierarmor : ProjectZulu_Core.tier3DesertArmor) {
-							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
-								exhaustion-=(exhaustion-exhaustion*0.25)/4f;
-							}
-						}
-
-						for (ItemStack tierarmor : ProjectZulu_Core.tier2DesertArmor) {
-							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
-								exhaustion-=(exhaustion-exhaustion*0.2)/4f;
-							}
-						}
-
-						for (ItemStack tierarmor : ProjectZulu_Core.tier1DesertArmor) {
-							if(thePlayer.inventory.armorInventory[i].itemID == tierarmor.itemID){
-								exhaustion-=exhaustion/4;
-							}
-						}
 					}
 				thePlayer.addExhaustion(Math.max(exhaustion, 0));
 			}

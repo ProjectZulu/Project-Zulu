@@ -7,12 +7,12 @@ import java.io.IOException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import projectzulu.common.core.ZuluPacketManagerBase;
+import projectzulu.common.core.PacketManager;
 import projectzulu.common.mobs.EntityFollower;
 import projectzulu.common.mobs.EntityMaster;
 import cpw.mods.fml.common.network.Player;
 
-public class PacketManagerFollowerMasterData extends ZuluPacketManagerBase{
+public class PacketManagerFollowerMasterData extends PacketManager{
 	
 	int childEntityID;
 	int masterEntityID;

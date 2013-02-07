@@ -106,7 +106,7 @@ public class EntityFollower extends EntityLiving{
 		
 		/* Send Packet Server -> Client with EntityData to Connect Child+Master : Packet calls linkMasterWithFollower from Child */
 		if(ticksExisted % 40 == 0 && !worldObj.isRemote && masterEntity != null){
-			PacketManagerFollowerMasterData packetManager = new PacketManagerFollowerMasterData(PacketIDs.followerMasterData.index);
+			PacketManagerFollowerMasterData packetManager = (PacketManagerFollowerMasterData) PacketIDs.followerMasterData.createPacketManager();
 			packetManager.setPacketData(entityId, masterEntity.entityId, followerIndex);
 			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 60, dimension, packetManager.createPacket());
 		}

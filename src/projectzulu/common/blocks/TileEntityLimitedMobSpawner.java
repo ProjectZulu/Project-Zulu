@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import projectzulu.common.core.PacketIDs;
-import projectzulu.common.mobs.packets.PacketManagerMobSpawner;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -20,6 +17,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
+import projectzulu.common.core.PacketIDs;
+import projectzulu.common.mobs.packets.PacketManagerMobSpawner;
+import projectzulu.common.mobs.packets.PacketManagerPlaySound;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,7 +32,6 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      * The string ID of the mobs being spawned from this spawner. Defaults to pig, apparently.
      */
     private String mobID = "Chicken";
-
     /* List of TileEntityLimitedMobSpawnData*/
     private List<TileEntityLimitedMobSpawnData> spawnList = null;
     public List<TileEntityLimitedMobSpawnData> getSpawnList(){
@@ -46,7 +45,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     private TileEntityLimitedMobSpawnData spawnerTags = null;
     public double yaw;
     public double yaw2 = 0.0D;
-    private int minSpawnDelay = 200; 
+    private int minSpawnDelay = 200;
     private int maxSpawnDelay = 800;
     public int getMinSpawnDelay(){
     	return minSpawnDelay;
@@ -121,8 +120,11 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     public boolean isEditable(){
         return this.isEditable;
     }
-
-
+    
+    @SideOnly(Side.CLIENT)
+    public void playSpawnSound(String spawnSound){
+    	worldObj.playSound(xCoord, yCoord, zCoord, spawnSound, 1.0f, 1.0f, true);
+    }
     /**
      * Sets the sign's isEditable flag to the specified parameter.
      */
@@ -196,6 +198,9 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
                             this.worldObj.spawnEntityInWorld(var13);
                             this.worldObj.playAuxSFX(2004, this.xCoord, this.yCoord, this.zCoord, 0);
                             spawnedEntities++;
+                            PacketManagerPlaySound packetManager = (PacketManagerPlaySound) PacketIDs.playSound.createPacketManager();
+                            packetManager.setPacketData(xCoord, yCoord, zCoord, spawnerTags.spawnSound);
+                            PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 64, worldObj.getWorldInfo().getDimension(),  packetManager.createPacket());
                             if (var11 != null){
                                 var11.spawnExplosionParticle();
                             }
@@ -278,7 +283,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
         }
 
         if(par1NBTTagCompound.hasKey("SpawnData")){
-            this.spawnerTags = new TileEntityLimitedMobSpawnData(this, par1NBTTagCompound.getCompoundTag("SpawnData"), this.mobID);
+            this.spawnerTags = new TileEntityLimitedMobSpawnData(this, par1NBTTagCompound.getCompoundTag("SpawnData"), this.mobID, "");
         }else{
             this.spawnerTags = null;
         }
@@ -374,7 +379,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     }
     
     public void syncToServer(){
-    	PacketManagerMobSpawner mobSpawnerPacketManager = new PacketManagerMobSpawner(PacketIDs.mobSpawner.index);
+    	PacketManagerMobSpawner mobSpawnerPacketManager = (PacketManagerMobSpawner) PacketIDs.mobSpawner.createPacketManager();
     	NBTTagCompound tileEntityData = new NBTTagCompound();
     	writeToNBT(tileEntityData);
     	mobSpawnerPacketManager.setPacketData(xCoord, yCoord, zCoord, tileEntityData);

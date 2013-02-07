@@ -7,11 +7,11 @@ import java.io.IOException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import projectzulu.common.core.ZuluPacketManagerBase;
+import projectzulu.common.core.PacketManager;
 import projectzulu.common.mobs.EntityGenericCreature;
 import cpw.mods.fml.common.network.Player;
 
-public class PacketManagerAnimTime extends ZuluPacketManagerBase{
+public class PacketManagerAnimTime extends PacketManager{
 	
 	int entityIDtoSync;
 	int animTime;

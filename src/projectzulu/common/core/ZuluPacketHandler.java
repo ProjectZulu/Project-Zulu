@@ -13,6 +13,7 @@ import projectzulu.common.mobs.EntityGenericTameable;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
 import projectzulu.common.mobs.packets.PacketManagerMobSpawner;
+import projectzulu.common.mobs.packets.PacketManagerPlaySound;
 import projectzulu.common.temperature.TemperatureTicker;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -27,86 +28,70 @@ public class ZuluPacketHandler implements IPacketHandler{
 			DataInputStream data = new DataInputStream(new ByteArrayInputStream(packet.data));
 			try {
 				PacketIDs packetID = PacketIDs.getPacketIDbyIndex(data.readInt());
-				switch (packetID) {
-				/* PacketID: Unknown Packet, send a Warning */
-				case unknown:{
-					ProjectZuluLog.warning("Unknown packet being Sent through Channel_Zulu", packet.getClass().getSimpleName());
-				}
-				break;
-				/*PacketID: Temperature Packet*/
-				case temperature:{
-					EntityPlayer sender = (EntityPlayer)player;
-					TemperatureTicker.updateTemperatureFromPacket(data, sender);
+				PacketManager packetManager =  packetID.createPacketManager();
+				if(packetManager != null){
+					if(!packetManager.processPacket(new DataInputStream(new ByteArrayInputStream(packet.data)), player)){
+						ProjectZuluLog.warning("Failed to Process Packet %s", packetManager.getClass().getSimpleName());
+					}
+				}else{
+					/* Legacy Packets */
+					switch (packetID) {
+					/* PacketID: Unknown Packet, send a Warning */
+					case unknown:{
+						ProjectZuluLog.warning("Unknown packet being Sent through Channel_Zulu", packet.getClass().getSimpleName());
+					}
 					break;
-				}
-				
-				/* PacketID: Update Tile Entity Text [C->S] */
-				case tileEntityText:{					
-					World worldObj = ((EntityPlayer)player).worldObj;
-					/* Unpack Some Data */
-					int tileLocationX = data.readInt();
-					int tileLocationY = data.readInt();
-					int tileLocationZ = data.readInt();
+					/*PacketID: Temperature Packet*/
+					case temperature:{
+						EntityPlayer sender = (EntityPlayer)player;
+						TemperatureTicker.updateTemperatureFromPacket(data, sender);
+						break;
+					}
+					
+					/* PacketID: Update Tile Entity Text [C->S] */
+					case tileEntityText:{					
+						World worldObj = ((EntityPlayer)player).worldObj;
+						/* Unpack Some Data */
+						int tileLocationX = data.readInt();
+						int tileLocationY = data.readInt();
+						int tileLocationZ = data.readInt();
 
-					/* Look For TileEntity, then Give it Text */
-					if(worldObj.getBlockTileEntity(tileLocationX, tileLocationY, tileLocationZ) instanceof TileEntityTombstone){
-						TileEntityTombstone tile = (TileEntityTombstone)worldObj.getBlockTileEntity(tileLocationX, tileLocationY, tileLocationZ);
-						tile.signText[0] = data.readUTF();
-						tile.signText[1] = data.readUTF();
-						tile.signText[2] = data.readUTF();
-						tile.signText[3] = data.readUTF();
+						/* Look For TileEntity, then Give it Text */
+						if(worldObj.getBlockTileEntity(tileLocationX, tileLocationY, tileLocationZ) instanceof TileEntityTombstone){
+							TileEntityTombstone tile = (TileEntityTombstone)worldObj.getBlockTileEntity(tileLocationX, tileLocationY, tileLocationZ);
+							tile.signText[0] = data.readUTF();
+							tile.signText[1] = data.readUTF();
+							tile.signText[2] = data.readUTF();
+							tile.signText[3] = data.readUTF();
+						}
+						break;
+					}
+					/* Packet: Sync Entity Name to Server from GUI */
+					case entityNameSync:{
+						World worldObj = ((EntityPlayer)player).worldObj;
+						int entityToBeNamedID = data.readInt();
+						String entityName = data.readUTF();
+						Entity entity = worldObj.getEntityByID(entityToBeNamedID);
+						if(entity instanceof EntityGenericTameable){
+							((EntityGenericTameable)entity).setUsername(entityName);
+						}
 					}
 					break;
-				}
-				
-				/* Packet: *USed to Be used* Sync Centipede Followers --> Master */
-				case followerMasterData:{
-					PacketManagerFollowerMasterData customPacket = new PacketManagerFollowerMasterData(packetID.index);
-					if(!customPacket.processPacket(new DataInputStream(new ByteArrayInputStream(packet.data)), player)){
-						ProjectZuluLog.warning("Failed to Process Packet %s", customPacket.getClass().getSimpleName());
+					/* Packet: Perform EntityGenericTameable Taming Effect */
+					case tameParticleEffect:{
+						World worldObj = ((EntityPlayer)player).worldObj;
+						int entityToBeNamedID = data.readInt();
+						Boolean tameingSuccess = data.readBoolean();
+						Entity entity = worldObj.getEntityByID(entityToBeNamedID);
+						if(entity instanceof EntityGenericTameable){
+							((EntityGenericTameable)entity).playTameEffect(tameingSuccess);
+						}
 					}
-				}
-				/* Packet: Sync Entity Name to Server from GUI */
-				break;
-				case entityNameSync:{
-					World worldObj = ((EntityPlayer)player).worldObj;
-					int entityToBeNamedID = data.readInt();
-					String entityName = data.readUTF();
-					Entity entity = worldObj.getEntityByID(entityToBeNamedID);
-					if(entity instanceof EntityGenericTameable){
-						((EntityGenericTameable)entity).setUsername(entityName);
+					break;
+					default:
+						break;
 					}
-				}
-				break;
-				/* Packet: Perform EntityGenericTameable Taming Effect */
-				case tameParticleEffect:{
-					World worldObj = ((EntityPlayer)player).worldObj;
-					int entityToBeNamedID = data.readInt();
-					Boolean tameingSuccess = data.readBoolean();
-					Entity entity = worldObj.getEntityByID(entityToBeNamedID);
-					if(entity instanceof EntityGenericTameable){
-						((EntityGenericTameable)entity).playTameEffect(tameingSuccess);
-					}
-				}
-				break;
 
-				/* Packet: Sync Entity Animation Time */
-				case animTime:{
-					PacketManagerAnimTime customPacket = new PacketManagerAnimTime(packetID.index);
-					if(!customPacket.processPacket(new DataInputStream(new ByteArrayInputStream(packet.data)), player)){
-						ProjectZuluLog.warning("Failed to Process Packet %s", customPacket.getClass().getSimpleName());
-					}
-				}
-				break;
-				case mobSpawner:{
-					PacketManagerMobSpawner customPacket = new PacketManagerMobSpawner(packetID.index);
-					if(!customPacket.processPacket(new DataInputStream(new ByteArrayInputStream(packet.data)), player)){
-						ProjectZuluLog.warning("Failed to Process Packet %s", customPacket.getClass().getSimpleName());
-					}
-					break;
-				}
-				default:
-					break;
 				}
 			} catch (Exception ex) {
 				ex.printStackTrace();

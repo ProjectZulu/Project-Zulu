@@ -90,7 +90,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
         	animTime = maxAnimTime;
         	
         	if(!worldObj.isRemote){
-        		PacketManagerAnimTime packetAnimTime = new PacketManagerAnimTime(PacketIDs.animTime.index);
+        		PacketManagerAnimTime packetAnimTime = (PacketManagerAnimTime) PacketIDs.animTime.createPacketManager();
             	packetAnimTime.setPacketData(entityId, animTime);
         		PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 30, this.dimension, packetAnimTime.createPacket());		
         	}

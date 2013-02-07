@@ -6,14 +6,13 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import projectzulu.common.blocks.TileEntityLimitedMobSpawner;
-import projectzulu.common.core.ZuluPacketManagerBase;
+import projectzulu.common.core.PacketManager;
 import cpw.mods.fml.common.network.Player;
 
-public class PacketManagerMobSpawner extends ZuluPacketManagerBase{
+public class PacketManagerMobSpawner extends PacketManager{
 	int entityIDtoSync;
 	int animTime;
 	

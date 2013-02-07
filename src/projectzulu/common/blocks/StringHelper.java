@@ -2,9 +2,9 @@ package projectzulu.common.blocks;
 
 public class StringHelper {
 	
-    public static String simplifyCreatureNameForDisplay(String string, int characterLimit){
+    public static String simplifyStringNameForDisplay(String string, int characterLimit, String splitString){
     	/* Remove Surpluous Creature Data (ProjectZulu.Armadillo) */
-    	String[] stringParts = string.split("\\.");
+    	String[] stringParts = string.split(splitString);
     	for (String string2 : stringParts) {
 		}
     	String displayName;

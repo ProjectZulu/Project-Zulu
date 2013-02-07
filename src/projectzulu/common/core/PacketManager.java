@@ -13,11 +13,11 @@ import cpw.mods.fml.common.network.Player;
 /**
  * All Packets Sent Over Channel_Zulu are assumed to be of This Type
  */
-public abstract class ZuluPacketManagerBase{
+public abstract class PacketManager{
 	
 	int packetID;
 	String channel = DefaultProps.defaultChannel;
-	public ZuluPacketManagerBase(int packetID) {
+	public PacketManager(int packetID) {
 		this.packetID = packetID;
 	}
 	
