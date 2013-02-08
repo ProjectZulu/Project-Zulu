@@ -1,4 +1,4 @@
-package projectzulu.common.mobs.packets;
+package projectzulu.common.packets.core;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

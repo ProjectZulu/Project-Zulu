@@ -10,7 +10,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.api.CustomEntityList;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.common.Loader;
@@ -238,8 +238,8 @@ public class EntityMaster extends EntityGenericAnimal{
 
 		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
 			for (int i = 0; i < var3; ++i){
-				if(ItemBlockList.scrapMeat.isPresent()){
-					this.dropItem(ItemBlockList.scrapMeat.get().itemID, 1);
+				if(ItemList.scrapMeat.isPresent()){
+					this.dropItem(ItemList.scrapMeat.get().itemID, 1);
 				}
 			}
 		}

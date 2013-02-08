@@ -5,8 +5,6 @@ public class StringHelper {
     public static String simplifyStringNameForDisplay(String string, int characterLimit, String splitString){
     	/* Remove Surpluous Creature Data (ProjectZulu.Armadillo) */
     	String[] stringParts = string.split(splitString);
-    	for (String string2 : stringParts) {
-		}
     	String displayName;
     	/* Shorten Name to Declared Number of Character */
     	if(stringParts.length > 0){
@@ -19,5 +17,9 @@ public class StringHelper {
     		displayName = displayName.substring(0, characterLimit);
     	}
     	return displayName;
+    }
+    
+    public static String toTitleCase(String string){
+    	return string.toUpperCase().replace(string.toUpperCase().substring(1), string.substring(1).toLowerCase());
     }
 }

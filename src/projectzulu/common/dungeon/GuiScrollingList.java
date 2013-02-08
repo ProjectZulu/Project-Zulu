@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.dungeon;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.Tessellator;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+
+import projectzulu.common.core.DefaultProps;
 
 public abstract class GuiScrollingList {
     private final Minecraft client;
@@ -338,7 +340,7 @@ public abstract class GuiScrollingList {
     }
     
     protected String getBackgroundTexture(){
-    	return "/projectzuluresources/module_block/customspawnerbackground.png";
+    	return DefaultProps.dungeonDiretory+"customspawnerbackground.png";
     }
 
     private void overlayBackground(int p_22239_1_, int p_22239_2_, int p_22239_3_, int p_22239_4_){

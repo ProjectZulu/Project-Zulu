@@ -17,7 +17,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
@@ -50,7 +51,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	boolean shootFireball = false;
 	int shootCooldown = 6*20;
 	int shootTimer = 30;
-	private static final ItemStack defaultHeldItem = ItemBlockList.ankh.isPresent() ? new ItemStack(ItemBlockList.ankh.get()) : new ItemStack(Item.swordSteel);
+	private static final ItemStack defaultHeldItem = ItemList.ankh.isPresent() ? new ItemStack(ItemList.ankh.get()) : new ItemStack(Item.swordSteel);
 
 	//Debug Variables
 	boolean printMessage = false;
@@ -427,8 +428,8 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 		int var3 = this.rand.nextInt(3);
 		int var4;
 
-		if(Loader.isModLoaded(DefaultProps.BlocksModId) && ItemBlockList.jasper.isPresent()){
-			this.dropItem(ItemBlockList.jasper.get().blockID, 1);			
+		if(Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.jasper.isPresent()){
+			this.dropItem(BlockList.jasper.get().blockID, 1);			
 		}
 
 		var4 = 3 + this.rand.nextInt(3);
@@ -440,8 +441,8 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	}
 	@Override
 	protected void dropRareDrop(int par1) {
-		if(Loader.isModLoaded(DefaultProps.BlocksModId) && ItemBlockList.ankh.isPresent()){
-	        ItemStack var2 = new ItemStack(ItemBlockList.ankh.get());
+		if(Loader.isModLoaded(DefaultProps.BlocksModId) && ItemList.ankh.isPresent()){
+	        ItemStack var2 = new ItemStack(ItemList.ankh.get());
 	        this.entityDropItem(var2, 5.0F);
 		}
 	}

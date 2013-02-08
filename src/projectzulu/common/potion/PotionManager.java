@@ -10,10 +10,11 @@ import net.minecraft.potion.PotionHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.api.PotionList;
 import projectzulu.common.blocks.BlockZuluBrewingStand;
 import projectzulu.common.blocks.TileEntityZuluBrewingStand;
+import projectzulu.common.core.ObfuscationHelper;
 import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.Optional;
@@ -134,7 +135,7 @@ public enum PotionManager {
 		Field fieldpotionAmplifiers = null;
 		HashMap potionAmplifiers;
 		try {			
-			if(isUnObfuscated(PotionHelper.class.getDeclaredFields().clone(), "potionRequirements")){
+			if(ObfuscationHelper.isUnObfuscated(PotionHelper.class.getDeclaredFields().clone(), "potionRequirements")){
 				/* Grab "potionRequirements" : OBFSC: "m" : potionRequirements --> fields.csv --> joined.srg --> m */
 				fieldPotionRequirement = PotionHelper.class.getDeclaredField("potionRequirements");
 				/* Grab "potionAmplifiers" : OBFSC: n */
@@ -191,7 +192,7 @@ public enum PotionManager {
 			Block.blocksList[Block.brewingStand.blockID] = null;
 			try {				
 				Field fieldnameToClassMap = null;
-				if(isUnObfuscated(TileEntity.class.getDeclaredFields().clone(), "nameToClassMap")){
+				if(ObfuscationHelper.isUnObfuscated(TileEntity.class.getDeclaredFields().clone(), "nameToClassMap")){
 					/* Grab "nameToClassMap" : OBFSC: "a" */
 					fieldnameToClassMap = TileEntity.class.getDeclaredField("nameToClassMap");
 				}else{
@@ -214,7 +215,7 @@ public enum PotionManager {
 			}
 
 			/* Sub in Our Own Brewing Stand and Tile Entity */
-			ItemBlockList.customBrewingStand = Optional.of(
+			BlockList.customBrewingStand = Optional.of(
 					(new BlockZuluBrewingStand(117)).setHardness(0.5F).setLightValue(0.125F).setBlockName("brewingStand").setRequiresSelfNotify()
 					);
 			GameRegistry.registerTileEntity(TileEntityZuluBrewingStand.class, "TileEntityZuluBrewingStand");   
@@ -289,32 +290,32 @@ public enum PotionManager {
         potionRequirements.put(Integer.valueOf(Potion.waterBreathing.getId()), "!0 & !1 & 2 & !3 & 10 & 2+6+9+9");
 	}
 	
-	/**
-	 * Helper used to See if we are unObfuscated by checking for a known non-Obfuscated name
-	 * return true if unObfuscated (eclipse), false if obfuscated (Minecraft)
-	 * @param list
-	 */
-	private static boolean isUnObfuscated(Field[] fieldList, String desired){
-		for (int i = 0; i < fieldList.length; i++) {
-			if(fieldList[i].getName().equals(desired)){
-				return true;
-			}
-		}			
-		return false;
-	}
-	
-	/**
-	 * Helper used to See What the obfuscated names have changed to, so they can be set. Requires Compile + run in minecraft outside Eclipse
-	 * Is not usually used, just lookup in MCP, useful for confirming or exploring to make sure it's right
-	 * @param list
-	 */
-	private static void printFieldNamesandType(Field[] fieldList, String title){
-		System.out.println("******");
-		System.out.println("Searching " + title +" found "+ fieldList.length + " properties");
-		for (int i = 0; i < fieldList.length; i++) {
-			System.out.println("******");
-			System.out.println("Field "+ i +" is named " + fieldList[i].getName() + " of type " + fieldList[i].getGenericType());
-		}			
-		System.out.println("******");
-	}
+//	/**
+//	 * Helper used to See if we are unObfuscated by checking for a known non-Obfuscated name
+//	 * return true if unObfuscated (eclipse), false if obfuscated (Minecraft)
+//	 * @param list
+//	 */
+//	private static boolean isUnObfuscated(Field[] fieldList, String desired){
+//		for (int i = 0; i < fieldList.length; i++) {
+//			if(fieldList[i].getName().equals(desired)){
+//				return true;
+//			}
+//		}			
+//		return false;
+//	}
+//	
+//	/**
+//	 * Helper used to See What the obfuscated names have changed to, so they can be set. Requires Compile + run in minecraft outside Eclipse
+//	 * Is not usually used, just lookup in MCP, useful for confirming or exploring to make sure it's right
+//	 * @param list
+//	 */
+//	private static void printFieldNamesandType(Field[] fieldList, String title){
+//		System.out.println("******");
+//		System.out.println("Searching " + title +" found "+ fieldList.length + " properties");
+//		for (int i = 0; i < fieldList.length; i++) {
+//			System.out.println("******");
+//			System.out.println("Field "+ i +" is named " + fieldList[i].getName() + " of type " + fieldList[i].getGenericType());
+//		}			
+//		System.out.println("******");
+//	}
 }

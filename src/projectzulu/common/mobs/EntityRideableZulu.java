@@ -19,7 +19,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.common.Loader;
@@ -685,8 +685,8 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 
 		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
 			if(var3 == 0){
-				if(ItemBlockList.furPelt.isPresent()){
-					this.dropItem(ItemBlockList.furPelt.get().itemID, 1);
+				if(ItemList.furPelt.isPresent()){
+					this.dropItem(ItemList.furPelt.get().itemID, 1);
 				}
 			}else{
 				this.dropItem(Item.beefRaw.itemID,1);

@@ -1,10 +1,13 @@
 package projectzulu.common.world.BlockDataObjects;
 
+import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
+
 import java.util.Random;
 
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.DungeonHooks;
 
 public class ChestWithMeta extends BlockWithMeta{
@@ -24,7 +27,7 @@ public class ChestWithMeta extends BlockWithMeta{
 		world.setBlockTileEntity(position.posX, position.posY,position.posZ, tileEntityChest);
 		for (int slot = 0; slot < tileEntityChest.getSizeInventory(); slot++){
 			if( lootChance - random.nextInt(100) >= 0 ){
-				tileEntityChest.setInventorySlotContents(slot, DungeonHooks.getRandomDungeonLoot(random));
+				tileEntityChest.setInventorySlotContents(slot, ChestGenHooks.getOneItem(DUNGEON_CHEST, random));
 			}
 		}
 	}

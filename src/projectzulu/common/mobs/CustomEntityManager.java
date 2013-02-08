@@ -15,7 +15,7 @@ import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.ProjectZulu_Mobs;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.EntityCreeperBlossomPrimed;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
@@ -54,10 +54,10 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.scaleItem.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scaleItem.get()), 10); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+			if(ItemList.scaleItem.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scaleItem.get()), 10); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
 			CustomEntityList.instance.armadillo = Optional.of(customMobData);	
 		}
@@ -86,9 +86,9 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
 			CustomEntityList.instance.sandworm = Optional.of(customMobData);	
 		}
@@ -118,11 +118,11 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.scaleItem.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scaleItem.get()), 10); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.PoisonDroplet.meta()), 4);
+			if(ItemList.scaleItem.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scaleItem.get()), 10); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.PoisonDroplet.meta()), 4);
 			}
 			CustomEntityList.instance.lizard = Optional.of(customMobData);	
 		}
@@ -208,9 +208,9 @@ public enum CustomEntityManager {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.feather), 8);
 			customMobData.addLootToMob(new ItemStack(Item.chickenRaw), 10);
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
 			}
 			CustomEntityList.instance.vulture = Optional.of(customMobData);	
 		}
@@ -242,9 +242,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Block.wood.blockID, 1, 3), 15);
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Bark.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Bark.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
 			}
 			CustomEntityList.instance.treeEnt = Optional.of(customMobData);	
 		}
@@ -276,11 +276,11 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 15);
-			if(ItemBlockList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.furPelt.get()), 10); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Tusk.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 10); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Tusk.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.mammoth = Optional.of(customMobData);	
 		}
@@ -317,10 +317,10 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 5);
-			if(ItemBlockList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.furPelt.get()), 10); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 15); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 10); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 15); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
 			CustomEntityList.instance.fox = Optional.of(customMobData);	
 		}
@@ -351,11 +351,11 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 2);
-			if(ItemBlockList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.furPelt.get()), 10); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 5);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Tusk.meta()), 10);
+			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 10); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 5);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Tusk.meta()), 10);
 
 			}
 			CustomEntityList.instance.boar = Optional.of(customMobData);	
@@ -376,8 +376,8 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Ectoplasm.meta()), 5);
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Ectoplasm.meta()), 5);
 			}
 			CustomEntityList.instance.mimic = Optional.of(customMobData);	
 		}
@@ -422,11 +422,11 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scaleItem.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scaleItem.get()), 10); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Gill.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scaleItem.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scaleItem.get()), 10); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Gill.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.crocodile = Optional.of(customMobData);	
 		}
@@ -455,10 +455,10 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Gill.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.FrogLegs.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Gill.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.FrogLegs.meta()), 4);
 			}
 			CustomEntityList.instance.frog = Optional.of(customMobData);	
 		}
@@ -488,9 +488,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.feather), 8);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
 			CustomEntityList.instance.penguin = Optional.of(customMobData);	
 		}
@@ -524,11 +524,11 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.furPelt.get()), 8); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 8); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
 			CustomEntityList.instance.beaver = Optional.of(customMobData);	
 		}
@@ -563,11 +563,11 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.furPelt.get()), 8); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 8); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
 			CustomEntityList.instance.blackBear = Optional.of(customMobData);	
 		}
@@ -602,11 +602,11 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.furPelt.get()), 8); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 8); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.brownBear = Optional.of(customMobData);	
 		}
@@ -637,11 +637,11 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.furPelt.get()), 8); }
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 8); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.polarBear = Optional.of(customMobData);	
 		}
@@ -672,10 +672,10 @@ public enum CustomEntityManager {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
 			customMobData.addLootToMob(new ItemStack(Item.feather), 8);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
 			CustomEntityList.instance.ostrich = Optional.of(customMobData);	
 		}
@@ -705,10 +705,10 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Tusk.meta()), 8);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Tusk.meta()), 8);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.rhino = Optional.of(customMobData);	
 		}
@@ -742,10 +742,10 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.RabbitsFoot.meta()), 8);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.RabbitsFoot.meta()), 8);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
 			CustomEntityList.instance.rabbit = Optional.of(customMobData);	
 		}
@@ -874,10 +874,10 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.furPelt.get()), 8); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 8); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.gorilla = Optional.of(customMobData);	
 		}
@@ -907,10 +907,10 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.BlackLichen.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.giraffe = Optional.of(customMobData);	
 		}
@@ -940,10 +940,10 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Tusk.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Tusk.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.elephant = Optional.of(customMobData);	
 		}
@@ -978,9 +978,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.horseBeige = Optional.of(customMobData);	
 		}
@@ -1015,9 +1015,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.horseBlack = Optional.of(customMobData);	
 		}
@@ -1052,9 +1052,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.horseBrown = Optional.of(customMobData);	
 		}
@@ -1089,9 +1089,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.horseDarkBlack = Optional.of(customMobData);	
 		}
@@ -1126,9 +1126,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.horseDarkBrown = Optional.of(customMobData);	
 		}
@@ -1163,9 +1163,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.horseGrey = Optional.of(customMobData);	
 		}
@@ -1200,9 +1200,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.horseWhite = Optional.of(customMobData);	
 		}
@@ -1232,9 +1232,9 @@ public enum CustomEntityManager {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.chickenRaw), 10);
 			customMobData.addLootToMob(new ItemStack(Item.feather), 8);
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
 			}
 			CustomEntityList.instance.eagle = Optional.of(customMobData);	
 		}
@@ -1265,9 +1265,9 @@ public enum CustomEntityManager {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.chickenRaw), 10);
 			customMobData.addLootToMob(new ItemStack(Item.feather), 8);
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
 			}
 			CustomEntityList.instance.hornBill = Optional.of(customMobData);	
 		}
@@ -1297,9 +1297,9 @@ public enum CustomEntityManager {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.chickenRaw), 10);
 			customMobData.addLootToMob(new ItemStack(Item.feather), 8);
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Talon.meta()), 4);
 			}
 			CustomEntityList.instance.pelican = Optional.of(customMobData);	
 		}
@@ -1319,10 +1319,10 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.furPelt.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Ectoplasm.meta()), 4);
+			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Ectoplasm.meta()), 4);
 			}
 			CustomEntityList.instance.minotaur = Optional.of(customMobData);	
 		}
@@ -1342,8 +1342,8 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Ectoplasm.meta()), 4);
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Ectoplasm.meta()), 4);
 			}
 			CustomEntityList.instance.hauntedArmor = Optional.of(customMobData);	
 		}
@@ -1378,9 +1378,9 @@ public enum CustomEntityManager {
 		@Override
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 15); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Antennae.meta()), 1);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 15); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Antennae.meta()), 1);
 			}
 			CustomEntityList.instance.centipede = Optional.of(customMobData);	
 		}
@@ -1429,9 +1429,9 @@ public enum CustomEntityManager {
 		public void outputDataToList() {
 			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemBlockList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemBlockList.scrapMeat.get()), 10); }
-			if(ItemBlockList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemBlockList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
 			}
 			CustomEntityList.instance.horseRandom = Optional.of(customMobData);	
 		}

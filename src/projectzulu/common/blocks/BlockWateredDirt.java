@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -112,10 +112,10 @@ public class BlockWateredDirt extends Block{
         
         
         if(metadata == 3){
-        	if(ItemBlockList.waterDroplets.isPresent()){
-                ret.add(new ItemStack(ItemBlockList.waterDroplets.get()));
-                ret.add(new ItemStack(ItemBlockList.waterDroplets.get()));
-                ret.add(new ItemStack(ItemBlockList.waterDroplets.get()));
+        	if(ItemList.waterDroplets.isPresent()){
+                ret.add(new ItemStack(ItemList.waterDroplets.get()));
+                ret.add(new ItemStack(ItemList.waterDroplets.get()));
+                ret.add(new ItemStack(ItemList.waterDroplets.get()));
         	}
             ret.add(new ItemStack(Block.dirt));
             return ret;
@@ -127,10 +127,10 @@ public class BlockWateredDirt extends Block{
         }
         
         if(metadata == 7){
-        	if(ItemBlockList.waterDroplets.isPresent()){
-                ret.add(new ItemStack(ItemBlockList.waterDroplets.get()));
-                ret.add(new ItemStack(ItemBlockList.waterDroplets.get()));
-                ret.add(new ItemStack(ItemBlockList.waterDroplets.get()));
+        	if(ItemList.waterDroplets.isPresent()){
+                ret.add(new ItemStack(ItemList.waterDroplets.get()));
+                ret.add(new ItemStack(ItemList.waterDroplets.get()));
+                ret.add(new ItemStack(ItemList.waterDroplets.get()));
         	}
             ret.add(new ItemStack(Block.sand));
             return ret;

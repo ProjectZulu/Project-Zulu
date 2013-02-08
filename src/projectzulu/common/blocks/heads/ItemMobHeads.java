@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -68,11 +68,11 @@ public class ItemMobHeads extends ItemBlock{
 			if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack)){
 				return false;
 			}
-			else if (!ItemBlockList.mobHeads.get().canPlaceBlockAt(par3World, par4, par5, par6)){
+			else if (!BlockList.mobHeads.get().canPlaceBlockAt(par3World, par4, par5, par6)){
 				return false;
 			}
-			else if(ItemBlockList.mobHeads.isPresent()){
-				par3World.setBlockAndMetadataWithNotify(par4, par5, par6, ItemBlockList.mobHeads.get().blockID, par7);
+			else if(BlockList.mobHeads.isPresent()){
+				par3World.setBlockAndMetadataWithNotify(par4, par5, par6, BlockList.mobHeads.get().blockID, par7);
 				int var11 = 0;
 
 				if (par7 == 1){

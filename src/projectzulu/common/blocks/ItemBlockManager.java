@@ -1,23 +1,31 @@
 package projectzulu.common.blocks;
 
+import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
+
 import java.io.File;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.heads.BlockMobHeads;
 import projectzulu.common.blocks.heads.ItemMobHeads;
 import projectzulu.common.blocks.heads.TileEntityMobHeads;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
+import projectzulu.common.dungeon.BlockLimitedMobSpawner;
+import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
+import projectzulu.common.dungeon.TileEntityLimitedMobSpawnerRenderer;
 
 import com.google.common.base.Optional;
 
@@ -35,13 +43,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create(){
-			ItemBlockList.aloeVera = Optional.of(
+			BlockList.aloeVera = Optional.of(
 					(new BlockAloeVera(blockID, 0)).setHardness(0.0f).setStepSound(Block.soundGrassFootstep).setBlockName("Aloe Vera") );
 		}
 
 		@Override
 		protected void register(){
-			Block block = ItemBlockList.aloeVera.get();
+			Block block = BlockList.aloeVera.get();
 			GameRegistry.registerBlock(block, ItemAloeVera.class, this.toString().toLowerCase());
 			LanguageRegistry.instance().addStringLocalization("tile.Aloe Vera.base_1.name", "Aloe Vera Plant");
 		}
@@ -56,12 +64,12 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.wateredDirt = Optional.of((new BlockWateredDirt(blockID, 8)).setHardness(0.5f).setResistance(1.0f).setBlockName("Watered Dirt"));
+			BlockList.wateredDirt = Optional.of((new BlockWateredDirt(blockID, 8)).setHardness(0.5f).setResistance(1.0f).setBlockName("Watered Dirt"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.wateredDirt.get();
+			Block block = BlockList.wateredDirt.get();
 			GameRegistry.registerBlock(block, ItemWateredDirt.class, this.toString().toLowerCase());
 		}
 
@@ -75,13 +83,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.tumbleweed = Optional.of(
+			BlockList.tumbleweed = Optional.of(
 					(new BlockTumbleweed(blockID, 8)).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setBlockName("Tumbleweed"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.tumbleweed.get();
+			Block block = BlockList.tumbleweed.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Tumbleweed");			
 		}
 
@@ -95,14 +103,14 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.jasper = Optional.of((new BlockJasper(blockID, 32)).setHardness(1.0f).setResistance(1.0f).setBlockName("jasper"));
+			BlockList.jasper = Optional.of((new BlockJasper(blockID, 32)).setHardness(1.0f).setResistance(1.0f).setBlockName("jasper"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.jasper.get();
+			Block block = BlockList.jasper.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Jasper Block");
-			DungeonHooks.addDungeonLoot(new ItemStack(block), 5, 1, 1);
+			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(block), 5, 1, 1));
 		}
 
 		@Override
@@ -114,13 +122,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.palmTreeLog = Optional.of(
+			BlockList.palmTreeLog = Optional.of(
 					new BlockPalmTreeLog(blockID, 17).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setBlockName("Palm Tree Log"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.palmTreeLog.get();
+			Block block = BlockList.palmTreeLog.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Log");
 			OreDictionary.registerOre("log", new ItemStack(block));
 			OreDictionary.registerOre("logWood", new ItemStack(block));
@@ -137,13 +145,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.palmTreePlank = Optional.of(
+			BlockList.palmTreePlank = Optional.of(
 					new BlockPalmTreePlank(blockID, 18).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("palmTreePlank"));			
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.palmTreePlank.get();
+			Block block = BlockList.palmTreePlank.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Plank");
 			OreDictionary.registerOre("plankWood", new ItemStack(block));
 		}
@@ -159,13 +167,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.palmTreeDoubleSlab = Optional.of(
+			BlockList.palmTreeDoubleSlab = Optional.of(
 					(BlockZuluHalfSlab)new BlockZuluHalfStep(blockID, true).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("palmTreeDoubleSlab"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.palmTreeDoubleSlab.get();
+			Block block = BlockList.palmTreeDoubleSlab.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Double Slab");
 			OreDictionary.registerOre("slabWood", new ItemStack(block));
 			OreDictionary.registerOre("slabPalm", new ItemStack(block));
@@ -181,13 +189,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.palmTreeSlab = Optional.of(
+			BlockList.palmTreeSlab = Optional.of(
 					(BlockZuluHalfSlab)(new BlockZuluHalfStep(blockID, false)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setLightOpacity(0).setBlockName("palmTreeSlab"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.palmTreeSlab.get();
+			Block block = BlockList.palmTreeSlab.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Single Slab");
 			OreDictionary.registerOre("slabWood", new ItemStack(block));
 			OreDictionary.registerOre("slabPalm", new ItemStack(block));
@@ -202,9 +210,9 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			if(ItemBlockList.palmTreePlank.isPresent()){
-				ItemBlockList.palmTreeStairs = Optional.of(
-						new BlockZuluStairs(blockID, ItemBlockList.palmTreePlank.get(), 0).setBlockName("palmTreeStairs").setLightOpacity(0));
+			if(BlockList.palmTreePlank.isPresent()){
+				BlockList.palmTreeStairs = Optional.of(
+						new BlockZuluStairs(blockID, BlockList.palmTreePlank.get(), 0).setBlockName("palmTreeStairs").setLightOpacity(0));
 			}else{
 				ProjectZuluLog.warning("Palm Tree Planks were not Enabled. Disabling Palm Tree Stairs. You have done bad, and You should feel bad.");
 			}
@@ -212,8 +220,8 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void register() {
-			if(ItemBlockList.palmTreeStairs.isPresent()){
-				Block block = ItemBlockList.palmTreeStairs.get();
+			if(BlockList.palmTreeStairs.isPresent()){
+				Block block = BlockList.palmTreeStairs.get();
 				GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Stairs");
 				OreDictionary.registerOre("stairsWood", new ItemStack(block));
 				OreDictionary.registerOre("stairsPalm", new ItemStack(block));
@@ -229,13 +237,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.palmTreeLeaves = Optional.of(
+			BlockList.palmTreeLeaves = Optional.of(
 					(BlockPalmTreeLeaves)(new BlockPalmTreeLeaves(blockID, 19)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("Palm Tree Leaves"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.palmTreeLeaves.get();
+			Block block = BlockList.palmTreeLeaves.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Leaves");
 			OreDictionary.registerOre("leaves", new ItemStack(block));
 			OreDictionary.registerOre("leavesPalm", new ItemStack(block));
@@ -251,13 +259,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.palmTreeSapling = Optional.of(
+			BlockList.palmTreeSapling = Optional.of(
 					new BlockPalmTreeSapling(blockID, 16).setBlockName("Palm Tree Sapling"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.palmTreeSapling.get();
+			Block block = BlockList.palmTreeSapling.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Tree Sapling");
 			OreDictionary.registerOre("sapling", new ItemStack(block));
 			OreDictionary.registerOre("saplingPalm", new ItemStack(block));
@@ -272,13 +280,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.coconut = Optional.of(
+			BlockList.coconut = Optional.of(
 					new BlockCoconut(blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("Coconut"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.coconut.get();
+			Block block = BlockList.coconut.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Coconut");
 		}
 
@@ -291,13 +299,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.quickSand = Optional.of(
+			BlockList.quickSand = Optional.of(
 					new BlockQuickSand(blockID, 112).setHardness(1.2F).setStepSound(Block.soundSandFootstep).setBlockName("quickSand"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.quickSand.get();
+			Block block = BlockList.quickSand.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "QuickSand");
 		}
 
@@ -310,13 +318,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.nightBloom = Optional.of(
+			BlockList.nightBloom = Optional.of(
 					new BlockNightBloom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setBlockName("nightBloom"));
 		}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.nightBloom.get();
+			Block block = BlockList.nightBloom.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "NightBloom");
 		}
 
@@ -329,13 +337,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.creeperBlossom = Optional.of(
+			BlockList.creeperBlossom = Optional.of(
 					new BlockCreeperBlossom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setBlockName("creeperBlossom"));
 			}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.creeperBlossom.get();
+			Block block = BlockList.creeperBlossom.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Creeper Blosson");
 		}
 
@@ -348,13 +356,13 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			ItemBlockList.spike = Optional.of(
+			BlockList.spike = Optional.of(
 					 new BlockSpikes(blockID).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setBlockName("spikes"));
 			}
 
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.spike.get();
+			Block block = BlockList.spike.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Ivory Spikes");
 		}
 
@@ -367,13 +375,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.campfire = Optional.of(
+			BlockList.campfire = Optional.of(
 					new BlockCampfire(blockID).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setBlockName("campfire"));
 		}
 		
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.campfire.get();
+			Block block = BlockList.campfire.get();
 			GameRegistry.registerBlock(block, ItemCampFire.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Campfire");
 			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_1.name", "Log Campfire");
 			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_2.name", "Stone Campfire");
@@ -392,13 +400,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.mobHeads = Optional.of(
+			BlockList.mobHeads = Optional.of(
 					new BlockMobHeads(blockID, 1, TileEntityMobHeads.class).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setBlockName("mobHeads"));
 		}
 		
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.mobHeads.get();
+			Block block = BlockList.mobHeads.get();
 			GameRegistry.registerBlock(block, ItemMobHeads.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "mobHeads");
 			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_0.name", "Stuffed Finch");
 			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_1.name", "Alligator Head");
@@ -422,8 +430,7 @@ public enum ItemBlockManager {
 			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_17.name", "Elephant Head");
 			
 	        GameRegistry.registerTileEntity(TileEntityMobHeads.class, "TileEntityMobHead");   
-	        ProjectZulu_Core.proxy.registerTileEntitySkullSpecialRender();
-
+			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityMobHeads.class, "projectzulu.common.blocks.heads.TileEntityMobHeadsRenderer");
 		}
 
 		@Override
@@ -435,13 +442,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.tombstone = Optional.of(
+			BlockList.tombstone = Optional.of(
 					new BlockTombstone(blockID, TileEntityTombstone.class).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setBlockName("Tombstone"));
 		}
 		
 		@Override
 		protected void register() {
-			Block block = ItemBlockList.tombstone.get();
+			Block block = BlockList.tombstone.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Tombstone");
 			/* Register TileEntity Render */
 			Configuration tempConfig = new Configuration(  new File(ProjectZulu_Core.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.tempConfigFile));
@@ -458,9 +465,7 @@ public enum ItemBlockManager {
 				property.value = Boolean.toString(true);
 			}
 			tempConfig.save();
-	        ProjectZulu_Core.proxy.registerTileEntityTombstoneSpecialRender();
-
-			
+			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityTombstone.class, "projectzulu.common.blocks.TileEntityTombstoneRenderer");			
 		}
 
 		@Override
@@ -474,10 +479,10 @@ public enum ItemBlockManager {
 		protected void create() {
 			if(ProjectZulu_Core.replaceFlowerPot){
 				Block.blocksList[Block.flowerPot.blockID] = null;
-				ItemBlockList.universalFlowerPot = Optional.of(
+				BlockList.universalFlowerPot = Optional.of(
 						new BlockUniversalFlowerPot(Block.flowerPot.blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setBlockName("Flower Pot"));
 			}else{
-				ItemBlockList.universalFlowerPot = Optional.of(
+				BlockList.universalFlowerPot = Optional.of(
 						new BlockUniversalFlowerPot(blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab).setBlockName("Universal Flower Pot"));
 			}
 		}
@@ -485,34 +490,12 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			if(!ProjectZulu_Core.replaceFlowerPot){
-				Block block = ItemBlockList.universalFlowerPot.get();
+				Block block = BlockList.universalFlowerPot.get();
 				GameRegistry.registerBlock(block, ItemUniversalFlowerPot.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Universal Flower Pot");			
 			}
 	        GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");   
-	        ProjectZulu_Core.proxy.registerTileEntityUniversalFlowerPotSpecialRender();
+			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityUniversalFlowerPot.class, "projectzulu.common.blocks.TileEntityUniversalFlowerPotRenderer");
 
-		}
-
-		@Override
-		protected void loadCustomConfig(Configuration config) {}
-	},	
-	LimitedMobSpawner{
-		@Override
-		protected boolean isBlock() { return true;	}
-		
-		@Override
-		protected void create() {
-			ItemBlockList.limitedMobSpawner = Optional.of(
-					new BlockLimitedMobSpawner(blockID).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setBlockName("LimitedMobSpawner"));
-		}
-		
-		@Override
-		protected void register() {
-			Block block = ItemBlockList.limitedMobSpawner.get();
-			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "LimitedMobSpawner");
-			/* Register TileEntity Render */
-			GameRegistry.registerTileEntity(TileEntityLimitedMobSpawner.class, "TileEntityLimitedMobSpawner");
-	        ProjectZulu_Core.proxy.registerTileEntityLimitedMobSpawner();
 		}
 
 		@Override
@@ -524,13 +507,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.ankh = Optional.of(
+			ItemList.ankh = Optional.of(
 					new ItemAnkh(blockID).setItemName("Ankh"));
 			}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.ankh.get();
+			Item item = ItemList.ankh.get();
 			LanguageRegistry.addName(item, "Ankh");
 		}
 
@@ -543,16 +526,16 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			if(ItemBlockList.aloeVera.isPresent()){
-				ItemBlockList.aloeVeraSeeds = Optional.of(
-						new ItemAloeVeraSeeds(blockID, ItemBlockList.aloeVera.get().blockID).setItemName("Aloe Vera Seeds"));
+			if(BlockList.aloeVera.isPresent()){
+				ItemList.aloeVeraSeeds = Optional.of(
+						new ItemAloeVeraSeeds(blockID, BlockList.aloeVera.get().blockID).setItemName("Aloe Vera Seeds"));
 				}
 			}
 		
 		@Override
 		protected void register() {
-			if(ItemBlockList.aloeVera.isPresent()){
-				Item item = ItemBlockList.aloeVeraSeeds.get();
+			if(BlockList.aloeVera.isPresent()){
+				Item item = ItemList.aloeVeraSeeds.get();
 				LanguageRegistry.addName(item, "Aloe Vera Seeds");
 			}
 		}
@@ -566,13 +549,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.waterDroplets = Optional.of(
+			ItemList.waterDroplets = Optional.of(
 					new ItemFoodProjectZulu(blockID, 1, 0.6f, false, 142).setItemName("waterDroplets"));
 			}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.waterDroplets.get();
+			Item item = ItemList.waterDroplets.get();
 			LanguageRegistry.addName(item, "Water Droplets");
 		}
 
@@ -585,13 +568,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.coconutMilkFragment = Optional.of(
+			ItemList.coconutMilkFragment = Optional.of(
 					new ItemFoodProjectZulu(blockID, 2, 2.4f, false, 8).setItemName("coconutMilkFragment"));
 			}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.coconutMilkFragment.get();
+			Item item = ItemList.coconutMilkFragment.get();
 			LanguageRegistry.addName(item, "Coconut Milk Fragment");
 		}
 
@@ -604,13 +587,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.coconutItem = Optional.of(
+			ItemList.coconutItem = Optional.of(
 					new ItemCoconutItem(blockID, 4, false).setItemName("coconutItem"));
 			}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.coconutItem.get();
+			Item item = ItemList.coconutItem.get();
 			LanguageRegistry.addName(item, "Whole Coconut");
 		}
 
@@ -623,13 +606,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.coconutSeed = Optional.of(
+			ItemList.coconutSeed = Optional.of(
 					new ItemCoconutSeed(blockID, 6, false).setItemName("coconutSeed"));
 			}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.coconutSeed.get();
+			Item item = ItemList.coconutSeed.get();
 			LanguageRegistry.addName(item, "Coconut Seed");
 		}
 
@@ -642,13 +625,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.coconutShell = Optional.of(
+			ItemList.coconutShell = Optional.of(
 					new ItemCoconutShell(blockID, 7, false).setItemName("coconutShell"));
 			}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.coconutShell.get();
+			Item item = ItemList.coconutShell.get();
 			LanguageRegistry.addName(item, "Coconut Shell");
 		}
 
@@ -661,13 +644,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.scaleItem = Optional.of(
+			ItemList.scaleItem = Optional.of(
 					new ItemScale(blockID, 1, false).setItemName("scaleItem"));
 			}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.scaleItem.get();
+			Item item = ItemList.scaleItem.get();
 			LanguageRegistry.addName(item, "Scale");
 		}
 
@@ -680,13 +663,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.furPelt = Optional.of(
+			ItemList.furPelt = Optional.of(
 					new ItemScale(blockID, 23, false).setItemName("furPelt"));
 			}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.furPelt.get();
+			Item item = ItemList.furPelt.get();
 			LanguageRegistry.addName(item, "Fur Pelt");
 		}
 
@@ -699,13 +682,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.scrapMeat = Optional.of(
+			ItemList.scrapMeat = Optional.of(
 					new ItemFoodProjectZulu(blockID, 1, 1.0f, false, 11).setItemName("scrapMeat"));
 			}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.scrapMeat.get();
+			Item item = ItemList.scrapMeat.get();
 			LanguageRegistry.addName(item, "Scrap Meat");
 		}
 
@@ -718,13 +701,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.genericCraftingItems1 = Optional.of(
+			ItemList.genericCraftingItems1 = Optional.of(
 					new ItemGenerics(blockID, 10).setItemName("genericCraftingItems1"));
 		}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.genericCraftingItems1.get();	        
+			Item item = ItemList.genericCraftingItems1.get();	        
 			for (ItemGenerics.Properties property : ItemGenerics.Properties.values()) {
 				LanguageRegistry.addName(new ItemStack(item, 1, property.meta()), property.getDisplayName());
 			}
@@ -739,13 +722,13 @@ public enum ItemBlockManager {
 		
 		@Override
 		protected void create() {
-			ItemBlockList.structurePlacer = Optional.of(
+			ItemList.structurePlacer = Optional.of(
 					new ItemStructurePlacer(blockID).setItemName("structurePlacer"));
 		}
 		
 		@Override
 		protected void register() {
-			Item item = ItemBlockList.structurePlacer.get();
+			Item item = ItemList.structurePlacer.get();
 	        LanguageRegistry.addName(new ItemStack(item,1,0), "Oasis Structure Placer");
 	        LanguageRegistry.addName(new ItemStack(item,1,1), "Pyramid Structure Placer");
 	        LanguageRegistry.addName(new ItemStack(item,1,2), "Labyrinth Structure Placer");

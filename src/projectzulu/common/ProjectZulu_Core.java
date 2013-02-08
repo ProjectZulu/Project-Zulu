@@ -104,7 +104,6 @@ public class ProjectZulu_Core{
 	@Init
 	public void load(FMLInitializationEvent event){
 		proxy.registerRenderThings();
-		proxy.clientEventHooks();
 		
 		if(enableTestBlock){
 			testBlock = (new BlockTestBlock(testBlockID, 32)).setHardness(1.0f).setResistance(1.0f).setBlockName("testBlock");

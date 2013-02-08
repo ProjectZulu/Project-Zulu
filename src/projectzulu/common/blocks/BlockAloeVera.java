@@ -11,7 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
+import projectzulu.common.api.BlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -53,7 +55,7 @@ public class BlockAloeVera extends BlockFlower
 			int holdRand = par5Random.nextInt(probabilityOutOf);
 			//Growth is proportional to the lightlevel, more light more likely to advance
 			if( par1World.getLightBrightness(par2, par3, par4) - holdRand >= 0 ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, ItemBlockList.aloeVera.get().blockID, tempAVMeta+1);
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1);
 			}
 		}
 		
@@ -61,10 +63,10 @@ public class BlockAloeVera extends BlockFlower
 		if(tempAVMeta == 3 && waterRate > 1){
 			//If Meta Data is at 3 or then we check to see if we can grow flower above and tumbleweed
 			//Check if Air is above and the block below is not aloeVera. If So, place the top 'Flower Aloe Vera' above
-			if(par1World.getBlockId(par2, par3+1, par4) == 0 && par1World.getBlockId(par2, par3-1, par4) != ItemBlockList.aloeVera.get().blockID){
+			if(par1World.getBlockId(par2, par3+1, par4) == 0 && par1World.getBlockId(par2, par3-1, par4) != BlockList.aloeVera.get().blockID){
 				int holdRand = par5Random.nextInt(probabilityOutOf);
 				if( par1World.getLightBrightness(par2, par3+1, par4) - holdRand >= 0 ){
-					par1World.setBlockAndMetadataWithNotify(par2, par3+1, par4, ItemBlockList.aloeVera.get().blockID, 4);
+					par1World.setBlockAndMetadataWithNotify(par2, par3+1, par4, BlockList.aloeVera.get().blockID, 4);
 				}
 			}
 		}
@@ -76,16 +78,16 @@ public class BlockAloeVera extends BlockFlower
 		
 		
 		//Deals with the flower block, if its 3-8 and is above an Aloe Vera Block (The Bottom) then it needs to grow
-		if(tempAVMeta > 3 && tempAVMeta < 8 && waterRate > 1 && par1World.getBlockId(par2, par3-1, par4) == ItemBlockList.aloeVera.get().blockID){
+		if(tempAVMeta > 3 && tempAVMeta < 8 && waterRate > 1 && par1World.getBlockId(par2, par3-1, par4) == BlockList.aloeVera.get().blockID){
 			int holdRand = par5Random.nextInt(probabilityOutOf);
 			//Growth is proportional to the lightlevel, more light more likely to advance
 			if( par1World.getLightBrightness(par2, par3, par4) - holdRand >= 0 ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, ItemBlockList.aloeVera.get().blockID, tempAVMeta+1);
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1);
 			}			
 		}
 
 		//If Flower is at final stage, it needs to spawn tumbleweed and destroy itself
-		if(tempAVMeta == 8 && par1World.getBlockId(par2, par3, par4) == ItemBlockList.aloeVera.get().blockID && ItemBlockList.tumbleweed.isPresent()){
+		if(tempAVMeta == 8 && par1World.getBlockId(par2, par3, par4) == BlockList.aloeVera.get().blockID && BlockList.tumbleweed.isPresent()){
 			int holdRand = par5Random.nextInt(probabilityOutOf);
 			if(weedRate - holdRand >= 0){
 				//Check in 3*3 square For air to place tumbleweed, cannot be placed over water
@@ -94,7 +96,7 @@ public class BlockAloeVera extends BlockFlower
 				//Place Tumbleweed
 				if (suitableBlockLoc != null){
 					//Place Tumbleweed at that desired location
-					par1World.setBlockWithNotify((int)suitableBlockLoc.xCoord, (int)suitableBlockLoc.yCoord, (int)suitableBlockLoc.zCoord, ItemBlockList.tumbleweed.get().blockID);
+					par1World.setBlockWithNotify((int)suitableBlockLoc.xCoord, (int)suitableBlockLoc.yCoord, (int)suitableBlockLoc.zCoord, BlockList.tumbleweed.get().blockID);
 					//Remove Flower as Tumbleweed is dead plant I guess
 					par1World.setBlockWithNotify(par2, par3, par4, 0);
 				}
@@ -105,25 +107,25 @@ public class BlockAloeVera extends BlockFlower
 		//Check That Block Below is Sand and if Random replace with watered dirt stage 1
 		int holdRand = par5Random.nextInt(probabilityOutOf/2);
 		if(par1World.getBlockId(par2, par3-1, par4) == Block.dirt.blockID && waterRate - holdRand >= 0){
-			if( ItemBlockList.wateredDirt.isPresent() ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, ItemBlockList.wateredDirt.get().blockID, 0);
+			if( BlockList.wateredDirt.isPresent() ){
+				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 0);
 			}
 		}
 		if(par1World.getBlockId(par2, par3-1, par4) == Block.sand.blockID && waterRate - holdRand >= 0){
-			if( ItemBlockList.wateredDirt.isPresent() ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, ItemBlockList.wateredDirt.get().blockID, 4);
+			if( BlockList.wateredDirt.isPresent() ){
+				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 4);
 			}
 		}
 
 		
-		if(ItemBlockList.wateredDirt.isPresent() && par1World.getBlockId(par2, par3-1, par4) == ItemBlockList.wateredDirt.get().blockID && waterRate - holdRand >= 0){
+		if(BlockList.wateredDirt.isPresent() && par1World.getBlockId(par2, par3-1, par4) == BlockList.wateredDirt.get().blockID && waterRate - holdRand >= 0){
 			int tempMeta = par1World.getBlockMetadata(par2, par3-1, par4);
 			if(tempMeta != 3 &&  tempMeta != 7){
-				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, ItemBlockList.wateredDirt.get().blockID, tempMeta+1);
+				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, tempMeta+1);
 			}
 		}
 		super.updateTick(par1World, par2, par3, par4, par5Random);
-		par1World.scheduleBlockUpdate(par2, par3, par4, ItemBlockList.aloeVera.get().blockID, 225/2);
+		par1World.scheduleBlockUpdate(par2, par3, par4, BlockList.aloeVera.get().blockID, 225/2);
 	}
 
 	private Vec3 findSuitableBlockLoc(World par1World, int par2, int par3, int par4){
@@ -190,7 +192,7 @@ public class BlockAloeVera extends BlockFlower
 	
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-		par1World.scheduleBlockUpdate(par2, par3, par4, ItemBlockList.aloeVera.get().blockID, 4);
+		par1World.scheduleBlockUpdate(par2, par3, par4, BlockList.aloeVera.get().blockID, 4);
 		
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}
@@ -239,16 +241,16 @@ public class BlockAloeVera extends BlockFlower
 		
 		switch(par1) {
 		case 0: {
-			return ItemBlockList.aloeVera.get().blockID;
+			return BlockList.aloeVera.get().blockID;
 		}
 		case 1: {
-			return ItemBlockList.aloeVera.get().blockID;
+			return BlockList.aloeVera.get().blockID;
 		}
 		case 2: {
-			return ItemBlockList.aloeVera.get().blockID;
+			return BlockList.aloeVera.get().blockID;
 		}
 		case 3: {
-			return ItemBlockList.aloeVera.get().blockID;
+			return BlockList.aloeVera.get().blockID;
 		}
 		case 4: {
 			return Item.dyePowder.itemID;
@@ -279,17 +281,17 @@ public class BlockAloeVera extends BlockFlower
     {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         if (metadata < 3){
-        	if(ItemBlockList.aloeVeraSeeds.isPresent()){
-                ret.add(new ItemStack(ItemBlockList.aloeVeraSeeds.get()));
+        	if(ItemList.aloeVeraSeeds.isPresent()){
+                ret.add(new ItemStack(ItemList.aloeVeraSeeds.get()));
         	}
             return ret;
         }
         
         if(metadata == 3){
             ret.add(new ItemStack(this));
-        	if(ItemBlockList.aloeVeraSeeds.isPresent()){
-                ret.add(new ItemStack(ItemBlockList.aloeVeraSeeds.get()));
-                ret.add(new ItemStack(ItemBlockList.aloeVeraSeeds.get()));
+        	if(ItemList.aloeVeraSeeds.isPresent()){
+                ret.add(new ItemStack(ItemList.aloeVeraSeeds.get()));
+                ret.add(new ItemStack(ItemList.aloeVeraSeeds.get()));
         	}
             return ret;
         }
@@ -356,15 +358,15 @@ public class BlockAloeVera extends BlockFlower
     }
         
     protected boolean canThisPlantGrowOnThisBlockID(int i){
-    	if(ItemBlockList.wateredDirt.isPresent() && i == ItemBlockList.wateredDirt.get().blockID){
+    	if(BlockList.wateredDirt.isPresent() && i == BlockList.wateredDirt.get().blockID){
     		return true;
     	}
     	return i == Block.grass.blockID || i == Block.dirt.blockID || i == Block.tilledField.blockID 
-            		|| i == Block.sand.blockID || i == ItemBlockList.aloeVera.get().blockID;
+            		|| i == Block.sand.blockID || i == BlockList.aloeVera.get().blockID;
     }
     
     public boolean canSpawnOnThisBlockID(int i){
-    	if(ItemBlockList.wateredDirt.isPresent() && i == ItemBlockList.wateredDirt.get().blockID){
+    	if(BlockList.wateredDirt.isPresent() && i == BlockList.wateredDirt.get().blockID){
     		return true;
     	}
         return i == Block.grass.blockID || i == Block.dirt.blockID || i == Block.sand.blockID;

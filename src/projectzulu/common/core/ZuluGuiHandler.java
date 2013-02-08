@@ -1,5 +1,13 @@
-package projectzulu.common.blocks;
+package projectzulu.common.core;
 
+import projectzulu.common.blocks.ContainerUniversalFlowerPot;
+import projectzulu.common.blocks.GuiAnimalName;
+import projectzulu.common.blocks.GuiContainerUniversalFlowerPot;
+import projectzulu.common.blocks.GuiTombstone;
+import projectzulu.common.blocks.TileEntityTombstone;
+import projectzulu.common.blocks.TileEntityUniversalFlowerPot;
+import projectzulu.common.dungeon.GuiLimitedMobSpawner;
+import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

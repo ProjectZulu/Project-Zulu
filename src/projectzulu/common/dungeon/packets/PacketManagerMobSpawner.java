@@ -1,4 +1,4 @@
-package projectzulu.common.mobs.packets;
+package projectzulu.common.dungeon.packets;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -8,8 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import projectzulu.common.blocks.TileEntityLimitedMobSpawner;
 import projectzulu.common.core.PacketManager;
+import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketManagerMobSpawner extends PacketManager{

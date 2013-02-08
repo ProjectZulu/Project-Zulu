@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.dungeon;
 
 
 import net.minecraft.client.Minecraft;
@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.CharMatcher;
@@ -109,7 +110,7 @@ public class CreatureFields implements DataFields {
 				&& weightedChanceField.getText().length() > 0){
 			return true;
 		}else{
-			ProjectZuluLog.info("Rejecting Entry due to Invalid data");
+			ProjectZuluLog.info("Rejecting Mob Spawner Entry due to Invalid data");
 			return false;
 		}
 	}
@@ -141,7 +142,11 @@ public class CreatureFields implements DataFields {
 				if(creatureNameField.textboxKeyTyped(keyChar, keyID)){
 					return true;
 				}else if(weightedChanceField.textboxKeyTyped(keyChar, keyID)){
-					weightedChanceField.setText(CharMatcher.anyOf("0123456789").retainFrom(weightedChanceField.getText()));
+					String originalString = weightedChanceField.getText();
+					String newString = CharMatcher.anyOf("0123456789").retainFrom(weightedChanceField.getText());
+					if(!originalString.equals(newString)){
+						weightedChanceField.setText(newString);
+					}
 					return true;
 				}
 			}else{
@@ -172,8 +177,12 @@ public class CreatureFields implements DataFields {
             }
 			
 			if(par3 == 0 && searchForEntity.mousePressed(mc, par1, par2)){
-				spawnerGUI.closeList();
-				spawnerGUI.openList( displayAdvancedOptions ? ListType.Sound : ListType.Creature, elementID);
+				if(spawnerGUI.lastCalledElementID == elementID){
+					spawnerGUI.closeList();
+				}else{
+					spawnerGUI.closeList();
+					spawnerGUI.openList( displayAdvancedOptions ? ListType.Sound : ListType.Creature, elementID);
+				}
 				mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
 			}
 			
@@ -247,7 +256,7 @@ public class CreatureFields implements DataFields {
 	
 	private void bindTexture(Minecraft mc){
 		/* Setup Required Texture Sheet */
-        int textureID = mc.renderEngine.getTexture("/projectzuluresources/module_block/creaturelistgui.png");
+        int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(textureID);
 	}

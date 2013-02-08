@@ -11,7 +11,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -63,7 +64,7 @@ public class BlockCoconut extends BlockCocoa
         par4 += Direction.offsetZ[var5];
         int var6 = par1World.getBlockId(par2, par3, par4);
         int var7 = par1World.getBlockId(par2, par3+1, par4);
-        return (ItemBlockList.palmTreeLog.isPresent() && var6 == ItemBlockList.palmTreeLog.get().blockID && var7 != ItemBlockList.palmTreeLog.get().blockID) ;
+        return (BlockList.palmTreeLog.isPresent() && var6 == BlockList.palmTreeLog.get().blockID && var7 != BlockList.palmTreeLog.get().blockID) ;
 
     }
 
@@ -207,13 +208,13 @@ public class BlockCoconut extends BlockCocoa
     {
     	ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
     	if (metadata >= 8) {
-    		if( ItemBlockList.coconutItem.isPresent() ){
-    			ret.add(new ItemStack(ItemBlockList.coconutItem.get()));
+    		if( ItemList.coconutItem.isPresent() ){
+    			ret.add(new ItemStack(ItemList.coconutItem.get()));
     		}
 			return ret;
 		}else {
-    		if( ItemBlockList.coconutSeed.isPresent() ){
-    			ret.add(new ItemStack(ItemBlockList.coconutSeed.get()));
+    		if( ItemList.coconutSeed.isPresent() ){
+    			ret.add(new ItemStack(ItemList.coconutSeed.get()));
     		}
     		return ret;
 		}    	
@@ -225,8 +226,8 @@ public class BlockCoconut extends BlockCocoa
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
      */
     public int idPicked(World par1World, int par2, int par3, int par4){
-    	if(ItemBlockList.coconutSeed.isPresent()){
-            return ItemBlockList.coconutSeed.get().itemID;
+    	if(ItemList.coconutSeed.isPresent()){
+            return ItemList.coconutSeed.get().itemID;
     	}else{
     		return 0;
     	}

@@ -4,7 +4,7 @@ import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIFlyingWander;
 import projectzulu.common.mobs.entityai.EntityAIStayStill;
@@ -134,8 +134,8 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals{
 	 
 	 @Override
 	 protected void dropRareDrop(int par1) {
-			if(Loader.isModLoaded(DefaultProps.BlocksModId) && ItemBlockList.mobHeads.isPresent()){
-			 entityDropItem(new ItemStack(ItemBlockList.mobHeads.get().blockID,1,0), 1);
+			if(Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()){
+			 entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID,1,0), 1);
 		 }
 		 super.dropRareDrop(par1);
 	 }

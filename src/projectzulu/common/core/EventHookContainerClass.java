@@ -9,7 +9,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -22,7 +21,8 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.TileEntityTombstone;
 import projectzulu.common.mobs.EntityTreeEnt;
 import cpw.mods.fml.common.Loader;
@@ -107,16 +107,16 @@ public class EventHookContainerClass {
 				}
 
 				/* Increase Speed if Wearing Fur */
-				if(thePlayer.inventory.armorInventory[0] != null && ItemBlockList.furArmorBoot.isPresent() && thePlayer.inventory.armorInventory[0].itemID == ItemBlockList.furArmorBoot.get().itemID ){
+				if(thePlayer.inventory.armorInventory[0] != null && ItemList.furArmorBoot.isPresent() && thePlayer.inventory.armorInventory[0].itemID == ItemList.furArmorBoot.get().itemID ){
 					velocityModifier += 0.005;
 				}
-				if(thePlayer.inventory.armorInventory[1] != null && ItemBlockList.furArmorLeg.isPresent() && thePlayer.inventory.armorInventory[1].itemID == ItemBlockList.furArmorLeg.get().itemID){
+				if(thePlayer.inventory.armorInventory[1] != null && ItemList.furArmorLeg.isPresent() && thePlayer.inventory.armorInventory[1].itemID == ItemList.furArmorLeg.get().itemID){
 					velocityModifier += 0.005;
 				}
-				if(thePlayer.inventory.armorInventory[2] != null && ItemBlockList.furArmorChest.isPresent() && thePlayer.inventory.armorInventory[2].itemID == ItemBlockList.furArmorChest.get().itemID){
+				if(thePlayer.inventory.armorInventory[2] != null && ItemList.furArmorChest.isPresent() && thePlayer.inventory.armorInventory[2].itemID == ItemList.furArmorChest.get().itemID){
 					velocityModifier += 0.005;
 				}
-				if(thePlayer.inventory.armorInventory[3] != null && ItemBlockList.furArmorHead.isPresent() && thePlayer.inventory.armorInventory[3].itemID == ItemBlockList.furArmorHead.get().itemID){
+				if(thePlayer.inventory.armorInventory[3] != null && ItemList.furArmorHead.isPresent() && thePlayer.inventory.armorInventory[3].itemID == ItemList.furArmorHead.get().itemID){
 					velocityModifier += 0.005;
 				}
 
@@ -156,14 +156,14 @@ public class EventHookContainerClass {
 //		}
 		
 		if( (Loader.isModLoaded(DefaultProps.MobsModId) && ProjectZulu_Core.tombstoneOnDeath 
-				&& event.entity instanceof EntityPlayer && ItemBlockList.tombstone.isPresent() )){
+				&& event.entity instanceof EntityPlayer && BlockList.tombstone.isPresent() )){
 			EntityPlayer player = (EntityPlayer)event.entity;
 			World worldObj = player.worldObj;
 			
 			/* Check if Location is Valid for Tombstone */
 			if(worldObj.isAirBlock((int)player.posX, (int)player.posY, (int)player.posZ)){
 				/* Place a Tombstone */
-				worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ItemBlockList.tombstone.get().blockID);
+				worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, BlockList.tombstone.get().blockID);
 				TileEntity tileEntity = worldObj.getBlockTileEntity((int)player.posX, (int)player.posY, (int)player.posZ);
 				if(tileEntity != null && tileEntity instanceof TileEntityTombstone ){
 					((TileEntityTombstone)tileEntity).setSignString(event.source.getDeathMessage((EntityPlayer)event.entity));
@@ -182,16 +182,16 @@ public class EventHookContainerClass {
 			if(attackingEntity != null && event.source.getDamageType() == "mob"){
 				
 				double cactusDamage = 0;
-				if(hurtEntity.inventory.armorInventory[3] != null && ItemBlockList.cactusArmorHead.isPresent() && hurtEntity.inventory.armorInventory[3].itemID == ItemBlockList.cactusArmorHead.get().itemID){
+				if(hurtEntity.inventory.armorInventory[3] != null && ItemList.cactusArmorHead.isPresent() && hurtEntity.inventory.armorInventory[3].itemID == ItemList.cactusArmorHead.get().itemID){
 					cactusDamage+=0.5;
 				}
-				if(hurtEntity.inventory.armorInventory[2] != null && ItemBlockList.cactusArmorChest.isPresent() && hurtEntity.inventory.armorInventory[2].itemID == ItemBlockList.cactusArmorChest.get().itemID){
+				if(hurtEntity.inventory.armorInventory[2] != null && ItemList.cactusArmorChest.isPresent() && hurtEntity.inventory.armorInventory[2].itemID == ItemList.cactusArmorChest.get().itemID){
 					cactusDamage+=0.5;
 				}
-				if(hurtEntity.inventory.armorInventory[1] != null && ItemBlockList.cactusArmorLeg.isPresent() && hurtEntity.inventory.armorInventory[1].itemID == ItemBlockList.cactusArmorLeg.get().itemID){
+				if(hurtEntity.inventory.armorInventory[1] != null && ItemList.cactusArmorLeg.isPresent() && hurtEntity.inventory.armorInventory[1].itemID == ItemList.cactusArmorLeg.get().itemID){
 					cactusDamage+=0.5;
 				}
-				if(hurtEntity.inventory.armorInventory[0] != null && ItemBlockList.cactusArmorBoot.isPresent() && hurtEntity.inventory.armorInventory[0].itemID == ItemBlockList.cactusArmorBoot.get().itemID){
+				if(hurtEntity.inventory.armorInventory[0] != null && ItemList.cactusArmorBoot.isPresent() && hurtEntity.inventory.armorInventory[0].itemID == ItemList.cactusArmorBoot.get().itemID){
 					cactusDamage+=0.5;
 				}
 				

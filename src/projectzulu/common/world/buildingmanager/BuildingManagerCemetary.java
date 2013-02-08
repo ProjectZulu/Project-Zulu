@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.world.CellType;
 import projectzulu.common.world.MazeCell;
 import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
@@ -119,8 +119,8 @@ public class BuildingManagerCemetary extends BuildingManager{
 									placeRandomBlockWall(new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
 								}
 							}else {
-								if(5 - random.nextInt(100) >= 0 && ItemBlockList.tombstone.isPresent()){
-									HandleBlockPlacement(new BlockWithMeta(ItemBlockList.tombstone.get().blockID),
+								if(5 - random.nextInt(100) >= 0 && BlockList.tombstone.isPresent()){
+									HandleBlockPlacement(new BlockWithMeta(BlockList.tombstone.get().blockID),
 											new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
 								}else{
 									HandleBlockPlacement(new BlockWithMeta(0), new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
@@ -145,8 +145,8 @@ public class BuildingManagerCemetary extends BuildingManager{
 									placeRandomBlockWall(new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
 								}
 							}else {
-								if(5 - random.nextInt(100) >= 0 && ItemBlockList.tombstone.isPresent()){
-									HandleBlockPlacement(new BlockWithMeta(ItemBlockList.tombstone.get().blockID),
+								if(5 - random.nextInt(100) >= 0 && BlockList.tombstone.isPresent()){
+									HandleBlockPlacement(new BlockWithMeta(BlockList.tombstone.get().blockID),
 											new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
 								}else{
 									HandleBlockPlacement(new BlockWithMeta(0), new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
@@ -171,8 +171,8 @@ public class BuildingManagerCemetary extends BuildingManager{
 									placeRandomBlockWall(new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
 								}
 							}else {
-								if(5 - random.nextInt(100) >= 0 && ItemBlockList.tombstone.isPresent()){
-									HandleBlockPlacement(new BlockWithMeta(ItemBlockList.tombstone.get().blockID),
+								if(5 - random.nextInt(100) >= 0 && BlockList.tombstone.isPresent()){
+									HandleBlockPlacement(new BlockWithMeta(BlockList.tombstone.get().blockID),
 											new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
 								}else{
 									HandleBlockPlacement(new BlockWithMeta(0), new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
@@ -196,8 +196,8 @@ public class BuildingManagerCemetary extends BuildingManager{
 									placeRandomBlockWall(new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
 								}
 							}else {
-								if(5 - random.nextInt(100) >= 0 && ItemBlockList.tombstone.isPresent()){
-									HandleBlockPlacement(new BlockWithMeta(ItemBlockList.tombstone.get().blockID),
+								if(5 - random.nextInt(100) >= 0 && BlockList.tombstone.isPresent()){
+									HandleBlockPlacement(new BlockWithMeta(BlockList.tombstone.get().blockID),
 											new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);
 								}else{
 									HandleBlockPlacement(new BlockWithMeta(0), new ChunkCoordinates(position.posX, position.posY+j, position.posZ), random);

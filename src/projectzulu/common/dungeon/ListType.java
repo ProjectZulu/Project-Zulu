@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.dungeon;
 
 public enum ListType {
 	NONE,

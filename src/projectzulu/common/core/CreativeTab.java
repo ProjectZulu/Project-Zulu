@@ -2,7 +2,7 @@ package projectzulu.common.core;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 
 public class CreativeTab extends CreativeTabs{
 
@@ -12,8 +12,8 @@ public class CreativeTab extends CreativeTabs{
 	
 	@Override
 	public ItemStack getIconItemStack() {
-		if(ItemBlockList.campfire.isPresent()){
-			return new ItemStack(ItemBlockList.campfire.get(),1,3);
+		if(BlockList.campfire.isPresent()){
+			return new ItemStack(BlockList.campfire.get(),1,3);
 		}
 		return super.getIconItemStack();
 	}

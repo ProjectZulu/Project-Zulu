@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.dungeon;
 
 
 import net.minecraft.client.Minecraft;
@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.Tessellator;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
+
+import projectzulu.common.core.DefaultProps;
 
 import com.google.common.base.CharMatcher;
 
@@ -100,7 +102,14 @@ public class SpawnerFields implements DataFields{
 	
 	private boolean correctIfInvalid(GuiTextField guiTextField, char keyChar, int keyID){
 		if(guiTextField.textboxKeyTyped(keyChar, keyID)){
-			guiTextField.setText( guiTextField.getText().length() == 0? "0": CharMatcher.anyOf("0123456789").retainFrom(guiTextField.getText()));
+			String originalString = guiTextField.getText();
+			String numericString = CharMatcher.anyOf("0123456789").retainFrom(guiTextField.getText()).replaceAll("^0*", "");
+			if(!originalString.equals(numericString)){
+				guiTextField.setText(numericString);
+			}
+			if(guiTextField.getText().length() == 0 ){
+				guiTextField.setText("0");
+			}
 			return true;
 		}
 		return false;
@@ -139,7 +148,7 @@ public class SpawnerFields implements DataFields{
 					(int)(screenSize.getY() - backgroundSize.getY())/2 + 26+17, 4210752);
 			
 			/* Draw TextBox Background Objects */
-	        int textureID = mc.renderEngine.getTexture("/projectzuluresources/module_block/creaturelistgui.png");
+	        int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
 	        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	        mc.renderEngine.bindTexture(textureID);
 	        

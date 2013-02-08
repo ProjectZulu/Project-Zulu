@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -44,8 +44,8 @@ public class BlockZuluHalfStep extends BlockZuluHalfSlab {
      * Returns the ID of the items to drop on destruction.
      */
     public int idDropped(int par1, Random par2Random, int par3){
-    	if(ItemBlockList.palmTreeSlab.isPresent()) {
-    		return ItemBlockList.palmTreeSlab.get().blockID;
+    	if(BlockList.palmTreeSlab.isPresent()) {
+    		return BlockList.palmTreeSlab.get().blockID;
     	}else{
     		return 0;
     	}
@@ -56,7 +56,7 @@ public class BlockZuluHalfStep extends BlockZuluHalfSlab {
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
     protected ItemStack createStackedBlock(int par1){
-    	return new ItemStack(ItemBlockList.palmTreeSlab.get().blockID, 2, par1 & 7);
+    	return new ItemStack(BlockList.palmTreeSlab.get().blockID, 2, par1 & 7);
     }
 
     /**

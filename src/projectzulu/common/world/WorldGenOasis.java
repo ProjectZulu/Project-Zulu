@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 
 public class WorldGenOasis extends WorldGenerator
 {
@@ -16,7 +16,7 @@ public class WorldGenOasis extends WorldGenerator
 
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5) {
 
-    	int palmTreeLogID = ItemBlockList.palmTreeLog.get().blockID;
+    	int palmTreeLogID = BlockList.palmTreeLog.get().blockID;
 
 
     	int var7 = par3 + par2Random.nextInt(8) - par2Random.nextInt(8);
@@ -219,7 +219,7 @@ public class WorldGenOasis extends WorldGenerator
     }
     
     public void growTree(World par1World, int par2, int par3, int par4, Random par5Random){
-    	int palmTreeLogID = ItemBlockList.palmTreeLog.get().blockID;
+    	int palmTreeLogID = BlockList.palmTreeLog.get().blockID;
     	
     	if(!par1World.isRemote){
     		int height = par5Random.nextInt(3)+4;
@@ -306,7 +306,7 @@ public class WorldGenOasis extends WorldGenerator
     }
     
     public void spawnLeaves(World par1World, int par2, int par3, int par4, Random par5Random, int height){
-    	int palmTreeLeavesID = ItemBlockList.palmTreeLeaves.get().blockID;
+    	int palmTreeLeavesID = BlockList.palmTreeLeaves.get().blockID;
     	
     	//TODO: Add more Leave Spawn Templates
     	if (height + 1 >= 7 ) {

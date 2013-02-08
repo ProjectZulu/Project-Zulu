@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.world.StructureManager;
 import projectzulu.common.world.WorldGenOnSurface;
 import projectzulu.common.world.WorldGenReplaceTop;
@@ -53,31 +53,31 @@ public class WorldGeneratorZulu implements IWorldGenerator {
 			Xcoord = blockX + random.nextInt(16);
 			Ycoord = random.nextInt(60);
 			Zcoord = blockZ + random.nextInt(16);
-			if(ItemBlockList.aloeVera.isPresent()){
-				(new WorldGenOnSurface(ItemBlockList.aloeVera.get().blockID, 3, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			if(BlockList.aloeVera.isPresent()){
+				(new WorldGenOnSurface(BlockList.aloeVera.get().blockID, 3, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			}
 
 			//NightBloom Generation
 			Xcoord = blockX + random.nextInt(16);
 			Ycoord = random.nextInt(60);
 			Zcoord = blockZ + random.nextInt(16);
-			if(ItemBlockList.nightBloom.isPresent()){
-				(new WorldGenOnSurface(ItemBlockList.nightBloom.get().blockID, 2, 85)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			if(BlockList.nightBloom.isPresent()){
+				(new WorldGenOnSurface(BlockList.nightBloom.get().blockID, 2, 85)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			}
 			//Creeper Blossom Generation
 			Xcoord = blockX + random.nextInt(16);
 			Ycoord = random.nextInt(60);
 			Zcoord = blockZ + random.nextInt(16);
-			if(ItemBlockList.creeperBlossom.isPresent()){
-				(new WorldGenOnSurface(ItemBlockList.creeperBlossom.get().blockID, 1, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			if(BlockList.creeperBlossom.isPresent()){
+				(new WorldGenOnSurface(BlockList.creeperBlossom.get().blockID, 1, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			}
 
 			//Palm Tree Sapling Generation (For River, Not Oasis)
 			Xcoord = blockX + random.nextInt(16);
 			Ycoord = random.nextInt(60);
 			Zcoord = blockZ + random.nextInt(16);
-			if(ItemBlockList.palmTreeSapling.isPresent()){
-				(new WorldGenOnSurface(ItemBlockList.palmTreeSapling.get().blockID, 6, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			if(BlockList.palmTreeSapling.isPresent()){
+				(new WorldGenOnSurface(BlockList.palmTreeSapling.get().blockID, 6, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			}
 		}
 	}

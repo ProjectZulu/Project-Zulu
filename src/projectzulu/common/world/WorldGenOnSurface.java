@@ -6,7 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
+import projectzulu.common.api.ItemList;
 
 public class WorldGenOnSurface extends WorldGenerator
 {
@@ -36,21 +37,21 @@ public class WorldGenOnSurface extends WorldGenerator
     			BiomeGenBase biome = par1World.getBiomeGenForCoords(var7, var9);
     			if(par1World.isAirBlock(var7, var8, var9)){
     				
-    				if(ItemBlockList.aloeVera.isPresent() && plantBlockId == ItemBlockList.aloeVera.get().blockID && (i == Block.grass.blockID || i == Block.dirt.blockID || i == Block.sand.blockID)
+    				if(BlockList.aloeVera.isPresent() && plantBlockId == BlockList.aloeVera.get().blockID && (i == Block.grass.blockID || i == Block.dirt.blockID || i == Block.sand.blockID)
     						&& (biome == BiomeGenBase.desert || biome == BiomeGenBase.desertHills) ){
     					par1World.setBlock(var7, var8, var9, this.plantBlockId);
     				} 
     				
-    				if(ItemBlockList.palmTreeSapling.isPresent() && plantBlockId == ItemBlockList.palmTreeSapling.get().blockID && (i == Block.sand.blockID || i == Block.dirt.blockID || i == Block.grass.blockID)
+    				if(BlockList.palmTreeSapling.isPresent() && plantBlockId == BlockList.palmTreeSapling.get().blockID && (i == Block.sand.blockID || i == Block.dirt.blockID || i == Block.grass.blockID)
     						&& (biome==BiomeGenBase.beach || biome==BiomeGenBase.river) ){
     					par1World.setBlock(var7, var8, var9, this.plantBlockId);
     				} 
-    				if(ItemBlockList.nightBloom.isPresent() && plantBlockId == ItemBlockList.nightBloom.get().blockID && (i == Block.tilledField.blockID || i == Block.dirt.blockID 
-    						|| i == Block.grass.blockID || (ItemBlockList.aloeVera.isPresent() && i == ItemBlockList.aloeVera.get().blockID))
+    				if(BlockList.nightBloom.isPresent() && plantBlockId == BlockList.nightBloom.get().blockID && (i == Block.tilledField.blockID || i == Block.dirt.blockID 
+    						|| i == Block.grass.blockID || (BlockList.aloeVera.isPresent() && i == BlockList.aloeVera.get().blockID))
     						&& (biome==BiomeGenBase.plains || biome==BiomeGenBase.river) ){
     					par1World.setBlock(var7, var8, var9, this.plantBlockId);
     				} 
-    				if(ItemBlockList.creeperBlossom.isPresent() && plantBlockId == ItemBlockList.creeperBlossom.get().blockID && (i == Block.dirt.blockID || i == Block.grass.blockID)
+    				if(BlockList.creeperBlossom.isPresent() && plantBlockId == BlockList.creeperBlossom.get().blockID && (i == Block.dirt.blockID || i == Block.grass.blockID)
     						&& (biome==BiomeGenBase.forest || biome==BiomeGenBase.forestHills) ){
     					par1World.setBlock(var7, var8, var9, this.plantBlockId);
     				}

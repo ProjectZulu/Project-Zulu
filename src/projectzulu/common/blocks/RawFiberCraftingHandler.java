@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.common.ICraftingHandler;
 
@@ -33,7 +33,7 @@ public class RawFiberCraftingHandler implements ICraftingHandler{
 			if( craftMatrix.getStackInSlot(i) == null){
 				continue;
 			}
-			if(craftMatrix.getStackInSlot(i).getItem().itemID == ItemBlockList.furPelt.get().itemID && !contsinsFur){
+			if(craftMatrix.getStackInSlot(i).getItem().itemID == ItemList.furPelt.get().itemID && !contsinsFur){
 				contsinsFur = true;
 				furInSlot = i;
 				continue;
@@ -43,7 +43,7 @@ public class RawFiberCraftingHandler implements ICraftingHandler{
 
 		if(!contsinsFur) return;
 		
-		ItemStack itemToPlace = new ItemStack(ItemBlockList.genericCraftingItems1.get(), 2, ItemGenerics.Properties.RawFiber.meta());
+		ItemStack itemToPlace = new ItemStack(ItemList.genericCraftingItems1.get(), 2, ItemGenerics.Properties.RawFiber.meta());
 
 		if(furInSlot == 0){
 			craftMatrix.setInventorySlotContents(1, itemToPlace);

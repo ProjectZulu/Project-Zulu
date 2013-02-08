@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.dungeon;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,8 +18,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import projectzulu.common.core.PacketIDs;
-import projectzulu.common.mobs.packets.PacketManagerMobSpawner;
-import projectzulu.common.mobs.packets.PacketManagerPlaySound;
+import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
+import projectzulu.common.packets.core.PacketManagerPlaySound;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

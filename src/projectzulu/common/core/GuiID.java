@@ -1,6 +1,5 @@
-package projectzulu.common.blocks;
+package projectzulu.common.core;
 
-import projectzulu.common.core.ItemGenerics.Properties;
 import projectzulu.common.world.BlockDataObjects.MobSpawnerWithMeta;
 
 public enum GuiID {

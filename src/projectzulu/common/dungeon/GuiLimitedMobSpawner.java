@@ -1,8 +1,9 @@
-package projectzulu.common.blocks;
+package projectzulu.common.dungeon;
 
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +20,11 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
+import projectzulu.common.blocks.StringHelper;
+import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ObfuscationHelper;
+import projectzulu.common.core.Pair;
+import projectzulu.common.core.PairFullShortName;
 import projectzulu.common.core.ProjectZuluLog;
 //TODO: Scrolling Text in Creature List
 //projectzuluresources\module_block\mobspawnergui.png
@@ -35,12 +41,9 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 	int lastCalledElementID = -1;
 	private ListType currentListType = ListType.NONE;
 	GUISelectCreatureList scrollingList;
-	List<String> creatureListFullName = new ArrayList<String>();
-	List<String> creatureListDisplayName = new ArrayList<String>();
-
-	List<String> soundListFullName = new ArrayList<String>();
-	List<String> soundListDisplayName = new ArrayList<String>();
-
+	List<PairFullShortName<String, String>> creatureListName = new ArrayList<PairFullShortName<String, String>>();
+	List<PairFullShortName<String, String>> soundListName = new ArrayList<PairFullShortName<String, String>>();
+	
     /** Counts the number of screen updates. */
     private int updateCounter;
     
@@ -81,7 +84,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
         }
         switch (currentListType) {
         case Creature:
-        	scrollingList = new GUISelectCreatureList(this, creatureListFullName, creatureListDisplayName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+        	scrollingList = new GUISelectCreatureList(this, creatureListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
         	break;
 		default:
@@ -95,49 +98,45 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	switch (currentListType) {
     	case Creature:
     		/* Create List if Empty */
-    		if(creatureListFullName != null || creatureListFullName.isEmpty()){
+    		if(creatureListName == null || creatureListName.isEmpty()){
     			Iterator stringToClassIterator = EntityList.stringToClassMapping.keySet().iterator();
     	    	while(stringToClassIterator.hasNext()){
     	    		String stringKey = (String) stringToClassIterator.next();
     	    		if( EntityLiving.class.isAssignableFrom( ((Class)EntityList.stringToClassMapping.get(stringKey))) ){
-    	    			creatureListFullName.add(stringKey);
-    	    			creatureListDisplayName.add(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."));
+    	                creatureListName.add(new PairFullShortName<String, String>(
+    	                		stringKey,
+    	                		StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."))));
     	    		}
     	    	}
+    	    	Collections.sort(creatureListName);
     		}
-            scrollingList = new GUISelectCreatureList(this, creatureListFullName, creatureListDisplayName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+    		
+            scrollingList = new GUISelectCreatureList(this, creatureListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
 			break;
 		case Sound:
-			if(soundListFullName != null || soundListFullName.isEmpty()){
+			if(soundListName == null || soundListName.isEmpty()){
 				SoundPool soundPool = mc.sndManager.soundPoolSounds;
-				/* Grab "potionRequirements" : OBFSC: "m" : potionRequirements --> fields.csv --> joined.srg --> m */
-				try {
-					Field fieldSoundHash = SoundPool.class.getDeclaredField("nameToSoundPoolEntriesMapping");
-					fieldSoundHash.setAccessible(true);
-					HashMap soundHash = (HashMap) fieldSoundHash.get(soundPool);
+				
+				/* Grab "nameToSoundPoolEntriesMapping" : OBFSC: "m" : nameToSoundPoolEntriesMapping --> fields.csv --> joined.srg --> d */
+				HashMap soundHash;
+				if(ObfuscationHelper.isUnObfuscated(SoundPool.class.getDeclaredFields().clone(), "nameToSoundPoolEntriesMapping")){
+					soundHash = ObfuscationHelper.getFieldFromReflection("nameToSoundPoolEntriesMapping", soundPool, HashMap.class);
+				}else{
+					soundHash = ObfuscationHelper.getFieldFromReflection("d", soundPool, HashMap.class);
+				}
+				if(soundHash != null){
 					Iterator stringSoundIterator = soundHash.keySet().iterator();
 					while(stringSoundIterator.hasNext()){
 						String stringKey = (String) stringSoundIterator.next();
-						soundListFullName.add(stringKey);
-						soundListDisplayName.add(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."));
+						soundListName.add(new PairFullShortName<String, String>(
+								stringKey,
+								StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."))));
 					}
-				}catch (NoSuchFieldException e) {
-					ProjectZuluLog.severe("Obfuscation needs to be updated to access the SoundPool Hashmap. Please notify modmaker Immediately.");
-					e.printStackTrace();
-				}catch (IllegalArgumentException e) {
-					ProjectZuluLog.severe("Obfuscation needs to be updated to access the SoundPool Hashmap. Please notify modmaker Immediately.");
-					e.printStackTrace();
-				}catch (IllegalAccessException e) {
-					ProjectZuluLog.severe("Obfuscation needs to be updated to access the SoundPool Hashmap. Please notify modmaker Immediately.");
-					e.printStackTrace();
-				}catch (SecurityException e) {
-					ProjectZuluLog.severe("Obfuscation needs to be updated to access the SoundPool Hashmap. Please notify modmaker Immediately.");
-					e.printStackTrace();
+					Collections.sort(soundListName);
 				}
-
 			}
-            scrollingList = new GUISelectCreatureList(this, soundListFullName, soundListDisplayName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+            scrollingList = new GUISelectCreatureList(this, soundListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
 			break;
 		default:
@@ -260,7 +259,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     @Override
     public void drawDefaultBackground() {
     	super.drawDefaultBackground();
-        int textureID = mc.renderEngine.getTexture("/projectzuluresources/module_block/mobspawnergui.png");
+        int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"mobspawnergui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(textureID);
         int xCoord = (width - backgroundSize.getX()) / 2;

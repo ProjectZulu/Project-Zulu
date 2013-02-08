@@ -21,6 +21,7 @@ public abstract class PacketManager{
 		this.packetID = packetID;
 	}
 	
+	
 	/** Creates Packet with data from writePacketData
 	 * See Individual implementations to ensure that individual packetData has been loaded into the Packet
 	  */

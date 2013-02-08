@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.dungeon;
 
 import java.util.List;
 
@@ -7,35 +7,36 @@ import net.minecraft.client.renderer.Tessellator;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
+import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.PairFullShortName;
+
 public class GUISelectCreatureList extends GuiScrollingList{
 	
     private GuiLimitedMobSpawner parent;
-    private List<String> listFullNames;
-    private List<String> listDisplayNames;
+    private List<PairFullShortName<String,String>> listNames;
     ListType listType;
     int selectedElement = -1;
     
-    public GUISelectCreatureList(GuiLimitedMobSpawner parent, List<String> listFullNames, List<String> listDisplayNames, ListType listType, int listWidth, Point screenSize, Point backgroundSize){
+    public GUISelectCreatureList(GuiLimitedMobSpawner parent, List<PairFullShortName<String,String>> listNames, ListType listType, int listWidth, Point screenSize, Point backgroundSize){
     	super(parent.getMinecraft(),
     			listWidth, backgroundSize.getY()+50, // Width, Height
     			(screenSize.getY()-backgroundSize.getY())/2+15, (screenSize.getY()-backgroundSize.getY())/2+backgroundSize.getY()-20, // Top, Bottom, 
     			(screenSize.getX()-backgroundSize.getX())/2+264, // Left
     			parent.getMinecraft().fontRenderer.FONT_HEIGHT+8); // Element Height
     	this.parent = parent;
-    	this.listFullNames = listFullNames;
-    	this.listDisplayNames = listDisplayNames;
+    	this.listNames = listNames;
     	this.listType = listType;
     }
     
     @Override
     protected int getSize(){
-        return listFullNames.size();
+        return listNames.size();
     }
 
     @Override
     protected void elementClicked(int clickedIndex, boolean var2){
     	if(parent.lastCalledElementID != -1 && parent.getDataField(parent.lastCalledElementID) instanceof CreatureFields){
-			((CreatureFields)parent.getDataField(parent.lastCalledElementID)).setDataFromList(listFullNames.get(clickedIndex), listType);
+			((CreatureFields)parent.getDataField(parent.lastCalledElementID)).setDataFromList(listNames.get(clickedIndex).getFullName(), listType);
     		parent.closeList();
     	}
     	selectedElement = clickedIndex;
@@ -48,7 +49,7 @@ public class GUISelectCreatureList extends GuiScrollingList{
 
     @Override
     protected void drawBackground(){
-        int textureID = parent.getMinecraft().renderEngine.getTexture("/projectzuluresources/module_block/creaturelistgui.png");
+        int textureID = parent.getMinecraft().renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         parent.getMinecraft().renderEngine.bindTexture(textureID);
         int xCoord = (parent.width - parent.backgroundSize.getX()) / 2+260; //277
@@ -63,7 +64,7 @@ public class GUISelectCreatureList extends GuiScrollingList{
     
     @Override
     protected void drawSlot(int listIndex, int var2, int var3, int var4, Tessellator tessellator) {
-    	String renderString = listDisplayNames.get(listIndex); //(160 << 16) + (145 << 8) + 114)
+    	String renderString = listNames.get(listIndex).getShortName(); //(160 << 16) + (145 << 8) + 114)
     	parent.drawString(parent.getMinecraft().fontRenderer, renderString, this.left + 3 , var3 + 2, 16777215); //Red: 0xFF2222 //Blck: 4210752
     }
     
@@ -76,7 +77,6 @@ public class GUISelectCreatureList extends GuiScrollingList{
     	drawScrollOverlay(this.left, this.bottom, (screenSize.getY()-backgroundSize.getY())/2+backgroundSize.getY()-4, 255, 255); // Bot Overlay
 //    	GL11.glEnable(GL11.GL_DEPTH_TEST);
 //    	GL11.glDisable(GL11.GL_TEXTURE_2D);
-
     }
     
     private void drawScrollOverlay(int leftOffset, int topHeight, int botHeight, int alphaBottom, int alphaTop){

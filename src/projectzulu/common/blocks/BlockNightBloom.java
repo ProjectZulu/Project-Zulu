@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -142,6 +142,6 @@ public class BlockNightBloom extends BlockFlower
         
     protected boolean canThisPlantGrowOnThisBlockID(int i){
             return i == Block.grass.blockID || i == Block.dirt.blockID || i == Block.tilledField.blockID  
-            		|| ( ItemBlockList.wateredDirt.isPresent() && i == ItemBlockList.wateredDirt.get().blockID);
+            		|| ( BlockList.wateredDirt.isPresent() && i == BlockList.wateredDirt.get().blockID);
     }
 }

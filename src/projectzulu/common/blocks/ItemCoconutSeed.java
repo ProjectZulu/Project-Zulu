@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Blocks;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -40,7 +40,7 @@ public class ItemCoconutSeed extends Item{
 		int var11 = par3World.getBlockId(par4, par5, par6);
 		int var12 = par3World.getBlockMetadata(par4, par5, par6);
 
-		if (ItemBlockList.palmTreeLog.isPresent() && var11 == ItemBlockList.palmTreeLog.get().blockID && !par3World.isAirBlock(par4, par5, par6)){
+		if (BlockList.palmTreeLog.isPresent() && var11 == BlockList.palmTreeLog.get().blockID && !par3World.isAirBlock(par4, par5, par6)){
 			if (par7 == 0){
 				return false;
 			}
@@ -65,10 +65,10 @@ public class ItemCoconutSeed extends Item{
 				++par4;
 			}
 
-			if (par3World.isAirBlock(par4, par5, par6) && ItemBlockList.coconut.isPresent()){
+			if (par3World.isAirBlock(par4, par5, par6) && BlockList.coconut.isPresent()){
 				
-                int var13 = Block.blocksList[ItemBlockList.coconut.get().blockID].onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, 0);
-                par3World.setBlockAndMetadataWithNotify(par4, par5, par6, ItemBlockList.coconut.get().blockID, var13);
+                int var13 = Block.blocksList[BlockList.coconut.get().blockID].onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, 0);
+                par3World.setBlockAndMetadataWithNotify(par4, par5, par6, BlockList.coconut.get().blockID, var13);
 
                 if (!par2EntityPlayer.capabilities.isCreativeMode){
                     --par1ItemStack.stackSize;

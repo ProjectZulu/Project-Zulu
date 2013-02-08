@@ -1,9 +1,12 @@
 package projectzulu.common.core;
 
+import java.util.EnumSet;
+import java.util.HashMap;
+
+import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
-import projectzulu.common.mobs.packets.PacketManagerMobSpawner;
-import projectzulu.common.mobs.packets.PacketManagerPlaySound;
+import projectzulu.common.packets.core.PacketManagerPlaySound;
 
 
 public enum PacketIDs {
@@ -73,19 +76,23 @@ public enum PacketIDs {
 
 	public final int index;
 	public int index() { return index; }
-
+	private static final HashMap<Integer, PacketIDs> lookupEnum = new HashMap<Integer, PacketIDs>();
+	static {
+        for(PacketIDs packetID : EnumSet.allOf(PacketIDs.class))
+        	lookupEnum.put(packetID.index, packetID);
+    }
 	PacketIDs(int index) {
 		this.index = index;
 	}
 	
 	/* Return unknown if State Cannot be Found  */
 	public static PacketIDs getPacketIDbyIndex(int index){		
-		for (PacketIDs packetID : PacketIDs.values()) {
-			if(packetID.index == index){
-				return packetID;
-			}
+		PacketIDs value = lookupEnum.get(index);
+		if(value != null){
+			return value;
+		}else{
+			return unknown;
 		}
-		return unknown;
 	}
 	
 	public abstract PacketManager createPacketManager();

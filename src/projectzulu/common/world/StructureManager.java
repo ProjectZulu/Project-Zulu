@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.world.buildingmanager.BuildingManagerCemetary;
 import projectzulu.common.world.buildingmanager.BuildingManagerLabyrinth;
@@ -131,7 +131,7 @@ public enum StructureManager {
 			if(!doesTerrainFluctuateTooMuch(world, Xcoord, Ycoord, Zcoord, 3, 6)){
 				return false;
 			}
-			if( !ItemBlockList.palmTreeSapling.isPresent() || !ItemBlockList.palmTreeLog.isPresent() || !ItemBlockList.palmTreeLeaves.isPresent()){
+			if( !BlockList.palmTreeSapling.isPresent() || !BlockList.palmTreeLog.isPresent() || !BlockList.palmTreeLeaves.isPresent()){
 				return false;
 			}
 			

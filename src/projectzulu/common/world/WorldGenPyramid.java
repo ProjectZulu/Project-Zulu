@@ -1,5 +1,7 @@
 package projectzulu.common.world;
 
+import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
+
 import java.awt.Point;
 import java.util.Random;
 
@@ -10,6 +12,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.DungeonHooks;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
@@ -330,7 +333,7 @@ public class WorldGenPyramid extends WorldGenerator
 									for (int slot = 0; slot < chest.getSizeInventory(); slot++)
 									{
 										if( 15 - classRandom.nextInt(100) >= 0 ){
-											chest.setInventorySlotContents(slot, DungeonHooks.getRandomDungeonLoot(classRandom));
+											chest.setInventorySlotContents(slot, ChestGenHooks.getOneItem(DUNGEON_CHEST, classRandom));
 										}
 									}
 

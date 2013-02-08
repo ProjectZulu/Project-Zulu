@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.api.ItemBlockList;
+import projectzulu.common.api.ItemList;
 
 import com.google.common.base.Optional;
 
@@ -17,13 +17,13 @@ public enum ArmorManager {
 	ScaleArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.scaleArmorHead = Optional.of(
+			ItemList.scaleArmorHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,0)).setIconIndex(16).setItemName("Scale Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.scaleArmorHead.get();
+			Item item = ItemList.scaleArmorHead.get();
 			LanguageRegistry.addName(item, "Scale Helmet"); 
 		}
 	},
@@ -31,507 +31,507 @@ public enum ArmorManager {
 
 		@Override
 		protected void create(){
-			ItemBlockList.scaleArmorChest = Optional.of(
+			ItemList.scaleArmorChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,1)).setIconIndex(17).setItemName("Scale Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.scaleArmorChest.get();
+			Item item = ItemList.scaleArmorChest.get();
 			LanguageRegistry.addName(item, "Scale Chestplate"); 
 		}
 	},
 	ScaleArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.scaleArmorLeg = Optional.of(
+			ItemList.scaleArmorLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,2)).setIconIndex(18).setItemName("Scale Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.scaleArmorLeg.get();
+			Item item = ItemList.scaleArmorLeg.get();
 			LanguageRegistry.addName(item, "Scale Leggings"); 
 		}
 	},
 	ScaleArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.scaleArmorBoot = Optional.of(
+			ItemList.scaleArmorBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,3)).setIconIndex(19).setItemName("Scale Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.scaleArmorBoot.get();
+			Item item = ItemList.scaleArmorBoot.get();
 			LanguageRegistry.addName(item, "Scale Boots"); 
 		}
 	},
 	GoldScaleArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.goldScaleArmorHead = Optional.of(
+			ItemList.goldScaleArmorHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 0)).setIconIndex(48).setItemName("goldScale Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.goldScaleArmorHead.get();
+			Item item = ItemList.goldScaleArmorHead.get();
 			LanguageRegistry.addName(item, "Gold Scale Helmet"); 
 		}
 	},
 	GoldScaleArmorChest{
 		@Override
 		protected void create(){
-			ItemBlockList.goldScaleArmorChest = Optional.of(
+			ItemList.goldScaleArmorChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 1)).setIconIndex(49).setItemName("goldScale Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.goldScaleArmorChest.get();
+			Item item = ItemList.goldScaleArmorChest.get();
 			LanguageRegistry.addName(item, "Gold Scale Chestplate"); 
 		}
 	},
 	GoldScaleArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.goldScaleArmorLeg = Optional.of(
+			ItemList.goldScaleArmorLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 2)).setIconIndex(50).setItemName("goldScale Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.goldScaleArmorLeg.get();
+			Item item = ItemList.goldScaleArmorLeg.get();
 			LanguageRegistry.addName(item, "Gold Scale Leggings"); 
 		}
 	},
 	GoldScaleArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.goldScaleArmorBoot = Optional.of(
+			ItemList.goldScaleArmorBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 3)).setIconIndex(51).setItemName("goldScale Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.goldScaleArmorBoot.get();
+			Item item = ItemList.goldScaleArmorBoot.get();
 			LanguageRegistry.addName(item, "Gold Scale Boots"); 
 		}
 	},
 	IronScaleArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.ironScaleArmorHead = Optional.of(
+			ItemList.ironScaleArmorHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,0)).setIconIndex(52).setItemName("ironScale Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.ironScaleArmorHead.get();
+			Item item = ItemList.ironScaleArmorHead.get();
 			LanguageRegistry.addName(item, "Iron Plated Scale Helmet"); 
 		}
 	},
 	IronScaleArmorChest{
 		@Override
 		protected void create(){
-			ItemBlockList.ironScaleArmorChest = Optional.of(
+			ItemList.ironScaleArmorChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,1)).setIconIndex(53).setItemName("ironScale Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.ironScaleArmorChest.get();
+			Item item = ItemList.ironScaleArmorChest.get();
 			LanguageRegistry.addName(item, "Iron Plated Scale Chestplate"); 
 		}
 	},
 	IronScaleArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.ironScaleArmorLeg = Optional.of(
+			ItemList.ironScaleArmorLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,2)).setIconIndex(54).setItemName("ironScale Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.ironScaleArmorLeg.get();
+			Item item = ItemList.ironScaleArmorLeg.get();
 			LanguageRegistry.addName(item, "Iron Plated Scale Leggings"); 
 		}
 	},
 	IronScaleArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.ironScaleArmorBoot = Optional.of(
+			ItemList.ironScaleArmorBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,3)).setIconIndex(55).setItemName("ironScale Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.ironScaleArmorBoot.get();
+			Item item = ItemList.ironScaleArmorBoot.get();
 			LanguageRegistry.addName(item, "Iron Plated Scale Boots"); 
 		}
 	},
 	DiamondScaleArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.diamondScaleArmorHead = Optional.of(
+			ItemList.diamondScaleArmorHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,0)).setIconIndex(56).setItemName("diamondScale Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.diamondScaleArmorHead.get();
+			Item item = ItemList.diamondScaleArmorHead.get();
 			LanguageRegistry.addName(item, "Diamond Plated Scale Helmet"); 
 		}
 	},
 	DiamondScaleArmorChest{
 		@Override
 		protected void create(){
-			ItemBlockList.diamondScaleArmorChest = Optional.of(
+			ItemList.diamondScaleArmorChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,1)).setIconIndex(57).setItemName("diamondScale Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.diamondScaleArmorChest.get();
+			Item item = ItemList.diamondScaleArmorChest.get();
 			LanguageRegistry.addName(item, "Diamond Plated Scale Chestplate"); 
 		}
 	},
 	DiamondScaleArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.diamondScaleArmorLeg = Optional.of(
+			ItemList.diamondScaleArmorLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,2)).setIconIndex(58).setItemName("diamondScale Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.diamondScaleArmorLeg.get();
+			Item item = ItemList.diamondScaleArmorLeg.get();
 			LanguageRegistry.addName(item, "Diamond Plated Scale Leggings"); 
 		}
 	},
 	DiamondScaleArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.diamondScaleArmorBoot = Optional.of(
+			ItemList.diamondScaleArmorBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,3)).setIconIndex(59).setItemName("diamondScale Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.diamondScaleArmorBoot.get();
+			Item item = ItemList.diamondScaleArmorBoot.get();
 			LanguageRegistry.addName(item, "Diamond Plated Scale Boots"); 
 		}
 	},
 	WhiteClothArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.whiteClothHead = Optional.of(
+			ItemList.whiteClothHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,0)).setIconIndex(32).setItemName("whiteCloth Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.whiteClothHead.get();
+			Item item = ItemList.whiteClothHead.get();
 			LanguageRegistry.addName(item, "White Cloth Helmet"); 
 		}
 	},
 	WhiteClothArmorChest{
 		@Override
 		protected void create(){
-			ItemBlockList.whiteClothChest = Optional.of(
+			ItemList.whiteClothChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,1)).setIconIndex(33).setItemName("whiteCloth Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.whiteClothChest.get();
+			Item item = ItemList.whiteClothChest.get();
 			LanguageRegistry.addName(item, "White Cloth Chestplate"); 
 		}
 	},
 	WhiteClothArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.whiteClothLeg = Optional.of(
+			ItemList.whiteClothLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,2)).setIconIndex(34).setItemName("whiteCloth Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.whiteClothLeg.get();
+			Item item = ItemList.whiteClothLeg.get();
 			LanguageRegistry.addName(item, "White Cloth Leggings"); 
 		}
 	},
 	WhiteClothArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.whiteClothBoot = Optional.of(
+			ItemList.whiteClothBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,3)).setIconIndex(35).setItemName("whiteCloth Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.whiteClothBoot.get();
+			Item item = ItemList.whiteClothBoot.get();
 			LanguageRegistry.addName(item, "White Cloth Boots"); 
 		}
 	},
 	RedClothArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.redClothHead = Optional.of(
+			ItemList.redClothHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,0)).setIconIndex(36).setItemName("redCloth Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.redClothHead.get();
+			Item item = ItemList.redClothHead.get();
 			LanguageRegistry.addName(item, "Red Cloth Helmet"); 
 		}
 	},
 	RedClothArmorChest{
 		@Override
 		protected void create(){
-			ItemBlockList.redClothChest = Optional.of(
+			ItemList.redClothChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,1)).setIconIndex(37).setItemName("redCloth Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.redClothChest.get();
+			Item item = ItemList.redClothChest.get();
 			LanguageRegistry.addName(item, "Red Cloth Chestplate"); 
 		}
 	},
 	RedClothArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.redClothLeg = Optional.of(
+			ItemList.redClothLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,2)).setIconIndex(38).setItemName("redCloth Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.redClothLeg.get();
+			Item item = ItemList.redClothLeg.get();
 			LanguageRegistry.addName(item, "Red Cloth Leggings"); 
 		}
 	},
 	RedClothArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.redClothBoot = Optional.of(
+			ItemList.redClothBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,3)).setIconIndex(39).setItemName("redCloth Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.redClothBoot.get();
+			Item item = ItemList.redClothBoot.get();
 			LanguageRegistry.addName(item, "Red Cloth Boots"); 
 		}
 	},
 	GreenClothArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.greenClothHead = Optional.of(
+			ItemList.greenClothHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,0)).setIconIndex(40).setItemName("greenCloth Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.greenClothHead.get();
+			Item item = ItemList.greenClothHead.get();
 			LanguageRegistry.addName(item, "Green Cloth Helmet"); 
 		}
 	},
 	GreenClothArmorChest{
 		@Override
 		protected void create(){
-			ItemBlockList.greenClothChest = Optional.of(
+			ItemList.greenClothChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,1)).setIconIndex(41).setItemName("greenCloth Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.greenClothChest.get();
+			Item item = ItemList.greenClothChest.get();
 			LanguageRegistry.addName(item, "Green Cloth Chestplate"); 
 		}
 	},
 	GreenClothArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.greenClothLeg = Optional.of(
+			ItemList.greenClothLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,2)).setIconIndex(42).setItemName("greenCloth Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.greenClothLeg.get();
+			Item item = ItemList.greenClothLeg.get();
 			LanguageRegistry.addName(item, "Green Cloth Leggings"); 
 		}
 	},
 	GreenClothArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.greenClothBoot = Optional.of(
+			ItemList.greenClothBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,3)).setIconIndex(43).setItemName("greenCloth Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.greenClothBoot.get();
+			Item item = ItemList.greenClothBoot.get();
 			LanguageRegistry.addName(item, "Green Cloth Boots"); 
 		}
 	},
 	BlueClothArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.blueClothHead = Optional.of(
+			ItemList.blueClothHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,0)).setIconIndex(44).setItemName("blueCloth Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.blueClothHead.get();
+			Item item = ItemList.blueClothHead.get();
 			LanguageRegistry.addName(item, "Blue Cloth Helmet"); 
 		}
 	},
 	BlueClothArmorChest{
 		@Override
 		protected void create(){
-			ItemBlockList.blueClothChest = Optional.of(
+			ItemList.blueClothChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,1)).setIconIndex(45).setItemName("blueCloth Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.blueClothChest.get();
+			Item item = ItemList.blueClothChest.get();
 			LanguageRegistry.addName(item, "Blue Cloth Chestplate"); 
 		}
 	},
 	BlueClothArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.blueClothLeg = Optional.of(
+			ItemList.blueClothLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,2)).setIconIndex(46).setItemName("blueCloth Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.blueClothLeg.get();
+			Item item = ItemList.blueClothLeg.get();
 			LanguageRegistry.addName(item, "Blue Cloth Leggings"); 
 		}
 	},
 	BlueClothArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.blueClothBoot = Optional.of(
+			ItemList.blueClothBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,3)).setIconIndex(47).setItemName("blueCloth Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.blueClothBoot.get();
+			Item item = ItemList.blueClothBoot.get();
 			LanguageRegistry.addName(item, "Blue Cloth Boots"); 
 		}
 	},
 	CactusClothArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.cactusArmorHead = Optional.of(
+			ItemList.cactusArmorHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,0)).setIconIndex(60).setItemName("CactusCloth Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.cactusArmorHead.get();
+			Item item = ItemList.cactusArmorHead.get();
 			LanguageRegistry.addName(item, "Cactus Cloth Helmet"); 
 		}
 	},
 	CactusClothArmorChest{
 		@Override
 		protected void create(){
-			ItemBlockList.cactusArmorChest = Optional.of(
+			ItemList.cactusArmorChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,1)).setIconIndex(61).setItemName("CactusCloth Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.cactusArmorChest.get();
+			Item item = ItemList.cactusArmorChest.get();
 			LanguageRegistry.addName(item, "Cactus Cloth Chestplate"); 
 		}
 	},
 	CactusClothArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.cactusArmorLeg = Optional.of(
+			ItemList.cactusArmorLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,2)).setIconIndex(62).setItemName("CactusCloth Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.cactusArmorLeg.get();
+			Item item = ItemList.cactusArmorLeg.get();
 			LanguageRegistry.addName(item, "Cactus Cloth Leggings"); 
 		}
 	},
 	CactusClothArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.cactusArmorBoot = Optional.of(
+			ItemList.cactusArmorBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,3)).setIconIndex(63).setItemName("CactusCloth Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.cactusArmorBoot.get();
+			Item item = ItemList.cactusArmorBoot.get();
 			LanguageRegistry.addName(item, "Cactus Cloth Boots"); 
 		}
 	},
 	FurArmorHead{
 		@Override
 		protected void create(){
-			ItemBlockList.furArmorHead = Optional.of(
+			ItemList.furArmorHead = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,0)).setIconIndex(64).setItemName("furCloth Helmet"));
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.furArmorHead.get();
+			Item item = ItemList.furArmorHead.get();
 			LanguageRegistry.addName(item, "Fur Cloth Helmet"); 
 		}
 	},
 	FurArmorChest{
 		@Override
 		protected void create(){
-			ItemBlockList.furArmorChest = Optional.of(
+			ItemList.furArmorChest = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,1)).setIconIndex(65).setItemName("furCloth Chestplate"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.furArmorChest.get();
+			Item item = ItemList.furArmorChest.get();
 			LanguageRegistry.addName(item, "Fur Cloth Chestplate"); 
 		}
 	},
 	FurArmorLeg{
 		@Override
 		protected void create(){
-			ItemBlockList.furArmorLeg = Optional.of(
+			ItemList.furArmorLeg = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,2)).setIconIndex(66).setItemName("furCloth Leggings"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.furArmorLeg.get();
+			Item item = ItemList.furArmorLeg.get();
 			LanguageRegistry.addName(item, "Fur Cloth Leggings"); 
 		}
 	},
 	FurArmorBoot{
 		@Override
 		protected void create(){
-			ItemBlockList.furArmorBoot = Optional.of(
+			ItemList.furArmorBoot = Optional.of(
 					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,3)).setIconIndex(67).setItemName("furCloth Boots"));	
 		}
 
 		@Override
 		protected void register(){
-			Item item = ItemBlockList.furArmorBoot.get();
+			Item item = ItemList.furArmorBoot.get();
 			LanguageRegistry.addName(item, "Fur Cloth Boots"); 
 		}
 	}
