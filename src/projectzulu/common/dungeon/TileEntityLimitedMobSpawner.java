@@ -18,6 +18,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import projectzulu.common.core.PacketIDs;
+import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
 import projectzulu.common.packets.core.PacketManagerPlaySound;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -198,9 +199,11 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
                             this.worldObj.spawnEntityInWorld(var13);
                             this.worldObj.playAuxSFX(2004, this.xCoord, this.yCoord, this.zCoord, 0);
                             spawnedEntities++;
-                            PacketManagerPlaySound packetManager = (PacketManagerPlaySound) PacketIDs.playSound.createPacketManager();
-                            packetManager.setPacketData(xCoord, yCoord, zCoord, spawnerTags.spawnSound);
-                            PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 64, worldObj.getWorldInfo().getDimension(),  packetManager.createPacket());
+                            if(spawnerTags != null){
+                                PacketManagerPlaySound packetManager = (PacketManagerPlaySound) PacketIDs.playSound.createPacketManager();
+                                packetManager.setPacketData(xCoord, yCoord, zCoord, spawnerTags.spawnSound);
+                                PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 64, worldObj.getWorldInfo().getDimension(),  packetManager.createPacket());
+                            }
                             if (var11 != null){
                                 var11.spawnExplosionParticle();
                             }
