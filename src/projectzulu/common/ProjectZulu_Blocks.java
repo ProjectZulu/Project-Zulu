@@ -4,13 +4,11 @@ import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
 
 import java.io.File;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
@@ -20,7 +18,6 @@ import projectzulu.common.blocks.ItemBlockRecipeManager;
 import projectzulu.common.blocks.RenderCampFire;
 import projectzulu.common.blocks.RenderSpike;
 import projectzulu.common.blocks.RenderUniversalFlowerPot;
-import projectzulu.common.core.CreativeTab;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
@@ -50,7 +47,6 @@ public class ProjectZulu_Blocks {
 	public static int getNextDefaultBlockID(){ return defaultBlockID++; }
 	private static int defaultItemID = 9000;
 	public static int getNextDefaultItemID(){ return defaultItemID++; }
-	public static final CreativeTabs projectZuluCreativeTab = new CreativeTab(CreativeTabs.creativeTabArray.length, "projectZuluTab");
 
 	/*Armor Indexes*/
 	public static int scaleIndex;

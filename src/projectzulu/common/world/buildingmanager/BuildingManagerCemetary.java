@@ -11,9 +11,9 @@ import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.world.CellType;
 import projectzulu.common.world.MazeCell;
-import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
 import projectzulu.common.world.architects.Architect;
 import projectzulu.common.world.architects.ArchitectCemetary;
+import projectzulu.common.world.dataobjects.BlockWithMeta;
 
 public class BuildingManagerCemetary extends BuildingManager{
 	

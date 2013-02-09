@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,7 +15,7 @@ public class BlockPalmTreePlank extends Block
     public BlockPalmTreePlank(int par1, int par2)
     {
         super(par1, par2, Material.wood);
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
     }
     
     @SideOnly(Side.CLIENT)

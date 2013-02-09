@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,7 +24,7 @@ public class ItemAloeVeraSeeds extends Item
     {
         super(par1);
         this.blockType = par2;
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         this.iconIndex = 2;
     }
     

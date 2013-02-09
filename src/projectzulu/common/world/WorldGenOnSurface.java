@@ -7,7 +7,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.api.ItemList;
 
 public class WorldGenOnSurface extends WorldGenerator
 {

@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
@@ -17,7 +17,7 @@ public class ItemCoconutSeed extends Item{
 		super(par1);
 		maxStackSize = 12;
 		setMaxDamage(5);
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		bFull3D = par3bool;
 		this.setIconIndex(par2);
 	}

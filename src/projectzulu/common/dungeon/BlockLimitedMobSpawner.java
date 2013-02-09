@@ -2,16 +2,13 @@ package projectzulu.common.dungeon;
 
 import java.util.Random;
 
-import projectzulu.common.ProjectZulu_Blocks;
-import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.core.GuiID;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.core.GuiID;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -19,7 +16,7 @@ public class BlockLimitedMobSpawner extends BlockContainer{
 	
     public BlockLimitedMobSpawner(int blockID){
         super(blockID, Material.rock);
-        setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         this.blockIndexInTexture = 65;
     }
     

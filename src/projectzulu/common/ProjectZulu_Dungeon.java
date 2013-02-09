@@ -2,7 +2,6 @@ package projectzulu.common;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;

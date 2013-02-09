@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,7 +18,7 @@ public class ItemAnkh extends Item{
 		super(i);
 		maxStackSize = 1;
 		setMaxDamage(200);
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		bFull3D = true;
 		this.iconIndex = 0;
 	}

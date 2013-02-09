@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.ProjectZulu_Core;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -78,7 +78,7 @@ public class ItemGenerics extends Item{
 	public ItemGenerics(int par1, int par2) {
 		super(par1);
 		this.setIconIndex(par2);
-		this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+		this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		setHasSubtypes(true);
 	}
 	

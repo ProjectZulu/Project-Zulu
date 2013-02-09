@@ -1,14 +1,14 @@
-package projectzulu.common.world.BlockDataObjects;
+package projectzulu.common.world.dataobjects;
 
 import java.util.Random;
 
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
-import projectzulu.common.mobs.EntityHauntedArmor;
+import projectzulu.common.mobs.EntityMimic;
 
-public class HauntedArmorWithMeta extends BlockWithMeta{
+public class MimicWithMeta extends BlockWithMeta{
 	
-	public HauntedArmorWithMeta() {
+	public MimicWithMeta() {
 		super(-1);
 	}
 	
@@ -20,11 +20,10 @@ public class HauntedArmorWithMeta extends BlockWithMeta{
 			world.setBlock(position.posX, position.posY, position.posZ, 0);
 			
 			/* Spawn Mimic */
-			EntityHauntedArmor mob = new EntityHauntedArmor(world, position.posX+0.5, position.posY, position.posZ+0.5, true);
-			mob.initCreature();
-			world.spawnEntityInWorld(mob);
-
+			EntityMimic entityMimic = new EntityMimic(world, position.posX+0.5, position.posY, position.posZ+0.5, true);
+			world.spawnEntityInWorld(entityMimic);
 		}
-	}
+			
 
+	}
 }

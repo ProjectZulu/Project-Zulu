@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import projectzulu.common.world.CellIndexDirection;
-import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
 import projectzulu.common.world.blueprints.Blueprint;
+import projectzulu.common.world.dataobjects.BlockWithMeta;
 
 /**
  * This Class Is Responsible for Supplying Individual Buildings to the BuildingManager

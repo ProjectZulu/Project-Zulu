@@ -2,7 +2,7 @@ package projectzulu.common.blocks;
 
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
-import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,7 +39,7 @@ public class ItemScaleArmor extends ItemArmor
         this.damageReduceAmount = par2EnumArmorMaterial.getDamageReductionAmount(par4);
         this.setMaxDamage(par2EnumArmorMaterial.getDurability(par4));
         this.maxStackSize = 1;
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
     }
 
     //Adds Custom Item png for Icons?

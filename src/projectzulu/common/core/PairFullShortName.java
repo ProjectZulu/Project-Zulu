@@ -1,6 +1,5 @@
 package projectzulu.common.core;
 
-import java.util.Comparator;
 
 /**
  * For usage see: {@link Pair}

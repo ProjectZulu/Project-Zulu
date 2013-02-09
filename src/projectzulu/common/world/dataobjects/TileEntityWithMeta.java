@@ -1,4 +1,4 @@
-package projectzulu.common.world.BlockDataObjects;
+package projectzulu.common.world.dataobjects;
 
 import java.util.Random;
 

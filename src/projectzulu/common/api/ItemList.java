@@ -1,6 +1,5 @@
 package projectzulu.common.api;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import com.google.common.base.Optional;

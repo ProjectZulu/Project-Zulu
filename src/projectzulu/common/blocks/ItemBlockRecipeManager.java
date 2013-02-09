@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;

@@ -1,6 +1,5 @@
 package projectzulu.common.core;
 
-import projectzulu.common.world.BlockDataObjects.MobSpawnerWithMeta;
 
 public enum GuiID {
 	Tombstone(0),

@@ -37,10 +37,6 @@ XCOPY forge\mcp\reobf\minecraft\projectzulu forge\mcp\reobf\minecraft\SETUP\Proj
 echo Copy Project Zulu into Core Module in Setup
 XCOPY forge\mcp\reobf\minecraft\projectzulu forge\mcp\reobf\minecraft\SETUP\ProjectZuluCore\projectzulu /E /I /Q /y
 
-echo Copy Code Buried In Vanilla Packages
-XCOPY forge\mcp\reobf\minecraft\net forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\net /E /I /Q /y
-XCOPY forge\mcp\reobf\minecraft\net forge\mcp\reobf\minecraft\SETUP\ProjectZuluCore\net /E /I /Q /y
-
 echo Move Block Code from Core to Block Module
 md forge\mcp\reobf\minecraft\SETUP\ProjectZuluBlocks\projectzulu\common\
 MOVE forge\mcp\reobf\minecraft\SETUP\ProjectZuluCore\projectzulu\common\ProjectZulu_Blocks.class forge\mcp\reobf\minecraft\SETUP\ProjectZuluBlocks\projectzulu\common\

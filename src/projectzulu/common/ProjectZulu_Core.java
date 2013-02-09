@@ -1,20 +1,19 @@
 package projectzulu.common;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import projectzulu.common.core.CreativeTab;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.EventHookContainerClass;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.WorldGeneratorZulu;
 import projectzulu.common.core.ZuluPacketHandler;
-import projectzulu.common.temperature.TemperatureTicker;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -29,19 +28,20 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /*Useful OpenSource reference to Look at: Gaurdsman*/
-@Mod(modid = DefaultProps.CoreModId, name = "Project Zulu Core", version = DefaultProps.VERSION_STRING)
+@Mod(modid = DefaultProps.CoreModId, name = "Project Zulu Core", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DesiredBefore)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels={"Channel_Zulu"}, packetHandler = ZuluPacketHandler.class)
 
 public class ProjectZulu_Core{
 	
 	@Instance(DefaultProps.CoreModId)
 	public static ProjectZulu_Core modInstance;
-		
+	public static final CreativeTabs projectZuluCreativeTab = new CreativeTab(CreativeTabs.creativeTabArray.length, "projectZuluTab");
+
 	public static boolean enableTestBlock = false ; 
 	public static boolean enableTemperature = false; 
 	public static boolean tombstoneOnDeath = true; 
 	public static boolean replaceFlowerPot = true;
-	
+
 	public static int spikeRenderID = -1;
 	public static int campFireRenderID = -1;
 	public static int universalFlowerPotRenderID = -1;

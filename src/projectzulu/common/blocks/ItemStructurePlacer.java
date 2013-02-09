@@ -9,7 +9,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.world.StructureManager;
 import cpw.mods.fml.common.Loader;
@@ -24,7 +24,7 @@ public class ItemStructurePlacer extends Item{
 		super(par1);
 		this.setIconIndex(1);
 		setHasSubtypes(true);
-		this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+		this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 
 	}
 

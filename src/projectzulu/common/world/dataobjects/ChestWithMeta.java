@@ -1,4 +1,4 @@
-package projectzulu.common.world.BlockDataObjects;
+package projectzulu.common.world.dataobjects;
 
 import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
 
@@ -8,7 +8,6 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.DungeonHooks;
 
 public class ChestWithMeta extends BlockWithMeta{
 

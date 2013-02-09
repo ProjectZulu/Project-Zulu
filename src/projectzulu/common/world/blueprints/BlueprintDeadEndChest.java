@@ -5,9 +5,9 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntityChest;
 import projectzulu.common.world.CellIndexDirection;
-import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
-import projectzulu.common.world.BlockDataObjects.ChestWithMeta;
-import projectzulu.common.world.BlockDataObjects.MimicWithMeta;
+import projectzulu.common.world.dataobjects.BlockWithMeta;
+import projectzulu.common.world.dataobjects.ChestWithMeta;
+import projectzulu.common.world.dataobjects.MimicWithMeta;
 
 public class BlueprintDeadEndChest extends Blueprint{
 

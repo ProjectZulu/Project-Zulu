@@ -14,7 +14,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
@@ -26,7 +25,7 @@ public class BlockSpikes extends Block{
 
 	public BlockSpikes(int i){
 		super(i, Material.iron);
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		this.disableStats();
 		this.setRequiresSelfNotify();
         this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);

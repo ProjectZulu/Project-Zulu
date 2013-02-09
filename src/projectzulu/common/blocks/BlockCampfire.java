@@ -22,7 +22,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.temperature.ITempBlock;
 import cpw.mods.fml.relauncher.Side;
@@ -33,7 +32,7 @@ public class BlockCampfire extends Block implements ITempBlock{
     public BlockCampfire(int par1) {
     	super(par1, Material.wood);
         this.blockIndexInTexture = 17;
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setTickRandomly(true);
         this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.35f, 1.0f);
 	}

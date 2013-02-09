@@ -1,7 +1,6 @@
 package projectzulu.common.dungeon;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.WeightedRandomItem;
 
 public class TileEntityLimitedMobSpawnData extends WeightedRandomItem {

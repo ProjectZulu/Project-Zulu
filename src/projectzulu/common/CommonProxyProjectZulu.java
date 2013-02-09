@@ -2,7 +2,6 @@ package projectzulu.common;
 
 import net.minecraft.tileentity.TileEntity;
 import projectzulu.common.temperature.TemperatureTicker;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 

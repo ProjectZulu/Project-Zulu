@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import projectzulu.common.world.CellIndexDirection;
-import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
+import projectzulu.common.world.dataobjects.BlockWithMeta;
 
 public class BlueprintCemetaryFountain2 extends Blueprint{
 

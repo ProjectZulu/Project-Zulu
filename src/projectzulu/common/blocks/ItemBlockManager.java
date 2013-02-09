@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import projectzulu.common.ProjectZulu_Blocks;
@@ -23,9 +22,6 @@ import projectzulu.common.blocks.heads.TileEntityMobHeads;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.dungeon.BlockLimitedMobSpawner;
-import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
-import projectzulu.common.dungeon.TileEntityLimitedMobSpawnerRenderer;
 
 import com.google.common.base.Optional;
 
@@ -483,7 +479,7 @@ public enum ItemBlockManager {
 						new BlockUniversalFlowerPot(Block.flowerPot.blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setBlockName("Flower Pot"));
 			}else{
 				BlockList.universalFlowerPot = Optional.of(
-						new BlockUniversalFlowerPot(blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab).setBlockName("Universal Flower Pot"));
+						new BlockUniversalFlowerPot(blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab).setBlockName("Universal Flower Pot"));
 			}
 		}
 		

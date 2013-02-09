@@ -6,7 +6,6 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IArmorTextureProvider;
-import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.temperature.ITempArmor;
@@ -45,7 +44,7 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor, IArmorTextur
         this.damageReduceAmount = par2EnumArmorMaterial.getDamageReductionAmount(par4);
         this.setMaxDamage(par2EnumArmorMaterial.getDurability(par4));
         this.maxStackSize = 1;
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
     }
 
     //Adds Custom Item png for Icons?

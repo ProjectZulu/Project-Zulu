@@ -1,5 +1,8 @@
 package projectzulu.common.core;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import projectzulu.common.blocks.ContainerUniversalFlowerPot;
 import projectzulu.common.blocks.GuiAnimalName;
 import projectzulu.common.blocks.GuiContainerUniversalFlowerPot;
@@ -8,9 +11,6 @@ import projectzulu.common.blocks.TileEntityTombstone;
 import projectzulu.common.blocks.TileEntityUniversalFlowerPot;
 import projectzulu.common.dungeon.GuiLimitedMobSpawner;
 import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class ZuluGuiHandler implements IGuiHandler{

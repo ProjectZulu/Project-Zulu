@@ -9,7 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.EntityMummyPharaoh;
 import cpw.mods.fml.relauncher.Side;
@@ -29,7 +29,7 @@ public class BlockJasper extends Block
         
         this.blockIndexInTexture = 32;
         this.setTickRandomly(true);
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         initialiseAlterBlocks();
     }
 	

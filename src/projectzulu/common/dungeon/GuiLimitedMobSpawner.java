@@ -1,13 +1,11 @@
 package projectzulu.common.dungeon;
 
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundPool;
@@ -23,9 +21,7 @@ import org.lwjgl.util.Point;
 import projectzulu.common.blocks.StringHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ObfuscationHelper;
-import projectzulu.common.core.Pair;
 import projectzulu.common.core.PairFullShortName;
-import projectzulu.common.core.ProjectZuluLog;
 //TODO: Scrolling Text in Creature List
 //projectzuluresources\module_block\mobspawnergui.png
 public class GuiLimitedMobSpawner extends GuiScreen{

@@ -14,7 +14,7 @@ import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import projectzulu.common.ProjectZulu_Blocks;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
@@ -37,7 +37,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable
         super(par1, par2, Material.leaves, false);
         this.baseIndexInPNG = par2;
         this.setTickRandomly(true);
-        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         this.setRequiresSelfNotify();
     }
     

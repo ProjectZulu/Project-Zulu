@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntityChest;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.world.CellIndexDirection;
-import projectzulu.common.world.BlockDataObjects.BlockWithMeta;
-import projectzulu.common.world.BlockDataObjects.ChestWithMeta;
-import projectzulu.common.world.BlockDataObjects.MobSpawnerWithMeta;
+import projectzulu.common.world.dataobjects.BlockWithMeta;
+import projectzulu.common.world.dataobjects.ChestWithMeta;
+import projectzulu.common.world.dataobjects.MobSpawnerWithMeta;
 import cpw.mods.fml.common.Loader;
 
 public class BlueprintLabyrinthHiddenWall extends Blueprint{

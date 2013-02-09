@@ -13,7 +13,7 @@ public class BlockUniversalFlowerPot extends BlockContainer{
 		super(par1, Material.wood);
         this.blockIndexInTexture = 186;
         this.setBlockBoundsForItemRender();
-//        this.setCreativeTab(ProjectZulu_Blocks.projectZuluCreativeTab);
+//        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 
         float var1 = 0.375F;
         float var2 = var1 / 2.0F;
