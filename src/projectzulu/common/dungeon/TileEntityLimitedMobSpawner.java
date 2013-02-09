@@ -115,7 +115,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      * Returns true if there is a player in range (using World.getClosestPlayer)
      */
     public boolean anyPlayerInRange(){
-        return this.worldObj.getClosestPlayer((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D, (double)this.requiredPlayerRange) != null;
+    	return this.worldObj.getClosestVulnerablePlayer((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D, (double)this.requiredPlayerRange) != null;
     }
 
     public boolean isEditable(){

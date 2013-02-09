@@ -53,21 +53,11 @@ public class BlockLimitedMobSpawner extends BlockContainer{
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		
-		if(player instanceof EntityPlayer && ((EntityPlayer)player).inventory.getCurrentItem() != null
-				&& isValidItemForEditing( ((EntityPlayer)player).inventory.getCurrentItem().getItem().itemID ) ){
+		if(player instanceof EntityPlayer && ((EntityPlayer)player).capabilities.isCreativeMode ){
 			((EntityPlayer)player).openGui(ProjectZulu_Core.modInstance, GuiID.MobSpawner.getID(), par1World, par2, par3, par4);
 			return true;
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, player, par6, par7, par8, par9);
-	}
-    
-	private boolean isValidItemForEditing(int itemID){	
-		return true;
-//		if(itemID == Item.pickaxeWood.itemID || itemID == Item.pickaxeStone.itemID || itemID == Item.pickaxeGold.itemID 
-//				|| itemID == Item.pickaxeSteel.itemID || itemID == Item.pickaxeDiamond.itemID){
-//			return true;
-//		}
-//		return false;
 	}
 	
     /**
