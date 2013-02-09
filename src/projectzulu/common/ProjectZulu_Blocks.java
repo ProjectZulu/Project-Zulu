@@ -127,8 +127,6 @@ public class ProjectZulu_Blocks {
 		}
 
 		ProjectZulu_Core.proxy.registerBlockRenders();
-        NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
-        
 		/* War Axe Declaration */
 //		TickRegistry.registerScheduledTickHandler(new RenderCustomArmorTicker(), Side.CLIENT);
 //		goldScaleIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/goldscale");
