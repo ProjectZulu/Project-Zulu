@@ -44,23 +44,26 @@ public class ProjectZulu_Dungeon {
 		ProjectZuluLog.info("Finished Dungeon Module ItemBlock Init ");
         zuluConfig.save();
         
+		ProjectZuluLog.info("Searching For Sounds Files");
         File userResourceDirectory = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory);
         userResourceDirectory.mkdir();
-        File[] soundFiles = finder(userResourceDirectory, ".txt");
+        File[] soundFiles = finder(userResourceDirectory);
 		if(soundFiles != null){
 			for (File file : soundFiles) {
+				ProjectZuluLog.info("Found sound %s", file.getName());
 				Sounds.addSound(file);
 			}
+		}else{
+			ProjectZuluLog.info("No sounds Found. Sad Panda is Sad.");
 		}
 		
 	}
 	
-	public File[] finder(File directory, String extention){
+	public File[] finder(File directory){
     	return directory.listFiles(new FilenameFilter() { 
     	         public boolean accept(File dir, String filename)
     	              { return filename.endsWith(".ogg"); }
     	} );
-
     }
 	
 	@Init

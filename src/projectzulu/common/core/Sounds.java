@@ -11,9 +11,9 @@ public class Sounds {
     public static final String SOUND_RESOURCE_LOCATION = DefaultProps.coreDiretory + "sounds/";
 	static{
 		String SOUND_RESOURCE_LOCATION = DefaultProps.coreDiretory + "sounds/";
-//		addSound(SOUND_RESOURCE_LOCATION, "armadillodeath.ogg");
-//		addSound(SOUND_RESOURCE_LOCATION, "armadillohurt.ogg");
-//		addSound(SOUND_RESOURCE_LOCATION, "armadilloliving.ogg");
+		addSound(SOUND_RESOURCE_LOCATION, "armadillodeath.ogg");
+		addSound(SOUND_RESOURCE_LOCATION, "armadillohurt.ogg");
+		addSound(SOUND_RESOURCE_LOCATION, "armadilloliving.ogg");
 		addSound(SOUND_RESOURCE_LOCATION, "lizardhurt.ogg");
 		
 		addSound(SOUND_RESOURCE_LOCATION, "mummyroar.ogg");
