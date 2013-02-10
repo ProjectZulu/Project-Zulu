@@ -106,7 +106,6 @@ public enum ItemBlockManager {
 		protected void register() {
 			Block block = BlockList.jasper.get();
 			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Jasper Block");
-			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(block), 5, 1, 1));
 		}
 
 		@Override

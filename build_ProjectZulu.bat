@@ -30,7 +30,7 @@ XCOPY "project-zulu\projectzuluresources\module_block" forge\mcp\reobf\minecraft
 XCOPY "project-zulu\projectzuluresources\module_core" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_core /E /I /Q /y
 XCOPY "project-zulu\projectzuluresources\module_mob" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_mob /E /I /Q /y
 XCOPY "project-zulu\projectzuluresources\module_world" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_world /E /I /Q /y
-XCOPY "project-zulu\projectzuluresources\module_dungeon" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_world /E /I /Q /y
+XCOPY "project-zulu\projectzuluresources\module_dungeon" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_dungeon /E /I /Q /y
 
 echo Copy Project Zulu into Complete Module in Setup 
 XCOPY forge\mcp\reobf\minecraft\projectzulu forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzulu /E /I /Q /y
