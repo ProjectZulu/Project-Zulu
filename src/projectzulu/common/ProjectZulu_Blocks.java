@@ -139,7 +139,7 @@ public class ProjectZulu_Blocks {
 	public void postInit(FMLPostInitializationEvent event){
 		if(ItemList.genericCraftingItems1.isPresent()){
 			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(
-					new ItemStack(ItemList.genericCraftingItems1.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 50, 3, 8));			
+					new ItemStack(ItemList.genericCraftingItems1.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 3, 8, 50));			
 		}
 			
 		ItemBlockRecipeManager.setupBlockModuleRecipies();

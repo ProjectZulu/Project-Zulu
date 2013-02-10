@@ -53,7 +53,7 @@ public class ItemBlockRecipeManager {
 				"XXX","XCX","XXX", 'C', Block.sand,'X',new ItemStack(Item.dyePowder, 1, 1)});
 			GameRegistry.addRecipe(new ItemStack(BlockList.jasper.get(), 1), new Object [] {
 				"XXX","XCX","XXX", 'C', Block.sand,'X',Item.redstone});
-			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(BlockList.jasper.get()), 5,1,1));
+			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(BlockList.jasper.get()), 1, 1, 5));
 		}
 		if(ItemList.coconutShell.isPresent()){
 			GameRegistry.addRecipe(new ItemStack(Item.bowlEmpty, 1), new Object [] {"   ","X X"," X ", 'X', ItemList.coconutShell.get()});
