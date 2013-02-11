@@ -1,3 +1,0 @@
-/eclipse/.metadata/
-/eclipse/Minecraft/
-!.gitignore
