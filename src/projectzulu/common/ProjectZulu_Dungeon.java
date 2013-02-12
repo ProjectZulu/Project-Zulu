@@ -3,6 +3,7 @@ package projectzulu.common;
 import java.io.File;
 import java.io.FilenameFilter;
 
+import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
@@ -13,10 +14,14 @@ import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = DefaultProps.DungeonModId, name = "Project Zulu Mobs", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -52,8 +57,6 @@ public class ProjectZulu_Dungeon {
 				ProjectZuluLog.info("Found sound %s", file.getName());
 				Sounds.addSound(file);
 			}
-		}else{
-			ProjectZuluLog.info("No sounds Found. Sad Panda is Sad.");
 		}
 		
 	}
@@ -78,10 +81,12 @@ public class ProjectZulu_Dungeon {
 		ProjectZuluLog.info("Finished Dungeon Module ItemBlock Setup ");
 	}
 
-	@PostInit
-	public void load(FMLPostInitializationEvent event){
-		
-	}
+	
+	@ServerStarting
+	public void serverStart(FMLServerStartingEvent event){
+		event.registerServerCommand(new CommandPlaySound());
+		LanguageRegistry.instance().addStringLocalization("commands.playsound.usage", "/playsound [targetPlayer] [fileName] <range> <x> <y> <z>");
 
+	}
 	
 }
