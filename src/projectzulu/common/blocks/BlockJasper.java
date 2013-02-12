@@ -185,7 +185,7 @@ public class BlockJasper extends Block
     	if (countValidTorches >= 13 && par1World.canBlockSeeTheSky(par2, par3+1, par4)) {
     		
     		if( !MinecraftServer.getServer().isDedicatedServer() ){
-    			Minecraft.getMinecraft().theWorld.playSound(par2, par3, par4, "sounds.summonwhispers", 10.0f, 1.0f, false);    
+    			Minecraft.getMinecraft().theWorld.playRecord("stream.summonwhispers", par2, par3, par4);
     		}
 
 //    		if( !MinecraftServer.getServer().isDedicatedServer() ){

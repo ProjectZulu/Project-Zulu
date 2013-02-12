@@ -10,14 +10,14 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import projectzulu.common.core.PacketIDs;
-import projectzulu.common.packets.core.PacketManagerPlaySound;
+import projectzulu.common.packets.core.PacketManagerStreamSound;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
-public class CommandPlaySound extends CommandBase{
+public class CommandStreamSound extends CommandBase{
 
 	@Override
     public String getCommandName(){
-        return "playsound";
+        return "streamsound";
     }
 
     /**
@@ -29,20 +29,20 @@ public class CommandPlaySound extends CommandBase{
 	
     @Override
     public String getCommandUsage(ICommandSender par1ICommandSender){
-        return par1ICommandSender.translateString("commands.playsound.usage", new Object[0]);
+        return par1ICommandSender.translateString("commands.streamsound.usage", new Object[0]);
     }
 	
 	/**
-	 * Command stringArgs == 2: /playsound [targetPlayer] [fileName] <range> <x> <y> <z>
-	 * Command stringArgs == 2: /playsound @p sounds.fileName
-	 * Command stringArgs == 3: /playsound @p sounds.fileName <range>
-	 * Command stringArgs == 5: /playsound @p sounds.fileName <xDouble, yDouble, zDouble>
-	 * Command stringArgs == 6: /playsound @p sounds.fileName <range> <xDouble, yDouble, zDouble>
+	 * Command stringArgs == 2: /streamsound [targetPlayer] [fileName] <range> <x> <y> <z>
+	 * Command stringArgs == 2: /streamsound @p sounds.fileName
+	 * Command stringArgs == 3: /streamsound @p sounds.fileName <range>
+	 * Command stringArgs == 5: /streamsound @p sounds.fileName <xDouble, yDouble, zDouble>
+	 * Command stringArgs == 6: /streamsound @p sounds.fileName <range> <xDouble, yDouble, zDouble>
 	 */
     @Override
 	public void processCommand(ICommandSender commandSender, String[] stringArgs) {
-		if(stringArgs.length < 2){
-			 throw new WrongUsageException("commands.playsound.usage", new Object[0]);
+    	if(stringArgs.length < 2){
+			 throw new WrongUsageException("commands.streamsound.usage", new Object[0]);
 		}else{
 			int soundTargetX = 0;
 			int soundTargetY = 0;
@@ -66,9 +66,9 @@ public class CommandPlaySound extends CommandBase{
 			
 			int soundRange = stringArgs.length == 3 || stringArgs.length == 6 ? parseIntBounded(commandSender, stringArgs[2], 0, 120) : 60;
 			
-			PacketManagerPlaySound playSound = PacketIDs.playSound.createPacketManager();
-			playSound.setPacketData(soundTargetX, soundTargetY, soundTargetZ, stringArgs[1]);
-			PacketDispatcher.sendPacketToAllAround(soundTargetX, soundTargetY, soundTargetZ, soundRange, targetPlayer.dimension, playSound.createPacket());
+			PacketManagerStreamSound streamSound = PacketIDs.streamSound.createPacketManager();
+			streamSound.setPacketData(soundTargetX, soundTargetY, soundTargetZ, stringArgs[1]);
+			PacketDispatcher.sendPacketToAllAround(soundTargetX, soundTargetY, soundTargetZ, soundRange, targetPlayer.dimension, streamSound.createPacket());
 		}
 	}
 	

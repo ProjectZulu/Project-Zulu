@@ -18,7 +18,7 @@ public class Sounds {
 		
 		addSound(SOUND_RESOURCE_LOCATION, "mummyroar.ogg");
 		addSound(SOUND_RESOURCE_LOCATION, "sandwormroar.ogg");
-		addSound(SOUND_RESOURCE_LOCATION, "summonwhispers.ogg");
+		addSound(SOUND_RESOURCE_LOCATION, "streaming.summonwhispers.ogg");
 		addSound(SOUND_RESOURCE_LOCATION, "MummyShortRoar.ogg");
 		addSound(SOUND_RESOURCE_LOCATION, "vulturehurt.ogg");
 		

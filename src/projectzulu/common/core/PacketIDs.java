@@ -7,6 +7,7 @@ import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
 import projectzulu.common.packets.core.PacketManagerPlaySound;
+import projectzulu.common.packets.core.PacketManagerStreamSound;
 
 
 public enum PacketIDs {
@@ -34,7 +35,7 @@ public enum PacketIDs {
 	/* Packet: Sync Centipede Followers --> Master */
 	followerMasterData(3) {
 		@Override
-		public PacketManager createPacketManager() {
+		public PacketManagerFollowerMasterData createPacketManager() {
 			return new PacketManagerFollowerMasterData(index);
 		}
 	},
@@ -55,22 +56,29 @@ public enum PacketIDs {
 	/* Packet: Sync Entity Animation Time */
 	animTime(6) {
 		@Override
-		public PacketManager createPacketManager() {
+		public PacketManagerAnimTime createPacketManager() {
 			return  new PacketManagerAnimTime(index);
 		}
 	},
 	/* Packet: Sync Mob Spawner Settings From Client to Server */
 	mobSpawner(7) {
 		@Override
-		public PacketManager createPacketManager() {
+		public PacketManagerMobSpawner createPacketManager() {
 			return new PacketManagerMobSpawner(index);
 		}
 	},
 	/* Packet: Sync Sound to Play from Server to Client */
 	playSound(8) {
 		@Override
-		public PacketManager createPacketManager() {
+		public PacketManagerPlaySound createPacketManager() {
 			return new PacketManagerPlaySound(index);
+		}
+	},
+	/* Packet: Sync Sound to Play from Server to Client */
+	streamSound(9) {
+		@Override
+		public PacketManagerStreamSound createPacketManager() {
+			return new PacketManagerStreamSound(index);
 		}
 	};
 
@@ -95,5 +103,5 @@ public enum PacketIDs {
 		}
 	}
 	
-	public abstract PacketManager createPacketManager();
+	public abstract <T extends PacketManager> T createPacketManager();
 }

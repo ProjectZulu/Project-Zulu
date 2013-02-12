@@ -7,17 +7,16 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import projectzulu.common.core.PacketManager;
-import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.common.network.Player;
 
-public class PacketManagerPlaySound extends PacketManager{
+public class PacketManagerStreamSound extends PacketManager {	
 	private int posX;
 	private int posY;
 	private int posZ;
 	
 	private String sound;
-	
-	public PacketManagerPlaySound(int packetID){
+
+	public PacketManagerStreamSound(int packetID){
 		super(packetID);
 	}
 
@@ -42,7 +41,7 @@ public class PacketManagerPlaySound extends PacketManager{
 		try{
 			int packetID = dataStream.readInt();
 			setPacketData(dataStream.readInt(), dataStream.readInt(), dataStream.readInt(), dataStream.readUTF());
-			worldObj.playSound(posX, posY, posZ, sound, 1.0f, 1.0f, false);
+			worldObj.playRecord(sound, posX, posY, posZ);
 			return true;
 		}catch(Exception ex){
 			ex.printStackTrace();

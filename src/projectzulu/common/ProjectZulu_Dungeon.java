@@ -2,8 +2,10 @@ package projectzulu.common;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.lang.reflect.Array;
 
-import net.minecraft.world.GameRules;
+import com.google.common.collect.ObjectArrays;
+
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
@@ -12,13 +14,10 @@ import projectzulu.common.dungeon.ItemBlockManager;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -49,19 +48,20 @@ public class ProjectZulu_Dungeon {
         zuluConfig.save();
         
 		ProjectZuluLog.info("Searching For Sounds Files");
-        File userResourceDirectory = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory);
-        userResourceDirectory.mkdir();
-        File[] soundFiles = finder(userResourceDirectory);
-		if(soundFiles != null){
-			for (File file : soundFiles) {
+        File[] soundFiles = finder(new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory));
+        File[] streamingFiles = finder(new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory + DefaultProps.streamingResourcesDirectory));
+		File[] allSoundFiles = ObjectArrays.concat(soundFiles, streamingFiles, File.class);
+		if(allSoundFiles != null){
+			for (File file : allSoundFiles) {
 				ProjectZuluLog.info("Found sound %s", file.getName());
 				Sounds.addSound(file);
 			}
 		}
-		
+
 	}
 	
 	public File[] finder(File directory){
+		directory.mkdirs();
     	return directory.listFiles(new FilenameFilter() { 
     	         public boolean accept(File dir, String filename)
     	              { return filename.endsWith(".ogg"); }
@@ -86,6 +86,8 @@ public class ProjectZulu_Dungeon {
 	public void serverStart(FMLServerStartingEvent event){
 		event.registerServerCommand(new CommandPlaySound());
 		LanguageRegistry.instance().addStringLocalization("commands.playsound.usage", "/playsound [targetPlayer] [fileName] <range> <x> <y> <z>");
+		event.registerServerCommand(new CommandStreamSound());
+		LanguageRegistry.instance().addStringLocalization("commands.streamsound.usage", "/streamsound [targetPlayer] [fileName] <range> <x> <y> <z>");
 
 	}
 	

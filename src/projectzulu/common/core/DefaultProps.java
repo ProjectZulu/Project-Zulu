@@ -30,6 +30,7 @@ public class DefaultProps {
 	/* Config Directories */
 	public static final String configDirectory = "/Project Zulu/";
 	public static final String customResourcesDirectory = "CustomResources/";
+	public static final String streamingResourcesDirectory = "Streaming/";
 	public static final String defaultConfigFile = "ProjectZuluConfig.cfg";
 	public static final String tempConfigFile = "tempSettingsConfig.cfg";
 	public static final String mobBiomeSpawnConfigFile = "ProjectZuluMobBiomeConfig.cfg";
