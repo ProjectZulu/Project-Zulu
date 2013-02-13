@@ -2,15 +2,15 @@ package projectzulu.common;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.lang.reflect.Array;
-
-import com.google.common.collect.ObjectArrays;
 
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.Sounds;
 import projectzulu.common.dungeon.ItemBlockManager;
+
+import com.google.common.collect.ObjectArrays;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;

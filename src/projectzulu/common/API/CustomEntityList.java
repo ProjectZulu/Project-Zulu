@@ -5,6 +5,7 @@ import com.google.common.base.Optional;
 
 public enum CustomEntityList {
 	instance;
+	public static Optional<? extends CustomMobData> creeperBlossom = Optional.absent();
 	public static Optional<? extends CustomMobData> armadillo = Optional.absent();
 	public static Optional<? extends CustomMobData> sandworm = Optional.absent();
 	public static Optional<? extends CustomMobData> lizard = Optional.absent();
