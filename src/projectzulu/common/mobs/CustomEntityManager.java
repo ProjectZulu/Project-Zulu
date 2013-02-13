@@ -59,7 +59,7 @@ public enum CustomEntityManager {
 			if(ItemList.genericCraftingItems1.isPresent()){
 				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
-			CustomEntityList.instance.armadillo = Optional.of(customMobData);	
+			CustomEntityList.armadillo = Optional.of(customMobData);	
 		}
 	},
 	Sandworm{
@@ -1505,7 +1505,7 @@ public enum CustomEntityManager {
 		}
 		mobConfig.save();
 		
-		/* Load Individual Mob Biome Properties and Store them in the Mob Spaw Config */
+		/* Load Individual Mob Biome Properties and Store them in the Mob Spawn Config */
 		Configuration biomeConfig = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		biomeConfig.load();
 		for (final CustomEntityManager mob : CustomEntityManager.values()) {

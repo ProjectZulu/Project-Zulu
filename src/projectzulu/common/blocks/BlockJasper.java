@@ -226,7 +226,6 @@ public class BlockJasper extends Block
 			counter++;
 		}else{
 			if( !MinecraftServer.getServer().isDedicatedServer() ){
-				
 //				World worldObj = ModLoader.getMinecraftInstance().theWorld;
 				Minecraft.getMinecraft().theWorld.playSound(par2, par3, par4, "sounds.mummyroar", 10.0f, 1.0f, false);
 			}

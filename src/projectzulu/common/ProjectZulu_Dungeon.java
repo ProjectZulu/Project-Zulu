@@ -57,7 +57,6 @@ public class ProjectZulu_Dungeon {
 				Sounds.addSound(file);
 			}
 		}
-
 	}
 	
 	public File[] finder(File directory){
@@ -88,7 +87,10 @@ public class ProjectZulu_Dungeon {
 		LanguageRegistry.instance().addStringLocalization("commands.playsound.usage", "/playsound [targetPlayer] [fileName] <range> <x> <y> <z>");
 		event.registerServerCommand(new CommandStreamSound());
 		LanguageRegistry.instance().addStringLocalization("commands.streamsound.usage", "/streamsound [targetPlayer] [fileName] <range> <x> <y> <z>");
-
+		event.registerServerCommand(new CommandSpawnEntity());
+		LanguageRegistry.instance().addStringLocalization("commands.spawnentity.usage", "/spawnentity [targetPlayer] [entityName] <yaw> <pitch> <x> <y> <z>");
+		event.registerServerCommand(new CommandPlaceBlock());
+		LanguageRegistry.instance().addStringLocalization("commands.placeblock.usage", "/placeblock [targetPlayer] [blockID] <meta> <x> <y> <z>");
 	}
 	
 }
