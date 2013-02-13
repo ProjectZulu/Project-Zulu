@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.AxisAlignedBB;
-import projectzulu.common.mobs.EntityGenericCreature;
+import projectzulu.common.mobs.entity.EntityGenericCreature;
 
 public class EntityAIHurtByTarget extends EntityAITarget {
     boolean shouldCallAllies;

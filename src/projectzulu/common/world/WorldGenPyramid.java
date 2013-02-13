@@ -15,7 +15,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.ChestGenHooks;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.mobs.EntityMimic;
+import projectzulu.common.mobs.entity.EntityMimic;
 import cpw.mods.fml.common.Loader;
 
 public class WorldGenPyramid extends WorldGenerator

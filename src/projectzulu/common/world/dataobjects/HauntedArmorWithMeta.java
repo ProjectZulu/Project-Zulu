@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
-import projectzulu.common.mobs.EntityHauntedArmor;
+import projectzulu.common.mobs.entity.EntityHauntedArmor;
 
 public class HauntedArmorWithMeta extends BlockWithMeta{
 	

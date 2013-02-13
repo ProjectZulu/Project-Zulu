@@ -22,6 +22,7 @@ public class ProjectZulu_Mobs {
 	
 	private static int defaultmobID = 0;
 	public static int getNextDefaultMobID(){ return defaultmobID++; }
+	
 	private static int defaulteggID = 300;
 	public static int getNextDefaultEggID(){ return defaulteggID++; }
 
@@ -41,15 +42,19 @@ public class ProjectZulu_Mobs {
 	public void load(FMLInitializationEvent event){
 		ProjectZulu_Core.proxy.registerMobRenders();
 		ProjectZulu_Core.proxy.registerMobSoundEvent();
+		
+		ProjectZuluLog.info("Load Entity Properties ");
+		CustomEntityManager.instance.loadCreatureFromConfig(modConfigDirectory);
+		ProjectZuluLog.info("Registering Entites ");
+		CustomEntityManager.instance.registerEntity();
 	}
 	
 	@PostInit
-	public void load(FMLPostInitializationEvent event){
-		ProjectZuluLog.info("Starting Mob Init ");
-		CustomEntityManager.loadSettings(modConfigDirectory);
-		ProjectZuluLog.info("Finished Mob Init ");
-		ProjectZuluLog.info("Starting Mob Setup ");
-		CustomEntityManager.setupMobs();
-		ProjectZuluLog.info("Finished Mob Setup ");
+	public void load(FMLPostInitializationEvent event){	
+		
+		ProjectZuluLog.info("Load Entity biomes ");
+		CustomEntityManager.instance.loadBiomeFromConfig(modConfigDirectory);
+		ProjectZuluLog.info("Register Entity Spawns ");
+		CustomEntityManager.instance.addSpawn();
 	}
 }

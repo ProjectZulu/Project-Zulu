@@ -8,11 +8,11 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import projectzulu.common.mobs.EntityMimic;
-import projectzulu.common.mobs.EntityMummy;
-import projectzulu.common.mobs.EntityMummyPharaoh;
-import projectzulu.common.mobs.EntitySandWorm;
-import projectzulu.common.mobs.EntityTreeEnt;
+import projectzulu.common.mobs.entity.EntityMimic;
+import projectzulu.common.mobs.entity.EntityMummy;
+import projectzulu.common.mobs.entity.EntityMummyPharaoh;
+import projectzulu.common.mobs.entity.EntitySandWorm;
+import projectzulu.common.mobs.entity.EntityTreeEnt;
 
 public class SoundHookContainerClass {
 

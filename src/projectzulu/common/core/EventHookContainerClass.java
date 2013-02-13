@@ -26,7 +26,7 @@ import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.TileEntityTombstone;
-import projectzulu.common.mobs.EntityTreeEnt;
+import projectzulu.common.mobs.entity.EntityTreeEnt;
 import cpw.mods.fml.common.Loader;
 
 public class EventHookContainerClass {

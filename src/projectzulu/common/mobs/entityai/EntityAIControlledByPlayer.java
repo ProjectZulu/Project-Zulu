@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
-import projectzulu.common.mobs.EntityGenericRideable;
+import projectzulu.common.mobs.entity.EntityGenericRideable;
 
 public class EntityAIControlledByPlayer extends EntityAIBase {
     private final EntityGenericRideable thisEntity;

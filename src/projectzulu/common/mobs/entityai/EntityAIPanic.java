@@ -2,8 +2,8 @@ package projectzulu.common.mobs.entityai;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.Vec3;
-import projectzulu.common.mobs.EntityGenericCreature;
-import projectzulu.common.mobs.EntityStates;
+import projectzulu.common.mobs.entity.EntityGenericCreature;
+import projectzulu.common.mobs.entity.EntityStates;
 
 public class EntityAIPanic extends EntityAIBase {
     private EntityGenericCreature theEntityCreature;

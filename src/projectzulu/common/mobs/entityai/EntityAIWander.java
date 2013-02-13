@@ -2,7 +2,7 @@ package projectzulu.common.mobs.entityai;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.Vec3;
-import projectzulu.common.mobs.EntityGenericCreature;
+import projectzulu.common.mobs.entity.EntityGenericCreature;
 
 public class EntityAIWander extends EntityAIBase
 {

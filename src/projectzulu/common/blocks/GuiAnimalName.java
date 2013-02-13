@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
-import projectzulu.common.mobs.EntityGenericTameable;
+import projectzulu.common.mobs.entity.EntityGenericTameable;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

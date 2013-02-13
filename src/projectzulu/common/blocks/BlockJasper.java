@@ -11,7 +11,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.mobs.EntityMummyPharaoh;
+import projectzulu.common.mobs.entity.EntityMummyPharaoh;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

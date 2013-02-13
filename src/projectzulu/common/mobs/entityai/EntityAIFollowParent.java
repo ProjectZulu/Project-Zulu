@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.ai.EntityAIBase;
-import projectzulu.common.mobs.EntityGenericBreedable;
+import projectzulu.common.mobs.entity.EntityGenericBreedable;
 
 public class EntityAIFollowParent extends EntityAIBase {
 	/** The child that is following its parent. */

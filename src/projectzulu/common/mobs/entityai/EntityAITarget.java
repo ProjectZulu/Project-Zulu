@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
-import projectzulu.common.mobs.EntityGenericTameable;
+import projectzulu.common.mobs.entity.EntityGenericTameable;
 
 public abstract class EntityAITarget extends EntityAIBase{
     /** The entity that this task belongs to */

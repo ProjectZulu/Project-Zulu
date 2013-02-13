@@ -6,8 +6,8 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.mobs.EntityGenericCreature;
-import projectzulu.common.mobs.EntityStates;
+import projectzulu.common.mobs.entity.EntityGenericCreature;
+import projectzulu.common.mobs.entity.EntityStates;
 
 /** This AI is Compatible with Only Flying Entities: Designed Specifically for Vulture */
 public class EntityAIVultureFollow extends EntityAIBase

@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import projectzulu.common.core.PacketManager;
-import projectzulu.common.mobs.EntityGenericCreature;
+import projectzulu.common.mobs.entity.EntityGenericCreature;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketManagerAnimTime extends PacketManager{

@@ -7,7 +7,7 @@ import java.util.Random;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.world.World;
-import projectzulu.common.mobs.EntityGenericBreedable;
+import projectzulu.common.mobs.entity.EntityGenericBreedable;
 
 public class EntityAIMate extends EntityAIBase
 {

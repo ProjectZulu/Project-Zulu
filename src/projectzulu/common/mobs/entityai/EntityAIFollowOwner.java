@@ -5,8 +5,8 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.mobs.EntityGenericAnimal;
-import projectzulu.common.mobs.EntityStates;
+import projectzulu.common.mobs.entity.EntityGenericAnimal;
+import projectzulu.common.mobs.entity.EntityStates;
 
 public class EntityAIFollowOwner extends EntityAIBase{
     private EntityGenericAnimal thePet;

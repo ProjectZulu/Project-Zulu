@@ -10,6 +10,9 @@ import net.minecraft.entity.EntityLiving;
 
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.common.mobs.entity.EntityGenericAnimal;
+import projectzulu.common.mobs.entity.EntityMummyPharaoh;
+
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 

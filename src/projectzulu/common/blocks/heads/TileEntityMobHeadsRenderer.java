@@ -13,7 +13,7 @@ import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.mobs.ModelFinch;
+import projectzulu.common.mobs.models.ModelFinch;
 
 public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 	

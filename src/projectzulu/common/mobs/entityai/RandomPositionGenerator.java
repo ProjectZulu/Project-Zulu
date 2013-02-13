@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import projectzulu.common.mobs.EntityGenericCreature;
+import projectzulu.common.mobs.entity.EntityGenericCreature;
 
 public class RandomPositionGenerator
 {

@@ -1,8 +1,8 @@
 package projectzulu.common.mobs.entityai;
 
 import net.minecraft.entity.ai.EntityAIBase;
-import projectzulu.common.mobs.EntityGenericAnimal;
-import projectzulu.common.mobs.EntityStates;
+import projectzulu.common.mobs.entity.EntityGenericAnimal;
+import projectzulu.common.mobs.entity.EntityStates;
 
 public class EntityAIStayStill extends EntityAIBase {
     private EntityGenericAnimal theEntity;

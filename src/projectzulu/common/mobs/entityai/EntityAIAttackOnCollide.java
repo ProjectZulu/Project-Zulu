@@ -6,7 +6,7 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.mobs.EntityGenericCreature;
+import projectzulu.common.mobs.entity.EntityGenericCreature;
 
 /* This AI is Compatible with both Flying and Ground Entities */
 public class EntityAIAttackOnCollide extends EntityAIBase

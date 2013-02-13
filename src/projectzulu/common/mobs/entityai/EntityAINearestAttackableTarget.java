@@ -9,9 +9,8 @@ import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import projectzulu.common.mobs.EntityGenericCreature;
-import projectzulu.common.mobs.EntityStates;
-//
+import projectzulu.common.mobs.entity.EntityGenericCreature;
+import projectzulu.common.mobs.entity.EntityStates;
 
 public class EntityAINearestAttackableTarget extends EntityAITarget{
 	EntityLiving targetEntity;
