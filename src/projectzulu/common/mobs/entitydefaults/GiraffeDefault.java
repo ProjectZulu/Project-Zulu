@@ -7,9 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityGiraffe;
+import projectzulu.common.mobs.models.ModelGiraffe;
 
 import com.google.common.base.Optional;
 
@@ -19,7 +20,8 @@ public class GiraffeDefault extends DefaultSpawnable{
 		super("Giraffe", EntityGiraffe.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
-		
+		setModelAndRender(ModelGiraffe.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 =  (239 << 16) + (228 << 8) + 109;					eggColor2 = (91 << 16) + (87 << 8) + 41;
 		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		

@@ -3,11 +3,11 @@ package projectzulu.common.core;
 import java.util.EnumSet;
 import java.util.HashMap;
 
+import projectzulu.common.core.packets.PacketManagerPlaySound;
+import projectzulu.common.core.packets.PacketManagerStreamSound;
 import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
-import projectzulu.common.packets.core.PacketManagerPlaySound;
-import projectzulu.common.packets.core.PacketManagerStreamSound;
 
 
 public enum PacketIDs {

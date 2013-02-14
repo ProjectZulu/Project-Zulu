@@ -7,6 +7,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.blocks.EntityCreeperBlossomPrimed;
 import projectzulu.common.blocks.RenderCreeperBlossomPrimed;
+import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.SoundHandlerClass;
@@ -109,23 +110,23 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 			Object renderer = Class.forName(specialRenderer).newInstance();
  			ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, (TileEntitySpecialRenderer) renderer);
 		} catch (InstantiationException e) {
-			ProjectZuluLog.warning("Failed Registering TileEntitySpecialRenderer from String %s", specialRenderer);
+			ProjectZuluLog.severe("Failed Registering TileEntitySpecialRenderer from String %s due to %s", specialRenderer, e.getClass().getSimpleName());
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			ProjectZuluLog.warning("Failed Registering TileEntitySpecialRenderer from String %s", specialRenderer);
+			ProjectZuluLog.severe("Failed Registering TileEntitySpecialRenderer from String %s due to %s", specialRenderer, e.getClass().getSimpleName());
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			ProjectZuluLog.warning("Failed Registering TileEntitySpecialRenderer from String %s", specialRenderer);
+			ProjectZuluLog.severe("Failed Registering TileEntitySpecialRenderer from String %s due to %s", specialRenderer, e.getClass().getSimpleName());
 			e.printStackTrace();
 		} catch (ClassCastException e) {
-			ProjectZuluLog.warning("Failed Registering TileEntitySpecialRenderer from String %s", specialRenderer);
+			ProjectZuluLog.severe("Failed Registering TileEntitySpecialRenderer from String %s due to %s", specialRenderer, e.getClass().getSimpleName());
 			e.printStackTrace();
 		}
  	}
 	
 	@Override
 	public void registerBlockRenders(){
-		RenderingRegistry.registerEntityRenderingHandler(EntityCreeperBlossomPrimed.class, new RenderCreeperBlossomPrimed());
+		RenderingRegistry.registerEntityRenderingHandler(EntityCreeperBlossomPrimed.class, new RenderCreeperBlossomPrimed(0.5f));
 	}
 	
 	@Override
@@ -136,6 +137,11 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 	@Override
 	public void bossHealthTicker(){
         TickRegistry.registerTickHandler(new BossHealthDisplayTicker(), Side.CLIENT);
+	}
+	
+	@Override
+	public void registerModelsAndRender(){
+		CustomEntityManager.instance.registerModelsAndRender();
 	}
 	
 	@Override

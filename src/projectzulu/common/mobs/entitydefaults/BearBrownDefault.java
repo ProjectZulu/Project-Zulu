@@ -7,9 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityBlackBear;
 import projectzulu.common.mobs.entity.EntityBrownBear;
+import projectzulu.common.mobs.models.ModelBrownBear;
 
 import com.google.common.base.Optional;
 
@@ -19,7 +20,8 @@ public class BearBrownDefault extends DefaultSpawnable{
 		super("Brown Bear", EntityBrownBear.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
-		
+		setModelAndRender(ModelBrownBear.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 = (51 << 16) + (34 << 8) + 8;							eggColor2 = (63 << 16) + (42 << 8) + 10;
 		defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName); 	defaultBiomesToSpawn.add(BiomeGenBase.iceMountains.biomeName);	
 		defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName);	

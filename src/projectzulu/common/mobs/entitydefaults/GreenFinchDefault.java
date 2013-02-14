@@ -6,7 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.mobs.entity.EntityGreenFinch;
+import projectzulu.common.mobs.models.ModelFinch;
 
 import com.google.common.base.Optional;
 
@@ -16,7 +18,8 @@ public class GreenFinchDefault extends DefaultSpawnable{
 		super("Green Finch", EntityGreenFinch.class);		
 		setSpawnProperties(EnumCreatureType.monster, 10, 5, 1, 1);
 		setRegistrationProperties(128, 3, true);
-				
+		setModelAndRender(ModelFinch.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 =  (30 << 16) + (130 << 8) + 0;						eggColor2 = (164 << 16) + (234 << 8) + 143;
 		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName); 

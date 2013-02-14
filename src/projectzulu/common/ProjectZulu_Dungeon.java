@@ -8,6 +8,10 @@ import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.Sounds;
 import projectzulu.common.dungeon.ItemBlockManager;
+import projectzulu.common.dungeon.commands.CommandPlaceBlock;
+import projectzulu.common.dungeon.commands.CommandPlaySound;
+import projectzulu.common.dungeon.commands.CommandSpawnEntity;
+import projectzulu.common.dungeon.commands.CommandStreamSound;
 
 import com.google.common.collect.ObjectArrays;
 

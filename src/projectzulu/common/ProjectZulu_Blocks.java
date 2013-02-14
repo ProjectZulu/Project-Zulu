@@ -13,15 +13,16 @@ import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.ArmorManager;
+import projectzulu.common.blocks.CreeperBlossomPrimedDefault;
 import projectzulu.common.blocks.ItemBlockManager;
 import projectzulu.common.blocks.ItemBlockRecipeManager;
 import projectzulu.common.blocks.RenderCampFire;
 import projectzulu.common.blocks.RenderSpike;
 import projectzulu.common.blocks.RenderUniversalFlowerPot;
+import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.core.ZuluGuiHandler;
 import projectzulu.common.potion.EventHandleNullPotions;
 import projectzulu.common.potion.PotionManager;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -36,7 +37,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = DefaultProps.BlocksModId, name = "Project Zulu Block and Items", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -92,6 +92,8 @@ public class ProjectZulu_Blocks {
 		PotionManager.loadSettings(zuluConfig);
 		ProjectZuluLog.info("Finsished Potion Init ");
         zuluConfig.save();
+        
+        declareModuleEntities();
 	}
 	
 	@Init
@@ -125,14 +127,6 @@ public class ProjectZulu_Blocks {
 			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.universalFlowerPotRenderID, new RenderUniversalFlowerPot() );
 			ProjectZuluLog.info("Universal Flower Pot Render ID Registed to %s", ProjectZulu_Core.universalFlowerPotRenderID);
 		}
-
-		ProjectZulu_Core.proxy.registerBlockRenders();
-		/* War Axe Declaration */
-//		TickRegistry.registerScheduledTickHandler(new RenderCustomArmorTicker(), Side.CLIENT);
-//		goldScaleIndex = mod_ProjectZulu.proxy.addArmor("Armor Sets/goldscale");
-//		vikingArmorHead = (new ItemVikingHelmet(vikingHelmetID, mod_ProjectZulu.goldScaleMaterial,goldScaleIndex,0)).setIconIndex(48).setItemName("vikingArmorHead");
-//		LanguageRegistry.addName(vikingArmorHead, "vikingArmorHead"); 
-//		MinecraftForgeClient.registerItemRenderer(vikingHelmetID+256, new ItemRendererVikingHelmet());
 	}
 	
 	@PostInit
@@ -170,5 +164,10 @@ public class ProjectZulu_Blocks {
 		}else {
 			gameRule.addGameRule(ruleName, "false");
 		}
+	}
+	
+	private void declareModuleEntities(){
+		CustomEntityManager.instance.addEntity(
+				new CreeperBlossomPrimedDefault());
 	}
 }

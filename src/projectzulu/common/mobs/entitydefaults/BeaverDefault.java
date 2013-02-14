@@ -6,9 +6,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityBeaver;
+import projectzulu.common.mobs.models.ModelBeaver;
 
 import com.google.common.base.Optional;
 
@@ -18,6 +19,7 @@ public class BeaverDefault extends DefaultSpawnable{
 		super("Beaver", EntityBeaver.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
+		setModelAndRender(ModelBeaver.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
 		eggColor1 = (54 << 16) + (36 << 8) + 9;
 		eggColor2 = (67 << 16) + (45 << 8) + 11;

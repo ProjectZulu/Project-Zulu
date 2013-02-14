@@ -1,23 +1,21 @@
-package projectzulu.common.mobs.entitydefaults;
+package projectzulu.common.core;
 
 import java.util.ArrayList;
-
-import projectzulu.common.core.ProjectZuluLog;
-import cpw.mods.fml.common.registry.EntityRegistry;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 public abstract class DefaultSpawnable extends DefaultWithEgg{
 
-	int spawnRate;
-	int secondarySpawnRate;
-	int minInChunk;
-	int maxInChunk;
+	protected int spawnRate;
+	protected int secondarySpawnRate;
+	protected int minInChunk;
+	protected int maxInChunk;
 	EnumCreatureType enumCreatureType;
 
-	ArrayList<String> defaultBiomesToSpawn = new ArrayList<String>();	
+	protected ArrayList<String> defaultBiomesToSpawn = new ArrayList<String>();	
 	ArrayList<BiomeGenBase> biomesToSpawn = new ArrayList();
 	
 	protected DefaultSpawnable(String mobName, Class mobClass) {
@@ -33,8 +31,8 @@ public abstract class DefaultSpawnable extends DefaultWithEgg{
 	}
 	
 	@Override
-	public void loadCreatureFromConfig(Configuration config) {
-		super.loadCreatureFromConfig(config);
+	public void loadCreaturesFromConfig(Configuration config) {
+		super.loadCreaturesFromConfig(config);
 		spawnRate = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" SpawnRate", spawnRate).getInt(spawnRate);
 		secondarySpawnRate = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" SecondarySpawnRate",secondarySpawnRate).getInt(secondarySpawnRate);
 		minInChunk = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" minInChunk", minInChunk).getInt(minInChunk);
@@ -42,7 +40,7 @@ public abstract class DefaultSpawnable extends DefaultWithEgg{
 	}
 	
 	@Override
-	public void loadBiomeFromConfig(Configuration config) {
+	public void loadBiomesFromConfig(Configuration config) {
 		for (int i = 0; i < BiomeGenBase.biomeList.length; i++) {
 			if(BiomeGenBase.biomeList[i] == null){
 				continue;

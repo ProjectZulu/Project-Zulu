@@ -7,9 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityGorilla;
+import projectzulu.common.mobs.models.ModelGorilla;
 
 import com.google.common.base.Optional;
 
@@ -19,7 +20,8 @@ public class GorillaDefault extends DefaultSpawnable{
 		super("Gorilla", EntityGorilla.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 1);
 		setRegistrationProperties(128, 3, true);
-		
+		setModelAndRender(ModelGorilla.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 =  (25 << 16) + (25 << 8) + 25;						eggColor2 = (93 << 16) + (93 << 8) + 93;
 		
 		defaultBiomesToSpawn.add(BiomeGenBase.jungle.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.jungleHills.biomeName); 

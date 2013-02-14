@@ -9,6 +9,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.core.CreativeTab;
+import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.EventHookContainerClass;
 import projectzulu.common.core.ProjectZuluLog;
@@ -65,7 +66,6 @@ public class ProjectZulu_Core{
 	public static final EnumArmorMaterial diamondScaleMaterial = EnumHelper.addArmorMaterial("Diamond Scale Material", 30, new int[]{3, 7, 6, 3}, 8);
 	
 	public static File modConfigDirectoryFile;
-
 	
 	@SidedProxy(clientSide = "projectzulu.common.ClientProxyProjectZulu", serverSide = "projectzulu.common.CommonProxyProjectZulu")
 	public static CommonProxyProjectZulu proxy;
@@ -112,12 +112,23 @@ public class ProjectZulu_Core{
 			GameRegistry.registerBlock(testBlock, "testZuluBlock"); LanguageRegistry.addName(testBlock, "Test block");
 		}
         NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
+        
+		ProjectZulu_Core.proxy.registerModelsAndRender();
+		ProjectZuluLog.info("Load Entity Properties");
+		CustomEntityManager.instance.loadCreaturesFromConfig(modConfigDirectoryFile);
+		ProjectZuluLog.info("Registering Entites");
+		CustomEntityManager.instance.registerEntities();
 	}
 	
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event){
 		MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
 		GameRegistry.registerWorldGenerator(new WorldGeneratorZulu());
+		
+		ProjectZuluLog.info("Load Entity Biomes");
+		CustomEntityManager.instance.loadBiomesFromConfig(modConfigDirectoryFile);
+		ProjectZuluLog.info("Register Entity Spawns");
+		CustomEntityManager.instance.addSpawns();
 	}
 	
 }

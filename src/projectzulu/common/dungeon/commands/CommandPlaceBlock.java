@@ -1,7 +1,8 @@
-package projectzulu.common;
+package projectzulu.common.dungeon.commands;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.NumberInvalidException;
@@ -9,15 +10,11 @@ import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import projectzulu.common.core.PacketIDs;
-import projectzulu.common.packets.core.PacketManagerPlaySound;
-import cpw.mods.fml.common.network.PacketDispatcher;
 
-public class CommandPlaySound extends CommandBase{
-
+public class CommandPlaceBlock extends CommandBase{
 	@Override
     public String getCommandName(){
-        return "playsound";
+        return "placeblock";
     }
 
     /**
@@ -26,52 +23,57 @@ public class CommandPlaySound extends CommandBase{
     public int getRequiredPermissionLevel(){
         return 2;
     }
-	
-    @Override
-    public String getCommandUsage(ICommandSender par1ICommandSender){
-        return par1ICommandSender.translateString("commands.playsound.usage", new Object[0]);
-    }
-	
+    
 	/**
-	 * Command stringArgs == 2: /playsound [targetPlayer] [fileName] <range> <x> <y> <z>
-	 * Command stringArgs == 2: /playsound @p sounds.fileName
-	 * Command stringArgs == 3: /playsound @p sounds.fileName <range>
-	 * Command stringArgs == 5: /playsound @p sounds.fileName <xDouble, yDouble, zDouble>
-	 * Command stringArgs == 6: /playsound @p sounds.fileName <range> <xDouble, yDouble, zDouble>
+	 * Command stringArgs     : /placeblock [targetPlayer] [blockID] <meta> <x> <y> <z>
+	 * Command stringArgs == 2: /placeblock @p blockID
+	 * Command stringArgs == 3: /placeblock @p blockID <meta>
+	 * Command stringArgs == 5: /placeblock @p blockID <xDouble, yDouble, zDouble>
+	 * Command stringArgs == 6: /placeblock @p blockID <meta> <xDouble, yDouble, zDouble>
 	 */
     @Override
-	public void processCommand(ICommandSender commandSender, String[] stringArgs) {
-		if(stringArgs.length < 2){
-			 throw new WrongUsageException("commands.playsound.usage", new Object[0]);
+	public void processCommand(ICommandSender commandSender, String[] stringArgs){
+    	if(stringArgs.length < 2){
+			 throw new WrongUsageException("commands.placeblock.usage", new Object[0]);
 		}else{
-			int soundTargetX = 0;
-			int soundTargetY = 0;
-			int soundTargetZ = 0;
-			
+			int targetX = 0;
+			int targetY = 0;
+			int targetZ = 0;
+			int blockMeta = 0;
 			EntityPlayerMP targetPlayer = func_82359_c(commandSender, stringArgs[0]);
 			if(targetPlayer == null){
 				throw new PlayerNotFoundException();
 			}
 			
-			if(stringArgs.length == 2 || stringArgs.length == 3){
-				soundTargetX = (int)targetPlayer.posX;
-				soundTargetY = (int)targetPlayer.posY;
-				soundTargetZ = (int)targetPlayer.posZ;
-			}else if(stringArgs.length == 5 || stringArgs.length == 6){
-				int indexOfPos = stringArgs.length - 3;
-				soundTargetX = (int)parsePosition(commandSender, targetPlayer.posX, stringArgs[indexOfPos++]);
-				soundTargetY = (int)parsePositionWithBounds(commandSender, targetPlayer.posY, stringArgs[indexOfPos++], 0, 0);
-				soundTargetZ = (int)parsePosition(commandSender, targetPlayer.posZ, stringArgs[indexOfPos++]);
+			Block blockToPlace = Block.blocksList[parseIntBounded(commandSender, stringArgs[1], 0, 4095)];
+			if(blockToPlace == null){
+				 throw new WrongUsageException("commands.placeblock.noentity", new Object[0]);
+			}
+						
+			if(stringArgs.length == 3 || stringArgs.length == 6){
+				blockMeta = parseIntBounded(commandSender, stringArgs[2], 0, 4095);
 			}
 			
-			int soundRange = stringArgs.length == 3 || stringArgs.length == 6 ? parseIntBounded(commandSender, stringArgs[2], 0, 120) : 60;
+			if(stringArgs.length == 2 || stringArgs.length == 3){
+				targetX = (int)targetPlayer.posX;
+				targetY = (int)targetPlayer.posY;
+				targetZ = (int)targetPlayer.posZ;
+			}else if(stringArgs.length == 5 || stringArgs.length == 6){
+				int indexOfPos = stringArgs.length - 3;
+				targetX = (int)parsePosition(commandSender, targetPlayer.posX, stringArgs[indexOfPos++]);
+				targetY = (int)parsePositionWithBounds(commandSender, targetPlayer.posY, stringArgs[indexOfPos++], 0, 0);
+				targetZ = (int)parsePosition(commandSender, targetPlayer.posZ, stringArgs[indexOfPos++]);
+			}
 			
-			PacketManagerPlaySound playSound = PacketIDs.playSound.createPacketManager();
-			playSound.setPacketData(soundTargetX, soundTargetY, soundTargetZ, stringArgs[1]);
-			PacketDispatcher.sendPacketToAllAround(soundTargetX, soundTargetY, soundTargetZ, soundRange, targetPlayer.dimension, playSound.createPacket());
+			targetPlayer.worldObj.setBlockAndMetadata(targetX, targetY, targetZ, blockToPlace.blockID, blockMeta);
 		}
-	}
-	
+	}    
+    
+    @Override
+    public String getCommandUsage(ICommandSender par1ICommandSender){
+        return par1ICommandSender.translateString("commands.spawnentity.usage", new Object[0]);
+    }
+    
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
@@ -79,7 +81,6 @@ public class CommandPlaySound extends CommandBase{
     public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr){
         return par2ArrayOfStr.length != 1 && par2ArrayOfStr.length != 2 ? null : getListOfStringsMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getAllUsernames());
     }
-	
 	private double parsePosition(ICommandSender commandSender, double currentPos, String stringDouble){
 		return this.parsePositionWithBounds(commandSender, currentPos, stringDouble, -30000000, 30000000);
 	}
@@ -112,5 +113,5 @@ public class CommandPlaySound extends CommandBase{
 			}
 		}
 		return targetPos;
-	}
+	}   
 }

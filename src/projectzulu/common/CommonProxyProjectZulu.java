@@ -24,4 +24,5 @@ public class CommonProxyProjectZulu{
  	public void registerBlockRenders(){}
 	public void registerMobSounds(){}
 	public void registerMobSoundEvent(){}
+	public void registerModelsAndRender(){}
 }

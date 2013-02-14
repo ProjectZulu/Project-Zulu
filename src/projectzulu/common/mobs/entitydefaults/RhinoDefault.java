@@ -7,9 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityRhino;
+import projectzulu.common.mobs.models.ModelRhino;
 
 import com.google.common.base.Optional;
 
@@ -19,7 +20,8 @@ public class RhinoDefault extends DefaultSpawnable{
 		super("Rhino", EntityRhino.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);		
-		
+		setModelAndRender(ModelRhino.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 = (95 << 16) + (93 << 8) + 94;						eggColor2 = (173 << 16) + (170 << 8) + 172;
 		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName); 

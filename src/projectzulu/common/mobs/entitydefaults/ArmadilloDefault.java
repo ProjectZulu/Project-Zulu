@@ -6,8 +6,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.mobs.entity.EntityArmadillo;
+import projectzulu.common.mobs.models.ModelArmadillo;
 
 import com.google.common.base.Optional;
 
@@ -17,6 +19,7 @@ public class ArmadilloDefault extends DefaultSpawnable{
 		super("Armadillo", EntityArmadillo.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 2, 4);
 		setRegistrationProperties(128, 3, true);
+		setModelAndRender(ModelArmadillo.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
 		eggColor1 = (116 << 16) + (64 << 8) + 33;
 		eggColor2 = (60 << 16) + (51 << 8) + 10;

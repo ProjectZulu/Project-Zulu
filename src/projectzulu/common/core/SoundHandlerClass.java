@@ -2,8 +2,6 @@ package projectzulu.common.core;
 
 import java.net.URL;
 
-import com.google.common.base.CharMatcher;
-
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 

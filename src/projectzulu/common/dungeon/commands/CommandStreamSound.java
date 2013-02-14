@@ -1,4 +1,4 @@
-package projectzulu.common;
+package projectzulu.common.dungeon.commands;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import projectzulu.common.core.PacketIDs;
-import projectzulu.common.packets.core.PacketManagerStreamSound;
+import projectzulu.common.core.packets.PacketManagerStreamSound;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class CommandStreamSound extends CommandBase{

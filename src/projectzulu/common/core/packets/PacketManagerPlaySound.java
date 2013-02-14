@@ -1,4 +1,4 @@
-package projectzulu.common.packets.core;
+package projectzulu.common.core.packets;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -7,7 +7,6 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import projectzulu.common.core.PacketManager;
-import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketManagerPlaySound extends PacketManager{

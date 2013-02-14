@@ -1,14 +1,10 @@
 package projectzulu.common.blocks;
 
-import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
-
 import java.io.File;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;

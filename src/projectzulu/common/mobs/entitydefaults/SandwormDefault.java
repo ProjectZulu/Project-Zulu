@@ -6,9 +6,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntitySandWorm;
+import projectzulu.common.mobs.models.ModelSandWorm;
 
 import com.google.common.base.Optional;
 
@@ -19,6 +20,7 @@ public class SandwormDefault extends DefaultSpawnable{
 		
 		setSpawnProperties(EnumCreatureType.creature, 1, 100, 1, 1);
 		setRegistrationProperties(128, 3, true);
+		setModelAndRender(ModelSandWorm.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
 		eggColor1 = (24 << 16) + (0 << 8) + 8;
 		eggColor2 = (49 << 16) + (16 << 8) + 8;

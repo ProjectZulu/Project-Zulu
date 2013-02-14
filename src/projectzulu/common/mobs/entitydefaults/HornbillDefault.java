@@ -7,9 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityHornBill;
+import projectzulu.common.mobs.models.ModelHornBill;
 
 import com.google.common.base.Optional;
 
@@ -19,7 +20,8 @@ public class HornbillDefault extends DefaultSpawnable{
 		super("Horn Bill", EntityHornBill.class);		
 		setSpawnProperties(EnumCreatureType.monster, 10, 25, 1, 1);
 		setRegistrationProperties(128, 3, true);
-		
+		setModelAndRender(ModelHornBill.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 =  (26 << 16) + (19 << 8) + 15;						eggColor2 = (199 << 16) + (33 << 8) + 14;
 		defaultBiomesToSpawn.add(BiomeGenBase.jungle.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.jungleHills.biomeName); 			
 		defaultBiomesToSpawn.add("Mini Jungle");						defaultBiomesToSpawn.add("Extreme Jungle");

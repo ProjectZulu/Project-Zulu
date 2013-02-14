@@ -7,8 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.mobs.entity.EntityCrocodile;
+import projectzulu.common.mobs.models.ModelCrocodile;
 
 import com.google.common.base.Optional;
 
@@ -18,6 +20,7 @@ public class AlligatorDefault extends DefaultSpawnable{
 		super("Alligator", EntityCrocodile.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
+		setModelAndRender(ModelCrocodile.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 		
 		eggColor1 = (32 << 16) + (39 << 8) + 33;
 		eggColor2 = (52 << 16) + (65 << 8) + 54;

@@ -7,9 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityPolarBear;
+import projectzulu.common.mobs.models.ModelPolarBear;
 
 import com.google.common.base.Optional;
 
@@ -19,6 +20,7 @@ public class BearPolarDefault extends DefaultSpawnable{
 		super("Polar Bear", EntityPolarBear.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
+		setModelAndRender(ModelPolarBear.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
 		eggColor1 = (255 << 16) + (255 << 8) + 255;						eggColor2 = (201 << 16) + (201 << 8) + 201;
 		defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName); 		

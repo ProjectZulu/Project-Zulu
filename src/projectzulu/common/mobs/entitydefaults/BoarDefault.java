@@ -7,9 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityBoar;
+import projectzulu.common.mobs.models.ModelBoar;
 
 import com.google.common.base.Optional;
 
@@ -19,7 +20,8 @@ public class BoarDefault extends DefaultSpawnable{
 		super("Boar", EntityBoar.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
-		
+		setModelAndRender(ModelBoar.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 = (122 << 16) + (77 << 8) + 32;
 		eggColor2 = (158 << 16) + (99 << 8) + 42;
 		defaultBiomesToSpawn.add(BiomeGenBase.taiga.biomeName);

@@ -4,8 +4,10 @@ import net.minecraft.item.ItemStack;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultWithEgg;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.mobs.entity.EntityMinotaur;
+import projectzulu.common.mobs.models.ModelMinotaur;
 
 import com.google.common.base.Optional;
 
@@ -14,7 +16,8 @@ public class MinotaurDefault extends DefaultWithEgg{
 	public MinotaurDefault(){
 		super("Minotaur", EntityMinotaur.class);		
 		setRegistrationProperties(128, 3, true);
-		
+		setModelAndRender(ModelMinotaur.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 = (51 << 16) + (34 << 8) + 8;			eggColor2 = (255 << 16) + (255 << 8) + 255;
 	}
 	

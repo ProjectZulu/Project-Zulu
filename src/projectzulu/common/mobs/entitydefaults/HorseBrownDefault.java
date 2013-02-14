@@ -7,8 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.mobs.entity.EntityHorseBrown;
+import projectzulu.common.mobs.models.ModelHorse;
 
 import com.google.common.base.Optional;
 
@@ -18,7 +20,8 @@ public class HorseBrownDefault extends DefaultSpawnable{
 		super("Horse Brown", EntityHorseBrown.class);		
 		setSpawnProperties(EnumCreatureType.creature, 5, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
-		
+		setModelAndRender(ModelHorse.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 =  (137 << 16) + (78 << 8) + 0;						eggColor2 = (81 << 16) + (46 << 8) + 0;
 		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName); 		

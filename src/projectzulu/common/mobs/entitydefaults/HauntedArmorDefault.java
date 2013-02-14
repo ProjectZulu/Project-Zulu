@@ -1,14 +1,13 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultWithEgg;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityHauntedArmor;
+import projectzulu.common.mobs.models.ModelHauntedArmor;
 
 import com.google.common.base.Optional;
 
@@ -17,7 +16,8 @@ public class HauntedArmorDefault extends DefaultWithEgg{
 	public HauntedArmorDefault(){
 		super("Haunted Armor", EntityHauntedArmor.class);		
 		setRegistrationProperties(128, 3, true);
-		
+		setModelAndRender(ModelHauntedArmor.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+
 		eggColor1 = (194 << 16) + (194 << 8) + 194;		eggColor2 = (251 << 16) + (246 << 8) + 36;
 	}
 	

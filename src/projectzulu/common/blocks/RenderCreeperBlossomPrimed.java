@@ -17,8 +17,8 @@ public class RenderCreeperBlossomPrimed extends Render{
 	
     private RenderBlocks blockRenderer = new RenderBlocks();
 
-    public RenderCreeperBlossomPrimed(){
-        this.shadowSize = 0.5F;
+    public RenderCreeperBlossomPrimed(float shadowSize){
+        this.shadowSize = shadowSize;
     }
 
     public void func_76992_a(EntityCreeperBlossomPrimed par1EntityTNTPrimed, double par2, double par4, double par6, float par8, float par9){

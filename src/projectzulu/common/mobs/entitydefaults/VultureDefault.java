@@ -7,9 +7,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityVulture;
+import projectzulu.common.mobs.models.ModelVulture;
 
 import com.google.common.base.Optional;
 
@@ -19,6 +20,7 @@ public class VultureDefault extends DefaultSpawnable{
 		super("Vulture", EntityVulture.class);		
 		setSpawnProperties(EnumCreatureType.monster, 2, 5, 1, 3);
 		setRegistrationProperties(128, 3, true);
+		setModelAndRender(ModelVulture.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
 		eggColor1 = (78 << 16) + (72 << 8) + 56;
 		eggColor2 = (120 << 16) + (110 << 8) + 86;
