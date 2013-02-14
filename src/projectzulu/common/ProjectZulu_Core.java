@@ -115,9 +115,9 @@ public class ProjectZulu_Core{
         
 		ProjectZulu_Core.proxy.registerModelsAndRender();
 		ProjectZuluLog.info("Load Entity Properties");
-		CustomEntityManager.instance.loadCreaturesFromConfig(modConfigDirectoryFile);
+		CustomEntityManager.INSTANCE.loadCreaturesFromConfig(modConfigDirectoryFile);
 		ProjectZuluLog.info("Registering Entites");
-		CustomEntityManager.instance.registerEntities();
+		CustomEntityManager.INSTANCE.registerEntities();
 	}
 	
 	@PostInit
@@ -126,9 +126,9 @@ public class ProjectZulu_Core{
 		GameRegistry.registerWorldGenerator(new WorldGeneratorZulu());
 		
 		ProjectZuluLog.info("Load Entity Biomes");
-		CustomEntityManager.instance.loadBiomesFromConfig(modConfigDirectoryFile);
+		CustomEntityManager.INSTANCE.loadBiomesFromConfig(modConfigDirectoryFile);
 		ProjectZuluLog.info("Register Entity Spawns");
-		CustomEntityManager.instance.addSpawns();
+		CustomEntityManager.INSTANCE.addSpawns();
 	}
 	
 }

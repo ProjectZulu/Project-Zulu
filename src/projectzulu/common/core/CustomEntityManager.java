@@ -7,8 +7,8 @@ import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class CustomEntityManager {
-	public static CustomEntityManager instance = new CustomEntityManager();
+public enum CustomEntityManager {
+	INSTANCE;
 	private ArrayList<DefaultEntity> entities = new ArrayList<DefaultEntity>();	
 	
 	private CustomEntityManager(){}

@@ -90,7 +90,7 @@ public class ProjectZulu_Mobs {
 	public void load(FMLPostInitializationEvent event){}
 	
 	private void declareModuleEntities(){
-		CustomEntityManager.instance.addEntity(
+		CustomEntityManager.INSTANCE.addEntity(
 			new ArmadilloDefault(), 	new SandwormDefault(), 		new LizardDefault(), 		new LizardSpitDefault(),
 			new PharaohDefault(),		new MummyDefault(),			new VultureDefault(), 		new TreeEntDefault(),
 			new MammothDefault(), 		new FoxDefault(),			new BoarDefault(), 			new MimicDefault(),

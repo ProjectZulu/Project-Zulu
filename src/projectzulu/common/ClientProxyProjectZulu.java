@@ -141,7 +141,7 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 	
 	@Override
 	public void registerModelsAndRender(){
-		CustomEntityManager.instance.registerModelsAndRender();
+		CustomEntityManager.INSTANCE.registerModelsAndRender();
 	}
 	
 	@Override

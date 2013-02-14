@@ -167,7 +167,7 @@ public class ProjectZulu_Blocks {
 	}
 	
 	private void declareModuleEntities(){
-		CustomEntityManager.instance.addEntity(
+		CustomEntityManager.INSTANCE.addEntity(
 				new CreeperBlossomPrimedDefault());
 	}
 }
