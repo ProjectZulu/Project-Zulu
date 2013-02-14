@@ -19,6 +19,7 @@ import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import projectzulu.common.core.PacketIDs;
 import projectzulu.common.core.packets.PacketManagerPlaySound;
+import projectzulu.common.core.packets.PacketManagerSyncSpawnerGameRule;
 import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
@@ -27,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityLimitedMobSpawner extends TileEntity{
     /** The stored delay before a new spawn. */
     public int delay = -1;
-    
+    private int ticksExisted = 0;
     /**
      * The string ID of the mobs being spawned from this spawner. Defaults to pig, apparently.
      */
@@ -110,11 +111,17 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
         this.mobID = par1Str;
     }
 
+    /* Boolean to Hold the TestAdventure Gamerule Result, as it Only Exists serverside */
+    public boolean debugMode;
     /**
      * Returns true if there is a player in range (using World.getClosestPlayer)
      */
     public boolean anyPlayerInRange(){
-    	return this.worldObj.getClosestVulnerablePlayer((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D, (double)this.requiredPlayerRange) != null;
+    	if(debugMode){
+            return this.worldObj.getClosestPlayer((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D, (double)this.requiredPlayerRange) != null;
+    	}else{
+        	return this.worldObj.getClosestVulnerablePlayer((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D, (double)this.requiredPlayerRange) != null;
+    	}
     }
 
     public boolean isEditable(){
@@ -138,6 +145,14 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      * ticks and creates a new spawn inside its implementation.
      */
     public void updateEntity(){
+    	//TODO: Debug Mode should be implemented/toggled in the GUI, This is a short and quick Stopgap until that can be done
+    	if(!worldObj.isRemote && (ticksExisted % 540 ==0 || debugMode != worldObj.getGameRules().getGameRuleBooleanValue("testAdventure"))){
+        	debugMode = worldObj.getGameRules().getGameRuleBooleanValue("testAdventure");
+    		PacketManagerSyncSpawnerGameRule pcktManager = PacketIDs.spawnerGameRuleSync.createPacketManager();
+    		pcktManager.setPacketData(xCoord, yCoord, zCoord, debugMode);
+    		PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 60, worldObj.getWorldInfo().getDimension(), pcktManager.createPacket());
+    	}
+    	
     	if(maxSpawnableEntities > 0 && spawnedEntities >= maxSpawnableEntities){
     		worldObj.setBlock(xCoord, yCoord, zCoord, 0);
     	}
@@ -197,7 +212,9 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
                             this.writeNBTTagsTo(var13);
                             this.worldObj.spawnEntityInWorld(var13);
                             this.worldObj.playAuxSFX(2004, this.xCoord, this.yCoord, this.zCoord, 0);
-                            spawnedEntities++;
+                        	if(!debugMode){
+                                spawnedEntities++;
+                            }
                             if(spawnerTags != null){
                                 PacketManagerPlaySound packetManager = (PacketManagerPlaySound) PacketIDs.playSound.createPacketManager();
                                 packetManager.setPacketData(xCoord, yCoord, zCoord, spawnerTags.spawnSound);

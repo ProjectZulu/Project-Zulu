@@ -3,6 +3,7 @@ package projectzulu.common;
 import java.io.File;
 import java.io.FilenameFilter;
 
+import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
@@ -87,6 +88,17 @@ public class ProjectZulu_Dungeon {
 	
 	@ServerStarting
 	public void serverStart(FMLServerStartingEvent event){
+		/* Add Custom Gamerules */
+		/* Add Custom GameRules */
+		GameRules gameRule = event.getServer().worldServerForDimension(0).getGameRules();
+		/* Add Does Campfire Burn GameRule: Only if not Present */
+		String ruleName = "testAdventure";
+		if(gameRule.hasRule(ruleName)){
+		}else {
+			gameRule.addGameRule(ruleName, "false");
+		}		
+		
+		/* Add Custom Commands */
 		event.registerServerCommand(new CommandPlaySound());
 		LanguageRegistry.instance().addStringLocalization("commands.playsound.usage", "/playsound [targetPlayer] [fileName] <range> <x> <y> <z>");
 		event.registerServerCommand(new CommandStreamSound());

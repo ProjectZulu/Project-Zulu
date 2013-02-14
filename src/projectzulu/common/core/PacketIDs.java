@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import projectzulu.common.core.packets.PacketManagerPlaySound;
 import projectzulu.common.core.packets.PacketManagerStreamSound;
+import projectzulu.common.core.packets.PacketManagerSyncSpawnerGameRule;
 import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
@@ -12,73 +13,80 @@ import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
 
 public enum PacketIDs {
 	/* PacketID: Unknown Packet, send a Warning */
-	unknown(0) {
+	unknown(0){
 		@Override
 		public PacketManager createPacketManager() {
 			return null;
 		}
 	},
 	/*PacketID: Temperature Packet*/
-	temperature(1) {
+	temperature(1){
 		@Override
 		public PacketManager createPacketManager() {
 			return null;
 		}
 	},
 	/* PacketID: Update Tile Entity Text [C->S] */
-	tileEntityText(2) {
+	tileEntityText(2){
 		@Override
 		public PacketManager createPacketManager() {
 			return null;
 		}
 	},
 	/* Packet: Sync Centipede Followers --> Master */
-	followerMasterData(3) {
+	followerMasterData(3){
 		@Override
 		public PacketManagerFollowerMasterData createPacketManager() {
 			return new PacketManagerFollowerMasterData(index);
 		}
 	},
 	/* Packet: Sync Entity Name to Server from GUI */
-	entityNameSync(4) {
+	entityNameSync(4){
 		@Override
 		public PacketManager createPacketManager() {
 			return null;
 		}
 	},
 	/* Packet: Perform EntityGenericTameable Taming Effect */
-	tameParticleEffect(5) {
+	tameParticleEffect(5){
 		@Override
 		public PacketManager createPacketManager() {
 			return null;
 		}
 	},
 	/* Packet: Sync Entity Animation Time */
-	animTime(6) {
+	animTime(6){
 		@Override
 		public PacketManagerAnimTime createPacketManager() {
 			return  new PacketManagerAnimTime(index);
 		}
 	},
 	/* Packet: Sync Mob Spawner Settings From Client to Server */
-	mobSpawner(7) {
+	mobSpawner(7){
 		@Override
 		public PacketManagerMobSpawner createPacketManager() {
 			return new PacketManagerMobSpawner(index);
 		}
 	},
 	/* Packet: Sync Sound to Play from Server to Client */
-	playSound(8) {
+	playSound(8){
 		@Override
 		public PacketManagerPlaySound createPacketManager() {
 			return new PacketManagerPlaySound(index);
 		}
 	},
 	/* Packet: Sync Sound to Play from Server to Client */
-	streamSound(9) {
+	streamSound(9){
 		@Override
 		public PacketManagerStreamSound createPacketManager() {
 			return new PacketManagerStreamSound(index);
+		}
+	},
+	/* Packet: Sync debug Mode Tag for L.Mob Spawner from Server to Client */
+	spawnerGameRuleSync(10){
+		@Override
+		public PacketManagerSyncSpawnerGameRule createPacketManager() {
+			return new PacketManagerSyncSpawnerGameRule(index);
 		}
 	};
 
