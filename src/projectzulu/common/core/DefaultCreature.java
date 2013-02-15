@@ -79,8 +79,25 @@ public abstract class DefaultCreature implements DefaultEntity{
 			}else{
 				RenderingRegistry.registerEntityRenderingHandler(mobClass, (Render)Class.forName(renderClass).getConstructor(Float.TYPE).newInstance(0.5f));
 			}
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException 
-				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+		}catch (InstantiationException e){
+			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
+			e.printStackTrace();
+		}catch (IllegalAccessException e){
+			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
+			e.printStackTrace();
+		}catch (IllegalArgumentException e){
+			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
+			e.printStackTrace();
+		}catch (InvocationTargetException e){
+			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
+			e.printStackTrace();
+		}catch (NoSuchMethodException e){
+			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
+			e.printStackTrace();
+		}catch (SecurityException e){
+			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
+			e.printStackTrace();
+		}catch (ClassNotFoundException e){
 			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
 			e.printStackTrace();
 		}
