@@ -20,7 +20,7 @@ import com.google.common.base.CharMatcher;
 public class CreatureFields implements DataFields {
 	public int rowIndex;
 	public int elementID;
-	private boolean isEnabled = false;
+	private boolean isEnabled = true;
 	private boolean displayAdvancedOptions = false;
 	private final static int rowZeroX = 0;
 	private final static int rowZeroY = 10;
