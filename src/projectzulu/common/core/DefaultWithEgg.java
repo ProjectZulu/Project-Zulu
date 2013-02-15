@@ -3,6 +3,7 @@ package projectzulu.common.core;
 import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraftforge.common.Configuration;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.ProjectZulu_Mobs;
 
 public abstract class DefaultWithEgg extends DefaultCreature{
@@ -24,8 +25,8 @@ public abstract class DefaultWithEgg extends DefaultCreature{
 	@Override
 	public void registerEgg() {
 		super.registerEgg();
-		int eggID = ProjectZulu_Mobs.getNextDefaultEggID();
-		while(EntityList.IDtoClassMapping.containsKey(eggID)){ eggID = ProjectZulu_Mobs.getNextDefaultEggID(); }
+		int eggID = ProjectZulu_Core.getNextDefaultEggID();
+		while(EntityList.IDtoClassMapping.containsKey(eggID)){ eggID = ProjectZulu_Core.getNextDefaultEggID(); }
 		EntityList.IDtoClassMapping.put(eggID, mobClass); 
 		EntityList.entityEggs.put(eggID, new EntityEggInfo(eggID, eggColor1, eggColor2 ));
 	}

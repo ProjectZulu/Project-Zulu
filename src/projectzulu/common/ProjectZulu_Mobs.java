@@ -62,11 +62,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 
 public class ProjectZulu_Mobs {
 	
-	private static int defaultmobID = 0;
-	public static int getNextDefaultMobID(){ return defaultmobID++; }
-	
-	private static int defaulteggID = 300;
-	public static int getNextDefaultEggID(){ return defaulteggID++; }
 
 	private static int id = 300;
 	private static int eggID = 300;

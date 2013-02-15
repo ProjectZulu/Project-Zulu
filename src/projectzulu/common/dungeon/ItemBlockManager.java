@@ -25,7 +25,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void register() {
 			Block block = BlockList.limitedMobSpawner.get();
-			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "LimitedMobSpawner");
+			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Limited Mob Spawner");
 			/* Register TileEntity Render */
 			GameRegistry.registerTileEntity(TileEntityLimitedMobSpawner.class, "TileEntityLimitedMobSpawner");
 			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityLimitedMobSpawner.class, "projectzulu.common.dungeon.TileEntityLimitedMobSpawnerRenderer");

@@ -146,7 +146,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      */
     public void updateEntity(){
     	//TODO: Debug Mode should be implemented/toggled in the GUI, This is a short and quick Stopgap until that can be done
-    	if(!worldObj.isRemote && (ticksExisted % 540 ==0 || debugMode != worldObj.getGameRules().getGameRuleBooleanValue("testAdventure"))){
+    	if(!worldObj.isRemote && (ticksExisted % 200 == 0 || debugMode != worldObj.getGameRules().getGameRuleBooleanValue("testAdventure"))){
         	debugMode = worldObj.getGameRules().getGameRuleBooleanValue("testAdventure");
     		PacketManagerSyncSpawnerGameRule pcktManager = PacketIDs.spawnerGameRuleSync.createPacketManager();
     		pcktManager.setPacketData(xCoord, yCoord, zCoord, debugMode);

@@ -36,6 +36,11 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ProjectZulu_Core{
 	
+	private static int defaultEntityID = 0;
+	public static int getNextDefaultEntityID(){ return defaultEntityID++; }
+	private static int defaulteggID = 300;
+	public static int getNextDefaultEggID(){ return defaulteggID++; }
+	
 	@Instance(DefaultProps.CoreModId)
 	public static ProjectZulu_Core modInstance;
 	public static final CreativeTabs projectZuluCreativeTab = new CreativeTab(CreativeTabs.creativeTabArray.length, "projectZuluTab");
