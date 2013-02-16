@@ -1,13 +1,18 @@
 package projectzulu.common.dungeon;
 
 
+import java.util.ArrayList;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
@@ -18,8 +23,6 @@ import projectzulu.common.core.ProjectZuluLog;
 import com.google.common.base.CharMatcher;
 
 public class CreatureFields implements DataFields {
-	public int rowIndex;
-	public int elementID;
 	private boolean isEnabled = true;
 	private boolean displayAdvancedOptions = false;
 	private final static int rowZeroX = 0;
@@ -37,31 +40,28 @@ public class CreatureFields implements DataFields {
 	private GuiButton searchForEntity;
 	private GuiButton advancedOptions;
 
-	CreatureFields(Integer elementID){
-		this.elementID = elementID;
-	}
+	CreatureFields(){}
 	
-	public DataFields createFields(int rowIndex, FontRenderer fontRenderer, int screenWidth, int screenHeight, Point backgroundSize){
-		this.rowIndex = rowIndex;		
-		creatureNameField = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(38,39+rowOffset()+7), new Point(100,18),
+	public DataFields createFields(FontRenderer fontRenderer, int screenWidth, int screenHeight, Point backgroundSize){
+		creatureNameField = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(38,39+7), new Point(100,18),
 				creatureNameField != null ? creatureNameField.getText() : "", 60);
 		
-		soundNameField = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(38,39+rowOffset()+7), new Point(100,18),
+		soundNameField = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(38,39+7), new Point(100,18),
 				soundNameField != null ? soundNameField.getText() : "", 60);
 		
-		weightedChanceField = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(181+4,39+rowOffset()+7), new Point(20,18),
+		weightedChanceField = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(181+4,39+7), new Point(20,18),
 				weightedChanceField != null ? weightedChanceField.getText() : "1", 2);
 		
 		/* Note ButtonID does not Matter Here as these don't hook into GUI.controls */
 		removeButton = new GuiButton(0,
 				(screenWidth - (int)backgroundSize.getX())/2+rowZeroX+228,
-				(screenHeight - (int)backgroundSize.getY())/2+rowZeroY+38+rowOffset(), 20, 20, "Del");
+				(screenHeight - (int)backgroundSize.getY())/2+rowZeroY+38, 20, 20, "Del");
 		searchForEntity = new GuiButton(1,
 				(screenWidth - (int)backgroundSize.getX())/2+rowZeroX+138+3,
-				(screenHeight - (int)backgroundSize.getY())/2+rowZeroY+38+rowOffset(), 20, 20, "...");
+				(screenHeight - (int)backgroundSize.getY())/2+rowZeroY+38, 20, 20, "...");
 		advancedOptions = new GuiButton(2,
 				(screenWidth - (int)backgroundSize.getX())/2+rowZeroX+205,
-				(screenHeight - (int)backgroundSize.getY())/2+rowZeroY+38+rowOffset(), 20, 20, "Opt");
+				(screenHeight - (int)backgroundSize.getY())/2+rowZeroY+38, 20, 20, "Opt");
 
 		return this;
 	}
@@ -80,7 +80,7 @@ public class CreatureFields implements DataFields {
 	}
 	
 	@Override
-	public void loadFromTileEntity(TileEntityLimitedMobSpawner limitedMobSpawner) {
+	public void loadFromTileEntity(TileEntityLimitedMobSpawner limitedMobSpawner, int elementID) {
 		if(limitedMobSpawner.getSpawnList() != null && limitedMobSpawner.getSpawnList().size() > elementID-1){
 			TileEntityLimitedMobSpawnData spawnEntryData = ((TileEntityLimitedMobSpawnData)limitedMobSpawner.getSpawnList().get(elementID-1));
 			if(spawnEntryData.type.length() > 0){
@@ -99,6 +99,17 @@ public class CreatureFields implements DataFields {
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setString("Type", creatureNameField.getText());
 			nbt.setInteger("Weight", Integer.parseInt(weightedChanceField.getText()));
+			
+			if(loadedNBT == null || loadedNBT.hasNoTags()){
+				NBTTagCompound entityNBT = new NBTTagCompound();
+	            Entity desiredEntity = EntityList.createEntityByName(creatureNameField.getText(), (World)null);
+				if(desiredEntity != null){
+					desiredEntity.writeToNBT(entityNBT);				
+//					Tree nbtTree = new Tree(entityNBT);
+//					NBTTagCompound reWritten = nbtTree.toNBTTagCompound();
+					loadedNBT = entityNBT;
+				}
+			}
 			nbt.setCompoundTag("Properties", loadedNBT != null ? loadedNBT : new NBTTagCompound());
 			nbt.setString("SpawnSound", soundNameField.getText());
 			limitedMobSpawner.getSpawnList().add(new TileEntityLimitedMobSpawnData(limitedMobSpawner, nbt));
@@ -169,20 +180,14 @@ public class CreatureFields implements DataFields {
 			}
 			
 			if(par3 == 0 && removeButton.mousePressed(mc, par1, par2)){
-				if(spawnerGUI.lastCalledElementID == elementID){
-					spawnerGUI.closeList();
-				}
+				spawnerGUI.closeList();
                 setIsEnabled(false);
                 mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
             }
 			
 			if(par3 == 0 && searchForEntity.mousePressed(mc, par1, par2)){
-				if(spawnerGUI.lastCalledElementID == elementID){
-					spawnerGUI.closeList();
-				}else{
-					spawnerGUI.closeList();
-					spawnerGUI.openList( displayAdvancedOptions ? ListType.Sound : ListType.Creature, elementID);
-				}
+				spawnerGUI.closeList();
+				spawnerGUI.openList( displayAdvancedOptions ? ListType.Sound : ListType.Creature);
 				mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
 			}
 			
@@ -204,14 +209,14 @@ public class CreatureFields implements DataFields {
 		if(!isEnabled){
 			mc.fontRenderer.drawString(titles[0],
 					(int)(screenSize.getX() - backgroundSize.getX())/2+rowZeroX+ 6,
-					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY +48+rowOffset(), 4210752); // White: 16777215
+					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY +48, 4210752); // White: 16777215
 			mc.fontRenderer.drawString(titles[1],
 					(int)(screenSize.getX() - backgroundSize.getX())/2+rowZeroX+ 165,
-					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY +48+rowOffset(), 4210752);
+					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY +48, 4210752);
 
 			bindTexture(mc);
-	        drawBackgroundBox(new Point(36+rowZeroX,rowZeroY+39+rowOffset()-1), screenSize, backgroundSize, new Point(154,44), new Point(102,20));
-	        drawBackgroundBox(new Point(181+rowZeroX,rowZeroY+39+rowOffset()-1), screenSize, backgroundSize, new Point(215,0), new Point(20,20));
+	        drawBackgroundBox(new Point(36+rowZeroX,rowZeroY+39-1), screenSize, backgroundSize, new Point(154,44), new Point(102,20));
+	        drawBackgroundBox(new Point(181+rowZeroX,rowZeroY+39-1), screenSize, backgroundSize, new Point(215,0), new Point(20,20));
 	        return;
 		}
 		
@@ -222,36 +227,29 @@ public class CreatureFields implements DataFields {
 		if(displayAdvancedOptions){
 			mc.fontRenderer.drawString(titles[2],
 					(int)(screenSize.getX() - backgroundSize.getX())/2+rowZeroX + 6,
-					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY +48+rowOffset(), 4210752); // White: 16777215
+					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY +48, 4210752); // White: 16777215
 			bindTexture(mc);
-	        drawBackgroundBox(new Point(36+rowZeroX,39+rowZeroY+rowOffset()-1), screenSize, backgroundSize, new Point(154,22), new Point(102,20));
+	        drawBackgroundBox(new Point(36+rowZeroX,39+rowZeroY-1), screenSize, backgroundSize, new Point(154,22), new Point(102,20));
 			soundNameField.drawTextBox();
 		}else{
 			mc.fontRenderer.drawString(titles[0],
 					(int)(screenSize.getX() - backgroundSize.getX())/2+rowZeroX + 6,
-					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY +48+rowOffset(), 4210752); // White: 16777215
+					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY +48, 4210752); // White: 16777215
 			mc.fontRenderer.drawString(titles[1],
 					(int)(screenSize.getX() - backgroundSize.getX())/2+rowZeroX+165,
-					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY+48+rowOffset(), 4210752);
+					(int)(screenSize.getY() - backgroundSize.getY())/2+rowZeroY+48, 4210752);
 			
 			if(isEnabled){
 				/* Draw TextBox Background Objects */
 				bindTexture(mc);
-		        drawBackgroundBox(new Point(36+rowZeroX,39+rowZeroY+rowOffset()-1), screenSize, backgroundSize, new Point(154,22), new Point(102,20));
-		        drawBackgroundBox(new Point(181+rowZeroX,39+rowZeroY+rowOffset()-1), screenSize, backgroundSize, new Point(236,0), new Point(20,20));
+		        drawBackgroundBox(new Point(36+rowZeroX,39+rowZeroY-1), screenSize, backgroundSize, new Point(154,22), new Point(102,20));
+		        drawBackgroundBox(new Point(181+rowZeroX,39+rowZeroY-1), screenSize, backgroundSize, new Point(236,0), new Point(20,20));
 				
 				/* Draw Interactive+Text Boxes */
 				creatureNameField.drawTextBox();
 				weightedChanceField.drawTextBox();
 			}
 		}
-	}
-	
-	/**
-	 * Used for the Height difference due to each row
-	 */
-	private int rowOffset(){
-		return rowIndex*24;
 	}
 	
 	private void bindTexture(Minecraft mc){

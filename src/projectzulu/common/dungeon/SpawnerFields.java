@@ -14,9 +14,7 @@ import projectzulu.common.core.DefaultProps;
 import com.google.common.base.CharMatcher;
 
 public class SpawnerFields implements DataFields{
-	private int rowIndex;
 	private boolean isEnabled = true;
-	public int elementID;
 
 	private GuiTextField minSpawnDelay;
 	private GuiTextField maxSpawnDelay;
@@ -27,13 +25,9 @@ public class SpawnerFields implements DataFields{
 	int[] titleOffset;
 	int totalFieldWidth;
 	
-	SpawnerFields(Integer elementID){
-		this.elementID = elementID;
-	}
+	SpawnerFields(){}
 	
-	public DataFields createFields(int rowIndex, FontRenderer fontRenderer, int screenWidth, int screenHeight, Point backgroundSize){
-		this.rowIndex = rowIndex;
-		
+	public DataFields createFields(FontRenderer fontRenderer, int screenWidth, int screenHeight, Point backgroundSize){		
 		minSpawnDelay = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(111+1,22+2), new Point(20,14),
 				minSpawnDelay != null ? minSpawnDelay.getText() : "");
 
@@ -65,7 +59,7 @@ public class SpawnerFields implements DataFields{
 	}
 	
 	@Override
-	public void loadFromTileEntity(TileEntityLimitedMobSpawner limitedMobSpawner){
+	public void loadFromTileEntity(TileEntityLimitedMobSpawner limitedMobSpawner, int elementID){
 		minSpawnDelay.setText(Integer.toString(limitedMobSpawner.getMinSpawnDelay()/20));
 		maxSpawnDelay.setText(Integer.toString(limitedMobSpawner.getMaxSpawnDelay()/20));
 		maxToSpawn.setText(Integer.toString(limitedMobSpawner.getMaxSpawnableEntities()));

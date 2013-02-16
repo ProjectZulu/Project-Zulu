@@ -38,7 +38,6 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 	boolean fieldsCreated = false;
 
 	/* Used by Scrolling Creature List to know which Field to Return a Selected String to */
-	int lastCalledElementID = -1;
 	GUISelectCreatureList scrollingList;
 	private ListType currentListType = ListType.NONE;
 	List<PairFullShortName<String, String>> creatureListName = new ArrayList<PairFullShortName<String, String>>();
@@ -49,6 +48,12 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     
     public GuiLimitedMobSpawner(TileEntityLimitedMobSpawner limitedMobSpawner){
     	this.limitedMobSpawner = limitedMobSpawner;
+    	
+    	if(limitedMobSpawner.getSpawnList() != null){
+        	numberOfFields = limitedMobSpawner.getSpawnList().size()+1;
+        }else{
+        	numberOfFields = 1;
+        }
     }
     
 
@@ -75,18 +80,17 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 
         limitedMobSpawner.setEditable(false);
         
-        
         for (int i = 0; i < numberOfFields; i++) {
         	if(dataFields.isEmpty() || dataFields.size() <= i){
     			if(i == 0){
-    				dataFields.add(0, new SpawnerFields(0).createFields(0 , fontRenderer, this.width, this.height, backgroundSize));
-    				dataFields.get(0).loadFromTileEntity(limitedMobSpawner);
+    				dataFields.add(0, new SpawnerFields().createFields(fontRenderer, this.width, this.height, backgroundSize));
+    				dataFields.get(0).loadFromTileEntity(limitedMobSpawner, i);
     			}else{
-                	dataFields.add(i, new CreatureFields(i).createFields(i, fontRenderer, this.width, this.height, backgroundSize));
-                    dataFields.get(i).loadFromTileEntity(limitedMobSpawner);
+                	dataFields.add(i, new CreatureFields().createFields(fontRenderer, this.width, this.height, backgroundSize));
+                    dataFields.get(i).loadFromTileEntity(limitedMobSpawner, i);
     			}
 			}else{
-				dataFields.get(i).createFields(i , fontRenderer, this.width, this.height, backgroundSize);
+				dataFields.get(i).createFields(fontRenderer, this.width, this.height, backgroundSize);
 			}
 		}
         
@@ -105,8 +109,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 		}
     }
     
-    public void openList(ListType listType, int callingElementID){
-    	lastCalledElementID = callingElementID;
+    public void openList(ListType listType){
     	currentListType = listType;
     	switch (currentListType) {
     	case Creature:
@@ -158,7 +161,6 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     }
     
     public void closeList(){
-    	lastCalledElementID = -1;
     	currentListType = ListType.NONE;
         scrollingList = null;
     }
@@ -185,7 +187,6 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     protected void actionPerformed(GuiButton button){
     	/* If Not on Main Screen */
     	if (button.enabled){
-    		
     		switch (ButtonIDs.getButtonByIndex(button.id)) {
     		case CANCEL:
     			/* Close Menu With Saving*/
@@ -210,21 +211,18 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     			break;
     		case DELENTRY:
     			if(currentDataField != 0){
-    				ProjectZuluLog.info("Removing Element %s from Size %s", currentDataField, dataFields.size());
         			dataFields.remove(currentDataField);
         			currentDataField--;
     			}
     			break;
     		case NEWENTRY:
-				ProjectZuluLog.info("Added New Element at %s", dataFields.size());
-            	dataFields.add(new CreatureFields(dataFields.size()).createFields(dataFields.size(), fontRenderer, this.width, this.height, backgroundSize));
-                dataFields.get(dataFields.size()-1).loadFromTileEntity(limitedMobSpawner);
+            	dataFields.add(new CreatureFields().createFields(fontRenderer, this.width, this.height, backgroundSize));
+                dataFields.get(dataFields.size()-1).loadFromTileEntity(limitedMobSpawner, dataFields.size()-1);
     			break;
     		default:
     			throw new IllegalStateException("Button action does not exist.");
     		}            
     	}
-    	
     }
    
     public void saveToTileEntity(){

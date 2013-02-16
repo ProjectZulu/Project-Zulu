@@ -35,8 +35,8 @@ public class GUISelectCreatureList extends GuiScrollingList{
 
     @Override
     protected void elementClicked(int clickedIndex, boolean var2){
-    	if(parent.lastCalledElementID != -1 && parent.getDataField(parent.lastCalledElementID) instanceof CreatureFields){
-			((CreatureFields)parent.getDataField(parent.lastCalledElementID)).setDataFromList(listNames.get(clickedIndex).getFullName(), listType);
+    	if(parent.getDataField(parent.currentDataField) instanceof CreatureFields){
+			((CreatureFields)parent.getDataField(parent.currentDataField)).setDataFromList(listNames.get(clickedIndex).getFullName(), listType);
     		parent.closeList();
     	}
     	selectedElement = clickedIndex;
