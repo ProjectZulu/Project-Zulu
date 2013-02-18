@@ -10,7 +10,7 @@ public interface DataFields {
 		
 	public abstract boolean isEnabled();
 	public abstract void setIsEnabled(boolean isEnabled);
-	public abstract DataFields createFields(FontRenderer fontRenderer, int screenWidth, int screenHeight, Point backgroundSize);
+	public abstract DataFields createFields(Minecraft mc, int screenWidth, int screenHeight, Point backgroundSize);
 	public abstract void loadFromTileEntity(TileEntityLimitedMobSpawner limitedMobSpawner, int elementID);
 	public abstract void saveToTileEntity(TileEntityLimitedMobSpawner limitedMobSpawner);
 	

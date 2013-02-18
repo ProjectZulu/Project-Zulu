@@ -1,5 +1,6 @@
 package projectzulu.common.dungeon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import projectzulu.common.core.ProjectZuluLog;
@@ -22,12 +23,44 @@ public class NBTNode {
 		return data;
 	}
 	
-	public NBTNode getParent(NBTNode child){
-		return child.parent;
+	public String getValue(){
+		return NBTHelper.getByID(data.getId()).getValue(data);
+	}
+	
+	public NBTBase createNBTFromString(String newValue){
+		NBTBase nbtBase = null;
+		try{
+			nbtBase = NBTHelper.getByID(data.getId()).getNBTFromString(this, newValue);
+		}catch(NumberFormatException e){
+			ProjectZuluLog.warning("Rejecting NBTTag Value %s due to incorrect formatting", newValue);
+		}
+		return nbtBase;
+	}
+	
+	public NBTNode getParent(){
+		return parent;
+	}
+	
+	public boolean replaceChild(NBTNode childNode, NBTNode newChild){
+		int index = children.indexOf(childNode);
+		if(index > -1){
+			children.set(index, newChild);
+			return true;
+		}
+		return false;
 	}
 	
 	public List<NBTNode> getChildren() {
 		return children;
+	}
+	
+	public int countParents(){
+		int numParents = 0;
+		if(parent != null){
+			numParents++;
+			numParents += parent.countParents();
+		}
+		return numParents;
 	}
 	
 	public boolean addChild(NBTBase data){
@@ -41,6 +74,13 @@ public class NBTNode {
 	public void writeNodeandChildrenToNBT(NBTTagCompound nbtTagCompound){
 		NBTHelper helper = NBTHelper.getByID(data.getId());
 		helper.writeToNBT(nbtTagCompound, this);
+	}
+	
+	public void writeNodeandChildrenToArrayList(ArrayList<NBTNode> nodeList){
+		nodeList.add(this);
+		for (NBTNode child : getChildren()) {
+			child.writeNodeandChildrenToArrayList(nodeList);
+		}
 	}
 	
 	@Override

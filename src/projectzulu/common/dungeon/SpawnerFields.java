@@ -27,20 +27,20 @@ public class SpawnerFields implements DataFields{
 	
 	SpawnerFields(){}
 	
-	public DataFields createFields(FontRenderer fontRenderer, int screenWidth, int screenHeight, Point backgroundSize){		
-		minSpawnDelay = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(111+1,22+2), new Point(20,14),
+	public DataFields createFields(Minecraft mc, int screenWidth, int screenHeight, Point backgroundSize){		
+		minSpawnDelay = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(111+1,22+2), new Point(20,14),
 				minSpawnDelay != null ? minSpawnDelay.getText() : "");
 
-		maxSpawnDelay = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(135+1,22+2), new Point(20,14),
+		maxSpawnDelay = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(135+1,22+2), new Point(20,14),
 				maxSpawnDelay != null ? maxSpawnDelay.getText() : "");
 
-		maxToSpawn = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(228+1,22+2), new Point(20,14),
+		maxToSpawn = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(228+1,22+2), new Point(20,14),
 				maxToSpawn != null ? maxToSpawn.getText() : "");
 
-		requiredPlayerRange = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(135+1,39+2), new Point(39,14),
+		requiredPlayerRange = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(135+1,39+2), new Point(39,14),
 				requiredPlayerRange != null ? requiredPlayerRange.getText() : "");
 		
-		maxNearbyEntities = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(228+1,39+2), new Point(39,14),
+		maxNearbyEntities = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(228+1,39+2), new Point(39,14),
 				maxNearbyEntities != null ? maxNearbyEntities.getText() : "");
 		return this;
 	}

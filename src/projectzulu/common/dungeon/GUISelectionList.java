@@ -10,14 +10,14 @@ import org.lwjgl.util.Point;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.PairFullShortName;
 
-public class GUISelectCreatureList extends GuiScrollingList{
+public class GUISelectionList extends GuiScrollingList{
 	
     private GuiLimitedMobSpawner parent;
     private List<PairFullShortName<String,String>> listNames;
     ListType listType;
     int selectedElement = -1;
     
-    public GUISelectCreatureList(GuiLimitedMobSpawner parent, List<PairFullShortName<String,String>> listNames, ListType listType, int listWidth, Point screenSize, Point backgroundSize){
+    public GUISelectionList(GuiLimitedMobSpawner parent, List<PairFullShortName<String,String>> listNames, ListType listType, int listWidth, Point screenSize, Point backgroundSize){
     	super(parent.getMinecraft(),
     			listWidth, backgroundSize.getY()+50, // Width, Height
     			(screenSize.getY()-backgroundSize.getY())/2+15, (screenSize.getY()-backgroundSize.getY())/2+backgroundSize.getY()-20, // Top, Bottom, 

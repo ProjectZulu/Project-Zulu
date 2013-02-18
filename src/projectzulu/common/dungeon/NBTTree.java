@@ -1,7 +1,6 @@
 package projectzulu.common.dungeon;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,4 +26,9 @@ public class NBTTree {
 		return (NBTTagCompound)nbtTagCompound.getTag("");
 	}
 	
+	public ArrayList<NBTNode> toArrayList(){
+		ArrayList<NBTNode> nodeList = new ArrayList<>(); 
+		root.writeNodeandChildrenToArrayList(nodeList);
+		return nodeList;
+	}
 }
