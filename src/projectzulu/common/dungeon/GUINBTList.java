@@ -24,7 +24,7 @@ public class GUINBTList extends GuiScrollingList{
     	super(mc,
     			listWidth, backgroundSize.getY()+50, // Width, Height
     			(screenSize.getY()-backgroundSize.getY())/2+100-14, (screenSize.getY()-backgroundSize.getY())/2+backgroundSize.getY()-60-12, // Top, Bottom, 
-    			(screenSize.getX()-backgroundSize.getX())/2+77, // Left
+    			(screenSize.getX()-backgroundSize.getX())/2+6, // Left
     			mc.fontRenderer.FONT_HEIGHT+8); // Element Height
     	this.parent = parent;
     	this.nodeTree = nodeTree;
@@ -97,7 +97,7 @@ public class GUINBTList extends GuiScrollingList{
 
     	GL11.glEnable(GL11.GL_TEXTURE_2D);
     	GL11.glDisable(GL11.GL_DEPTH_TEST);
-    	drawScrollOverlay(this.left, (screenSize.getY()-backgroundSize.getY())/2+4, this.top, 255, 255); // Top Overlay
+    	drawScrollOverlay(this.left, (screenSize.getY()-backgroundSize.getY())/2+55, this.top, 255, 255); // Top Overlay
     	drawScrollOverlay(this.left, this.bottom, (screenSize.getY()-backgroundSize.getY())/2+backgroundSize.getY()-4, 255, 255); // Bot Overlay
 //    	GL11.glEnable(GL11.GL_DEPTH_TEST);
 //    	GL11.glDisable(GL11.GL_TEXTURE_2D);

@@ -47,6 +47,7 @@ public class NBTNode {
 			children.set(index, newChild);
 			return true;
 		}
+		ProjectZuluLog.warning("Could not find Child %s with Parent %s ", childNode.getData().getName(), getData().getName());
 		return false;
 	}
 	
@@ -85,21 +86,42 @@ public class NBTNode {
 	
 	@Override
 	public boolean equals(Object otherObj) {
-		if (this == otherObj)
+		if (this == otherObj){
 			return true;
-		if (otherObj == null)
-			return false;
-		if (getClass() != otherObj.getClass())
-			return false;
-		
-		NBTNode otherNode = (NBTNode) otherObj;
-		if (children == null && otherNode.children != null && !children.equals(otherNode.children)) {
-			return false;
-		}else if(data == null && otherNode.data != null && !data.equals(otherNode.data)){
-			return false;
-		}else if (parent == null && otherNode.parent != null && !parent.equals(otherNode.parent)) {
+		}
+		if (otherObj == null){
 			return false;
 		}
+		if (getClass() != otherObj.getClass()){
+			return false;
+		}
+		
+		NBTNode otherNode = (NBTNode) otherObj;
+		
+		if(children == null){
+			if(otherNode.children != null){
+				return false;
+			}
+		}else if(!children.equals(otherNode.children)){
+			return false;
+		}
+		
+		if(data == null){
+			if(otherNode.data != null){
+				return false;
+			}
+		}else if(!data.equals(otherNode.data)){
+			return false;
+		}
+		
+		if(parent == null){
+			if(otherNode.parent != null){
+				return false;
+			}
+		}else if(!parent.equals(otherNode.parent)){
+			return false;
+		}
+		
 		return true;
 	}
 	

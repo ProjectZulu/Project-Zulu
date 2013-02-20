@@ -20,7 +20,7 @@ public class FoxDefault extends DefaultSpawnable{
 		super("Fox", EntityFox.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
-		setModelAndRender(ModelFox.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+		setModelAndRender(ModelFox.class, "projectzulu.common.mobs.renders.RenderTameable");
 
 		eggColor1 = (204 << 16) + (132 << 8) + 22;
 		eggColor2 = (224 << 16) + (224 << 8) + 224;

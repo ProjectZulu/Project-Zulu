@@ -72,14 +72,14 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	super.initGui();
         controlList.clear();
         Keyboard.enableRepeatEvents(true);
-        controlList.add(new GuiButton(ButtonIDs.BACKWARDS.index, this.width / 2 -25/2 -23, (this.height+backgroundSize.getY())/2-27-25+5, 25, 20, "<<"));
-        controlList.add(new GuiButton(ButtonIDs.FORWARD.index, this.width / 2 -25/2 +23, (this.height+backgroundSize.getY())/2-27-25+5, 25, 20, ">>"));
+        controlList.add(new GuiButton(ButtonIDs.BACKWARDS.index, this.width/2 -25/2 -38, (this.height+backgroundSize.getY())/2-47, 25, 20, "<<"));
+        controlList.add(new GuiButton(ButtonIDs.FORWARD.index, this.width/2 -25/2 +8, (this.height+backgroundSize.getY())/2-47, 25, 20, ">>"));
+        //-88 / -47
+        controlList.add(new GuiButton(ButtonIDs.SAVENCLOSE.index, this.width/2-70/2-88, (this.height+backgroundSize.getY())/2-47, 70, 20, "Save & Quit")); //Three Button System: Save & Close - Cancel - + Entry
+        controlList.add(new GuiButton(ButtonIDs.CANCEL.index, this.width/2 -70/2-88, (this.height+backgroundSize.getY())/2-25, 70, 20, "Cancel"));
         
-        controlList.add(new GuiButton(ButtonIDs.CANCEL.index, this.width / 2 -70/2, (this.height+backgroundSize.getY())/2-27+2, 70, 20, "Cancel"));
-        controlList.add(new GuiButton(ButtonIDs.SAVENCLOSE.index, this.width / 2 -70/2 - 75, (this.height+backgroundSize.getY())/2-27+2, 70, 20, "Save & Close")); //Three Button System: Save & Close - Cancel - + Entry
-        
-        controlList.add(new GuiButton(ButtonIDs.NEWENTRY.index, this.width / 2 -70/2 + 75, (this.height+backgroundSize.getY())/2-27+2, 70, 20, "New Entry"));
-        controlList.add(new GuiButton(ButtonIDs.DELENTRY.index, this.width / 2 -70/2 + 75 , (this.height+backgroundSize.getY())/2-27-25+5, 70, 20, "Delete Entry"));
+        controlList.add(new GuiButton(ButtonIDs.NEWENTRY.index, this.width/2-70/2+75-17, (this.height+backgroundSize.getY())/2-47, 70, 20, "New Entry"));
+        controlList.add(new GuiButton(ButtonIDs.DELENTRY.index, this.width/2-70/2+75-17 , (this.height+backgroundSize.getY())/2-25, 70, 20, "Delete Entry"));
 
         limitedMobSpawner.setEditable(false);
         
@@ -100,11 +100,11 @@ public class GuiLimitedMobSpawner extends GuiScreen{
         
         switch (currentListType) {
         case Creature:
-        	scrollingList = new GUISelectionList(this, creatureListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+        	scrollingList = new GUISelectionList(this, creatureListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
         	break;
         case Sound:
-        	scrollingList = new GUISelectionList(this, soundListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+        	scrollingList = new GUISelectionList(this, soundListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
         	break;
 		default:
@@ -124,13 +124,13 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	    		if( EntityLiving.class.isAssignableFrom( ((Class)EntityList.stringToClassMapping.get(stringKey))) ){
     	                creatureListName.add(new PairFullShortName<String, String>(
     	                		stringKey,
-    	                		StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."))));
+    	                		StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 14, "\\."))));
     	    		}
     	    	}
     	    	Collections.sort(creatureListName);
     		}
     		
-            scrollingList = new GUISelectionList(this, creatureListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+            scrollingList = new GUISelectionList(this, creatureListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
 			break;
 		case Sound:
@@ -150,12 +150,12 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 						String stringKey = (String) stringSoundIterator.next();
 						soundListName.add(new PairFullShortName<String, String>(
 								stringKey,
-								StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."))));
+								StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 14, "\\."))));
 					}
 					Collections.sort(soundListName);
 				}
 			}
-            scrollingList = new GUISelectionList(this, soundListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+            scrollingList = new GUISelectionList(this, soundListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
 			break;
 		default:
@@ -199,7 +199,6 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     		case FORWARD:
     			if (currentDataField+1 < dataFields.size()) {
     				currentDataField++;
-    				numberOfFields++;
 				}
     			break;
     		case BACKWARDS:
@@ -223,6 +222,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     		case NEWENTRY:
             	dataFields.add(new CreatureFields(mc).createFields(mc, this.width, this.height, backgroundSize));
                 dataFields.get(dataFields.size()-1).loadFromTileEntity(limitedMobSpawner, dataFields.size()-1);
+                numberOfFields++;
     			break;
     		default:
     			throw new IllegalStateException("Button action does not exist.");

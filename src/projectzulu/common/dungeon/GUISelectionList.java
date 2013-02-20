@@ -21,7 +21,7 @@ public class GUISelectionList extends GuiScrollingList{
     	super(parent.getMinecraft(),
     			listWidth, backgroundSize.getY()+50, // Width, Height
     			(screenSize.getY()-backgroundSize.getY())/2+15, (screenSize.getY()-backgroundSize.getY())/2+backgroundSize.getY()-20, // Top, Bottom, 
-    			(screenSize.getX()-backgroundSize.getX())/2+264, // Left
+    			(screenSize.getX()-backgroundSize.getX())/2+234, // Left
     			parent.getMinecraft().fontRenderer.FONT_HEIGHT+8); // Element Height
     	this.parent = parent;
     	this.listNames = listNames;
@@ -52,9 +52,9 @@ public class GUISelectionList extends GuiScrollingList{
         int textureID = parent.getMinecraft().renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         parent.getMinecraft().renderEngine.bindTexture(textureID);
-        int xCoord = (parent.width - parent.backgroundSize.getX()) / 2+260; //277
+        int xCoord = (parent.width - parent.backgroundSize.getX()) / 2+230; //277
         int yCoord = (parent.height - parent.backgroundSize.getY()) / 2;
-        parent.drawTexturedModalRect(xCoord, yCoord, 0, 0, 77, 244);
+        parent.drawTexturedModalRect(xCoord, yCoord, 0, 0, 91, 244);
     }
     
     @Override

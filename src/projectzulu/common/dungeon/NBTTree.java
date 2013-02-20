@@ -12,6 +12,10 @@ public class NBTTree {
 		root = new NBTNode(rootData, null);		
 	}
 	
+	public NBTNode getRootNode(){
+		return root;
+	}
+	
 	public boolean addNode(NBTBase data, NBTNode parent){
 		return parent.addChild(data);
 	}
@@ -23,7 +27,7 @@ public class NBTTree {
 	public NBTTagCompound toNBTTagCompound(){
 		NBTTagCompound nbtTagCompound = new NBTTagCompound();
 		root.writeNodeandChildrenToNBT(nbtTagCompound);
-		return (NBTTagCompound)nbtTagCompound.getTag("");
+		return (NBTTagCompound)nbtTagCompound.getTag("Properties");
 	}
 	
 	public ArrayList<NBTNode> toArrayList(){
