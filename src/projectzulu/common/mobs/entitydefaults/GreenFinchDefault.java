@@ -1,12 +1,17 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.io.File;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
+import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultSpawnable;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.mobs.entity.EntityGreenFinch;
 import projectzulu.common.mobs.models.ModelFinch;
 
@@ -32,11 +37,12 @@ public class GreenFinchDefault extends DefaultSpawnable{
 	}
 	
 	@Override
-	public void outputDataToList() {
-		if(shouldExist){
-			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			customMobData.addLootToMob(new ItemStack(Item.feather), 8);
-			CustomEntityList.greenFinch = Optional.of(customMobData);	
-		}
+	public void outputDataToList(File configDirectory) {
+		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
+		config.load();
+		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);
+		config.save();
+		CustomEntityList.greenFinch = Optional.of(customMobData);
 	}
 }

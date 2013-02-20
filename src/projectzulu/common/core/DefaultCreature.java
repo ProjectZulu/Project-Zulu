@@ -49,7 +49,7 @@ public abstract class DefaultCreature implements DefaultEntity{
 	}
 	
 	@Override
-	public void loadCreaturesFromConfig(Configuration config) {		
+	public void loadCreaturesFromConfig(Configuration config) {
 		shouldExist = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" shouldExist", shouldExist).getBoolean(shouldExist);
 		reportSpawningInLog = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" reportSpawningInLog", reportSpawningInLog).getBoolean(reportSpawningInLog);
 		updateFrequency = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" UpdateFrequency", updateFrequency).getInt(updateFrequency);

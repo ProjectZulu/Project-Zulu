@@ -1,13 +1,19 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.io.File;
+
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.mobs.entity.EntityCentipede;
 import projectzulu.common.mobs.models.ModelCentipede;
 
@@ -33,14 +39,15 @@ public class CentipedeDefault extends DefaultSpawnable{
 	}
 	
 	@Override
-	public void outputDataToList() {
-		if(shouldExist){
-			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 15); }
-			if(ItemList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Antennae.meta()), 1);
-			}
-			CustomEntityList.centipede = Optional.of(customMobData);	
-		}
+	public void outputDataToList(File configDirectory) {
+		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
+		config.load();
+		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 15);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+				ItemGenerics.Properties.Antennae.meta(), 1);
+
+		config.save();
+		CustomEntityList.centipede = Optional.of(customMobData);
 	}
 }

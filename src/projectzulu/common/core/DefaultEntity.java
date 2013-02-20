@@ -1,5 +1,7 @@
 package projectzulu.common.core;
 
+import java.io.File;
+
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -9,7 +11,7 @@ public interface DefaultEntity {
 	
 	public abstract void loadCreaturesFromConfig(Configuration config);
 	public abstract void loadBiomesFromConfig(Configuration config);
-	public abstract void outputDataToList();
+	public abstract void outputDataToList(File configDirectory);
 	public abstract void registerEntity();
 	public abstract void registerEgg();
 	public abstract void addSpawn();

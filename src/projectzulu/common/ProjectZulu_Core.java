@@ -122,7 +122,7 @@ public class ProjectZulu_Core{
 		ProjectZuluLog.info("Load Entity Properties");
 		CustomEntityManager.INSTANCE.loadCreaturesFromConfig(modConfigDirectoryFile);
 		ProjectZuluLog.info("Registering Entites");
-		CustomEntityManager.INSTANCE.registerEntities();
+		CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
 	}
 	
 	@PostInit
