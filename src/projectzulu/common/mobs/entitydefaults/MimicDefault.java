@@ -2,6 +2,7 @@ package projectzulu.common.mobs.entitydefaults;
 
 import java.io.File;
 
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
@@ -32,9 +33,10 @@ public class MimicDefault extends DefaultWithEgg{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
+		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", false).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.Ectoplasm.meta(), 5);
 		config.save();
-		CustomEntityList.mimic = Optional.of(customMobData);
+		CustomEntityList.MIMIC.modData = Optional.of(customMobData);
 	}
 }

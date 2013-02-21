@@ -65,12 +65,12 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 		int var3 = MathHelper.floor_double(this.posZ);
 		boolean wasSuccesful = false;
 		
-		if (CustomEntityList.lizard.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() 
+		if (CustomEntityList.LIZARD.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() 
 				&& worldObj.getClosestPlayerToEntity(this, 32) == null && this.worldObj.canBlockSeeTheSky(var1, var2, var3)){
 			wasSuccesful = true;
 		}
 		
-		if(CustomEntityList.lizard.get().reportSpawningInLog){
+		if(CustomEntityList.LIZARD.modData.get().reportSpawningInLog){
 			if(wasSuccesful){
 				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}else{
@@ -158,7 +158,7 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 	protected void dropFewItems(boolean par1, int par2) {
 		int var3 = rand.nextInt(2 + par2);
 		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.lizard.get().getLootItem(rand);
+			ItemStack loot = CustomEntityList.LIZARD.modData.get().getLootItem(rand);
 			if(loot != null){
 				entityDropItem(loot, 1);
 			}

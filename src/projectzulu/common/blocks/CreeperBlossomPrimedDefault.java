@@ -23,7 +23,7 @@ public class CreeperBlossomPrimedDefault extends DefaultCreature{
 	@Override
 	public void outputDataToList(File configDirectory) {
 		if(shouldExist){
-			CustomEntityList.creeperBlossom = Optional.of(new CustomMobData(mobName, reportSpawningInLog));	
+			CustomEntityList.CREEPERBLOSSONPRIMED.modData = Optional.of(new CustomMobData(mobName, reportSpawningInLog));	
 		}
 	}
 

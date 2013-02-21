@@ -48,20 +48,6 @@ public class EntityMimic extends EntityHerd
 	public EntityModelRotation eBACKTREESTEM5 = new EntityModelRotation();
 	public EntityModelRotation eBACKTREESTEM6 = new EntityModelRotation();
 
-	//	public EntityModelRotation etoer1 = new EntityModelRotation();
-	//	public EntityModelRotation etoer2 = new EntityModelRotation();
-	//	public EntityModelRotation etoer3 = new EntityModelRotation();
-	//	public EntityModelRotation etoer4 = new EntityModelRotation();
-	//	public EntityModelRotation etoer5 = new EntityModelRotation();
-	//	public EntityModelRotation etoer6 = new EntityModelRotation();
-	//
-	//	public EntityModelRotation etoel1 = new EntityModelRotation();
-	//	public EntityModelRotation etoel2 = new EntityModelRotation();
-	//	public EntityModelRotation etoel3 = new EntityModelRotation();
-	//	public EntityModelRotation etoel4 = new EntityModelRotation();
-	//	public EntityModelRotation etoel5 = new EntityModelRotation();
-	//	public EntityModelRotation etoel6 = new EntityModelRotation();
-
 	public float chargeCooldown = 10f;
 	public float chargeTime = 5f;
 	public float timeLeftCharging = chargeTime;
@@ -443,8 +429,7 @@ public class EntityMimic extends EntityHerd
 	/**
 	 * Determines if an entity can be despawned, used on idle far away entities
 	 */
-	protected boolean canDespawn()
-	{
+	protected boolean canDespawn(){
 		return false;
 	}
 
@@ -538,7 +523,7 @@ public class EntityMimic extends EntityHerd
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(1 + par2);
 		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.mimic.get().getLootItem(rand);
+			ItemStack loot = CustomEntityList.MIMIC.modData.get().getLootItem(rand);
 			if(loot != null){
 				entityDropItem(loot, 1);
 			}

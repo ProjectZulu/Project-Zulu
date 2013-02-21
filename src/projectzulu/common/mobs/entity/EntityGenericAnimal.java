@@ -4,14 +4,17 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.PacketIDs;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -20,6 +23,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
 	
     /* Fixed Variables */
     public int maxAnimTime = 20;
+    public boolean forceDespawn = false;
 	public EntityGenericAnimal(World par1World) {
 		super(par1World);
 		experienceValue = 3;
@@ -81,7 +85,11 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     
     @Override
     protected boolean canDespawn() {
-    	return false;
+    	CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+    	if(entityEntry != null){
+    		return forceDespawn || entityEntry.modData.get().shouldDespawn;
+    	}
+    	return true;
     }
     
     @Override
@@ -217,5 +225,18 @@ public class EntityGenericAnimal extends EntityGenericTameable {
 	
 	protected boolean isValidLightLevel(World world, int xCoord, int yCoord, int zCoord){
 		return worldObj.getSavedLightValue(EnumSkyBlock.Block, xCoord, yCoord, zCoord) < 1;
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1nbtTagCompound) {
+		super.writeEntityToNBT(par1nbtTagCompound);
+		par1nbtTagCompound.setBoolean("ForceDespawn", forceDespawn);
+		
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
+		super.readEntityFromNBT(par1nbtTagCompound);
+		forceDespawn = par1nbtTagCompound.getBoolean("ForceDespawn");
 	}
 }

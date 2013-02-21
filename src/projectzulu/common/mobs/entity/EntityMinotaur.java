@@ -105,11 +105,11 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob{
 		int var3 = MathHelper.floor_double(this.posZ);
 		boolean wasSuccesful = false;
 		
-		if (CustomEntityList.minotaur.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() ) {
+		if (CustomEntityList.MINOTAUR.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() ) {
 			wasSuccesful = true;
 		}
 		
-		if(CustomEntityList.minotaur.get().reportSpawningInLog){
+		if(CustomEntityList.MINOTAUR.modData.get().reportSpawningInLog){
 			if(wasSuccesful){
 				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}else{
@@ -167,7 +167,7 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob{
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(2 + par2);
 		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.minotaur.get().getLootItem(rand);
+			ItemStack loot = CustomEntityList.MINOTAUR.modData.get().getLootItem(rand);
 			if(loot != null){
 				entityDropItem(loot, 1);
 			}

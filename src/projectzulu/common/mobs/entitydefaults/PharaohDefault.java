@@ -19,7 +19,7 @@ public class PharaohDefault extends DefaultCreature{
 	@Override
 	public void outputDataToList(File configDirectory) {
 		if(shouldExist){
-			CustomEntityList.pharaoh = Optional.of(new CustomMobData(mobName, reportSpawningInLog));	
+			CustomEntityList.MUMMYPHARAOH.modData = Optional.of(new CustomMobData(mobName, reportSpawningInLog));	
 		}
 	}
 }

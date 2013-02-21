@@ -31,11 +31,7 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals{
 	public boolean defaultGrounded() {
 		return false;
 	}
-
-	@Override
-	protected boolean canDespawn() {
-		return true;
-	}
+	
 	
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.

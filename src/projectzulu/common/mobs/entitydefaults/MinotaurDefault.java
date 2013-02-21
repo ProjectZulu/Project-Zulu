@@ -2,6 +2,7 @@ package projectzulu.common.mobs.entitydefaults;
 
 import java.io.File;
 
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
@@ -31,6 +32,7 @@ public class MinotaurDefault extends DefaultWithEgg{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
+		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.furPelt, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
@@ -38,6 +40,6 @@ public class MinotaurDefault extends DefaultWithEgg{
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.Ectoplasm.meta(), 4);
 		config.save();
-		CustomEntityList.minotaur = Optional.of(customMobData);	
+		CustomEntityList.MINOTAUR.modData = Optional.of(customMobData);	
 	}
 }

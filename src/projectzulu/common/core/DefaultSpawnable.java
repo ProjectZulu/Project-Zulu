@@ -13,7 +13,7 @@ public abstract class DefaultSpawnable extends DefaultWithEgg{
 	protected int secondarySpawnRate;
 	protected int minInChunk;
 	protected int maxInChunk;
-	EnumCreatureType enumCreatureType;
+	protected EnumCreatureType enumCreatureType;
 
 	protected ArrayList<String> defaultBiomesToSpawn = new ArrayList<String>();	
 	ArrayList<BiomeGenBase> biomesToSpawn = new ArrayList();

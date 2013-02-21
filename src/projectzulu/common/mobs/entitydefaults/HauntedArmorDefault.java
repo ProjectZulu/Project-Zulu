@@ -2,6 +2,7 @@ package projectzulu.common.mobs.entitydefaults;
 
 import java.io.File;
 
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.api.CustomEntityList;
@@ -35,6 +36,6 @@ public class HauntedArmorDefault extends DefaultWithEgg{
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.Ectoplasm.meta(), 4);
 		config.save();
-		CustomEntityList.hauntedArmor = Optional.of(customMobData);
+		CustomEntityList.HAUNTEDARMOR.modData = Optional.of(customMobData);
 	}
 }
