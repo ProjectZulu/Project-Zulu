@@ -87,17 +87,7 @@ public class ProjectZulu_Dungeon {
 
 	
 	@ServerStarting
-	public void serverStart(FMLServerStartingEvent event){
-		/* Add Custom Gamerules */
-		/* Add Custom GameRules */
-		GameRules gameRule = event.getServer().worldServerForDimension(0).getGameRules();
-		/* Add Does Campfire Burn GameRule: Only if not Present */
-		String ruleName = "testAdventure";
-		if(gameRule.hasRule(ruleName)){
-		}else {
-			gameRule.addGameRule(ruleName, "false");
-		}		
-		
+	public void serverStart(FMLServerStartingEvent event){		
 		/* Add Custom Commands */
 		event.registerServerCommand(new CommandPlaySound());
 		LanguageRegistry.instance().addStringLocalization("commands.playsound.usage", "/playsound [targetPlayer] [fileName] <range> <x> <y> <z>");

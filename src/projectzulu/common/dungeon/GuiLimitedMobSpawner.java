@@ -25,41 +25,30 @@ import projectzulu.common.core.PairFullShortName;
 import projectzulu.common.core.ProjectZuluLog;
 
 public class GuiLimitedMobSpawner extends GuiScreen{
-	TileEntityLimitedMobSpawner limitedMobSpawner;
+	public TileEntityLimitedMobSpawner limitedMobSpawner;
 	Point backgroundSize = new Point(256, 244);
 	
-	int currentDataField = 0;
 	int numberOfFields = 1;
+	int currentDataField = 0;
 	private List<DataFields> dataFields = new ArrayList<DataFields>();
 	public DataFields getDataField(int index){
 		return dataFields.get(index);
 	}
 	
-	boolean fieldsCreated = false;
-
 	/* Used by Scrolling Creature List to know which Field to Return a Selected String to */
 	GUISelectionList scrollingList;
-	private ListType currentListType = ListType.NONE;
-	public ListType getListType(){
-		return currentListType;
-	}
+	public ListType currentListType = ListType.NONE;
 	List<PairFullShortName<String, String>> creatureListName = new ArrayList<PairFullShortName<String, String>>();
 	List<PairFullShortName<String, String>> soundListName = new ArrayList<PairFullShortName<String, String>>();
-
-    /** Counts the number of screen updates. */
-    private int updateCounter;
     
     public GuiLimitedMobSpawner(TileEntityLimitedMobSpawner limitedMobSpawner){
     	this.limitedMobSpawner = limitedMobSpawner;
-    	
     	if(limitedMobSpawner.getSpawnList() != null){
         	numberOfFields = limitedMobSpawner.getSpawnList().size()+1;
         }else{
         	numberOfFields = 1;
         }
     }
-    
-
     
     public Minecraft getMinecraft(){
     	return mc;
@@ -74,7 +63,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
         Keyboard.enableRepeatEvents(true);
         controlList.add(new GuiButton(ButtonIDs.BACKWARDS.index, this.width/2 -25/2 -38, (this.height+backgroundSize.getY())/2-47, 25, 20, "<<"));
         controlList.add(new GuiButton(ButtonIDs.FORWARD.index, this.width/2 -25/2 +8, (this.height+backgroundSize.getY())/2-47, 25, 20, ">>"));
-        //-88 / -47
+        
         controlList.add(new GuiButton(ButtonIDs.SAVENCLOSE.index, this.width/2-70/2-88, (this.height+backgroundSize.getY())/2-47, 70, 20, "Save & Quit")); //Three Button System: Save & Close - Cancel - + Entry
         controlList.add(new GuiButton(ButtonIDs.CANCEL.index, this.width/2 -70/2-88, (this.height+backgroundSize.getY())/2-25, 70, 20, "Cancel"));
         
@@ -86,7 +75,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
         for (int i = 0; i < numberOfFields; i++) {
         	if(dataFields.isEmpty() || dataFields.size() <= i){
     			if(i == 0){
-    				dataFields.add(0, new SpawnerFields().createFields(mc, this.width, this.height, backgroundSize));
+    				dataFields.add(0, new SpawnerFields(this).createFields(mc, this.width, this.height, backgroundSize));
     				dataFields.get(0).loadFromTileEntity(limitedMobSpawner, i);
     			}else{
                 	dataFields.add(i, new CreatureFields(mc).createFields(mc, this.width, this.height, backgroundSize));
@@ -96,7 +85,6 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 				dataFields.get(i).createFields(mc, this.width, this.height, backgroundSize);
 			}
 		}
-        
         
         switch (currentListType) {
         case Creature:
@@ -114,7 +102,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     
     public void openList(ListType listType){
     	currentListType = listType;
-    	switch (currentListType) {
+    	switch (currentListType){
     	case Creature:
     		/* Create List if Empty */
     		if(creatureListName == null || creatureListName.isEmpty()){
@@ -180,9 +168,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen(){
-        ++this.updateCounter;
-    }
+    public void updateScreen(){}
     
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
@@ -194,7 +180,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     		case CANCEL:
     			/* Close Menu With Saving*/
     			this.limitedMobSpawner.onInventoryChanged();
-    			this.mc.displayGuiScreen((GuiScreen)null);
+    			closeGui();
     			break;
     		case FORWARD:
     			if (currentDataField+1 < dataFields.size()) {
@@ -209,8 +195,8 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     		case SAVENCLOSE:
     			/* Close Menu With Saving*/
     			this.limitedMobSpawner.onInventoryChanged();
-    			saveToTileEntity();
-    			this.mc.displayGuiScreen((GuiScreen)null);
+    			saveGuiToTileEntity();
+    			closeGui();
     			break;
     		case DELENTRY:
     			if(currentDataField != 0){
@@ -222,6 +208,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     		case NEWENTRY:
             	dataFields.add(new CreatureFields(mc).createFields(mc, this.width, this.height, backgroundSize));
                 dataFields.get(dataFields.size()-1).loadFromTileEntity(limitedMobSpawner, dataFields.size()-1);
+                currentDataField = dataFields.size()-1;
                 numberOfFields++;
     			break;
     		default:
@@ -230,7 +217,17 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	}
     }
    
-    public void saveToTileEntity(){
+    public void closeGui(){
+    	this.mc.displayGuiScreen((GuiScreen)null);
+    }
+    
+    public void loadGuiFromTileEntity(){
+    	for (int i = 0; i < dataFields.size(); i++) {
+    		dataFields.get(i).loadFromTileEntity(limitedMobSpawner, i);
+		}
+    }
+    
+    public void saveGuiToTileEntity(){
     	if(limitedMobSpawner.getSpawnList() == null){
     		limitedMobSpawner.setSpawnList(new ArrayList<TileEntityLimitedMobSpawnData>());
     	}

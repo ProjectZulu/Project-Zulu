@@ -197,7 +197,7 @@ public class CreatureFields implements DataFields {
 			selectedTagField.mouseClicked(par1, par2, par3);
 			
 			if(par3 == 0 && searchForEntity.mousePressed(mc, par1, par2)){
-				if(spawnerGUI.getListType() == ListType.Creature){
+				if(spawnerGUI.currentListType == ListType.Creature){
 					spawnerGUI.closeList();
 				}else{
 					spawnerGUI.openList(ListType.Creature);
@@ -206,7 +206,7 @@ public class CreatureFields implements DataFields {
 			}
 			
 			if(par3 == 0 && searchForSound.mousePressed(mc, par1, par2)){
-				if(spawnerGUI.getListType() == ListType.Sound){
+				if(spawnerGUI.currentListType == ListType.Sound){
 					spawnerGUI.closeList();
 				}else{
 					spawnerGUI.openList(ListType.Sound);
