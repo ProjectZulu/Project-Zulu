@@ -13,9 +13,7 @@ import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketManagerMobSpawner extends PacketManager{
-	int entityIDtoSync;
-	int animTime;
-	
+	int entityIDtoSync;	
 	private int posX;
 	private int posY;
 	private int posZ;

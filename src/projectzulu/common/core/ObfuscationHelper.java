@@ -71,4 +71,13 @@ public class ObfuscationHelper {
 		}
 		return null;
 	}
+	
+	public static Class getDeclaredClass(String className, Class containingClass){
+		for (Class declaredClass : containingClass.getDeclaredClasses()) {
+			if(declaredClass.getSimpleName().equals(className)){
+				return declaredClass;
+			}
+		}
+		return null;
+	}
 }

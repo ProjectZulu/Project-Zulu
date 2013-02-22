@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import projectzulu.common.core.packets.PacketManagerPlaySound;
 import projectzulu.common.core.packets.PacketManagerStreamSound;
-import projectzulu.common.core.packets.PacketManagerSyncSpawnerGameRule;
 import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
@@ -80,13 +79,6 @@ public enum PacketIDs {
 		@Override
 		public PacketManagerStreamSound createPacketManager() {
 			return new PacketManagerStreamSound(index);
-		}
-	},
-	/* Packet: Sync debug Mode Tag for L.Mob Spawner from Server to Client */
-	spawnerGameRuleSync(10){
-		@Override
-		public PacketManagerSyncSpawnerGameRule createPacketManager() {
-			return new PacketManagerSyncSpawnerGameRule(index);
 		}
 	};
 

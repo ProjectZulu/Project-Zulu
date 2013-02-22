@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -22,32 +23,33 @@ import projectzulu.common.blocks.StringHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ObfuscationHelper;
 import projectzulu.common.core.PairFullShortName;
-//TODO: Scrolling Text in Creature List
-//projectzuluresources\module_block\mobspawnergui.png
+import projectzulu.common.core.ProjectZuluLog;
+//TODO: Implement Try Write / Read to Test if Saving Would Cause a Crash
 public class GuiLimitedMobSpawner extends GuiScreen{
-	TileEntityLimitedMobSpawner limitedMobSpawner;
+	public TileEntityLimitedMobSpawner limitedMobSpawner;
 	Point backgroundSize = new Point(256, 244);
+	
+	int numberOfFields = 1;
+	int currentDataField = 0;
 	private List<DataFields> dataFields = new ArrayList<DataFields>();
 	public DataFields getDataField(int index){
 		return dataFields.get(index);
 	}
-	boolean fieldsCreated = false;
-
+	
 	/* Used by Scrolling Creature List to know which Field to Return a Selected String to */
-	int lastCalledElementID = -1;
-	private ListType currentListType = ListType.NONE;
-	GUISelectCreatureList scrollingList;
+	GUISelectionList scrollingList;
+	public ListType currentListType = ListType.NONE;
 	List<PairFullShortName<String, String>> creatureListName = new ArrayList<PairFullShortName<String, String>>();
 	List<PairFullShortName<String, String>> soundListName = new ArrayList<PairFullShortName<String, String>>();
-	
-    /** Counts the number of screen updates. */
-    private int updateCounter;
     
     public GuiLimitedMobSpawner(TileEntityLimitedMobSpawner limitedMobSpawner){
     	this.limitedMobSpawner = limitedMobSpawner;
+    	if(limitedMobSpawner.getSpawnList() != null){
+        	numberOfFields = limitedMobSpawner.getSpawnList().size()+1;
+        }else{
+        	numberOfFields = 1;
+        }
     }
-    
-
     
     public Minecraft getMinecraft(){
     	return mc;
@@ -60,27 +62,38 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	super.initGui();
         controlList.clear();
         Keyboard.enableRepeatEvents(true);
-        controlList.add(new GuiButton(-3, this.width / 2 -70/2, (this.height+backgroundSize.getY())/2-27, 70, 20, "Cancel"));
-        controlList.add(new GuiButton(-2, this.width / 2 -70/2 - 75, (this.height+backgroundSize.getY())/2-27, 70, 20, "Save & Close")); //Three Button System: Save & Close - Cancel - + Entry
-        controlList.add(new GuiButton(-1, this.width / 2 -70/2 + 75, (this.height+backgroundSize.getY())/2-27, 70, 20, "New Entry"));
+        controlList.add(new GuiButton(ButtonIDs.BACKWARDS.index, this.width/2 -25/2 -38, (this.height+backgroundSize.getY())/2-47, 25, 20, "<<"));
+        controlList.add(new GuiButton(ButtonIDs.FORWARD.index, this.width/2 -25/2 +8, (this.height+backgroundSize.getY())/2-47, 25, 20, ">>"));
+        
+        controlList.add(new GuiButton(ButtonIDs.SAVENCLOSE.index, this.width/2-70/2-88, (this.height+backgroundSize.getY())/2-47, 70, 20, "Save & Quit")); //Three Button System: Save & Close - Cancel - + Entry
+        controlList.add(new GuiButton(ButtonIDs.CANCEL.index, this.width/2 -70/2-88, (this.height+backgroundSize.getY())/2-25, 70, 20, "Cancel"));
+        
+        controlList.add(new GuiButton(ButtonIDs.NEWENTRY.index, this.width/2-70/2+75-17, (this.height+backgroundSize.getY())/2-47, 70, 20, "New Entry"));
+        controlList.add(new GuiButton(ButtonIDs.DELENTRY.index, this.width/2-70/2+75-17 , (this.height+backgroundSize.getY())/2-25, 70, 20, "Delete Entry"));
+
         limitedMobSpawner.setEditable(false);
         
-        if(!fieldsCreated){
-            dataFields.add(0, new SpawnerFields(0).createFields(0 , fontRenderer, this.width, this.height, backgroundSize));
-            dataFields.get(0).loadFromTileEntity(limitedMobSpawner);
-            for (int i = 1; i < 7; i++) {
-            	dataFields.add(i, new CreatureFields(i).createFields(i, fontRenderer, this.width, this.height, backgroundSize));
-                dataFields.get(i).loadFromTileEntity(limitedMobSpawner);
-            }
-            fieldsCreated = true;
-        }else{
-            for (int i = 0; i < 7; i++) {
-            	dataFields.get(i).createFields(i , fontRenderer, this.width, this.height, backgroundSize);
-            }
-        }
+        for (int i = 0; i < numberOfFields; i++) {
+        	if(dataFields.isEmpty() || dataFields.size() <= i){
+    			if(i == 0){
+    				dataFields.add(0, new SpawnerFields(this).createFields(mc, this.width, this.height, backgroundSize));
+    				dataFields.get(0).loadFromTileEntity(limitedMobSpawner, i);
+    			}else{
+                	dataFields.add(i, new CreatureFields(mc).createFields(mc, this.width, this.height, backgroundSize));
+                    dataFields.get(i).loadFromTileEntity(limitedMobSpawner, i);
+    			}
+			}else{
+				dataFields.get(i).createFields(mc, this.width, this.height, backgroundSize);
+			}
+		}
+        
         switch (currentListType) {
         case Creature:
-        	scrollingList = new GUISelectCreatureList(this, creatureListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+        	scrollingList = new GUISelectionList(this, creatureListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
+            scrollingList.registerScrollButtons(this.controlList, 7, 8);
+        	break;
+        case Sound:
+        	scrollingList = new GUISelectionList(this, soundListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
         	break;
 		default:
@@ -88,10 +101,9 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 		}
     }
     
-    public void openList(ListType listType, int callingElementID){
-    	lastCalledElementID = callingElementID;
+    public void openList(ListType listType){
     	currentListType = listType;
-    	switch (currentListType) {
+    	switch (currentListType){
     	case Creature:
     		/* Create List if Empty */
     		if(creatureListName == null || creatureListName.isEmpty()){
@@ -101,13 +113,13 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	    		if( EntityLiving.class.isAssignableFrom( ((Class)EntityList.stringToClassMapping.get(stringKey))) ){
     	                creatureListName.add(new PairFullShortName<String, String>(
     	                		stringKey,
-    	                		StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."))));
+    	                		StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 14, "\\."))));
     	    		}
     	    	}
     	    	Collections.sort(creatureListName);
     		}
     		
-            scrollingList = new GUISelectCreatureList(this, creatureListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+            scrollingList = new GUISelectionList(this, creatureListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
 			break;
 		case Sound:
@@ -127,12 +139,12 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 						String stringKey = (String) stringSoundIterator.next();
 						soundListName.add(new PairFullShortName<String, String>(
 								stringKey,
-								StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 10, "\\."))));
+								StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 14, "\\."))));
 					}
 					Collections.sort(soundListName);
 				}
 			}
-            scrollingList = new GUISelectCreatureList(this, soundListName, currentListType, 70, new Point(this.width, this.height), backgroundSize);
+            scrollingList = new GUISelectionList(this, soundListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.controlList, 7, 8);
 			break;
 		default:
@@ -141,7 +153,6 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     }
     
     public void closeList(){
-    	lastCalledElementID = -1;
     	currentListType = ListType.NONE;
         scrollingList = null;
     }
@@ -158,9 +169,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen(){
-        ++this.updateCounter;
-    }
+    public void updateScreen(){}
     
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
@@ -168,41 +177,65 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     protected void actionPerformed(GuiButton button){
     	/* If Not on Main Screen */
     	if (button.enabled){
-    		switch (button.id) {
-    		case -3:
+    		switch (ButtonIDs.getButtonByIndex(button.id)) {
+    		case CANCEL:
     			/* Close Menu With Saving*/
     			this.limitedMobSpawner.onInventoryChanged();
-    			this.mc.displayGuiScreen((GuiScreen)null);
+    			closeGui();
     			break;
-    		case -2:
+    		case FORWARD:
+    			if (currentDataField+1 < dataFields.size()) {
+    				currentDataField++;
+				}
+    			break;
+    		case BACKWARDS:
+    			if (currentDataField > 0) {
+    				currentDataField--;
+				}
+    			break;
+    		case SAVENCLOSE:
     			/* Close Menu With Saving*/
     			this.limitedMobSpawner.onInventoryChanged();
-    			saveToTileEntity();
-    			this.mc.displayGuiScreen((GuiScreen)null);
+    			saveGuiToTileEntity();
+    			closeGui();
     			break;
-    		case -1:
-    			for (DataFields dataField : dataFields) {
-    				if(!dataField.isEnabled()){
-    					dataField.setIsEnabled(true);
-    					break;
-    				}
+    		case DELENTRY:
+    			if(currentDataField != 0){
+        			dataFields.remove(currentDataField);
+        			currentDataField--;
+        			numberOfFields--;
     			}
+    			break;
+    		case NEWENTRY:
+            	dataFields.add(new CreatureFields(mc).createFields(mc, this.width, this.height, backgroundSize));
+                dataFields.get(dataFields.size()-1).loadFromTileEntity(limitedMobSpawner, dataFields.size()-1);
+                currentDataField = dataFields.size()-1;
+                numberOfFields++;
     			break;
     		default:
     			throw new IllegalStateException("Button action does not exist.");
     		}            
     	}
-    	
     }
    
-    public void saveToTileEntity(){
+    public void closeGui(){
+    	this.mc.displayGuiScreen((GuiScreen)null);
+    }
+    
+    public void loadGuiFromTileEntity(){
+    	for (int i = 0; i < dataFields.size(); i++) {
+    		dataFields.get(i).loadFromTileEntity(limitedMobSpawner, i);
+		}
+    }
+    
+    public void saveGuiToTileEntity(){
     	if(limitedMobSpawner.getSpawnList() == null){
     		limitedMobSpawner.setSpawnList(new ArrayList<TileEntityLimitedMobSpawnData>());
     	}
     	limitedMobSpawner.getSpawnList().clear();
     	for (int i = 0; i < dataFields.size(); i++) {
     		dataFields.get(i).saveToTileEntity(limitedMobSpawner);
-		}
+    	}
     	if(limitedMobSpawner.getSpawnList().isEmpty()){
     		limitedMobSpawner.setSpawnList(null);
     	}
@@ -215,19 +248,19 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     @Override
     protected void keyTyped(char keyChar, int keyID){
     	super.keyTyped(keyChar, keyID);
-    	for (DataFields dataField : dataFields) {
-    		if(dataField.isEnabled()){
-    			dataField.keyboardInput(keyChar, keyID);
-    		}
-    	}
+    	
+    	if(dataFields.get(currentDataField).isEnabled()){
+			dataFields.get(currentDataField).keyboardInput(keyChar, keyID);
+		}
     }
     
     @Override
     protected void mouseClicked(int par1, int par2, int par3) {
     	super.mouseClicked(par1, par2, par3);
-    	for (DataFields dataField : dataFields) {
-    		dataField.mouseClicked(this, mc, par1, par2, par3);
-    	}
+    	
+    	if(dataFields.get(currentDataField).isEnabled()){
+			dataFields.get(currentDataField).mouseClicked(this, mc, par1, par2, par3);
+		}
     }
     
     /**
@@ -237,12 +270,15 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     @Override
     public void drawScreen(int par1, int par2, float par3){
         this.drawDefaultBackground();
-        fontRenderer.drawString("Edit Mob Spawner Settings", (width - fontRenderer.getStringWidth("Edit Mob Spawner Settings"))/2, (height-backgroundSize.getY())/2+8, 4210752); //White: 16777215
-        super.drawScreen(par1, par2, par3);
-        for (DataFields dataField : dataFields) {
-        	dataField.render(mc, par1, par2, par3, new Point(this.width, this.height), backgroundSize);
-        }
         
+        if(dataFields.get(currentDataField).isEnabled()){
+			dataFields.get(currentDataField).render(mc, par1, par2, par3, new Point(this.width, this.height), backgroundSize);
+		}
+        
+        String titleString = "Edit Mob Spawner Settings " + Integer.toString(currentDataField) + "/"+ Integer.toString(dataFields.size()-1);
+        fontRenderer.drawString(titleString, (width - fontRenderer.getStringWidth(titleString))/2, (height-backgroundSize.getY())/2+8, 4210752); //White: 16777215
+        super.drawScreen(par1, par2, par3);
+
         if(currentListType != ListType.NONE){
         	scrollingList.drawBackground();
         	scrollingList.drawScreen(new Point(this.width, this.height), backgroundSize, par1, par2, par3);

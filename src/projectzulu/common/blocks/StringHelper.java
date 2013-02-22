@@ -22,4 +22,6 @@ public class StringHelper {
     public static String toTitleCase(String string){
     	return string.toUpperCase().replace(string.toUpperCase().substring(1), string.substring(1).toLowerCase());
     }
+    
+    
 }

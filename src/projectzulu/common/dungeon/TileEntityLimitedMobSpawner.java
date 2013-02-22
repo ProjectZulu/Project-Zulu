@@ -19,7 +19,6 @@ import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import projectzulu.common.core.PacketIDs;
 import projectzulu.common.core.packets.PacketManagerPlaySound;
-import projectzulu.common.core.packets.PacketManagerSyncSpawnerGameRule;
 import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
@@ -29,6 +28,21 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     /** The stored delay before a new spawn. */
     public int delay = -1;
     private int ticksExisted = 0;
+    
+    private NBTTagCompound debugSavedSetup = new NBTTagCompound();
+    
+    public boolean isDebugEnabled(){
+    	return !(debugSavedSetup == null || debugSavedSetup.hasNoTags());
+    }
+    
+    public void setDebugMode(NBTTagCompound debugSavedSetup){
+    	this.debugSavedSetup = debugSavedSetup;
+    }
+    
+    public void loadDebugNBT(){
+    	readFromNBT(debugSavedSetup);
+    }
+    
     /**
      * The string ID of the mobs being spawned from this spawner. Defaults to pig, apparently.
      */
@@ -111,13 +125,11 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
         this.mobID = par1Str;
     }
 
-    /* Boolean to Hold the TestAdventure Gamerule Result, as it Only Exists serverside */
-    public boolean debugMode;
     /**
      * Returns true if there is a player in range (using World.getClosestPlayer)
      */
     public boolean anyPlayerInRange(){
-    	if(debugMode){
+    	if(isDebugEnabled()){
             return this.worldObj.getClosestPlayer((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D, (double)this.requiredPlayerRange) != null;
     	}else{
         	return this.worldObj.getClosestVulnerablePlayer((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D, (double)this.requiredPlayerRange) != null;
@@ -144,15 +156,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
      * ticks and creates a new spawn inside its implementation.
      */
-    public void updateEntity(){
-    	//TODO: Debug Mode should be implemented/toggled in the GUI, This is a short and quick Stopgap until that can be done
-    	if(!worldObj.isRemote && (ticksExisted % 200 == 0 || debugMode != worldObj.getGameRules().getGameRuleBooleanValue("testAdventure"))){
-        	debugMode = worldObj.getGameRules().getGameRuleBooleanValue("testAdventure");
-    		PacketManagerSyncSpawnerGameRule pcktManager = PacketIDs.spawnerGameRuleSync.createPacketManager();
-    		pcktManager.setPacketData(xCoord, yCoord, zCoord, debugMode);
-    		PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 60, worldObj.getWorldInfo().getDimension(), pcktManager.createPacket());
-    	}
-    	
+    public void updateEntity(){    	
     	if(maxSpawnableEntities > 0 && spawnedEntities >= maxSpawnableEntities){
     		worldObj.setBlock(xCoord, yCoord, zCoord, 0);
     	}
@@ -206,13 +210,13 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
                         double var7 = (double)(this.yCoord + this.worldObj.rand.nextInt(3) - 1);
                         double var9 = (double)this.zCoord + (this.worldObj.rand.nextDouble() - this.worldObj.rand.nextDouble()) * (double)this.spawnRange;
                         EntityLiving var11 = var13 instanceof EntityLiving ? (EntityLiving)var13 : null;
+                        this.writeNBTTagsTo(var13);
                         var13.setLocationAndAngles(var5, var7, var9, this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
-
                         if (var11 == null || var11.getCanSpawnHere()){
-                            this.writeNBTTagsTo(var13);
+
                             this.worldObj.spawnEntityInWorld(var13);
                             this.worldObj.playAuxSFX(2004, this.xCoord, this.yCoord, this.zCoord, 0);
-                        	if(!debugMode){
+                        	if(!isDebugEnabled()){
                                 spawnedEntities++;
                             }
                             if(spawnerTags != null){
@@ -287,9 +291,10 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      */
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
         super.readFromNBT(par1NBTTagCompound);
+        
         this.mobID = par1NBTTagCompound.getString("EntityId");
         this.delay = par1NBTTagCompound.getShort("Delay");
-
+        
         if(par1NBTTagCompound.hasKey("SpawnPotentials")){
             this.spawnList = new ArrayList();
             NBTTagList var2 = par1NBTTagCompound.getTagList("SpawnPotentials");
@@ -322,7 +327,11 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
         if(par1NBTTagCompound.hasKey("SpawnRange")){
             this.spawnRange = par1NBTTagCompound.getShort("SpawnRange");
         }
+        if(par1NBTTagCompound.hasKey("DebugSavedSetup")){
+            debugSavedSetup = par1NBTTagCompound.getCompoundTag("DebugSavedSetup");
+        }
 
+        
         if(this.worldObj != null && this.worldObj.isRemote){
             this.displayEntity = null;
         }
@@ -342,6 +351,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
         par1NBTTagCompound.setShort("RequiredPlayerRange", (short)this.requiredPlayerRange);
         par1NBTTagCompound.setShort("SpawnRange", (short)this.spawnRange);
         par1NBTTagCompound.setShort("MaxSpawnableEntities", (short)this.maxSpawnableEntities);
+        par1NBTTagCompound.setCompoundTag("DebugSavedSetup", debugSavedSetup);
         
         if (this.spawnerTags != null){
             par1NBTTagCompound.setCompoundTag("SpawnData", (NBTTagCompound)this.spawnerTags.properties.copy());
@@ -385,7 +395,6 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     public Packet getDescriptionPacket(){
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);
-//        var1.removeTag("SpawnPotentials");
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, var1);
     }
     
