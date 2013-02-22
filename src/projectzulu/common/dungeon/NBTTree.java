@@ -31,7 +31,7 @@ public class NBTTree {
 	}
 	
 	public ArrayList<NBTNode> toArrayList(){
-		ArrayList<NBTNode> nodeList = new ArrayList<>(); 
+		ArrayList<NBTNode> nodeList = new ArrayList<NBTNode>(); 
 		root.writeNodeandChildrenToArrayList(nodeList);
 		return nodeList;
 	}

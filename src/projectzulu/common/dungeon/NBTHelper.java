@@ -294,7 +294,7 @@ public enum NBTHelper {
 			String[] newValueParts = newValue.split(",");
 			ProjectZuluLog.info("New tag compound %s Length is %s", newValue, newValueParts.length);
 			NBTTagCompound newTagCompound = new NBTTagCompound(oldTagCompound.getName());
-			ArrayList<NBTBase> oldNBT = new ArrayList<>(oldTagCompound.getTags());
+			ArrayList<NBTBase> oldNBT = new ArrayList<NBTBase>(oldTagCompound.getTags());
 
 			for (int i = 0; i < newValueParts.length; i++) {
 				String[] newValuePieces = newValueParts[i].split(":");
@@ -348,7 +348,7 @@ public enum NBTHelper {
 			String[] newValueParts = newValue.split(",");
 			ProjectZuluLog.info("New tag compound %s Length is %s", newValue, newValueParts.length);
 			NBTTagCompound newTagCompound = new NBTTagCompound(oldTagCompound.getName());
-			ArrayList<NBTBase> oldNBT = new ArrayList<>(oldTagCompound.getTags());
+			ArrayList<NBTBase> oldNBT = new ArrayList<NBTBase>(oldTagCompound.getTags());
 
 			for (int i = 0; i < newValueParts.length; i++) {
 				String[] newValuePieces = newValueParts[i].split(":");
