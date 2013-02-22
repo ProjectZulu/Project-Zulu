@@ -36,7 +36,7 @@ public class ElephantDefault extends DefaultSpawnable{
 			if(ItemList.genericCraftingItems1.isPresent()){
 				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
 			}
-			CustomEntityList.armadillo = Optional.of(customMobData);
+			CustomEntityList.elephant = Optional.of(customMobData);
 		}
 	}
 }
