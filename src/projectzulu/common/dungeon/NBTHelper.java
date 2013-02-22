@@ -254,15 +254,60 @@ public enum NBTHelper {
 			}
 			nbtTagCompound.setTag(newTagList.getName(), newTagList);
 		}
+		
+		/* Return Value of Tag in the Form of a String. For Container tags, such as @link{NBTTagList} Return String with All Tags Seperated by commas */
+		/* Sets Value of Value in the Form of a String. For Container tags, such as @link{NBTTagList} it sets the List Size */
 		/** Return Number of Tags */
 		@Override
 		String getValue(NBTBase currentTag) {
-			return Integer.toString(((NBTTagList)currentTag).tagCount());
+			NBTTagList tagList = (NBTTagList)currentTag;
+			String stringBuilder = "";
+			for (int i = 0; i < tagList.tagCount(); i++) {
+				stringBuilder = stringBuilder + tagList.tagAt(i).getName()+":"+tagList.tagAt(i).getId()+",";
+			}
+			return stringBuilder;
+//			return Integer.toString(((NBTTagList)currentTag).tagCount());
 		}
 		@Override
 		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			return null; //TODO: Add Tag Name
+			NBTTagList oldTagList = (NBTTagList)currentNode.getData();
+			
+			String[] newValueParts = newValue.split(",");
+			ProjectZuluLog.info("New tag List %s Length is %s", newValue, newValueParts.length);
+			NBTTagList newTagList = new NBTTagList(oldTagList.getName());
+			for (int i = 0; i < newValueParts.length; i++) {
+				String[] newValuePieces = newValueParts[i].split(":");
+				ProjectZuluLog.info("Pieces of %s Length is %s", newValueParts[i], newValuePieces.length);
+				if(i < oldTagList.tagCount()){
+					newTagList.appendTag(oldTagList.tagAt(i).setName(newValuePieces[0]));
+				}else{
+					newTagList.appendTag(NBTBase.newTag(Byte.parseByte(newValuePieces[1]), newValuePieces[0]));
+				}
+			}
+			ProjectZuluLog.info("getNBTFromString is now %s", getValue(newTagList));
+			return newTagList;
 		}
+		
+		NBTBase getNBTFromString222(NBTNode currentNode, String newValue) {
+			NBTTagCompound oldTagCompound = (NBTTagCompound)currentNode.getData();
+			
+			String[] newValueParts = newValue.split(",");
+			ProjectZuluLog.info("New tag compound %s Length is %s", newValue, newValueParts.length);
+			NBTTagCompound newTagCompound = new NBTTagCompound(oldTagCompound.getName());
+			ArrayList<NBTBase> oldNBT = new ArrayList<>(oldTagCompound.getTags());
+
+			for (int i = 0; i < newValueParts.length; i++) {
+				String[] newValuePieces = newValueParts[i].split(":");
+				if(i < oldTagCompound.getTags().size()){
+					newTagCompound.setTag(newValuePieces[0], oldNBT.get(i));
+				}else{
+					newTagCompound.setTag(newValuePieces[0], NBTBase.newTag(Byte.parseByte(newValuePieces[1]), newValuePieces[0]));
+				}
+			}
+			ProjectZuluLog.info("getNBTFromString is now %s", getValue(newTagCompound));
+			return newTagCompound;
+		}
+		
 	},
 	TAG_COMPOUND(10) {
 		@Override
@@ -286,14 +331,35 @@ public enum NBTHelper {
 			}
 			nbtTagCompound.setTag(newNBTTagCompound.getName(), newNBTTagCompound);
 		}
-		/** Return Number of Tags */
 		@Override
 		String getValue(NBTBase currentTag) {
-			return Integer.toString(((NBTTagCompound)currentTag).getTags().size());
+			NBTTagCompound tagCompound = (NBTTagCompound)currentTag;
+			String stringBuilder = "";
+			for (Object object : tagCompound.getTags()) {
+				NBTBase tag = (NBTBase)object;
+				stringBuilder = stringBuilder+tag.getName()+":"+tag.getId()+",";
+			}
+			return stringBuilder;
 		}
 		@Override
 		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			return null; //TODO: Add Tag Name
+			NBTTagCompound oldTagCompound = (NBTTagCompound)currentNode.getData();
+			
+			String[] newValueParts = newValue.split(",");
+			ProjectZuluLog.info("New tag compound %s Length is %s", newValue, newValueParts.length);
+			NBTTagCompound newTagCompound = new NBTTagCompound(oldTagCompound.getName());
+			ArrayList<NBTBase> oldNBT = new ArrayList<>(oldTagCompound.getTags());
+
+			for (int i = 0; i < newValueParts.length; i++) {
+				String[] newValuePieces = newValueParts[i].split(":");
+				if(i < oldTagCompound.getTags().size()){
+					newTagCompound.setTag(newValuePieces[0], oldNBT.get(i));
+				}else{
+					newTagCompound.setTag(newValuePieces[0], NBTBase.newTag(Byte.parseByte(newValuePieces[1]), newValuePieces[0]));
+				}
+			}
+			ProjectZuluLog.info("getNBTFromString is now %s", getValue(newTagCompound));
+			return newTagCompound;
 		}
 	},
 	TAG_INT_ARRAY(11) {

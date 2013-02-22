@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ProjectZuluLog;
 
 public class GUINBTList extends GuiScrollingList{
 	NBTTree nodeTree;
@@ -45,10 +46,11 @@ public class GUINBTList extends GuiScrollingList{
 	
     @Override
     protected void elementClicked(int clickedIndex, boolean var2){
-    	if(nodeList.get(clickedIndex).getChildren().size() == 0){
+    	ProjectZuluLog.info("Clicked on Tag of Type %s with name %s", nodeList.get(clickedIndex).getData().getTagName(nodeList.get(clickedIndex).getData().getId()), nodeList.get(clickedIndex).getData().getName());
+//    	if(nodeList.get(clickedIndex).getChildren().size() == 0){
         	parent.setSelectedCurentNode(nodeList.get(clickedIndex));
         	selectedElement = clickedIndex;
-    	}
+//    	}
     }
     
     @Override
@@ -57,14 +59,7 @@ public class GUINBTList extends GuiScrollingList{
     }
     
     @Override
-    protected void drawBackground(){
-//        int textureID = parent.mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
-//        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-//        parent.mc.renderEngine.bindTexture(textureID);
-//        int xCoord = (screenSize.getX() - backgroundSize.getX()) / 2+260; //277
-//        int yCoord = (screenSize.getY() - backgroundSize.getY()) / 2;
-//        parent.drawTexturedModalRect(xCoord, yCoord, 0, 0, 77, 244);
-    }
+    protected void drawBackground(){}
     
     @Override
     protected int getContentHeight(){

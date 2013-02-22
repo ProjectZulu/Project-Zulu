@@ -18,7 +18,7 @@ public class GUIEditNodeTextField extends GuiTextField{
 				(screenSize.getX() - (int)backgroundSize.getX())/2+position.getX(),
 				(screenSize.getY() - (int)backgroundSize.getY())/2+position.getY(),
 				boxSize.getX(), boxSize.getY());
-		setupTextField(maxTextChars);
+		setupTextField(30000);
 	}
 	
 	public GUIEditNodeTextField(GUIEditNodeTextField oldTextFields, FontRenderer fontRenderer, int maxTextChars, Point screenSize, Point backgroundSize, Point position, Point boxSize) {
@@ -29,7 +29,7 @@ public class GUIEditNodeTextField extends GuiTextField{
 		
 		this.selectedNode = oldTextFields.selectedNode;
 		setText(oldTextFields.getText());
-		setupTextField(maxTextChars);
+		setupTextField(30000);
 	}
 	
 	private void setupTextField(int maxTextChars){
@@ -51,7 +51,12 @@ public class GUIEditNodeTextField extends GuiTextField{
 	public boolean saveAndClear(NBTTree nodeTree){
 		NBTBase newNBT = selectedNode.createNBTFromString(getText());
 		if(newNBT != null){
-			selectedNode.getParent().replaceChild(selectedNode, new NBTNode(newNBT, selectedNode.getParent()));
+			//TODO: What if I'm Root? I do not have parent, does this mean entire tree can be remade?
+			if(selectedNode.getParent() != null){
+				selectedNode.getParent().replaceChild(selectedNode, new NBTNode(newNBT, selectedNode.getParent())); 
+			}else{
+				selectedNode = new NBTNode(newNBT, null);
+			}
 			clear();
 			return true;
 		}
