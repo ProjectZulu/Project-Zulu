@@ -1,5 +1,7 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.io.File;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -7,8 +9,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.mobs.entity.EntityFox;
 import projectzulu.common.mobs.models.ModelFox;
 
@@ -20,7 +25,7 @@ public class FoxDefault extends DefaultSpawnable{
 		super("Fox", EntityFox.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
-		setModelAndRender(ModelFox.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+		setModelAndRender(ModelFox.class, "projectzulu.common.mobs.renders.RenderTameable");
 
 		eggColor1 = (204 << 16) + (132 << 8) + 22;
 		eggColor2 = (224 << 16) + (224 << 8) + 224;
@@ -35,19 +40,18 @@ public class FoxDefault extends DefaultSpawnable{
 		defaultBiomesToSpawn.add("Snowy Rainforest"); 				defaultBiomesToSpawn.add("Temperate Rainforest");
 		defaultBiomesToSpawn.add("Woodlands");
 	}
-
-	@Override
-	public void outputDataToList() {
-		if(shouldExist){
-			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 5);
-			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 10); }
-			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 15); }
-			if(ItemList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
-			}
-			CustomEntityList.fox = Optional.of(customMobData);	
-		}
+	
+	public void outputDataToList(File configDirectory) {
+		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
+		config.load();
+		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.beefRaw, 0, 5);		
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.furPelt, 0, 10);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 15);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1, ItemGenerics.Properties.SmallHeart.meta(), 4);
+		config.save();
+		CustomEntityList.FOX.modData = Optional.of(customMobData);	
 	}
 }
 

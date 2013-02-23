@@ -1,5 +1,7 @@
 package projectzulu.common.blocks;
 
+import java.io.File;
+
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
@@ -19,9 +21,9 @@ public class CreeperBlossomPrimedDefault extends DefaultCreature{
 	public void loadCreaturesFromConfig(Configuration config) {}
 	
 	@Override
-	public void outputDataToList() {
+	public void outputDataToList(File configDirectory) {
 		if(shouldExist){
-			CustomEntityList.creeperBlossom = Optional.of(new CustomMobData(mobName, reportSpawningInLog));	
+			CustomEntityList.CREEPERBLOSSONPRIMED.modData = Optional.of(new CustomMobData(mobName, reportSpawningInLog));	
 		}
 	}
 

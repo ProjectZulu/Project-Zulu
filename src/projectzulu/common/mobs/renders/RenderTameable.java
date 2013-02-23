@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entity.EntityGenericAnimal;
 import projectzulu.common.mobs.entity.EntityGenericTameable;
 import projectzulu.common.mobs.entity.EntityStates;

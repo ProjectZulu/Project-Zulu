@@ -1,5 +1,7 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.io.File;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
@@ -25,9 +27,9 @@ public class MummyDefault extends DefaultSpawnable{
 	}
 	
 	@Override
-	public void outputDataToList() {
+	public void outputDataToList(File configDirectory) {
 		if(shouldExist){
-			CustomEntityList.mummy = Optional.of(new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog));	
+			CustomEntityList.MUMMY.modData = Optional.of(new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog));	
 		}
 	}
 }

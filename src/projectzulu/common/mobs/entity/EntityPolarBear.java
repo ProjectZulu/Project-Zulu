@@ -64,12 +64,12 @@ public class EntityPolarBear extends EntityBear{
 		int var3 = MathHelper.floor_double(this.posZ);
 		boolean wasSuccesful = false;
 		
-		if (CustomEntityList.polarBear.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
+		if (CustomEntityList.POLARBEAR.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
 				&& worldObj.canBlockSeeTheSky(var1, var2, var3)){
 			wasSuccesful = true;
 		}
 		
-		if(CustomEntityList.polarBear.get().reportSpawningInLog){
+		if(CustomEntityList.POLARBEAR.modData.get().reportSpawningInLog){
 			if(wasSuccesful){
 				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}else{
@@ -86,7 +86,7 @@ public class EntityPolarBear extends EntityBear{
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(3 + par2);
 		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.polarBear.get().getLootItem(rand);
+			ItemStack loot = CustomEntityList.POLARBEAR.modData.get().getLootItem(rand);
 			if(loot != null){
 				entityDropItem(loot, 1);
 			}

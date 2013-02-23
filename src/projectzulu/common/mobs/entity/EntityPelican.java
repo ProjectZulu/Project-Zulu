@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -36,11 +37,7 @@ public class EntityPelican extends EntityGenericAnimal{
 	public boolean defaultGrounded(){
 		return false;
 	}
-
-	@Override
-	protected boolean canDespawn(){
-		return true;
-	}
+	
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.
 	 */
@@ -69,13 +66,13 @@ public class EntityPelican extends EntityGenericAnimal{
 		int var3 = MathHelper.floor_double(this.posZ);
 		boolean wasSuccesful = false;
 		
-		if (CustomEntityList.pelican.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() 
+		if (CustomEntityList.PELICAN.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() 
 				&& worldObj.getClosestPlayerToEntity(this, 32) == null && this.worldObj.getSavedLightValue(EnumSkyBlock.Block, var1, var2, var3) < 1
 				&& worldObj.canBlockSeeTheSky(var1, var2, var3) ){
 			wasSuccesful = true;
 		}
 		
-		if(CustomEntityList.pelican.get().reportSpawningInLog){
+		if(CustomEntityList.PELICAN.modData.get().reportSpawningInLog){
 			if(wasSuccesful){
 				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}else{
@@ -128,18 +125,13 @@ public class EntityPelican extends EntityGenericAnimal{
 	/**
 	 * Drop 0-2 items of this living's type
 	 */
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(2) + this.rand.nextInt(1 + par2);
-
-		for (int var4 = 0; var4 < var3; ++var4) {
-			this.dropItem(Item.feather.itemID, 1);
-		}
-
-		if (this.isBurning()) {
-			this.dropItem(Item.chickenCooked.itemID, 1);
-		}
-		else{
-			this.dropItem(Item.chickenRaw.itemID, 1);
+	protected void dropFewItems(boolean par1, int par2){		
+		int numToDrop = this.rand.nextInt(2) + this.rand.nextInt(1 + par2);
+		for (int i = 0; i < numToDrop; i++) {
+			ItemStack loot = CustomEntityList.PELICAN.modData.get().getLootItem(rand);
+			if(loot != null){
+				entityDropItem(loot, 1);
+			}
 		}
 
 	}

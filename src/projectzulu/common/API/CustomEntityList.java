@@ -1,62 +1,35 @@
 package projectzulu.common.api;
 
 
+import java.util.EnumSet;
+import java.util.HashMap;
+
+import projectzulu.common.core.PacketIDs;
+import projectzulu.common.core.ProjectZuluLog;
+
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Optional;
 
 public enum CustomEntityList {
-	instance;
-	public static Optional<? extends CustomMobData> creeperBlossom = Optional.absent();
-	public static Optional<? extends CustomMobData> armadillo = Optional.absent();
-	public static Optional<? extends CustomMobData> sandworm = Optional.absent();
-	public static Optional<? extends CustomMobData> lizard = Optional.absent();
-	public static Optional<? extends CustomMobData> pharaoh = Optional.absent();
+	CREEPERBLOSSONPRIMED, ARMADILLO, SANDWORM, LIZARD, MUMMYPHARAOH, MUMMY, VULTURE, TREEENT, MAMMOTH, FOX, BOAR,
+	MIMIC, ALLIGATOR, FROG, PENGUIN, BEAVER, BLACKBEAR, BROWNBEAR, POLARBEAR, OSTRICH, RHINO, RABBIT,
+	REDFINCH, BLUEFINCH, GREENFINCH, GORILLA, GIRAFFE, ELEPHANT, HORSEBEIGE, HORSEBLACK, HORSEBROWN,
+	HORSEDARKBLACK, HORSEDARKBROWN, HORSEGREY, HORSEWHITE, EAGLE, HORNBILL, PELICAN, MINOTAUR, HAUNTEDARMOR, 
+	CENTIPEDE, HORSERANDOM;
 	
-	public static Optional<? extends CustomMobData> mummy = Optional.absent();
-	public static Optional<? extends CustomMobData> vulture = Optional.absent();
-	public static Optional<? extends CustomMobData> treeEnt = Optional.absent();
+	public Optional<? extends CustomMobData> modData = Optional.absent();
+	private static final HashMap<String, CustomEntityList> lookupEnum = new HashMap<String, CustomEntityList>();
+	static {
+        for(CustomEntityList entry : EnumSet.allOf(CustomEntityList.class))
+        	lookupEnum.put(entry.toString().toLowerCase(), entry);
+    }
 	
-	public static Optional<? extends CustomMobData> mammoth = Optional.absent();
-	public static Optional<? extends CustomMobData> fox = Optional.absent();
-	public static Optional<? extends CustomMobData> boar = Optional.absent();
-	public static Optional<? extends CustomMobData> mimic = Optional.absent();
-	
-	public static Optional<? extends CustomMobData> crocodile = Optional.absent();
-	public static Optional<? extends CustomMobData> frog = Optional.absent();
-	public static Optional<? extends CustomMobData> penguin = Optional.absent();
-	
-	public static Optional<? extends CustomMobData> beaver = Optional.absent();
-	public static Optional<? extends CustomMobData> blackBear = Optional.absent();
-	public static Optional<? extends CustomMobData> brownBear = Optional.absent();
-	public static Optional<? extends CustomMobData> polarBear = Optional.absent();
-	
-	public static Optional<? extends CustomMobData> ostrich = Optional.absent();
-	public static Optional<? extends CustomMobData> rhino = Optional.absent();
-	public static Optional<? extends CustomMobData> rabbit = Optional.absent();
-	
-	public static Optional<? extends CustomMobData> redFinch = Optional.absent();
-	public static Optional<? extends CustomMobData> blueFinch = Optional.absent();
-	public static Optional<? extends CustomMobData> greenFinch = Optional.absent();
-	public static Optional<? extends CustomMobData> gorilla = Optional.absent();
-	
-	public static Optional<? extends CustomMobData> giraffe = Optional.absent();
-	public static Optional<? extends CustomMobData> elephant = Optional.absent();
-	public static Optional<? extends CustomMobData> horseBeige = Optional.absent();
-	
-	public static Optional<? extends CustomMobData> horseBlack = Optional.absent();
-	public static Optional<? extends CustomMobData> horseBrown = Optional.absent();
-	public static Optional<? extends CustomMobData> horseDarkBlack = Optional.absent();
-	public static Optional<? extends CustomMobData> horseDarkBrown = Optional.absent();
-	
-	public static Optional<? extends CustomMobData> horseGrey = Optional.absent();
-	public static Optional<? extends CustomMobData> horseWhite = Optional.absent();
-	public static Optional<? extends CustomMobData> eagle = Optional.absent();
-	
-	public static Optional<? extends CustomMobData> hornBill = Optional.absent();
-	public static Optional<? extends CustomMobData> pelican = Optional.absent();
-	public static Optional<? extends CustomMobData> minotaur = Optional.absent();
-	public static Optional<? extends CustomMobData> hauntedArmor = Optional.absent();
-	
-	public static Optional<? extends CustomMobData> centipede = Optional.absent();
-	public static Optional<? extends CustomMobData> horseRandom = Optional.absent();
-
+	public static CustomEntityList getByName(String mobName){
+		String[] nameParts = CharMatcher.anyOf(" ").removeFrom(mobName).toLowerCase().split("\\.");
+		CustomEntityList result = lookupEnum.get(nameParts[nameParts.length-1]);
+		if(result == null){
+			ProjectZuluLog.info("Custom Entity Lookup Failed %s Does not Seem to Exist", CharMatcher.anyOf(" ").removeFrom(mobName).toLowerCase());
+		}
+		return result;
+	}
 }

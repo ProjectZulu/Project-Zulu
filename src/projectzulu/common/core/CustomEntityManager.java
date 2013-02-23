@@ -37,12 +37,12 @@ public enum CustomEntityManager {
 		config.save();
 	}
 	
-	public void registerEntities(){
+	public void registerEntities(File configDirectory){
 		for (DefaultEntity entity : entities) {
 			if(entity.shouldExist()){
 				entity.registerEntity();
 				entity.registerEgg();
-				entity.outputDataToList();
+				entity.outputDataToList(configDirectory);
 			}
 		}
 	}

@@ -1,11 +1,18 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.io.File;
+
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultWithEgg;
 import projectzulu.common.core.ItemGenerics;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.mobs.entity.EntityHauntedArmor;
 import projectzulu.common.mobs.models.ModelHauntedArmor;
 
@@ -22,13 +29,13 @@ public class HauntedArmorDefault extends DefaultWithEgg{
 	}
 	
 	@Override
-	public void outputDataToList() {
-		if(shouldExist){
-			CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
-			if(ItemList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Ectoplasm.meta()), 4);
-			}
-			CustomEntityList.hauntedArmor = Optional.of(customMobData);	
-		}
+	public void outputDataToList(File configDirectory) {
+		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
+		config.load();
+		CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+				ItemGenerics.Properties.Ectoplasm.meta(), 4);
+		config.save();
+		CustomEntityList.HAUNTEDARMOR.modData = Optional.of(customMobData);
 	}
 }

@@ -1,5 +1,7 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.io.File;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -7,8 +9,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.mobs.entity.EntityHorseBrown;
 import projectzulu.common.mobs.models.ModelHorse;
 
@@ -34,15 +39,16 @@ public class HorseBrownDefault extends DefaultSpawnable{
 	}
 	
 	@Override
-	public void outputDataToList() {
-		if(shouldExist){
-			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-			customMobData.addLootToMob(new ItemStack(Item.beefRaw), 10);
-			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
-			if(ItemList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
-			}
-			CustomEntityList.horseBrown = Optional.of(customMobData);	
-		}
+	public void outputDataToList(File configDirectory) {
+		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
+		config.load();
+		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.beefRaw, 0, 10);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+				ItemGenerics.Properties.LargeHeart.meta(), 4);
+		config.save();
+		CustomEntityList.HORSEBROWN.modData = Optional.of(customMobData);	
 	}
 }

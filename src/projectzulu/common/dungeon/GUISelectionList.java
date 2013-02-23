@@ -10,18 +10,18 @@ import org.lwjgl.util.Point;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.PairFullShortName;
 
-public class GUISelectCreatureList extends GuiScrollingList{
+public class GUISelectionList extends GuiScrollingList{
 	
     private GuiLimitedMobSpawner parent;
     private List<PairFullShortName<String,String>> listNames;
     ListType listType;
     int selectedElement = -1;
     
-    public GUISelectCreatureList(GuiLimitedMobSpawner parent, List<PairFullShortName<String,String>> listNames, ListType listType, int listWidth, Point screenSize, Point backgroundSize){
+    public GUISelectionList(GuiLimitedMobSpawner parent, List<PairFullShortName<String,String>> listNames, ListType listType, int listWidth, Point screenSize, Point backgroundSize){
     	super(parent.getMinecraft(),
     			listWidth, backgroundSize.getY()+50, // Width, Height
     			(screenSize.getY()-backgroundSize.getY())/2+15, (screenSize.getY()-backgroundSize.getY())/2+backgroundSize.getY()-20, // Top, Bottom, 
-    			(screenSize.getX()-backgroundSize.getX())/2+264, // Left
+    			(screenSize.getX()-backgroundSize.getX())/2+234, // Left
     			parent.getMinecraft().fontRenderer.FONT_HEIGHT+8); // Element Height
     	this.parent = parent;
     	this.listNames = listNames;
@@ -35,8 +35,8 @@ public class GUISelectCreatureList extends GuiScrollingList{
 
     @Override
     protected void elementClicked(int clickedIndex, boolean var2){
-    	if(parent.lastCalledElementID != -1 && parent.getDataField(parent.lastCalledElementID) instanceof CreatureFields){
-			((CreatureFields)parent.getDataField(parent.lastCalledElementID)).setDataFromList(listNames.get(clickedIndex).getFullName(), listType);
+    	if(parent.getDataField(parent.currentDataField) instanceof CreatureFields){
+			((CreatureFields)parent.getDataField(parent.currentDataField)).setDataFromList(listNames.get(clickedIndex).getFullName(), listType);
     		parent.closeList();
     	}
     	selectedElement = clickedIndex;
@@ -52,9 +52,9 @@ public class GUISelectCreatureList extends GuiScrollingList{
         int textureID = parent.getMinecraft().renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         parent.getMinecraft().renderEngine.bindTexture(textureID);
-        int xCoord = (parent.width - parent.backgroundSize.getX()) / 2+260; //277
+        int xCoord = (parent.width - parent.backgroundSize.getX()) / 2+230; //277
         int yCoord = (parent.height - parent.backgroundSize.getY()) / 2;
-        parent.drawTexturedModalRect(xCoord, yCoord, 0, 0, 77, 244);
+        parent.drawTexturedModalRect(xCoord, yCoord, 0, 0, 91, 244);
     }
     
     @Override

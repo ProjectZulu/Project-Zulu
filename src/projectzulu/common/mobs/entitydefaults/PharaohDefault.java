@@ -1,5 +1,7 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.io.File;
+
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.DefaultCreature;
@@ -15,9 +17,9 @@ public class PharaohDefault extends DefaultCreature{
 	}
 	
 	@Override
-	public void outputDataToList() {
+	public void outputDataToList(File configDirectory) {
 		if(shouldExist){
-			CustomEntityList.pharaoh = Optional.of(new CustomMobData(mobName, reportSpawningInLog));	
+			CustomEntityList.MUMMYPHARAOH.modData = Optional.of(new CustomMobData(mobName, reportSpawningInLog));	
 		}
 	}
 }

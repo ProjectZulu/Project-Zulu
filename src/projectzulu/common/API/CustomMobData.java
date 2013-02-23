@@ -10,6 +10,7 @@ public class CustomMobData {
 	public String mobName = "";
 	public int secondarySpawnRate = 0;
 	public boolean reportSpawningInLog = false;
+	public boolean shouldDespawn = true;
 	
 	private List lootItems = new ArrayList<ItemStack>();
 	private List lootWeights = new ArrayList<Integer>();

@@ -3,8 +3,10 @@ package projectzulu.common.dungeon;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
@@ -14,40 +16,44 @@ import projectzulu.common.core.DefaultProps;
 import com.google.common.base.CharMatcher;
 
 public class SpawnerFields implements DataFields{
-	private int rowIndex;
 	private boolean isEnabled = true;
-	public int elementID;
-
+	
 	private GuiTextField minSpawnDelay;
 	private GuiTextField maxSpawnDelay;
 	private GuiTextField maxToSpawn;
 	private GuiTextField requiredPlayerRange;
 	private GuiTextField maxNearbyEntities;
-	String[] titles = new String[]{"Spawn Delay","Max Spawn","Activation Range", "Max Nearby"};
-	int[] titleOffset;
-	int totalFieldWidth;
 	
-	SpawnerFields(Integer elementID){
-		this.elementID = elementID;
+	private GuiButton toggleDebug;
+	private GuiButton resetDebug;
+
+	private GuiLimitedMobSpawner parent;
+	SpawnerFields(GuiLimitedMobSpawner parent){
+		this.parent = parent;
 	}
 	
-	public DataFields createFields(int rowIndex, FontRenderer fontRenderer, int screenWidth, int screenHeight, Point backgroundSize){
-		this.rowIndex = rowIndex;
-		
-		minSpawnDelay = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(111+1,22+2), new Point(20,14),
+	public DataFields createFields(Minecraft mc, int screenWidth, int screenHeight, Point backgroundSize){
+		minSpawnDelay = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(177,22+2), new Point(20,14),
 				minSpawnDelay != null ? minSpawnDelay.getText() : "");
-
-		maxSpawnDelay = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(135+1,22+2), new Point(20,14),
+		maxSpawnDelay = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(201,22+2), new Point(20,14),
 				maxSpawnDelay != null ? maxSpawnDelay.getText() : "");
 
-		maxToSpawn = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(228+1,22+2), new Point(20,14),
-				maxToSpawn != null ? maxToSpawn.getText() : "");
-
-		requiredPlayerRange = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(135+1,39+2), new Point(39,14),
+		requiredPlayerRange = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(201,39+2), new Point(39,14),
 				requiredPlayerRange != null ? requiredPlayerRange.getText() : "");
 		
-		maxNearbyEntities = setupTextField(fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(228+1,39+2), new Point(39,14),
+		maxToSpawn = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(201,58), new Point(20,14),
+				maxToSpawn != null ? maxToSpawn.getText() : "");
+		maxNearbyEntities = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(201,58+17), new Point(39,14),
 				maxNearbyEntities != null ? maxNearbyEntities.getText() : "");
+		
+		toggleDebug = new GuiButton(1,
+				(screenWidth - (int)backgroundSize.getX())/2+5,
+				(screenHeight - (int)backgroundSize.getY())/2+175, 70, 20, "Toggle Debug");
+		resetDebug = new GuiButton(1,
+				(screenWidth - (int)backgroundSize.getX())/2+151,
+				(screenHeight - (int)backgroundSize.getY())/2+175, 70, 20, "Reset Debug");
+
+		
 		return this;
 	}
 	
@@ -65,7 +71,7 @@ public class SpawnerFields implements DataFields{
 	}
 	
 	@Override
-	public void loadFromTileEntity(TileEntityLimitedMobSpawner limitedMobSpawner){
+	public void loadFromTileEntity(TileEntityLimitedMobSpawner limitedMobSpawner, int elementID){
 		minSpawnDelay.setText(Integer.toString(limitedMobSpawner.getMinSpawnDelay()/20));
 		maxSpawnDelay.setText(Integer.toString(limitedMobSpawner.getMaxSpawnDelay()/20));
 		maxToSpawn.setText(Integer.toString(limitedMobSpawner.getMaxSpawnableEntities()));
@@ -122,6 +128,29 @@ public class SpawnerFields implements DataFields{
 			maxToSpawn.mouseClicked(par1, par2, par3);
 			maxNearbyEntities.mouseClicked(par1, par2, par3);
 			requiredPlayerRange.mouseClicked(par1, par2, par3);
+			
+			if(par3 == 0 && toggleDebug.mousePressed(mc, par1, par2)){
+				if(parent.limitedMobSpawner.isDebugEnabled()){
+					parent.limitedMobSpawner.setDebugMode(new NBTTagCompound());
+					parent.limitedMobSpawner.syncToServer();
+				}else{
+					NBTTagCompound tagToSave = new NBTTagCompound();
+					parent.limitedMobSpawner.writeToNBT(tagToSave);
+					parent.limitedMobSpawner.setDebugMode(tagToSave);
+					parent.limitedMobSpawner.syncToServer();
+				}
+				
+				mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+			}	
+			if(par3 == 0 && resetDebug.mousePressed(mc, par1, par2)){
+				if(parent.limitedMobSpawner.isDebugEnabled()){
+					parent.limitedMobSpawner.loadDebugNBT();
+					parent.limitedMobSpawner.setDebugMode(new NBTTagCompound());
+					parent.limitedMobSpawner.syncToServer();
+					parent.loadGuiFromTileEntity();
+				}				
+				mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+			}	
 		}
 	}
 
@@ -133,39 +162,50 @@ public class SpawnerFields implements DataFields{
 	
 	public void render(Minecraft mc, int par1, int par2, float par3, Point screenSize, Point backgroundSize){
 		if(isEnabled){
+			if(parent.limitedMobSpawner.isDebugEnabled()){
+				toggleDebug.enabled = false;
+				toggleDebug.drawButton(mc, par1, par2);
+				toggleDebug.enabled = true;
+			}else{
+				toggleDebug.drawButton(mc, par1, par2);
+			}
+			
+			resetDebug.drawButton(mc, par1, par2);
+
 			/* Draw Raw Text */
-			mc.fontRenderer.drawString(titles[0],
+			mc.fontRenderer.drawString("Spawn Delay [Min / Max]",
 					(int)(screenSize.getX() - backgroundSize.getX())/2 + 46,
 					(int)(screenSize.getY() - backgroundSize.getY())/2 + 26, 4210752); // White: 16777215
-			mc.fontRenderer.drawString(titles[1],
-					(int)(screenSize.getX() - backgroundSize.getX())/2 + 46+114,
-					(int)(screenSize.getY() - backgroundSize.getY())/2 + 26, 4210752);
-			mc.fontRenderer.drawString(titles[2],
+			mc.fontRenderer.drawString("Player Activation Range",
 					(int)(screenSize.getX() - backgroundSize.getX())/2 + 46,
 					(int)(screenSize.getY() - backgroundSize.getY())/2 + 26+17, 4210752);
-			mc.fontRenderer.drawString(titles[3],
-					(int)(screenSize.getX() - backgroundSize.getX())/2 + 46+114,
-					(int)(screenSize.getY() - backgroundSize.getY())/2 + 26+17, 4210752);
+			mc.fontRenderer.drawString("Maximum To Spawn",
+					(int)(screenSize.getX() - backgroundSize.getX())/2 + 46,
+					(int)(screenSize.getY() - backgroundSize.getY())/2 + 75-17, 4210752);
+			mc.fontRenderer.drawString("Maximum Nearby",
+					(int)(screenSize.getX() - backgroundSize.getX())/2 + 46,
+					(int)(screenSize.getY() - backgroundSize.getY())/2 + 75, 4210752);
 			
 			/* Draw TextBox Background Objects */
 	        int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
 	        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	        mc.renderEngine.bindTexture(textureID);
 	        
-	        Point smallBoxImageLocation = new Point(155,0);
+	        Point smallBoxImageLocation = new Point(154,0);
 	        Point smallBoxSize = new Point(22,14);
-	        drawBackgroundBox(new Point(110,21), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
-	        drawBackgroundBox(new Point(134,21), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
-	        drawBackgroundBox(new Point(227,21), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
-	        drawBackgroundBox(new Point(134,38), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
-	        drawBackgroundBox(new Point(227,38), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
+	        drawBackgroundBox(new Point(175,21), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
+	        drawBackgroundBox(new Point(199,21), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
+	        drawBackgroundBox(new Point(199,21+17), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
+
+	        drawBackgroundBox(new Point(199,21+17*2), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
+	        drawBackgroundBox(new Point(199,21+17*3), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
 	        
 			/* Draw Interactive Text Boxes */
 			minSpawnDelay.drawTextBox();
 			maxSpawnDelay.drawTextBox();
 			maxToSpawn.drawTextBox();
 			maxNearbyEntities.drawTextBox();
-			requiredPlayerRange.drawTextBox();			
+			requiredPlayerRange.drawTextBox();	
 		}
 	}
 	

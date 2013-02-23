@@ -14,38 +14,49 @@ import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
 import net.minecraftforge.common.Configuration;
-import projectzulu.common.mobs.entity.EntityGiraffe;
-import projectzulu.common.mobs.models.ModelGiraffe;
+import projectzulu.common.mobs.entity.EntityElephant;
+import projectzulu.common.mobs.models.ModelElephant;
 
 import com.google.common.base.Optional;
 
-public class GiraffeDefault extends DefaultSpawnable{
+public class ElephantDefault extends DefaultSpawnable{
 	
-	public GiraffeDefault(){
-		super("Giraffe", EntityGiraffe.class);		
+	public ElephantDefault(){
+		super("Elephant", EntityElephant.class);		
 		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
-		setModelAndRender(ModelGiraffe.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+		setModelAndRender(ModelElephant.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
-		eggColor1 =  (239 << 16) + (228 << 8) + 109;					eggColor2 = (91 << 16) + (87 << 8) + 41;
+		eggColor1 =  (88 << 16) + (67 << 8) + 50;				eggColor2 = (190 << 16) + (165 << 8) + 145;
 		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		
 		defaultBiomesToSpawn.add("Savanna");
 	}
 	
 	@Override
+<<<<<<< HEAD
+	public void outputDataToList() {
+		if(shouldExist){
+			CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+			if(ItemList.scaleItem.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scaleItem.get()), 10); }
+			if(ItemList.scrapMeat.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.scrapMeat.get()), 10); }
+			if(ItemList.genericCraftingItems1.isPresent()){
+				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.SmallHeart.meta()), 4);
+			}
+			CustomEntityList.elephant = Optional.of(customMobData);
+		}
+=======
 	public void outputDataToList(File configDirectory) {
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.beefRaw, 0, 10);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scaleItem, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
-				ItemGenerics.Properties.BlackLichen.meta(), 4);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
-				ItemGenerics.Properties.LargeHeart.meta(), 4);
+				ItemGenerics.Properties.SmallHeart.meta(), 5);
 		config.save();
-		CustomEntityList.GIRAFFE.modData = Optional.of(customMobData);	
+		CustomEntityList.ELEPHANT.modData = Optional.of(customMobData);
+>>>>>>> master
 	}
 }

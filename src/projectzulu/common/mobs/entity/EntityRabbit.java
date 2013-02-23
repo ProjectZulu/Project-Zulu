@@ -78,12 +78,12 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
 		int var3 = MathHelper.floor_double(this.posZ);
 		boolean wasSuccesful = false;
 		
-		if (CustomEntityList.rabbit.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
+		if (CustomEntityList.RABBIT.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
 				&& worldObj.canBlockSeeTheSky(var1, var2, var3)){
 			wasSuccesful = true;
 		}
 		
-		if(CustomEntityList.rabbit.get().reportSpawningInLog){
+		if(CustomEntityList.RABBIT.modData.get().reportSpawningInLog){
 			if(wasSuccesful){
 				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}else{
@@ -145,7 +145,7 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(1 + par2);
 		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.rabbit.get().getLootItem(rand);
+			ItemStack loot = CustomEntityList.RABBIT.modData.get().getLootItem(rand);
 			if(loot != null){
 				entityDropItem(loot, 1);
 			}

@@ -1,11 +1,17 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.io.File;
+
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultWithEgg;
 import projectzulu.common.core.ItemGenerics;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.mobs.entity.EntityMinotaur;
 import projectzulu.common.mobs.models.ModelMinotaur;
 
@@ -22,15 +28,18 @@ public class MinotaurDefault extends DefaultWithEgg{
 	}
 	
 	@Override
-	public void outputDataToList() {
-		if(shouldExist){
-			CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
-			if(ItemList.furPelt.isPresent()){ customMobData.addLootToMob(new ItemStack(ItemList.furPelt.get()), 10); }
-			if(ItemList.genericCraftingItems1.isPresent()){
-				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.LargeHeart.meta()), 4);
-				customMobData.addLootToMob(new ItemStack(ItemList.genericCraftingItems1.get().itemID, 1, ItemGenerics.Properties.Ectoplasm.meta()), 4);
-			}
-			CustomEntityList.minotaur = Optional.of(customMobData);	
-		}
+	public void outputDataToList(File configDirectory) {
+		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
+		config.load();
+		CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
+		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", true).getBoolean(true);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.furPelt, 0, 10);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+				ItemGenerics.Properties.LargeHeart.meta(), 4);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+				ItemGenerics.Properties.Ectoplasm.meta(), 4);
+		config.save();
+		CustomEntityList.MINOTAUR.modData = Optional.of(customMobData);	
 	}
 }

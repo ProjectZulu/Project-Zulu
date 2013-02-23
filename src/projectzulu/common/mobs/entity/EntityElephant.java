@@ -83,12 +83,12 @@ public class EntityElephant extends EntityGenericAnimal{
 		int var3 = MathHelper.floor_double(this.posZ);
 		boolean wasSuccesful = false;
 		
-		if (CustomEntityList.elephant.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
+		if (CustomEntityList.ELEPHANT.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
 				&& worldObj.canBlockSeeTheSky(var1, var2, var3)){
 			wasSuccesful = true;
 		}
 		
-		if(CustomEntityList.elephant.get().reportSpawningInLog){
+		if(CustomEntityList.ELEPHANT.modData.get().reportSpawningInLog){
 			if(wasSuccesful){
 				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}else{
@@ -153,7 +153,7 @@ public class EntityElephant extends EntityGenericAnimal{
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(4 + par2);
 		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.elephant.get().getLootItem(rand);
+			ItemStack loot = CustomEntityList.ELEPHANT.modData.get().getLootItem(rand);
 			if(loot != null){
 				entityDropItem(loot, 1);
 			}

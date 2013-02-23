@@ -30,13 +30,13 @@ public class EntityRedFinch extends EntityFinch{
 		int var3 = MathHelper.floor_double(this.posZ);
 		boolean wasSuccesful = false;
 		
-		if (CustomEntityList.redFinch.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() 
+		if (CustomEntityList.REDFINCH.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() 
 				&& worldObj.getClosestPlayerToEntity(this, 32) == null && this.worldObj.getSavedLightValue(EnumSkyBlock.Block, var1, var2, var3) < 1
 				&& worldObj.canBlockSeeTheSky(var1, var2, var3) ){
 			wasSuccesful = true;
 		}
 		
-		if(CustomEntityList.redFinch.get().reportSpawningInLog){
+		if(CustomEntityList.REDFINCH.modData.get().reportSpawningInLog){
 			if(wasSuccesful){
 				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}else{
@@ -53,7 +53,7 @@ public class EntityRedFinch extends EntityFinch{
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(1 + par2);
 		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.redFinch.get().getLootItem(rand);
+			ItemStack loot = CustomEntityList.REDFINCH.modData.get().getLootItem(rand);
 			if(loot != null){
 				entityDropItem(loot, 1);
 			}

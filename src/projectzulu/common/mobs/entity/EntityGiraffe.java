@@ -86,12 +86,12 @@ public class EntityGiraffe extends EntityGenericAnimal {
 		int var3 = MathHelper.floor_double(this.posZ);
 		boolean wasSuccesful = false;
 		
-		if (CustomEntityList.giraffe.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
+		if (CustomEntityList.GIRAFFE.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
 				&& worldObj.canBlockSeeTheSky(var1, var2, var3)){
 			wasSuccesful = true;
 		}
 		
-		if(CustomEntityList.giraffe.get().reportSpawningInLog){
+		if(CustomEntityList.GIRAFFE.modData.get().reportSpawningInLog){
 			if(wasSuccesful){
 				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}else{
@@ -144,7 +144,7 @@ public class EntityGiraffe extends EntityGenericAnimal {
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(3 + par2);
 		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.giraffe.get().getLootItem(rand);
+			ItemStack loot = CustomEntityList.GIRAFFE.modData.get().getLootItem(rand);
 			if(loot != null){
 				entityDropItem(loot, 1);
 			}
