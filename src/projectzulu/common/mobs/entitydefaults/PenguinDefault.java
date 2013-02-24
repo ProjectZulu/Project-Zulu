@@ -45,6 +45,7 @@ public class PenguinDefault extends DefaultSpawnable{
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.SmallHeart.meta(), 4);
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.PENGUIN.modData = Optional.of(customMobData);	
 	}

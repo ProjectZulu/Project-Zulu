@@ -48,6 +48,7 @@ public class MammothDefault extends DefaultSpawnable{
 				ItemGenerics.Properties.LargeHeart.meta(), 4);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.Tusk.meta(), 4);
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.MAMMOTH.modData = Optional.of(customMobData);	
 	}

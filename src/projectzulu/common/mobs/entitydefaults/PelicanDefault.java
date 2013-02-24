@@ -43,6 +43,7 @@ public class PelicanDefault extends DefaultSpawnable{
 				ItemGenerics.Properties.LargeHeart.meta(), 4);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.Talon.meta(), 4);
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.PELICAN.modData = Optional.of(customMobData);	
 	}

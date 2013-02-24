@@ -1,5 +1,7 @@
 package projectzulu.common.blocks;
 
+import com.google.common.base.CharMatcher;
+
 public class StringHelper {
 	
     public static String simplifyStringNameForDisplay(String string, int characterLimit, String splitString){
@@ -23,5 +25,8 @@ public class StringHelper {
     	return string.toUpperCase().replace(string.toUpperCase().substring(1), string.substring(1).toLowerCase());
     }
     
+    public static int parseInteger(String integer, String regexRetain){
+    	return Integer.parseInt(CharMatcher.anyOf(regexRetain).retainFrom(integer));
+    }
     
 }

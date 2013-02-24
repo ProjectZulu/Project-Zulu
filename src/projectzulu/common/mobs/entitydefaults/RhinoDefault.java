@@ -44,6 +44,7 @@ public class RhinoDefault extends DefaultSpawnable{
 				ItemGenerics.Properties.LargeHeart.meta(), 4);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.Tusk.meta(), 8);
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.RHINO.modData = Optional.of(customMobData);
 	}

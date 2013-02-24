@@ -7,6 +7,7 @@ public class ProjectZuluLog {
 	
     private static Logger myLog;
 	private static boolean isSetup;
+//    ProjectZuluLog.severe("$ Spawming: $ %s $ %s $ %s $ %s $ %s",var35.toString(), var39.getEntityName(), var39.posX, var39.posY, var39.posZ);
 
 	public static void configureLogging() {
 		if (!isSetup){

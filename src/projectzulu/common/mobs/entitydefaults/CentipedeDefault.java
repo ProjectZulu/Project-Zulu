@@ -48,6 +48,7 @@ public class CentipedeDefault extends DefaultSpawnable{
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.Antennae.meta(), 1);
 
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.CENTIPEDE.modData = Optional.of(customMobData);
 	}

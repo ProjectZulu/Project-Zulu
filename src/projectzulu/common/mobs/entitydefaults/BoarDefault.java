@@ -49,6 +49,7 @@ public class BoarDefault extends DefaultSpawnable{
 				ItemGenerics.Properties.Tusk.meta(), 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.SmallHeart.meta(), 5);
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.BOAR.modData = Optional.of(customMobData);
 	}

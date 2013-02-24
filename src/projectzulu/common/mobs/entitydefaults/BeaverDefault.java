@@ -51,6 +51,7 @@ public class BeaverDefault extends DefaultSpawnable{
 				ItemGenerics.Properties.BlackLichen.meta(), 4);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.SmallHeart.meta(), 4);
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.BEAVER.modData = Optional.of(customMobData);
 	}

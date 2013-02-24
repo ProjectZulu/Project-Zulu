@@ -50,6 +50,7 @@ public class TreeEntDefault extends DefaultSpawnable{
 				ItemGenerics.Properties.Bark.meta(), 4);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.BlackLichen.meta(), 4);
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.TREEENT.modData = Optional.of(customMobData);	
 	}

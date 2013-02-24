@@ -46,6 +46,7 @@ public class OstrichDefault extends DefaultSpawnable{
 				ItemGenerics.Properties.Talon.meta(), 4);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
 				ItemGenerics.Properties.SmallHeart.meta(), 4);
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.OSTRICH.modData = Optional.of(customMobData);
 	}
