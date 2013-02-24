@@ -51,7 +51,6 @@ public class GUIEditNodeTextField extends GuiTextField{
 	public boolean saveAndClear(NBTTree nodeTree){
 		NBTBase newNBT = selectedNode.createNBTFromString(getText());
 		if(newNBT != null){
-			//TODO: What if I'm Root? I do not have parent, does this mean entire tree can be remade?
 			if(selectedNode.getParent() != null){
 				selectedNode.getParent().replaceChild(selectedNode, new NBTNode(newNBT, selectedNode.getParent())); 
 			}else{

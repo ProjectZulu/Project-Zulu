@@ -1,16 +1,7 @@
 package projectzulu.common.dungeon;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
-
-import javax.print.DocFlavor.BYTE_ARRAY;
-
-import org.objectweb.asm.Type;
-
-import projectzulu.common.core.ProjectZuluLog;
-
-import com.google.common.base.CharMatcher;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
@@ -24,6 +15,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
+import projectzulu.common.core.ProjectZuluLog;
 
 /**
  * Helper NBT Enum for proccessing NBTTagCompounds. 
@@ -41,7 +33,9 @@ public enum NBTHelper {
 		@Override
 		String getValue(NBTBase currentTag) { return ""; }
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) { return null; }
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) { return null; }
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {}
 	},
 	TAG_BYTE(1) {
 		@Override
@@ -58,10 +52,14 @@ public enum NBTHelper {
 			return Byte.toString(((NBTTagByte)currentTag).data);
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
 			ProjectZuluLog.info("Setting Byte Value");
-			NBTTagByte nbtTag = (NBTTagByte)currentNode.getData();
+			NBTTagByte nbtTag = (NBTTagByte)currentNBT;
 			return new NBTTagByte(nbtTag.getName(), Byte.parseByte(newValue)); 
+		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			nbtTagList.appendTag(currentNode.getData());
 		}
 	},
 	TAG_SHORT(2) {
@@ -81,10 +79,13 @@ public enum NBTHelper {
 		}
 
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			ProjectZuluLog.info("Setting Short Value");
-			NBTTagShort nbtTag = (NBTTagShort)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagShort nbtTag = (NBTTagShort)currentNBT;
 			return new NBTTagShort(nbtTag.getName(), Short.parseShort(newValue)); 
+		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			nbtTagList.appendTag(currentNode.getData());
 		}
 	},
 	TAG_INT(3) {
@@ -103,10 +104,13 @@ public enum NBTHelper {
 			return Integer.toString(((NBTTagInt)currentTag).data);
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			ProjectZuluLog.info("Setting Int Value");
-			NBTTagInt nbtTag = (NBTTagInt)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagInt nbtTag = (NBTTagInt)currentNBT;
 			return new NBTTagInt(nbtTag.getName(), Integer.parseInt(newValue)); 
+		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			nbtTagList.appendTag(currentNode.getData());
 		}
 	},
 	TAG_LONG(4) {
@@ -125,11 +129,13 @@ public enum NBTHelper {
 			return Long.toString(((NBTTagLong)currentTag).data);
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			ProjectZuluLog.info("Setting Long Value");
-			NBTTagLong nbtTag = (NBTTagLong)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagLong nbtTag = (NBTTagLong)currentNBT;
 			return new NBTTagLong(nbtTag.getName(), Long.parseLong(newValue)); 
-
+		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			nbtTagList.appendTag(currentNode.getData());
 		}
 	},
 	TAG_FLOAT(5) {
@@ -137,7 +143,6 @@ public enum NBTHelper {
 		ArrayList getChildTags(NBTBase currentTag, NBTNode currentNode) {
 			return new ArrayList();
 		}
-		
 		@Override
 		void writeToNBT(NBTTagCompound nbtTagCompound, NBTNode currentNode) {
 			NBTTagFloat nbtTag = (NBTTagFloat)currentNode.getData();
@@ -148,10 +153,13 @@ public enum NBTHelper {
 			return Float.toString(((NBTTagFloat)currentTag).data);
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			ProjectZuluLog.info("Setting Float Value");
-			NBTTagFloat nbtTag = (NBTTagFloat)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagFloat nbtTag = (NBTTagFloat)currentNBT;
 			return new NBTTagFloat(nbtTag.getName(), Float.parseFloat(newValue)); 
+		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			nbtTagList.appendTag(currentNode.getData());
 		}
 	},
 	TAG_DOUBLE(6) {
@@ -169,10 +177,13 @@ public enum NBTHelper {
 			return Double.toString(((NBTTagDouble)currentTag).data);
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			ProjectZuluLog.info("Setting Double Value");
-			NBTTagDouble nbtTag = (NBTTagDouble)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagDouble nbtTag = (NBTTagDouble)currentNBT;
 			return new NBTTagDouble(nbtTag.getName(), Double.parseDouble(newValue)); 
+		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			nbtTagList.appendTag(currentNode.getData());
 		}
 	},
 	TAG_BYTE_ARRAY(7) {
@@ -197,9 +208,8 @@ public enum NBTHelper {
 			return value;
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			ProjectZuluLog.info("Setting Byte Array Value");
-			NBTTagByteArray nbtTag = (NBTTagByteArray)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagByteArray nbtTag = (NBTTagByteArray)currentNBT;
 			ArrayList<Byte> fillerByteArray = new ArrayList();
 			Scanner scanner = new Scanner(newValue);
 			while(scanner.hasNextByte()){
@@ -211,6 +221,10 @@ public enum NBTHelper {
 				resultByte[i] = fillerByteArray.get(i);
 			}
 			return new NBTTagByteArray(nbtTag.getName(), resultByte); 
+		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			nbtTagList.appendTag(currentNode.getData());
 		}
 	},
 	TAG_STRING(8) {
@@ -228,10 +242,13 @@ public enum NBTHelper {
 			return ((NBTTagString)currentTag).data;
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			ProjectZuluLog.info("Setting String Value");
-			NBTTagString nbtTag = (NBTTagString)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagString nbtTag = (NBTTagString)currentNBT;
 			return new NBTTagString(nbtTag.getName(), newValue); 
+		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			nbtTagList.appendTag(currentNode.getData());
 		}
 	},
 	TAG_LIST(9) {
@@ -250,14 +267,11 @@ public enum NBTHelper {
 			NBTTagList oldTagList = (NBTTagList)currentNode.getData();
 			NBTTagList newTagList = new NBTTagList(oldTagList.getName());
 			for (NBTNode childNode : currentNode.getChildren()) {
-				newTagList.appendTag(childNode.getData());
+				NBTHelper helper = getByID(childNode.getData().getId());
+				helper.writeToTagList(newTagList, childNode);
 			}
 			nbtTagCompound.setTag(newTagList.getName(), newTagList);
 		}
-		
-		/* Return Value of Tag in the Form of a String. For Container tags, such as @link{NBTTagList} Return String with All Tags Seperated by commas */
-		/* Sets Value of Value in the Form of a String. For Container tags, such as @link{NBTTagList} it sets the List Size */
-		/** Return Number of Tags */
 		@Override
 		String getValue(NBTBase currentTag) {
 			NBTTagList tagList = (NBTTagList)currentTag;
@@ -266,48 +280,33 @@ public enum NBTHelper {
 				stringBuilder = stringBuilder + tagList.tagAt(i).getName()+":"+tagList.tagAt(i).getId()+",";
 			}
 			return stringBuilder;
-//			return Integer.toString(((NBTTagList)currentTag).tagCount());
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			NBTTagList oldTagList = (NBTTagList)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagList oldTagList = (NBTTagList)currentNBT;
 			
 			String[] newValueParts = newValue.split(",");
-			ProjectZuluLog.info("New tag List %s Length is %s", newValue, newValueParts.length);
 			NBTTagList newTagList = new NBTTagList(oldTagList.getName());
 			for (int i = 0; i < newValueParts.length; i++) {
 				String[] newValuePieces = newValueParts[i].split(":");
-				ProjectZuluLog.info("Pieces of %s Length is %s", newValueParts[i], newValuePieces.length);
 				if(i < oldTagList.tagCount()){
 					newTagList.appendTag(oldTagList.tagAt(i).setName(newValuePieces[0]));
 				}else{
 					newTagList.appendTag(NBTBase.newTag(Byte.parseByte(newValuePieces[1]), newValuePieces[0]));
 				}
 			}
-			ProjectZuluLog.info("getNBTFromString is now %s", getValue(newTagList));
 			return newTagList;
 		}
-		
-		NBTBase getNBTFromString222(NBTNode currentNode, String newValue) {
-			NBTTagCompound oldTagCompound = (NBTTagCompound)currentNode.getData();
-			
-			String[] newValueParts = newValue.split(",");
-			ProjectZuluLog.info("New tag compound %s Length is %s", newValue, newValueParts.length);
-			NBTTagCompound newTagCompound = new NBTTagCompound(oldTagCompound.getName());
-			ArrayList<NBTBase> oldNBT = new ArrayList<NBTBase>(oldTagCompound.getTags());
-
-			for (int i = 0; i < newValueParts.length; i++) {
-				String[] newValuePieces = newValueParts[i].split(":");
-				if(i < oldTagCompound.getTags().size()){
-					newTagCompound.setTag(newValuePieces[0], oldNBT.get(i));
-				}else{
-					newTagCompound.setTag(newValuePieces[0], NBTBase.newTag(Byte.parseByte(newValuePieces[1]), newValuePieces[0]));
-				}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			NBTTagList oldTagList = (NBTTagList)currentNode.getData();
+			NBTTagList newTagList = new NBTTagList(oldTagList.getName());
+			for (NBTNode childNode : currentNode.getChildren()) {
+				NBTHelper helper = getByID(childNode.getData().getId());
+				helper.writeToTagList(newTagList, childNode);
 			}
-			ProjectZuluLog.info("getNBTFromString is now %s", getValue(newTagCompound));
-			return newTagCompound;
+			nbtTagList.appendTag(newTagList);
 		}
-		
 	},
 	TAG_COMPOUND(10) {
 		@Override
@@ -342,11 +341,10 @@ public enum NBTHelper {
 			return stringBuilder;
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			NBTTagCompound oldTagCompound = (NBTTagCompound)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagCompound oldTagCompound = (NBTTagCompound)currentNBT;
 			
 			String[] newValueParts = newValue.split(",");
-			ProjectZuluLog.info("New tag compound %s Length is %s", newValue, newValueParts.length);
 			NBTTagCompound newTagCompound = new NBTTagCompound(oldTagCompound.getName());
 			ArrayList<NBTBase> oldNBT = new ArrayList<NBTBase>(oldTagCompound.getTags());
 
@@ -358,8 +356,17 @@ public enum NBTHelper {
 					newTagCompound.setTag(newValuePieces[0], NBTBase.newTag(Byte.parseByte(newValuePieces[1]), newValuePieces[0]));
 				}
 			}
-			ProjectZuluLog.info("getNBTFromString is now %s", getValue(newTagCompound));
 			return newTagCompound;
+		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			NBTTagCompound oldTagCompound = (NBTTagCompound) currentNode.getData();
+			NBTTagCompound newTagCompound = new NBTTagCompound(oldTagCompound.getName());
+			for (NBTNode childNode : currentNode.getChildren()) {
+				NBTHelper helper = getByID(childNode.getData().getId());
+				helper.writeToNBT(newTagCompound, childNode);
+			}
+			nbtTagList.appendTag(newTagCompound);
 		}
 	},
 	TAG_INT_ARRAY(11) {
@@ -384,9 +391,8 @@ public enum NBTHelper {
 			return value;
 		}
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) {
-			ProjectZuluLog.info("Setting Int Array Value");
-			NBTTagIntArray nbtTag = (NBTTagIntArray)currentNode.getData();
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
+			NBTTagIntArray nbtTag = (NBTTagIntArray)currentNBT;
 			ArrayList<Integer> fillerIntArray = new ArrayList();
 			Scanner scanner = new Scanner(newValue);
 			while(scanner.hasNextInt()){
@@ -399,6 +405,10 @@ public enum NBTHelper {
 			}
 			return new NBTTagIntArray(nbtTag.getName(), resultInt); 
 		}
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {
+			nbtTagList.appendTag(currentNode.getData());
+		}
 	},
 	UNKNOWN(12) {
 		@Override
@@ -410,7 +420,9 @@ public enum NBTHelper {
 		@Override
 		String getValue(NBTBase currentTag) { return ""; }
 		@Override
-		NBTBase getNBTFromString(NBTNode currentNode, String newValue) { return null; }
+		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) { return null; }
+		@Override
+		void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode) {}
 	};	
 	
 	public int iD;
@@ -423,8 +435,9 @@ public enum NBTHelper {
 	/** Return Value of Tag in the Form of a String. For Container tags, such as @link{NBTTagList} it returns List Size TODO: Should return list of Tags */
 	abstract String getValue(NBTBase currentTag);
 	/** Sets Value of Value in the Form of a String. For Container tags, such as @link{NBTTagList} Does Nothing TODO: it sets the List Size*/
-	abstract NBTBase getNBTFromString(NBTNode currentNode, String newValue);
-
+	abstract NBTBase getNBTFromString(NBTBase currentNBT, String newValue);
+	abstract void writeToTagList(NBTTagList nbtTagList, NBTNode currentNode);
+	
 	public static NBTHelper getByID(int iD){
 		for (NBTHelper nbtHelper : NBTHelper.values()) {
 			if(nbtHelper.iD == iD){

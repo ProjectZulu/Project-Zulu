@@ -111,13 +111,7 @@ public class CreatureFields implements DataFields {
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setString("Type", creatureNameField.getText());
 			nbt.setInteger("Weight", Integer.parseInt(weightedChanceField.getText()));
-			if(nbtTree == null){
-//				ProjectZuluLog.warning("Saving: NBTTree is null");
-			}else if(nbtTree.toNBTTagCompound() == null){
-//				ProjectZuluLog.warning("Saving: NBTTag Compound is Null :: %s", nbtTree.getRootNode().getData() == null);
-			}else{
-				nbt.setCompoundTag("Properties", (NBTTagCompound) nbtTree.toNBTTagCompound());
-			}			
+			nbt.setCompoundTag("Properties", (NBTTagCompound) nbtTree.toNBTTagCompound());		
 			nbt.setString("SpawnSound", soundNameField.getText());
 			limitedMobSpawner.getSpawnList().add(new TileEntityLimitedMobSpawnData(limitedMobSpawner, nbt));
 		}
