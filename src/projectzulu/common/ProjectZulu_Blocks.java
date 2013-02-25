@@ -1,17 +1,11 @@
 package projectzulu.common;
 
-import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
-
 import java.io.File;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.GameRules;
-import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.ArmorManager;
 import projectzulu.common.blocks.CreeperBlossomPrimedDefault;
 import projectzulu.common.blocks.ItemBlockManager;
@@ -21,7 +15,6 @@ import projectzulu.common.blocks.RenderSpike;
 import projectzulu.common.blocks.RenderUniversalFlowerPot;
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.potion.EventHandleNullPotions;
 import projectzulu.common.potion.PotionManager;

@@ -702,6 +702,7 @@ public enum ItemBlockManager {
 			for (ItemGenerics.Properties property : ItemGenerics.Properties.values()) {
 				LanguageRegistry.addName(new ItemStack(item, 1, property.meta()), property.getDisplayName());
 			}
+			OreDictionary.registerOre("foodSalt", new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Salt.meta()));
 		}
 		
 		@Override
