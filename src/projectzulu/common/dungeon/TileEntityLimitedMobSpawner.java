@@ -244,21 +244,36 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     }
 
     public void writeNBTTagsTo(Entity par1Entity){
-        if (this.spawnerTags != null){
-            NBTTagCompound var2 = new NBTTagCompound();
-            par1Entity.addEntityID(var2);
-            Iterator var3 = this.spawnerTags.properties.getTags().iterator();
+    	if (this.spawnerTags != null){
+    		NBTTagCompound var2 = new NBTTagCompound();
+    		par1Entity.addEntityID(var2);
+    		Iterator var3 = this.spawnerTags.properties.getTags().iterator();
 
-            while (var3.hasNext()){
-                NBTBase var4 = (NBTBase)var3.next();
-                var2.setTag(var4.getName(), var4.copy());
-            }
+    		while (var3.hasNext()){
+    			NBTBase var4 = (NBTBase)var3.next();
+    			var2.setTag(var4.getName(), var4.copy());
+    		}
 
-            par1Entity.readFromNBT(var2);
-        }
-        else if (par1Entity instanceof EntityLiving && par1Entity.worldObj != null){
-            ((EntityLiving)par1Entity).initCreature();
-        }
+    		try{
+    			par1Entity.readFromNBT(var2);
+    		}catch(Exception e){
+    			if(!debugSavedSetup.hasNoTags()){
+    				ProjectZuluLog.info("Attempting to Recover From Debug Mode Backup due to Error %s", e.getMessage());
+    				try {
+    					loadDebugNBT();
+    				} catch (Exception e2) {
+    					ProjectZuluLog.info("Exception Occured when Writing DebugNBT. Entity may not work as expected. Use Recreate NBT on entity to repair.");
+    					e2.printStackTrace();
+    				}
+    			}else{
+    				ProjectZuluLog.info("Exception occured when writing NBT to Entity. Entity may not work as expected. Use Recreate NBT on entity to repair.");
+    				e.printStackTrace();
+    			}
+    		}
+    	}
+    	else if (par1Entity instanceof EntityLiving && par1Entity.worldObj != null){
+    		((EntityLiving)par1Entity).initCreature();
+    	}
     }
 
     /**
@@ -291,90 +306,82 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      * Reads a tile entity from NBT.
      */
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
-        super.readFromNBT(par1NBTTagCompound);
-        
-        this.mobID = par1NBTTagCompound.getString("EntityId");
-        this.delay = par1NBTTagCompound.getShort("Delay");
-        
-        if(par1NBTTagCompound.hasKey("SpawnPotentials")){
-            this.spawnList = new ArrayList();
-            NBTTagList var2 = par1NBTTagCompound.getTagList("SpawnPotentials");
+    	super.readFromNBT(par1NBTTagCompound);
+    	this.mobID = par1NBTTagCompound.getString("EntityId");
+    	this.delay = par1NBTTagCompound.getShort("Delay");
+    	if(par1NBTTagCompound.hasKey("SpawnPotentials")){
+    		this.spawnList = new ArrayList();
+    		NBTTagList var2 = par1NBTTagCompound.getTagList("SpawnPotentials");
 
-            for (int var3 = 0; var3 < var2.tagCount(); ++var3){
-                this.spawnList.add(new TileEntityLimitedMobSpawnData(this, (NBTTagCompound)var2.tagAt(var3)));
-            }
-        }else{
-            this.spawnList = null;
-        }
-
-        if(par1NBTTagCompound.hasKey("SpawnData")){
-            this.spawnerTags = new TileEntityLimitedMobSpawnData(this, par1NBTTagCompound.getCompoundTag("SpawnData"), this.mobID, "");
-        }else{
-            this.spawnerTags = null;
-        }
-
-        if(par1NBTTagCompound.hasKey("MinSpawnDelay")){
-            this.minSpawnDelay = par1NBTTagCompound.getShort("MinSpawnDelay");
-            this.maxSpawnDelay = par1NBTTagCompound.getShort("MaxSpawnDelay");
-            this.spawnCount = par1NBTTagCompound.getShort("SpawnCount");
-            this.maxSpawnableEntities = par1NBTTagCompound.getShort("MaxSpawnableEntities");
-        }
-
-        if(par1NBTTagCompound.hasKey("MaxNearbyEntities")){
-            this.maxNearbyEntities = par1NBTTagCompound.getShort("MaxNearbyEntities");
-            this.requiredPlayerRange = par1NBTTagCompound.getShort("RequiredPlayerRange");
-        }
-
-        if(par1NBTTagCompound.hasKey("SpawnRange")){
-            this.spawnRange = par1NBTTagCompound.getShort("SpawnRange");
-        }
-        if(par1NBTTagCompound.hasKey("DebugSavedSetup")){
-            debugSavedSetup = par1NBTTagCompound.getCompoundTag("DebugSavedSetup");
-        }
-
-        
-        if(this.worldObj != null && this.worldObj.isRemote){
-            this.displayEntity = null;
-        }
+    		for (int var3 = 0; var3 < var2.tagCount(); ++var3){
+    			this.spawnList.add(new TileEntityLimitedMobSpawnData(this, (NBTTagCompound)var2.tagAt(var3)));
+    		}
+    	}else{
+    		this.spawnList = null;
+    	}
+    	if(par1NBTTagCompound.hasKey("SpawnData")){
+    		this.spawnerTags = new TileEntityLimitedMobSpawnData(this, par1NBTTagCompound.getCompoundTag("SpawnData"), this.mobID, "");
+    	}else{
+    		this.spawnerTags = null;
+    	}
+    	if(par1NBTTagCompound.hasKey("MinSpawnDelay")){
+    		this.minSpawnDelay = par1NBTTagCompound.getShort("MinSpawnDelay");
+    		this.maxSpawnDelay = par1NBTTagCompound.getShort("MaxSpawnDelay");
+    		this.spawnCount = par1NBTTagCompound.getShort("SpawnCount");
+    		this.maxSpawnableEntities = par1NBTTagCompound.getShort("MaxSpawnableEntities");
+    	}
+    	if(par1NBTTagCompound.hasKey("MaxNearbyEntities")){
+    		this.maxNearbyEntities = par1NBTTagCompound.getShort("MaxNearbyEntities");
+    		this.requiredPlayerRange = par1NBTTagCompound.getShort("RequiredPlayerRange");
+    	}
+    	if(par1NBTTagCompound.hasKey("SpawnRange")){
+    		this.spawnRange = par1NBTTagCompound.getShort("SpawnRange");
+    	}
+    	if(par1NBTTagCompound.hasKey("DebugSavedSetup")){
+    		debugSavedSetup = par1NBTTagCompound.getCompoundTag("DebugSavedSetup");
+    	}            
+    	if(this.worldObj != null && this.worldObj.isRemote){
+    		this.displayEntity = null;
+    	}
     }
 
     /**
      * Writes a tile entity to NBT.
      */
     public void writeToNBT(NBTTagCompound par1NBTTagCompound){
-        super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setString("EntityId", this.getEntityName());
-        par1NBTTagCompound.setShort("Delay", (short)this.delay);
-        par1NBTTagCompound.setShort("MinSpawnDelay", (short)this.minSpawnDelay);
-        par1NBTTagCompound.setShort("MaxSpawnDelay", (short)this.maxSpawnDelay);
-        par1NBTTagCompound.setShort("SpawnCount", (short)this.spawnCount);
-        par1NBTTagCompound.setShort("MaxNearbyEntities", (short)this.maxNearbyEntities);
-        par1NBTTagCompound.setShort("RequiredPlayerRange", (short)this.requiredPlayerRange);
-        par1NBTTagCompound.setShort("SpawnRange", (short)this.spawnRange);
-        par1NBTTagCompound.setShort("MaxSpawnableEntities", (short)this.maxSpawnableEntities);
-        par1NBTTagCompound.setCompoundTag("DebugSavedSetup", debugSavedSetup);
-        
-        if (this.spawnerTags != null){
-            par1NBTTagCompound.setCompoundTag("SpawnData", (NBTTagCompound)this.spawnerTags.properties.copy());
-        }
+            super.writeToNBT(par1NBTTagCompound);
+            par1NBTTagCompound.setCompoundTag("DebugSavedSetup", debugSavedSetup);
+            par1NBTTagCompound.setString("EntityId", this.getEntityName());
+            par1NBTTagCompound.setShort("Delay", (short)this.delay);
+            par1NBTTagCompound.setShort("MinSpawnDelay", (short)this.minSpawnDelay);
+            par1NBTTagCompound.setShort("MaxSpawnDelay", (short)this.maxSpawnDelay);
+            par1NBTTagCompound.setShort("SpawnCount", (short)this.spawnCount);
+            par1NBTTagCompound.setShort("MaxNearbyEntities", (short)this.maxNearbyEntities);
+            par1NBTTagCompound.setShort("RequiredPlayerRange", (short)this.requiredPlayerRange);
+            par1NBTTagCompound.setShort("SpawnRange", (short)this.spawnRange);
+            par1NBTTagCompound.setShort("MaxSpawnableEntities", (short)this.maxSpawnableEntities);
+            
+            if (this.spawnerTags != null){
+                par1NBTTagCompound.setCompoundTag("SpawnData", (NBTTagCompound)this.spawnerTags.properties.copy());
+            }
 
-        if (this.spawnerTags != null || this.spawnList != null && this.spawnList.size() > 0){
-            NBTTagList var2 = new NBTTagList();
+            if (this.spawnerTags != null || this.spawnList != null && this.spawnList.size() > 0){
+                NBTTagList var2 = new NBTTagList();
 
-            if (this.spawnList != null && this.spawnList.size() > 0){
-                Iterator var3 = this.spawnList.iterator();
+                if (this.spawnList != null && this.spawnList.size() > 0){
+                    Iterator var3 = this.spawnList.iterator();
 
-                while (var3.hasNext()){
-                    TileEntityLimitedMobSpawnData var4 = (TileEntityLimitedMobSpawnData)var3.next();
-                    var2.appendTag(var4.getNBT());
+                    while (var3.hasNext()){
+                        TileEntityLimitedMobSpawnData var4 = (TileEntityLimitedMobSpawnData)var3.next();
+                        var2.appendTag(var4.getNBT());
+                    }
                 }
-            }
-            else{
-                var2.appendTag(this.spawnerTags.getNBT());
-            }
+                else{
+                    var2.appendTag(this.spawnerTags.getNBT());
+                }
 
-            par1NBTTagCompound.setTag("SpawnPotentials", var2);
-        }
+                par1NBTTagCompound.setTag("SpawnPotentials", var2);
+            }
     }
 
     /**

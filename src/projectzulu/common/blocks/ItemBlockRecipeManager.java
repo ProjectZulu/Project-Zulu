@@ -88,6 +88,13 @@ public class ItemBlockRecipeManager {
 		 *  Misc Generic Craftables 
 		 */
 		if(ItemList.genericCraftingItems1.isPresent()){
+			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(
+					new ItemStack(ItemList.genericCraftingItems1.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 3, 8, 35));			
+			
+			GameRegistry.addShapelessRecipe(
+					new ItemStack(ItemList.genericCraftingItems1.get(),2,ItemGenerics.Properties.Salt.meta()), 
+					new ItemStack(Item.gunpowder));
+			
 			/* 3 Tusks --> Spike */
 			if(BlockList.spike.isPresent()){
 				GameRegistry.addRecipe(new ItemStack(BlockList.spike.get()), new Object[]{
