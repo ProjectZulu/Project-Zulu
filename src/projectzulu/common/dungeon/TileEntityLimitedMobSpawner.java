@@ -258,15 +258,15 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     			par1Entity.readFromNBT(var2);
     		}catch(Exception e){
     			if(!debugSavedSetup.hasNoTags()){
-    				ProjectZuluLog.info("Attempting to Recover From Debug Mode Backup due to Error %s", e.getMessage());
+    				ProjectZuluLog.warning("Attempting to Recover From Debug Mode Backup due to Error %s", e.getMessage());
     				try {
     					loadDebugNBT();
     				} catch (Exception e2) {
-    					ProjectZuluLog.info("Exception Occured when Writing DebugNBT. Entity may not work as expected. Use Recreate NBT on entity to repair.");
+    					ProjectZuluLog.severe("Exception Occured when Writing DebugNBT. Entity may not work as expected. Recreate NBT on entity can repair.");
     					e2.printStackTrace();
     				}
     			}else{
-    				ProjectZuluLog.info("Exception occured when writing NBT to Entity. Entity may not work as expected. Use Recreate NBT on entity to repair.");
+    				ProjectZuluLog.severe("Exception occured when writing NBT to Entity. Entity may not work as expected. Recreate NBT on entity can repair.");
     				e.printStackTrace();
     			}
     		}

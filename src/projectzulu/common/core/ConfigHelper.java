@@ -1,7 +1,5 @@
 package projectzulu.common.core;
 
-import java.util.Scanner;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,7 +8,6 @@ import net.minecraftforge.common.Property;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.blocks.StringHelper;
 
-import com.google.common.base.CharMatcher;
 import com.google.common.base.Optional;
 
 public class ConfigHelper {

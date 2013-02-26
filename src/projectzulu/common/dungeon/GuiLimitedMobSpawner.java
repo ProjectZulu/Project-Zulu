@@ -13,7 +13,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -23,7 +22,6 @@ import projectzulu.common.blocks.StringHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ObfuscationHelper;
 import projectzulu.common.core.PairFullShortName;
-import projectzulu.common.core.ProjectZuluLog;
 //TODO: Implement Try Write / Read to Test if Saving Would Cause a Crash
 public class GuiLimitedMobSpawner extends GuiScreen{
 	public TileEntityLimitedMobSpawner limitedMobSpawner;

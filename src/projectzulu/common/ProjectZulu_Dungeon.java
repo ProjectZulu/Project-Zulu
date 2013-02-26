@@ -3,7 +3,6 @@ package projectzulu.common;
 import java.io.File;
 import java.io.FilenameFilter;
 
-import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;

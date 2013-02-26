@@ -2,8 +2,7 @@ package projectzulu.common.mobs.entitydefaults;
 
 import java.io.File;
 
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
@@ -11,7 +10,6 @@ import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultWithEgg;
 import projectzulu.common.core.ItemGenerics;
-import net.minecraftforge.common.Configuration;
 import projectzulu.common.mobs.entity.EntityMinotaur;
 import projectzulu.common.mobs.models.ModelMinotaur;
 

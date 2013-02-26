@@ -4,7 +4,6 @@ package projectzulu.common.api;
 import java.util.EnumSet;
 import java.util.HashMap;
 
-import projectzulu.common.core.PacketIDs;
 import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.CharMatcher;

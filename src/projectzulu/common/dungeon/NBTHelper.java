@@ -15,7 +15,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
-import projectzulu.common.core.ProjectZuluLog;
 
 /**
  * Helper NBT Enum for proccessing NBTTagCompounds. 
@@ -53,7 +52,6 @@ public enum NBTHelper {
 		}
 		@Override
 		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
-			ProjectZuluLog.info("Setting Byte Value");
 			NBTTagByte nbtTag = (NBTTagByte)currentNBT;
 			return new NBTTagByte(nbtTag.getName(), Byte.parseByte(newValue)); 
 		}

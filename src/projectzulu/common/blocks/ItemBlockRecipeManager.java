@@ -14,13 +14,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
-import projectzulu.common.blocks.OptionalItemStack.OptionalType;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.core.Pair;
-import projectzulu.common.core.ProjectZuluLog;
-
-import com.google.common.base.Optional;
-
 import cpw.mods.fml.common.ICraftingHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;

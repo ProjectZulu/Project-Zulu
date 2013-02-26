@@ -3,7 +3,6 @@ package projectzulu.common.mobs.entitydefaults;
 import java.io.File;
 
 import net.minecraftforge.common.Configuration;
-
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.ConfigHelper;

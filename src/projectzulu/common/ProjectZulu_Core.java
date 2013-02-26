@@ -16,9 +16,6 @@ import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.WorldGeneratorZulu;
 import projectzulu.common.core.ZuluGuiHandler;
 import projectzulu.common.core.ZuluPacketHandler;
-
-import com.google.common.base.CharMatcher;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;

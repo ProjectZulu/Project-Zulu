@@ -1,10 +1,10 @@
 package projectzulu.common.dungeon;
 
-import org.lwjgl.util.Point;
-
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.nbt.NBTBase;
+
+import org.lwjgl.util.Point;
 
 public class GUIEditNodeTextField extends GuiTextField{
 	private NBTNode selectedNode = null;

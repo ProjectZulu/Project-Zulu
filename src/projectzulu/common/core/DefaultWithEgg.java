@@ -4,7 +4,6 @@ import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.ProjectZulu_Mobs;
 
 public abstract class DefaultWithEgg extends DefaultCreature{
 
