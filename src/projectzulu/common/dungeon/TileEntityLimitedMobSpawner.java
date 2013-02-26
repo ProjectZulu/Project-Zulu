@@ -262,11 +262,11 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     				try {
     					loadDebugNBT();
     				} catch (Exception e2) {
-    					ProjectZuluLog.severe("Exception Occured when Writing DebugNBT. Entity may not work as expected. Recreate NBT on entity can repair.");
+    					ProjectZuluLog.severe("Exception Occured when Writing DebugNBT to %s. Entity may not work as expected. Recreate NBT on entity can repair.", par1Entity.getEntityName());
     					e2.printStackTrace();
     				}
     			}else{
-    				ProjectZuluLog.severe("Exception occured when writing NBT to Entity. Entity may not work as expected. Recreate NBT on entity can repair.");
+    				ProjectZuluLog.severe("Exception occured when writing NBT to Entity %s. Entity may not work as expected. Recreate NBT on entity can repair.", par1Entity.getEntityName());
     				e.printStackTrace();
     			}
     		}
