@@ -106,7 +106,7 @@ public class ItemBlockRecipeManager {
 		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.GlowingGoo.meta()),
 				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.PowderSlush.meta()),
 				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Ectoplasm.meta()));
-		shapelessOreRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.LargeUnhealthyHeart.meta()),
+		shapelessOreRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.SmallUnhealthyHeart.meta()),
 				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.SmallHeart.meta()),
 				new OptionalItemStack("foodSalt") );
 		shapelessOreRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.LargeUnhealthyHeart.meta()),
