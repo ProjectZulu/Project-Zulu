@@ -1,9 +1,9 @@
 package projectzulu.common.dungeon;
 
-import org.lwjgl.util.Point;
-
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
+
+import org.lwjgl.util.Point;
 
 public class GuiSaveableTextField extends GuiTextField{
 

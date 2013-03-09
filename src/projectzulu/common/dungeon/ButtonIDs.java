@@ -1,6 +1,5 @@
 package projectzulu.common.dungeon;
 
-import net.minecraft.client.gui.GuiButton;
 
 public enum ButtonIDs {
 	NEWENTRY(-1),

@@ -2,12 +2,8 @@ package projectzulu.common.dungeon;
 
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
@@ -111,13 +107,7 @@ public class CreatureFields implements DataFields {
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setString("Type", creatureNameField.getText());
 			nbt.setInteger("Weight", Integer.parseInt(weightedChanceField.getText()));
-			if(nbtTree == null){
-//				ProjectZuluLog.warning("Saving: NBTTree is null");
-			}else if(nbtTree.toNBTTagCompound() == null){
-//				ProjectZuluLog.warning("Saving: NBTTag Compound is Null :: %s", nbtTree.getRootNode().getData() == null);
-			}else{
-				nbt.setCompoundTag("Properties", (NBTTagCompound) nbtTree.toNBTTagCompound());
-			}			
+			nbt.setCompoundTag("Properties", (NBTTagCompound) nbtTree.toNBTTagCompound());		
 			nbt.setString("SpawnSound", soundNameField.getText());
 			limitedMobSpawner.getSpawnList().add(new TileEntityLimitedMobSpawnData(limitedMobSpawner, nbt));
 		}

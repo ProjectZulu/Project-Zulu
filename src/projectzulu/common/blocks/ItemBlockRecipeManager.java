@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
@@ -19,7 +20,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ItemBlockRecipeManager {
-
+	
 	public static void setupBlockModuleRecipies(){
 		if( Loader.isModLoaded("ExtrabiomesXL") ){
 			setupExtrabiomesXLRecipies();
@@ -28,356 +29,281 @@ public class ItemBlockRecipeManager {
 		setupArmorRecipies();
 
 		/* Palm Tree Recipies */
-		if(BlockList.palmTreeLog.isPresent()){
-			GameRegistry.addSmelting(BlockList.palmTreeLog.get().blockID, new ItemStack(Item.coal), 0);
-		}
-		if(BlockList.palmTreePlank.isPresent() && BlockList.palmTreeLog.isPresent()){
-			GameRegistry.addShapelessRecipe(new ItemStack(BlockList.palmTreePlank.get(), 4), new ItemStack(BlockList.palmTreeLog.get()));
-		}
-		if(BlockList.palmTreeDoubleSlab.isPresent() && BlockList.palmTreeSlab.isPresent()){
-			Block palmTreeDoubleSlab = BlockList.palmTreeDoubleSlab.get();
-			Block palmTreeSlab = BlockList.palmTreeSlab.get();
-			GameRegistry.addRecipe(new ItemStack(palmTreeDoubleSlab, 1), new Object [] {"X  ","X  ","   ", 'X', palmTreeSlab});
-			GameRegistry.addRecipe(new ItemStack(palmTreeDoubleSlab, 1), new Object [] {" X "," X ","   ", 'X', palmTreeSlab});
-			GameRegistry.addRecipe(new ItemStack(palmTreeDoubleSlab, 1), new Object [] {"  X","  X","   ", 'X', palmTreeSlab});
-			GameRegistry.addRecipe(new ItemStack(palmTreeDoubleSlab, 1), new Object [] {"   ","X  ","X  ", 'X', palmTreeSlab});
-			GameRegistry.addRecipe(new ItemStack(palmTreeDoubleSlab, 1), new Object [] {"   "," X "," X ", 'X', palmTreeSlab});
-			GameRegistry.addRecipe(new ItemStack(palmTreeDoubleSlab, 1), new Object [] {"   ","  X","  X", 'X', palmTreeSlab});
-		}
-		if(BlockList.palmTreeLog.isPresent()){
-			GameRegistry.addShapelessRecipe(new ItemStack(BlockList.palmTreePlank.get(), 4), new ItemStack(BlockList.palmTreeLog.get()));
-		}
+		addSmelting(new OptionalItemStack(Item.coal), 0, new OptionalItemStack(BlockList.palmTreeLog));
+		addShapelessRecipe(new OptionalItemStack(BlockList.palmTreePlank,4), new OptionalItemStack(BlockList.palmTreeLog));
+		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{"X  ","X  ","   "}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
+		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{" X "," X ","   "}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
+		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{"  X","  X","   "}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
+		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{"   ","X  ","X  "}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
+		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{"   "," X "," X "}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
+		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{"   ","  X","  X"}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
 
+		/* Jasper */
 		if(BlockList.jasper.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(BlockList.jasper.get(), 1), new Object [] {
-				"XXX","XCX","XXX", 'C', Block.sand,'X',new ItemStack(Item.dyePowder, 1, 1)});
-			GameRegistry.addRecipe(new ItemStack(BlockList.jasper.get(), 1), new Object [] {
-				"XXX","XCX","XXX", 'C', Block.sand,'X',Item.redstone});
 			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(BlockList.jasper.get()), 1, 1, 5));
 		}
-		if(ItemList.coconutShell.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(Item.bowlEmpty, 1), new Object [] {"   ","X X"," X ", 'X', ItemList.coconutShell.get()});
-		}
+		addRecipe(new OptionalItemStack(BlockList.jasper), new String[]{"XXX","XCX","XXX"}, new char[]{'C','X'},
+				new OptionalItemStack(Block.sand), new OptionalItemStack(Item.dyePowder,1,1) );
+		addRecipe(new OptionalItemStack(BlockList.jasper), new String[]{"XXX","XCX","XXX"}, new char[]{'C','X'}, 
+				new OptionalItemStack(Block.sand), new OptionalItemStack(Item.redstone) );
+		
+		/* Coconut */
 		if(ItemList.coconutSeed.isPresent() && ItemList.coconutItem.isPresent()){
 			GameRegistry.registerCraftingHandler(coconutItemCraftingHandler);
-			Item coconutItem = ItemList.coconutItem.get();
-			Item coconutSeed = ItemList.coconutSeed.get();
-			GameRegistry.addRecipe(new ItemStack(coconutSeed), new Object[]{
-				" X "," Y ","   ", 'X', new ItemStack(Item.swordWood,1,-1), 'Y', coconutItem });
-			GameRegistry.addRecipe(new ItemStack(coconutSeed), new Object[]{
-				" X "," Y ","   ", 'X', new ItemStack(Item.swordStone,1,-1), 'Y', coconutItem});
-			GameRegistry.addRecipe(new ItemStack(coconutSeed), new Object[]{
-				" X "," Y ","   ", 'X', new ItemStack(Item.swordSteel,1,-1), 'Y', coconutItem});
-			GameRegistry.addRecipe(new ItemStack(coconutSeed), new Object[]{
-				" X "," Y ","   ", 'X', new ItemStack(Item.swordGold,1,-1), 'Y', coconutItem});
-			GameRegistry.addRecipe(new ItemStack(coconutSeed), new Object[]{
-				" X "," Y ","   ", 'X', new ItemStack(Item.swordDiamond,1,-1), 'Y', coconutItem});
 		}
+		addRecipe(new OptionalItemStack(Item.bowlEmpty), new String[]{"   ","X X"," X "}, 'X', new OptionalItemStack(ItemList.coconutShell));
+		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordWood,1,-1), new OptionalItemStack(ItemList.coconutItem));
+		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordStone,1,-1), new OptionalItemStack(ItemList.coconutItem));
+		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordSteel,1,-1), new OptionalItemStack(ItemList.coconutItem));
+		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordGold,1,-1), new OptionalItemStack(ItemList.coconutItem));
+		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordDiamond,1,-1), new OptionalItemStack(ItemList.coconutItem));
 		
 		/*Aloe Vera */
-		if(BlockList.tumbleweed.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(Item.silk, 6), new Object [] {"C  ","C  ","C  ", 'C', BlockList.tumbleweed.get()});
-			GameRegistry.addRecipe(new ItemStack(Item.silk, 6), new Object [] {" C "," C "," C ", 'C', BlockList.tumbleweed.get()});
-			GameRegistry.addRecipe(new ItemStack(Item.silk, 6), new Object [] {"  C","  C","  C", 'C', BlockList.tumbleweed.get()});
-		}
-		if(BlockList.aloeVera.isPresent() && BlockList.tumbleweed.isPresent()){
-			GameRegistry.addShapelessRecipe(new ItemStack(BlockList.aloeVera.get(), 2), new ItemStack(BlockList.tumbleweed.get()));
-		}
+		addRecipe(new OptionalItemStack(Item.silk,6), new String[]{"C  ","C  ","C  "}, 'C', new OptionalItemStack(BlockList.tumbleweed));
+		addRecipe(new OptionalItemStack(Item.silk,6), new String[]{" C "," C "," C "}, 'C', new OptionalItemStack(BlockList.tumbleweed));
+		addRecipe(new OptionalItemStack(Item.silk,6), new String[]{"  C","  C","  C"}, 'C', new OptionalItemStack(BlockList.tumbleweed));
+		addShapelessRecipe(new OptionalItemStack(BlockList.aloeVera,2), new OptionalItemStack(BlockList.tumbleweed));
 		
-		/**
-		 *  Misc Generic Craftables 
-		 */
+		/* Misc Generic Craftables */
 		if(ItemList.genericCraftingItems1.isPresent()){
-			/* 3 Tusks --> Spike */
-			if(BlockList.spike.isPresent()){
-				GameRegistry.addRecipe(new ItemStack(BlockList.spike.get()), new Object[]{
-					"   ","   ","TTT", 'T', new ItemStack(ItemList.genericCraftingItems1.get(), 1, ItemGenerics.Properties.Tusk.meta()) });
-			}
-			
-			/* 4 Raw Fiber --> String  */
-			GameRegistry.addShapelessRecipe(new ItemStack(Item.silk),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.RawFiber.meta()));
-			
-			/* Paper --> Pulp */
-			GameRegistry.addShapelessRecipe(new ItemStack(ItemList.genericCraftingItems1.get(),2,ItemGenerics.Properties.Pulp.meta()),
-					new ItemStack(Item.paper));
-			/*   Cactus + Pulp = Thorns   					:   Prickly Powder */
-			GameRegistry.addShapelessRecipe(new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.PricklyPowder.meta()),
-					new ItemStack(Block.cactus), new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Pulp.meta()));
-			/*   Milk + Pulp + Black Lichen  = Cleanse  					:   Powder Slush */
-			GameRegistry.addShapelessRecipe(new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.PowderSlush.meta()),
-					new ItemStack(Item.bucketMilk), new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Pulp.meta()), 
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.BlackLichen.meta()));
-			/*   Milk + Pulp + Ectoplasm = Curse   			:   Glowing Goo */
-			GameRegistry.addShapelessRecipe(new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.GlowingGoo.meta()),
-					new ItemStack(Item.bucketMilk), new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Pulp.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Ectoplasm.meta()));
-			/*   Powder Slush + Ectoplasm = Curse   			:   Glowing Goo */
-			GameRegistry.addShapelessRecipe(new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.GlowingGoo.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.PowderSlush.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Ectoplasm.meta()));
-			/*   Salt + Small heart = DigSpeef-  			:   Small Unhealthy Heart */
-			GameRegistry.addShapelessRecipe(new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.SmallUnhealthyHeart.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.SmallHeart.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Salt.meta()));
-			/*   Salt + Large heart = Strength-  			:   Large Unhealthy Heart */
-			GameRegistry.addShapelessRecipe(new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.LargeUnhealthyHeart.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.LargeHeart.meta()),
-					new ItemStack(ItemList.genericCraftingItems1.get(),1,ItemGenerics.Properties.Salt.meta()));
+			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(
+					new ItemStack(ItemList.genericCraftingItems1.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 3, 8, 35));			
 		}
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,2,ItemGenerics.Properties.Salt.meta()),
+				new OptionalItemStack(Item.gunpowder));
+		addRecipe(new OptionalItemStack(BlockList.spike), new String[]{"   ","   ","TTT"}, 'T',
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Tusk.meta()) );
+		addShapelessRecipe(new OptionalItemStack(Item.silk),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.RawFiber.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.RawFiber.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.RawFiber.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.RawFiber.meta()) ); //4 RawFib --> 1 String
 		
-		if(ItemList.furPelt.isPresent()){
-			if(ItemList.genericCraftingItems1.isPresent()){
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,2,ItemGenerics.Properties.Pulp.meta()), 
+				new OptionalItemStack(Item.paper));
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.PricklyPowder.meta()),
+				new OptionalItemStack(Block.cactus), new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Pulp.meta()));
+		
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.PowderSlush.meta()),
+				new OptionalItemStack(Item.bucketMilk), 
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Pulp.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.BlackLichen.meta()));
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.GlowingGoo.meta()),
+				new OptionalItemStack(Item.bucketMilk), 
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Pulp.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Ectoplasm.meta()));
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.GlowingGoo.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.PowderSlush.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Ectoplasm.meta()));
+		shapelessOreRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.SmallUnhealthyHeart.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.SmallHeart.meta()),
+				new OptionalItemStack("foodSalt") );
+		shapelessOreRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.LargeUnhealthyHeart.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.LargeHeart.meta()),
+				new OptionalItemStack("foodSalt") );
+		
+		addShapelessRecipe(new OptionalItemStack(Item.leather), new OptionalItemStack(ItemList.furPelt));
+		if(ItemList.furPelt.isPresent() && ItemList.genericCraftingItems1.isPresent()){
 				GameRegistry.registerCraftingHandler(new RawFiberCraftingHandler());
-			}
-			GameRegistry.addShapelessRecipe(new ItemStack(Item.leather), new ItemStack(ItemList.furPelt.get()));
 		}
 		
-		if(!ProjectZulu_Core.replaceFlowerPot && BlockList.universalFlowerPot.isPresent()){
-			GameRegistry.addShapelessRecipe(new ItemStack(Item.flowerPot), new ItemStack(BlockList.universalFlowerPot.get()));
-			GameRegistry.addShapelessRecipe(new ItemStack(BlockList.universalFlowerPot.get()), new ItemStack(Item.flowerPot));
+		/* Flower Pot */
+		if(!ProjectZulu_Core.replaceFlowerPot){
+			addShapelessRecipe(new OptionalItemStack(Item.flowerPot), new OptionalItemStack(BlockList.universalFlowerPot) );
+			addShapelessRecipe(new OptionalItemStack(BlockList.universalFlowerPot), new OptionalItemStack(Item.flowerPot) );
 		}
-
 	}
 
 	private static void setupExtrabiomesXLRecipies(){
-		if(BlockList.campfire.isPresent()){
-			int campfireBlockID = BlockList.campfire.get().blockID;
-			/* Red Cobblestone Versions of Campfire Recipies*/
-			/* No Fire Stone Campfire*/	
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,1), true, new Object[]{
-				"   ","LLL","CCC", 
-				Character.valueOf('L'), "log",
-				Character.valueOf('C'), "cobbleRed" }));		
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,1), true, new String[]{"   ","LLL","CCC"}, new char[]{'L','C'},
+				new OptionalItemStack("log"), new OptionalItemStack("cobbleRed") );
+		
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,2), true, new String[]{" S ","LLL","   "}, new char[]{'L','C','S'},
+				new OptionalItemStack("log"), new OptionalItemStack("cobbleRed"), new OptionalItemStack(Item.stick) );
 
-			/* On Fire Log Campfire*/
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,2), true, new Object[]{
-				" S ","LLL","   ", 
-				Character.valueOf('L'), "log",
-				Character.valueOf('C'), "cobbleRed",
-				Character.valueOf('S'), Item.stick }));
-
-			/* On Fire Stone Campfire*/
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,3), true, new Object[]{
-				" S ","LLL","CCC", 
-				Character.valueOf('L'), "log",
-				Character.valueOf('C'), "cobbleRed",
-				Character.valueOf('S'), Item.stick }));
-		}
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,3), true, new String[]{" S ","LLL","CCC"}, new char[]{'L','C','S'},
+				new OptionalItemStack("log"), new OptionalItemStack("cobbleRed"), new OptionalItemStack(Item.stick) );		
 	}
 
 	private static void setupCampfireRecipies() {
-		if(BlockList.campfire.isPresent()){
-			int campfireBlockID = BlockList.campfire.get().blockID;
-			/* No Fire Log Campfire*/
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,0), true, new Object[]{
-				"   ","LLL","   ", 
-				Character.valueOf('L'), new ItemStack(Block.wood, 1, -1) }));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,0), true, new Object[]{
-				"   ","LLL","   ", 
-				Character.valueOf('L'), "log" }));
+		
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,0), true, new String[]{"   ","LLL","   "}, new char[]{'L'}, 
+				new OptionalItemStack(Block.wood,1,-1));
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,0), true, new String[]{"   ","LLL","   "}, new char[]{'L'},
+				new OptionalItemStack("log"));
+		
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,1), true, new String[]{"   ","LLL","CCC"}, new char[]{'L','C'},
+				new OptionalItemStack(Block.wood,1,-1), new OptionalItemStack(Block.cobblestone) );		
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,1), true, new String[]{"   ","LLL","CCC"}, new char[]{'L','C'},
+				new OptionalItemStack("log"), new OptionalItemStack(Block.cobblestone) );
 
-			/* No Fire Stone Campfire*/
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,1), true, new Object[]{
-				"   ","LLL","CCC", 
-				Character.valueOf('L'), new ItemStack(Block.wood, 1, -1),
-				Character.valueOf('C'), new ItemStack(Block.cobblestone) }));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,1), true, new Object[]{
-				"   ","LLL","CCC", 
-				Character.valueOf('L'), "log",
-				Character.valueOf('C'), new ItemStack(Block.cobblestone) }));
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,2), true, new String[]{" S ","LLL","   "}, new char[]{'L','C','S'},
+				new OptionalItemStack(Block.wood,1,-1), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,2), true, new String[]{" S ","LLL","   "}, new char[]{'L','C','S'},
+				new OptionalItemStack("log"), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Block.cobblestone) );
 
-			/* On Fire Log Campfire*/
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,2), true, new Object[]{
-				" S ","LLL","   ", 
-				Character.valueOf('L'), new ItemStack(Block.wood, 1, -1),
-				Character.valueOf('C'), new ItemStack(Block.cobblestone),
-				Character.valueOf('S'), Item.stick }));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,2), true, new Object[]{
-				" S ","LLL","   ", 
-				Character.valueOf('L'), "log",
-				Character.valueOf('C'), new ItemStack(Block.cobblestone),
-				Character.valueOf('S'), Item.stick }));
-
-			/* On Fire Stone Campfire*/
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,3), true, new Object[]{
-				" S ","LLL","CCC", 
-				Character.valueOf('L'), new ItemStack(Block.wood, 1, -1),
-				Character.valueOf('C'), new ItemStack(Block.cobblestone),
-				Character.valueOf('S'), Item.stick }));
-			CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(campfireBlockID,1,3), true, new Object[]{
-				" S ","LLL","CCC", 
-				Character.valueOf('L'), "log",
-				Character.valueOf('C'), new ItemStack(Block.cobblestone),
-				Character.valueOf('S'), Item.stick }));
-		}
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,3), true, new String[]{" S ","LLL","CCC"}, new char[]{'L','C','S'},
+				new OptionalItemStack(Block.wood,1,-1), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
+		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,3), true, new String[]{" S ","LLL","CCC"}, new char[]{'L','C','S'},
+				new OptionalItemStack("log"), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Block.cobblestone) );
 	}
 
 	private static void setupArmorRecipies(){
 
-		if(ItemList.scaleItem.isPresent()){
-			if(ItemList.scaleArmorHead.isPresent()){
-				GameRegistry.addRecipe(new ItemStack(ItemList.scaleArmorHead.get()), new Object[]{"XXX","X X","   ", 'X', ItemList.scaleItem.get()});
-			}
-			if(ItemList.scaleArmorChest.isPresent()){
-				GameRegistry.addRecipe(new ItemStack(ItemList.scaleArmorChest.get()), new Object[]{"X X","XXX","XXX", 'X', ItemList.scaleItem.get()});
-			}
-			if(ItemList.scaleArmorLeg.isPresent()){
-				GameRegistry.addRecipe(new ItemStack(ItemList.scaleArmorLeg.get()), new Object[]{"XXX","X X","X X", 'X', ItemList.scaleItem.get()});
-			}
-			if(ItemList.scaleArmorBoot.isPresent()){
-				GameRegistry.addRecipe(new ItemStack(ItemList.scaleArmorBoot.get()), new Object[]{"   ","X X","X X", 'X', ItemList.scaleItem.get()});
-			}
-		}
+		addRecipe(new OptionalItemStack(ItemList.scaleArmorHead), new String[]{"XXX","X X","   "}, 'X', new OptionalItemStack(ItemList.scaleItem));
+		addRecipe(new OptionalItemStack(ItemList.scaleArmorChest), new String[]{"X X","XXX","XXX"}, 'X', new OptionalItemStack(ItemList.scaleItem));
+		addRecipe(new OptionalItemStack(ItemList.scaleArmorLeg), new String[]{"XXX","X X","X X"}, 'X', new OptionalItemStack(ItemList.scaleItem));
+		addRecipe(new OptionalItemStack(ItemList.scaleArmorBoot), new String[]{"   ","X X","X X"}, 'X', new OptionalItemStack(ItemList.scaleItem));
 
-		if(ItemList.goldScaleArmorHead.isPresent() && ItemList.scaleArmorHead.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.goldScaleArmorHead.get()), new Object[]{"XXX","XYX","   ", 'X', Item.ingotGold,'Y',new ItemStack(ItemList.scaleArmorHead.get()) });
-		}
-		if(ItemList.goldScaleArmorChest.isPresent() && ItemList.scaleArmorChest.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.goldScaleArmorChest.get()), new Object[]{"XYX","XXX","XXX", 'X', Item.ingotGold,'Y',new ItemStack(ItemList.scaleArmorChest.get())} );
-		}
-		if(ItemList.goldScaleArmorLeg.isPresent() && ItemList.scaleArmorLeg.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.goldScaleArmorLeg.get()), new Object[]{"XXX","XYX","X X", 'X', Item.ingotGold,'Y',new ItemStack(ItemList.scaleArmorLeg.get())} );
-		}
-		if(ItemList.goldScaleArmorBoot.isPresent() && ItemList.scaleArmorBoot.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.goldScaleArmorBoot.get()), new Object[]{"   ","XYX","X X", 'X', Item.ingotGold,'Y',new ItemStack(ItemList.scaleArmorBoot.get())} );
-		}
+		addRecipe(new OptionalItemStack(ItemList.goldScaleArmorHead), new String[]{"XXX","XYX","   "}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotGold), new OptionalItemStack(ItemList.scaleArmorHead) );
+		addRecipe(new OptionalItemStack(ItemList.goldScaleArmorChest), new String[]{"XYX","XXX","XXX"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotGold), new OptionalItemStack(ItemList.scaleArmorChest) );
+		addRecipe(new OptionalItemStack(ItemList.goldScaleArmorLeg), new String[]{"XXX","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotGold), new OptionalItemStack(ItemList.scaleArmorLeg) );
+		addRecipe(new OptionalItemStack(ItemList.goldScaleArmorBoot), new String[]{"   ","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotGold), new OptionalItemStack(ItemList.scaleArmorBoot) );
+		
+		addRecipe(new OptionalItemStack(ItemList.ironScaleArmorHead), new String[]{"XXX","XYX","   "}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotIron), new OptionalItemStack(ItemList.scaleArmorHead) );
+		addRecipe(new OptionalItemStack(ItemList.ironScaleArmorChest), new String[]{"XYX","XXX","XXX"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotIron), new OptionalItemStack(ItemList.scaleArmorChest) );
+		addRecipe(new OptionalItemStack(ItemList.ironScaleArmorLeg), new String[]{"XXX","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotIron), new OptionalItemStack(ItemList.scaleArmorLeg) );
+		addRecipe(new OptionalItemStack(ItemList.ironScaleArmorBoot), new String[]{"   ","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotIron), new OptionalItemStack(ItemList.scaleArmorBoot) );
 
-		if(ItemList.ironScaleArmorHead.isPresent() && ItemList.scaleArmorHead.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.ironScaleArmorHead.get()), new Object[]{"XXX","XYX","   ", 'X', Item.ingotIron,'Y',new ItemStack(ItemList.scaleArmorHead.get()) });
-		}
-		if(ItemList.ironScaleArmorChest.isPresent() && ItemList.scaleArmorChest.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.ironScaleArmorChest.get()), new Object[]{"XYX","XXX","XXX", 'X', Item.ingotIron,'Y',new ItemStack(ItemList.scaleArmorChest.get())} );
-		}
-		if(ItemList.ironScaleArmorLeg.isPresent() && ItemList.scaleArmorLeg.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.ironScaleArmorLeg.get()), new Object[]{"XXX","XYX","X X", 'X', Item.ingotIron,'Y',new ItemStack(ItemList.scaleArmorLeg.get())} );
-		}
-		if(ItemList.ironScaleArmorBoot.isPresent() && ItemList.scaleArmorBoot.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.ironScaleArmorBoot.get()), new Object[]{"   ","XYX","X X", 'X', Item.ingotIron,'Y',new ItemStack(ItemList.scaleArmorBoot.get())} );
-		}
+		addRecipe(new OptionalItemStack(ItemList.diamondScaleArmorHead), new String[]{"XXX","XYX","   "}, new char[]{'X','Y'},new OptionalItemStack(Item.diamond), new OptionalItemStack(ItemList.scaleArmorHead) );
+		addRecipe(new OptionalItemStack(ItemList.diamondScaleArmorChest), new String[]{"XYX","XXX","XXX"}, new char[]{'X','Y'},new OptionalItemStack(Item.diamond), new OptionalItemStack(ItemList.scaleArmorChest) );
+		addRecipe(new OptionalItemStack(ItemList.diamondScaleArmorLeg), new String[]{"XXX","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.diamond), new OptionalItemStack(ItemList.scaleArmorLeg) );
+		addRecipe(new OptionalItemStack(ItemList.diamondScaleArmorBoot), new String[]{"   ","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.diamond), new OptionalItemStack(ItemList.scaleArmorBoot) );
 
-		if(ItemList.diamondScaleArmorHead.isPresent() && ItemList.scaleArmorHead.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.diamondScaleArmorHead.get()), new Object[]{"XXX","XYX","   ", 'X', Item.diamond,'Y',new ItemStack(ItemList.scaleArmorHead.get()) });
-		}
-		if(ItemList.diamondScaleArmorChest.isPresent() && ItemList.scaleArmorChest.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.diamondScaleArmorChest.get()), new Object[]{"XYX","XXX","XXX", 'X', Item.diamond,'Y',new ItemStack(ItemList.scaleArmorChest.get())} );
-		}
-		if(ItemList.diamondScaleArmorLeg.isPresent() && ItemList.scaleArmorLeg.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.diamondScaleArmorLeg.get()), new Object[]{"XXX","XYX","X X", 'X', Item.diamond,'Y',new ItemStack(ItemList.scaleArmorLeg.get())} );
-		}
-		if(ItemList.diamondScaleArmorBoot.isPresent() && ItemList.scaleArmorBoot.isPresent()){
-			GameRegistry.addRecipe(new ItemStack(ItemList.diamondScaleArmorBoot.get()), new Object[]{"   ","XYX","X X", 'X', Item.diamond,'Y',new ItemStack(ItemList.scaleArmorBoot.get())} );
-		}
+		addRecipe(new OptionalItemStack(ItemList.redClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,14) );
+		addRecipe(new OptionalItemStack(ItemList.redClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,14) );
+		addRecipe(new OptionalItemStack(ItemList.redClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,14) );
+		addRecipe(new OptionalItemStack(ItemList.redClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,14) );
 
-
-		if(ItemList.whiteClothHead.isPresent() ){
-			GameRegistry.addRecipe(new ItemStack(ItemList.whiteClothHead.get()), new Object[]{"XXX","X X","   ", 'X', new ItemStack(Block.cloth, 1, 0)});
-		}
-		if(ItemList.whiteClothChest.isPresent() ){
-			GameRegistry.addRecipe(new ItemStack(ItemList.whiteClothChest.get()), new Object[]{"X X","XXX","XXX", 'X', new ItemStack(Block.cloth, 1, 0)});
-		}
-		if(ItemList.whiteClothLeg.isPresent() ){
-			GameRegistry.addRecipe(new ItemStack(ItemList.whiteClothLeg.get()), new Object[]{"XXX","X X","X X", 'X', new ItemStack(Block.cloth, 1, 0)});
-		}
-		if(ItemList.whiteClothBoot.isPresent() ){
-			GameRegistry.addRecipe(new ItemStack(ItemList.whiteClothBoot.get()), new Object[]{"   ","X X","X X", 'X', new ItemStack(Block.cloth, 1, 0)});
-		}
-
-		if(ItemList.redClothHead.isPresent() ){
-			GameRegistry.addRecipe(new ItemStack(ItemList.redClothHead.get()), new Object[]{"XXX","X X","   ", 'X', new ItemStack(Block.cloth, 1, 14)});
-		}
-		if(ItemList.redClothChest.isPresent() ){
-			GameRegistry.addRecipe(new ItemStack(ItemList.redClothChest.get()), new Object[]{"X X","XXX","XXX", 'X', new ItemStack(Block.cloth, 1, 14)});
-		}
-		if(ItemList.redClothLeg.isPresent() ){
-			GameRegistry.addRecipe(new ItemStack(ItemList.redClothLeg.get()), new Object[]{"XXX","X X","X X", 'X', new ItemStack(Block.cloth, 1, 14)});
-		}
-		if(ItemList.redClothBoot.isPresent() ){
-			GameRegistry.addRecipe(new ItemStack(ItemList.redClothBoot.get()), new Object[]{"   ","X X","X X", 'X', new ItemStack(Block.cloth, 1, 14)});
-		}
-
-		if(ItemList.greenClothHead.isPresent() ){
-			Item greenClothHead = ItemList.greenClothHead.get(); 
-			GameRegistry.addRecipe(new ItemStack(greenClothHead), new Object[]{"XXX","X X","   ", 'X', new ItemStack(Block.cloth, 1, 13)});
-			GameRegistry.addRecipe(new ItemStack(greenClothHead), new Object[]{"XXX","X X","   ", 'X', new ItemStack(Block.cloth, 1, 5)});
-		}
-		if(ItemList.greenClothChest.isPresent() ){
-			Item greenClothChest = ItemList.greenClothChest.get(); 
-			GameRegistry.addRecipe(new ItemStack(greenClothChest), new Object[]{"X X","XXX","XXX", 'X', new ItemStack(Block.cloth, 1, 13)});
-			GameRegistry.addRecipe(new ItemStack(greenClothChest), new Object[]{"X X","XXX","XXX", 'X', new ItemStack(Block.cloth, 1, 5)});
-		}
-		if(ItemList.greenClothLeg.isPresent() ){
-			Item greenClothLeg = ItemList.greenClothLeg.get(); 
-			GameRegistry.addRecipe(new ItemStack(greenClothLeg), new Object[]{"XXX","X X","X X", 'X', new ItemStack(Block.cloth, 1, 13)});
-			GameRegistry.addRecipe(new ItemStack(greenClothLeg), new Object[]{"XXX","X X","X X", 'X', new ItemStack(Block.cloth, 1, 5)});
-		}
-		if(ItemList.greenClothBoot.isPresent() ){
-			Item greenClothBoot = ItemList.greenClothBoot.get(); 
-			GameRegistry.addRecipe(new ItemStack(greenClothBoot), new Object[]{"   ","X X","X X", 'X', new ItemStack(Block.cloth, 1, 13)});
-			GameRegistry.addRecipe(new ItemStack(greenClothBoot), new Object[]{"   ","X X","X X", 'X', new ItemStack(Block.cloth, 1, 5)});
-		}
-
-		if(ItemList.blueClothHead.isPresent() ){
-			Item blueClothHead = ItemList.blueClothHead.get(); 
-			GameRegistry.addRecipe(new ItemStack(blueClothHead), new Object[]{"XXX","X X","   ", 'X', new ItemStack(Block.cloth, 1, 11)});
-			GameRegistry.addRecipe(new ItemStack(blueClothHead), new Object[]{"XXX","X X","   ", 'X', new ItemStack(Block.cloth, 1, 3)});
-		}
-		if(ItemList.blueClothChest.isPresent() ){
-			Item blueClothChest = ItemList.blueClothChest.get(); 
-			GameRegistry.addRecipe(new ItemStack(blueClothChest), new Object[]{"X X","XXX","XXX", 'X', new ItemStack(Block.cloth, 1, 11)});
-			GameRegistry.addRecipe(new ItemStack(blueClothChest), new Object[]{"X X","XXX","XXX", 'X', new ItemStack(Block.cloth, 1, 3)});
-		}
-		if(ItemList.blueClothLeg.isPresent() ){
-			Item blueClothLeg = ItemList.blueClothLeg.get(); 
-			GameRegistry.addRecipe(new ItemStack(blueClothLeg), new Object[]{"XXX","X X","X X", 'X', new ItemStack(Block.cloth, 1, 11)});
-			GameRegistry.addRecipe(new ItemStack(blueClothLeg), new Object[]{"XXX","X X","X X", 'X', new ItemStack(Block.cloth, 1, 3)});
-		}
-		if(ItemList.blueClothBoot.isPresent() ){
-			Item blueClothBoot = ItemList.blueClothBoot.get(); 
-			GameRegistry.addRecipe(new ItemStack(blueClothBoot), new Object[]{"   ","X X","X X", 'X', new ItemStack(Block.cloth, 1, 11)});
-			GameRegistry.addRecipe(new ItemStack(blueClothBoot), new Object[]{"   ","X X","X X", 'X', new ItemStack(Block.cloth, 1, 3)});
-		}
-
-		if(ItemList.cactusArmorHead.isPresent() ){
-			Item cactusArmorHead = ItemList.cactusArmorHead.get(); 
-			GameRegistry.addRecipe(new ItemStack(cactusArmorHead), new Object[]{"XXX","X X","   ", 'X', Block.cactus});
-		}
-		if(ItemList.cactusArmorChest.isPresent() ){
-			Item cactusArmorChest = ItemList.cactusArmorChest.get(); 
-			GameRegistry.addRecipe(new ItemStack(cactusArmorChest), new Object[]{"X X","XXX","XXX", 'X', Block.cactus});
-		}
-		if(ItemList.cactusArmorLeg.isPresent() ){
-			Item cactusArmorLeg = ItemList.cactusArmorLeg.get(); 
-			GameRegistry.addRecipe(new ItemStack(cactusArmorLeg), new Object[]{"XXX","X X","X X", 'X', Block.cactus});
-		}
-		if(ItemList.cactusArmorBoot.isPresent() ){
-			Item cactusArmorBoot = ItemList.cactusArmorBoot.get(); 
-			GameRegistry.addRecipe(new ItemStack(cactusArmorBoot), new Object[]{"   ","X X","X X", 'X', Block.cactus});
-		}
-
-		if(ItemList.furPelt.isPresent()){
-			if(ItemList.furArmorHead.isPresent() ){
-				Item furArmorHead = ItemList.furArmorHead.get(); 
-				GameRegistry.addRecipe(new ItemStack(furArmorHead), new Object[]{"XXX","X X","   ", 'X', ItemList.furPelt.get()});
-			}
-			if(ItemList.furArmorChest.isPresent() ){
-				Item furArmorChest = ItemList.furArmorChest.get(); 
-				GameRegistry.addRecipe(new ItemStack(furArmorChest), new Object[]{"X X","XXX","XXX", 'X', ItemList.furPelt.get()});
-			}
-			if(ItemList.furArmorLeg.isPresent() ){
-				Item furArmorLeg = ItemList.furArmorLeg.get(); 
-				GameRegistry.addRecipe(new ItemStack(furArmorLeg), new Object[]{"XXX","X X","X X", 'X', ItemList.furPelt.get()});
-			}
-			if(ItemList.furArmorBoot.isPresent() ){
-				Item furArmorBoot = ItemList.furArmorBoot.get();
-				GameRegistry.addRecipe(new ItemStack(furArmorBoot), new Object[]{"   ","X X","X X", 'X', ItemList.furPelt.get()});
-			}
-		}
+		addRecipe(new OptionalItemStack(ItemList.greenClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,13) );
+		addRecipe(new OptionalItemStack(ItemList.greenClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,13) );
+		addRecipe(new OptionalItemStack(ItemList.greenClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,13) );
+		addRecipe(new OptionalItemStack(ItemList.greenClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,13) );
+		addRecipe(new OptionalItemStack(ItemList.greenClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,5) );
+		addRecipe(new OptionalItemStack(ItemList.greenClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,5) );
+		addRecipe(new OptionalItemStack(ItemList.greenClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,5) );
+		addRecipe(new OptionalItemStack(ItemList.greenClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,5) );
+		
+		addRecipe(new OptionalItemStack(ItemList.blueClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,11) );
+		addRecipe(new OptionalItemStack(ItemList.blueClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,11) );
+		addRecipe(new OptionalItemStack(ItemList.blueClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,11) );
+		addRecipe(new OptionalItemStack(ItemList.blueClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,11) );
+		addRecipe(new OptionalItemStack(ItemList.blueClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,3) );
+		addRecipe(new OptionalItemStack(ItemList.blueClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,3) );
+		addRecipe(new OptionalItemStack(ItemList.blueClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,3) );
+		addRecipe(new OptionalItemStack(ItemList.blueClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,3) );
+		
+		addRecipe(new OptionalItemStack(ItemList.cactusArmorHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cactus) );
+		addRecipe(new OptionalItemStack(ItemList.cactusArmorChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
+		addRecipe(new OptionalItemStack(ItemList.cactusArmorLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
+		addRecipe(new OptionalItemStack(ItemList.cactusArmorBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
+		
+		addRecipe(new OptionalItemStack(ItemList.furArmorHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cactus));
+		addRecipe(new OptionalItemStack(ItemList.furArmorChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
+		addRecipe(new OptionalItemStack(ItemList.furArmorLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
+		addRecipe(new OptionalItemStack(ItemList.furArmorBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(ItemList.furPelt) );
 	}
 
+	public static void shapelessOreRecipe(OptionalItemStack result, OptionalItemStack... component){
+		if(!result.isPresent()){
+			return;
+		}
+		for (OptionalItemStack pairCharParam : component) {
+			if(!pairCharParam.isPresent()){
+				return;
+			}
+		}
+		Object[] objectComp = new Object[component.length];
+		for (int i = 0; i < objectComp.length; i++) {
+			objectComp[i] = component[i].createRecipeObject();
+		}
+		CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(result.createItemStack(), objectComp));
+	}
+	
+	public static void shapedOreRecipe(OptionalItemStack result, boolean mirrored, String[] craftingRecipe, char[] compChar, OptionalItemStack... component){
+		if(!result.isPresent()){
+			return;
+		}
+		for (OptionalItemStack pairCharParam : component) {
+			if(!pairCharParam.isPresent()){
+				return;
+			}
+		}
+		
+		Object[] objectComponents = new Object[craftingRecipe.length + compChar.length*2];
+		for (int i = 0; i < craftingRecipe.length; i++) {
+			objectComponents[i] = craftingRecipe[i];
+		}
+		for (int i = 0; i < component.length; i++) {
+			objectComponents[i*2+craftingRecipe.length] = compChar[i];
+			objectComponents[i*2+craftingRecipe.length+1] = component[i].createRecipeObject();
+		}
+		
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(result.createItemStack(), mirrored, objectComponents));
+	}
+	
+	public static void addSmelting(OptionalItemStack result, int xp, OptionalItemStack component){
+		if(!result.isPresent() || !component.isPresent()){
+			return;
+		}
+		GameRegistry.addSmelting(component.getID(), result.createItemStack(), xp);
+	}
+	
+	public static void addShapelessRecipe(OptionalItemStack result, OptionalItemStack... component){
+		if(!result.isPresent()){
+			return;
+		}
+		for (OptionalItemStack optionalItemStack : component) {
+			if(!optionalItemStack.isPresent()){
+				return;
+			}
+		}
+		Object[] itemStackComp = new ItemStack[component.length];
+		for (int i = 0; i < itemStackComp.length; i++) {
+			itemStackComp[i] = component[i].createItemStack();
+		}
+		GameRegistry.addShapelessRecipe(result.createItemStack(), itemStackComp);
+	}
+	
+	public static void addRecipe(OptionalItemStack result, String[] craftingRecipe, char compChar, OptionalItemStack component){
+		if(!result.isPresent() || !component.isPresent()){
+			return;
+		}
+		addRecipe(result.createItemStack(), craftingRecipe,	new char[]{compChar}, component.createItemStack());
+	}
+	
+	public static void addRecipe(OptionalItemStack result, String[] craftingRecipe, char[] compChar, OptionalItemStack... component){
+		if(!result.isPresent()){
+			return;
+		}
+		for (OptionalItemStack pairCharParam : component) {
+			if(!pairCharParam.isPresent())
+				return;
+		}
+		ItemStack[] itemStackComponents = new ItemStack[component.length];
+		for (int i = 0; i < component.length; i++) {
+			itemStackComponents[i] = component[i].createItemStack();
+		}
+		addRecipe(result.createItemStack(), craftingRecipe, compChar, itemStackComponents);
+	}
+	
+	public static void addRecipe(ItemStack itemResult, String[] craftingRecipe, char[] compChar, ItemStack... component){
+		Object[] componentList = new Object[craftingRecipe.length + compChar.length*2];
+		for (int i = 0; i < craftingRecipe.length; i++) {
+			componentList[i] = craftingRecipe[i];
+		}
+		for (int i = 0; i < compChar.length; i++) {
+			componentList[i*2+craftingRecipe.length] = compChar[i];
+			componentList[i*2+craftingRecipe.length+1] = component[i];
+		}
+		GameRegistry.addRecipe(itemResult, componentList);
+	}
+	
 	static ICraftingHandler coconutItemCraftingHandler = new ICraftingHandler() {
 		@Override
 		public void onSmelting(EntityPlayer player, ItemStack item) {}

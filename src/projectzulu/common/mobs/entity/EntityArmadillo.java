@@ -2,7 +2,6 @@ package projectzulu.common.mobs.entity;
 
 import java.util.EnumSet;
 
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;

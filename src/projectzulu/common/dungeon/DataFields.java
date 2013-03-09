@@ -2,7 +2,6 @@ package projectzulu.common.dungeon;
 
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 
 import org.lwjgl.util.Point;
 

@@ -3,10 +3,9 @@ package projectzulu.common.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
-import projectzulu.common.core.ProjectZuluLog;
-
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import projectzulu.common.core.ProjectZuluLog;
 
 public class NBTNode {
 	private NBTBase data;
@@ -30,7 +29,7 @@ public class NBTNode {
 	public NBTBase createNBTFromString(String newValue){
 		NBTBase nbtBase = null;
 		try{
-			nbtBase = NBTHelper.getByID(data.getId()).getNBTFromString(this, newValue);
+			nbtBase = NBTHelper.getByID(data.getId()).getNBTFromString(data, newValue);
 		}catch(NumberFormatException e){
 			ProjectZuluLog.warning("Rejecting NBTTag Value %s due to incorrect formatting", newValue);
 		}

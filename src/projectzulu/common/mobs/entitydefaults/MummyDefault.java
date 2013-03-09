@@ -4,8 +4,11 @@ import java.io.File;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
+import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.mobs.entity.EntityMummy;
 
@@ -28,8 +31,11 @@ public class MummyDefault extends DefaultSpawnable{
 	
 	@Override
 	public void outputDataToList(File configDirectory) {
-		if(shouldExist){
-			CustomEntityList.MUMMY.modData = Optional.of(new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog));	
-		}
+		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
+		config.load();
+		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
+		config.save();
+		CustomEntityList.MUMMY.modData = Optional.of(customMobData);	
 	}
 }
