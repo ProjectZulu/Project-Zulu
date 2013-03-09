@@ -13,7 +13,7 @@ import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.EventHookContainerClass;
 import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.core.WorldGeneratorZulu;
+import projectzulu.common.core.ProjectZuluGenerator;
 import projectzulu.common.core.ZuluGuiHandler;
 import projectzulu.common.core.ZuluPacketHandler;
 import cpw.mods.fml.common.Mod;
@@ -128,7 +128,7 @@ public class ProjectZulu_Core{
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event){
 		MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
-		GameRegistry.registerWorldGenerator(new WorldGeneratorZulu());
+		GameRegistry.registerWorldGenerator(new ProjectZuluGenerator());
 		
 		ProjectZuluLog.info("Load Entity Biomes");
 		CustomEntityManager.INSTANCE.loadBiomesFromConfig(modConfigDirectoryFile);

@@ -13,7 +13,7 @@ import projectzulu.common.world.WorldGenReplaceTop;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Loader;
 
-public class WorldGeneratorZulu implements IWorldGenerator {
+public class ProjectZuluGenerator implements IWorldGenerator {
 	//MadhatdragoN
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
