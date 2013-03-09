@@ -58,16 +58,16 @@ public class GuiLimitedMobSpawner extends GuiScreen{
      */
     public void initGui() {
     	super.initGui();
-        controlList.clear();
+    	buttonList.clear();
         Keyboard.enableRepeatEvents(true);
-        controlList.add(new GuiButton(ButtonIDs.BACKWARDS.index, this.width/2 -25/2 -38, (this.height+backgroundSize.getY())/2-47, 25, 20, "<<"));
-        controlList.add(new GuiButton(ButtonIDs.FORWARD.index, this.width/2 -25/2 +8, (this.height+backgroundSize.getY())/2-47, 25, 20, ">>"));
+        buttonList.add(new GuiButton(ButtonIDs.BACKWARDS.index, this.width/2 -25/2 -38, (this.height+backgroundSize.getY())/2-47, 25, 20, "<<"));
+        buttonList.add(new GuiButton(ButtonIDs.FORWARD.index, this.width/2 -25/2 +8, (this.height+backgroundSize.getY())/2-47, 25, 20, ">>"));
         
-        controlList.add(new GuiButton(ButtonIDs.SAVENCLOSE.index, this.width/2-70/2-88, (this.height+backgroundSize.getY())/2-47, 70, 20, "Save & Quit")); //Three Button System: Save & Close - Cancel - + Entry
-        controlList.add(new GuiButton(ButtonIDs.CANCEL.index, this.width/2 -70/2-88, (this.height+backgroundSize.getY())/2-25, 70, 20, "Cancel"));
+        buttonList.add(new GuiButton(ButtonIDs.SAVENCLOSE.index, this.width/2-70/2-88, (this.height+backgroundSize.getY())/2-47, 70, 20, "Save & Quit")); //Three Button System: Save & Close - Cancel - + Entry
+        buttonList.add(new GuiButton(ButtonIDs.CANCEL.index, this.width/2 -70/2-88, (this.height+backgroundSize.getY())/2-25, 70, 20, "Cancel"));
         
-        controlList.add(new GuiButton(ButtonIDs.NEWENTRY.index, this.width/2-70/2+75-17, (this.height+backgroundSize.getY())/2-47, 70, 20, "New Entry"));
-        controlList.add(new GuiButton(ButtonIDs.DELENTRY.index, this.width/2-70/2+75-17 , (this.height+backgroundSize.getY())/2-25, 70, 20, "Delete Entry"));
+        buttonList.add(new GuiButton(ButtonIDs.NEWENTRY.index, this.width/2-70/2+75-17, (this.height+backgroundSize.getY())/2-47, 70, 20, "New Entry"));
+        buttonList.add(new GuiButton(ButtonIDs.DELENTRY.index, this.width/2-70/2+75-17 , (this.height+backgroundSize.getY())/2-25, 70, 20, "Delete Entry"));
 
         limitedMobSpawner.setEditable(false);
         
@@ -88,11 +88,11 @@ public class GuiLimitedMobSpawner extends GuiScreen{
         switch (currentListType) {
         case Creature:
         	scrollingList = new GUISelectionList(this, creatureListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
-            scrollingList.registerScrollButtons(this.controlList, 7, 8);
+            scrollingList.registerScrollButtons(this.buttonList, 7, 8);
         	break;
         case Sound:
         	scrollingList = new GUISelectionList(this, soundListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
-            scrollingList.registerScrollButtons(this.controlList, 7, 8);
+            scrollingList.registerScrollButtons(this.buttonList, 7, 8);
         	break;
 		default:
 			break;
@@ -118,7 +118,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     		}
     		
             scrollingList = new GUISelectionList(this, creatureListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
-            scrollingList.registerScrollButtons(this.controlList, 7, 8);
+            scrollingList.registerScrollButtons(this.buttonList, 7, 8);
 			break;
 		case Sound:
 			if(soundListName == null || soundListName.isEmpty()){
@@ -143,7 +143,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 				}
 			}
             scrollingList = new GUISelectionList(this, soundListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
-            scrollingList.registerScrollButtons(this.controlList, 7, 8);
+            scrollingList.registerScrollButtons(this.buttonList, 7, 8);
 			break;
 		default:
 			throw new IllegalStateException("Trying to Open invalid List type " + listType.toString());
@@ -291,7 +291,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	super.drawDefaultBackground();
         int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"mobspawnergui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(textureID);
+//        this.mc.renderEngine.bindTexture(textureID); //TODO: Commented
         int xCoord = (width - backgroundSize.getX()) / 2;
         int yCoord = (height - backgroundSize.getY()) / 2;
         this.drawTexturedModalRect(xCoord, yCoord, 0, 0, backgroundSize.getX(), backgroundSize.getY());

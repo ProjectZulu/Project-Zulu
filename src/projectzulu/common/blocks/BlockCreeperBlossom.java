@@ -18,7 +18,7 @@ public class BlockCreeperBlossom extends BlockFlower{
 
 	public BlockCreeperBlossom(int par1, int par2)
 	{
-		super(par1, par2, Material.tnt);
+		super(par1, Material.tnt);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 	}
 
@@ -28,13 +28,14 @@ public class BlockCreeperBlossom extends BlockFlower{
 		return DefaultProps.blockSpriteSheet;
 	}
 
-	/**
-	 * Returns the block texture based on the side being looked at.  Args: side
-	 */
-	public int getBlockTextureFromSide(int par1)
-	{
-		return 101;
-	}
+	//TODO: Commented textureFromSide
+//	/**
+//	 * Returns the block texture based on the side being looked at.  Args: side
+//	 */
+//	public int getBlockTextureFromSide(int par1)
+//	{
+//		return 101;
+//	}
 
 //	/**
 //	 * Called whenever the block is added into the world. Args: world, x, y, z
@@ -46,7 +47,7 @@ public class BlockCreeperBlossom extends BlockFlower{
 //		if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
 //		{
 //			this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
-//			par1World.setBlockWithNotify(par2, par3, par4, 0);
+//			par1World.func_94575_c(par2, par3, par4, 0);
 //		}
 //	}
 
@@ -61,7 +62,7 @@ public class BlockCreeperBlossom extends BlockFlower{
 //		if (par5 > 0 && Block.blocksList[par5].canProvidePower() && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
 //		{
 //			this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
-//			par1World.setBlockWithNotify(par2, par3, par4, 0);
+//			par1World.func_94575_c(par2, par3, par4, 0);
 //		}
 //	}
 
@@ -95,7 +96,7 @@ public class BlockCreeperBlossom extends BlockFlower{
 			EntityCreeperBlossomPrimed var6 = new EntityCreeperBlossomPrimed(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F));
 			par1World.spawnEntityInWorld(var6);
 			par1World.playSoundAtEntity(var6, "random.fuse", 1.0F, 1.0F);
-			par1World.setBlockWithNotify(par2, par3, par4, 0);
+			par1World.func_94575_c(par2, par3, par4, 0);
 		}
 	}
 

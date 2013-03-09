@@ -273,7 +273,7 @@ public class CreatureFields implements DataFields {
 		/* Setup Required Texture Sheet */
         int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.bindTexture(textureID);
+//        mc.renderEngine.bindTexture(textureID); //TODO: Commented
 	}
 	
 	private void drawBackgroundBox(Point position, Point screenSize, Point backgroundSize, Point imageLocation, Point imageSize){

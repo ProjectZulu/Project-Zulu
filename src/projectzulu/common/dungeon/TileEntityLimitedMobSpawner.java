@@ -159,7 +159,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      */
     public void updateEntity(){    	
     	if(maxSpawnableEntities > 0 && spawnedEntities >= maxSpawnableEntities){
-    		worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+    		worldObj.func_94575_c(xCoord, yCoord, zCoord, 0);
     	}
     	
         if (this.anyPlayerInRange()){
@@ -199,7 +199,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
                         return;
                     }
 
-                    int var4 = this.worldObj.getEntitiesWithinAABB(var13.getClass(), AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, (double)(this.xCoord + 1), (double)(this.yCoord + 1), (double)(this.zCoord + 1)).expand((double)(this.spawnRange * 2), 4.0D, (double)(this.spawnRange * 2))).size();
+                    int var4 = this.worldObj.getEntitiesWithinAABB(var13.getClass(), AxisAlignedBB.getAABBPool().getAABB((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, (double)(this.xCoord + 1), (double)(this.yCoord + 1), (double)(this.zCoord + 1)).expand((double)(this.spawnRange * 2), 4.0D, (double)(this.spawnRange * 2))).size();
 
                     if (var4 >= this.maxNearbyEntities){
                         this.updateDelay();
@@ -426,10 +426,12 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     /**
      * Called when a client event is received with the event number and argument, see World.sendClientEvent
      */
-    public void receiveClientEvent(int par1, int par2){
+    public boolean receiveClientEvent(int par1, int par2){
         if (par1 == 1 && this.worldObj.isRemote){
             this.delay = this.minSpawnDelay;
+            return true;
+        }else{
+        	return super.receiveClientEvent(par1, par2);
         }
     }
-
 }

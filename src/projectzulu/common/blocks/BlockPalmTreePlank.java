@@ -14,7 +14,7 @@ public class BlockPalmTreePlank extends Block
     /** The type of tree this block came from. */
     public BlockPalmTreePlank(int par1, int par2)
     {
-        super(par1, par2, Material.wood);
+        super(par1, Material.wood);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
     }
     

@@ -19,7 +19,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.limitedMobSpawner = Optional.of(
-					new BlockLimitedMobSpawner(blockID).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setBlockName("LimitedMobSpawner"));
+					new BlockLimitedMobSpawner(blockID).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("LimitedMobSpawner"));
 		}
 		
 		@Override

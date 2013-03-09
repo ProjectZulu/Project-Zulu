@@ -44,7 +44,7 @@ public class ItemRendererWarAxe implements IItemRenderer{
 	public void renderHelmet(float x, float y, float z){
 		String textureLocation = "";
 		GL11.glPushMatrix(); //start
-		ForgeHooksClient.bindTexture("/mods/vikinghelmet.png", 0);
+//		ForgeHooksClient.bindTexture("/mods/vikinghelmet.png", 0); //TODO: Commented bindTexture
 		GL11.glTranslatef(x, y, z); //size
 		float var10 = 0.0625F;
 		model.render((Entity)null, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, var10);

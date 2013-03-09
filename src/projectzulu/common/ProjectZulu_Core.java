@@ -113,7 +113,7 @@ public class ProjectZulu_Core{
 		proxy.registerRenderThings();
 		
 		if(enableTestBlock){
-			testBlock = (new BlockTestBlock(testBlockID, 32)).setHardness(1.0f).setResistance(1.0f).setBlockName("testBlock");
+			testBlock = (new BlockTestBlock(testBlockID, 32)).setHardness(1.0f).setResistance(1.0f).setUnlocalizedName("testBlock");
 			GameRegistry.registerBlock(testBlock, "testZuluBlock"); LanguageRegistry.addName(testBlock, "Test block");
 		}
         NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());

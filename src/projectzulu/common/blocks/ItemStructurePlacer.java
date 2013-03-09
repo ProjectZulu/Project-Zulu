@@ -22,10 +22,8 @@ public class ItemStructurePlacer extends Item{
 
 	public ItemStructurePlacer(int par1) {
 		super(par1);
-		this.setIconIndex(1);
 		setHasSubtypes(true);
 		this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-
 	}
 
 	@Override
@@ -78,11 +76,12 @@ public class ItemStructurePlacer extends Item{
 		return par1ItemStack;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getIconFromDamage(int par1) {
-		return 58;
-	}
+	// Commented icon
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public int getIconFromDamage(int par1) {
+//		return 58;
+//	}
 	
 	/**
      * Return an item rarity from EnumRarity
@@ -97,7 +96,7 @@ public class ItemStructurePlacer extends Item{
         return EnumAction.bow;
     }
 	
-	public String getItemNameIS(ItemStack itemstack) {
+	public String getUnlocalizedName(ItemStack itemstack) {
 		try{
 			return structureName[itemstack.getItemDamage()];
 		}catch(Exception e){

@@ -18,7 +18,6 @@ public class BlockMobHeads extends BlockContainer{
 	public BlockMobHeads(int par1, int par2, Class class1){
 		super(par1, Material.circuits);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
-		this.setRequiresSelfNotify(); // absolutely needed
 	}
 
 	public int quantityDropped(Random par1Random){
@@ -86,10 +85,11 @@ public class BlockMobHeads extends BlockContainer{
 	/**
 	 * Called when the block is attempted to be harvested
 	 */
+    @Override
 	public void onBlockHarvested(World par1World, int par2, int par3, int par4, int par5, EntityPlayer par6EntityPlayer){
 		if (par6EntityPlayer.capabilities.isCreativeMode){
 			par5 |= 8;
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, par5);
+			par1World.setBlockMetadataWithNotify(par2, par3, par4, par5, 3);
 		}
 
 		super.onBlockHarvested(par1World, par2, par3, par4, par5, par6EntityPlayer);
@@ -98,6 +98,7 @@ public class BlockMobHeads extends BlockContainer{
 	/**
 	 * ejects contained items into the world, and notifies neighbours of an update, as appropriate
 	 */
+    @Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
 		if (!par1World.isRemote)
@@ -114,9 +115,10 @@ public class BlockMobHeads extends BlockContainer{
 	/**
 	 * Called when the block is placed in the world.
 	 */
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving){
+	@Override
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack){
 		int var6 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, var6);
+		par1World.setBlockMetadataWithNotify(par2, par3, par4, var6, 3);
 	}
 
 	@Override

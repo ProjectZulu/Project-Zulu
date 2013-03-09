@@ -61,7 +61,8 @@ public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRende
 				
 		        float scaleItem = 0.6f;
 		        GL11.glPushMatrix();
-				GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture( itemToRender.getTextureFile() ));
+		        //TODO: Commented
+//				GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture( itemToRender.getTextureFile() ));
 
 		        GL11.glTranslatef((float)xRenderCoord + 0.5f, (float)(yRenderCoord + 0.3), (float)zRenderCoord + 0.5f);
 		        GL11.glScalef(scaleItem, scaleItem, scaleItem);

@@ -17,7 +17,7 @@ public abstract class BlockZuluHalfSlab extends Block{
     private final boolean isDoubleSlab;
 
     public BlockZuluHalfSlab(int par1, boolean par2, Material par3Material){
-        super(par1, 6, par3Material);
+        super(par1, par3Material);
         this.isDoubleSlab = par2;
 
         if (par2){
@@ -61,20 +61,22 @@ public abstract class BlockZuluHalfSlab extends Block{
         }
     }
 
-    /**
-     * if the specified block is in the given AABB, add its collision bounding box to the given list
-     */
-    public void addCollidingBlockToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity){
-        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
-        super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
-    }
+    //TODO:Commented
+//    /**
+//     * if the specified block is in the given AABB, add its collision bounding box to the given list
+//     */
+//    public void addCollidingBlockToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity){
+//        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
+//        super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+//    }
 
-    /**
-     * Returns the block texture based on the side being looked at.  Args: side
-     */
-    public int getBlockTextureFromSide(int par1){
-        return this.getBlockTextureFromSideAndMetadata(par1, 0);
-    }
+    //TODO: Commented
+//    /**
+//     * Returns the block texture based on the side being looked at.  Args: side
+//     */
+//    public int getBlockTextureFromSide(int par1){
+//        return this.getBlockTextureFromSideAndMetadata(par1, 0);
+//    }
 
     /**
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
@@ -91,7 +93,7 @@ public abstract class BlockZuluHalfSlab extends Block{
         if (!this.isDoubleSlab){
             if (par5 == 0 || par5 != 1 && (double)par7 > 0.5D){
                 int var9 = par1World.getBlockMetadata(par2, par3, par4) & 7;
-                par1World.setBlockMetadataWithNotify(par2, par3, par4, var9 | 8);
+                par1World.setBlockMetadataWithNotify(par2, par3, par4, var9 | 8, 3);
             }
         }
     }

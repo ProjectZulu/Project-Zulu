@@ -14,7 +14,6 @@ public class ItemCoconutShell extends Item{
 		setMaxDamage(5);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		bFull3D = par3bool;
-		this.setIconIndex(par2);
 	}
 	
     public int getMetadata(int par1)

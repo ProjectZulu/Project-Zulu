@@ -27,7 +27,7 @@ public class RenderCreeperBlossomPrimed extends Render{
     	par1EntityTNTPrimed.fuse = 39;
 
     	if (var2 != null){
-    		var2.bindTexture(var2.getTexture("/terrain.png"));
+//    		var2.bindTexture(var2.getTexture("/terrain.png")); //TODO: Commented
     	}
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);

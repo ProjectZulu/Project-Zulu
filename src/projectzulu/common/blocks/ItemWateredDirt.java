@@ -14,7 +14,7 @@ public class ItemWateredDirt extends ItemBlock{
 		return par1;
 	}
 	
-	public String getItemNameIS(ItemStack itemstack) {
+	public String getUnlocalizedName(ItemStack itemstack) {
 		String name = "";
 		switch(itemstack.getItemDamage()) {
 		case 0: {
@@ -51,7 +51,7 @@ public class ItemWateredDirt extends ItemBlock{
 		}
 				default: name = "ore";
 		}
-		return getItemName() + "." + name;
+		return getUnlocalizedName() + "." + name;
 	}
 		
 }

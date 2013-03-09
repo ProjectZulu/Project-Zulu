@@ -16,7 +16,6 @@ public class BlockWateredDirt extends Block{
 
 	public BlockWateredDirt(int par1, int par2){
         super(par1, Material.sand);
-		this.setRequiresSelfNotify();
     }
 	
 	@SideOnly(Side.CLIENT)
@@ -24,38 +23,39 @@ public class BlockWateredDirt extends Block{
     {
             return DefaultProps.blockSpriteSheet;
     }
-
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) 
-	{
-		if (par2 < 4) {
-			this.setStepSound(Block.soundGravelFootstep);
-		}else {
-			this.setStepSound(Block.soundSandFootstep);
-		}
-
-		switch (par2) {
-		case 0:
-			return 8;
-		case 1:
-			return 9;
-		case 2:
-			return 10;
-		case 3:
-			return 11;
-
-		case 4:
-			return 12;
-		case 5:
-			return 13;
-		case 6:
-			return 14;
-		case 7:
-			return 15;
-
-		default:
-			return 8;
-		}
-	}
+	
+	//TODO: Commented textureFromSide
+//	public int getBlockTextureFromSideAndMetadata(int par1, int par2) 
+//	{
+//		if (par2 < 4) {
+//			this.setStepSound(Block.soundGravelFootstep);
+//		}else {
+//			this.setStepSound(Block.soundSandFootstep);
+//		}
+//
+//		switch (par2) {
+//		case 0:
+//			return 8;
+//		case 1:
+//			return 9;
+//		case 2:
+//			return 10;
+//		case 3:
+//			return 11;
+//
+//		case 4:
+//			return 12;
+//		case 5:
+//			return 13;
+//		case 6:
+//			return 14;
+//		case 7:
+//			return 15;
+//
+//		default:
+//			return 8;
+//		}
+//	}
 
 	public int damageDropped(int par1)
 	{

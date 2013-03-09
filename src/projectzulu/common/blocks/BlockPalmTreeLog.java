@@ -15,9 +15,7 @@ public class BlockPalmTreeLog extends Block
     public BlockPalmTreeLog(int par1, int par2)
     {
         super(par1, Material.wood);
-        this.blockIndexInTexture = par2;
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        this.setRequiresSelfNotify();
         this.setBurnProperties(this.blockID, 5, 20);
     }
 

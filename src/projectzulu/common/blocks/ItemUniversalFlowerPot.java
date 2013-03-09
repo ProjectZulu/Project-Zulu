@@ -6,11 +6,12 @@ public class ItemUniversalFlowerPot extends ItemBlock{
 
 	public ItemUniversalFlowerPot(int par1) {
 		super(par1);
-		setIconCoord(13, 11);
+//		setIconCoord(13, 11);
 	}
 	
-	@Override
-	public String getTextureFile() {
-		return "/gui/items.png";
-	}
+	//TODO: Commented - Does not exist anymore
+//	@Override
+//	public String getTextureFile() {
+//		return "/gui/items.png";
+//	}
 }

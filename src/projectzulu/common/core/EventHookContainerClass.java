@@ -163,7 +163,7 @@ public class EventHookContainerClass {
 			/* Check if Location is Valid for Tombstone */
 			if(worldObj.isAirBlock((int)player.posX, (int)player.posY, (int)player.posZ)){
 				/* Place a Tombstone */
-				worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, BlockList.tombstone.get().blockID);
+				worldObj.func_94575_c((int)player.posX, (int)player.posY, (int)player.posZ, BlockList.tombstone.get().blockID);
 				TileEntity tileEntity = worldObj.getBlockTileEntity((int)player.posX, (int)player.posY, (int)player.posZ);
 				if(tileEntity != null && tileEntity instanceof TileEntityTombstone ){
 					((TileEntityTombstone)tileEntity).setSignString(event.source.getDeathMessage((EntityPlayer)event.entity));

@@ -86,7 +86,7 @@ public class ItemCoconutItem extends Item{
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		bFull3D = par3bool;
 		this.setHasSubtypes(true);
-		this.setIconIndex(par2);
+//		this.setIconIndex(par2);
 	}
 	
 	@Override

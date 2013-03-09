@@ -17,7 +17,7 @@ public class HauntedArmorWithMeta extends BlockWithMeta{
 		if(!world.isRemote){
 			
 			/* Place Air cause we don't want to spawn Inside something*/
-			world.setBlock(position.posX, position.posY, position.posZ, 0);
+			world.func_94575_c(position.posX, position.posY, position.posZ, 0);
 			
 			/* Spawn Mimic */
 			EntityHauntedArmor mob = new EntityHauntedArmor(world, position.posX+0.5, position.posY, position.posZ+0.5, true);

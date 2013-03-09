@@ -27,9 +27,7 @@ public class BlockSpikes extends Block{
 		super(i, Material.iron);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		this.disableStats();
-		this.setRequiresSelfNotify();
         this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
-        blockIndexInTexture = 33;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -37,18 +35,18 @@ public class BlockSpikes extends Block{
 		return DefaultProps.blockSpriteSheet;
 	}
 
-
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
-		if(par2 > 11){
-			return 35;
-		}else if(par2 > 5){
-			return 34;
-		}else{
-			return 33;
-		}
-	}
-	
+	//TODO: Commented textureFromSide
+//	@Override
+//	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
+//		if(par2 > 11){
+//			return 35;
+//		}else if(par2 > 5){
+//			return 34;
+//		}else{
+//			return 33;
+//		}
+//	}
+//	
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
 			int par2, int par3, int par4) {
@@ -201,9 +199,9 @@ public class BlockSpikes extends Block{
 			
 			/* If not Poison (meta<6) increase by 6, if sticky(>11) reduce by 6*/
 			if(par1World.getBlockMetadata(par2, par3, par4) < 6){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6 );
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
 			}else{
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) - 6 );
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) - 6, 3);
 			}
 		}
 		
@@ -218,9 +216,9 @@ public class BlockSpikes extends Block{
 			
 			/* If not Poison or Sticky (meta<6) increase by 12, if Poison(>6 & <11) increase by 6*/
 			if( par1World.getBlockMetadata(par2, par3, par4) < 6 ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 12 );
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 12, 3);
 			}else{
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6 );
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
 			}
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,

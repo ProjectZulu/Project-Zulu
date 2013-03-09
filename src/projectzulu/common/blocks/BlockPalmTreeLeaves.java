@@ -34,11 +34,10 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable
 
     public BlockPalmTreeLeaves(int par1, int par2)
     {
-        super(par1, par2, Material.leaves, false);
+        super(par1, Material.leaves, false);
         this.baseIndexInPNG = par2;
         this.setTickRandomly(true);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        this.setRequiresSelfNotify();
     }
     
     @SideOnly(Side.CLIENT)
@@ -125,9 +124,10 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable
      */
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
-		if(!MinecraftServer.getServer().isDedicatedServer()){
-			setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);  			
-		}
+    	//TODO:
+//		if(!MinecraftServer.getServer().isDedicatedServer()){
+//			setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);  			
+//		}
 
     	
     	
@@ -256,7 +256,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable
     private void removeLeaves(World par1World, int par2, int par3, int par4)
     {
         this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-        par1World.setBlockWithNotify(par2, par3, par4, 0);
+        par1World.func_94575_c(par2, par3, par4, 0);
     }
 
     /**
@@ -350,10 +350,10 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2)
-    {
-        return (par2 & 3) == 1 ? this.blockIndexInTexture + 80 : ((par2 & 3) == 3 ? this.blockIndexInTexture + 144 : this.blockIndexInTexture);
-    }
+    //TODO
+//    public int getBlockTextureFromSideAndMetadata(int par1, int par2){
+//        return (par2 & 3) == 1 ? this.blockIndexInTexture + 80 : ((par2 & 3) == 3 ? this.blockIndexInTexture + 144 : this.blockIndexInTexture);
+//    }
     
 //    public boolean isOpaqueCube()	{
 //    	return false;	
@@ -364,30 +364,18 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable
     	}
     @SideOnly(Side.CLIENT)
 
-    /**
-     * Pass true to draw this block using fancy graphics, or false for fast graphics.
-     */
-    public void setGraphicsLevel(boolean par1)
-    {
-        this.graphicsLevel = par1;
-        if(par1){
-        	this.blockIndexInTexture = this.baseIndexInPNG;
-        }else{
-        	this.blockIndexInTexture = this.baseIndexInPNG+1;
-        }
-    }
-
-//    @SideOnly(Side.CLIENT)
-//
 //    /**
-//     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+//     * Pass true to draw this block using fancy graphics, or false for fast graphics.
 //     */
-//    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    //TODO:
+//    public void setGraphicsLevel(boolean par1)
 //    {
-//        par3List.add(new ItemStack(par1, 1, 0));
-//        par3List.add(new ItemStack(par1, 1, 1));
-//        par3List.add(new ItemStack(par1, 1, 2));
-//        par3List.add(new ItemStack(par1, 1, 3));
+//        this.graphicsLevel = par1;
+//        if(par1){
+//        	this.blockIndexInTexture = this.baseIndexInPNG;
+//        }else{
+//        	this.blockIndexInTexture = this.baseIndexInPNG+1;
+//        }
 //    }
     
     @Override
@@ -404,7 +392,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable
 
     @Override
     public void beginLeavesDecay(World world, int x, int y, int z){
-        world.setBlockMetadata(x, y, z, world.getBlockMetadata(x, y, z) | 8);
+        world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 8, 3);
     }
 
     @Override

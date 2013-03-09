@@ -28,15 +28,16 @@ public class ItemPalmTreeLeaves extends ItemBlock
         return par1 | 4;
     }
 
-    @SideOnly(Side.CLIENT)
 
-    /**
-     * Gets an icon index based on an item's damage value
-     */
-    public int getIconFromDamage(int par1)
-    {
-        return Block.leaves.getBlockTextureFromSideAndMetadata(0, par1);
-    }
+	// TODO: Commented icon
+//    @SideOnly(Side.CLIENT)
+//    /**
+//     * Gets an icon index based on an item's damage value
+//     */
+//    public int getIconFromDamage(int par1)
+//    {
+//        return Block.leaves.getBlockTextureFromSideAndMetadata(0, par1);
+//    }
 
     @SideOnly(Side.CLIENT)
     public int getColorFromDamage(int par1, int par2)
@@ -44,7 +45,7 @@ public class ItemPalmTreeLeaves extends ItemBlock
         return (par1 & 1) == 1 ? ColorizerFoliage.getFoliageColorPine() : ((par1 & 2) == 2 ? ColorizerFoliage.getFoliageColorBirch() : ColorizerFoliage.getFoliageColorBasic());
     }
 
-    public String getItemNameIS(ItemStack par1ItemStack)
+    public String getUnlocalizedName(ItemStack par1ItemStack)
     {
         int var2 = par1ItemStack.getItemDamage();
 
@@ -53,6 +54,6 @@ public class ItemPalmTreeLeaves extends ItemBlock
             var2 = 0;
         }
 
-        return super.getItemName() + "." + BlockLeaves.LEAF_TYPES[var2];
+        return super.getUnlocalizedName() + "." + BlockLeaves.LEAF_TYPES[var2];
     }
 }

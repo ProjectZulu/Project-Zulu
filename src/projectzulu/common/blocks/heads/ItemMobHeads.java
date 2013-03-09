@@ -24,11 +24,12 @@ public class ItemMobHeads extends ItemBlock{
 		maxStackSize = 8;
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public String getTextureFile(){
-            return DefaultProps.blockSpriteSheet;
-    }
+	//TODO: Commented textureFiles Don't exist
+//	@SideOnly(Side.CLIENT)
+//	@Override
+//	public String getTextureFile(){
+//            return DefaultProps.blockSpriteSheet;
+//    }
 	
 	/**
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
@@ -72,7 +73,7 @@ public class ItemMobHeads extends ItemBlock{
 				return false;
 			}
 			else if(BlockList.mobHeads.isPresent()){
-				par3World.setBlockAndMetadataWithNotify(par4, par5, par6, BlockList.mobHeads.get().blockID, par7);
+				par3World.setBlockAndMetadataWithNotify(par4, par5, par6, BlockList.mobHeads.get().blockID, par7, 3);
 				int var11 = 0;
 
 				if (par7 == 1){
@@ -126,7 +127,7 @@ public class ItemMobHeads extends ItemBlock{
 	/* for every block, you need a name. it doesn't matter, really. its just so all your blocks wont have the same name. 
 	 * delete this part and all your blocks have the same name. */
 	@Override
-	public String getItemNameIS(ItemStack itemstack)
+	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		String name = "";
 		switch(itemstack.getItemDamage())
@@ -187,55 +188,56 @@ public class ItemMobHeads extends ItemBlock{
 			break;
 		default: name = "base_0";
 		}
-		return itemstack.getItem().getItemName() + "." + name;
+		return itemstack.getItem().getUnlocalizedName() + "." + name;
 	}
 	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getIconFromDamage(int par1) {
-		switch (par1) {
-		case 0:
-			return 144;
-		case 1:
-			return 134;
-		case 2:
-			return 128;
-		case 3:
-			return 129;
-		case 4:
-			return 130;
-		case 5:
-			return 131;
-		case 6:
-			return 132;
-		case 7:
-			return 133;
-		case 8:
-			return 136;
-		case 9:
-			return 137;
-		case 10:
-			return 138;
-		case 11:
-			return 139;
-		case 12:
-			return 140;
-		case 13:
-			return 135;
-		case 14:
-			return 141;
-		case 15:
-			return 142;
-		case 16:
-			return 143;
-		case 17:
-			return 145;
-		default:
-			return super.getIconFromDamage(par1);
-		}
-	}
+	//TODO: Commented
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public int getIconFromDamage(int par1) {
+//		switch (par1) {
+//		case 0:
+//			return 144;
+//		case 1:
+//			return 134;
+//		case 2:
+//			return 128;
+//		case 3:
+//			return 129;
+//		case 4:
+//			return 130;
+//		case 5:
+//			return 131;
+//		case 6:
+//			return 132;
+//		case 7:
+//			return 133;
+//		case 8:
+//			return 136;
+//		case 9:
+//			return 137;
+//		case 10:
+//			return 138;
+//		case 11:
+//			return 139;
+//		case 12:
+//			return 140;
+//		case 13:
+//			return 135;
+//		case 14:
+//			return 141;
+//		case 15:
+//			return 142;
+//		case 16:
+//			return 143;
+//		case 17:
+//			return 145;
+//		default:
+//			return super.getIconFromDamage(par1);
+//		}
+//	}
 	
-//	public String getItemNameIS(ItemStack par1ItemStack)
+//	public String getUnlocalizedName(ItemStack par1ItemStack)
 //	{
 //		int var2 = par1ItemStack.getItemDamage();
 //
@@ -244,7 +246,7 @@ public class ItemMobHeads extends ItemBlock{
 //			var2 = 0;
 //		}
 //
-//		return super.getItemName() + "." + field_82807_a[var2];
+//		return super.getUnlocalizedName() + "." + field_82807_a[var2];
 //	}
 //
 //	public String getItemDisplayName(ItemStack par1ItemStack)

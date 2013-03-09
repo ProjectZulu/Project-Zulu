@@ -103,68 +103,69 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
 
     public void drawCrossedSquares(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer)
     {
-        Tessellator var9 = Tessellator.instance;
-        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
-
-        if (renderer.overrideBlockTexture >= 0){
-            var10 = renderer.overrideBlockTexture;
-        }
-
-        int var11 = (var10 & 15) << 4;
-        int var12 = var10 & 240;
-        double var13 = (double)((float)var11 / 256.0F);
-        double var15 = (double)(((float)var11 + 15.99F) / 256.0F);
-        double var17 = (double)((float)var12 / 256.0F);
-        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
-        double var21 = par3 + 0.5D - 0.5D;
-        double var23 = par3 + 0.5D + 0.5D;
-        double var25 = par7 + 0.5D - 0.5D;
-        double var27 = par7 + 0.5D + 0.5D;
-                        
-        switch (par2) {
-        case 0:
-        	drawOnSide0(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 1:
-        	drawOnSide1(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 2:
-        	drawOnSide2(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 3:
-        	drawOnSide3(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 4:
-        	drawOnSide4(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 5:
-        	drawOnSide5(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        	
-        case 6:
-        	drawOnSide0(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 7:
-        	drawOnSide1(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 8:
-        	drawOnSide2(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 9:
-        	drawOnSide3(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 10:
-        	drawOnSide4(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        case 11:
-        	drawOnSide5(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        	
-        default:
-        	drawOnSide0(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
-        	break;
-        }
-        
+    	//TODO: COmmented render
+//        Tessellator var9 = Tessellator.instance;
+//        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+//
+//        if (renderer.overrideBlockTexture >= 0){
+//            var10 = renderer.overrideBlockTexture;
+//        }
+//
+//        int var11 = (var10 & 15) << 4;
+//        int var12 = var10 & 240;
+//        double var13 = (double)((float)var11 / 256.0F);
+//        double var15 = (double)(((float)var11 + 15.99F) / 256.0F);
+//        double var17 = (double)((float)var12 / 256.0F);
+//        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+//        double var21 = par3 + 0.5D - 0.5D;
+//        double var23 = par3 + 0.5D + 0.5D;
+//        double var25 = par7 + 0.5D - 0.5D;
+//        double var27 = par7 + 0.5D + 0.5D;
+//                        
+//        switch (par2) {
+//        case 0:
+//        	drawOnSide0(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 1:
+//        	drawOnSide1(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 2:
+//        	drawOnSide2(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 3:
+//        	drawOnSide3(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 4:
+//        	drawOnSide4(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 5:
+//        	drawOnSide5(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        	
+//        case 6:
+//        	drawOnSide0(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 7:
+//        	drawOnSide1(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 8:
+//        	drawOnSide2(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 9:
+//        	drawOnSide3(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 10:
+//        	drawOnSide4(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        case 11:
+//        	drawOnSide5(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        	
+//        default:
+//        	drawOnSide0(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
+//        	break;
+//        }
+//        
         
     }
     
@@ -315,284 +316,284 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
     	
     public void RenderFencePikes(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer)
     {
-        Tessellator var9 = Tessellator.instance;
-        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
-
-        if (renderer.overrideBlockTexture >= 0){
-            var10 = renderer.overrideBlockTexture;
-        }
-
-        int var11 = (var10 & 15) << 4;
-        int var12 = var10 & 240;
-        double var13 = (double)(((float)var11 + 3.99F) / 256.0F);
-        double var15 = (double)(((float)var11 + 11.99F) / 256.0F);
-        double var17 = (double)(((float)var12 +0.0f) / 256.0F);
-        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
-
-        double var21 = par3 + 0.5D - (0.625-0.375)/2D;
-        double var23 = par3 + 0.5D + (0.625-0.375)/2D;
-        double var25 = par7 + 0.5D - (0.625-0.375)/2D;
-        double var27 = par7 + 0.5D + (0.625-0.375)/2D;
-        
-//        float var6 = 0.375F;
-//        float var7 = 0.625F;
-        double maxY = 0.6;
-        
-        /* Bottom Facing Texture */
-        var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
-        
-        var9.addVertexWithUV(var23, par5 + maxY, var27, var13, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var21, par5 + maxY, var25, var15, var17);
-
-        /* Bottom Facing Texture */
-        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
-        
-        var9.addVertexWithUV(var23, par5 + maxY, var25, var13, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var21, par5 + maxY, var27, var15, var17);
+    	//TODO: COmmented render
+//        Tessellator var9 = Tessellator.instance;
+//        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+//
+//        if (renderer.overrideBlockTexture >= 0){
+//            var10 = renderer.overrideBlockTexture;
+//        }
+//
+//        int var11 = (var10 & 15) << 4;
+//        int var12 = var10 & 240;
+//        double var13 = (double)(((float)var11 + 3.99F) / 256.0F);
+//        double var15 = (double)(((float)var11 + 11.99F) / 256.0F);
+//        double var17 = (double)(((float)var12 +0.0f) / 256.0F);
+//        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+//
+//        double var21 = par3 + 0.5D - (0.625-0.375)/2D;
+//        double var23 = par3 + 0.5D + (0.625-0.375)/2D;
+//        double var25 = par7 + 0.5D - (0.625-0.375)/2D;
+//        double var27 = par7 + 0.5D + (0.625-0.375)/2D;
+//        
+////        float var6 = 0.375F;
+////        float var7 = 0.625F;
+//        double maxY = 0.6;
+//        
+//        /* Bottom Facing Texture */
+//        var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+//        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
+//        
+//        var9.addVertexWithUV(var23, par5 + maxY, var27, var13, var17);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var13, var19);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var15, var19);
+//        var9.addVertexWithUV(var21, par5 + maxY, var25, var15, var17);
+//
+//        /* Bottom Facing Texture */
+//        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+//        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
+//        
+//        var9.addVertexWithUV(var23, par5 + maxY, var25, var13, var17);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
+//        var9.addVertexWithUV(var21, par5 + maxY, var27, var15, var17);
     	
     }
 
     public void drawSpikeCross(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer){
-//    	Boolean alongX = false;
-        Tessellator var9 = Tessellator.instance;
-        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
-
-        if (renderer.overrideBlockTexture >= 0){
-            var10 = renderer.overrideBlockTexture;
-        }
-        
-        int var11 = (var10 & 15) << 4;
-        int var12 = var10 & 240;
-        
-        double var13 = (double)((float)var11 / 256.0F);
-        double var15 = (double)(((float)var11 + 15.99F) / 256.0F);
-        double var17 = (double)((float)var12 / 256.0F);
-        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
-
-        /* Render Strip Along X */
-        double var21 = par3 + 0.5D - 0.5;
-        double var23 = par3 + 0.5D + 0.5;
-        double var25 = par7 + 0.5D - 0.06;
-        double var27 = par7 + 0.5D + 0.06;
-
-        //float var6 = 0.375F;
-        //float var7 = 0.625F;
-        double maxY = 0.6;
-
-        /* Bottom Facing Texture */
-        var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
-
-        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var21, par5 + maxY, var25, var13 , var17);
-
-        /* Bottom Facing Texture */
-        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
-
-        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
-        
-        /* Render Strip Along Z */
-        var21 = par3 + 0.5D - 0.06;
-        var23 = par3 + 0.5D + 0.06;
-        var25 = par7 + 0.5D - 0.5;
-        var27 = par7 + 0.5D + 0.5;
-
-        //float var6 = 0.375F;
-        //float var7 = 0.625F;
-        maxY = 0.6;
-
-        /* Bottom Facing Texture */
-        var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
-
-        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var21, par5 + maxY, var25, var13 , var17);
-
-        /* Bottom Facing Texture */
-        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
-
-        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
-        
+    	//TODO: COmmented render
+//        Tessellator var9 = Tessellator.instance;
+//        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+//
+//        if (renderer.overrideBlockTexture >= 0){
+//            var10 = renderer.overrideBlockTexture;
+//        }
+//        
+//        int var11 = (var10 & 15) << 4;
+//        int var12 = var10 & 240;
+//        
+//        double var13 = (double)((float)var11 / 256.0F);
+//        double var15 = (double)(((float)var11 + 15.99F) / 256.0F);
+//        double var17 = (double)((float)var12 / 256.0F);
+//        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+//
+//        /* Render Strip Along X */
+//        double var21 = par3 + 0.5D - 0.5;
+//        double var23 = par3 + 0.5D + 0.5;
+//        double var25 = par7 + 0.5D - 0.06;
+//        double var27 = par7 + 0.5D + 0.06;
+//
+//        //float var6 = 0.375F;
+//        //float var7 = 0.625F;
+//        double maxY = 0.6;
+//
+//        /* Bottom Facing Texture */
+//        var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+//        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
+//
+//        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+//        var9.addVertexWithUV(var21, par5 + maxY, var25, var13 , var17);
+//
+//        /* Bottom Facing Texture */
+//        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+//        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
+//
+//        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+//        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
+//        
+//        /* Render Strip Along Z */
+//        var21 = par3 + 0.5D - 0.06;
+//        var23 = par3 + 0.5D + 0.06;
+//        var25 = par7 + 0.5D - 0.5;
+//        var27 = par7 + 0.5D + 0.5;
+//
+//        //float var6 = 0.375F;
+//        //float var7 = 0.625F;
+//        maxY = 0.6;
+//
+//        /* Bottom Facing Texture */
+//        var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+//        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
+//
+//        var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+//        var9.addVertexWithUV(var21, par5 + maxY, var25, var13 , var17);
+//
+//        /* Bottom Facing Texture */
+//        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+//        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
+//
+//        var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
+//        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+//        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+//        var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
+//        
     }
 
     
     public void drawSpikeStrip(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer, Boolean alongX, int type)
     {    	
-    	
-//    	Boolean alongX = false;
-        Tessellator var9 = Tessellator.instance;
-        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
-
-        if (renderer.overrideBlockTexture >= 0){
-            var10 = renderer.overrideBlockTexture;
-        }
-        
-        int var11 = (var10 & 15) << 4;
-        int var12 = var10 & 240;
-        
-        
-        double var13;
-        double var15;
-        double var17;
-        double var19;
-        
-    	switch (type) {
-    	case 1:
-	        var13 = (double)(((float)var11 + 0.0f + 15.99f/2.0) / 256.0F);
-	        var15 = (double)(((float)var11 + 15.99F ) / 256.0F);
-	        var17 = (double)(((float)var12 + 0.0f) / 256.0F);
-	        var19 = (double)(((float)var12 + 15.99F) / 256.0F);
-			break;
-			
-		case 2:
-			var13 = (double)(((float)var11 +0.0f ) / 256.0F);
-	        var15 = (double)(((float)var11 + 15.99F - 15.99f/2.) / 256.0F);
-	        var17 = (double)(((float)var12 + 0.0f) / 256.0F);
-	        var19 = (double)(((float)var12 + 15.99F) / 256.0F);
-			break;
-			
-		default:
-	        var13 = (double)((float)var11 / 256.0F);
-	        var15 = (double)(((float)var11 + 15.99F) / 256.0F);
-	        var17 = (double)((float)var12 / 256.0F);
-	        var19 = (double)(((float)var12 + 15.99F) / 256.0F);
-		}
-
-
-        
-        double var21;
-        double var23;
-        double var25;
-        double var27;
-        if(alongX){
-        	switch (type) {
-			case 1:
-	            var21 = par3 + 0.5D - 0.0;
-	            var23 = par3 + 0.5D + 0.5;
-	            var25 = par7 + 0.5D - 0.06;
-	            var27 = par7 + 0.5D + 0.06;
-
-				break;
-			case 2:
-	            var21 = par3 + 0.5D - 0.5;
-	            var23 = par3 + 0.5D + 0.0;
-	            var25 = par7 + 0.5D - 0.06;
-	            var27 = par7 + 0.5D + 0.06;
-				break;
-			default:
-	            var21 = par3 + 0.5D - 0.5;
-	            var23 = par3 + 0.5D + 0.5;
-	            var25 = par7 + 0.5D - 0.06;
-	            var27 = par7 + 0.5D + 0.06;
-				break;
-			}
-
-        }else{
-        	switch (type) {
-			case 1:
-	            var21 = par3 + 0.5D - 0.06;
-	            var23 = par3 + 0.5D + 0.06;
-	            var25 = par7 + 0.5D - 0.0;
-	            var27 = par7 + 0.5D + 0.5;
-
-				break;
-			case 2:
-	            var21 = par3 + 0.5D - 0.06;
-	            var23 = par3 + 0.5D + 0.06;
-	            var25 = par7 + 0.5D - 0.5;
-	            var27 = par7 + 0.5D + 0.0;
-
-				break;
-			default:
-	            var21 = par3 + 0.5D - 0.06;
-	            var23 = par3 + 0.5D + 0.06;
-	            var25 = par7 + 0.5D - 0.5;
-	            var27 = par7 + 0.5D + 0.5;
-				break;
-			}
-        }
-        
-//        float var6 = 0.375F;
-//        float var7 = 0.625F;
-        double maxY = 0.6;
-        
-        if(alongX){
-            /* Bottom Facing Texture */
-            var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
-            var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-            var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-            var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
-            
-            var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
-            var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-            var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-            var9.addVertexWithUV(var21, par5 + maxY, var25, var13 , var17);
-            
-            /* Bottom Facing Texture */
-            var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
-            var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-            var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-            var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
-            
-            var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
-            var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-            var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-            var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
-
-        }else{
-            /* Bottom Facing Texture */
-            var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
-            var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-            var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-            var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
-            
-            var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
-            var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-            var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-            var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
-            
-            /* Bottom Facing Texture */
-            var9.addVertexWithUV(var21, par5 + maxY, var27, var15, var17);
-            var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
-            var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
-            var9.addVertexWithUV(var23, par5 + maxY, var25, var13, var17);
-            
-            var9.addVertexWithUV(var23, par5 + maxY, var25, var13, var17);
-            var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
-            var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
-            var9.addVertexWithUV(var21, par5 + maxY, var27, var15, var17);
-
-        }
+    	//TODO: COmmented render
+//        Tessellator var9 = Tessellator.instance;
+//        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+//
+//        if (renderer.overrideBlockTexture >= 0){
+//            var10 = renderer.overrideBlockTexture;
+//        }
+//        
+//        int var11 = (var10 & 15) << 4;
+//        int var12 = var10 & 240;
+//        
+//        
+//        double var13;
+//        double var15;
+//        double var17;
+//        double var19;
+//        
+//    	switch (type) {
+//    	case 1:
+//	        var13 = (double)(((float)var11 + 0.0f + 15.99f/2.0) / 256.0F);
+//	        var15 = (double)(((float)var11 + 15.99F ) / 256.0F);
+//	        var17 = (double)(((float)var12 + 0.0f) / 256.0F);
+//	        var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+//			break;
+//			
+//		case 2:
+//			var13 = (double)(((float)var11 +0.0f ) / 256.0F);
+//	        var15 = (double)(((float)var11 + 15.99F - 15.99f/2.) / 256.0F);
+//	        var17 = (double)(((float)var12 + 0.0f) / 256.0F);
+//	        var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+//			break;
+//			
+//		default:
+//	        var13 = (double)((float)var11 / 256.0F);
+//	        var15 = (double)(((float)var11 + 15.99F) / 256.0F);
+//	        var17 = (double)((float)var12 / 256.0F);
+//	        var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+//		}
+//
+//
+//        
+//        double var21;
+//        double var23;
+//        double var25;
+//        double var27;
+//        if(alongX){
+//        	switch (type) {
+//			case 1:
+//	            var21 = par3 + 0.5D - 0.0;
+//	            var23 = par3 + 0.5D + 0.5;
+//	            var25 = par7 + 0.5D - 0.06;
+//	            var27 = par7 + 0.5D + 0.06;
+//
+//				break;
+//			case 2:
+//	            var21 = par3 + 0.5D - 0.5;
+//	            var23 = par3 + 0.5D + 0.0;
+//	            var25 = par7 + 0.5D - 0.06;
+//	            var27 = par7 + 0.5D + 0.06;
+//				break;
+//			default:
+//	            var21 = par3 + 0.5D - 0.5;
+//	            var23 = par3 + 0.5D + 0.5;
+//	            var25 = par7 + 0.5D - 0.06;
+//	            var27 = par7 + 0.5D + 0.06;
+//				break;
+//			}
+//
+//        }else{
+//        	switch (type) {
+//			case 1:
+//	            var21 = par3 + 0.5D - 0.06;
+//	            var23 = par3 + 0.5D + 0.06;
+//	            var25 = par7 + 0.5D - 0.0;
+//	            var27 = par7 + 0.5D + 0.5;
+//
+//				break;
+//			case 2:
+//	            var21 = par3 + 0.5D - 0.06;
+//	            var23 = par3 + 0.5D + 0.06;
+//	            var25 = par7 + 0.5D - 0.5;
+//	            var27 = par7 + 0.5D + 0.0;
+//
+//				break;
+//			default:
+//	            var21 = par3 + 0.5D - 0.06;
+//	            var23 = par3 + 0.5D + 0.06;
+//	            var25 = par7 + 0.5D - 0.5;
+//	            var27 = par7 + 0.5D + 0.5;
+//				break;
+//			}
+//        }
+//        
+////        float var6 = 0.375F;
+////        float var7 = 0.625F;
+//        double maxY = 0.6;
+//        
+//        if(alongX){
+//            /* Bottom Facing Texture */
+//            var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
+//            var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+//            var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+//            var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
+//            
+//            var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
+//            var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+//            var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+//            var9.addVertexWithUV(var21, par5 + maxY, var25, var13 , var17);
+//            
+//            /* Bottom Facing Texture */
+//            var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
+//            var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+//            var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+//            var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
+//            
+//            var9.addVertexWithUV(var23, par5 + maxY, var25, var15, var17);
+//            var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+//            var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+//            var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
+//
+//        }else{
+//            /* Bottom Facing Texture */
+//            var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
+//            var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+//            var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+//            var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
+//            
+//            var9.addVertexWithUV(var23, par5 + maxY, var27, var15, var17);
+//            var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+//            var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+//            var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
+//            
+//            /* Bottom Facing Texture */
+//            var9.addVertexWithUV(var21, par5 + maxY, var27, var15, var17);
+//            var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
+//            var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
+//            var9.addVertexWithUV(var23, par5 + maxY, var25, var13, var17);
+//            
+//            var9.addVertexWithUV(var23, par5 + maxY, var25, var13, var17);
+//            var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
+//            var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
+//            var9.addVertexWithUV(var21, par5 + maxY, var27, var15, var17);
+//
+//        }
     }
     
     

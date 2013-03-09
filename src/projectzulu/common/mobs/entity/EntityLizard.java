@@ -174,6 +174,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 	}
 
 	@Override
-	public void attackEntityWithRangedAttack(EntityLiving var1) {}
+	public void attackEntityWithRangedAttack(EntityLiving var1, float par2) {}
 
 }

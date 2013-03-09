@@ -22,11 +22,10 @@ public class BlockNightBloom extends BlockFlower
 	}
 
 	public BlockNightBloom(int i, int j){
-		super(i, j, Material.plants);
+		super(i, Material.plants);
 		setTickRandomly(true);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		this.disableStats();
-		this.setRequiresSelfNotify();
 	}
 	
     @SideOnly(Side.CLIENT)
@@ -50,7 +49,7 @@ public class BlockNightBloom extends BlockFlower
 		//If Night Time && And is not open (meta != 4) : begin opening
 		if(mapTimeTo24000(par1World.getWorldTime()) > 13000 && par1World.getBlockMetadata(par2, par3, par4) != 4){
 			
-			par1World.setBlockAndMetadataWithNotify( par2, par3, par4, blockID, par1World.getBlockMetadata(par2, par3, par4) + 1);
+			par1World.setBlockAndMetadataWithNotify( par2, par3, par4, blockID, par1World.getBlockMetadata(par2, par3, par4) + 1, 3);
 			
 			par1World.scheduleBlockUpdate(par2, par3, par4, blockID, 20);
 		}
@@ -58,7 +57,7 @@ public class BlockNightBloom extends BlockFlower
 		//If Day Time && And is not closed (meta != 0) : begin opening
 		if(mapTimeTo24000(par1World.getWorldTime()) < 13000 && par1World.getBlockMetadata(par2, par3, par4) != 0){
 			
-			par1World.setBlockAndMetadataWithNotify( par2, par3, par4, blockID, par1World.getBlockMetadata(par2, par3, par4) - 1);
+			par1World.setBlockAndMetadataWithNotify( par2, par3, par4, blockID, par1World.getBlockMetadata(par2, par3, par4) - 1, 3);
 
 			par1World.scheduleBlockUpdate(par2, par3, par4, blockID, 20);
 		}
@@ -85,25 +84,25 @@ public class BlockNightBloom extends BlockFlower
 		}
 		return tempWorldTime;
 	}
-	
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
-		
-		switch (par2) {
-		case 0:
-			return 96;
-		case 1:
-			return 97;
-		case 2:
-			return 98;
-		case 3:
-			return 99;
-		case 4:
-			return 100;
-		default:
-			return 96;
-		}
-	}
+	//TODO: Commented textureFromSide
+//	@Override
+//	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
+//		
+//		switch (par2) {
+//		case 0:
+//			return 96;
+//		case 1:
+//			return 97;
+//		case 2:
+//			return 98;
+//		case 3:
+//			return 99;
+//		case 4:
+//			return 100;
+//		default:
+//			return 96;
+//		}
+//	}
 			
 		
 	@Override

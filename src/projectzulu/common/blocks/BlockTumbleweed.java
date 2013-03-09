@@ -17,7 +17,6 @@ public class BlockTumbleweed extends Block
 	public BlockTumbleweed(int par1, int par2)
     {
         super(par1, Material.plants);
-        this.blockIndexInTexture = 6;
         //this.setTickRandomly(true);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
     }

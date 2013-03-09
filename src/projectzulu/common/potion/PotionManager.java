@@ -216,7 +216,7 @@ public enum PotionManager {
 
 			/* Sub in Our Own Brewing Stand and Tile Entity */
 			BlockList.customBrewingStand = Optional.of(
-					(new BlockZuluBrewingStand(117)).setHardness(0.5F).setLightValue(0.125F).setBlockName("brewingStand").setRequiresSelfNotify()
+					(new BlockZuluBrewingStand(117)).setHardness(0.5F).setLightValue(0.125F).setUnlocalizedName("brewingStand")
 					);
 			GameRegistry.registerTileEntity(TileEntityZuluBrewingStand.class, "TileEntityZuluBrewingStand");   
 		}

@@ -19,7 +19,7 @@ public class BlockPalmTreeSapling extends BlockFlower{
     Random classRand = new Random();
 
     public BlockPalmTreeSapling(int par1, int par2){
-        super(par1, par2);
+        super(par1);
         float var3 = 0.4F;
         this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
@@ -49,10 +49,11 @@ public class BlockPalmTreeSapling extends BlockFlower{
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2){
-        
-        return 16;
-    }
+    //TODO: Commented
+//    public int getBlockTextureFromSideAndMetadata(int par1, int par2){
+//        
+//        return 16;
+//    }
 
     /**
      * Attempts to grow a sapling into a tree
@@ -112,38 +113,38 @@ public class BlockPalmTreeSapling extends BlockFlower{
     		while(localY <= height){
     			//Place Log above by 1
     			localY++;
-    			par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
+    			par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
 
     			if(favoredDirectionX > 0){
     				localX++;    		
     				favoredDirectionX = Math.max(favoredDirectionX-horizontalFactor,0);
-    				par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
+    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
 
     			}else if(favoredDirectionX < 0){
     				localX--;    		
     				favoredDirectionX = Math.min(favoredDirectionX+horizontalFactor,0);
-    				par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
+    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
 
     			}
 
     			if(favoredDirectionZ > 0){
     				localZ++;
     				favoredDirectionZ = Math.max(favoredDirectionZ-horizontalFactor,0);
-    				par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
+    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
 
     			}else if(favoredDirectionZ < 0){
     				localZ--;
     				favoredDirectionZ = Math.min(favoredDirectionZ+horizontalFactor,0);
-    				par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);    			
+    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);    			
     			}
 
     			if(localY+1 == height){
     				localY++;
-    				par1World.setBlock(par2+localX, par3+localY, par4+localZ,palmTreeLogID);
+    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ,palmTreeLogID);
     				localY++;
     				spawnLeaves(par1World, par2+localX, par3+localY, par4+localZ, par5Random, height);
     				//Place block at original sapling locations
-    				par1World.setBlock(par2, par3, par4, palmTreeLogID);
+    				par1World.func_94575_c(par2, par3, par4, palmTreeLogID);
     			}
     		}
     	}
@@ -154,44 +155,44 @@ public class BlockPalmTreeSapling extends BlockFlower{
 
     	//TODO: Add more Leave Spawn Templates
     	if (height + 1 >= 7 ) {
-    		par1World.setBlock(par2, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2-1, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2-2, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2-3, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2-4, par3-1, par4, palmTreeLeavesID);
+    		par1World.func_94575_c(par2, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2-1, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2-2, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2-3, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2-4, par3-1, par4, palmTreeLeavesID);
 	    	
-	    	par1World.setBlock(par2+1, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2+2, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2+3, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2+3, par3-1, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2+1, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2+2, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2+3, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2+3, par3-1, par4, palmTreeLeavesID);
 	    	
-	    	par1World.setBlock(par2, par3, par4-1, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3, par4-2, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3, par4-3, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3-1, par4-3, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4-1, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4-2, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4-3, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3-1, par4-3, palmTreeLeavesID);
 	    	
-	    	par1World.setBlock(par2, par3, par4+1, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3, par4+2, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3, par4+3, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3-1, par4+3, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4+1, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4+2, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4+3, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3-1, par4+3, palmTreeLeavesID);
 			
 		}else{
-			par1World.setBlock(par2, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2-1, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2-2, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2-2, par3-1, par4, palmTreeLeavesID);
+			par1World.func_94575_c(par2, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2-1, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2-2, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2-2, par3-1, par4, palmTreeLeavesID);
 	    	
-	    	par1World.setBlock(par2+1, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2+2, par3, par4, palmTreeLeavesID);
-	    	par1World.setBlock(par2+2, par3-1, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2+1, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2+2, par3, par4, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2+2, par3-1, par4, palmTreeLeavesID);
 	    	
-	    	par1World.setBlock(par2, par3, par4-1, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3, par4-2, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3-1, par4-2, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4-1, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4-2, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3-1, par4-2, palmTreeLeavesID);
 	    	
-	    	par1World.setBlock(par2, par3, par4+1, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3, par4+2, palmTreeLeavesID);
-	    	par1World.setBlock(par2, par3-1, par4+2, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4+1, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3, par4+2, palmTreeLeavesID);
+	    	par1World.func_94575_c(par2, par3-1, par4+2, palmTreeLeavesID);
 		}
     	
     }
@@ -204,7 +205,7 @@ public class BlockPalmTreeSapling extends BlockFlower{
     		if(itemstack.getItemDamage() == 15)
     		{
     			growTree(par1World, par2, par3, par4, classRand);
-    			//par1World.setBlockMetadataWithNotify(par2, par3, par4, 8);
+    			//par1World.setBlockMetadataWith_Notify(par2, par3, par4, 8);
     			itemstack.stackSize--;
     			//par1World.notifyBlockChange(par2, par3, par4, 0);
     		}

@@ -14,7 +14,7 @@ public class BlockQuickSand extends Block
 {
 	private double sinkHeight = 0.0;
     public BlockQuickSand(int par1, int par2){
-        super(par1, par2, Material.sand);
+        super(par1, Material.sand);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
     }
     

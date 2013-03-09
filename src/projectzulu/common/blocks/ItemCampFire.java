@@ -18,34 +18,35 @@ public class ItemCampFire extends ItemBlock {
 		return par1;
 	}
 	
-    @Override
-    @SideOnly(Side.CLIENT)
-	public String getTextureFile()
-    {
-            return DefaultProps.blockSpriteSheet;
-    }
+	//TODO: Commented : No Longer Exists
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//	public String getTextureFile(){
+//            return DefaultProps.blockSpriteSheet;
+//    }
 	
-	@Override
-	public int getIconFromDamage(int par1) {
-		
-		switch (par1) {
-		case 0:
-			return 48;
-		case 1:
-
-			return 49;
-		case 2:
-
-			return 50;
-		case 3:
-
-			return 51;
-		default:
-			return super.getIconFromDamage(par1);
-		}
-	}
+	//TODO: Commented
+//	@Override
+//	public int getIconFromDamage(int par1) {
+//		
+//		switch (par1) {
+//		case 0:
+//			return 48;
+//		case 1:
+//
+//			return 49;
+//		case 2:
+//
+//			return 50;
+//		case 3:
+//
+//			return 51;
+//		default:
+//			return super.getIconFromDamage(par1);
+//		}
+//	}
 	
-	public String getItemNameIS(ItemStack itemstack) 
+	public String getUnlocalizedName(ItemStack itemstack) 
 	{
 		String name = "";
 		switch(itemstack.getItemDamage()) {
@@ -67,7 +68,7 @@ public class ItemCampFire extends ItemBlock {
 		}
 		default: name = "base_1";
 		}
-		return getItemName() + "." + name;
+		return getUnlocalizedName() + "." + name;
 	}
 
 

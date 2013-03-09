@@ -11,7 +11,6 @@ public class BlockUniversalFlowerPot extends BlockContainer{
 	
 	protected BlockUniversalFlowerPot(int par1) {
 		super(par1, Material.wood);
-        this.blockIndexInTexture = 186;
         this.setBlockBoundsForItemRender();
 //        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 

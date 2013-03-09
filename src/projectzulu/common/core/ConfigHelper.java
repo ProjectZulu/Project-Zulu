@@ -36,7 +36,7 @@ public class ConfigHelper {
 	
 	public static void userItemConfigRangeToMobData(Configuration config, String category, CustomMobData customMobData){
 		Property property = config.get(category,"Item User Custom Drop", "0-0:0:3:4, 0:0:1:2");
-		String[] itemStringEntries = property.value.split(",");
+		String[] itemStringEntries = property.getString().split(",");
 		for (String stringEntry : itemStringEntries){
 			String[] entryParts = stringEntry.split(":");
 			if(entryParts.length == 4){

@@ -31,7 +31,6 @@ public class BlockCampfire extends Block implements ITempBlock{
 	
     public BlockCampfire(int par1) {
     	super(par1, Material.wood);
-        this.blockIndexInTexture = 17;
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setTickRandomly(true);
         this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.35f, 1.0f);
@@ -84,19 +83,19 @@ public class BlockCampfire extends Block implements ITempBlock{
 			
 			if(meta > 1){
 				if( canBlockCatchFire(par1World, par2, par3+1, par4, ForgeDirection.UP) ){
-					par1World.setBlockWithNotify(par2, par3+1, par4, Block.fire.blockID);
+					par1World.func_94575_c(par2, par3+1, par4, Block.fire.blockID);
 				}
 			}
 			
 			if(meta == 2){
 				if( 	  canBlockCatchFire(par1World, par2,   par3, par4+1, ForgeDirection.NORTH) ){
-					par1World.setBlockWithNotify(	   par2,   par3, par4+1, Block.fire.blockID);
+					par1World.func_94575_c(	   par2,   par3, par4+1, Block.fire.blockID);
 				}else if( canBlockCatchFire(par1World, par2,   par3, par4-1, ForgeDirection.SOUTH) ){
-					par1World.setBlockWithNotify(	   par2,   par3, par4-1, Block.fire.blockID);
+					par1World.func_94575_c(	   par2,   par3, par4-1, Block.fire.blockID);
 				}else if( canBlockCatchFire(par1World, par2+1, par3, par4,   ForgeDirection.WEST) ){
-					par1World.setBlockWithNotify(	   par2+1, par3, par4,   Block.fire.blockID);
+					par1World.func_94575_c(	   par2+1, par3, par4,   Block.fire.blockID);
 				}else if( canBlockCatchFire(par1World, par2-1, par3, par4,   ForgeDirection.EAST) ){
-					par1World.setBlockWithNotify(	   par2-1, par3, par4,   Block.fire.blockID);
+					par1World.func_94575_c(	   par2-1, par3, par4,   Block.fire.blockID);
 				}
 			}
 
@@ -109,7 +108,7 @@ public class BlockCampfire extends Block implements ITempBlock{
      * cleared to be reused)
      */
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4){
-		return AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + 0.3, (double)par4 + this.maxZ);
+		return AxisAlignedBB.getAABBPool().getAABB((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + 0.3, (double)par4 + this.maxZ);
 	}
 	
     /**
@@ -143,7 +142,7 @@ public class BlockCampfire extends Block implements ITempBlock{
     			if( !((EntityPlayer)par5EntityPlayer).capabilities.isCreativeMode){
     				((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem().stackSize -= 1;
     			}
-    			par1World.setBlockAndMetadata(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 2);
+    			par1World.setBlockMetadataWithNotify(par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4) + 2, 3);
     			return true;
     		}
     		
@@ -153,7 +152,7 @@ public class BlockCampfire extends Block implements ITempBlock{
     			if( !((EntityPlayer)par5EntityPlayer).capabilities.isCreativeMode){
     				((EntityPlayer)par5EntityPlayer).inventory.setInventorySlotContents(((EntityPlayer)par5EntityPlayer).inventory.currentItem, new ItemStack(Item.bucketEmpty));
     			}
-    			par1World.setBlockAndMetadata(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) - 2);
+    			par1World.setBlockMetadataWithNotify(par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4) - 2, 3);
     			return true;
     		}
     	}   

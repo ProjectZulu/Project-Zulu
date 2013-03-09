@@ -264,8 +264,8 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 		int desY = this.worldObj.getHeightValue((int)desX,(int)desZ);
 		//If the block is not air
 		if(worldObj.getBlockId((int)desX, (int)desY-2, (int)desZ) != 0){
-			worldObj.setBlockWithNotify((int)desX, desY-0, (int)desZ, 0);
-			worldObj.setBlockWithNotify((int)desX, desY-1, (int)desZ, 0);
+			worldObj.func_94575_c((int)desX, desY-0, (int)desZ, 0);
+			worldObj.func_94575_c((int)desX, desY-1, (int)desZ, 0);
 		}
 		//This sets where the monster will spawn on Y relative to Ground Level
 		desY -= 1;

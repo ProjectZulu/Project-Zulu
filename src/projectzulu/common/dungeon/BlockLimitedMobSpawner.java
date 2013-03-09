@@ -17,7 +17,6 @@ public class BlockLimitedMobSpawner extends BlockContainer{
     public BlockLimitedMobSpawner(int blockID){
         super(blockID, Material.rock);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        this.blockIndexInTexture = 65;
     }
     
     /**

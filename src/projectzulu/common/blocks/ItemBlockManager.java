@@ -36,7 +36,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create(){
 			BlockList.aloeVera = Optional.of(
-					(new BlockAloeVera(blockID, 0)).setHardness(0.0f).setStepSound(Block.soundGrassFootstep).setBlockName("Aloe Vera") );
+					(new BlockAloeVera(blockID, 0)).setHardness(0.0f).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Aloe Vera") );
 		}
 
 		@Override
@@ -56,7 +56,7 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			BlockList.wateredDirt = Optional.of((new BlockWateredDirt(blockID, 8)).setHardness(0.5f).setResistance(1.0f).setBlockName("Watered Dirt"));
+			BlockList.wateredDirt = Optional.of((new BlockWateredDirt(blockID, 8)).setHardness(0.5f).setResistance(1.0f).setUnlocalizedName("Watered Dirt"));
 		}
 
 		@Override
@@ -76,7 +76,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.tumbleweed = Optional.of(
-					(new BlockTumbleweed(blockID, 8)).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setBlockName("Tumbleweed"));
+					(new BlockTumbleweed(blockID, 8)).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("Tumbleweed"));
 		}
 
 		@Override
@@ -95,7 +95,7 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			BlockList.jasper = Optional.of((new BlockJasper(blockID, 32)).setHardness(1.0f).setResistance(1.0f).setBlockName("jasper"));
+			BlockList.jasper = Optional.of((new BlockJasper(blockID, 32)).setHardness(1.0f).setResistance(1.0f).setUnlocalizedName("jasper"));
 		}
 
 		@Override
@@ -114,7 +114,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreeLog = Optional.of(
-					new BlockPalmTreeLog(blockID, 17).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setBlockName("Palm Tree Log"));
+					new BlockPalmTreeLog(blockID, 17).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("Palm Tree Log"));
 		}
 
 		@Override
@@ -137,7 +137,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreePlank = Optional.of(
-					new BlockPalmTreePlank(blockID, 18).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("palmTreePlank"));			
+					new BlockPalmTreePlank(blockID, 18).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("palmTreePlank"));			
 		}
 
 		@Override
@@ -159,7 +159,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreeDoubleSlab = Optional.of(
-					(BlockZuluHalfSlab)new BlockZuluHalfStep(blockID, true).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("palmTreeDoubleSlab"));
+					(BlockZuluHalfSlab)new BlockZuluHalfStep(blockID, true).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("palmTreeDoubleSlab"));
 		}
 
 		@Override
@@ -181,7 +181,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreeSlab = Optional.of(
-					(BlockZuluHalfSlab)(new BlockZuluHalfStep(blockID, false)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setLightOpacity(0).setBlockName("palmTreeSlab"));
+					(BlockZuluHalfSlab)(new BlockZuluHalfStep(blockID, false)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setLightOpacity(0).setUnlocalizedName("palmTreeSlab"));
 		}
 
 		@Override
@@ -203,7 +203,7 @@ public enum ItemBlockManager {
 		protected void create() {
 			if(BlockList.palmTreePlank.isPresent()){
 				BlockList.palmTreeStairs = Optional.of(
-						new BlockZuluStairs(blockID, BlockList.palmTreePlank.get(), 0).setBlockName("palmTreeStairs").setLightOpacity(0));
+						new BlockZuluStairs(blockID, BlockList.palmTreePlank.get(), 0).setUnlocalizedName("palmTreeStairs").setLightOpacity(0));
 			}else{
 				ProjectZuluLog.warning("Palm Tree Planks were not Enabled. Disabling Palm Tree Stairs. You have done bad, and You should feel bad.");
 			}
@@ -229,7 +229,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreeLeaves = Optional.of(
-					(BlockPalmTreeLeaves)(new BlockPalmTreeLeaves(blockID, 19)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("Palm Tree Leaves"));
+					(BlockPalmTreeLeaves)(new BlockPalmTreeLeaves(blockID, 19)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Palm Tree Leaves"));
 		}
 
 		@Override
@@ -251,7 +251,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreeSapling = Optional.of(
-					new BlockPalmTreeSapling(blockID, 16).setBlockName("Palm Tree Sapling"));
+					new BlockPalmTreeSapling(blockID, 16).setUnlocalizedName("Palm Tree Sapling"));
 		}
 
 		@Override
@@ -272,7 +272,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.coconut = Optional.of(
-					new BlockCoconut(blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("Coconut"));
+					new BlockCoconut(blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("Coconut"));
 		}
 
 		@Override
@@ -291,7 +291,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.quickSand = Optional.of(
-					new BlockQuickSand(blockID, 112).setHardness(1.2F).setStepSound(Block.soundSandFootstep).setBlockName("quickSand"));
+					new BlockQuickSand(blockID, 112).setHardness(1.2F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("quickSand"));
 		}
 
 		@Override
@@ -310,7 +310,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.nightBloom = Optional.of(
-					new BlockNightBloom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setBlockName("nightBloom"));
+					new BlockNightBloom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("nightBloom"));
 		}
 
 		@Override
@@ -329,7 +329,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.creeperBlossom = Optional.of(
-					new BlockCreeperBlossom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setBlockName("creeperBlossom"));
+					new BlockCreeperBlossom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("creeperBlossom"));
 			}
 
 		@Override
@@ -348,7 +348,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.spike = Optional.of(
-					 new BlockSpikes(blockID).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setBlockName("spikes"));
+					 new BlockSpikes(blockID).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("spikes"));
 			}
 
 		@Override
@@ -367,7 +367,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.campfire = Optional.of(
-					new BlockCampfire(blockID).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setBlockName("campfire"));
+					new BlockCampfire(blockID).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("campfire"));
 		}
 		
 		@Override
@@ -392,7 +392,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.mobHeads = Optional.of(
-					new BlockMobHeads(blockID, 1, TileEntityMobHeads.class).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setBlockName("mobHeads"));
+					new BlockMobHeads(blockID, 1, TileEntityMobHeads.class).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("mobHeads"));
 		}
 		
 		@Override
@@ -434,7 +434,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.tombstone = Optional.of(
-					new BlockTombstone(blockID, TileEntityTombstone.class).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setBlockName("Tombstone"));
+					new BlockTombstone(blockID, TileEntityTombstone.class).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("Tombstone"));
 		}
 		
 		@Override
@@ -453,7 +453,7 @@ public enum ItemBlockManager {
 				}
 			}else{
 		        GameRegistry.registerTileEntity(TileEntityTombstone.class, "PZTileEntityTombstone");
-				property.value = Boolean.toString(true);
+				property.set(true);
 			}
 			tempConfig.save();
 			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityTombstone.class, "projectzulu.common.blocks.TileEntityTombstoneRenderer");			
@@ -471,10 +471,10 @@ public enum ItemBlockManager {
 			if(ProjectZulu_Core.replaceFlowerPot){
 				Block.blocksList[Block.flowerPot.blockID] = null;
 				BlockList.universalFlowerPot = Optional.of(
-						new BlockUniversalFlowerPot(Block.flowerPot.blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setBlockName("Flower Pot"));
+						new BlockUniversalFlowerPot(Block.flowerPot.blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Flower Pot"));
 			}else{
 				BlockList.universalFlowerPot = Optional.of(
-						new BlockUniversalFlowerPot(blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab).setBlockName("Universal Flower Pot"));
+						new BlockUniversalFlowerPot(blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab).setUnlocalizedName("Universal Flower Pot"));
 			}
 		}
 		
@@ -499,7 +499,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.ankh = Optional.of(
-					new ItemAnkh(blockID).setItemName("Ankh"));
+					new ItemAnkh(blockID).setUnlocalizedName("Ankh"));
 			}
 		
 		@Override
@@ -519,7 +519,7 @@ public enum ItemBlockManager {
 		protected void create() {
 			if(BlockList.aloeVera.isPresent()){
 				ItemList.aloeVeraSeeds = Optional.of(
-						new ItemAloeVeraSeeds(blockID, BlockList.aloeVera.get().blockID).setItemName("Aloe Vera Seeds"));
+						new ItemAloeVeraSeeds(blockID, BlockList.aloeVera.get().blockID).setUnlocalizedName("Aloe Vera Seeds"));
 				}
 			}
 		
@@ -541,7 +541,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.waterDroplets = Optional.of(
-					new ItemFoodProjectZulu(blockID, 1, 0.6f, false, 142).setItemName("waterDroplets"));
+					new ItemFoodProjectZulu(blockID, 1, 0.6f, false, 142).setUnlocalizedName("waterDroplets"));
 			}
 		
 		@Override
@@ -560,7 +560,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.coconutMilkFragment = Optional.of(
-					new ItemFoodProjectZulu(blockID, 2, 2.4f, false, 8).setItemName("coconutMilkFragment"));
+					new ItemFoodProjectZulu(blockID, 2, 2.4f, false, 8).setUnlocalizedName("coconutMilkFragment"));
 			}
 		
 		@Override
@@ -579,7 +579,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.coconutItem = Optional.of(
-					new ItemCoconutItem(blockID, 4, false).setItemName("coconutItem"));
+					new ItemCoconutItem(blockID, 4, false).setUnlocalizedName("coconutItem"));
 			}
 		
 		@Override
@@ -598,7 +598,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.coconutSeed = Optional.of(
-					new ItemCoconutSeed(blockID, 6, false).setItemName("coconutSeed"));
+					new ItemCoconutSeed(blockID, 6, false).setUnlocalizedName("coconutSeed"));
 			}
 		
 		@Override
@@ -617,7 +617,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.coconutShell = Optional.of(
-					new ItemCoconutShell(blockID, 7, false).setItemName("coconutShell"));
+					new ItemCoconutShell(blockID, 7, false).setUnlocalizedName("coconutShell"));
 			}
 		
 		@Override
@@ -636,7 +636,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.scaleItem = Optional.of(
-					new ItemScale(blockID, 1, false).setItemName("scaleItem"));
+					new ItemScale(blockID, 1, false).setUnlocalizedName("scaleItem"));
 			}
 		
 		@Override
@@ -655,7 +655,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.furPelt = Optional.of(
-					new ItemScale(blockID, 23, false).setItemName("furPelt"));
+					new ItemScale(blockID, 23, false).setUnlocalizedName("furPelt"));
 			}
 		
 		@Override
@@ -674,7 +674,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.scrapMeat = Optional.of(
-					new ItemFoodProjectZulu(blockID, 1, 1.0f, false, 11).setItemName("scrapMeat"));
+					new ItemFoodProjectZulu(blockID, 1, 1.0f, false, 11).setUnlocalizedName("scrapMeat"));
 			}
 		
 		@Override
@@ -693,7 +693,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.genericCraftingItems1 = Optional.of(
-					new ItemGenerics(blockID, 10).setItemName("genericCraftingItems1"));
+					new ItemGenerics(blockID, 10).setUnlocalizedName("genericCraftingItems1"));
 		}
 		
 		@Override
@@ -715,7 +715,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.structurePlacer = Optional.of(
-					new ItemStructurePlacer(blockID).setItemName("structurePlacer"));
+					new ItemStructurePlacer(blockID).setUnlocalizedName("structurePlacer"));
 		}
 		
 		@Override

@@ -77,7 +77,6 @@ public class ItemGenerics extends Item{
 	
 	public ItemGenerics(int par1, int par2) {
 		super(par1);
-		this.setIconIndex(par2);
 		this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		setHasSubtypes(true);
 	}
@@ -120,7 +119,7 @@ public class ItemGenerics extends Item{
     }
 	
 	@Override
-	public String getItemNameIS(ItemStack itemStack){
+	public String getUnlocalizedName(ItemStack itemStack){
 		for (final Properties property : Properties.values()){
 			if(property.meta == itemStack.getItemDamage()){
 				return property.displayName;
@@ -129,15 +128,16 @@ public class ItemGenerics extends Item{
 		return "";
 	}
 	
-	@Override
-	public int getIconFromDamage(int meta) {
-		for (final Properties property : Properties.values()) {
-			if(property.meta == meta){
-				return property.iconIndex;
-			}
-		}
-		return 0;
-	}
+	//TODO: Commented
+//	@Override
+//	public int getIconFromDamage(int meta) {
+//		for (final Properties property : Properties.values()) {
+//			if(property.meta == meta){
+//				return property.iconIndex;
+//			}
+//		}
+//		return 0;
+//	}
 	
 	@Override
 	public void getSubItems(int itemID, CreativeTabs par2CreativeTabs, List par3List) {

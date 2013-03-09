@@ -23,9 +23,10 @@ public class BlockZuluHalfStep extends BlockZuluHalfSlab {
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
-        	return 18;
-    }
+    //TODO: Commented
+//    public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
+//        	return 18;
+//    }
     
     @SideOnly(Side.CLIENT)
 	public String getTextureFile() {
@@ -36,9 +37,10 @@ public class BlockZuluHalfStep extends BlockZuluHalfSlab {
     /**
      * Returns the block texture based on the side being looked at.  Args: side
      */
-    public int getBlockTextureFromSide(int par1) {
-        return this.getBlockTextureFromSideAndMetadata(par1, 0);
-    }
+    //TODO: Commented
+//    public int getBlockTextureFromSide(int par1) {
+//        return this.getBlockTextureFromSideAndMetadata(par1, 0);
+//    }
 
     /**
      * Returns the ID of the items to drop on destruction.
@@ -62,13 +64,14 @@ public class BlockZuluHalfStep extends BlockZuluHalfSlab {
     /**
      * Returns the slab block name with step type.
      */
+    @Override
     public String getFullSlabName(int par1) {
         if (par1 < 0 || par1 >= woodType.length)
         {
             par1 = 0;
         }
 
-        return super.getBlockName() + "." + woodType[par1];
+        return super.getUnlocalizedName() + "." + woodType[par1];
     }
 
 //    @SideOnly(Side.CLIENT)

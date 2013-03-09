@@ -26,11 +26,10 @@ public class BlockAloeVera extends BlockFlower
 	}
 
 	public BlockAloeVera(int i, int j){
-		super(i, j, Material.plants);
+		super(i, Material.plants);
 		setTickRandomly(true);
 		//this.setCreativeTab(CreativeTabs.tabFood);
 		this.disableStats();
-		this.setRequiresSelfNotify();
 	}
 	
     @SideOnly(Side.CLIENT)
@@ -54,7 +53,7 @@ public class BlockAloeVera extends BlockFlower
 			int holdRand = par5Random.nextInt(probabilityOutOf);
 			//Growth is proportional to the lightlevel, more light more likely to advance
 			if( par1World.getLightBrightness(par2, par3, par4) - holdRand >= 0 ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1);
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1, 3);
 			}
 		}
 		
@@ -65,7 +64,7 @@ public class BlockAloeVera extends BlockFlower
 			if(par1World.getBlockId(par2, par3+1, par4) == 0 && par1World.getBlockId(par2, par3-1, par4) != BlockList.aloeVera.get().blockID){
 				int holdRand = par5Random.nextInt(probabilityOutOf);
 				if( par1World.getLightBrightness(par2, par3+1, par4) - holdRand >= 0 ){
-					par1World.setBlockAndMetadataWithNotify(par2, par3+1, par4, BlockList.aloeVera.get().blockID, 4);
+					par1World.setBlockAndMetadataWithNotify(par2, par3+1, par4, BlockList.aloeVera.get().blockID, 4, 3);
 				}
 			}
 		}
@@ -81,7 +80,7 @@ public class BlockAloeVera extends BlockFlower
 			int holdRand = par5Random.nextInt(probabilityOutOf);
 			//Growth is proportional to the lightlevel, more light more likely to advance
 			if( par1World.getLightBrightness(par2, par3, par4) - holdRand >= 0 ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1);
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1, 3);
 			}			
 		}
 
@@ -95,9 +94,9 @@ public class BlockAloeVera extends BlockFlower
 				//Place Tumbleweed
 				if (suitableBlockLoc != null){
 					//Place Tumbleweed at that desired location
-					par1World.setBlockWithNotify((int)suitableBlockLoc.xCoord, (int)suitableBlockLoc.yCoord, (int)suitableBlockLoc.zCoord, BlockList.tumbleweed.get().blockID);
+					par1World.func_94575_c((int)suitableBlockLoc.xCoord, (int)suitableBlockLoc.yCoord, (int)suitableBlockLoc.zCoord, BlockList.tumbleweed.get().blockID);
 					//Remove Flower as Tumbleweed is dead plant I guess
-					par1World.setBlockWithNotify(par2, par3, par4, 0);
+					par1World.func_94575_c(par2, par3, par4, 0);
 				}
 			}
 		}
@@ -107,12 +106,12 @@ public class BlockAloeVera extends BlockFlower
 		int holdRand = par5Random.nextInt(probabilityOutOf/2);
 		if(par1World.getBlockId(par2, par3-1, par4) == Block.dirt.blockID && waterRate - holdRand >= 0){
 			if( BlockList.wateredDirt.isPresent() ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 0);
+				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 0, 3);
 			}
 		}
 		if(par1World.getBlockId(par2, par3-1, par4) == Block.sand.blockID && waterRate - holdRand >= 0){
 			if( BlockList.wateredDirt.isPresent() ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 4);
+				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 4, 3);
 			}
 		}
 
@@ -120,7 +119,7 @@ public class BlockAloeVera extends BlockFlower
 		if(BlockList.wateredDirt.isPresent() && par1World.getBlockId(par2, par3-1, par4) == BlockList.wateredDirt.get().blockID && waterRate - holdRand >= 0){
 			int tempMeta = par1World.getBlockMetadata(par2, par3-1, par4);
 			if(tempMeta != 3 &&  tempMeta != 7){
-				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, tempMeta+1);
+				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, tempMeta+1, 3);
 			}
 		}
 		super.updateTick(par1World, par2, par3, par4, par5Random);
@@ -145,39 +144,40 @@ public class BlockAloeVera extends BlockFlower
 		return null;
 	}
 		
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) 
-	{
-		switch(par2) {
-		case 0: {
-			return 0;
-		}
-		case 1: {
-			return 1;
-		}
-		case 2: {
-			return 2;
-		}
-		case 3: {
-			return 3;
-		}
-		case 4: {
-			return 24;
-		}
-		case 5: {
-			return 25;
-		}
-		case 6: {
-			return 26;
-		}
-		case 7: {
-			return 27;
-		}
-		case 8: {
-			return 28;
-		}
-		default: return 0;
-		}
-	}
+	//TODO: Commented textureFromSide
+//	public int getBlockTextureFromSideAndMetadata(int par1, int par2) 
+//	{
+//		switch(par2) {
+//		case 0: {
+//			return 0;
+//		}
+//		case 1: {
+//			return 1;
+//		}
+//		case 2: {
+//			return 2;
+//		}
+//		case 3: {
+//			return 3;
+//		}
+//		case 4: {
+//			return 24;
+//		}
+//		case 5: {
+//			return 25;
+//		}
+//		case 6: {
+//			return 26;
+//		}
+//		case 7: {
+//			return 27;
+//		}
+//		case 8: {
+//			return 28;
+//		}
+//		default: return 0;
+//		}
+//	}
 	
 //    @SideOnly(Side.CLIENT)
 //    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)

@@ -15,7 +15,7 @@ public class ItemAloeVera extends ItemBlock{
 		return par1;
 	}
 	
-	public String getItemNameIS(ItemStack itemstack) 
+	public String getUnlocalizedName(ItemStack itemstack) 
 	{
 		String name = "";
 		switch(itemstack.getItemDamage()) {
@@ -57,7 +57,7 @@ public class ItemAloeVera extends ItemBlock{
 		}
 				default: name = "base_1";
 		}
-		return getItemName() + "." + name;
+		return getUnlocalizedName() + "." + name;
 	}
 		
 }

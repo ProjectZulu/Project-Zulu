@@ -15,7 +15,6 @@ public class ItemScale extends Item{
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		bFull3D = par3bool;
 		this.setHasSubtypes(true);
-		this.setIconIndex(par2);
 	}
 	
 	@SideOnly(Side.CLIENT)
