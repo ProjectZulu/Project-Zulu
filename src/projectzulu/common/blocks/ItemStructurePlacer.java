@@ -42,7 +42,7 @@ public class ItemStructurePlacer extends Item{
 			switch (buildingID) {
 			case 0:
 				/* Oasis Generation */
-				StructureManager.tryToGenerateSpecificStructure(StructureManager.Oasis, par2World, Xcoord, Ycoord, Zcoord, par2World.rand);
+				StructureManager.tryToGenerateSpecificStructure(StructureManager.Oasis, par2World, Xcoord, Ycoord+1, Zcoord, par2World.rand);
 				break;
 			case 1:
 				/* Pyramid Generation */
@@ -50,11 +50,11 @@ public class ItemStructurePlacer extends Item{
 				break;
 			case 2:
 				/* Labyrinth Generation */
-				StructureManager.tryToGenerateSpecificStructure(StructureManager.Labyrinth, par2World, Xcoord, Ycoord, Zcoord, par2World.rand);
+				StructureManager.tryToGenerateSpecificStructure(StructureManager.Labyrinth, par2World, Xcoord, Ycoord+1, Zcoord, par2World.rand);
 				break;
 			case 3:
 				/* Cemetary Generation */
-				StructureManager.tryToGenerateSpecificStructure(StructureManager.Cemetary, par2World, Xcoord, Ycoord, Zcoord, par2World.rand);
+				StructureManager.tryToGenerateSpecificStructure(StructureManager.Cemetary, par2World, Xcoord, Ycoord+1, Zcoord, par2World.rand);
 				break;
 			default:
 				break;
