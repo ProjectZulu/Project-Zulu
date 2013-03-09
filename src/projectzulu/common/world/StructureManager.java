@@ -73,7 +73,7 @@ public enum StructureManager {
 		}
 		@Override
 		public boolean generate(World world, int Xcoord, int Ycoord, int Zcoord, Random random){
-			return new MazeGenerator(new BuildingManagerLabyrinth(world), 1, 4, 3, 24, 1, 1).generate(world, random, Xcoord, Ycoord-(12), Zcoord);
+			return new MazeGenerator(new BuildingManagerLabyrinth(world), 1, 4, 3, 24, 1, 1).generate(world, random, Xcoord, Ycoord-(11), Zcoord);
 		}
 	},
 	Cemetary{
@@ -207,9 +207,9 @@ public enum StructureManager {
 			/*Do Structure Specific Checks: Invalid Block, terrain to Wobbly */
 			if(structure.checkToGenerate(world, Xcoord, Ycoord, Zcoord, random)){
 				if(structure.generate(world, Xcoord, Ycoord, Zcoord, random)){
-					if(structure.printToLog){
+//					if(structure.printToLog){
 						ProjectZuluLog.info("Generating %s at %s, %s, %s", structure.name(), Xcoord, Ycoord, Zcoord);
-					}
+//					}
 					return true;
 				}else{
 					if(structure.printToLog){

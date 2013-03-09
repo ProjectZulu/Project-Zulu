@@ -38,9 +38,7 @@ public class WorldGenPyramid extends WorldGenerator
 		//C is the number of tries to palce desert in the provided chunk
 		for (int c = 0; c < 1; c++) {
 			if (chancePerChunk - par2Random.nextInt(chanceOutOf) >= 0){
-				int TempY = par1World.getTopSolidOrLiquidBlock(par3, par5);
-
-				Vec3 startingPos = Vec3.createVectorHelper(par3, TempY-1, par5);
+				Vec3 startingPos = Vec3.createVectorHelper(par3, par4-1, par5);
 				
 				/* Generate Floors below Pyramid 
 				 * Only replace Air and Water Blocks (unlike rest of pyramid), used to simulate 'supports' for the pyramid on even terrain or hills 
