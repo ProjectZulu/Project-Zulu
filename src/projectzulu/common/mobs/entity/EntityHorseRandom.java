@@ -22,15 +22,15 @@ public class EntityHorseRandom extends EntityHorseBase{
 	protected void entityInit(){
 		super.entityInit();
 		/* Horse Type */
-		this.dataWatcher.addObject(20, Short.valueOf((short) 0));
+		this.dataWatcher.addObject(26, Short.valueOf((short) 0));
 	}	
 	
 	public void updateHorseType(){
-		this.dataWatcher.updateObject(20, (short)(horseType));
+		this.dataWatcher.updateObject(26, (short)(horseType));
 	}
 
 	public int getHorseType(){
-		return this.dataWatcher.getWatchableObjectShort(20);
+		return this.dataWatcher.getWatchableObjectShort(26);
 	}
 	
 	@Override
