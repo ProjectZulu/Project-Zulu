@@ -98,7 +98,7 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 	public void registerRenderThings(){
 		MinecraftForgeClient.preloadTexture(DefaultProps.blockSpriteSheet);
 		MinecraftForgeClient.preloadTexture(DefaultProps.itemSpriteSheet);
-		MinecraftForgeClient.preloadTexture("/mods/icons/temperature_icon.png");
+//		MinecraftForgeClient.preloadTexture("/mods/icons/temperature_icon.png");
 	}
 	
  	/**

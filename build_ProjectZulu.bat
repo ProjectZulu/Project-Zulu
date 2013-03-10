@@ -20,17 +20,17 @@ popd
 echo.
 
 echo Moving Art Assets to Setup Folder
-XCOPY "project-zulu\projectzuluresources\module_block" forge\mcp\reobf\minecraft\SETUP\ProjectZuluBlocks\projectzuluresources\module_block /E /I /Q /y
-XCOPY "project-zulu\projectzuluresources\module_core" forge\mcp\reobf\minecraft\SETUP\ProjectZuluCore\projectzuluresources\module_core /E /I /Q /y
-XCOPY "project-zulu\projectzuluresources\module_mob" forge\mcp\reobf\minecraft\SETUP\ProjectZuluMobs\projectzuluresources\module_mob /E /I /Q /y
-XCOPY "project-zulu\projectzuluresources\module_world" forge\mcp\reobf\minecraft\SETUP\ProjectZuluWorld\projectzuluresources\module_world /E /I /Q /y
-XCOPY "project-zulu\projectzuluresources\module_dungeon" forge\mcp\reobf\minecraft\SETUP\ProjectZuluDungeon\projectzuluresources\module_dungeon /E /I /Q /y
+XCOPY "project-zulu\mods\projectzulublock" forge\mcp\reobf\minecraft\SETUP\ProjectZuluBlocks\mods\projectzulublock /E /I /Q /y
+XCOPY "project-zulu\mods\projectzulucore" forge\mcp\reobf\minecraft\SETUP\ProjectZuluCore\mods\projectzulucore /E /I /Q /y
+XCOPY "project-zulu\mods\projectzulumob" forge\mcp\reobf\minecraft\SETUP\ProjectZuluMobs\mods\projectzulumob /E /I /Q /y
+XCOPY "project-zulu\mods\projectzuluworld" forge\mcp\reobf\minecraft\SETUP\ProjectZuluWorld\mods\projectzuluworld /E /I /Q /y
+XCOPY "project-zulu\mods\projectzuludungeon" forge\mcp\reobf\minecraft\SETUP\ProjectZuluDungeon\mods\projectzuludungeon /E /I /Q /y
 
-XCOPY "project-zulu\projectzuluresources\module_block" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_block /E /I /Q /y
-XCOPY "project-zulu\projectzuluresources\module_core" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_core /E /I /Q /y
-XCOPY "project-zulu\projectzuluresources\module_mob" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_mob /E /I /Q /y
-XCOPY "project-zulu\projectzuluresources\module_world" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_world /E /I /Q /y
-XCOPY "project-zulu\projectzuluresources\module_dungeon" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzuluresources\module_dungeon /E /I /Q /y
+XCOPY "project-zulu\mods\projectzulublock" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\mods\projectzulublock /E /I /Q /y
+XCOPY "project-zulu\mods\projectzulucore" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\mods\projectzulucore /E /I /Q /y
+XCOPY "project-zulu\mods\projectzulumob" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\mods\projectzulumob /E /I /Q /y
+XCOPY "project-zulu\mods\projectzuluworld" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\mods\projectzuluworld /E /I /Q /y
+XCOPY "project-zulu\mods\projectzuludungeon" forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\mods\projectzuludungeon /E /I /Q /y
 
 echo Copy Project Zulu into Complete Module in Setup 
 XCOPY forge\mcp\reobf\minecraft\projectzulu forge\mcp\reobf\minecraft\SETUP\ProjectZuluComplete\projectzulu /E /I /Q /y

@@ -28,52 +28,52 @@ public enum ItemList {
 	public static Optional<? extends Item>	scaleArmorHead = Optional.absent();
 	public static Optional<? extends Item>	scaleArmorChest = Optional.absent();
 	public static Optional<? extends Item>	scaleArmorLeg = Optional.absent();
-	public static Optional<? extends Item>	scaleArmorBoot = Optional.absent();
+	public static Optional<? extends Item>	scaleArmorBoots = Optional.absent();
 	
 	public static Optional<? extends Item>	goldScaleArmorHead = Optional.absent();
 	public static Optional<? extends Item>	goldScaleArmorChest = Optional.absent();
 	public static Optional<? extends Item>	goldScaleArmorLeg = Optional.absent();
-	public static Optional<? extends Item>	goldScaleArmorBoot = Optional.absent();
+	public static Optional<? extends Item>	goldScaleArmorBoots = Optional.absent();
 	
 	public static Optional<? extends Item>	ironScaleArmorHead = Optional.absent();
 	public static Optional<? extends Item>	ironScaleArmorChest = Optional.absent();
 	public static Optional<? extends Item>	ironScaleArmorLeg = Optional.absent();
-	public static Optional<? extends Item>	ironScaleArmorBoot = Optional.absent();
+	public static Optional<? extends Item>	ironScaleArmorBoots = Optional.absent();
 	
 	public static Optional<? extends Item>	diamondScaleArmorHead = Optional.absent();
 	public static Optional<? extends Item>	diamondScaleArmorChest = Optional.absent();
 	public static Optional<? extends Item>	diamondScaleArmorLeg = Optional.absent();
-	public static Optional<? extends Item>	diamondScaleArmorBoot = Optional.absent();
+	public static Optional<? extends Item>	diamondScaleArmorBoots = Optional.absent();
 	
 	public static Optional<? extends Item>	whiteClothHead = Optional.absent();
 	public static Optional<? extends Item>	whiteClothChest = Optional.absent();
 	public static Optional<? extends Item>	whiteClothLeg = Optional.absent();
-	public static Optional<? extends Item>	whiteClothBoot = Optional.absent();
+	public static Optional<? extends Item>	whiteClothBoots = Optional.absent();
     
 	public static Optional<? extends Item>	redClothHead = Optional.absent();
 	public static Optional<? extends Item>	redClothChest = Optional.absent();
 	public static Optional<? extends Item>	redClothLeg = Optional.absent();
-	public static Optional<? extends Item>	redClothBoot = Optional.absent();
+	public static Optional<? extends Item>	redClothBoots = Optional.absent();
 	
 	public static Optional<? extends Item>	greenClothHead = Optional.absent();
 	public static Optional<? extends Item>	greenClothChest = Optional.absent();
 	public static Optional<? extends Item>	greenClothLeg = Optional.absent();
-	public static Optional<? extends Item>	greenClothBoot = Optional.absent();
+	public static Optional<? extends Item>	greenClothBoots = Optional.absent();
 	
 	public static Optional<? extends Item>	blueClothHead = Optional.absent();
 	public static Optional<? extends Item>	blueClothChest = Optional.absent();
 	public static Optional<? extends Item>	blueClothLeg = Optional.absent();
-	public static Optional<? extends Item>	blueClothBoot = Optional.absent();
+	public static Optional<? extends Item>	blueClothBoots = Optional.absent();
 	
 	public static Optional<? extends Item>	cactusArmorHead = Optional.absent();
 	public static Optional<? extends Item>	cactusArmorChest = Optional.absent();
 	public static Optional<? extends Item>	cactusArmorLeg = Optional.absent();
-	public static Optional<? extends Item>	cactusArmorBoot = Optional.absent();
+	public static Optional<? extends Item>	cactusArmorBoots = Optional.absent();
 	
 	public static Optional<? extends Item>	furArmorHead = Optional.absent();
 	public static Optional<? extends Item>	furArmorChest = Optional.absent();
 	public static Optional<? extends Item>	furArmorLeg = Optional.absent();
-	public static Optional<? extends Item>	furArmorBoot = Optional.absent();
+	public static Optional<? extends Item>	furArmorBoots = Optional.absent();
 	
 	
 }
