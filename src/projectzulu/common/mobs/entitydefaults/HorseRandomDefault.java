@@ -21,11 +21,11 @@ import com.google.common.base.Optional;
 public class HorseRandomDefault extends DefaultSpawnable{
 	
 	public HorseRandomDefault(){
-		super("HorseRandom", EntityHorseRandom.class);		
+		super("Horse Random", EntityHorseRandom.class);		
 		setSpawnProperties(EnumCreatureType.creature, 5, 100, 3, 4);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelHorse.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
-
+		shouldExist = false;
 		eggColor1 =  (200 << 16) + (245 << 8) + 245;					eggColor2 = (51 << 16) + (51 << 8) + 51;
 		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName); 		
