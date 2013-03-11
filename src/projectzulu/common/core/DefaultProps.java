@@ -24,11 +24,11 @@ public class DefaultProps {
 	public static final String dungeonKey = "projectzuludungeon";	
 	
 	/* Module Resource Directories */
-	public static final String coreDiretory = "/projectzuluresources/"+coreKey+"/";
-	public static final String mobDiretory = "/projectzuluresources/"+mobKey+"/";
-	public static final String blockDiretory = "/projectzuluresources/"+blockKey+"/";
-	public static final String worldDiretory = "/projectzuluresources/"+worldKey+"/";
-	public static final String dungeonDiretory = "/projectzuluresources/"+dungeonKey+"/";
+	public static final String coreDiretory = "/mods/"+coreKey+"/";
+	public static final String mobDiretory = "/mods/"+mobKey+"/";
+	public static final String blockDiretory = "/mods/"+blockKey+"/";
+	public static final String worldDiretory = "/mods/"+worldKey+"/";
+	public static final String dungeonDiretory = "/mods/"+dungeonKey+"/";
 	
 	/* Common Resource Directories */
 	public static final String blockSpriteSheet = blockDiretory + "blocks_projectzulu.png";

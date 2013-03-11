@@ -96,9 +96,9 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 	
 	@Override
 	public void registerRenderThings(){
-		MinecraftForgeClient.preloadTexture(DefaultProps.blockSpriteSheet);
-		MinecraftForgeClient.preloadTexture(DefaultProps.itemSpriteSheet);
-//		MinecraftForgeClient.preloadTexture("/mods/icons/temperature_icon.png");
+//		MinecraftForgeClient.preloadTexture(DefaultProps.blockSpriteSheet); //TODO: These should not be needed 1.5?
+//		MinecraftForgeClient.preloadTexture(DefaultProps.itemSpriteSheet);  //TODO: These should not be needed 1.5?
+//		MinecraftForgeClient.preloadTexture("/mods/icons/temperature_icon.png"); //TODO Temp needs to be seperated, Temp should be its own module altogether
 	}
 	
  	/**

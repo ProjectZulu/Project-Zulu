@@ -12,14 +12,14 @@ import com.google.common.base.Optional;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
- * Inspired by BlockManager Classfrom ExtrabiomesXL . See Github for Original Source: https://github.com/ExtrabiomesXL
+ * Inspired by BlockManager Class from ExtrabiomesXL . See Github for Original Source: https://github.com/ExtrabiomesXL
  */
 public enum ArmorManager {
 	ScaleHelmet{
 		@Override
 		protected void create(){
 			ItemList.scaleArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -33,7 +33,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.scaleArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -42,11 +42,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Scale Chestplate"); 
 		}
 	},
-	ScaleLeg{
+	ScaleLegs{
 		@Override
 		protected void create(){
 			ItemList.scaleArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -59,7 +59,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.scaleArmorBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.scaleIndex,3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -72,7 +72,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.goldScaleArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -85,7 +85,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.goldScaleArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -94,11 +94,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Gold Scale Chestplate"); 
 		}
 	},
-	GoldScaleLeg{
+	GoldScaleLegs{
 		@Override
 		protected void create(){
 			ItemList.goldScaleArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -111,7 +111,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.goldScaleArmorBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.goldScaleMaterial, ProjectZulu_Blocks.goldScaleIndex, 3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -124,7 +124,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.ironScaleArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -137,7 +137,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.ironScaleArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -146,11 +146,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Iron Plated Scale Chestplate"); 
 		}
 	},
-	IronScaleLeg{
+	IronScaleLegs{
 		@Override
 		protected void create(){
 			ItemList.ironScaleArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -163,7 +163,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.ironScaleArmorBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.ironScaleMaterial, ProjectZulu_Blocks.ironScaleIndex,3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -176,7 +176,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.diamondScaleArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -189,7 +189,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.diamondScaleArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -198,11 +198,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Diamond Plated Scale Chestplate"); 
 		}
 	},
-	DiamondScaleLeg{
+	DiamondScaleLegs{
 		@Override
 		protected void create(){
 			ItemList.diamondScaleArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -215,7 +215,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.diamondScaleArmorBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.diamondScaleMaterial, ProjectZulu_Blocks.diamondScaleIndex,3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -228,7 +228,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.whiteClothHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -241,7 +241,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.whiteClothChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -250,11 +250,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "White Cloth Chestplate"); 
 		}
 	},
-	WhiteClothLeg{
+	WhiteClothLegs{
 		@Override
 		protected void create(){
 			ItemList.whiteClothLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -267,7 +267,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.whiteClothBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.whiteWoolIndex,3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -280,7 +280,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.redClothHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -293,7 +293,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.redClothChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -302,11 +302,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Red Cloth Chestplate"); 
 		}
 	},
-	RedClothLeg{
+	RedClothLegs{
 		@Override
 		protected void create(){
 			ItemList.redClothLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -319,7 +319,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.redClothBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.redWoolIndex,3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -332,7 +332,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.greenClothHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -345,7 +345,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.greenClothChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -354,11 +354,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Green Cloth Chestplate"); 
 		}
 	},
-	GreenClothLeg{
+	GreenClothLegs{
 		@Override
 		protected void create(){
 			ItemList.greenClothLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -371,7 +371,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.greenClothBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.greenWoolIndex,3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -384,7 +384,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.blueClothHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -397,7 +397,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.blueClothChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -406,11 +406,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Blue Cloth Chestplate"); 
 		}
 	},
-	BlueClothLeg{
+	BlueClothLegs{
 		@Override
 		protected void create(){
 			ItemList.blueClothLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -423,7 +423,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.blueClothBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.desertClothMaterial, ProjectZulu_Blocks.blueWoolIndex,3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -436,7 +436,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.cactusArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -449,7 +449,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.cactusArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -458,11 +458,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Cactus Cloth Chestplate"); 
 		}
 	},
-	CactusLeg{
+	CactusLegs{
 		@Override
 		protected void create(){
 			ItemList.cactusArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -475,7 +475,7 @@ public enum ArmorManager {
 		@Override
 		protected void create(){
 			ItemList.cactusArmorBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.cactusIndex,3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -484,11 +484,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Cactus Cloth Boots"); 
 		}
 	},
-	FurArmorHelmet{
+	FurHelmet{
 		@Override
 		protected void create(){
 			ItemList.furArmorHead = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,0)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,0)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -497,11 +497,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Fur Cloth Helmet"); 
 		}
 	},
-	FurArmorChest{
+	FurChest{
 		@Override
 		protected void create(){
 			ItemList.furArmorChest = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,1)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,1)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -510,11 +510,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Fur Cloth Chestplate"); 
 		}
 	},
-	FurArmorLeg{
+	FurLegs{
 		@Override
 		protected void create(){
 			ItemList.furArmorLeg = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,2)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,2)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
@@ -523,11 +523,11 @@ public enum ArmorManager {
 			LanguageRegistry.addName(item, "Fur Cloth Leggings"); 
 		}
 	},
-	FurArmorBoots{
+	FurBoots{
 		@Override
 		protected void create(){
 			ItemList.furArmorBoots = Optional.of(
-					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,3)).setUnlocalizedName(DefaultProps.blockKey+toString().toLowerCase()));	
+					(new ItemZuluArmor(blockID, ProjectZulu_Core.scaleMaterial, ProjectZulu_Blocks.furIndex,3)).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));	
 		}
 
 		@Override
