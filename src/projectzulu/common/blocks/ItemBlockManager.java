@@ -158,16 +158,21 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			BlockList.palmTreeDoubleSlab = Optional.of(
-					(BlockZuluHalfSlab)new BlockZuluHalfStep(blockID, true).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
+			if(BlockList.palmTreePlank.isPresent()){
+				BlockList.palmTreeDoubleSlab = Optional.of(
+						(new BlockZuluSlab(blockID, true, BlockList.palmTreePlank.get())).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setLightOpacity(0).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
+			}
 		}
 
 		@Override
 		protected void register() {
-			Block block = BlockList.palmTreeDoubleSlab.get();
-			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Double Slab");
-			OreDictionary.registerOre("slabWood", new ItemStack(block));
-			OreDictionary.registerOre("slabPalm", new ItemStack(block));
+			if(BlockList.palmTreeDoubleSlab.isPresent() && BlockList.palmTreeSlab.isPresent()){
+				Block block = BlockList.palmTreeDoubleSlab.get();
+				ItemZuluSlab.initialise(BlockList.palmTreeSlab.get(), BlockList.palmTreeDoubleSlab.get());
+				GameRegistry.registerBlock(block, ItemZuluSlab.class, toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Double Slab");
+				OreDictionary.registerOre("slabWood", new ItemStack(block));
+				OreDictionary.registerOre("slabPalm", new ItemStack(block));
+			}
 		}
 
 
@@ -180,16 +185,21 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			BlockList.palmTreeSlab = Optional.of(
-					(BlockZuluHalfSlab)(new BlockZuluHalfStep(blockID, false)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setLightOpacity(0).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
+			if(BlockList.palmTreePlank.isPresent()){
+				BlockList.palmTreeSlab = Optional.of(
+						(new BlockZuluSlab(blockID, false, BlockList.palmTreePlank.get())).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setLightOpacity(0).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
+			}
 		}
 
 		@Override
 		protected void register() {
-			Block block = BlockList.palmTreeSlab.get();
-			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Single Slab");
-			OreDictionary.registerOre("slabWood", new ItemStack(block));
-			OreDictionary.registerOre("slabPalm", new ItemStack(block));
+			if(BlockList.palmTreeDoubleSlab.isPresent() && BlockList.palmTreeSlab.isPresent()){
+				Block block = BlockList.palmTreeSlab.get();
+				ItemZuluSlab.initialise(BlockList.palmTreeSlab.get(), BlockList.palmTreeDoubleSlab.get());
+				GameRegistry.registerBlock(block, ItemZuluSlab.class, toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Single Slab");
+				OreDictionary.registerOre("slabWood", new ItemStack(block));
+				OreDictionary.registerOre("slabPalm", new ItemStack(block));
+			}
 		}
 
 		@Override
