@@ -37,9 +37,9 @@ public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRende
 				Block blockToRender = Block.blocksList[itemToRender.itemID];
 				int meta = itemStackToRender.getItemDamage() > 16 ? 16 : itemStackToRender.getItemDamage() < 0 ? 0 : itemStackToRender.getItemDamage();
 				
-				String textureLocation = blockToRender.getTextureFile();
+//				String textureLocation = blockToRender.getTextureFile(); //TODO: Commented
 //				GL11.glBindTexture(GL11.GL_TEXTURE_2D, tileEntity.tileEntityRenderer.getTexture( textureLocation ));
-				bindTextureByName(textureLocation);
+//				bindTextureByName(textureLocation); //TODO: Commented
 		        GL11.glPushMatrix();
 		        float scaleBlock = (float) (0.29f / (blockToRender.getBlockBoundsMaxX() - blockToRender.getBlockBoundsMinX()));
 		        float scaleY = (float) (scaleBlock * (blockToRender.getBlockBoundsMaxY() - blockToRender.getBlockBoundsMinY()));

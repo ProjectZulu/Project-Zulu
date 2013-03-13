@@ -31,8 +31,10 @@ public class DefaultProps {
 	public static final String dungeonDiretory = "/mods/"+dungeonKey+"/";
 	
 	/* Common Resource Directories */
-	public static final String blockSpriteSheet = blockDiretory + "blocks_projectzulu.png";
-	public static final String itemSpriteSheet = blockDiretory + "items_projectzulu.png";
+	public static final String blockBlockTextureDir = blockDiretory + "textures/blocks/";
+	public static final String blockItemTextureDir = blockDiretory + "textures/items/";
+	public static final String blockSpriteSheet = blockDiretory + "blocks_projectzulu.png"; //TODO: Delete
+	public static final String itemSpriteSheet = blockDiretory + "items_projectzulu.png"; //TODO: Delete
 	
 	/* Config Directories */
 	public static final String configDirectory = "/Project Zulu/";

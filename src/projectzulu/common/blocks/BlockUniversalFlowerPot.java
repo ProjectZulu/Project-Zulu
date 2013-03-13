@@ -19,12 +19,6 @@ public class BlockUniversalFlowerPot extends BlockContainer{
         this.setBlockBounds(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, var1, 0.5F + var2);
 	}
 	
-	@Override
-	public String getTextureFile() {
-//		return "/gui/items.png";
-		return super.getTextureFile();
-	}
-	
     /**
      * The type of render function that is called for this block
      */
