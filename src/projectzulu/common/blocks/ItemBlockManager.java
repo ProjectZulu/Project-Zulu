@@ -175,7 +175,6 @@ public enum ItemBlockManager {
 			}
 		}
 
-
 		@Override
 		protected void loadCustomConfig(Configuration config) {}
 	},

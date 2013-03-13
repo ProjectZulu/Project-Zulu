@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
@@ -14,8 +16,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
-public class BlockNightBloom extends BlockFlower
-{
+public class BlockNightBloom extends BlockFlower{
+	public static final String[] imageSuffix = new String[] {"_0", "_1", "_2", "_3","_4"};
+    @SideOnly(Side.CLIENT)
+    private Icon[] icons;
+
 	private int tickInterval = 4;
 	public int getTickInterval(){
 		return tickInterval;
@@ -28,10 +33,19 @@ public class BlockNightBloom extends BlockFlower
 		this.disableStats();
 	}
 	
+    @Override
     @SideOnly(Side.CLIENT)
-	public String getTextureFile()
-    {
-            return DefaultProps.blockSpriteSheet;
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+    	return icons[par2];
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void func_94332_a(IconRegister par1IconRegister){
+        this.icons = new Icon[imageSuffix.length];
+        for (int i = 0; i < this.icons.length; ++i){
+            this.icons[i] = par1IconRegister.func_94245_a(func_94330_A()+imageSuffix[i]);
+        }
     }
     
 	@Override
@@ -45,7 +59,6 @@ public class BlockNightBloom extends BlockFlower
     
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		
 		//If Night Time && And is not open (meta != 4) : begin opening
 		if(mapTimeTo24000(par1World.getWorldTime()) > 13000 && par1World.getBlockMetadata(par2, par3, par4) != 4){
 			
@@ -83,48 +96,12 @@ public class BlockNightBloom extends BlockFlower
 			return 0L;
 		}
 		return tempWorldTime;
-	}
-	//TODO: Commented textureFromSide
-//	@Override
-//	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
-//		
-//		switch (par2) {
-//		case 0:
-//			return 96;
-//		case 1:
-//			return 97;
-//		case 2:
-//			return 98;
-//		case 3:
-//			return 99;
-//		case 4:
-//			return 100;
-//		default:
-//			return 96;
-//		}
-//	}
-			
+	}	
 		
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-		
 		par1World.scheduleBlockUpdate(par2, par3, par4, blockID, 2);
-		
 		super.onBlockAdded(par1World, par2, par3, par4);
-	}
-
-	
-	public int idDropped(int par1, Random par2Random, int par3){
-
-		return this.blockID;
-	}
-	
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7){
-        super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, 0);
-    }
-	
-	public int quantityDropped(Random random){
-		return 1;
 	}
 	
     public boolean isOpaqueCube(){
