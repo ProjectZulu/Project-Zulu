@@ -480,7 +480,7 @@ public enum ItemBlockManager {
 						new BlockUniversalFlowerPot(Block.flowerPot.blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("flowerPot")); //TODO: Needs to be Identical to Vanilla? Flower Pot Name?
 			}else{
 				BlockList.universalFlowerPot = Optional.of(
-						new BlockUniversalFlowerPot(blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab).setUnlocalizedName(DefaultProps.blockKey+":"+"universalflowerpot"));
+						new BlockUniversalFlowerPot(blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("flowerPot"));
 			}
 		}
 		
@@ -488,7 +488,8 @@ public enum ItemBlockManager {
 		protected void register() {
 			if(!ProjectZulu_Core.replaceFlowerPot){
 				Block block = BlockList.universalFlowerPot.get();
-				GameRegistry.registerBlock(block, ItemUniversalFlowerPot.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Universal Flower Pot");			
+				GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Universal Flower Pot");			
+				new ItemUniversalFlowerPot(block.blockID - 256, block).setUnlocalizedName("flowerPot");
 			}
 	        GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");   
 			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityUniversalFlowerPot.class, "projectzulu.common.blocks.TileEntityUniversalFlowerPotRenderer");

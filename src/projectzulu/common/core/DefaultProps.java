@@ -30,9 +30,9 @@ public class DefaultProps {
 	public static final String worldDiretory = "/mods/"+worldKey+"/";
 	public static final String dungeonDiretory = "/mods/"+dungeonKey+"/";
 	
-	/* Common Resource Directories */
-	public static final String blockBlockTextureDir = blockDiretory + "textures/blocks/";
-	public static final String blockItemTextureDir = blockDiretory + "textures/items/";
+	/* Common Resource Sub-Directories */
+	public static final String itemSubDir = "textures/blocks/";
+	public static final String blockSubDir = "textures/blocks/";
 	public static final String blockSpriteSheet = blockDiretory + "blocks_projectzulu.png"; //TODO: Delete
 	public static final String itemSpriteSheet = blockDiretory + "items_projectzulu.png"; //TODO: Delete
 	
@@ -45,5 +45,4 @@ public class DefaultProps {
 	public static final String tempConfigFile = "tempSettingsConfig.cfg";
 	public static final String mobBiomeSpawnConfigFile = "ProjectZuluMobBiomeConfig.cfg";
 	public static final String structureBiomeConfigFile = "ProjectZuluStructureBiomeConfig.cfg";
-	
 }

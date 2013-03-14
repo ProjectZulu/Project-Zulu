@@ -1,6 +1,8 @@
 package projectzulu.common.blocks;
 
 
+import java.awt.RenderingHints;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -14,6 +16,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.registry.RenderingRegistry;
+
+import projectzulu.common.core.DefaultProps;
 
 public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRenderer{
     private RenderBlocks blockRenderer = new RenderBlocks();
@@ -32,14 +38,11 @@ public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRende
 		if(itemStackToRender != null){
 			Item itemToRender = itemStackToRender.getItem();
 			
-			/* Try to See if I should render as Blocks */
+			/* Try to See if I should render as Block */
 			if(itemToRender != null && Item.itemsList[itemToRender.itemID] instanceof ItemBlock && Block.blocksList[itemToRender.itemID].getRenderType() != -1){
 				Block blockToRender = Block.blocksList[itemToRender.itemID];
 				int meta = itemStackToRender.getItemDamage() > 16 ? 16 : itemStackToRender.getItemDamage() < 0 ? 0 : itemStackToRender.getItemDamage();
-				
-//				String textureLocation = blockToRender.getTextureFile(); //TODO: Commented
-//				GL11.glBindTexture(GL11.GL_TEXTURE_2D, tileEntity.tileEntityRenderer.getTexture( textureLocation ));
-//				bindTextureByName(textureLocation); //TODO: Commented
+				bindTextureByName("/terrain.png");
 		        GL11.glPushMatrix();
 		        float scaleBlock = (float) (0.29f / (blockToRender.getBlockBoundsMaxX() - blockToRender.getBlockBoundsMinX()));
 		        float scaleY = (float) (scaleBlock * (blockToRender.getBlockBoundsMaxY() - blockToRender.getBlockBoundsMinY()));
@@ -61,19 +64,13 @@ public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRende
 				
 		        float scaleItem = 0.6f;
 		        GL11.glPushMatrix();
-		        //TODO: Commented
-//				GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture( itemToRender.getTextureFile() ));
-
+		        bindTextureByName("/terrain.png");
 		        GL11.glTranslatef((float)xRenderCoord + 0.5f, (float)(yRenderCoord + 0.3), (float)zRenderCoord + 0.5f);
 		        GL11.glScalef(scaleItem, scaleItem, scaleItem);
-
-				
 				itemRenderer.doRenderItem(entityItemToRender, 0, 0, 0, 0, 0);
 		        GL11.glPopMatrix();
 
 			}
-			
-			
 		}
 	}
 
