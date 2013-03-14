@@ -369,7 +369,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void loadCustomConfig(Configuration config) {}
 	},
-	Campire{
+	Campfire{
 		@Override
 		protected boolean isBlock() { return true;	}
 		
@@ -383,12 +383,9 @@ public enum ItemBlockManager {
 		protected void register() {
 			Block block = BlockList.campfire.get();
 			GameRegistry.registerBlock(block, ItemCampFire.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Campfire");
-			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_1.name", "Log Campfire");
-			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_2.name", "Stone Campfire");
-			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_3.name", "Lit Log Campfire");
-			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_4.name", "Lit Stone Campfire");
-			
-
+			for (BlockCampfire.Type type : BlockCampfire.Type.values()) {
+				LanguageRegistry.addName(new ItemStack(block, 1, type.meta()), type.displayName());
+			}
 		}
 		
 		@Override
