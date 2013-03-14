@@ -2,6 +2,7 @@ package projectzulu.common.blocks;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -19,13 +20,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemStructurePlacer extends Item{
 
 	String[] structureName = new String[]{"Oasis", "Pyramid", "Labyrinth", "Cemetary"};
-
 	public ItemStructurePlacer(int par1) {
 		super(par1);
 		setHasSubtypes(true);
 		this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 	}
-
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void func_94581_a(IconRegister par1IconRegister) {
+        iconIndex = par1IconRegister.func_94245_a(Item.paper.getUnlocalizedName().substring(5)); //Substring removes "item."
+    }
+	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4) {
 		if( !Loader.isModLoaded(DefaultProps.WorldModId)){
@@ -75,13 +81,6 @@ public class ItemStructurePlacer extends Item{
 		par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
 		return par1ItemStack;
 	}
-
-	// Commented icon
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public int getIconFromDamage(int par1) {
-//		return 58;
-//	}
 	
 	/**
      * Return an item rarity from EnumRarity
@@ -105,8 +104,7 @@ public class ItemStructurePlacer extends Item{
 	}
 
 	@Override
-	public void getSubItems(int par1, CreativeTabs par2CreativeTabs,
-			List par3List) {
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
 		for (int i = 0; i < structureName.length; i++) {
 			par3List.add(new ItemStack(par1,1,i));
 		}
