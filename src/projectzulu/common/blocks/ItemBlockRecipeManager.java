@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import projectzulu.common.ProjectZulu_Core;
@@ -53,15 +54,15 @@ public class ItemBlockRecipeManager {
 		}
 		addRecipe(new OptionalItemStack(Item.bowlEmpty), new String[]{"   ","X X"," X "}, 'X', new OptionalItemStack(ItemList.coconutShell));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordWood,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordWood,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordStone,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordStone,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordSteel,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordSteel,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordGold,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordGold,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordDiamond,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordDiamond,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		
 		/*Aloe Vera */
 		addRecipe(new OptionalItemStack(Item.silk,6), new String[]{"C  ","C  ","C  "}, 'C', new OptionalItemStack(BlockList.tumbleweed));
@@ -133,22 +134,22 @@ public class ItemBlockRecipeManager {
 	private static void setupCampfireRecipies() {
 		
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,0), true, new String[]{"   ","LLL","   "}, new char[]{'L'}, 
-				new OptionalItemStack(Block.wood,1,-1));
+				new OptionalItemStack(Block.wood,1,OreDictionary.WILDCARD_VALUE));
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,0), true, new String[]{"   ","LLL","   "}, new char[]{'L'},
 				new OptionalItemStack("log"));
 		
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,1), true, new String[]{"   ","LLL","CCC"}, new char[]{'L','C'},
-				new OptionalItemStack(Block.wood,1,-1), new OptionalItemStack(Block.cobblestone) );		
+				new OptionalItemStack(Block.wood,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Block.cobblestone) );		
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,1), true, new String[]{"   ","LLL","CCC"}, new char[]{'L','C'},
 				new OptionalItemStack("log"), new OptionalItemStack(Block.cobblestone) );
 
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,2), true, new String[]{" S ","LLL","   "}, new char[]{'L','C','S'},
-				new OptionalItemStack(Block.wood,1,-1), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
+				new OptionalItemStack(Block.wood,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,2), true, new String[]{" S ","LLL","   "}, new char[]{'L','C','S'},
 				new OptionalItemStack("log"), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Block.cobblestone) );
 
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,3), true, new String[]{" S ","LLL","CCC"}, new char[]{'L','C','S'},
-				new OptionalItemStack(Block.wood,1,-1), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
+				new OptionalItemStack(Block.wood,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,3), true, new String[]{" S ","LLL","CCC"}, new char[]{'L','C','S'},
 				new OptionalItemStack("log"), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Block.cobblestone) );
 	}
