@@ -52,9 +52,7 @@ public class RenderCreeperBlossomPrimed extends Render{
             GL11.glScalef(var11, var11, var11);
         }
         var10 = (1.0F - ((float)par1EntityTNTPrimed.fuse - par9 + 1.0F) / 100.0F) * 0.8F;
-//    	this.loadTexture(DefaultProps.blockSpriteSheet);
-    	this.loadTexture("/mods/projectzulublock/" + "textures/blocks/" + "creeperblossom.png"); //BlockList.creeperBlossom.get().func_94330_A()
-//    	this.loadTexture("projectzulublock:creeperblossom");
+        this.loadTexture("/terrain.png");
         this.blockRenderer.renderBlockAsItem(BlockList.creeperBlossom.get(), 2, par1EntityTNTPrimed.getBrightness(par9));
         if (par1EntityTNTPrimed.fuse / 5 % 2 == 0){
             GL11.glDisable(GL11.GL_TEXTURE_2D);
