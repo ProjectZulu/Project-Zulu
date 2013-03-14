@@ -1,9 +1,16 @@
 package projectzulu.common.blocks;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeDirection;
@@ -12,8 +19,24 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 public class RenderCampFire implements ISimpleBlockRenderingHandler{
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
-
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+		RenderItem itemRenderer = new RenderItem();
+		
+		ItemStack itemStackToRender = new ItemStack(block,1,metadata);
+		
+		itemRenderer.setRenderManager(RenderManager.instance);
+		EntityItem entityItemToRender = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, itemStackToRender);
+		entityItemToRender.hoverStart = 0;
+		
+        float scaleItem = 1.5f;
+        GL11.glPushMatrix();
+        Minecraft.getMinecraft().renderEngine.func_98187_b("/terrain.png");
+        GL11.glRotatef((float) (90f*Math.PI/180f), 1, 0, 0);
+        GL11.glScalef(scaleItem, scaleItem, scaleItem);
+		itemRenderer.doRenderItem(entityItemToRender, 0, 0, 0, 0, 0);
+        GL11.glPopMatrix();
+	}
+	
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		return render(world, x, y, z, block, modelId, renderer);
@@ -22,8 +45,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 	/**
 	 * Render Campfire Stones
 	 */
-	public boolean render(IBlockAccess blockAccess, int par2, int par3, int par4,
-			Block par1Block, int modelId, RenderBlocks renderer){
+	public boolean render(IBlockAccess blockAccess, int par2, int par3, int par4, Block par1Block, int modelId, RenderBlocks renderer){
 
 		Tessellator var5 = Tessellator.instance;
 		var5.setBrightness(par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4));
