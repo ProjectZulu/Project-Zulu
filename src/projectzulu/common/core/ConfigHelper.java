@@ -17,13 +17,13 @@ public class ConfigHelper {
 		//Handle null Case
 		Property creatureProperty = config.get(category, "Creature Type", creatureType != null ? creatureType.toString() : "None");
 		for (EnumCreatureType enumCreatureType : EnumCreatureType.values()) {
-			if(enumCreatureType.toString().toLowerCase().equals(creatureProperty.toString().toLowerCase())){
+			if(enumCreatureType.toString().toLowerCase().equals(creatureProperty.getString().toLowerCase())){
 				return enumCreatureType;
 			}
 		}
 		
-		if(!creatureProperty.toString().toLowerCase().equals("none")){
-			ProjectZuluLog.severe("Error Parsing Entity Config entry %s for EnumCreatureType. Entity will be assumed not to have Type.", creatureProperty.toString());
+		if(!creatureProperty.getString().toLowerCase().equals("none")){
+			ProjectZuluLog.severe("Error Parsing Entity Config entry %s for EnumCreatureType. Entity will be assumed not to have Type.", creatureProperty.getString());
 		}
 		return null;
 	}
