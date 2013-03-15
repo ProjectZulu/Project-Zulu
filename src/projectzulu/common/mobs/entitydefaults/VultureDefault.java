@@ -21,8 +21,8 @@ import com.google.common.base.Optional;
 public class VultureDefault extends DefaultSpawnable{
 	
 	public VultureDefault(){
-		super("Vulture", EntityVulture.class);		
-		setSpawnProperties(EnumCreatureType.monster, 2, 5, 1, 3);
+		super("Vulture", EntityVulture.class, EnumCreatureType.monster);		
+		setSpawnProperties(2, 5, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelVulture.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -41,6 +41,7 @@ public class VultureDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.chickenRaw, 0, 10);

@@ -17,8 +17,8 @@ import com.google.common.base.Optional;
 public class MummyDefault extends DefaultSpawnable{
 	
 	public MummyDefault(){
-		super("Mummy", EntityMummy.class);		
-		setSpawnProperties(EnumCreatureType.creature, 5, 100, 1, 2);
+		super("Mummy", EntityMummy.class, EnumCreatureType.monster);		
+		setSpawnProperties(5, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender("projectzulu.common.mobs.models.ModelMummy", "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -34,6 +34,7 @@ public class MummyDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();
 		CustomEntityList.MUMMY.modData = Optional.of(customMobData);	

@@ -21,8 +21,8 @@ import com.google.common.base.Optional;
 public class FoxDefault extends DefaultSpawnable{
 
 	public FoxDefault(){
-		super("Fox", EntityFox.class);		
-		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 3);
+		super("Fox", EntityFox.class, EnumCreatureType.creature);		
+		setSpawnProperties(10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelFox.class, "projectzulu.common.mobs.renders.RenderTameable");
 
@@ -44,6 +44,7 @@ public class FoxDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.beefRaw, 0, 5);		
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.furPelt, 0, 10);

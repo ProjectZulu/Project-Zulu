@@ -1,6 +1,7 @@
 package projectzulu.common.core;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -11,6 +12,22 @@ import projectzulu.common.blocks.StringHelper;
 import com.google.common.base.Optional;
 
 public class ConfigHelper {
+	
+	public static EnumCreatureType configCreatureType(Configuration config, String category, EnumCreatureType creatureType){
+		//Handle null Case
+		Property creatureProperty = config.get(category, "Creature Type", creatureType != null ? creatureType.toString() : "None");
+		for (EnumCreatureType enumCreatureType : EnumCreatureType.values()) {
+			if(enumCreatureType.toString().toLowerCase().equals(creatureProperty.toString().toLowerCase())){
+				return enumCreatureType;
+			}
+		}
+		
+		if(!creatureProperty.toString().toLowerCase().equals("none")){
+			ProjectZuluLog.severe("Error Parsing Entity Config entry %s for EnumCreatureType. Entity will be assumed not to have Type.", creatureProperty.toString());
+		}
+		return null;
+	}
+	
 	public static void configDropToMobData(Configuration config, String category, CustomMobData customMobData, Item item, int meta, int weightChance){
 		configItemStackToMobData(config, category, customMobData, new ItemStack(item, 1, meta), weightChance);
 	}

@@ -21,8 +21,8 @@ import com.google.common.base.Optional;
 public class BearBlackDefault extends DefaultSpawnable{
 	
 	public BearBlackDefault(){
-		super("Black Bear", EntityBlackBear.class);		
-		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
+		super("Black Bear", EntityBlackBear.class, EnumCreatureType.creature);		
+		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelBlackBear.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -42,6 +42,7 @@ public class BearBlackDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.beefRaw, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.furPelt, 0, 8);

@@ -21,8 +21,8 @@ import com.google.common.base.Optional;
 public class HornbillDefault extends DefaultSpawnable{
 	
 	public HornbillDefault(){
-		super("Horn Bill", EntityHornBill.class);		
-		setSpawnProperties(EnumCreatureType.monster, 10, 25, 1, 1);
+		super("Horn Bill", EntityHornBill.class, EnumCreatureType.ambient);		
+		setSpawnProperties(10, 25, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelHornBill.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -36,6 +36,7 @@ public class HornbillDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.chickenRaw, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);

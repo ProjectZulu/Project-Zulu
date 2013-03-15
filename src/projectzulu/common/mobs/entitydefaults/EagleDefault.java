@@ -21,8 +21,8 @@ import com.google.common.base.Optional;
 public class EagleDefault extends DefaultSpawnable{
 	
 	public EagleDefault(){
-		super("Eagle", EntityEagle.class);		
-		setSpawnProperties(EnumCreatureType.monster, 5, 5, 1, 1);
+		super("Eagle", EntityEagle.class, EnumCreatureType.ambient);		
+		setSpawnProperties(5, 5, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelEagle.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -36,6 +36,7 @@ public class EagleDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.chickenRaw, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);

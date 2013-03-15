@@ -4,18 +4,20 @@ import java.lang.reflect.InvocationTargetException;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Core;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-
+//TODO: Think of Better Keyword than Default, Possibly Initial
 public abstract class DefaultCreature implements DefaultEntity{
 	protected String mobName;
 	protected Class mobClass;
 	protected String modelClass;
 	protected String renderClass;
-	
+	protected EnumCreatureType enumCreatureType;
+
 	protected boolean shouldExist = true;
 	protected boolean reportSpawningInLog = false;
 	
@@ -23,9 +25,10 @@ public abstract class DefaultCreature implements DefaultEntity{
 	protected int updateFrequency;
 	protected boolean sendsVelocityUpdates;
 		
-	protected DefaultCreature(String mobName, Class mobClass){
+	protected DefaultCreature(String mobName, Class mobClass, EnumCreatureType creatureType){
 		this.mobName = mobName;
 		this.mobClass = mobClass;
+		this.enumCreatureType = creatureType;
 	}
 	
 	protected void setModelAndRender(String modelClass, String renderClass){

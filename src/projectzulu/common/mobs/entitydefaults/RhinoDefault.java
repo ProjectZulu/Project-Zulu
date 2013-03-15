@@ -20,8 +20,8 @@ import com.google.common.base.Optional;
 public class RhinoDefault extends DefaultSpawnable{
 	
 	public RhinoDefault(){
-		super("Rhino", EntityRhino.class);		
-		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
+		super("Rhino", EntityRhino.class, EnumCreatureType.creature);		
+		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);		
 		setModelAndRender(ModelRhino.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -36,6 +36,7 @@ public class RhinoDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,

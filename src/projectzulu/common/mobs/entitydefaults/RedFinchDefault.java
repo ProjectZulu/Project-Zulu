@@ -19,8 +19,8 @@ import com.google.common.base.Optional;
 public class RedFinchDefault extends DefaultSpawnable{
 	
 	public RedFinchDefault(){
-		super("Red Finch", EntityRedFinch.class);		
-		setSpawnProperties(EnumCreatureType.monster, 10, 5, 1, 1);
+		super("Red Finch", EntityRedFinch.class, EnumCreatureType.ambient);		
+		setSpawnProperties(10, 5, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelFinch.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -40,6 +40,7 @@ public class RedFinchDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);
 		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);

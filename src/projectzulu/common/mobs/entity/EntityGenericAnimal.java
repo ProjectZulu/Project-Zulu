@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -90,6 +91,16 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     		return forceDespawn || entityEntry.modData.get().shouldDespawn;
     	}
     	return true;
+    }
+    
+    @Override
+    public boolean isCreatureType(EnumCreatureType type, boolean forSpawnCount) {
+    	CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+    	if(entityEntry != null){
+    		return entityEntry.modData.get().creatureType != null ? entityEntry.modData.get().creatureType.equals(type) : false;
+    	}else{
+        	return super.isCreatureType(type, forSpawnCount);
+    	}
     }
     
     @Override

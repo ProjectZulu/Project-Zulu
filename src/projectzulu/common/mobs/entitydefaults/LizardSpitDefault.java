@@ -9,7 +9,7 @@ import projectzulu.common.mobs.entity.EntityLizardSpit;
 public class LizardSpitDefault extends DefaultCreature{
 
 	public LizardSpitDefault() {
-		super("Lizard Spit", EntityLizardSpit.class);
+		super("Lizard Spit", EntityLizardSpit.class, null);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender("", "projectzulu.common.mobs.renders.RenderLizardSpit");
 	}

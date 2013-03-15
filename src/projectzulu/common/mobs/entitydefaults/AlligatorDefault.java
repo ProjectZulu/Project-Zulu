@@ -21,8 +21,8 @@ import com.google.common.base.Optional;
 public class AlligatorDefault extends DefaultSpawnable{
 	
 	public AlligatorDefault(){
-		super("Alligator", EntityCrocodile.class);		
-		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
+		super("Alligator", EntityCrocodile.class, EnumCreatureType.creature);		
+		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelCrocodile.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 		
@@ -39,7 +39,9 @@ public class AlligatorDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.beefRaw, 0, 5);		
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scaleItem, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);

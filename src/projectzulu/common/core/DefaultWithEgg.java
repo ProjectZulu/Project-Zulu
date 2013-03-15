@@ -2,6 +2,7 @@ package projectzulu.common.core;
 
 import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Core;
 
@@ -10,8 +11,8 @@ public abstract class DefaultWithEgg extends DefaultCreature{
 	protected int eggColor1;
 	protected int eggColor2;
 	
-	protected DefaultWithEgg(String mobName, Class mobClass) {
-		super(mobName, mobClass);
+	protected DefaultWithEgg(String mobName, Class mobClass, EnumCreatureType creatureType) {
+		super(mobName, mobClass, creatureType);
 	}
 	
 	@Override

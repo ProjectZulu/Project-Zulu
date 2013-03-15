@@ -20,8 +20,8 @@ import com.google.common.base.Optional;
 public class RabbitDefault extends DefaultSpawnable{
 	
 	public RabbitDefault(){
-		super("Rabbit", EntityRabbit.class);		
-		setSpawnProperties(EnumCreatureType.creature, 15, 100, 1, 2);
+		super("Rabbit", EntityRabbit.class, EnumCreatureType.creature);		
+		setSpawnProperties(15, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelRabbit.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -34,7 +34,7 @@ public class RabbitDefault extends DefaultSpawnable{
 		defaultBiomesToSpawn.add("Forested Hills");						defaultBiomesToSpawn.add("Forested Island");		
 		defaultBiomesToSpawn.add("Green Hills");						defaultBiomesToSpawn.add("Redwood Forest");		
 		defaultBiomesToSpawn.add("Lush Redwoods");						defaultBiomesToSpawn.add("Temperate Rainforest");		
-		defaultBiomesToSpawn.add("Woodlands");	
+		defaultBiomesToSpawn.add("Woodlands");
 	}
 	
 	@Override
@@ -42,6 +42,7 @@ public class RabbitDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,

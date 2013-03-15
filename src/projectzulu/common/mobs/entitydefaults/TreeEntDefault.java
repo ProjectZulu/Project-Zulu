@@ -21,8 +21,8 @@ import com.google.common.base.Optional;
 public class TreeEntDefault extends DefaultSpawnable{
 	
 	public TreeEntDefault(){
-		super("TreeEnt", EntityTreeEnt.class);		
-		setSpawnProperties(EnumCreatureType.creature, 1, 7, 1, 1);
+		super("TreeEnt", EntityTreeEnt.class, EnumCreatureType.creature);		
+		setSpawnProperties(1, 7, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelTreeEnt.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -42,6 +42,7 @@ public class TreeEntDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Block.wood, 1, 8);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,

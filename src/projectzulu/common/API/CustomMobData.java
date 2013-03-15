@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 
 public class CustomMobData {
@@ -11,6 +12,7 @@ public class CustomMobData {
 	public int secondarySpawnRate = 0;
 	public boolean reportSpawningInLog = false;
 	public boolean shouldDespawn = true;
+	public EnumCreatureType creatureType;
 	
 	private List lootItems = new ArrayList<ItemStack>();
 	private List lootWeights = new ArrayList<Integer>();

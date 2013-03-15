@@ -12,7 +12,7 @@ import com.google.common.base.Optional;
 public class CreeperBlossomPrimedDefault extends DefaultCreature{
 
 	public CreeperBlossomPrimedDefault() {
-		super("CreeperBlossomPrimed", EntityCreeperBlossomPrimed.class);
+		super("CreeperBlossomPrimed", EntityCreeperBlossomPrimed.class, null);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender("", "projectzulu.common.blocks.RenderCreeperBlossomPrimed");
 	}

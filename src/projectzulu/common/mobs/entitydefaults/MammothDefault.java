@@ -20,8 +20,8 @@ import com.google.common.base.Optional;
 public class MammothDefault extends DefaultSpawnable{
 
 	public MammothDefault(){
-		super("Mammoth", EntityMammoth.class);		
-		setSpawnProperties(EnumCreatureType.creature, 1, 7, 1, 3);
+		super("Mammoth", EntityMammoth.class, EnumCreatureType.creature);		
+		setSpawnProperties(1, 7, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelMammoth.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -39,6 +39,7 @@ public class MammothDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.furPelt, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);

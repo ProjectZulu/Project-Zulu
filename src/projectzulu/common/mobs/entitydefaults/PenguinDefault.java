@@ -21,8 +21,8 @@ import com.google.common.base.Optional;
 public class PenguinDefault extends DefaultSpawnable{
 	
 	public PenguinDefault(){
-		super("Penguin", EntityPenguin.class);		
-		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 3);
+		super("Penguin", EntityPenguin.class, EnumCreatureType.creature);		
+		setSpawnProperties(10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelPenguin.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
@@ -39,6 +39,7 @@ public class PenguinDefault extends DefaultSpawnable{
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
 		config.load();
 		CustomMobData customMobData = new CustomMobData(mobName, reportSpawningInLog);
+		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);

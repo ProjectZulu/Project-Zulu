@@ -13,17 +13,15 @@ public abstract class DefaultSpawnable extends DefaultWithEgg{
 	protected int secondarySpawnRate;
 	protected int minInChunk;
 	protected int maxInChunk;
-	protected EnumCreatureType enumCreatureType;
 
 	protected ArrayList<String> defaultBiomesToSpawn = new ArrayList<String>();	
 	ArrayList<BiomeGenBase> biomesToSpawn = new ArrayList();
 	
-	protected DefaultSpawnable(String mobName, Class mobClass) {
-		super(mobName, mobClass);
+	protected DefaultSpawnable(String mobName, Class mobClass, EnumCreatureType creatureType) {
+		super(mobName, mobClass, creatureType);
 	}
 	
-	protected void setSpawnProperties(EnumCreatureType enumCreatureType, int spawnRate, int secondarySpawnRate, int minInChunk, int maxInChunk){
-		this.enumCreatureType = enumCreatureType;
+	protected void setSpawnProperties(int spawnRate, int secondarySpawnRate, int minInChunk, int maxInChunk){
 		this.spawnRate = spawnRate;
 		this.secondarySpawnRate = secondarySpawnRate;
 		this.minInChunk = minInChunk;

@@ -21,8 +21,8 @@ import com.google.common.base.Optional;
 public class GiraffeDefault extends DefaultSpawnable{
 	
 	public GiraffeDefault(){
-		super("Giraffe", EntityGiraffe.class);		
-		setSpawnProperties(EnumCreatureType.creature, 10, 100, 1, 2);
+		super("Giraffe", EntityGiraffe.class, EnumCreatureType.creature);		
+		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelGiraffe.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
 
