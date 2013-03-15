@@ -67,9 +67,9 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals{
 	public String getTexture() {
 		if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
 				|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-			this.texture = DefaultProps.mobDiretory + "Treeant_Snow.png";
+			this.texture = DefaultProps.mobDiretory + "treeent_snow.png";
 		}else{
-			this.texture = DefaultProps.mobDiretory + "Treeant.png";
+			this.texture = DefaultProps.mobDiretory + "treeent.png";
 		}
 
 		return super.getTexture();

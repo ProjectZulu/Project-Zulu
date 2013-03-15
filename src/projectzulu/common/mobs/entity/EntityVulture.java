@@ -79,7 +79,7 @@ public class EntityVulture extends EntityGenericAnimal {
 
 	@Override
 	public String getTexture(){
-		this.texture = DefaultProps.mobDiretory + "Vulture.png";
+		this.texture = DefaultProps.mobDiretory + "vulture.png";
 		return super.getTexture();
 	}
 	

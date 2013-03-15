@@ -99,17 +99,17 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 		if(getSaddled()){
 			if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
 					|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-				this.texture = DefaultProps.mobDiretory + "Mammoth_Snow_Saddle.png";
+				this.texture = DefaultProps.mobDiretory + "mammoth_snow_saddle.png";
 			}else{
-				this.texture = DefaultProps.mobDiretory + "Mammoth_Saddle.png";
+				this.texture = DefaultProps.mobDiretory + "mammoth_saddle.png";
 			}
 
 		}else{
 			if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
 					|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-				this.texture = DefaultProps.mobDiretory + "Mammoth_Snow.png";
+				this.texture = DefaultProps.mobDiretory + "mammoth_snow.png";
 			}else{
-				this.texture = DefaultProps.mobDiretory + "Mammoth.png";
+				this.texture = DefaultProps.mobDiretory + "mammoth.png";
 			}
 		}
 		return super.getTexture();

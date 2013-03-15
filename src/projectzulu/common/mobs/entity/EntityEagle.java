@@ -49,7 +49,7 @@ public class EntityEagle extends EntityGenericAnimal{
 
 	@Override
 	public String getTexture(){
-		this.texture = DefaultProps.mobDiretory + "Eagle.png";
+		this.texture = DefaultProps.mobDiretory + "eagle.png";
 		return super.getTexture();
 	}
 	

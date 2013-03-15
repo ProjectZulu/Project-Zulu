@@ -68,7 +68,7 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
 
 	@Override
 	public String getTexture() {
-		this.texture = DefaultProps.mobDiretory + "Rhino.png";
+		this.texture = DefaultProps.mobDiretory + "rhino.png";
 		return super.getTexture();
 	}
 	

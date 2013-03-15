@@ -65,7 +65,7 @@ public class EntityCrocodile extends EntityGenericAnimal{
 
 	@Override
 	public String getTexture() {
-		this.texture = DefaultProps.mobDiretory + "Crocodile.png";
+		this.texture = DefaultProps.mobDiretory + "crocodile.png";
 		return super.getTexture();
 	}
 

@@ -66,7 +66,7 @@ public class EntityFrog extends EntityGenericAnimal implements IAnimals {
 	@Override
 	public String getTexture() {
 
-		this.texture = DefaultProps.mobDiretory + "Frog.png";
+		this.texture = DefaultProps.mobDiretory + "frog.png";
 
 		return super.getTexture();
 	}

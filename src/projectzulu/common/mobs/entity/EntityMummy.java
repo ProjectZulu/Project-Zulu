@@ -77,7 +77,7 @@ public class EntityMummy extends EntityMob{
 	}
 	
     public String getTexture(){
-    	return DefaultProps.mobDiretory + "Mummy.png";
+    	return DefaultProps.mobDiretory + "mummy.png";
     }
     
     protected void entityInit(){

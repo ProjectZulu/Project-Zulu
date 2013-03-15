@@ -105,7 +105,7 @@ public class EntityMimic extends EntityHerd
 
 	@Override
 	public String getTexture() {
-		this.texture = DefaultProps.mobDiretory + "MimicChest.png";
+		this.texture = DefaultProps.mobDiretory + "mimicchest.png";
 		return super.getTexture();
 	}
 

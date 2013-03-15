@@ -82,9 +82,9 @@ public class EntitySandWorm extends EntityMob {
 	@Override
 	public String getTexture() {
 		if (isHidden) {
-			this.texture = DefaultProps.mobDiretory + "SandWorm_hidden.png";
+			this.texture = DefaultProps.mobDiretory + "sandworm_hidden.png";
 		}else{
-			this.texture = DefaultProps.mobDiretory + "SandWorm.png";
+			this.texture = DefaultProps.mobDiretory + "sandworm.png";
 		}
 		return super.getTexture();
 	}
