@@ -103,23 +103,7 @@ public class ProjectZulu_Blocks {
 		}
 		ProjectZuluLog.info("Finished ItemBlock Setup ");
 
-		if(BlockList.spike.isPresent()){
-			ProjectZulu_Core.spikeRenderID = ProjectZulu_Core.spikeRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.spikeRenderID;
-			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.spikeRenderID, new RenderSpike() );
-			ProjectZuluLog.info("Spike Render ID Registed to %s", ProjectZulu_Core.spikeRenderID);
-		}
-		
-		if(BlockList.campfire.isPresent()){
-			ProjectZulu_Core.campFireRenderID = ProjectZulu_Core.campFireRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.campFireRenderID;
-			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.campFireRenderID, new RenderCampFire() );
-			ProjectZuluLog.info("Campfire Render ID Registed to %s", ProjectZulu_Core.campFireRenderID);
-		}
-		
-		if(BlockList.universalFlowerPot.isPresent()){
-			ProjectZulu_Core.universalFlowerPotRenderID = ProjectZulu_Core.universalFlowerPotRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.universalFlowerPotRenderID;
-			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.universalFlowerPotRenderID, new RenderUniversalFlowerPot() );
-			ProjectZuluLog.info("Universal Flower Pot Render ID Registed to %s", ProjectZulu_Core.universalFlowerPotRenderID);
-		}
+		ProjectZulu_Core.proxy.registerSimpleBlockRenderingHandlers();
 	}
 	
 	@PostInit
