@@ -398,34 +398,16 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.mobHeads = Optional.of(
-					new BlockMobHeads(blockID, 1, TileEntityMobHeads.class).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
+					new BlockMobHeads(blockID, 1).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 		
 		@Override
 		protected void register() {
 			Block block = BlockList.mobHeads.get();
 			GameRegistry.registerBlock(block, ItemMobHeads.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "mobHeads");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_0.name", "Stuffed Finch");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_1.name", "Alligator Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_2.name", "Armadillo Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_3.name", "Black Bear Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_4.name", "Brown Bear Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_5.name", "Polar Bear Head");
-
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_6.name", "Beaver Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_7.name", "Boar Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_8.name", "Giraffe Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_9.name", "Gorilla Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_10.name", "Lizard Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_11.name", "Mammoth Head");
-			
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_12.name", "Ostrich Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_13.name", "Penguin Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_14.name", "Rhino Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_15.name", "TreeEnt Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_16.name", "Vulture Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_17.name", "Elephant Head");
-			
+			for (BlockMobHeads.Head head : BlockMobHeads.Head.values()) {
+				LanguageRegistry.addName(new ItemStack(block, 1, head.meta()), head.displayName());
+			}			
 	        GameRegistry.registerTileEntity(TileEntityMobHeads.class, "TileEntityMobHead");   
 			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityMobHeads.class, "projectzulu.common.blocks.heads.TileEntityMobHeadsRenderer");
 		}

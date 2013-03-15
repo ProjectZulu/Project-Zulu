@@ -1,48 +1,103 @@
 package projectzulu.common.blocks.heads;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import projectzulu.common.ProjectZulu_Core;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockMobHeads extends BlockContainer{
-
-	public BlockMobHeads(int par1, int par2, Class class1){
-		super(par1, Material.circuits);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+	public enum Head{
+		RedFinch(0, "Stuffed Finch"),
+		Crocodile(1, "Alligator Head"),
+		Armadillo(2, "Armadillo Head"),
+		BlackBear(3, "Black Bear Head"),
+		BrownBear(4, "Brown Bear Head"),
+		PolarBear(5, "Polar Bear Head"),
+		Beaver(6, "Beaver Head"),
+		Boar(7, "Boar Head"),
+		Giraffe(8, "Giraffe Head"),
+		Gorilla(9, "Gorilla Head"),
+		Lizard(10, "Lizard Head"),
+		Mammoth(11, "Mammoth Head"),
+		Ostrich(12, "Ostrich Head"),
+		Penguin(13, "Penguin Head"),
+		Rhino(14, "Rhino Head"),
+		TreeEnt(15, "TreeEnt Head"),
+		Vulture(16, "Vulture Head"),
+		Elephant(17, "Elephant Head");
+		
+		private final int meta; public int meta() {return meta;}
+		private final String displayName; public String displayName(){return displayName;}
+		private Icon icon;
+		private Head(int meta, String displayName) {
+			this.meta = meta;
+			this.displayName = displayName;
+		}
+		public static Head getByMeta(int meta){
+			for (Head head : Head.values()) {
+				if(head.meta == meta) return head;
+			}
+			return null;
 	}
-
+	}
+	
+	public BlockMobHeads(int par1, int par2){
+		super(par1, Material.circuits);
+		this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+	}
+	
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2){
+    	return Head.getByMeta(par2).icon;
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void func_94332_a(IconRegister par1IconRegister){
+    	for (Head head : Head.values()) {
+    		head.icon = par1IconRegister.func_94245_a(func_94330_A()+"_"+head.toString().toLowerCase());
+		}
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+    	for (Head head : Head.values()) {
+    		par3List.add(new ItemStack(this, 1, head.meta));
+		}
+    }
+	
 	public int quantityDropped(Random par1Random){
 		return 1;
 	}
-	// if you want your block to drop itself more then once, change it to an higher number.
 
-
-
-	/* where and what to render */
 	public int getRenderType(){
 		return -1;
 	} 
 
-	/* make it opaque cube, or else you will be able to see trough the world ! */
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(){
 		return false;
 	} 
 
-	/* offcourse, because it's not a 1x1x1 block */
-	public boolean renderAsNormalBlock() {
+	public boolean renderAsNormalBlock(){
 		return false;
 	} 
-
-
+	
 	/**
 	 * Determines the damage on the item the block drops. Used in cloth and wood.
 	 */
@@ -58,12 +113,10 @@ public class BlockMobHeads extends BlockContainer{
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4){
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4) & 7;
 
-        switch (var5)
-        {
+        switch (var5){
             case 1:
             default:
                 this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
@@ -91,7 +144,6 @@ public class BlockMobHeads extends BlockContainer{
 			par5 |= 8;
 			par1World.setBlockMetadataWithNotify(par2, par3, par4, par5, 3);
 		}
-
 		super.onBlockHarvested(par1World, par2, par3, par4, par5, par6EntityPlayer);
 	}
 
@@ -99,15 +151,11 @@ public class BlockMobHeads extends BlockContainer{
 	 * ejects contained items into the world, and notifies neighbours of an update, as appropriate
 	 */
     @Override
-	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-	{
-		if (!par1World.isRemote)
-		{
-			if ((par6 & 8) == 0)
-			{
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6){
+		if (!par1World.isRemote){
+			if((par6 & 8) == 0){
 				this.dropBlockAsItem_do(par1World, par2, par3, par4, new ItemStack(this.blockID, 1, this.getDamageValue(par1World, par2, par3, par4)));
 			}
-
 			super.breakBlock(par1World, par2, par3, par4, par5, par6);
 		}
 	}
