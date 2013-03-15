@@ -49,7 +49,8 @@ public class GUISelectionList extends GuiScrollingList{
 
     @Override
     protected void drawBackground(){
-        int textureID = parent.getMinecraft().renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
+    	parent.getMinecraft().renderEngine.func_98187_b(DefaultProps.dungeonDiretory+"creaturelistgui.png");
+//        int textureID = parent.getMinecraft().renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 //        parent.getMinecraft().renderEngine.bindTexture(textureID); //TODO: Commented
         int xCoord = (parent.width - parent.backgroundSize.getX()) / 2+230; //277
