@@ -8,9 +8,7 @@ import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Icon;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
@@ -19,7 +17,6 @@ import net.minecraftforge.common.IShearable;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
-import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -29,9 +26,11 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
     public static final String[] imageSuffix = new String[] {"_opaque",""};
-    int[] adjacentTreeBlocks;    
+    int[] adjacentTreeBlocks;
+    
     @SideOnly(Side.CLIENT)
-    private Icon[] icons = new Icon[2];
+    private Icon[] icons;
+    
     private int iconIndex;
     private static final int METADATA_BITMASK       = 0x3;
     private static final int METADATA_USERPLACEDBIT = 0x4;
