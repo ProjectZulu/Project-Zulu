@@ -96,6 +96,11 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
 		}
 		return wasSuccesful;
 	}
+	
+	@Override
+	public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
+		return true;
+	}
 
 	@Override
 	public int getMaxHealth(){

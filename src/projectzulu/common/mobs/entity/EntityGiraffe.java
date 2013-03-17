@@ -47,11 +47,6 @@ public class EntityGiraffe extends EntityGenericAnimal {
 //		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
 
 	}
-
-//	@Override
-//	public float getAttackDistance() {
-//		return 2.0f;
-//	}
 	
 	@Override
 	protected int getAttackStrength(World par1World) {
@@ -135,6 +130,11 @@ public class EntityGiraffe extends EntityGenericAnimal {
 			return true;
 		}
 		return super.isValidBreedingItem(itemStack);
+	}
+	
+	@Override
+	public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
+		return true;
 	}
 	
 	/**
