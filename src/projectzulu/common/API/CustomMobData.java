@@ -12,6 +12,7 @@ public class CustomMobData {
 	public int secondarySpawnRate = 100;
 	public boolean reportSpawningInLog = false;
 	public boolean shouldDespawn = true;
+	public int maxSpawnInChunk = 4;
 	public EnumCreatureType creatureType;
 	
 	private List lootItems = new ArrayList<ItemStack>();

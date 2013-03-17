@@ -13,7 +13,7 @@ import com.google.common.base.Optional;
 
 public class ConfigHelper {
 	
-	public static EnumCreatureType configCreatureType(Configuration config, String category, EnumCreatureType creatureType){
+	public static EnumCreatureType configGetCreatureType(Configuration config, String category, String key, EnumCreatureType creatureType){
 		//Handle null Case
 		Property creatureProperty = config.get(category, "Creature Type", creatureType != null ? creatureType.toString() : "None");
 		for (EnumCreatureType enumCreatureType : EnumCreatureType.values()) {
