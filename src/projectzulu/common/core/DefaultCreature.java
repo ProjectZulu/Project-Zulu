@@ -22,10 +22,10 @@ public abstract class DefaultCreature implements DefaultEntity{
 	protected String modelClass;
 	protected String renderClass;
 	protected EnumCreatureType enumCreatureType;
-	protected int maxSpawnInChunk;
 	protected boolean shouldExist = true;
 	protected boolean reportSpawningInLog = false;
-	
+	protected int maxSpawnInChunk = 4;
+
 	protected int trackingRange;
 	protected int updateFrequency;
 	protected boolean sendsVelocityUpdates;
@@ -61,7 +61,7 @@ public abstract class DefaultCreature implements DefaultEntity{
 		shouldExist = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" shouldExist", shouldExist).getBoolean(shouldExist);
 		reportSpawningInLog = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" reportSpawningInLog", reportSpawningInLog).getBoolean(reportSpawningInLog);
 		updateFrequency = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" UpdateFrequency", updateFrequency).getInt(updateFrequency);
-		maxSpawnInChunk = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" MaxSpawnInChunk", maxSpawnInChunk).getInt(maxSpawnInChunk);
+		maxSpawnInChunk = config.get("MOB CONTROLS."+mobName, "MaxSpawnInChunk", maxSpawnInChunk).getInt(maxSpawnInChunk);
 	}
 	
 	@Override
@@ -93,8 +93,8 @@ public abstract class DefaultCreature implements DefaultEntity{
 		customMobData.reportSpawningInLog = reportSpawningInLog;
 		customMobData.creatureType = ConfigHelper.configGetCreatureType(config, "MOB CONTROLS."+mobName, "Creature Type", enumCreatureType);
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
-		customMobData.maxSpawnInChunk = maxSpawnInChunk;
 		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
+		customMobData.maxSpawnInChunk = maxSpawnInChunk;
 	}
 	
 	@Override
