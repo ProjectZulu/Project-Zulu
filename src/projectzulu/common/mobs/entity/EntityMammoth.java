@@ -36,15 +36,7 @@ import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
 public class EntityMammoth extends EntityGenericAnimal implements IAnimals{	
-	public EntityModelRotation eWHOLE = new EntityModelRotation();
-	public EntityModelRotation eHEADPIECE = new EntityModelRotation();
-	public EntityModelRotation eREARRTR1 = new EntityModelRotation();
-	public EntityModelRotation eREARRTR2 = new EntityModelRotation();
-	public EntityModelRotation eREARRTR3 = new EntityModelRotation();
-	public EntityModelRotation etail = new EntityModelRotation();
-	public EntityModelRotation eleg3 = new EntityModelRotation();
-	public EntityModelRotation eleg4 = new EntityModelRotation();
-
+	
 	//	public int stampedeTime = 0;
 	Vec3 stampedeDirection = Vec3.createVectorHelper(0, 0, 0);
 	public int timeLeftStampeding = 0;
