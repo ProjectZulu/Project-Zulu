@@ -6,6 +6,8 @@ import java.util.Random;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandom;
+import net.minecraft.util.WeightedRandomItem;
 
 public class CustomMobData {
 	public String mobName = "";
@@ -15,31 +17,26 @@ public class CustomMobData {
 	public int maxSpawnInChunk = 4;
 	public EnumCreatureType creatureType;
 	
-	private List lootItems = new ArrayList<ItemStack>();
-	private List lootWeights = new ArrayList<Integer>();
-	private int totalWeight = 0;
+	private List lootItems = new ArrayList<WeightedItemStack>();
+	
+	public static class WeightedItemStack extends WeightedRandomItem{
+		public final ItemStack itemStack;
+		public WeightedItemStack(ItemStack itemStack, int weight) {
+			super(weight);
+			this.itemStack = itemStack;
+		}
+	}
 	
 	public CustomMobData(String mobName){
 		this.mobName = mobName;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void addLootToMob(ItemStack itemStack, int weight){
-		lootItems.add(itemStack);
-		lootWeights.add(weight);
-		totalWeight += weight;
+		lootItems.add(new WeightedItemStack(itemStack, weight));
 	}
 	
 	public ItemStack getLootItem(Random rand){
-		int lootChance = totalWeight > 0 ? rand.nextInt(totalWeight) : 0;
-		ItemStack lootItem = null;
-		for (int i = 0; i < lootWeights.size(); i++) {
-			if(lootChance - (Integer)lootWeights.get(i) <= 0){
-				lootItem = (ItemStack) lootItems.get(i);
-				break;
-			}else{
-				lootChance -= (Integer)lootWeights.get(i);
-			}
-		}
-		return lootItem != null ? lootItem.copy() : null;
+		return ((WeightedItemStack)WeightedRandom.getRandomItem(rand, lootItems)).itemStack;
 	}
 }
