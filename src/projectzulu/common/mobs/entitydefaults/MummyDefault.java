@@ -30,13 +30,7 @@ public class MummyDefault extends DefaultSpawnable{
 	}
 	
 	@Override
-	public void outputDataToList(File configDirectory) {
-		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
-		config.load();
-		CustomMobData customMobData = new CustomMobData(mobName, secondarySpawnRate, reportSpawningInLog);
-		customMobData.creatureType = ConfigHelper.configCreatureType(config, "MOB CONTROLS."+mobName, enumCreatureType);
-		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
-		config.save();
-		CustomEntityList.MUMMY.modData = Optional.of(customMobData);	
+	public void outputDataToList(Configuration config, CustomMobData customMobData) {
+		super.outputDataToList(config, customMobData);
 	}
 }

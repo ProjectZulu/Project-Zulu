@@ -113,21 +113,12 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
     }
 
     public void drawCrossedSquares(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer){
-    	//TODO: COmmented render
         Tessellator var9 = Tessellator.instance;
-//        Icon var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
         Icon var10 = renderer.func_94165_a(par1Block, 0, par2);
 
         if (renderer.overrideBlockTexture != null){
             var10 = renderer.overrideBlockTexture;
         }
-        
-//        int var11 = (var10 & 15) << 4;
-//        int var12 = var10 & 240;        
-//        double var13 = (double)((float)var11 / 256.0F);
-//        double var15 = (double)(((float)var11 + 15.99F) / 256.0F);
-//        double var17 = (double)((float)var12 / 256.0F);
-//        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
         
         double var13 = (double)var10.func_94209_e();
         double var15 = (double)var10.func_94212_f();

@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 
 public class CustomMobData {
 	public String mobName = "";
-	public int secondarySpawnRate = 0;
+	public int secondarySpawnRate = 100;
 	public boolean reportSpawningInLog = false;
 	public boolean shouldDespawn = true;
 	public EnumCreatureType creatureType;
@@ -18,19 +18,8 @@ public class CustomMobData {
 	private List lootWeights = new ArrayList<Integer>();
 	private int totalWeight = 0;
 	
-	public CustomMobData(String mobName, int secondarySpawnRate, boolean reportSpawningInLog){
-		this.mobName = mobName;
-		this.secondarySpawnRate = secondarySpawnRate;
-		this.mobName = mobName;
-	}
-	public CustomMobData(String mobName, boolean reportSpawningInLog){
-		this(mobName, 0, reportSpawningInLog);
-	}
-	public CustomMobData(String mobName, int secondarySpawnRate){
-		this(mobName, secondarySpawnRate, false);
-	}
 	public CustomMobData(String mobName){
-		this(mobName, 0);
+		this.mobName = mobName;
 	}
 	
 	public void addLootToMob(ItemStack itemStack, int weight){

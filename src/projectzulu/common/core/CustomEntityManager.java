@@ -42,7 +42,7 @@ public enum CustomEntityManager {
 			if(entity.shouldExist()){
 				entity.registerEntity();
 				entity.registerEgg();
-				entity.outputDataToList(configDirectory); //TODO Create loadCustomMobData() method which calls outputData to List. loadCustom contains calls that are the same for all creatures
+				entity.loadCustomMobData(configDirectory);
 			}
 		}
 	}

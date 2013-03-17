@@ -2,6 +2,8 @@ package projectzulu.common.core;
 
 import java.util.ArrayList;
 
+import projectzulu.common.api.CustomMobData;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
@@ -47,6 +49,11 @@ public abstract class DefaultSpawnable extends DefaultWithEgg{
 				biomesToSpawn.add(BiomeGenBase.biomeList[i]);
 			}
 		}
+	}
+	
+	/* Create loadCustomMobData() method which calls outputData to List. loadCustom contains calls that are the same for all creatures */
+	public void outputDataToList(Configuration config, CustomMobData customMobData){
+		customMobData.secondarySpawnRate = secondarySpawnRate;
 	}
 	
 	@Override

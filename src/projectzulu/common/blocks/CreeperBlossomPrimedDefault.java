@@ -21,10 +21,8 @@ public class CreeperBlossomPrimedDefault extends DefaultCreature{
 	public void loadCreaturesFromConfig(Configuration config) {}
 	
 	@Override
-	public void outputDataToList(File configDirectory) {
-		if(shouldExist){
-			CustomEntityList.CREEPERBLOSSONPRIMED.modData = Optional.of(new CustomMobData(mobName, reportSpawningInLog));	
-		}
+	public void outputDataToList(Configuration config, CustomMobData customMobData) {
+		super.outputDataToList(config, customMobData);
 	}
 
 }

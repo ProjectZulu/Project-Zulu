@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entitydefaults;
 import java.io.File;
 
 import net.minecraftforge.common.Configuration;
+import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.DefaultCreature;
 import projectzulu.common.mobs.entity.EntityLizardSpit;
 
@@ -18,6 +19,6 @@ public class LizardSpitDefault extends DefaultCreature{
 	public void loadCreaturesFromConfig(Configuration config) {}
 
 	@Override
-	public void outputDataToList(File configDirectory) {}
+	public void outputDataToList(Configuration config, CustomMobData customMobData) {}
 
 }
