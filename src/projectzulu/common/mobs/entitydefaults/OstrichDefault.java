@@ -29,7 +29,7 @@ public class OstrichDefault extends DefaultSpawnable{
 		eggColor1 = (25 << 16) + (18 << 8) + 14;						eggColor2 = (232 << 16) + (107 << 8) + 101;
 		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName); 
-		defaultBiomesToSpawn.add("Meadow");								defaultBiomesToSpawn.add("Savanna");		
+		defaultBiomesToSpawn.add("Savanna");		
 	}
 	
 	@Override

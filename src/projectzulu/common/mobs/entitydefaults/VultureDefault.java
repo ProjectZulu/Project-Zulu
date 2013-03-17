@@ -31,7 +31,6 @@ public class VultureDefault extends DefaultSpawnable{
 		defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
 		defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
 		defaultBiomesToSpawn.add("Mountainous Desert");
-		defaultBiomesToSpawn.add("Savanna");
 		defaultBiomesToSpawn.add("Mountain Ridge");
 		defaultBiomesToSpawn.add("Wasteland");
 	}
