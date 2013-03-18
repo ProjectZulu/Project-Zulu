@@ -78,7 +78,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     
     @Override
     public void onLivingUpdate() {
-		rotationYaw = rotationYawHead;
+//		rotationYaw = rotationYawHead;
     	super.onLivingUpdate();
     	animTime = Math.max(animTime - 1, 0);
     	entityState = EntityStates.getEntityByIndex(getDWEntityState());
