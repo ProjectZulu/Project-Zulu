@@ -3,7 +3,9 @@ package projectzulu.common.mobs.entity;
 import java.util.EnumSet;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,6 +50,9 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.egg.itemID, false));
 		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
 		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
+
+        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(11, new EntityAILookIdle(this));
 
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
