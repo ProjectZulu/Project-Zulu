@@ -96,8 +96,10 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     @Override
     public boolean isCreatureType(EnumCreatureType type, boolean forSpawnCount) {
     	CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
-    	if(entityEntry != null){
-    		return entityEntry.modData.get().creatureType != null ? entityEntry.modData.get().creatureType.equals(type) : false;
+    	if(forSpawnCount && entityEntry != null){
+    		return entityEntry.modData.get().spawnType != null ? entityEntry.modData.get().spawnType.equals(type) : false;
+    	}else if(entityEntry != null){
+    		return entityEntry.modData.get().creatureType != null ? entityEntry.modData.get().creatureType.equals(type) : super.isCreatureType(type, forSpawnCount);
     	}else{
         	return super.isCreatureType(type, forSpawnCount);
     	}

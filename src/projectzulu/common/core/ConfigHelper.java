@@ -14,7 +14,7 @@ import com.google.common.base.Optional;
 public class ConfigHelper {
 	
 	public static EnumCreatureType configGetCreatureType(Configuration config, String category, String key, EnumCreatureType creatureType){
-		Property creatureProperty = config.get(category, "Creature Type", creatureType != null ? creatureType.toString() : "None");
+		Property creatureProperty = config.get(category, key, creatureType != null ? creatureType.toString() : "None");
 		for (EnumCreatureType enumCreatureType : EnumCreatureType.values()) {
 			if(enumCreatureType.toString().toLowerCase().equals(creatureProperty.getString().toLowerCase())){
 				return enumCreatureType;

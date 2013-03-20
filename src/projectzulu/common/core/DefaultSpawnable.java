@@ -56,6 +56,7 @@ public abstract class DefaultSpawnable extends DefaultWithEgg{
 	/* Create loadCustomMobData() method which calls outputData to List. loadCustom contains calls that are the same for all creatures */
 	public void outputDataToList(Configuration config, CustomMobData customMobData){
 		customMobData.secondarySpawnRate = secondarySpawnRate;
+		customMobData.spawnType = spawnType;
 	}
 	
 	@Override

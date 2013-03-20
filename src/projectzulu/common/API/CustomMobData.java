@@ -16,7 +16,8 @@ public class CustomMobData {
 	public boolean shouldDespawn = true;
 	public int maxSpawnInChunk = 4;
 	public EnumCreatureType creatureType;
-	
+	public EnumCreatureType spawnType;
+
 	private List lootItems = new ArrayList<WeightedItemStack>();
 	
 	public static class WeightedItemStack extends WeightedRandomItem{
