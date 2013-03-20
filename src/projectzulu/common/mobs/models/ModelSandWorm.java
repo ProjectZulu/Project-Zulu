@@ -14,11 +14,9 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.mobs.entity.EntitySandWorm;
+import projectzulu.common.mobs.entity.EntityStates;
 
-public class ModelSandWorm extends ModelBase
-{
-  //fields
-
+public class ModelSandWorm extends ModelBase {
     ModelRenderer HEADBASE;
     ModelRenderer head;
     
@@ -377,21 +375,8 @@ public class ModelSandWorm extends ModelBase
 
   @Override
   public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-
       EntitySandWorm var5 = (EntitySandWorm)par1EntityLiving;
-
-//      if(var5.eHEADBASE.isSetup == false){var5.eHEADBASE.setup(HEADBASE);}
-//      if(var5.eREARROT.isSetup == false){var5.eREARROT.setup(REARROT);}
-//      if(var5.eREARROT2.isSetup == false){var5.eREARROT2.setup(REARROT2);}
-//      if(var5.eREARROT3.isSetup == false){var5.eREARROT3.setup(REARROT3);}
-//      
-//      if(var5.eLEFMOROT.isSetup == false){var5.eLEFMOROT.setup(LEFMOROT);}
-//      if(var5.eRIGMOROT.isSetup == false){var5.eRIGMOROT.setup(RIGMOROT);}
-//      if(var5.eTOPMOROT.isSetup == false){var5.eTOPMOROT.setup(TOPMOROT);}
-//      if(var5.eBOTMOROT.isSetup == false){var5.eBOTMOROT.setup(BOTMOROT);}
-      
-	  if (var5.isHidden) {
-		  
+	  if (var5.getEntityState() == EntityStates.idle) { 
 		  //Mandables are at Position 0 when Hiding
 	      TOPMOROT.rotateAngleX = 0.0f;
 	      LEFMOROT.rotateAngleY = 0.0f;
@@ -405,8 +390,6 @@ public class ModelSandWorm extends ModelBase
 	      REARROT5.rotateAngleY = 0.0f;
 	      REARROT6.rotateAngleY = 0.0f;
 	      REARROT7.rotateAngleY = 0.0f;
-
-		
 	}else{
 	      float animSpeed = 1.0f;
 	      //TOPMOROT.rotateAngleX = var5.eLEFMOROT.rotateX(+0.05f*animSpeed,0f,(float)(45*Math.PI/180f));
@@ -422,24 +405,6 @@ public class ModelSandWorm extends ModelBase
 	      REARROT5.rotateAngleY = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI*4/3) * 0.5F * par3);
 	      REARROT6.rotateAngleY = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI*5/3) * 0.5F * par3);
 	      REARROT7.rotateAngleY = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI*6/3) * 0.5F * par3);
-	      
-		//Tail Up and Down
-//	      REARROT.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F					 ) * 0.5F * par3);
-//	      REARROT2.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI/4) * 0.5F * par3);
-//	      REARROT3.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI/2) * 0.5F * par3);
-//	      REARROT4.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI*3/4) * 0.5F * par3);
-//	      REARROT5.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI) * 0.5F * par3);
-//	      REARROT6.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI*5/4) * 0.5F * par3);
-//	      REARROT7.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI*6/4) * 0.5F * par3);
-	      
-	      //Scorpion Tail
-//	      double inc = 1*Math.PI/5;
-//	      REARROT.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F					 ) * 0.5F * par3 + inc  );
-//	      REARROT2.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI/4) * 0.5F * par3 + inc  );
-//	      REARROT3.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI/2) * 0.5F * par3 + inc  );
-//	      REARROT4.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI*3/4) * 0.5F * par3 + inc  );
-//	      REARROT5.rotateAngleX = (float)( MathHelper.cos(animSpeed*par2*0.6662F - (float)Math.PI) * 0.5F * par3 + inc  );
-	      
 	}
 
       super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
