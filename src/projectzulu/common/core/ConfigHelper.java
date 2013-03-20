@@ -14,7 +14,6 @@ import com.google.common.base.Optional;
 public class ConfigHelper {
 	
 	public static EnumCreatureType configGetCreatureType(Configuration config, String category, String key, EnumCreatureType creatureType){
-		//Handle null Case
 		Property creatureProperty = config.get(category, "Creature Type", creatureType != null ? creatureType.toString() : "None");
 		for (EnumCreatureType enumCreatureType : EnumCreatureType.values()) {
 			if(enumCreatureType.toString().toLowerCase().equals(creatureProperty.getString().toLowerCase())){
@@ -36,9 +35,13 @@ public class ConfigHelper {
 		configItemStackToMobData(config, category, customMobData, new ItemStack(block, 1, meta), weightChance);
 	}
 	
-	public static void configDropToMobData(Configuration config, String category, CustomMobData customMobData, Optional<? extends Item> item, int meta, int weightChance){
-		if(item.isPresent()){
-			configItemStackToMobData(config, category, customMobData, new ItemStack(item.get(), 1, meta), weightChance);
+	public static void configDropToMobData(Configuration config, String category, CustomMobData customMobData, Optional<?> itemBlock, int meta, int weightChance){
+		if(itemBlock.isPresent()){
+			if(itemBlock.get() instanceof Item ){
+				configItemStackToMobData(config, category, customMobData, new ItemStack((Item)itemBlock.get(), 1, meta), weightChance);
+			}else if(itemBlock.get() instanceof Block){
+				configItemStackToMobData(config, category, customMobData, new ItemStack((Block)itemBlock.get(), 1, meta), weightChance);
+			}
 		}
 	}
 	

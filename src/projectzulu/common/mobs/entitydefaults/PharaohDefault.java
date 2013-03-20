@@ -1,17 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import java.io.File;
-
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
-import projectzulu.common.api.CustomEntityList;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.api.CustomMobData;
+import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultCreature;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entity.EntityMummyPharaoh;
-
-import com.google.common.base.Optional;
 
 public class PharaohDefault extends DefaultCreature{
 	public PharaohDefault(){
@@ -22,6 +19,9 @@ public class PharaohDefault extends DefaultCreature{
 	
 	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.ingotIron, 0, 40);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, BlockList.jasper, 0, 10);
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.ankh, 0, 10);
 		super.outputDataToList(config, customMobData);
 	}
 }
