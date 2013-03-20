@@ -18,5 +18,4 @@ public class LizardSpitDefault extends DefaultCreature{
 
 	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {}
-
 }
