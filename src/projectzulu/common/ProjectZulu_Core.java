@@ -121,12 +121,14 @@ public class ProjectZulu_Core{
 		ProjectZulu_Core.proxy.registerModelsAndRender();
 		ProjectZuluLog.info("Load Entity Properties");
 		CustomEntityManager.INSTANCE.loadCreaturesFromConfig(modConfigDirectoryFile);
-		ProjectZuluLog.info("Registering Entites");
-		CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
 	}
 	
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event){
+		ProjectZuluLog.info("Registering Entites");
+		CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
+		
+		ProjectZuluLog.info("Registering Events");
 		MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
 		GameRegistry.registerWorldGenerator(new ProjectZuluGenerator());
 		
