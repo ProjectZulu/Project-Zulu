@@ -122,7 +122,6 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob{
 	@Override
 	protected void updateAITick() {
 		this.angerLevel = 100;
-
 		super.updateAITick();
 	}
 	
