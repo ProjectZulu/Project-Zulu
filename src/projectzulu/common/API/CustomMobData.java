@@ -37,6 +37,9 @@ public class CustomMobData {
 	}
 	
 	public ItemStack getLootItem(Random rand){
-		return ((WeightedItemStack)WeightedRandom.getRandomItem(rand, lootItems)).itemStack;
+		if(lootItems != null && !lootItems.isEmpty()){
+			return ((WeightedItemStack)WeightedRandom.getRandomItem(rand, lootItems)).itemStack;
+		}
+		return null;
 	}
 }
