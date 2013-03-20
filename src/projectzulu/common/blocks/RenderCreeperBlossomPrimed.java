@@ -1,6 +1,5 @@
 package projectzulu.common.blocks;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.client.renderer.entity.Render;
@@ -9,8 +8,6 @@ import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.api.BlockList;
-import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -3,8 +3,6 @@ package projectzulu.common.core;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 
-import com.google.common.base.Optional;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.EnumCreatureType;
@@ -12,6 +10,9 @@ import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
+
+import com.google.common.base.Optional;
+
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;

@@ -25,7 +25,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.temperature.ITempBlock;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

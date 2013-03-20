@@ -1,18 +1,11 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import java.io.File;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
-import projectzulu.common.core.ConfigHelper;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.mobs.entity.EntityMummy;
-
-import com.google.common.base.Optional;
 
 public class MummyDefault extends DefaultSpawnable{
 	

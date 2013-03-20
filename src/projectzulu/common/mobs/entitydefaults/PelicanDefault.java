@@ -1,22 +1,16 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import java.io.File;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultSpawnable;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.mobs.entity.EntityPelican;
 import projectzulu.common.mobs.models.ModelPelican;
-
-import com.google.common.base.Optional;
 
 public class PelicanDefault extends DefaultSpawnable{
 	

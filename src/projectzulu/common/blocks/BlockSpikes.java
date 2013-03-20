@@ -18,9 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemList;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
-import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

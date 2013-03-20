@@ -1,20 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import java.io.File;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.Configuration;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.DefaultWithEgg;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.mobs.entity.EntityHauntedArmor;
 import projectzulu.common.mobs.models.ModelHauntedArmor;
-
-import com.google.common.base.Optional;
 
 public class HauntedArmorDefault extends DefaultWithEgg{
 	

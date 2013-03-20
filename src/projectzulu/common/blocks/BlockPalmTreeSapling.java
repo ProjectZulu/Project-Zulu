@@ -10,9 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.core.DefaultProps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPalmTreeSapling extends BlockFlower{
     public BlockPalmTreeSapling(int par1, int par2){

@@ -8,7 +8,6 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entity.EntityFox;
 import projectzulu.common.mobs.entity.EntityStates;
 

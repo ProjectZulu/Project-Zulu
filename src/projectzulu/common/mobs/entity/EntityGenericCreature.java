@@ -1,10 +1,10 @@
 package projectzulu.common.mobs.entity;
 
-import projectzulu.common.api.CustomEntityList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.world.World;
+import projectzulu.common.api.CustomEntityList;
 
 public abstract class EntityGenericCreature extends EntityAerial
 {

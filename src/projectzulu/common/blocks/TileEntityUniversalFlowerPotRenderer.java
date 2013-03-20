@@ -1,10 +1,7 @@
 package projectzulu.common.blocks;
 
 
-import java.awt.RenderingHints;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -16,10 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.RenderingRegistry;
-
-import projectzulu.common.core.DefaultProps;
 
 public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRenderer{
     private RenderBlocks blockRenderer = new RenderBlocks();

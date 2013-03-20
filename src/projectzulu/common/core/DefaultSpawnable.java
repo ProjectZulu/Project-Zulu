@@ -2,11 +2,10 @@ package projectzulu.common.core;
 
 import java.util.ArrayList;
 
-import projectzulu.common.api.CustomMobData;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import projectzulu.common.api.CustomMobData;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
 public abstract class DefaultSpawnable extends DefaultWithEgg{

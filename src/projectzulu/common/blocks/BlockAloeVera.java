@@ -14,7 +14,6 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
-import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
