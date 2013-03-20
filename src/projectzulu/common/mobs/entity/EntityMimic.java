@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entity;
 import java.util.EnumSet;
 
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -17,7 +18,7 @@ import projectzulu.common.mobs.entityai.EntityAIPanic;
 import projectzulu.common.mobs.entityai.EntityAIStayStill;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 
-public class EntityMimic extends EntityGenericAnimal{	
+public class EntityMimic extends EntityGenericAnimal implements IMob {	
 	
 	protected int wakeUpTimer = 0;
 	public int getWakeUpTimer(){

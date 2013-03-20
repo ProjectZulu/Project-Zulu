@@ -6,6 +6,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -17,7 +18,7 @@ import projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
 import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 
-public class EntityMummy extends EntityGenericAnimal {
+public class EntityMummy extends EntityGenericAnimal implements IMob {
 	
 	public EntityMummy(World par1World) {
 		super(par1World);
