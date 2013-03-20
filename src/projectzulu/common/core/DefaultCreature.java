@@ -29,11 +29,13 @@ public abstract class DefaultCreature implements DefaultEntity{
 	protected int trackingRange;
 	protected int updateFrequency;
 	protected boolean sendsVelocityUpdates;
-		
+	protected boolean shouldDespawn;
+	
 	protected DefaultCreature(String mobName, Class mobClass, EnumCreatureType creatureType){
 		this.mobName = mobName;
 		this.mobClass = mobClass;
 		this.enumCreatureType = creatureType;
+		shouldDespawn = enumCreatureType == EnumCreatureType.creature ? false : true;
 	}
 	
 	protected void setModelAndRender(String modelClass, String renderClass){
@@ -92,7 +94,7 @@ public abstract class DefaultCreature implements DefaultEntity{
 	public void outputDataToList(Configuration config, CustomMobData customMobData){
 		customMobData.reportSpawningInLog = reportSpawningInLog;
 		customMobData.creatureType = ConfigHelper.configGetCreatureType(config, "MOB CONTROLS."+mobName, "Creature Type", enumCreatureType);
-		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", enumCreatureType == EnumCreatureType.creature ? false : true).getBoolean(true);
+		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", shouldDespawn).getBoolean(true);
 		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		customMobData.maxSpawnInChunk = maxSpawnInChunk;
 	}
