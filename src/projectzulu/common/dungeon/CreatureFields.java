@@ -138,7 +138,7 @@ public class CreatureFields implements DataFields {
 	}
 	
 	private void resetNBTList(){
-		Entity desiredEntity = EntityList.createEntityByName(creatureNameField.getText(), (World)null);
+		Entity desiredEntity = EntityList.createEntityByName(creatureNameField.getText(), Minecraft.getMinecraft().theWorld);
 		 if(desiredEntity != null){
 			 loadedNBT = new NBTTagCompound("Properties");
 			 desiredEntity.writeToNBT(loadedNBT);	
