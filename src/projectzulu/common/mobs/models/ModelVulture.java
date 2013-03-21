@@ -416,10 +416,9 @@ public class ModelVulture extends ModelBase
 		if(var5.eHEADROT.isSetup == false){var5.eHEADROT.setup(HEADROT);}
 		if(var5.eTAILROT.isSetup == false){var5.eTAILROT.setup(TAILROT);}
 
-		//On Ground
 		if(var5.onGround){
 			float animSpeed = 2.0f;
-			//On Ground Idle Standing Animation
+			/* On Ground Idle Standing Animation */
 			FEETROT.rotateAngleX = var5.eFEETROT.rotateX(+0.09f*animSpeed, (float)(-90*Math.PI/180f), 0f );
 			NECKROT1.rotateAngleX = var5.eNECKROT1.rotateX(+0.09f*animSpeed, (float)(-30*Math.PI/180f), (float)(+30*Math.PI/180f) );
 			NECKROT2.rotateAngleX = var5.eNECKROT2.rotateX(-0.09f*animSpeed, (float)(+15*Math.PI/180f), (float)(+40*Math.PI/180f) );
@@ -432,7 +431,7 @@ public class ModelVulture extends ModelBase
 			BODYROT.rotateAngleX = var5.eBODYROT.rotateX(-0.09f*animSpeed, (float)(0*Math.PI/180f), (float)(15*Math.PI/180f));
 
 		}else if(var5.getEntityState() == EntityStates.attacking|| var5.getEntityState() == EntityStates.following ){
-			//Attacking Flying Animation
+			/* Attacking Flying Animation */
 			float animSpeed = 2.0f;
 			FEETROT.rotateAngleX = var5.eFEETROT.rotateX(-0.09f*animSpeed, (float)(-90*Math.PI/180f), (float)(45*Math.PI/180f) );
 			NECKROT1.rotateAngleX = var5.eNECKROT1.rotateX(-0.09f*animSpeed, (float)(-30*Math.PI/180f), (float)(+30*Math.PI/180f) );
@@ -444,13 +443,8 @@ public class ModelVulture extends ModelBase
 			RIGTHWING.rotateAngleZ = var5.eRIGTHWING.rotateZ(-0.09f*animSpeed, (float)(-90*Math.PI/180f), (float)(0*Math.PI/180f), 2);
 
 			BODYROT.rotateAngleX = var5.eBODYROT.rotateX(-0.09f*animSpeed, (float)(15*Math.PI/180f), (float)(40*Math.PI/180f));
-
-			//    	if(ModLoader.getMinecraftInstance().thePlayer != null){
-			//    		ModLoader.getMinecraftInstance().thePlayer.addChatMessage( "Model ".concat(Integer.toString(1)) );
-			//    	}
 		}else if(var5.getEntityState() == EntityStates.idle){
-			//Idle Flying Animation
-
+			/* Idle Flying Animation */
 			float animSpeed = 2.0f;
 			FEETROT.rotateAngleX = var5.eFEETROT.rotateX(+0.09f*animSpeed, (float)(-90*Math.PI/180f), (float)(55*Math.PI/180f) );
 			NECKROT1.rotateAngleX = var5.eNECKROT1.rotateX(+0.09f*animSpeed, (float)(-30*Math.PI/180f), (float)(+30*Math.PI/180f) );
@@ -461,32 +455,17 @@ public class ModelVulture extends ModelBase
 			LEFTWING.rotateAngleZ = var5.eLEFTWING.rotateZ(+0.09f*animSpeed, (float)(0*Math.PI/180f), (float)(90*Math.PI/180f), 2);
 			RIGTHWING.rotateAngleZ = var5.eRIGTHWING.rotateZ(-0.09f*animSpeed, (float)(-90*Math.PI/180f), (float)(0*Math.PI/180f), 2);
 
-			//    	LEFTWING.rotateAngleY = var5.eLEFTWING.rotateY(+0.09f*animSpeed, (float)(0*Math.PI/180f), (float)(50*Math.PI/180f), 0);
-			//    	RIGTHWING.rotateAngleY = var5.eRIGTHWING.rotateY(-0.09f*animSpeed, (float)(-50*Math.PI/180f), (float)(0*Math.PI/180f), 0);
-
-
 			BODYROT.rotateAngleX = var5.eBODYROT.rotateX(+0.09f*animSpeed, (float)(0*Math.PI/180f), (float)(60*Math.PI/180f));
-
-			//    	if(ModLoader.getMinecraftInstance().thePlayer != null){
-			//    		ModLoader.getMinecraftInstance().thePlayer.addChatMessage( "Model ".concat(Integer.toString(0)) );
-			//    	}
-
-
 		}
-
-
-
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
-		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, par7Entity);
 	}
-
 }

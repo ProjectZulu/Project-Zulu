@@ -23,7 +23,7 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.common.Loader;
-
+@Deprecated
 public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 {	
 	/* Uncategorized Variables */

@@ -94,10 +94,8 @@ public class ModelFox extends ModelBase {
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-
 		float field_78145_g = 4.0f;
 		float field_78151_h = 3.0f;
-
 		if (this.isChild){
 			float var8 = 2.0F;
 			GL11.glPushMatrix();
@@ -112,7 +110,6 @@ public class ModelFox extends ModelBase {
 			BODYROT.render(f5);
 			GL11.glPopMatrix();
 		}else{
-			
 			if(((EntityFox)entity).getEntityState() == EntityStates.sitting){
 				HEADROT.render(f5*1.1f);
 				BODYROT.render(f5);
@@ -120,7 +117,6 @@ public class ModelFox extends ModelBase {
 				HEADROT.render(f5);
 				BODYROT.render(f5);
 			}
-
 		}
 	}
 

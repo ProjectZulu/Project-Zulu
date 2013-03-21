@@ -6,6 +6,7 @@ import net.minecraft.world.World;
  * Class Holds Entity Age Methods
  * such as setting and saving age
  */
+@Deprecated
 public class EntityRideableGenericAgeable extends EntityRideableHerd{
 
 	public EntityRideableGenericAgeable(World par1World) {
