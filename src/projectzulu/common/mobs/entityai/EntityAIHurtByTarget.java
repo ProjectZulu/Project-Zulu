@@ -46,7 +46,7 @@ public class EntityAIHurtByTarget extends EntityAITarget {
         this.entityPathNavigate = this.taskOwner.getAITarget();
         
         if (this.shouldCallAllies){
-            List var1 = this.taskOwner.worldObj.getEntitiesWithinAABB(this.taskOwner.getClass(), AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, this.taskOwner.posX + 1.0D, this.taskOwner.posY + 1.0D, this.taskOwner.posZ + 1.0D).expand((double)this.targetDistance, 4.0D, (double)this.targetDistance));
+            List var1 = this.taskOwner.worldObj.getEntitiesWithinAABB(this.taskOwner.getClass(), AxisAlignedBB.getAABBPool().getAABB(this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, this.taskOwner.posX + 1.0D, this.taskOwner.posY + 1.0D, this.taskOwner.posZ + 1.0D).expand((double)this.targetDistance, 4.0D, (double)this.targetDistance));
             Iterator var2 = var1.iterator();
 
             while (var2.hasNext()){

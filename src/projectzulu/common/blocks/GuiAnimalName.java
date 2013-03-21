@@ -51,9 +51,9 @@ public class GuiAnimalName extends GuiScreen
 	 * Adds the buttons (and other controls) to the screen in question.
 	 */
 	public void initGui(){
-		this.controlList.clear();
+		this.buttonList.clear();
 		Keyboard.enableRepeatEvents(true);
-		this.controlList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, "Done"));
+		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, "Done"));
 //		this.entitySign.setEditable(false);
 	}
 

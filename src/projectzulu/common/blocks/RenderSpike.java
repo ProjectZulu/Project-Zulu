@@ -4,26 +4,36 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderSpike implements ISimpleBlockRenderingHandler{
 
+	/* Leaving This here For Reference*/
+//	ProjectZuluLog.info("func_94209_e %s", var10.func_94209_e()); // 0.46875
+//	ProjectZuluLog.info("func_94216_b %s", var10.func_94216_b()); // 192
+//	ProjectZuluLog.info("func_94209_e %s", var10.func_94209_e()); // 0.46875
+//	ProjectZuluLog.info("func_94212_f %s", var10.func_94212_f()); // 0.5
+//	ProjectZuluLog.info("func_94214_a %s", var10.func_94214_a(8D)); // 0: 0.46875, 8: 0.484375
+//	ProjectZuluLog.info("func_94206_g %s", var10.func_94206_g()); // 0.375
+//	ProjectZuluLog.info("func_94210_h %s", var10.func_94210_h()); // 0.40625
+//	ProjectZuluLog.info("func_94207_b %s", var10.func_94207_b(8D)); // 0: 0.375, 8: 0.390625
+//	ProjectZuluLog.info("func_94215_i %s", var10.func_94215_i()); // NAME
+//	ProjectZuluLog.info("func_94213_j %s", var10.func_94213_j()); // 512
+//	ProjectZuluLog.info("func_94208_k %s", var10.func_94208_k()); // 512
+	
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess blockAccess, int par2, int par3, int par4,
-			Block par1Block, int modelId, RenderBlocks renderer) {
-		
+	public boolean renderWorldBlock(IBlockAccess blockAccess, int par2, int par3, int par4, Block par1Block, int modelId, RenderBlocks renderer) {
 		return Render(blockAccess, par2, par3, par4, par1Block, modelId, renderer);
-		
 	}
 
-	private boolean Render(IBlockAccess blockAccess, int par2, int par3, int par4,
-			Block par1Block, int modelId, RenderBlocks renderer){
-        Tessellator var5 = Tessellator.instance;
-        var5.setBrightness(par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4));
+	private boolean Render(IBlockAccess blockAccess, int par2, int par3, int par4, Block par1Block, int modelId, RenderBlocks renderer){
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4));
         float var6 = 1.0F;
         int var7 = par1Block.colorMultiplier(blockAccess, par2, par3, par4);
         float var8 = (float)(var7 >> 16 & 255) / 255.0F;
@@ -40,19 +50,19 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
             var10 = var13;
         }
 
-        var5.setColorOpaque_F(var6 * var8, var6 * var9, var6 * var10);
+        tessellator.setColorOpaque_F(var6 * var8, var6 * var9, var6 * var10);
         double var19 = (double)par2;
         double var20 = (double)par3;
         double var15 = (double)par4;
 
-//        if (par1Block == Block.tallGrass)
-//        {
-//            long var17 = (long)(par2 * 3129871) ^ (long)par4 * 116129781L ^ (long)par3;
-//            var17 = var17 * var17 * 42317861L + var17 * 11L;
-//            var19 += ((double)((float)(var17 >> 16 & 15L) / 15.0F) - 0.5D) * 0.5D;
-//            var20 += ((double)((float)(var17 >> 20 & 15L) / 15.0F) - 1.0D) * 0.2D;
-//            var15 += ((double)((float)(var17 >> 24 & 15L) / 15.0F) - 0.5D) * 0.5D;
-//        }
+////        if (par1Block == Block.tallGrass)
+////        {
+////            long var17 = (long)(par2 * 3129871) ^ (long)par4 * 116129781L ^ (long)par3;
+////            var17 = var17 * var17 * 42317861L + var17 * 11L;
+////            var19 += ((double)((float)(var17 >> 16 & 15L) / 15.0F) - 0.5D) * 0.5D;
+////            var20 += ((double)((float)(var17 >> 20 & 15L) / 15.0F) - 1.0D) * 0.2D;
+////            var15 += ((double)((float)(var17 >> 24 & 15L) / 15.0F) - 0.5D) * 0.5D;
+////        }
         if(blockAccess.getBlockId(par2, par3-1, par4) == Block.fence.blockID || blockAccess.getBlockId(par2, par3-1, par4) == Block.netherFence.blockID ){
 //            renderAsSpike(blockAccess, par2, par3, par4, par1Block, modelId, renderer);
         	RenderFencePikes(par1Block, blockAccess.getBlockMetadata(par2, par3, par4), var19, var20, var15, renderer);
@@ -86,7 +96,8 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
         	}
         	
         }else{
-            drawCrossedSquares(par1Block, blockAccess.getBlockMetadata(par2, par3, par4), var19, var20, var15, renderer);
+//        renderer.drawCrossedSquares(par1Block, blockAccess.getBlockMetadata(par2, par3, par4), var19, var20, var15, 1.0f);
+        	drawCrossedSquares(par1Block, blockAccess.getBlockMetadata(par2, par3, par4), var19, var20, var15, renderer);
         }
         return true;
 	}
@@ -101,21 +112,19 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
         return Block.opaqueCubeLookup[par1] || par1 == Block.fenceIron.blockID || par1 == Block.glass.blockID;
     }
 
-    public void drawCrossedSquares(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer)
-    {
+    public void drawCrossedSquares(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer){
         Tessellator var9 = Tessellator.instance;
-        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+        Icon var10 = renderer.func_94165_a(par1Block, 0, par2);
 
-        if (renderer.overrideBlockTexture >= 0){
+        if (renderer.overrideBlockTexture != null){
             var10 = renderer.overrideBlockTexture;
         }
-
-        int var11 = (var10 & 15) << 4;
-        int var12 = var10 & 240;
-        double var13 = (double)((float)var11 / 256.0F);
-        double var15 = (double)(((float)var11 + 15.99F) / 256.0F);
-        double var17 = (double)((float)var12 / 256.0F);
-        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+        
+        double var13 = (double)var10.func_94209_e();
+        double var15 = (double)var10.func_94212_f();
+        double var17 = (double)var10.func_94206_g();
+        double var19 = (double)var10.func_94210_h();
+    	
         double var21 = par3 + 0.5D - 0.5D;
         double var23 = par3 + 0.5D + 0.5D;
         double var25 = par7 + 0.5D - 0.5D;
@@ -164,32 +173,31 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
         	drawOnSide0(var9, par5, var21, var23, var25, var27, var13, var15, var17, var19);
         	break;
         }
-        
-        
     }
     
-    public void drawOnSide0(Tessellator var9, double par5, double var21, double var23, double var25, double var27, double var13, double var15, double var17, double var19){
-        /* Bottom Facing Texture */
-        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var15, var17);
+    public void drawOnSide0(Tessellator tessellator, double par5, double var21, double var23, double var25, double var27, double var13, double var15, double var17, double var19){
+    	
+    	/* Bottom Facing Texture */
+        tessellator.addVertexWithUV(var21, par5 + 1.0D, var25, var13, var17);
+        tessellator.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+        tessellator.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+        tessellator.addVertexWithUV(var23, par5 + 1.0D, var27, var15, var17);
         
-        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var13, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var15, var17);
+        tessellator.addVertexWithUV(var23, par5 + 1.0D, var27, var13, var17);
+        tessellator.addVertexWithUV(var23, par5 + 0.0D, var27, var13, var19);
+        tessellator.addVertexWithUV(var21, par5 + 0.0D, var25, var15, var19);
+        tessellator.addVertexWithUV(var21, par5 + 1.0D, var25, var15, var17);
 
         /* Bottom Facing Texture */
-        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var15, var17);
+        tessellator.addVertexWithUV(var21, par5 + 1.0D, var27, var13, var17);
+        tessellator.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+        tessellator.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+        tessellator.addVertexWithUV(var23, par5 + 1.0D, var25, var15, var17);
         
-        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var13, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var15, var17);
+        tessellator.addVertexWithUV(var23, par5 + 1.0D, var25, var13, var17);
+        tessellator.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
+        tessellator.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
+        tessellator.addVertexWithUV(var21, par5 + 1.0D, var27, var15, var17);
     }
     
     public void drawOnSide1(Tessellator var9, double par5, double var21, double var23, double var25, double var27, double var13, double var15, double var17, double var19){
@@ -313,31 +321,26 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
         var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var17);
     }
     	
-    public void RenderFencePikes(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer)
-    {
-        Tessellator var9 = Tessellator.instance;
-        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+    public void RenderFencePikes(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer) {
+    	Tessellator var9 = Tessellator.instance;
+    	//      Icon var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+    	Icon var10 = renderer.func_94165_a(par1Block, 0, par2);
 
-        if (renderer.overrideBlockTexture >= 0){
-            var10 = renderer.overrideBlockTexture;
-        }
+    	if (renderer.overrideBlockTexture != null){
+    		var10 = renderer.overrideBlockTexture;
+    	}
 
-        int var11 = (var10 & 15) << 4;
-        int var12 = var10 & 240;
-        double var13 = (double)(((float)var11 + 3.99F) / 256.0F);
-        double var15 = (double)(((float)var11 + 11.99F) / 256.0F);
-        double var17 = (double)(((float)var12 +0.0f) / 256.0F);
-        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
-
+    	double var13 = var10.func_94209_e() + (var10.func_94212_f()-var10.func_94209_e())*1f/4f;
+    	double var15 = var10.func_94209_e() + (var10.func_94212_f()-var10.func_94209_e())*3f/4f;
+    	double var17 = var10.func_94206_g();
+    	double var19 = var10.func_94210_h();
+    	
         double var21 = par3 + 0.5D - (0.625-0.375)/2D;
         double var23 = par3 + 0.5D + (0.625-0.375)/2D;
         double var25 = par7 + 0.5D - (0.625-0.375)/2D;
         double var27 = par7 + 0.5D + (0.625-0.375)/2D;
         
-//        float var6 = 0.375F;
-//        float var7 = 0.625F;
         double maxY = 0.6;
-        
         /* Bottom Facing Texture */
         var9.addVertexWithUV(var21, par5 + maxY, var25, var13, var17);
         var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
@@ -363,22 +366,19 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
     }
 
     public void drawSpikeCross(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer){
-//    	Boolean alongX = false;
-        Tessellator var9 = Tessellator.instance;
-        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+    	Tessellator var9 = Tessellator.instance;
+    	//      Icon var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+    	Icon var10 = renderer.func_94165_a(par1Block, 0, par2);
 
-        if (renderer.overrideBlockTexture >= 0){
-            var10 = renderer.overrideBlockTexture;
-        }
+    	if (renderer.overrideBlockTexture != null){
+    		var10 = renderer.overrideBlockTexture;
+    	}
+    	
+    	double var13 = (double)var10.func_94209_e();
+    	double var15 = (double)var10.func_94212_f();
+    	double var17 = (double)var10.func_94206_g();
+    	double var19 = (double)var10.func_94210_h();
         
-        int var11 = (var10 & 15) << 4;
-        int var12 = var10 & 240;
-        
-        double var13 = (double)((float)var11 / 256.0F);
-        double var15 = (double)(((float)var11 + 15.99F) / 256.0F);
-        double var17 = (double)((float)var12 / 256.0F);
-        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
-
         /* Render Strip Along X */
         double var21 = par3 + 0.5D - 0.5;
         double var23 = par3 + 0.5D + 0.5;
@@ -442,25 +442,17 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
         var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
         var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
         var9.addVertexWithUV(var21, par5 + maxY, var27, var13, var17);
-        
     }
 
     
-    public void drawSpikeStrip(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer, Boolean alongX, int type)
-    {    	
-    	
-//    	Boolean alongX = false;
-        Tessellator var9 = Tessellator.instance;
-        int var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+    public void drawSpikeStrip(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer, Boolean alongX, int type){    	
+    	Tessellator var9 = Tessellator.instance;
+    	Icon var10 = renderer.func_94165_a(par1Block, 0, par2);
 
-        if (renderer.overrideBlockTexture >= 0){
-            var10 = renderer.overrideBlockTexture;
-        }
-        
-        int var11 = (var10 & 15) << 4;
-        int var12 = var10 & 240;
-        
-        
+    	if (renderer.overrideBlockTexture != null){
+    		var10 = renderer.overrideBlockTexture;
+    	}
+    	
         double var13;
         double var15;
         double var17;
@@ -468,28 +460,27 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
         
     	switch (type) {
     	case 1:
-	        var13 = (double)(((float)var11 + 0.0f + 15.99f/2.0) / 256.0F);
-	        var15 = (double)(((float)var11 + 15.99F ) / 256.0F);
-	        var17 = (double)(((float)var12 + 0.0f) / 256.0F);
-	        var19 = (double)(((float)var12 + 15.99F) / 256.0F);
-			break;
+        	var13 = var10.func_94214_a(8D);
+        	var15 = var10.func_94212_f();
+        	var17 = var10.func_94206_g();
+        	var19 = var10.func_94210_h();
+        	break;
 			
 		case 2:
-			var13 = (double)(((float)var11 +0.0f ) / 256.0F);
-	        var15 = (double)(((float)var11 + 15.99F - 15.99f/2.) / 256.0F);
-	        var17 = (double)(((float)var12 + 0.0f) / 256.0F);
-	        var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+        	var13 = var10.func_94209_e();
+        	var15 = var10.func_94214_a(8D); //var10.func_94212_f();
+        	var15 = var10.func_94209_e() + (var10.func_94212_f() - var10.func_94209_e())/2f; //var10.func_94212_f();
+        	var17 = var10.func_94206_g();
+        	var19 = var10.func_94210_h();
 			break;
 			
 		default:
-	        var13 = (double)((float)var11 / 256.0F);
-	        var15 = (double)(((float)var11 + 15.99F) / 256.0F);
-	        var17 = (double)((float)var12 / 256.0F);
-	        var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+        	var13 = (double)var10.func_94209_e();
+        	var15 = (double)var10.func_94212_f();
+        	var17 = (double)var10.func_94206_g();
+        	var19 = (double)var10.func_94210_h();
 		}
-
-
-        
+    	
         double var21;
         double var23;
         double var25;

@@ -82,15 +82,14 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob{
 		super.initCreature();
 		setRandomArmor(worldObj);
 	}
+	
 	@Override
 	protected int getAttackStrength(World par1World) {
 		ItemStack var2 = this.getHeldItem();
         int var3 = 4;
-
         if (var2 != null){
             var3 += var2.getDamageVsEntity(this);
         }
-
         return var3;
 	}
 	
@@ -98,17 +97,26 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob{
 	public int getMaxHealth() {
 		return 25;
 	}
+	
+	@Override
+	protected String getHurtSound() {
+		return "random.break";
+	}
+
+	@Override
+	protected String getDeathSound() {
+		return "random.break";
+	}
+	
     /**
      * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
      */
 	@Override
     public int getTotalArmorValue(){
         int var1 = super.getTotalArmorValue() + 2;
-
         if (var1 > 20){
             var1 = 20;
         }
-
         return var1;
     }
 	

@@ -94,10 +94,8 @@ public class ModelFox extends ModelBase {
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-
 		float field_78145_g = 4.0f;
 		float field_78151_h = 3.0f;
-
 		if (this.isChild){
 			float var8 = 2.0F;
 			GL11.glPushMatrix();
@@ -112,7 +110,6 @@ public class ModelFox extends ModelBase {
 			BODYROT.render(f5);
 			GL11.glPopMatrix();
 		}else{
-			
 			if(((EntityFox)entity).getEntityState() == EntityStates.sitting){
 				HEADROT.render(f5*1.1f);
 				BODYROT.render(f5);
@@ -120,7 +117,6 @@ public class ModelFox extends ModelBase {
 				HEADROT.render(f5);
 				BODYROT.render(f5);
 			}
-
 		}
 	}
 
@@ -130,8 +126,11 @@ public class ModelFox extends ModelBase {
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+	@Override
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity){
+		super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
+        this.HEADROT.rotateAngleX = par5 / (180F / (float)Math.PI);
+        this.HEADROT.rotateAngleY = par4 / (180F / (float)Math.PI);
 	}
 
 	/* Test method for Rendering Model in Arbitrary Space */
@@ -144,7 +143,8 @@ public class ModelFox extends ModelBase {
 	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
 		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 		EntityFox var5 = (EntityFox)par1EntityLiving;
-		
+
+
 		if(var5.getEntityState() == EntityStates.sitting){
 			TAILROT.rotateAngleX = (float) (10*Math.PI/180);
 			
@@ -160,8 +160,6 @@ public class ModelFox extends ModelBase {
 
 			BODYROT.rotateAngleX = (float) (-35*Math.PI/180);
 			BODYROT.setRotationPoint(0F, 17f, -5F);
-			HEADROT.rotateAngleX = (float) (0*Math.PI/180);
-			HEADROT.setRotationPoint(0F, 16.0F, -3.6F);		
 			
 		}else{
 			TAILROT.rotateAngleX = (float) (-23*Math.PI/180);
@@ -177,8 +175,6 @@ public class ModelFox extends ModelBase {
 			
 			BODYROT.rotateAngleX = (float) (0*Math.PI/180);
 			BODYROT.setRotationPoint(0F, 17.5F, -5F);
-			HEADROT.rotateAngleX = (float) (0*Math.PI/180);
-			HEADROT.setRotationPoint(0F, 17.5F, -5F);
 		}
 	}
 

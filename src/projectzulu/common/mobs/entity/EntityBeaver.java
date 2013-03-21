@@ -61,7 +61,7 @@ public class EntityBeaver extends EntityGenericAnimal implements IAnimals{
 
 	@Override
 	public String getTexture(){
-		this.texture = DefaultProps.mobDiretory + "Beaver.png";
+		this.texture = DefaultProps.mobDiretory + "beaver.png";
 		return super.getTexture();
 	}
 	

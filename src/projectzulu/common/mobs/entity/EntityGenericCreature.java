@@ -1,8 +1,10 @@
 package projectzulu.common.mobs.entity;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.world.World;
+import projectzulu.common.api.CustomEntityList;
 
 public abstract class EntityGenericCreature extends EntityAerial
 {
@@ -53,6 +55,16 @@ public abstract class EntityGenericCreature extends EntityAerial
     	attackTime = Math.max(attackTime-1, 0);
     	fleeingTick = Math.max(fleeingTick-1, 0);
     	angerLevel = Math.max(angerLevel-1, 0);
+	}
+	
+	@Override
+	public int getMaxSpawnedInChunk() {
+		CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+    	if(entityEntry != null){
+    		return entityEntry.modData.get().maxSpawnInChunk;
+    	}else{
+    		return super.getMaxSpawnedInChunk();
+    	}
 	}
 	
     /**

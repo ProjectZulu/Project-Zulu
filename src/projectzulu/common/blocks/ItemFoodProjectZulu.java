@@ -50,7 +50,7 @@ public class ItemFoodProjectZulu extends ItemFood
         this.isWolfsFavoriteMeat = par4;
         this.saturationModifier = par3;
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        this.iconIndex = par5;
+//        this.iconIndex = par5;
     }
 
     public ItemFoodProjectZulu(int par1, int par2, boolean par3, int par4)
@@ -64,9 +64,8 @@ public class ItemFoodProjectZulu extends ItemFood
             return DefaultProps.itemSpriteSheet;
     }
 
-    
-    public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
+    @Override
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer){
         --par1ItemStack.stackSize;
         par3EntityPlayer.getFoodStats().addStats(this);
         par2World.playSoundAtEntity(par3EntityPlayer, "random.burp", 0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);

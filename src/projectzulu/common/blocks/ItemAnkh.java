@@ -20,7 +20,7 @@ public class ItemAnkh extends Item{
 		setMaxDamage(200);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		bFull3D = true;
-		this.iconIndex = 0;
+//		this.iconIndex = 0;
 	}
 	@SideOnly(Side.CLIENT)
 	public String getTextureFile()

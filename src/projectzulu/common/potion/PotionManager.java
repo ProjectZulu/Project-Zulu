@@ -136,15 +136,15 @@ public enum PotionManager {
 		HashMap potionAmplifiers;
 		try {			
 			if(ObfuscationHelper.isUnObfuscated(PotionHelper.class.getDeclaredFields().clone(), "potionRequirements")){
-				/* Grab "potionRequirements" : OBFSC: "m" : potionRequirements --> fields.csv --> joined.srg --> m */
+				/* Grab "potionRequirements" : OBFSC/SrgNames: "m" : potionRequirements --> fields.csv --> joined.srg --> m */
 				fieldPotionRequirement = PotionHelper.class.getDeclaredField("potionRequirements");
 				/* Grab "potionAmplifiers" : OBFSC: n */
 				fieldpotionAmplifiers = PotionHelper.class.getDeclaredField("potionAmplifiers");	
 			}else{
 				/* Grab "potionRequirements" : OBFSC: "m" */
-				fieldPotionRequirement = PotionHelper.class.getDeclaredField("m");
+				fieldPotionRequirement = PotionHelper.class.getDeclaredField("field_77927_l");
 				/* Grab "potionAmplifiers" : OBFSC: n */
-				fieldpotionAmplifiers = PotionHelper.class.getDeclaredField("n");	
+				fieldpotionAmplifiers = PotionHelper.class.getDeclaredField("field_77928_m");	
 			}
 			
 			if(fieldPotionRequirement != null && fieldpotionAmplifiers != null){
@@ -197,7 +197,7 @@ public enum PotionManager {
 					fieldnameToClassMap = TileEntity.class.getDeclaredField("nameToClassMap");
 				}else{
 					/* Grab "nameToClassMap" : OBFSC: "a" */
-					fieldnameToClassMap = TileEntity.class.getDeclaredField("a");
+					fieldnameToClassMap = TileEntity.class.getDeclaredField("field_70326_a");
 				}
 				
 				if(fieldnameToClassMap != null){
@@ -216,7 +216,7 @@ public enum PotionManager {
 
 			/* Sub in Our Own Brewing Stand and Tile Entity */
 			BlockList.customBrewingStand = Optional.of(
-					(new BlockZuluBrewingStand(117)).setHardness(0.5F).setLightValue(0.125F).setBlockName("brewingStand").setRequiresSelfNotify()
+					(new BlockZuluBrewingStand(117)).setHardness(0.5F).setLightValue(0.125F).setUnlocalizedName("brewingStand")
 					);
 			GameRegistry.registerTileEntity(TileEntityZuluBrewingStand.class, "TileEntityZuluBrewingStand");   
 		}

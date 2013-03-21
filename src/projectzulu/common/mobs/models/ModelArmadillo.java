@@ -16,17 +16,13 @@ import org.lwjgl.opengl.GL11;
 import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityStates;
 
-public class ModelArmadillo extends ModelBase
-{
-	int counter = 0;
-//	float startingAngle = 0;
+public class ModelArmadillo extends ModelBase {
 	public ModelRenderer WHOLE;
 	public ModelRenderer HEADPIECE;
 	public ModelRenderer REARRTR1;
 	public ModelRenderer REARRTR2;
 	public ModelRenderer REARRTR3;
 	
-	//Declaration of Ind. Models
     public ModelRenderer leg1;
     public ModelRenderer leg2;
     public ModelRenderer leg3;
@@ -213,19 +209,19 @@ public class ModelArmadillo extends ModelBase
     	  float animSpeed = 2.0f;
     	  if(var5.isCharging()==true){
     		  animSpeed = 5.0f;
-        	  //Make Complete Body Circle
+        	  /* Make Complete Body Circle */
     		  if(var5.eWHOLE.rotateAngleX == (float)((390+360)*Math.PI/180f) ){
     			  var5.eWHOLE.rotateAngleX-=360*Math.PI/180;
     		  }
         	  WHOLE.rotateAngleX = var5.eWHOLE.rotateX(+0.09f*animSpeed, 0f, (float)( (390+360)*Math.PI/180f ));
     	  }else{
     		  animSpeed = 2.0f;
-        	  //Make Complete Body Circle
+        	  /* Make Complete Body Circle */
         	  WHOLE.rotateAngleX = var5.eWHOLE.rotateX(+0.09f*animSpeed, 0f, (float)(390*Math.PI/180f));
     	  }
-    	  //Rotate Face Inward
+    	  /* Rotate Face Inward */
     	  HEADPIECE.rotateAngleX = var5.eHEADPIECE.rotateX(+0.05f*animSpeed,0f,(float)(145*Math.PI/180f));  	  
-    	  //Rear Segments (square) fold to form circle
+    	  /* Rear Segments (square) fold to form circle */
     	  REARRTR1.rotateAngleX = var5.eREARRTR1.rotateX(-0.01f*animSpeed,(float)(-44*Math.PI/180f),0f); 	  
     	  REARRTR2.rotateAngleX = var5.eREARRTR2.rotateX(-0.01f*animSpeed,(float)(-44*Math.PI/180f),0f);  	  
     	  REARRTR3.rotateAngleX = var5.eREARRTR3.rotateX(-0.01f*animSpeed,(float)(-44*Math.PI/180f),0f); 
@@ -235,11 +231,11 @@ public class ModelArmadillo extends ModelBase
     	  leg4.rotationPointZ = var5.eleg4.translateZ(-0.5f*animSpeed, -4f, 4f);
       }else if(var5.getEntityState() != EntityStates.inCover && var5.isCharging() == false){
     	  float animSpeed = 2.0f;
-    	  //Make Complete Body Circle
+    	  /* Make Complete Body Circle */
     	  WHOLE.rotateAngleX = var5.eWHOLE.rotateX(-0.09f*animSpeed, 0f, (float)((390+360)*Math.PI/180f) );
-    	  //Rotate Face Inward
+    	  /* Rotate Face Inward */
     	  HEADPIECE.rotateAngleX = var5.eHEADPIECE.rotateX(-0.05f*animSpeed,0f,(float)(145*Math.PI/180f));  	  
-    	  //Rear Segments (square) fold to form circle
+    	  /* Rear Segments (square) fold to form circle */
     	  REARRTR1.rotateAngleX = var5.eREARRTR1.rotateX(+0.01f*animSpeed,(float)(-44*Math.PI/180f),0f); 	  
     	  REARRTR2.rotateAngleX = var5.eREARRTR2.rotateX(+0.01f*animSpeed,(float)(-44*Math.PI/180f),0f);  	  
     	  REARRTR3.rotateAngleX = var5.eREARRTR3.rotateX(+0.01f*animSpeed,(float)(-44*Math.PI/180f),0f);
@@ -253,33 +249,6 @@ public class ModelArmadillo extends ModelBase
           leg3.rotateAngleX = (float)( MathHelper.cos(4*par2*0.6662F + (float)Math.PI) * 1.4F * par3);
           leg4.rotateAngleX = (float)( MathHelper.cos(4*par2*0.6662F				 ) * 1.4F * par3);
       }
-
-      
-//      if(var5.takeCover == true){
-//    	  //Make Complete Body Circle
-//    	  if(WHOLE.rotateAngleX < 359f*(float)Math.PI/180f){WHOLE.rotateAngleX = Math.min(WHOLE.rotateAngleX+0.09f, 359*(float)Math.PI/180f);}
-//    	  ModLoader.getMinecraftInstance().thePlayer.addChatMessage(Boolean.toString(var5.takeCover));
-//    	  //Rotate Face Inward
-//    	  if(HEADPIECE.rotateAngleX < 90*Math.PI/180f){HEADPIECE.rotateAngleX = (float) Math.min(HEADPIECE.rotateAngleX+0.05, 90*Math.PI/180f);}	  
-//    	  //Rear Segments (square) fold to form circle
-//    	  if(REARRTR1.rotateAngleX > -44*Math.PI/180f){
-//    		  REARRTR1.rotateAngleX = (float) Math.max(REARRTR1.rotateAngleX-0.01, -44*Math.PI/180f);
-//    		  REARRTR2.rotateAngleX = (float) Math.max(REARRTR2.rotateAngleX-0.01, -44*Math.PI/180f);
-//    		  REARRTR3.rotateAngleX = (float) Math.max(REARRTR3.rotateAngleX-0.01, -44*Math.PI/180f);
-//    	  }
-//      }else if(var5.takeCover == false){
-//    	  //Make Complete Body Circle [reverse]
-//    	  if(WHOLE.rotateAngleX > 0*Math.PI/180f){WHOLE.rotateAngleX = (float) Math.max(WHOLE.rotateAngleX-0.09, 0*Math.PI/180f);}
-//    	  //Rotate Face Outward
-//    	  if(HEADPIECE.rotateAngleX > 0*Math.PI/180f){HEADPIECE.rotateAngleX = (float) Math.max(HEADPIECE.rotateAngleX-0.05, 0*Math.PI/180f);}
-//
-//    	  //Rear Segments Compress
-//    	  if(REARRTR1.rotateAngleX < 0*Math.PI/180f){
-//    		  REARRTR1.rotateAngleX = (float) Math.min(REARRTR1.rotateAngleX+0.01, 0*Math.PI/180f);
-//    		  REARRTR2.rotateAngleX = (float) Math.min(REARRTR2.rotateAngleX+0.01, 0*Math.PI/180f);
-//    		  REARRTR3.rotateAngleX = (float) Math.min(REARRTR3.rotateAngleX+0.01, 0*Math.PI/180f);
-//    	  }
-//      }
   }
   
 

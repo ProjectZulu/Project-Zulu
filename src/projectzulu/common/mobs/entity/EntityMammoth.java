@@ -36,15 +36,7 @@ import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
 public class EntityMammoth extends EntityGenericAnimal implements IAnimals{	
-	public EntityModelRotation eWHOLE = new EntityModelRotation();
-	public EntityModelRotation eHEADPIECE = new EntityModelRotation();
-	public EntityModelRotation eREARRTR1 = new EntityModelRotation();
-	public EntityModelRotation eREARRTR2 = new EntityModelRotation();
-	public EntityModelRotation eREARRTR3 = new EntityModelRotation();
-	public EntityModelRotation etail = new EntityModelRotation();
-	public EntityModelRotation eleg3 = new EntityModelRotation();
-	public EntityModelRotation eleg4 = new EntityModelRotation();
-
+	
 	//	public int stampedeTime = 0;
 	Vec3 stampedeDirection = Vec3.createVectorHelper(0, 0, 0);
 	public int timeLeftStampeding = 0;
@@ -99,17 +91,17 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 		if(getSaddled()){
 			if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
 					|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-				this.texture = DefaultProps.mobDiretory + "Mammoth_Snow_Saddle.png";
+				this.texture = DefaultProps.mobDiretory + "mammoth_snow_saddle.png";
 			}else{
-				this.texture = DefaultProps.mobDiretory + "Mammoth_Saddle.png";
+				this.texture = DefaultProps.mobDiretory + "mammoth_saddle.png";
 			}
 
 		}else{
 			if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
 					|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-				this.texture = DefaultProps.mobDiretory + "Mammoth_Snow.png";
+				this.texture = DefaultProps.mobDiretory + "mammoth_snow.png";
 			}else{
-				this.texture = DefaultProps.mobDiretory + "Mammoth.png";
+				this.texture = DefaultProps.mobDiretory + "mammoth.png";
 			}
 		}
 		return super.getTexture();

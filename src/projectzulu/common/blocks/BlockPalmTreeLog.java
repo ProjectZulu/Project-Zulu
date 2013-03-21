@@ -6,72 +6,57 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.core.DefaultProps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPalmTreeLog extends Block
-{
-    public BlockPalmTreeLog(int par1, int par2)
-    {
+public class BlockPalmTreeLog extends Block{
+	
+    public BlockPalmTreeLog(int par1, int par2){
         super(par1, Material.wood);
-        this.blockIndexInTexture = par2;
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        this.setRequiresSelfNotify();
-        this.setBurnProperties(this.blockID, 5, 20);
+        Block.setBurnProperties(this.blockID, 5, 20);
     }
 
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
-    {
+    public int getRenderType(){
         return 0;
     }
-
-	@SideOnly(Side.CLIENT)
-    public String getTextureFile()
-    {
-    	return DefaultProps.blockSpriteSheet;
-    }
-
     
     /**
      * Returns the quantity of items to drop on block destruction.
      */
-    public int quantityDropped(Random par1Random)
-    {
+    public int quantityDropped(Random par1Random){
         return 1;
     }
 
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    public int idDropped(int par1, Random par2Random, int par3)
-    {
+    public int idDropped(int par1, Random par2Random, int par3){
         return this.blockID;
     }
+    
+    /**
+     * Determines the damage on the item the block drops. Used in cloth and wood.
+     */
+    public int damageDropped(int par1){
+        return par1;
+    }    
 
     /**
      * ejects contained items into the world, and notifies neighbors of an update, as appropriate
      */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-    {
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6){
         byte var7 = 4;
         int var8 = var7 + 1;
 
-        if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8))
-        {
-            for (int var9 = -var7; var9 <= var7; ++var9)
-            {
-                for (int var10 = -var7; var10 <= var7; ++var10)
-                {
-                    for (int var11 = -var7; var11 <= var7; ++var11)
-                    {
+        if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8)){
+            for (int var9 = -var7; var9 <= var7; ++var9){
+                for (int var10 = -var7; var10 <= var7; ++var10){
+                    for (int var11 = -var7; var11 <= var7; ++var11){
                         int var12 = par1World.getBlockId(par2 + var9, par3 + var10, par4 + var11);
 
-                        if (Block.blocksList[var12] != null)
-                        {
+                        if (Block.blocksList[var12] != null){
                             Block.blocksList[var12].beginLeavesDecay(par1World, par2 + var9, par3 + var10, par4 + var11);
                         }
                     }
@@ -80,24 +65,13 @@ public class BlockPalmTreeLog extends Block
         }
     }
 
-
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and wood.
-     */
-    public int damageDropped(int par1)
-    {
-        return par1;
-    }
-
     @Override
-    public boolean canSustainLeaves(World world, int x, int y, int z)
-    {
+    public boolean canSustainLeaves(World world, int x, int y, int z){
         return true;
     }
 
     @Override
-    public boolean isWood(World world, int x, int y, int z)
-    {
+    public boolean isWood(World world, int x, int y, int z){
         return true;
     }
 }

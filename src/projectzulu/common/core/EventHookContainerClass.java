@@ -107,7 +107,7 @@ public class EventHookContainerClass {
 				}
 
 				/* Increase Speed if Wearing Fur */
-				if(thePlayer.inventory.armorInventory[0] != null && ItemList.furArmorBoot.isPresent() && thePlayer.inventory.armorInventory[0].itemID == ItemList.furArmorBoot.get().itemID ){
+				if(thePlayer.inventory.armorInventory[0] != null && ItemList.furArmorBoots.isPresent() && thePlayer.inventory.armorInventory[0].itemID == ItemList.furArmorBoots.get().itemID ){
 					velocityModifier += 0.005;
 				}
 				if(thePlayer.inventory.armorInventory[1] != null && ItemList.furArmorLeg.isPresent() && thePlayer.inventory.armorInventory[1].itemID == ItemList.furArmorLeg.get().itemID){
@@ -163,7 +163,7 @@ public class EventHookContainerClass {
 			/* Check if Location is Valid for Tombstone */
 			if(worldObj.isAirBlock((int)player.posX, (int)player.posY, (int)player.posZ)){
 				/* Place a Tombstone */
-				worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, BlockList.tombstone.get().blockID);
+				worldObj.func_94575_c((int)player.posX, (int)player.posY, (int)player.posZ, BlockList.tombstone.get().blockID);
 				TileEntity tileEntity = worldObj.getBlockTileEntity((int)player.posX, (int)player.posY, (int)player.posZ);
 				if(tileEntity != null && tileEntity instanceof TileEntityTombstone ){
 					((TileEntityTombstone)tileEntity).setSignString(event.source.getDeathMessage((EntityPlayer)event.entity));
@@ -191,7 +191,7 @@ public class EventHookContainerClass {
 				if(hurtEntity.inventory.armorInventory[1] != null && ItemList.cactusArmorLeg.isPresent() && hurtEntity.inventory.armorInventory[1].itemID == ItemList.cactusArmorLeg.get().itemID){
 					cactusDamage+=0.5;
 				}
-				if(hurtEntity.inventory.armorInventory[0] != null && ItemList.cactusArmorBoot.isPresent() && hurtEntity.inventory.armorInventory[0].itemID == ItemList.cactusArmorBoot.get().itemID){
+				if(hurtEntity.inventory.armorInventory[0] != null && ItemList.cactusArmorBoots.isPresent() && hurtEntity.inventory.armorInventory[0].itemID == ItemList.cactusArmorBoots.get().itemID){
 					cactusDamage+=0.5;
 				}
 				

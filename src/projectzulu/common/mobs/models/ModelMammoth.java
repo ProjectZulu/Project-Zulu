@@ -352,6 +352,4 @@ public class ModelMammoth extends ModelBase {
 			return value;
 		}
 	}
-
-
 }

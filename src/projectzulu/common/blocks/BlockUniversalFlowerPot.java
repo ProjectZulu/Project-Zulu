@@ -2,29 +2,30 @@ package projectzulu.common.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockUniversalFlowerPot extends BlockContainer{
 	
 	protected BlockUniversalFlowerPot(int par1) {
 		super(par1, Material.wood);
-        this.blockIndexInTexture = 186;
-        this.setBlockBoundsForItemRender();
-//        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-
+        this.setBlockBoundsForItemRender();        
         float var1 = 0.375F;
         float var2 = var1 / 2.0F;
         this.setBlockBounds(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, var1, 0.5F + var2);
 	}
 	
-	@Override
-	public String getTextureFile() {
-//		return "/gui/items.png";
-		return super.getTextureFile();
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void func_94332_a(IconRegister par1IconRegister){
+		this.field_94336_cN = par1IconRegister.func_94245_a("flowerPot");
+
+    }
 	
     /**
      * The type of render function that is called for this block

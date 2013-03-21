@@ -42,7 +42,7 @@ public enum CustomEntityManager {
 			if(entity.shouldExist()){
 				entity.registerEntity();
 				entity.registerEgg();
-				entity.outputDataToList(configDirectory);
+				entity.loadCustomMobData(configDirectory);
 			}
 		}
 	}

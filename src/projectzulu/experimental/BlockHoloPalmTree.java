@@ -14,27 +14,27 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockHoloPalmTree extends Block{
 
 	public BlockHoloPalmTree(int par1, int par2){
-		super(par1, par2, Material.wood);
+		super(par1, Material.wood);
 		
 		this.setTickRandomly(true);
 
 		this.setCreativeTab(CreativeTabs.tabBlock);
-		this.setRequiresSelfNotify();
 	}
 	
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) 
-	{
-			switch (par2) {
-			case 0:
-				return 17;
-			case 1:
-				return 19;
-			case 2:
-				return 18;
-			default:
-				return 17;
-			}
-	}
+	//TODO Commented
+//	public int getBlockTextureFromSideAndMetadata(int par1, int par2) 
+//	{
+//			switch (par2) {
+//			case 0:
+//				return 17;
+//			case 1:
+//				return 19;
+//			case 2:
+//				return 18;
+//			default:
+//				return 17;
+//			}
+//	}
 	
 	public int damageDropped(int par1)
 	{

@@ -43,7 +43,7 @@ public class WorldGenReplaceTop extends WorldGenerator
     				for (int j = 0; j < 2; j++) {
     					for (int j2 = 0; j2 < genReplace.length; j2++) {
     						if(par1World.getBlockId(var7, var8+j, var9) == genReplace[j2] ){
-    							par1World.setBlockWithNotify(var7, var8+j, var9, genID);
+    							par1World.func_94575_c(var7, var8+j, var9, genID);
     						}
     					}
     				}

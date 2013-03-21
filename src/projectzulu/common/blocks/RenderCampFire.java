@@ -1,30 +1,52 @@
 package projectzulu.common.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderCampFire implements ISimpleBlockRenderingHandler{
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID,
-			RenderBlocks renderer) {
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+		RenderItem itemRenderer = new RenderItem();
+		
+		ItemStack itemStackToRender = new ItemStack(block,1,metadata);
+		
+		itemRenderer.setRenderManager(RenderManager.instance);
+		EntityItem entityItemToRender = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, itemStackToRender);
+		entityItemToRender.hoverStart = 0;
+		
+        float scaleItem = 1.5f;
+        GL11.glPushMatrix();
+        Minecraft.getMinecraft().renderEngine.func_98187_b("/terrain.png");
+        GL11.glRotatef((float) (90f*Math.PI/180f), 1, 0, 0);
+        GL11.glScalef(scaleItem, scaleItem, scaleItem);
+		itemRenderer.doRenderItem(entityItemToRender, 0, 0, 0, 0, 0);
+        GL11.glPopMatrix();
 	}
-
+	
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
-			Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		return render(world, x, y, z, block, modelId, renderer);
 	}
-
+	
 	/**
 	 * Render Campfire Stones
 	 */
-	public boolean render(IBlockAccess blockAccess, int par2, int par3, int par4,
-			Block par1Block, int modelId, RenderBlocks renderer){
+	public boolean render(IBlockAccess blockAccess, int par2, int par3, int par4, Block par1Block, int modelId, RenderBlocks renderer){
 
 		Tessellator var5 = Tessellator.instance;
 		var5.setBrightness(par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4));
@@ -34,8 +56,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 		float var9 = (float)(var7 >> 8 & 255) / 255.0F;
 		float var10 = (float)(var7 & 255) / 255.0F;
 
-		if (EntityRenderer.anaglyphEnable)
-		{
+		if (EntityRenderer.anaglyphEnable){
 			float var11 = (var8 * 30.0F + var9 * 59.0F + var10 * 11.0F) / 100.0F;
 			float var12 = (var8 * 30.0F + var9 * 70.0F) / 100.0F;
 			float var13 = (var8 * 30.0F + var10 * 70.0F) / 100.0F;
@@ -49,12 +70,21 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 		double var20 = (double)par3;
 		double var15 = (double)par4;
 		
-		/* Render If Should and Render Campfire Fire*/
-		if(blockAccess.getBlockMetadata(par2, par3, par4) > 1 ){
+		switch (BlockCampfire.Type.getTypeByMeta(blockAccess.getBlockMetadata(par2, par3, par4))) {
+		case WoodFire:
+		case StoneFire:
+			/* Render If Should and Render Campfire Fire*/
 			renderBlockFire(blockAccess, par2, par3, par4, par1Block, modelId, renderer);
+			break;
+		case Stone:
+		case Wood:
+			break;
 		}
+
 		
-		if( blockAccess.getBlockMetadata(par2, par3, par4) == 0 || blockAccess.getBlockMetadata(par2, par3, par4) == 2  ){
+		switch (BlockCampfire.Type.getTypeByMeta(blockAccess.getBlockMetadata(par2, par3, par4))) {
+		case Wood:
+		case WoodFire:
 			/* Render Campfire Logs*/
 			renderCampireRectangle2Sides(par1Block, 20, 21, blockAccess.getBlockMetadata(par2, par3, par4), var19     , var20, var15     , renderer, 0.35, 0.2, 0.2, 45*Math.PI/180);
 			renderCampireRectangle2Sides(par1Block, 20, 21, blockAccess.getBlockMetadata(par2, par3, par4), var19+0.24, var20, var15+0.24, renderer, 0.33, 0.2, 0.2, 45*Math.PI/180);
@@ -62,10 +92,9 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 			
 			renderCampireRectangle2Sides(par1Block, 20, 21, blockAccess.getBlockMetadata(par2, par3, par4), var19-0.21, var20, var15+0.21, renderer, 0.4, 0.2, 0.2, (90+45)*Math.PI/180);
 			renderCampireRectangle2Sides(par1Block, 20, 21, blockAccess.getBlockMetadata(par2, par3, par4), var19+0.21, var20, var15-0.21, renderer, 0.4, 0.2, 0.2, (90+45)*Math.PI/180);
-
-		}
-		
-		if( blockAccess.getBlockMetadata(par2, par3, par4) == 1 || blockAccess.getBlockMetadata(par2, par3, par4) == 3 ){
+			break;
+		case Stone:
+		case StoneFire:
 			/* Render Campfire Logs*/
 			renderCampireRectangle2Sides(par1Block, 20, 21, blockAccess.getBlockMetadata(par2, par3, par4), var19     , var20, var15     , renderer, 0.2, 0.2, 0.2, 45*Math.PI/180);
 			renderCampireRectangle2Sides(par1Block, 20, 21, blockAccess.getBlockMetadata(par2, par3, par4), var19+0.14, var20, var15+0.14, renderer, 0.2, 0.2, 0.2, 45*Math.PI/180);
@@ -90,11 +119,8 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 			renderCampireRectangle(par1Block, 16, blockAccess.getBlockMetadata(par2, par3, par4), var19-0.33, var20, var15-0.33, renderer, 0.3, 0.2, 0.3, 135*Math.PI/180);
 			renderCampireRectangle(par1Block, 16, blockAccess.getBlockMetadata(par2, par3, par4), var19-0.33, var20, var15+0.33, renderer, 0.3, 0.2, 0.3, 45*Math.PI/180);
 			renderCampireRectangle(par1Block, 16, blockAccess.getBlockMetadata(par2, par3, par4), var19+0.33, var20, var15-0.33, renderer, 0.3, 0.2, 0.3, 45*Math.PI/180);
-
+			break;
 		}
-		
-
-		
 		return true;
 	}
 	/**
@@ -113,14 +139,13 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 	 * @return
 	 */
 	private boolean renderCampireRectangle2Sides(Block par1Block, int index1, int index2, int par2, double par3, double par5, double par7, RenderBlocks renderer, double xWidth, double zWidth, double yMax, double angle){
-		Tessellator var9 = Tessellator.instance;
-		int var11 = (index1 & 15) << 4;
-		int var12 = index1 & 240;
-		double var13 = (double)((float)var11 / 256.0F);
-		double var15 = (double)(((float)var11 + 15.99F*0.5) / 256.0F);
-		double var17 = (double)((float)var12 / 256.0F);
-		double var19 = (double)(((float)var12 + 15.99F*0.5) / 256.0F);
-		
+		Tessellator var9 = Tessellator.instance;		
+    	Icon var10 = renderer.func_94165_a(Block.wood, 2, 0);
+    	double var13 = var10.func_94209_e();
+    	double var15 = var10.func_94209_e() + (var10.func_94212_f() - var10.func_94209_e())/2.01f;
+    	double var17 = var10.func_94206_g();
+    	double var19 = var10.func_94206_g() + (var10.func_94210_h() - var10.func_94206_g())/2.01f;
+    	
 		double yMin = 0.0f;
 				
 		double intermedVarX = -xWidth/2;
@@ -187,14 +212,13 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 		var9.addVertexWithUV(point3X, par5 + yMin, point3Z, var15, var19);
 		var9.addVertexWithUV(point2X, par5 + yMin, point2Z, var13, var19);
 		var9.addVertexWithUV(point1X, par5 + yMin, point1Z, var13, var17);
-
-		var11 = (index2 & 15) << 4;
-		var12 = index2 & 240;
-		var13 = (double)(((float)var11 + 15.99F*0.25) / 256.0F);
-		var15 = (double)(((float)var11 + 15.99F*0.75) / 256.0F);
-		var17 = (double)(((float)var12 + 15.99F*0.25) / 256.0F);
-		var19 = (double)(((float)var12 + 15.99F*0.75) / 256.0F);
-
+		
+    	var10 = renderer.func_94165_a(Block.wood, 1, 0);
+    	var13 = var10.func_94209_e() + (var10.func_94212_f() - var10.func_94209_e())*0.99f/4f;
+    	var15 = var10.func_94209_e() + (var10.func_94212_f() - var10.func_94209_e())*2.99f/4f;
+    	var17 = var10.func_94206_g() + (var10.func_94210_h() - var10.func_94206_g())*0.99f/4f;
+    	var19 = var10.func_94206_g() + (var10.func_94210_h() - var10.func_94206_g())*2.99f/4f;
+		
 		/* Side 1 */
 		var9.addVertexWithUV(point1X, par5 + yMin, point1Z, var13, var17);
 		var9.addVertexWithUV(point1X, par5 + yMax, point1Z, var13, var19);
@@ -236,13 +260,12 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 	 * @return
 	 */
 	private boolean renderCampireRectangle(Block par1Block, int var10, int par2, double par3, double par5, double par7, RenderBlocks renderer, double xWidth, double zWidth, double yMax, double angle){
-		Tessellator var9 = Tessellator.instance;
-		int var11 = (var10 & 15) << 4;
-		int var12 = var10 & 240;
-		double var13 = (double)((float)var11 / 256.0F);
-		double var15 = (double)(((float)var11 + 15.99F*0.5) / 256.0F);
-		double var17 = (double)((float)var12 / 256.0F);
-		double var19 = (double)(((float)var12 + 15.99F*0.5) / 256.0F);
+		Tessellator var9 = Tessellator.instance;		
+    	Icon icon = renderer.func_94165_a(Block.cobblestone,3, 2);
+    	double var13 = icon.func_94209_e();
+    	double var15 = icon.func_94209_e() + (icon.func_94212_f() - icon.func_94209_e())/2.01f;
+    	double var17 = icon.func_94206_g();
+    	double var19 = icon.func_94206_g() + (icon.func_94210_h() - icon.func_94206_g())/2.01f;
 		
 		double yMin = 0.0f;
 				
@@ -338,25 +361,17 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 	/**
 	 * Renders a fire block at the given coordinates
 	 */
-	public boolean renderBlockFire(IBlockAccess blockAccess, int par2, int par3, int par4,
-			Block par1Block, int modelId, RenderBlocks renderer)
-	{
+	public boolean renderBlockFire(IBlockAccess blockAccess, int par2, int par3, int par4, Block par1Block, int modelId, RenderBlocks renderer){
 		Tessellator var5 = Tessellator.instance;
-		int var6 = 31;
-
-		//        if (this.overrideBlockTexture >= 0)
-		//        {
-		//            var6 = this.overrideBlockTexture;
-		//        }
-
 		var5.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 		var5.setBrightness(par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4));
-		int var7 = (var6 & 15) << 4;
-		int var8 = var6 & 240;
-		double var9 = (double)((float)var7 / 256.0F);
-		double var11 = (double)(((float)var7 + 15.99F) / 256.0F);
-		double var13 = (double)((float)var8 / 256.0F);
-		double var15 = (double)(((float)var8 + 15.99F) / 256.0F);
+		
+    	Icon icon = renderer.func_94165_a(Block.fire, 0, 0);
+    	double var9 = icon.func_94209_e();
+    	double var11 = icon.func_94212_f();
+    	double var13 = icon.func_94206_g();
+    	double var15 = icon.func_94210_h();
+		
 		float var17 = 1.4F;
 		double var20;
 		double var22;
@@ -366,127 +381,121 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 		double var30;
 		double var32;
 
-//		if (!blockAccess.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && !Block.fire.canBlockCatchFire(blockAccess, par2, par3 - 1, par4, UP))
-//		{
-//			float var36 = 0.2F;
-//			float var19 = 0.0625F;
-//
-//			if ((par2 + par3 + par4 & 1) == 1)
-//			{
-//				var9 = (double)((float)var7 / 256.0F);
-//				var11 = (double)(((float)var7 + 15.99F) / 256.0F);
-//				var13 = (double)((float)(var8 + 16) / 256.0F);
-//				var15 = (double)(((float)var8 + 15.99F + 16.0F) / 256.0F);
-//			}
-//
-//			if ((par2 / 2 + par3 / 2 + par4 / 2 & 1) == 1)
-//			{
-//				var20 = var11;
-//				var11 = var9;
-//				var9 = var20;
-//			}
-//
-//			if (Block.fire.canBlockCatchFire(blockAccess, par2 - 1, par3, par4, EAST))
-//			{
-//				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-//				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
-//				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
-//				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
-//			}
-//
-//			if (Block.fire.canBlockCatchFire(blockAccess, par2 + 1, par3, par4, WEST))
-//			{
-//				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
-//				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-//				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
-//				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
-//				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
-//				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
-//				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-//				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
-//			}
-//
-//			if (Block.fire.canBlockCatchFire(blockAccess, par2, par3, par4 - 1, SOUTH))
-//			{
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var11, var13);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var11, var15);
-//				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-//				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var9, var13);
-//				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var9, var13);
-//				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var11, var15);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var11, var13);
-//			}
-//
-//			if (Block.fire.canBlockCatchFire(blockAccess, par2, par3, par4 + 1, NORTH))
-//			{
-//				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var9, var13);
-//				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var9, var15);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var11, var15);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var11, var13);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var11, var13);
-//				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var11, var15);
-//				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var9, var15);
-//				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var9, var13);
-//			}
-//
-//			if (Block.fire.canBlockCatchFire(blockAccess, par2, par3 + 1, par4, DOWN))
-//			{
-//				var20 = (double)par2 + 0.5D + 0.5D; // 1
-//				var22 = (double)par2 + 0.5D - 0.5D; // 0
-//				var24 = (double)par4 + 0.5D + 0.5D; 
-//				var26 = (double)par4 + 0.5D - 0.5D;
-//
-//				var28 = (double)par2 + 0.5D - 0.5D;
-//				var30 = (double)par2 + 0.5D + 0.5D;
-//				var32 = (double)par4 + 0.5D - 0.5D;
-//				double var34 = (double)par4 + 0.5D + 0.5D;
-//
-//				var9 = (double)((float)var7 / 256.0F);
-//				var11 = (double)(((float)var7 + 15.99F) / 256.0F);
-//				var13 = (double)((float)var8 / 256.0F);
-//				var15 = (double)(((float)var8 + 15.99F) / 256.0F);
-//				++par3;
-//				var17 = -0.2F;
-//
-//				if ((par2 + par3 + par4 & 1) == 0)
-//				{
-//					var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0), var11, var13);
-//					var5.addVertexWithUV(var20, (double)(par3 + 0), (double)(par4 + 0), var11, var15);
-//					var5.addVertexWithUV(var20, (double)(par3 + 0), (double)(par4 + 1), var9, var15);
-//					var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 1), var9, var13);
-//					var9 = (double)((float)var7 / 256.0F);
-//					var11 = (double)(((float)var7 + 15.99F) / 256.0F);
-//					var13 = (double)((float)(var8 + 16) / 256.0F);
-//					var15 = (double)(((float)var8 + 15.99F + 16.0F) / 256.0F);
-//					var5.addVertexWithUV(var30, (double)((float)par3 + var17), (double)(par4 + 1), var11, var13);
-//					var5.addVertexWithUV(var22, (double)(par3 + 0), (double)(par4 + 1), var11, var15);
-//					var5.addVertexWithUV(var22, (double)(par3 + 0), (double)(par4 + 0), var9, var15);
-//					var5.addVertexWithUV(var30, (double)((float)par3 + var17), (double)(par4 + 0), var9, var13);
-//				}
-//				else
-//				{
-//					var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17), var34, var11, var13);
-//					var5.addVertexWithUV((double)(par2 + 0), (double)(par3 + 0), var26, var11, var15);
-//					var5.addVertexWithUV((double)(par2 + 1), (double)(par3 + 0), var26, var9, var15);
-//					var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17), var34, var9, var13);
-//					var9 = (double)((float)var7 / 256.0F);
-//					var11 = (double)(((float)var7 + 15.99F) / 256.0F);
-//					var13 = (double)((float)(var8 + 16) / 256.0F);
-//					var15 = (double)(((float)var8 + 15.99F + 16.0F) / 256.0F);
-//					var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17), var32, var11, var13);
-//					var5.addVertexWithUV((double)(par2 + 1), (double)(par3 + 0), var24, var11, var15);
-//					var5.addVertexWithUV((double)(par2 + 0), (double)(par3 + 0), var24, var9, var15);
-//					var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17), var32, var9, var13);
-//				}
-//			}
-//		}
-//		else
-//		{
+		if (!blockAccess.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && !Block.fire.canBlockCatchFire(blockAccess, par2, par3 - 1, par4, ForgeDirection.UP)){
+			float var36 = 0.2F;
+			float var19 = 0.0625F;
+
+			if ((par2 + par3 + par4 & 1) == 1){
+		    	var9 = icon.func_94209_e();
+		    	var11 = icon.func_94212_f();
+		    	var13 = icon.func_94206_g();
+		    	var15 = icon.func_94210_h();
+
+			}
+
+			if ((par2 / 2 + par3 / 2 + par4 / 2 & 1) == 1){
+				var20 = var11;
+				var11 = var9;
+				var9 = var20;
+			}
+
+			if (Block.fire.canBlockCatchFire(blockAccess, par2 - 1, par3, par4, ForgeDirection.EAST)){
+				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
+				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
+				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
+				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
+			}
+
+			if (Block.fire.canBlockCatchFire(blockAccess, par2 + 1, par3, par4, ForgeDirection.WEST)){
+				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
+				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
+				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
+				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
+				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
+				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
+				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
+				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
+			}
+
+			if (Block.fire.canBlockCatchFire(blockAccess, par2, par3, par4 - 1, ForgeDirection.SOUTH)){
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var11, var13);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var11, var15);
+				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
+				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var9, var13);
+				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var9, var13);
+				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var11, var15);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var11, var13);
+			}
+
+			if (Block.fire.canBlockCatchFire(blockAccess, par2, par3, par4 + 1, ForgeDirection.NORTH)){
+				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var9, var13);
+				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var9, var15);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var11, var15);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var11, var13);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var11, var13);
+				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var11, var15);
+				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var9, var15);
+				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var9, var13);
+			}
+
+			if (Block.fire.canBlockCatchFire(blockAccess, par2, par3 + 1, par4, ForgeDirection.DOWN)){
+				var20 = (double)par2 + 0.5D + 0.5D; // 1
+				var22 = (double)par2 + 0.5D - 0.5D; // 0
+				var24 = (double)par4 + 0.5D + 0.5D; 
+				var26 = (double)par4 + 0.5D - 0.5D;
+
+				var28 = (double)par2 + 0.5D - 0.5D;
+				var30 = (double)par2 + 0.5D + 0.5D;
+				var32 = (double)par4 + 0.5D - 0.5D;
+				double var34 = (double)par4 + 0.5D + 0.5D;
+
+		    	var9 = icon.func_94209_e();
+		    	var11 = icon.func_94212_f();
+		    	var13 = icon.func_94206_g();
+		    	var15 = icon.func_94210_h();
+
+				++par3;
+				var17 = -0.2F;
+
+				if ((par2 + par3 + par4 & 1) == 0){
+					var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0), var11, var13);
+					var5.addVertexWithUV(var20, (double)(par3 + 0), (double)(par4 + 0), var11, var15);
+					var5.addVertexWithUV(var20, (double)(par3 + 0), (double)(par4 + 1), var9, var15);
+					var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 1), var9, var13);
+
+					var9 = icon.func_94209_e();
+			    	var11 = icon.func_94212_f();
+			    	var13 = icon.func_94206_g();
+			    	var15 = icon.func_94210_h();
+
+					var5.addVertexWithUV(var30, (double)((float)par3 + var17), (double)(par4 + 1), var11, var13);
+					var5.addVertexWithUV(var22, (double)(par3 + 0), (double)(par4 + 1), var11, var15);
+					var5.addVertexWithUV(var22, (double)(par3 + 0), (double)(par4 + 0), var9, var15);
+					var5.addVertexWithUV(var30, (double)((float)par3 + var17), (double)(par4 + 0), var9, var13);
+				}
+				else{
+					var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17), var34, var11, var13);
+					var5.addVertexWithUV((double)(par2 + 0), (double)(par3 + 0), var26, var11, var15);
+					var5.addVertexWithUV((double)(par2 + 1), (double)(par3 + 0), var26, var9, var15);
+					var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17), var34, var9, var13);
+
+					var9 = icon.func_94209_e();
+			    	var11 = icon.func_94212_f();
+			    	var13 = icon.func_94206_g();
+			    	var15 = icon.func_94210_h();
+
+					var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17), var32, var11, var13);
+					var5.addVertexWithUV((double)(par2 + 1), (double)(par3 + 0), var24, var11, var15);
+					var5.addVertexWithUV((double)(par2 + 0), (double)(par3 + 0), var24, var9, var15);
+					var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17), var32, var9, var13);
+				}
+			}
+		}else{
 			double var18 = (double)par2 + 0.5D + 0.2D;
 			var20 = (double)par2 + 0.5D - 0.2D; // 
 			var22 = (double)par4 + 0.5D + 0.2D;
@@ -505,10 +514,11 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 			var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0.8), var9, var13);
 
 
-			var9 = (double)((float)var7 / 256.0F);
-			var11 = (double)(((float)var7 + 15.99F) / 256.0F);
-			var13 = (double)((float)(var8 + 16) / 256.0F);
-			var15 = (double)(((float)var8 + 15.99F + 16.0F) / 256.0F);
+	    	var9 = icon.func_94209_e();
+	    	var11 = icon.func_94212_f();
+	    	var13 = icon.func_94206_g();
+	    	var15 = icon.func_94210_h();
+
 			var5.addVertexWithUV( (double)(par2 + 0.8), (double)((float)par3 + var17), var32, var11, var13);
 			var5.addVertexWithUV( (double)(par2 + 0.8), (double)(par3 + 0), var24, var11, var15);
 			var5.addVertexWithUV( (double)(par2 + 0.2), (double)(par3 + 0), var24, var9, var15);
@@ -535,11 +545,11 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 			var5.addVertexWithUV(var20, (double)(par3 + 0),            (double)(par4 + 0.8), var9, var15);
 			var5.addVertexWithUV(var20, (double)(par3 + 0),            (double)(par4 + 0.2), var11, var15);
 			var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0.2), var11, var13);
-//
-			var9 = (double)((float)var7 / 256.0F);
-			var11 = (double)(((float)var7 + 15.99F) / 256.0F);
-			var13 = (double)((float)var8 / 256.0F);
-			var15 = (double)(((float)var8 + 15.99F) / 256.0F);
+			
+	    	var9 = icon.func_94209_e();
+	    	var11 = icon.func_94212_f();
+	    	var13 = icon.func_94206_g();
+	    	var15 = icon.func_94210_h();
 
 			var5.addVertexWithUV((double)(par2 + 0.2), (double)((float)par3 + var17), var32, var9, var13);
 			var5.addVertexWithUV((double)(par2 + 0.2), (double)(par3 + 0), var24, var9, var15);
@@ -549,15 +559,13 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 			var5.addVertexWithUV((double)(par2 + 0.8), (double)(par3 + 0), var22, var9, var15);
 			var5.addVertexWithUV((double)(par2 + 0.2), (double)(par3 + 0), var22, var11, var15);
 			var5.addVertexWithUV((double)(par2 + 0.2), (double)((float)par3 + var17), var30, var11, var13);
-//		}
-
+		}
+			
 		return true;
 	}
-
-
+	
 	@Override
 	public boolean shouldRender3DInInventory() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -565,5 +573,4 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 	public int getRenderId() {
 		return 0;
 	}
-
 }

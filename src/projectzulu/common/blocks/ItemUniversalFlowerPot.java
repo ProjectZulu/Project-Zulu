@@ -1,16 +1,13 @@
 package projectzulu.common.blocks;
 
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemReed;
+import projectzulu.common.ProjectZulu_Core;
 
-public class ItemUniversalFlowerPot extends ItemBlock{
-
-	public ItemUniversalFlowerPot(int par1) {
-		super(par1);
-		setIconCoord(13, 11);
-	}
+public class ItemUniversalFlowerPot extends ItemReed{
 	
-	@Override
-	public String getTextureFile() {
-		return "/gui/items.png";
+	public ItemUniversalFlowerPot(int par1, Block block) {
+		super(par1, block);
+		setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 	}
 }

@@ -25,7 +25,7 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.common.Loader;
-
+@Deprecated
 public class EntityZulu extends EntityHerd implements IAnimals {	
 	/* Uncategorized Variables */
 	public final static float attackAnimTime = 20;

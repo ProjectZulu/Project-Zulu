@@ -1,115 +1,53 @@
 package projectzulu.common.blocks;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import projectzulu.common.api.ItemList;
-import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWateredDirt extends Block{
-
+	public static final String[] imageSuffix = new String[] {"_d0", "_d1", "_d2", "_d3","_s0", "_s1", "_s2", "_s3"};
+    @SideOnly(Side.CLIENT)
+    private Icon[] icons;
+    
 	public BlockWateredDirt(int par1, int par2){
         super(par1, Material.sand);
-		this.setRequiresSelfNotify();
     }
 	
-	@SideOnly(Side.CLIENT)
-	public String getTextureFile()
-    {
-            return DefaultProps.blockSpriteSheet;
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+    	if (par2 < 4) {
+    		this.setStepSound(Block.soundGravelFootstep);
+    	}else {
+    		this.setStepSound(Block.soundSandFootstep);
+    	}
+    	return icons[par2];
     }
-
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) 
-	{
-		if (par2 < 4) {
-			this.setStepSound(Block.soundGravelFootstep);
-		}else {
-			this.setStepSound(Block.soundSandFootstep);
-		}
-
-		switch (par2) {
-		case 0:
-			return 8;
-		case 1:
-			return 9;
-		case 2:
-			return 10;
-		case 3:
-			return 11;
-
-		case 4:
-			return 12;
-		case 5:
-			return 13;
-		case 6:
-			return 14;
-		case 7:
-			return 15;
-
-		default:
-			return 8;
-		}
-	}
-
-	public int damageDropped(int par1)
-	{
-		return par1;
-	}
-
-	public void onGameTick() {
-		
-		
-	}
-	
-	public int quantityDropped(Random random){
-		return 1;
-	}
-	
-
-	public int idDropped(int par1, Random random, int par2){
-		switch (par1) {
-		case 0:
-			return -1;
-		case 1:
-			return -1;
-		case 2:
-			return -1;
-		case 3:
-			return this.blockID;
-		case 4:
-			return -1;
-		case 5:
-			return -1;
-		case 6:
-			return -1;
-		case 7:
-			return this.blockID;
-		default:
-			return -1;
-		}
-	}
-	
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
-    {
-        super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, 0);
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void func_94332_a(IconRegister par1IconRegister){
+        this.icons = new Icon[imageSuffix.length];
+        for (int i = 0; i < this.icons.length; ++i){
+            this.icons[i] = par1IconRegister.func_94245_a(func_94330_A()+imageSuffix[i]);
+        }
     }
         
     @Override 
-    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
-    {
+    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         if (metadata < 3){
             ret.add(new ItemStack(Block.dirt));
             return ret;
         }
-        
-        
         
         if(metadata == 3){
         	if(ItemList.waterDroplets.isPresent()){
@@ -138,13 +76,11 @@ public class BlockWateredDirt extends Block{
         return ret;
     }
 
-
-    @SideOnly(Side.CLIENT)
     /**
      * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
      */
-    public int getRenderBlockPass()
-    {
+    @SideOnly(Side.CLIENT)
+    public int getRenderBlockPass(){
         return 0;
     }
 
@@ -152,8 +88,7 @@ public class BlockWateredDirt extends Block{
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube(){
         return false;
     }
 
@@ -164,8 +99,7 @@ public class BlockWateredDirt extends Block{
 		return true;
 	}
 
-	public int getRenderType()
-	{
+	public int getRenderType(){
 	return 0;
 	}
 }

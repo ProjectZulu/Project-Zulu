@@ -5,20 +5,15 @@ import java.io.File;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.ArmorManager;
 import projectzulu.common.blocks.CreeperBlossomPrimedDefault;
 import projectzulu.common.blocks.ItemBlockManager;
 import projectzulu.common.blocks.ItemBlockRecipeManager;
-import projectzulu.common.blocks.RenderCampFire;
-import projectzulu.common.blocks.RenderSpike;
-import projectzulu.common.blocks.RenderUniversalFlowerPot;
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.potion.EventHandleNullPotions;
 import projectzulu.common.potion.PotionManager;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -103,23 +98,7 @@ public class ProjectZulu_Blocks {
 		}
 		ProjectZuluLog.info("Finished ItemBlock Setup ");
 
-		if(BlockList.spike.isPresent()){
-			ProjectZulu_Core.spikeRenderID = ProjectZulu_Core.spikeRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.spikeRenderID;
-			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.spikeRenderID, new RenderSpike() );
-			ProjectZuluLog.info("Spike Render ID Registed to %s", ProjectZulu_Core.spikeRenderID);
-		}
-		
-		if(BlockList.campfire.isPresent()){
-			ProjectZulu_Core.campFireRenderID = ProjectZulu_Core.campFireRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.campFireRenderID;
-			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.campFireRenderID, new RenderCampFire() );
-			ProjectZuluLog.info("Campfire Render ID Registed to %s", ProjectZulu_Core.campFireRenderID);
-		}
-		
-		if(BlockList.universalFlowerPot.isPresent()){
-			ProjectZulu_Core.universalFlowerPotRenderID = ProjectZulu_Core.universalFlowerPotRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.universalFlowerPotRenderID;
-			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.universalFlowerPotRenderID, new RenderUniversalFlowerPot() );
-			ProjectZuluLog.info("Universal Flower Pot Render ID Registed to %s", ProjectZulu_Core.universalFlowerPotRenderID);
-		}
+		ProjectZulu_Core.proxy.registerSimpleBlockRenderingHandlers();
 	}
 	
 	@PostInit

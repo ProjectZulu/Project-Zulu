@@ -69,6 +69,11 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
 		return super.getTexture();
 	}
 	
+	@Override
+	public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
+		return true;
+	}
+	
 	/**
 	 * Checks if the entity's current position is a valid location to spawn this entity.
 	 */

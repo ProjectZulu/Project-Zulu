@@ -12,6 +12,7 @@ import net.minecraft.world.World;
  * Class functions as backend of Entity
  * Contains Methods mainly pertaining to Movement of Entity 
  */
+@Deprecated
 public abstract class EntityHerd extends EntityGenericAgeable
 {
 	

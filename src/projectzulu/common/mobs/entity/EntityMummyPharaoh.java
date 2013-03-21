@@ -17,7 +17,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.api.BlockList;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -26,21 +26,10 @@ import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
-public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {	
+public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
+	
 	Vec3 startingPosition;
 	int stage = 1;
-	boolean transition = false;
-
-	public EntityModelRotation ebipedHead = new EntityModelRotation();
-	public EntityModelRotation ebipedHeadwear = new EntityModelRotation();
-	public EntityModelRotation ebipedBody = new EntityModelRotation();
-	public EntityModelRotation ebipedRightArm = new EntityModelRotation();
-	public EntityModelRotation ebipedLeftArm = new EntityModelRotation();
-	public EntityModelRotation ebipedRightLeg = new EntityModelRotation();
-	public EntityModelRotation ebipedLeftLeg = new EntityModelRotation();
-	public EntityModelRotation ebipedEars = new EntityModelRotation();
-	
-	boolean firstUpdate = true;
 	
 	boolean spawnMummy = false;
 	//Time To Wait after spawning to spawn another
@@ -52,11 +41,6 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	int shootCooldown = 6*20;
 	int shootTimer = 30;
 	private static final ItemStack defaultHeldItem = ItemList.ankh.isPresent() ? new ItemStack(ItemList.ankh.get()) : new ItemStack(Item.swordSteel);
-
-	//Debug Variables
-	boolean printMessage = false;
-	public boolean doNothing = false;
-	int counter = 0;
 	
 	public EntityMummyPharaoh(World par1World) {
 		super(par1World);
@@ -65,26 +49,21 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 		
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		
 		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
 		
 		this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed, 120));
 		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
-		
-//		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-//		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 32.0F, 0, true));
-		
+				
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
 		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.allOf(EntityStates.class), EntityPlayer.class, 16.0F, 0, true));
-
 	}
 	
     public EntityMummyPharaoh(World par1World, double parx, double pary, double parz){
     	this(par1World);
     	this.setSize(0.6F, 1.4F);
 		this.moveSpeed = 0.4f;
-		this.texture = DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
+		this.texture = DefaultProps.mobDiretory + "mummy_pharaoh.png";
 		
 		setLocationAndAngles(parx, pary, parz, 1, 1);
 		setPosition(parx, pary, parz);
@@ -110,13 +89,16 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 		}
 	}
 	
+	@Override
     public String getTexture(){
     	return DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
     }
 
+	@Override
 	public int getMaxHealth(){
 		return 200;
 	}
+	
 	
 	public int getCurrentHealth(){
 		return health;
@@ -125,6 +107,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound(){
 		return "sounds.MummyShortRoar";
 	}
@@ -134,6 +117,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	 * use this to react to sunlight and start to burn.
 	 */
 	//TODO: Some of THis could be moved Server Side Only
+	@Override
 	public void onLivingUpdate(){
 		super.onLivingUpdate();		
 		if (startingPosition == null) {
@@ -206,13 +190,12 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 			shootTimer = shootCooldown;
 		}
 		shootTimer = Math.max(shootTimer-1, 0);
-
-		counter++; 
 	} 
 
 	/**
 	 * Called when the entity is attacked.
 	 */
+	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2){
 		if (par1DamageSource.getEntity() instanceof EntityPlayer) {
 			EntityPlayer tempPlayer = (EntityPlayer)par1DamageSource.getEntity();
@@ -234,7 +217,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	}
 
 
-	public void spawnMummy(){
+	private void spawnMummy(){
 		//Get a Random Position Around Entity
 		double desX;
 		double desZ;
@@ -264,8 +247,8 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 		int desY = this.worldObj.getHeightValue((int)desX,(int)desZ);
 		//If the block is not air
 		if(worldObj.getBlockId((int)desX, (int)desY-2, (int)desZ) != 0){
-			worldObj.setBlockWithNotify((int)desX, desY-0, (int)desZ, 0);
-			worldObj.setBlockWithNotify((int)desX, desY-1, (int)desZ, 0);
+			worldObj.func_94575_c((int)desX, desY-0, (int)desZ, 0);
+			worldObj.func_94575_c((int)desX, desY-1, (int)desZ, 0);
 		}
 		//This sets where the monster will spawn on Y relative to Ground Level
 		desY -= 1;
@@ -278,7 +261,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 		this.worldObj.spawnEntityInWorld(var17);
 	}
 	
-	public void shootFireballAtTarget(){
+	private void shootFireballAtTarget(){
 		EntityPlayer targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, 32.0D);
 		if (targetedEntity != null) {
 			int holdRand = rand.nextInt(10)-5;
@@ -302,7 +285,8 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	        this.worldObj.spawnEntityInWorld(var17);			
 		}
 	}
-	public void shootFireballAroundTarget(){
+	
+	private void shootFireballAroundTarget(){
 		EntityPlayer targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, 32.0D);
 		if (targetedEntity != null) {
 			int holdRand = rand.nextInt(10)-5;
@@ -334,7 +318,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
     /**
      * Teleport the Pharoah to a random nearby position
      */
-    protected boolean teleportRandomly() {
+    private boolean teleportRandomly() {
         double var1 = this.posX + (this.rand.nextDouble() - 0.5D) * 24.0D;
         double var5 = this.posZ + (this.rand.nextDouble() - 0.5D) * 24.0D;
         double var3 = worldObj.getHeightValue((int)var1, (int)var5);
@@ -344,7 +328,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
     /**
      * Teleport the Pharoah
      */
-    protected boolean teleportTo(double par1, double par3, double par5) {
+    private boolean teleportTo(double par1, double par3, double par5) {
         double var7 = this.posX;
         double var9 = this.posY;
         double var11 = this.posZ;
@@ -409,6 +393,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	/**
 	 * Plays step sound at given x, y, z for the entity
 	 */
+    @Override
 	protected void playStepSound(int par1, int par2, int par3, int par4){
 		this.worldObj.playSoundAtEntity(this, "mob.irongolem.walk", 1.0F, 1.0F);
 	}
@@ -417,6 +402,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	/**
      * Get this Entity's EnumCreatureAttribute
      */
+    @Override
     public EnumCreatureAttribute getCreatureAttribute(){
         return EnumCreatureAttribute.UNDEAD;
     }
@@ -424,21 +410,17 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	/**
 	 * Drop 0-2 items of this living's type
 	 */
+    @Override
 	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(3);
-		int var4;
-
-		if(Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.jasper.isPresent()){
-			this.dropItem(BlockList.jasper.get().blockID, 1);			
-		}
-
-		var4 = 3 + this.rand.nextInt(3);
-
-		for (int var5 = 0; var5 < var4; ++var5)
-		{
-			this.dropItem(Item.ingotIron.itemID, 1);
+		int var3 = rand.nextInt(3 + par2);
+		for (int i = 0; i < var3; i++) {
+			ItemStack loot = CustomEntityList.MUMMYPHARAOH.modData.get().getLootItem(rand);
+			if (loot != null) {
+				entityDropItem(loot, 1);
+			}
 		}
 	}
+    
 	@Override
 	protected void dropRareDrop(int par1) {
 		if(Loader.isModLoaded(DefaultProps.BlocksModId) && ItemList.ankh.isPresent()){

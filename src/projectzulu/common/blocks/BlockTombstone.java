@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
@@ -21,7 +22,6 @@ public class BlockTombstone extends BlockContainer{
 	public BlockTombstone(int par1, Class par2Class) {
 		super(par1, Material.rock);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        blockIndexInTexture = 52;
         signEntityClass = par2Class;
         
         float var4 = 0.4F;
@@ -81,17 +81,17 @@ public class BlockTombstone extends BlockContainer{
     }
 
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving) {
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
 		int var6 = (Math.round(-par5EntityLiving.rotationYaw / 45f) + 4) & 7;
 		
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, var6);
+		par1World.setBlockMetadataWithNotify(par2, par3, par4, var6, 3);
 		
 		
 		if(par5EntityLiving instanceof EntityPlayer){
 			((EntityPlayer)par5EntityLiving).openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
 		} 
 		
-		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving);
+		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack);
 	}
 	
 	@Override

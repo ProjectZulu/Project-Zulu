@@ -16,7 +16,7 @@ public class ItemPalmTreeBlocks extends ItemBlock{
 		return par1;
 	}
 	
-	public String getItemNameIS(ItemStack itemstack) 
+	public String getUnlocalizedName(ItemStack itemstack) 
 	{
 		String name = "";
 		switch(itemstack.getItemDamage()) 
@@ -78,7 +78,7 @@ public class ItemPalmTreeBlocks extends ItemBlock{
 		}
 		default: name = "ore";
 		}
-		return getItemName() + "." + name;
+		return getUnlocalizedName() + "." + name;
 	}
 		
 }

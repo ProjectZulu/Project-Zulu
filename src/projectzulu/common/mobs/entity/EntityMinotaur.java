@@ -80,7 +80,7 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob{
 
 	@Override
 	public String getTexture(){
-		this.texture = DefaultProps.mobDiretory + "Minotaur.png";
+		this.texture = DefaultProps.mobDiretory + "minotaur.png";
 		return super.getTexture();
 	}
 
@@ -122,7 +122,6 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob{
 	@Override
 	protected void updateAITick() {
 		this.angerLevel = 100;
-
 		super.updateAITick();
 	}
 	

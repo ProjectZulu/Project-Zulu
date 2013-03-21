@@ -12,8 +12,8 @@ import projectzulu.common.core.CreativeTab;
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.EventHookContainerClass;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.ProjectZuluGenerator;
+import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.ZuluGuiHandler;
 import projectzulu.common.core.ZuluPacketHandler;
 import cpw.mods.fml.common.Mod;
@@ -113,7 +113,7 @@ public class ProjectZulu_Core{
 		proxy.registerRenderThings();
 		
 		if(enableTestBlock){
-			testBlock = (new BlockTestBlock(testBlockID, 32)).setHardness(1.0f).setResistance(1.0f).setBlockName("testBlock");
+			testBlock = (new BlockTestBlock(testBlockID, 32)).setHardness(1.0f).setResistance(1.0f).setUnlocalizedName("testBlock");
 			GameRegistry.registerBlock(testBlock, "testZuluBlock"); LanguageRegistry.addName(testBlock, "Test block");
 		}
         NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
@@ -121,12 +121,14 @@ public class ProjectZulu_Core{
 		ProjectZulu_Core.proxy.registerModelsAndRender();
 		ProjectZuluLog.info("Load Entity Properties");
 		CustomEntityManager.INSTANCE.loadCreaturesFromConfig(modConfigDirectoryFile);
-		ProjectZuluLog.info("Registering Entites");
-		CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
 	}
 	
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event){
+		ProjectZuluLog.info("Registering Entites");
+		CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
+		
+		ProjectZuluLog.info("Registering Events");
 		MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
 		GameRegistry.registerWorldGenerator(new ProjectZuluGenerator());
 		

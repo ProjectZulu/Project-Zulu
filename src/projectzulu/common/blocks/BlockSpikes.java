@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,40 +13,46 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemList;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSpikes extends Block{
 
+	public static final String[] imageSuffix = new String[] {"", "_poison", "_sticky"};
+    @SideOnly(Side.CLIENT)
+    private Icon[] icons;
+	
 	public BlockSpikes(int i){
 		super(i, Material.iron);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		this.disableStats();
-		this.setRequiresSelfNotify();
         this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
-        blockIndexInTexture = 33;
 	}
-
+	
+	@Override
 	@SideOnly(Side.CLIENT)
-	public String getTextureFile(){
-		return DefaultProps.blockSpriteSheet;
+	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+		if(par2 <= 5){
+			return icons[0];
+		}else if(par2 > 5 && par2 <= 11){
+			return icons[1];
+		}else{
+			return icons[2];
+		}
 	}
-
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
-		if(par2 > 11){
-			return 35;
-		}else if(par2 > 5){
-			return 34;
-		}else{
-			return 33;
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister){
+		this.icons = new Icon[imageSuffix.length];
+		for (int i = 0; i < this.icons.length; ++i){
+			this.icons[i] = par1IconRegister.func_94245_a(func_94330_A()+imageSuffix[i]);
 		}
 	}
 	
@@ -74,7 +81,6 @@ public class BlockSpikes extends Block{
         	}
 			
 		}else{
-			int blockMeta = par1iBlockAccess.getBlockMetadata(par2, par3, par4);
 			switch ( par1iBlockAccess.getBlockMetadata(par2, par3, par4) ) {
 			case 0:
 		        this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
@@ -125,11 +131,11 @@ public class BlockSpikes extends Block{
 	public int getRenderType(){
 		return ProjectZulu_Core.spikeRenderID;
 	}
-
+	
 	public boolean isOpaqueCube(){
 		return false;
 	}
-
+	
 	public boolean renderAsNormalBlock(){
 		return false;
 	}
@@ -151,15 +157,6 @@ public class BlockSpikes extends Block{
 	 */
 	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5){
 		return this.canPlaceBlockAt(par1World, par2, par3, par4);
-	}
-
-	/**
-	 * Returns the default ambient occlusion value based on block opacity
-	 */
-	@Override
-	public void onEntityWalking(World par1World, int par2, int par3, int par4, Entity par5Entity) {
-//		ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Walking");
-
 	}
 
 	@Override
@@ -201,9 +198,9 @@ public class BlockSpikes extends Block{
 			
 			/* If not Poison (meta<6) increase by 6, if sticky(>11) reduce by 6*/
 			if(par1World.getBlockMetadata(par2, par3, par4) < 6){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6 );
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
 			}else{
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) - 6 );
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) - 6, 3);
 			}
 		}
 		
@@ -218,9 +215,9 @@ public class BlockSpikes extends Block{
 			
 			/* If not Poison or Sticky (meta<6) increase by 12, if Poison(>6 & <11) increase by 6*/
 			if( par1World.getBlockMetadata(par2, par3, par4) < 6 ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 12 );
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 12, 3);
 			}else{
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6 );
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
 			}
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,
@@ -238,7 +235,7 @@ public class BlockSpikes extends Block{
     }
     
 	/**
-	 * Used to Set MEtadata as the block is placed
+	 * Used to Set Metadata as the block is placed
 	 * called before onBlockPlacedBy by ItemBlock and ItemReed
 	 * was called void updateBlockMetadata
 	 * was called int func_85104 ~1.4.5 - 1.4.6
@@ -283,8 +280,7 @@ public class BlockSpikes extends Block{
      * @param z Z Position
      * @return True to allow the torch to be placed
      */
-    public boolean canPlaceSpikeOn(World world, int x, int y, int z)
-    {
+    public boolean canPlaceSpikeOn(World world, int x, int y, int z){
         if (world.doesBlockHaveSolidTopSurface(x, y, z)){
             return true;
         }
@@ -294,13 +290,4 @@ public class BlockSpikes extends Block{
             		|| id == Block.pistonExtension.blockID || id == Block.pistonStickyBase.blockID;
         }
     }
-
-	/**
-	 * Block's chance to react to an entity falling on it.
-	 */
-	@Override
-	public void onFallenUpon(World par1World, int par2, int par3, int par4, Entity par5Entity, float par6){
-//		ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Fallen");
-	}
-
 }

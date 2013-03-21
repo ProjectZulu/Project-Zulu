@@ -1,7 +1,11 @@
 package projectzulu.common.mobs.entity;
 
 import net.minecraft.client.model.ModelRenderer;
-
+/**
+ * Used for Models that need to Track their Rotation 
+ * i.e. Rotate based on their previous rotation angle
+ * See {@link #ModelArmadillo}
+ */
 public class EntityModelRotation {
 	public float rotateAngleX = 0;
 	public float rotateAngleY = 0;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import projectzulu.common.api.CustomMobData;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
 public abstract class DefaultSpawnable extends DefaultWithEgg{
@@ -13,17 +14,17 @@ public abstract class DefaultSpawnable extends DefaultWithEgg{
 	protected int secondarySpawnRate;
 	protected int minInChunk;
 	protected int maxInChunk;
-	protected EnumCreatureType enumCreatureType;
+	protected EnumCreatureType spawnType;
 
 	protected ArrayList<String> defaultBiomesToSpawn = new ArrayList<String>();	
 	ArrayList<BiomeGenBase> biomesToSpawn = new ArrayList();
 	
-	protected DefaultSpawnable(String mobName, Class mobClass) {
-		super(mobName, mobClass);
+	protected DefaultSpawnable(String mobName, Class mobClass, EnumCreatureType creatureType) {
+		super(mobName, mobClass, creatureType);
+		spawnType = creatureType;
 	}
 	
-	protected void setSpawnProperties(EnumCreatureType enumCreatureType, int spawnRate, int secondarySpawnRate, int minInChunk, int maxInChunk){
-		this.enumCreatureType = enumCreatureType;
+	protected void setSpawnProperties(int spawnRate, int secondarySpawnRate, int minInChunk, int maxInChunk){
 		this.spawnRate = spawnRate;
 		this.secondarySpawnRate = secondarySpawnRate;
 		this.minInChunk = minInChunk;
@@ -37,6 +38,7 @@ public abstract class DefaultSpawnable extends DefaultWithEgg{
 		secondarySpawnRate = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" SecondarySpawnRate",secondarySpawnRate).getInt(secondarySpawnRate);
 		minInChunk = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" minInChunk", minInChunk).getInt(minInChunk);
 		maxInChunk = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" maxInChunk", maxInChunk).getInt(maxInChunk);
+		spawnType = ConfigHelper.configGetCreatureType(config, "MOB CONTROLS."+mobName, "Spawn List Type", spawnType);
 	}
 	
 	@Override
@@ -51,10 +53,20 @@ public abstract class DefaultSpawnable extends DefaultWithEgg{
 		}
 	}
 	
+	/* Create loadCustomMobData() method which calls outputData to List. loadCustom contains calls that are the same for all creatures */
+	public void outputDataToList(Configuration config, CustomMobData customMobData){
+		customMobData.secondarySpawnRate = secondarySpawnRate;
+		customMobData.spawnType = spawnType;
+	}
+	
 	@Override
 	public void addSpawn() {
+		if(spawnType == null){
+			return;
+		}
+		
 		for (int i = 0; i < biomesToSpawn.size(); i++){
-			EntityRegistry.addSpawn(mobClass, spawnRate, minInChunk, maxInChunk, enumCreatureType, biomesToSpawn.get(i));
+			EntityRegistry.addSpawn(mobClass, spawnRate, minInChunk, maxInChunk, spawnType, biomesToSpawn.get(i));
 			if(reportSpawningInLog){
 				ProjectZuluLog.info("Registering %s to biome %s at rates of %s,%s,%s",
 						mobClass.getSimpleName(), biomesToSpawn.get(i).biomeName, spawnRate, minInChunk, maxInChunk);

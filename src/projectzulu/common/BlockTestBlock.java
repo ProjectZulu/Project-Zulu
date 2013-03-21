@@ -19,7 +19,6 @@ public class BlockTestBlock extends Block
 	
 	public BlockTestBlock(int par1, int par2){
         super(par1, Material.rock);
-        this.blockIndexInTexture = par2;
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }

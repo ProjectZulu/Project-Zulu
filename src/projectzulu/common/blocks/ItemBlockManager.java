@@ -36,7 +36,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create(){
 			BlockList.aloeVera = Optional.of(
-					(new BlockAloeVera(blockID, 0)).setHardness(0.0f).setStepSound(Block.soundGrassFootstep).setBlockName("Aloe Vera") );
+					(new BlockAloeVera(blockID, 0)).setHardness(0.0f).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()) );
 		}
 
 		@Override
@@ -56,7 +56,7 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			BlockList.wateredDirt = Optional.of((new BlockWateredDirt(blockID, 8)).setHardness(0.5f).setResistance(1.0f).setBlockName("Watered Dirt"));
+			BlockList.wateredDirt = Optional.of((new BlockWateredDirt(blockID, 8)).setHardness(0.5f).setResistance(1.0f).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -69,14 +69,14 @@ public enum ItemBlockManager {
 		protected void loadCustomConfig(Configuration config) {}
 
 	},
-	Tumblweed{
+	Tumbleweed{
 		@Override
 		protected boolean isBlock() { return true;	}
 
 		@Override
 		protected void create() {
 			BlockList.tumbleweed = Optional.of(
-					(new BlockTumbleweed(blockID, 8)).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setBlockName("Tumbleweed"));
+					(new BlockTumbleweed(blockID, 8)).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -95,7 +95,7 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			BlockList.jasper = Optional.of((new BlockJasper(blockID, 32)).setHardness(1.0f).setResistance(1.0f).setBlockName("jasper"));
+			BlockList.jasper = Optional.of((new BlockJasper(blockID, 32)).setHardness(1.0f).setResistance(1.0f).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -114,7 +114,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreeLog = Optional.of(
-					new BlockPalmTreeLog(blockID, 17).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setBlockName("Palm Tree Log"));
+					new BlockPalmTreeLog(blockID, 17).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -137,7 +137,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreePlank = Optional.of(
-					new BlockPalmTreePlank(blockID, 18).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("palmTreePlank"));			
+					new BlockPalmTreePlank(blockID, 18).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));			
 		}
 
 		@Override
@@ -158,18 +158,22 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			BlockList.palmTreeDoubleSlab = Optional.of(
-					(BlockZuluHalfSlab)new BlockZuluHalfStep(blockID, true).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("palmTreeDoubleSlab"));
+			if(BlockList.palmTreePlank.isPresent()){
+				BlockList.palmTreeDoubleSlab = Optional.of(
+						(new BlockZuluSlab(blockID, true, BlockList.palmTreePlank.get())).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setLightOpacity(0).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
+			}
 		}
 
 		@Override
 		protected void register() {
-			Block block = BlockList.palmTreeDoubleSlab.get();
-			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Double Slab");
-			OreDictionary.registerOre("slabWood", new ItemStack(block));
-			OreDictionary.registerOre("slabPalm", new ItemStack(block));
+			if(BlockList.palmTreeDoubleSlab.isPresent() && BlockList.palmTreeSlab.isPresent()){
+				Block block = BlockList.palmTreeDoubleSlab.get();
+				ItemZuluSlab.initialise(BlockList.palmTreeSlab.get(), BlockList.palmTreeDoubleSlab.get());
+				GameRegistry.registerBlock(block, ItemZuluSlab.class, toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Double Slab");
+				OreDictionary.registerOre("slabWood", new ItemStack(block));
+				OreDictionary.registerOre("slabPalm", new ItemStack(block));
+			}
 		}
-
 
 		@Override
 		protected void loadCustomConfig(Configuration config) {}
@@ -180,16 +184,21 @@ public enum ItemBlockManager {
 
 		@Override
 		protected void create() {
-			BlockList.palmTreeSlab = Optional.of(
-					(BlockZuluHalfSlab)(new BlockZuluHalfStep(blockID, false)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setLightOpacity(0).setBlockName("palmTreeSlab"));
+			if(BlockList.palmTreePlank.isPresent()){
+				BlockList.palmTreeSlab = Optional.of(
+						(new BlockZuluSlab(blockID, false, BlockList.palmTreePlank.get())).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setLightOpacity(0).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
+			}
 		}
 
 		@Override
 		protected void register() {
-			Block block = BlockList.palmTreeSlab.get();
-			GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Single Slab");
-			OreDictionary.registerOre("slabWood", new ItemStack(block));
-			OreDictionary.registerOre("slabPalm", new ItemStack(block));
+			if(BlockList.palmTreeDoubleSlab.isPresent() && BlockList.palmTreeSlab.isPresent()){
+				Block block = BlockList.palmTreeSlab.get();
+				ItemZuluSlab.initialise(BlockList.palmTreeSlab.get(), BlockList.palmTreeDoubleSlab.get());
+				GameRegistry.registerBlock(block, ItemZuluSlab.class, toString().toLowerCase()); LanguageRegistry.addName(block, "Palm Single Slab");
+				OreDictionary.registerOre("slabWood", new ItemStack(block));
+				OreDictionary.registerOre("slabPalm", new ItemStack(block));
+			}
 		}
 
 		@Override
@@ -203,7 +212,7 @@ public enum ItemBlockManager {
 		protected void create() {
 			if(BlockList.palmTreePlank.isPresent()){
 				BlockList.palmTreeStairs = Optional.of(
-						new BlockZuluStairs(blockID, BlockList.palmTreePlank.get(), 0).setBlockName("palmTreeStairs").setLightOpacity(0));
+						new BlockZuluStairs(blockID, BlockList.palmTreePlank.get(), 0).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()).setLightOpacity(0));
 			}else{
 				ProjectZuluLog.warning("Palm Tree Planks were not Enabled. Disabling Palm Tree Stairs. You have done bad, and You should feel bad.");
 			}
@@ -229,7 +238,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreeLeaves = Optional.of(
-					(BlockPalmTreeLeaves)(new BlockPalmTreeLeaves(blockID, 19)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("Palm Tree Leaves"));
+					(BlockPalmTreeLeaves)(new BlockPalmTreeLeaves(blockID, 19)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -251,7 +260,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.palmTreeSapling = Optional.of(
-					new BlockPalmTreeSapling(blockID, 16).setBlockName("Palm Tree Sapling"));
+					new BlockPalmTreeSapling(blockID, 16).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -272,7 +281,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.coconut = Optional.of(
-					new BlockCoconut(blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("Coconut"));
+					new BlockCoconut(blockID).setHardness(0.2F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -291,7 +300,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.quickSand = Optional.of(
-					new BlockQuickSand(blockID, 112).setHardness(1.2F).setStepSound(Block.soundSandFootstep).setBlockName("quickSand"));
+					new BlockQuickSand(blockID, 112).setHardness(1.2F).setStepSound(Block.soundSandFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -310,7 +319,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.nightBloom = Optional.of(
-					new BlockNightBloom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setBlockName("nightBloom"));
+					new BlockNightBloom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 
 		@Override
@@ -329,7 +338,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.creeperBlossom = Optional.of(
-					new BlockCreeperBlossom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setBlockName("creeperBlossom"));
+					new BlockCreeperBlossom(blockID, 96).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 
 		@Override
@@ -348,7 +357,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.spike = Optional.of(
-					 new BlockSpikes(blockID).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setBlockName("spikes"));
+					 new BlockSpikes(blockID).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 
 		@Override
@@ -360,26 +369,23 @@ public enum ItemBlockManager {
 		@Override
 		protected void loadCustomConfig(Configuration config) {}
 	},
-	Campire{
+	Campfire{
 		@Override
 		protected boolean isBlock() { return true;	}
 		
 		@Override
 		protected void create() {
 			BlockList.campfire = Optional.of(
-					new BlockCampfire(blockID).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setBlockName("campfire"));
+					new BlockCampfire(blockID).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 		
 		@Override
 		protected void register() {
 			Block block = BlockList.campfire.get();
 			GameRegistry.registerBlock(block, ItemCampFire.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Campfire");
-			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_1.name", "Log Campfire");
-			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_2.name", "Stone Campfire");
-			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_3.name", "Lit Log Campfire");
-			LanguageRegistry.instance().addStringLocalization("tile.campfire.base_4.name", "Lit Stone Campfire");
-			
-
+			for (BlockCampfire.Type type : BlockCampfire.Type.values()) {
+				LanguageRegistry.addName(new ItemStack(block, 1, type.meta()), type.displayName());
+			}
 		}
 		
 		@Override
@@ -392,34 +398,16 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.mobHeads = Optional.of(
-					new BlockMobHeads(blockID, 1, TileEntityMobHeads.class).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setBlockName("mobHeads"));
+					new BlockMobHeads(blockID, 1).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 		
 		@Override
 		protected void register() {
 			Block block = BlockList.mobHeads.get();
 			GameRegistry.registerBlock(block, ItemMobHeads.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "mobHeads");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_0.name", "Stuffed Finch");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_1.name", "Alligator Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_2.name", "Armadillo Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_3.name", "Black Bear Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_4.name", "Brown Bear Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_5.name", "Polar Bear Head");
-
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_6.name", "Beaver Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_7.name", "Boar Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_8.name", "Giraffe Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_9.name", "Gorilla Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_10.name", "Lizard Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_11.name", "Mammoth Head");
-			
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_12.name", "Ostrich Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_13.name", "Penguin Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_14.name", "Rhino Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_15.name", "TreeEnt Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_16.name", "Vulture Head");
-			LanguageRegistry.instance().addStringLocalization("tile.mobHeads.base_17.name", "Elephant Head");
-			
+			for (BlockMobHeads.Head head : BlockMobHeads.Head.values()) {
+				LanguageRegistry.addName(new ItemStack(block, 1, head.meta()), head.displayName());
+			}			
 	        GameRegistry.registerTileEntity(TileEntityMobHeads.class, "TileEntityMobHead");   
 			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityMobHeads.class, "projectzulu.common.blocks.heads.TileEntityMobHeadsRenderer");
 		}
@@ -434,7 +422,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			BlockList.tombstone = Optional.of(
-					new BlockTombstone(blockID, TileEntityTombstone.class).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setBlockName("Tombstone"));
+					new BlockTombstone(blockID, TileEntityTombstone.class).setHardness(0.5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 		
 		@Override
@@ -453,7 +441,7 @@ public enum ItemBlockManager {
 				}
 			}else{
 		        GameRegistry.registerTileEntity(TileEntityTombstone.class, "PZTileEntityTombstone");
-				property.value = Boolean.toString(true);
+				property.set(true);
 			}
 			tempConfig.save();
 			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityTombstone.class, "projectzulu.common.blocks.TileEntityTombstoneRenderer");			
@@ -471,10 +459,10 @@ public enum ItemBlockManager {
 			if(ProjectZulu_Core.replaceFlowerPot){
 				Block.blocksList[Block.flowerPot.blockID] = null;
 				BlockList.universalFlowerPot = Optional.of(
-						new BlockUniversalFlowerPot(Block.flowerPot.blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setBlockName("Flower Pot"));
+						new BlockUniversalFlowerPot(Block.flowerPot.blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("flowerPot")); //TODO: Needs to be Identical to Vanilla? Flower Pot Name?
 			}else{
 				BlockList.universalFlowerPot = Optional.of(
-						new BlockUniversalFlowerPot(blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab).setBlockName("Universal Flower Pot"));
+						new BlockUniversalFlowerPot(blockID).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("flowerPot"));
 			}
 		}
 		
@@ -482,7 +470,8 @@ public enum ItemBlockManager {
 		protected void register() {
 			if(!ProjectZulu_Core.replaceFlowerPot){
 				Block block = BlockList.universalFlowerPot.get();
-				GameRegistry.registerBlock(block, ItemUniversalFlowerPot.class, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Universal Flower Pot");			
+				GameRegistry.registerBlock(block, this.toString().toLowerCase()); LanguageRegistry.addName(block, "Universal Flower Pot");			
+				new ItemUniversalFlowerPot(block.blockID - 256, block).setUnlocalizedName("flowerPot");
 			}
 	        GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");   
 			ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityUniversalFlowerPot.class, "projectzulu.common.blocks.TileEntityUniversalFlowerPotRenderer");
@@ -499,7 +488,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.ankh = Optional.of(
-					new ItemAnkh(blockID).setItemName("Ankh"));
+					new ItemAnkh(blockID).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 		
 		@Override
@@ -519,7 +508,7 @@ public enum ItemBlockManager {
 		protected void create() {
 			if(BlockList.aloeVera.isPresent()){
 				ItemList.aloeVeraSeeds = Optional.of(
-						new ItemAloeVeraSeeds(blockID, BlockList.aloeVera.get().blockID).setItemName("Aloe Vera Seeds"));
+						new ItemAloeVeraSeeds(blockID, BlockList.aloeVera.get().blockID).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 				}
 			}
 		
@@ -534,14 +523,14 @@ public enum ItemBlockManager {
 		@Override
 		protected void loadCustomConfig(Configuration config) {}
 	},
-	WaterDroplets{
+	WaterDroplet{
 		@Override
 		protected boolean isBlock() { return false;	}
 		
 		@Override
 		protected void create() {
 			ItemList.waterDroplets = Optional.of(
-					new ItemFoodProjectZulu(blockID, 1, 0.6f, false, 142).setItemName("waterDroplets"));
+					new ItemFoodProjectZulu(blockID, 1, 0.6f, false, 142).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 		
 		@Override
@@ -560,7 +549,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.coconutMilkFragment = Optional.of(
-					new ItemFoodProjectZulu(blockID, 2, 2.4f, false, 8).setItemName("coconutMilkFragment"));
+					new ItemFoodProjectZulu(blockID, 2, 2.4f, false, 8).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 		
 		@Override
@@ -579,7 +568,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.coconutItem = Optional.of(
-					new ItemCoconutItem(blockID, 4, false).setItemName("coconutItem"));
+					new ItemCoconutItem(blockID, 4, false).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 		
 		@Override
@@ -598,7 +587,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.coconutSeed = Optional.of(
-					new ItemCoconutSeed(blockID, 6, false).setItemName("coconutSeed"));
+					new ItemCoconutSeed(blockID, 6, false).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 		
 		@Override
@@ -617,7 +606,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.coconutShell = Optional.of(
-					new ItemCoconutShell(blockID, 7, false).setItemName("coconutShell"));
+					new ItemCoconutShell(blockID, 7, false).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 		
 		@Override
@@ -636,7 +625,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.scaleItem = Optional.of(
-					new ItemScale(blockID, 1, false).setItemName("scaleItem"));
+					new ItemScale(blockID, 1, false).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 		
 		@Override
@@ -655,7 +644,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.furPelt = Optional.of(
-					new ItemScale(blockID, 23, false).setItemName("furPelt"));
+					new ItemScale(blockID, 23, false).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 		
 		@Override
@@ -674,7 +663,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.scrapMeat = Optional.of(
-					new ItemFoodProjectZulu(blockID, 1, 1.0f, false, 11).setItemName("scrapMeat"));
+					new ItemFoodProjectZulu(blockID, 1, 1.0f, false, 11).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 			}
 		
 		@Override
@@ -693,7 +682,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.genericCraftingItems1 = Optional.of(
-					new ItemGenerics(blockID, 10).setItemName("genericCraftingItems1"));
+					new ItemGenerics(blockID, 10).setUnlocalizedName(DefaultProps.blockKey+"genericItems"));
 		}
 		
 		@Override
@@ -715,7 +704,7 @@ public enum ItemBlockManager {
 		@Override
 		protected void create() {
 			ItemList.structurePlacer = Optional.of(
-					new ItemStructurePlacer(blockID).setItemName("structurePlacer"));
+					new ItemStructurePlacer(blockID).setUnlocalizedName(DefaultProps.blockKey+":"+toString().toLowerCase()));
 		}
 		
 		@Override

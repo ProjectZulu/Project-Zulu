@@ -2,20 +2,18 @@ package projectzulu.common.blocks;
 
 import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ItemGenerics;
-import cpw.mods.fml.common.ICraftingHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -53,15 +51,15 @@ public class ItemBlockRecipeManager {
 		}
 		addRecipe(new OptionalItemStack(Item.bowlEmpty), new String[]{"   ","X X"," X "}, 'X', new OptionalItemStack(ItemList.coconutShell));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordWood,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordWood,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordStone,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordStone,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordSteel,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordSteel,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordGold,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordGold,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordDiamond,1,-1), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordDiamond,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		
 		/*Aloe Vera */
 		addRecipe(new OptionalItemStack(Item.silk,6), new String[]{"C  ","C  ","C  "}, 'C', new OptionalItemStack(BlockList.tumbleweed));
@@ -133,22 +131,22 @@ public class ItemBlockRecipeManager {
 	private static void setupCampfireRecipies() {
 		
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,0), true, new String[]{"   ","LLL","   "}, new char[]{'L'}, 
-				new OptionalItemStack(Block.wood,1,-1));
+				new OptionalItemStack(Block.wood,1,OreDictionary.WILDCARD_VALUE));
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,0), true, new String[]{"   ","LLL","   "}, new char[]{'L'},
 				new OptionalItemStack("log"));
 		
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,1), true, new String[]{"   ","LLL","CCC"}, new char[]{'L','C'},
-				new OptionalItemStack(Block.wood,1,-1), new OptionalItemStack(Block.cobblestone) );		
+				new OptionalItemStack(Block.wood,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Block.cobblestone) );		
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,1), true, new String[]{"   ","LLL","CCC"}, new char[]{'L','C'},
 				new OptionalItemStack("log"), new OptionalItemStack(Block.cobblestone) );
 
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,2), true, new String[]{" S ","LLL","   "}, new char[]{'L','C','S'},
-				new OptionalItemStack(Block.wood,1,-1), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
+				new OptionalItemStack(Block.wood,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,2), true, new String[]{" S ","LLL","   "}, new char[]{'L','C','S'},
 				new OptionalItemStack("log"), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Block.cobblestone) );
 
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,3), true, new String[]{" S ","LLL","CCC"}, new char[]{'L','C','S'},
-				new OptionalItemStack(Block.wood,1,-1), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
+				new OptionalItemStack(Block.wood,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.stick) );
 		shapedOreRecipe(new OptionalItemStack(BlockList.campfire,1,3), true, new String[]{" S ","LLL","CCC"}, new char[]{'L','C','S'},
 				new OptionalItemStack("log"), new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Block.cobblestone) );
 	}
@@ -158,55 +156,55 @@ public class ItemBlockRecipeManager {
 		addRecipe(new OptionalItemStack(ItemList.scaleArmorHead), new String[]{"XXX","X X","   "}, 'X', new OptionalItemStack(ItemList.scaleItem));
 		addRecipe(new OptionalItemStack(ItemList.scaleArmorChest), new String[]{"X X","XXX","XXX"}, 'X', new OptionalItemStack(ItemList.scaleItem));
 		addRecipe(new OptionalItemStack(ItemList.scaleArmorLeg), new String[]{"XXX","X X","X X"}, 'X', new OptionalItemStack(ItemList.scaleItem));
-		addRecipe(new OptionalItemStack(ItemList.scaleArmorBoot), new String[]{"   ","X X","X X"}, 'X', new OptionalItemStack(ItemList.scaleItem));
+		addRecipe(new OptionalItemStack(ItemList.scaleArmorBoots), new String[]{"   ","X X","X X"}, 'X', new OptionalItemStack(ItemList.scaleItem));
 
 		addRecipe(new OptionalItemStack(ItemList.goldScaleArmorHead), new String[]{"XXX","XYX","   "}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotGold), new OptionalItemStack(ItemList.scaleArmorHead) );
 		addRecipe(new OptionalItemStack(ItemList.goldScaleArmorChest), new String[]{"XYX","XXX","XXX"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotGold), new OptionalItemStack(ItemList.scaleArmorChest) );
 		addRecipe(new OptionalItemStack(ItemList.goldScaleArmorLeg), new String[]{"XXX","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotGold), new OptionalItemStack(ItemList.scaleArmorLeg) );
-		addRecipe(new OptionalItemStack(ItemList.goldScaleArmorBoot), new String[]{"   ","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotGold), new OptionalItemStack(ItemList.scaleArmorBoot) );
+		addRecipe(new OptionalItemStack(ItemList.goldScaleArmorBoots), new String[]{"   ","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotGold), new OptionalItemStack(ItemList.scaleArmorBoots) );
 		
 		addRecipe(new OptionalItemStack(ItemList.ironScaleArmorHead), new String[]{"XXX","XYX","   "}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotIron), new OptionalItemStack(ItemList.scaleArmorHead) );
 		addRecipe(new OptionalItemStack(ItemList.ironScaleArmorChest), new String[]{"XYX","XXX","XXX"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotIron), new OptionalItemStack(ItemList.scaleArmorChest) );
 		addRecipe(new OptionalItemStack(ItemList.ironScaleArmorLeg), new String[]{"XXX","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotIron), new OptionalItemStack(ItemList.scaleArmorLeg) );
-		addRecipe(new OptionalItemStack(ItemList.ironScaleArmorBoot), new String[]{"   ","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotIron), new OptionalItemStack(ItemList.scaleArmorBoot) );
+		addRecipe(new OptionalItemStack(ItemList.ironScaleArmorBoots), new String[]{"   ","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.ingotIron), new OptionalItemStack(ItemList.scaleArmorBoots) );
 
 		addRecipe(new OptionalItemStack(ItemList.diamondScaleArmorHead), new String[]{"XXX","XYX","   "}, new char[]{'X','Y'},new OptionalItemStack(Item.diamond), new OptionalItemStack(ItemList.scaleArmorHead) );
 		addRecipe(new OptionalItemStack(ItemList.diamondScaleArmorChest), new String[]{"XYX","XXX","XXX"}, new char[]{'X','Y'},new OptionalItemStack(Item.diamond), new OptionalItemStack(ItemList.scaleArmorChest) );
 		addRecipe(new OptionalItemStack(ItemList.diamondScaleArmorLeg), new String[]{"XXX","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.diamond), new OptionalItemStack(ItemList.scaleArmorLeg) );
-		addRecipe(new OptionalItemStack(ItemList.diamondScaleArmorBoot), new String[]{"   ","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.diamond), new OptionalItemStack(ItemList.scaleArmorBoot) );
+		addRecipe(new OptionalItemStack(ItemList.diamondScaleArmorBoots), new String[]{"   ","XYX","X X"}, new char[]{'X','Y'},new OptionalItemStack(Item.diamond), new OptionalItemStack(ItemList.scaleArmorBoots) );
 
 		addRecipe(new OptionalItemStack(ItemList.redClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,14) );
 		addRecipe(new OptionalItemStack(ItemList.redClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,14) );
 		addRecipe(new OptionalItemStack(ItemList.redClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,14) );
-		addRecipe(new OptionalItemStack(ItemList.redClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,14) );
+		addRecipe(new OptionalItemStack(ItemList.redClothBoots), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,14) );
 
 		addRecipe(new OptionalItemStack(ItemList.greenClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,13) );
 		addRecipe(new OptionalItemStack(ItemList.greenClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,13) );
 		addRecipe(new OptionalItemStack(ItemList.greenClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,13) );
-		addRecipe(new OptionalItemStack(ItemList.greenClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,13) );
+		addRecipe(new OptionalItemStack(ItemList.greenClothBoots), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,13) );
 		addRecipe(new OptionalItemStack(ItemList.greenClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,5) );
 		addRecipe(new OptionalItemStack(ItemList.greenClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,5) );
 		addRecipe(new OptionalItemStack(ItemList.greenClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,5) );
-		addRecipe(new OptionalItemStack(ItemList.greenClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,5) );
+		addRecipe(new OptionalItemStack(ItemList.greenClothBoots), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,5) );
 		
 		addRecipe(new OptionalItemStack(ItemList.blueClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,11) );
 		addRecipe(new OptionalItemStack(ItemList.blueClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,11) );
 		addRecipe(new OptionalItemStack(ItemList.blueClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,11) );
-		addRecipe(new OptionalItemStack(ItemList.blueClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,11) );
+		addRecipe(new OptionalItemStack(ItemList.blueClothBoots), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,11) );
 		addRecipe(new OptionalItemStack(ItemList.blueClothHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cloth,1,3) );
 		addRecipe(new OptionalItemStack(ItemList.blueClothChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,3) );
 		addRecipe(new OptionalItemStack(ItemList.blueClothLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,3) );
-		addRecipe(new OptionalItemStack(ItemList.blueClothBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,3) );
+		addRecipe(new OptionalItemStack(ItemList.blueClothBoots), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cloth,1,3) );
 		
 		addRecipe(new OptionalItemStack(ItemList.cactusArmorHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cactus) );
 		addRecipe(new OptionalItemStack(ItemList.cactusArmorChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
 		addRecipe(new OptionalItemStack(ItemList.cactusArmorLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
-		addRecipe(new OptionalItemStack(ItemList.cactusArmorBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
+		addRecipe(new OptionalItemStack(ItemList.cactusArmorBoots), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
 		
 		addRecipe(new OptionalItemStack(ItemList.furArmorHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cactus));
 		addRecipe(new OptionalItemStack(ItemList.furArmorChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
 		addRecipe(new OptionalItemStack(ItemList.furArmorLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
-		addRecipe(new OptionalItemStack(ItemList.furArmorBoot), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(ItemList.furPelt) );
+		addRecipe(new OptionalItemStack(ItemList.furArmorBoots), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(ItemList.furPelt) );
 	}
 
 	public static void shapelessOreRecipe(OptionalItemStack result, OptionalItemStack... component){

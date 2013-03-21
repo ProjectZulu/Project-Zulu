@@ -39,7 +39,7 @@ public class BlockCoconut extends BlockCocoa
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
+            par1World.func_94575_c(par2, par3, par4, 0);
         }
         else if (par1World.rand.nextInt(5) == 0)
         {
@@ -49,7 +49,7 @@ public class BlockCoconut extends BlockCocoa
             if (var7 < 2)
             {
                 ++var7;
-                par1World.setBlockMetadataWithNotify(par2, par3, par4, var7 << 2 | getDirection(var6));
+                par1World.setBlockMetadataWithNotify(par2, par3, par4, var7 << 2 | getDirection(var6), 3);
             }
         }
     }
@@ -148,7 +148,7 @@ public class BlockCoconut extends BlockCocoa
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
     {
         int var6 = ((MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 0) % 4;
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, var6);
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, var6, 3);
     }
 
     /**
@@ -162,7 +162,7 @@ public class BlockCoconut extends BlockCocoa
         }
 
         int var9 = Direction.footInvisibleFaceRemap[Direction.vineGrowth[par5]];
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, var9);
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, var9, 3);
     }
 
     /**
@@ -174,7 +174,7 @@ public class BlockCoconut extends BlockCocoa
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
+            par1World.func_94575_c(par2, par3, par4, 0);
         }
     }
 

@@ -3,12 +3,14 @@ package projectzulu.common;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.EntityCreeperBlossomPrimed;
+import projectzulu.common.blocks.RenderCampFire;
 import projectzulu.common.blocks.RenderCreeperBlossomPrimed;
+import projectzulu.common.blocks.RenderSpike;
+import projectzulu.common.blocks.RenderUniversalFlowerPot;
 import projectzulu.common.core.CustomEntityManager;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.SoundHandlerClass;
 import projectzulu.common.core.SoundHookContainerClass;
@@ -96,9 +98,9 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 	
 	@Override
 	public void registerRenderThings(){
-		MinecraftForgeClient.preloadTexture(DefaultProps.blockSpriteSheet);
-		MinecraftForgeClient.preloadTexture(DefaultProps.itemSpriteSheet);
-		MinecraftForgeClient.preloadTexture("/mods/icons/temperature_icon.png");
+//		MinecraftForgeClient.preloadTexture(DefaultProps.blockSpriteSheet); //TODO: These should not be needed 1.5?
+//		MinecraftForgeClient.preloadTexture(DefaultProps.itemSpriteSheet);  //TODO: These should not be needed 1.5?
+//		MinecraftForgeClient.preloadTexture("/mods/icons/temperature_icon.png"); //TODO Temp needs to be seperated, Temp should be its own module altogether
 	}
 	
  	/**
@@ -124,6 +126,27 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 		}
  	}
 	
+ 	@Override
+ 	public void registerSimpleBlockRenderingHandlers(){
+ 		if(BlockList.spike.isPresent()){
+			ProjectZulu_Core.spikeRenderID = ProjectZulu_Core.spikeRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.spikeRenderID;
+			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.spikeRenderID, new RenderSpike() );
+			ProjectZuluLog.info("Spike Render ID Registed to %s", ProjectZulu_Core.spikeRenderID);
+		}
+		
+		if(BlockList.campfire.isPresent()){
+			ProjectZulu_Core.campFireRenderID = ProjectZulu_Core.campFireRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.campFireRenderID;
+			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.campFireRenderID, new RenderCampFire() );
+			ProjectZuluLog.info("Campfire Render ID Registed to %s", ProjectZulu_Core.campFireRenderID);
+		}
+		
+		if(BlockList.universalFlowerPot.isPresent()){
+			ProjectZulu_Core.universalFlowerPotRenderID = ProjectZulu_Core.universalFlowerPotRenderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : ProjectZulu_Core.universalFlowerPotRenderID;
+			RenderingRegistry.registerBlockHandler(ProjectZulu_Core.universalFlowerPotRenderID, new RenderUniversalFlowerPot() );
+			ProjectZuluLog.info("Universal Flower Pot Render ID Registed to %s", ProjectZulu_Core.universalFlowerPotRenderID);
+		}
+ 	}
+ 	
 	@Override
 	public void registerBlockRenders(){
 		RenderingRegistry.registerEntityRenderingHandler(EntityCreeperBlossomPrimed.class, new RenderCreeperBlossomPrimed(0.5f));

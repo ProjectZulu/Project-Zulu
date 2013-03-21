@@ -8,7 +8,6 @@ import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.api.BlockList;
-import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -27,7 +26,7 @@ public class RenderCreeperBlossomPrimed extends Render{
     	par1EntityTNTPrimed.fuse = 39;
 
     	if (var2 != null){
-    		var2.bindTexture(var2.getTexture("/terrain.png"));
+//    		var2.bindTexture(var2.getTexture("/terrain.png")); //TODO: Commented
     	}
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
@@ -50,16 +49,15 @@ public class RenderCreeperBlossomPrimed extends Render{
             GL11.glScalef(var11, var11, var11);
         }
         var10 = (1.0F - ((float)par1EntityTNTPrimed.fuse - par9 + 1.0F) / 100.0F) * 0.8F;
-    	this.loadTexture(DefaultProps.blockSpriteSheet);
+        this.loadTexture("/terrain.png");
         this.blockRenderer.renderBlockAsItem(BlockList.creeperBlossom.get(), 2, par1EntityTNTPrimed.getBrightness(par9));
-
         if (par1EntityTNTPrimed.fuse / 5 % 2 == 0){
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_DST_ALPHA);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, var10);
-            this.blockRenderer.renderBlockAsItem(BlockList.creeperBlossom.get(), 0, 1.0F);
+            this.blockRenderer.renderBlockAsItem(BlockList.creeperBlossom.get(), 0, 1.0F); //TODO: Commented Out To Debug Image
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glEnable(GL11.GL_LIGHTING);

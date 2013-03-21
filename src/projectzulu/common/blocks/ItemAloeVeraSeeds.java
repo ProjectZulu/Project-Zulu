@@ -25,7 +25,7 @@ public class ItemAloeVeraSeeds extends Item
         super(par1);
         this.blockType = par2;
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        this.iconIndex = 2;
+//        this.iconIndex = 2;
     }
     
     @SideOnly(Side.CLIENT)
@@ -48,7 +48,7 @@ public class ItemAloeVeraSeeds extends Item
 
             if ( (var11 == Block.dirt.blockID || var11 == Block.sand.blockID || var11 == Block.grass.blockID)&& par3World.isAirBlock(par4, par5 + 1, par6))
             {
-                par3World.setBlockWithNotify(par4, par5 + 1, par6, this.blockType);
+                par3World.func_94575_c(par4, par5 + 1, par6, this.blockType);
                 --par1ItemStack.stackSize;
                 return true;
             }

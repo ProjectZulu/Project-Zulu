@@ -21,7 +21,7 @@ public class TileEntityWithMeta extends BlockWithMeta{
 	
 	@Override
 	public void placeBlock(World world, ChunkCoordinates position, Random random) {
-		world.setBlockAndMetadata(position.posX, position.posY,position.posZ, blockID, meta);
+		world.setBlockAndMetadataWithNotify(position.posX, position.posY,position.posZ, blockID, meta, 3);
 		world.setBlockTileEntity(position.posX, position.posY,position.posZ, tileEntity);
 	}
 }

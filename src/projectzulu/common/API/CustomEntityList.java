@@ -10,11 +10,11 @@ import com.google.common.base.CharMatcher;
 import com.google.common.base.Optional;
 
 public enum CustomEntityList {
-	CREEPERBLOSSONPRIMED, ARMADILLO, SANDWORM, LIZARD, MUMMYPHARAOH, MUMMY, VULTURE, TREEENT, MAMMOTH, FOX, BOAR,
+	CREEPERBLOSSOMPRIMED, ARMADILLO, SANDWORM, LIZARD, MUMMYPHARAOH, MUMMY, VULTURE, TREEENT, MAMMOTH, FOX, BOAR,
 	MIMIC, ALLIGATOR, FROG, PENGUIN, BEAVER, BLACKBEAR, BROWNBEAR, POLARBEAR, OSTRICH, RHINO, RABBIT,
 	REDFINCH, BLUEFINCH, GREENFINCH, GORILLA, GIRAFFE, ELEPHANT, HORSEBEIGE, HORSEBLACK, HORSEBROWN,
 	HORSEDARKBLACK, HORSEDARKBROWN, HORSEGREY, HORSEWHITE, EAGLE, HORNBILL, PELICAN, MINOTAUR, HAUNTEDARMOR, 
-	CENTIPEDE, HORSERANDOM;
+	CENTIPEDE, HORSERANDOM, LIZARDSPIT, FOLLOWER;
 	
 	public Optional<? extends CustomMobData> modData = Optional.absent();
 	private static final HashMap<String, CustomEntityList> lookupEnum = new HashMap<String, CustomEntityList>();
@@ -25,7 +25,12 @@ public enum CustomEntityList {
 	
 	public static CustomEntityList getByName(String mobName){
 		String[] nameParts = CharMatcher.anyOf(" ").removeFrom(mobName).toLowerCase().split("\\.");
-		CustomEntityList result = lookupEnum.get(nameParts[nameParts.length-1]);
+		CustomEntityList result;
+		if(nameParts.length > 1){
+			result = lookupEnum.get(nameParts[nameParts.length-1]);
+		}else{
+			result = lookupEnum.get(nameParts[0]);
+		}
 		if(result == null){
 			ProjectZuluLog.info("Custom Entity Lookup Failed %s Does not Seem to Exist", CharMatcher.anyOf(" ").removeFrom(mobName).toLowerCase());
 		}

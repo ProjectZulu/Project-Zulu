@@ -22,7 +22,7 @@ public class PotionZulu extends Potion{
 	@SideOnly(Side.CLIENT)
 	public int getStatusIconIndex() {
 		Minecraft mc = Minecraft.getMinecraft();
-		mc.renderEngine.bindTexture(mc.renderEngine.getTexture(getTextureFile()));
+//		mc.renderEngine.bindTexture(mc.renderEngine.getTexture(getTextureFile())); //TODO: Commented
 		return super.getStatusIconIndex();
 	}
 	

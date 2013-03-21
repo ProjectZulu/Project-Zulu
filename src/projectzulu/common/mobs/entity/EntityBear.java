@@ -42,6 +42,11 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals{
 	@Override
 	protected String getHurtSound() { return "sounds.bearliving"; }
 	
+	@Override
+	public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
+		return true;
+	}
+	
 	/** 
 	 * Checks if the Provided ItemStack is considered an item that should be used for Breeding
 	 * This is overriden by each Entity if deviations from default are desired

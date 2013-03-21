@@ -10,11 +10,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.tileentity.TileEntityBrewingStand;
-import net.minecraftforge.common.ForgeDirection;
 import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+//TODO: Look back at Original TileEntityBrewingStand To See what to replace, this may not work anymore
 public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
     /** The itemstacks currently placed in the slots of the brewing stand */
     private ItemStack[] brewingItemStacks = new ItemStack[4];
@@ -73,7 +73,7 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
 
         if (var1 != this.filledSlots){
             this.filledSlots = var1;
-            this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, var1);
+            this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, var1, 3);
         }
 
 //        super.updateEntity();
@@ -348,13 +348,15 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
         return var1;
     }
 
-    @Override
-    public int getStartInventorySide(ForgeDirection side){
-        return (side == ForgeDirection.UP ? 3 : 0);
-    }
+  //TODO: Commented
+//    @Override
+//    public int getStartInventorySide(ForgeDirection side){
+//        return (side == ForgeDirection.UP ? 3 : 0);
+//    }
 
-    @Override
-    public int getSizeInventorySide(ForgeDirection side){
-        return (side == ForgeDirection.UP ? 1 : 3);
-    }
+  //TODO: Commented
+//    @Override
+//    public int getSizeInventorySide(ForgeDirection side){
+//        return (side == ForgeDirection.UP ? 1 : 3);
+//    }
 }

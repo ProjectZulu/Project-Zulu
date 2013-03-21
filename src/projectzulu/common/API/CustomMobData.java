@@ -4,50 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandom;
+import net.minecraft.util.WeightedRandomItem;
 
 public class CustomMobData {
 	public String mobName = "";
-	public int secondarySpawnRate = 0;
+	public int secondarySpawnRate = 100;
 	public boolean reportSpawningInLog = false;
 	public boolean shouldDespawn = true;
+	public int maxSpawnInChunk = 4;
+	public EnumCreatureType creatureType;
+	public EnumCreatureType spawnType;
+
+	private List lootItems = new ArrayList<WeightedItemStack>();
 	
-	private List lootItems = new ArrayList<ItemStack>();
-	private List lootWeights = new ArrayList<Integer>();
-	private int totalWeight = 0;
+	public static class WeightedItemStack extends WeightedRandomItem{
+		public final ItemStack itemStack;
+		public WeightedItemStack(ItemStack itemStack, int weight) {
+			super(weight);
+			this.itemStack = itemStack;
+		}
+	}
 	
-	public CustomMobData(String mobName, int secondarySpawnRate, boolean reportSpawningInLog){
-		this.mobName = mobName;
-		this.secondarySpawnRate = secondarySpawnRate;
-		this.mobName = mobName;
-	}
-	public CustomMobData(String mobName, boolean reportSpawningInLog){
-		this(mobName, 0, reportSpawningInLog);
-	}
-	public CustomMobData(String mobName, int secondarySpawnRate){
-		this(mobName, secondarySpawnRate, false);
-	}
 	public CustomMobData(String mobName){
-		this(mobName, 0);
+		this.mobName = mobName;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void addLootToMob(ItemStack itemStack, int weight){
-		lootItems.add(itemStack);
-		lootWeights.add(weight);
-		totalWeight += weight;
+		lootItems.add(new WeightedItemStack(itemStack, weight));
 	}
 	
 	public ItemStack getLootItem(Random rand){
-		int lootChance = totalWeight > 0 ? rand.nextInt(totalWeight) : 0;
-		ItemStack lootItem = null;
-		for (int i = 0; i < lootWeights.size(); i++) {
-			if(lootChance - (Integer)lootWeights.get(i) <= 0){
-				lootItem = (ItemStack) lootItems.get(i);
-				break;
-			}else{
-				lootChance -= (Integer)lootWeights.get(i);
-			}
+		if(lootItems != null && !lootItems.isEmpty()){
+			return ((WeightedItemStack)WeightedRandom.getRandomItem(rand, lootItems)).itemStack;
 		}
-		return lootItem != null ? lootItem.copy() : null;
+		return null;
 	}
 }

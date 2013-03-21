@@ -187,9 +187,10 @@ public class SpawnerFields implements DataFields{
 					(int)(screenSize.getY() - backgroundSize.getY())/2 + 75, 4210752);
 			
 			/* Draw TextBox Background Objects */
-	        int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
+			mc.renderEngine.func_98187_b(DefaultProps.dungeonDiretory+"creaturelistgui.png");
+//	        int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
 	        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	        mc.renderEngine.bindTexture(textureID);
+//	        mc.renderEngine.bindTexture(textureID); //TODO: Commented
 	        
 	        Point smallBoxImageLocation = new Point(154,0);
 	        Point smallBoxSize = new Point(22,14);
