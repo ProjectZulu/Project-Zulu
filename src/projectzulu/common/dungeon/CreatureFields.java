@@ -271,7 +271,7 @@ public class CreatureFields implements DataFields {
 	
 	private void bindTexture(Minecraft mc){
 		/* Setup Required Texture Sheet */
-        this.mc.renderEngine.func_98187_b(DefaultProps.dungeonDiretory+"creaturelistgui.png");
+        this.mc.renderEngine.bindTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
 //        int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 //        mc.renderEngine.bindTexture(textureID); //TODO: Commented

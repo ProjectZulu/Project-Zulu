@@ -65,7 +65,7 @@ public class CommandPlaceBlock extends CommandBase{
 				targetZ = (int)parsePosition(commandSender, targetPlayer.posZ, stringArgs[indexOfPos++]);
 			}
 			
-			targetPlayer.worldObj.setBlockAndMetadataWithNotify(targetX, targetY, targetZ, blockToPlace.blockID, blockMeta, 3);
+			targetPlayer.worldObj.setBlock(targetX, targetY, targetZ, blockToPlace.blockID, blockMeta, 3);
 		}
 	}    
     

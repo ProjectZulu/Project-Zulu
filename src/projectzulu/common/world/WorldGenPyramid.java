@@ -50,7 +50,7 @@ public class WorldGenPyramid extends WorldGenerator
 					for (int i = -(outside_height + j*2); i < (outside_height + j*2); i++) {
 						for (int k = -(outside_height + j*2); k < (outside_height + j*2); k++) {
 							if(par1World.isAirBlock((int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k)){
-								par1World.func_94575_c( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
+								par1World.setBlock( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
 							}
 						}
 					}
@@ -63,7 +63,7 @@ public class WorldGenPyramid extends WorldGenerator
 						/* Create The Floor at Given j */
 						for (int i = -(outside_height - j); i < (outside_height - j); i++) {
 							for (int k = -(outside_height - j); k < (outside_height - j); k++) {
-								par1World.func_94575_c( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
+								par1World.setBlock( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
 							}
 						}
 
@@ -75,7 +75,7 @@ public class WorldGenPyramid extends WorldGenerator
 						/* Create The Floor at Given j */
 						for (int i = -(outside_height - j); i < (outside_height - j); i++) {
 							for (int k = -(outside_height - j); k < (outside_height - j); k++) {
-								par1World.func_94575_c( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
+								par1World.setBlock( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
 							}
 						}
 
@@ -95,20 +95,20 @@ public class WorldGenPyramid extends WorldGenerator
 					for (int i = -(outside_height - j); i <= (outside_height - j); i++) {
 
 						int k = -(outside_height - j);
-						par1World.func_94575_c( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
+						par1World.setBlock( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
 
 						k = (outside_height - j);
-						par1World.func_94575_c( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
+						par1World.setBlock( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
 					}
 
 					/* Wall Along Z */
 					for (int k = -(outside_height - j); k <= (outside_height - j); k++) {
 
 						int i = -(outside_height - j);
-						par1World.func_94575_c( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
+						par1World.setBlock( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
 
 						i = (outside_height - j);
-						par1World.func_94575_c( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
+						par1World.setBlock( (int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
 					}
 				}
 
@@ -117,9 +117,9 @@ public class WorldGenPyramid extends WorldGenerator
 					for (int k = -(outside_height - 8); k > -outside_height; k--) {
 						for (int j = 1; j < 5; j++) {
 							if(j == 4 || i == -2 || i == 2){
-								par1World.func_94575_c((int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
+								par1World.setBlock((int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, Block.sandStone.blockID);
 							}else{
-								par1World.func_94575_c((int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, 0);
+								par1World.setBlock((int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k, 0);
 							}
 						}
 					}
@@ -280,25 +280,25 @@ public class WorldGenPyramid extends WorldGenerator
 						for (int j = 0; j < floorHeight; j++) {
 
 							if( 5 - classRandom.nextInt(100) >= 0 ){
-								par1World.setBlockAndMetadataWithNotify( 
+								par1World.setBlock( 
 										(int)allCells[i][k].getLocation(m).xCoord,
 										(int)allCells[i][k].getLocation(m).yCoord+j,
 										(int)allCells[i][k].getLocation(m).zCoord,
 										Block.sandStone.blockID, 3, 3);
 							}else if( 5 - classRandom.nextInt(100) >= 0 ){
-								par1World.setBlockAndMetadataWithNotify( 
+								par1World.setBlock( 
 										(int)allCells[i][k].getLocation(m).xCoord,
 										(int)allCells[i][k].getLocation(m).yCoord+j,
 										(int)allCells[i][k].getLocation(m).zCoord,
 										Block.sandStone.blockID, 2, 3);
 							}else if( 5 - classRandom.nextInt(100) >= 0 ){
-								par1World.setBlockAndMetadataWithNotify( 
+								par1World.setBlock( 
 										(int)allCells[i][k].getLocation(m).xCoord,
 										(int)allCells[i][k].getLocation(m).yCoord+j,
 										(int)allCells[i][k].getLocation(m).zCoord,
 										Block.sandStone.blockID, 1, 3);
 							}else{
-								par1World.setBlockAndMetadataWithNotify( 
+								par1World.setBlock( 
 										(int)allCells[i][k].getLocation(m).xCoord,
 										(int)allCells[i][k].getLocation(m).yCoord+j,
 										(int)allCells[i][k].getLocation(m).zCoord,
@@ -318,7 +318,7 @@ public class WorldGenPyramid extends WorldGenerator
 									/* Spawn Chest */
 									TileEntityChest chest = new TileEntityChest();
 
-									par1World.func_94575_c( 
+									par1World.setBlock( 
 											(int)allCells[i][k].getLocation(m).xCoord,
 											(int)allCells[i][k].getLocation(m).yCoord+j,
 											(int)allCells[i][k].getLocation(m).zCoord,
@@ -336,7 +336,7 @@ public class WorldGenPyramid extends WorldGenerator
 
 								}else if(!par1World.isRemote){
 									/* Place Air cause we don't want to spawn Inside something*/
-									par1World.func_94575_c( 
+									par1World.setBlock( 
 											(int)allCells[i][k].getLocation(m).xCoord,
 											(int)allCells[i][k].getLocation(m).yCoord+j,
 											(int)allCells[i][k].getLocation(m).zCoord,
@@ -353,7 +353,7 @@ public class WorldGenPyramid extends WorldGenerator
 								}
 
 							}else{
-								par1World.func_94575_c( 
+								par1World.setBlock( 
 										(int)allCells[i][k].getLocation(m).xCoord,
 										(int)allCells[i][k].getLocation(m).yCoord+j,
 										(int)allCells[i][k].getLocation(m).zCoord,
@@ -367,7 +367,7 @@ public class WorldGenPyramid extends WorldGenerator
 					if( allCells[i][k].getLocation(m) != null && allCells[i][k].getCellType() == 3){
 						for (int j = 0; j < floorHeight; j++) {
 
-							par1World.func_94575_c( 
+							par1World.setBlock( 
 									(int)allCells[i][k].getLocation(m).xCoord,
 									(int)allCells[i][k].getLocation(m).yCoord+j,
 									(int)allCells[i][k].getLocation(m).zCoord,
@@ -381,7 +381,7 @@ public class WorldGenPyramid extends WorldGenerator
 							if(j == 0 && m == 0){
 
 								/* Create Mob Spawner */
-								par1World.func_94575_c( 
+								par1World.setBlock( 
 										(int)allCells[i][k].getLocation(m).xCoord,
 										(int)allCells[i][k].getLocation(m).yCoord+j,
 										(int)allCells[i][k].getLocation(m).zCoord,
@@ -393,13 +393,13 @@ public class WorldGenPyramid extends WorldGenerator
 
 								if (var19 != null){
 									if( Loader.isModLoaded("ProjectZulu|Mobs") ){
-										var19.func_98049_a().func_98272_a(DefaultProps.CoreModId.concat(".Entity Mummy") );
+										var19.func_98049_a().setMobID(DefaultProps.CoreModId.concat(".Entity Mummy") );
 									}else{
-										var19.func_98049_a().func_98272_a( "Zombie" );
+										var19.func_98049_a().setMobID( "Zombie" );
 									}
 								}
 							}else{
-								par1World.func_94575_c( 
+								par1World.setBlock( 
 										(int)allCells[i][k].getLocation(m).xCoord,
 										(int)allCells[i][k].getLocation(m).yCoord+j,
 										(int)allCells[i][k].getLocation(m).zCoord,
@@ -628,7 +628,7 @@ public class WorldGenPyramid extends WorldGenerator
 
 					for (int tempY = 0; tempY <= floorHeight*2; tempY++) {
 						if(tempY != floorHeight){
-							par1World.func_94575_c(
+							par1World.setBlock(
 									(int)(startingPos.xCoord) + stairCasePlacement.x + tempX,
 									(int)(startingPos.yCoord) + floorYcoord - floorHeight + tempY,
 									(int)(startingPos.zCoord) + stairCasePlacement.y + tempZ,
@@ -647,13 +647,13 @@ public class WorldGenPyramid extends WorldGenerator
 				for (int i = (stairCaseLocRef.length-1-j); i >= (stairCaseLocRef.length / 2); i--) {
 
 					if( i == (stairCaseLocRef.length-1-j) ){
-						par1World.setBlockAndMetadataWithNotify(
+						par1World.setBlock(
 								(int)(startingPos.xCoord) + stairCasePlacement.x + stairCaseLocRef[i].x,
 								(int)(startingPos.yCoord) + floorYcoord - floorHeight + j,
 								(int)(startingPos.zCoord) + stairCasePlacement.y + stairCaseLocRef[i].y,
 								Block.stairsSandStone.blockID, 3, 3);
 					}else{
-						par1World.func_94575_c(
+						par1World.setBlock(
 								(int)(startingPos.xCoord) + stairCasePlacement.x + stairCaseLocRef[i].x,
 								(int)(startingPos.yCoord) + floorYcoord - floorHeight + j,
 								(int)(startingPos.zCoord) + stairCasePlacement.y + stairCaseLocRef[i].y,
@@ -665,7 +665,7 @@ public class WorldGenPyramid extends WorldGenerator
 				if(j == floorHeight){
 
 					for (int i = 0; i < stairCaseLocRef.length; i++) {
-						par1World.func_94575_c(
+						par1World.setBlock(
 								(int)(startingPos.xCoord) + stairCasePlacement.x + stairCaseLocRef[i].x,
 								(int)(startingPos.yCoord) + floorYcoord - floorHeight + j,
 								(int)(startingPos.zCoord) + stairCasePlacement.y + stairCaseLocRef[i].y,
@@ -675,14 +675,14 @@ public class WorldGenPyramid extends WorldGenerator
 
 					for (int i = 0; i < stairCaseLocRef.length / 2; i++) {
 						if(i == 0){
-							par1World.setBlockAndMetadataWithNotify(
+							par1World.setBlock(
 									(int)(startingPos.xCoord) + stairCasePlacement.x + stairCaseLocRef[i].x,
 									(int)(startingPos.yCoord) + floorYcoord - floorHeight + j,
 									(int)(startingPos.zCoord) + stairCasePlacement.y + stairCaseLocRef[i].y,
 									Block.stairsSandStone.blockID, 1, 3);
 
 						}else{
-							par1World.func_94575_c(
+							par1World.setBlock(
 									(int)(startingPos.xCoord) + stairCasePlacement.x + stairCaseLocRef[i].x,
 									(int)(startingPos.yCoord) + floorYcoord - floorHeight + j,
 									(int)(startingPos.zCoord) + stairCasePlacement.y + stairCaseLocRef[i].y,

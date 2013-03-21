@@ -67,7 +67,7 @@ public class ItemCoconutSeed extends Item{
 			if (par3World.isAirBlock(par4, par5, par6) && BlockList.coconut.isPresent()){
 				
                 int var13 = Block.blocksList[BlockList.coconut.get().blockID].onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, 0);
-                par3World.setBlockAndMetadataWithNotify(par4, par5, par6, BlockList.coconut.get().blockID, var13, 3);
+                par3World.setBlock(par4, par5, par6, BlockList.coconut.get().blockID, var13, 3);
 
                 if (!par2EntityPlayer.capabilities.isCreativeMode){
                     --par1ItemStack.stackSize;

@@ -18,20 +18,20 @@ public class BlueprintCemetaryFountain2 extends Blueprint{
 			switch (cellIndexDirection.calcDirection(cellIndex, cellSize)){
 			case NorthWall:
 			case NorthMiddle:
-				return new BlockWithMeta(Block.stairsStoneBrickSmooth.blockID, 2);
+				return new BlockWithMeta(Block.stairsStoneBrick.blockID, 2);
 			case SouthWall:
 			case SouthMiddle:
-				return new BlockWithMeta(Block.stairsStoneBrickSmooth.blockID, 3);
+				return new BlockWithMeta(Block.stairsStoneBrick.blockID, 3);
 			case EastWall:
 			case NorthEastCorner:
 			case SouthEastCorner:
 			case EastMiddle:
-				return new BlockWithMeta(Block.stairsStoneBrickSmooth.blockID, 1);
+				return new BlockWithMeta(Block.stairsStoneBrick.blockID, 1);
 			case WestWall:
 			case NorthWestCorner:
 			case SouthWestCorner:
 			case WestMiddle:
-				return new BlockWithMeta(Block.stairsStoneBrickSmooth.blockID, 0);
+				return new BlockWithMeta(Block.stairsStoneBrick.blockID, 0);
 			case Inner:
 			case Middle:
 				return new BlockWithMeta(Block.waterStill.blockID);

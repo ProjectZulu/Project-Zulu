@@ -61,7 +61,7 @@ public class WorldGenOasis extends WorldGenerator
     		//    					int distOasis2 = 12+par2Random.nextInt(2);
     		//    					for (int k = -width2-distOasis2; k < width2+distOasis2; k++) {
     		//    						if( par1World.isAirBlock(var7+i, var8+0, var9+k) ){
-    		//    							par1World.func_94575_c(var7+i, var8-2, var9+k, Block.sand.blockID);
+    		//    							par1World.setBlock(var7+i, var8-2, var9+k, Block.sand.blockID);
     		//    						}
     		//    					}
     		//    				}
@@ -71,7 +71,7 @@ public class WorldGenOasis extends WorldGenerator
     		//    					int distOasis2 = 11+par2Random.nextInt(2);
     		//    					for (int i = -width-distOasis2;  i < width+distOasis2; i++) {
     		//    						if( par1World.isAirBlock(var7+i, var8+0, var9+k) ){
-    		//    							par1World.func_94575_c(var7+i, var8-1, var9+k, Block.sand.blockID);
+    		//    							par1World.setBlock(var7+i, var8-1, var9+k, Block.sand.blockID);
     		//    						}
     		//    					}
     		//    				}
@@ -81,7 +81,7 @@ public class WorldGenOasis extends WorldGenerator
     		//    					int distOasis2 = 10+par2Random.nextInt(2);
     		//    					for (int k = -width2-distOasis2; k < width2+distOasis2; k++) {
     		//    						if( par1World.isAirBlock(var7+i, var8+0, var9+k) ){
-    		//    							par1World.func_94575_c(var7+i, var8+0, var9+k, Block.sand.blockID);
+    		//    							par1World.setBlock(var7+i, var8+0, var9+k, Block.sand.blockID);
     		//    						}
     		//    					}
     		//    				}
@@ -93,7 +93,7 @@ public class WorldGenOasis extends WorldGenerator
     			for (int k = -width2; k <= width2; k++) {
     				int depth = par2Random.nextInt(1)+1;
     				for (int j = 0; j >= -depth; j--) {
-    					par1World.func_94575_c(var7+i, var8+j, var9+k, Block.waterStill.blockID);
+    					par1World.setBlock(var7+i, var8+j, var9+k, Block.waterStill.blockID);
     				}
     			}
     		}
@@ -105,15 +105,15 @@ public class WorldGenOasis extends WorldGenerator
     		for (int i = -width-1; i <= width+1; i++) {
     			int numGrassAway = par2Random.nextInt(rngGrassAway)+minGrassAway;
     			for (int k = width2; k <= width2+numGrassAway; k++) {
-    				par1World.func_94575_c(var7+i, var8, var9+k, Block.grass.blockID);
+    				par1World.setBlock(var7+i, var8, var9+k, Block.grass.blockID);
     				for (int j = 1; j < 3; j++) {
-    					par1World.func_94575_c(var7+i, var8+j, var9+k, 0);
+    					par1World.setBlock(var7+i, var8+j, var9+k, 0);
     				}
     			}
     			for (int k = width2+numGrassAway+1; k <= width2+numGrassAway+3; k++) {
-    				//par1World.func_94575_c(var7+i, var8, var9+k, Block.grass.blockID);
+    				//par1World.setBlock(var7+i, var8, var9+k, Block.grass.blockID);
     				for (int j = 0; j > -5; j--) {
-    					par1World.func_94575_c(var7+i, var8+j, var9+k, Block.sand.blockID);
+    					par1World.setBlock(var7+i, var8+j, var9+k, Block.sand.blockID);
     				}
     			}
     		}
@@ -122,14 +122,14 @@ public class WorldGenOasis extends WorldGenerator
     		for (int i = -width-1; i <= width+1; i++) {
     			int numGrassAway = par2Random.nextInt(rngGrassAway)+minGrassAway;
     			for (int k = -width2; k >= -(width2+numGrassAway); k--) {
-    				par1World.func_94575_c(var7+i, var8, var9+k, Block.grass.blockID);
+    				par1World.setBlock(var7+i, var8, var9+k, Block.grass.blockID);
     				for (int j = 1; j < 3; j++) {
-    					par1World.func_94575_c(var7+i, var8+j, var9+k, 0);
+    					par1World.setBlock(var7+i, var8+j, var9+k, 0);
     				}
     			}
     			for (int k = -(width2+numGrassAway+1); k >= -(width2+numGrassAway+3); k--) {
     				for (int j = 0; j > -5; j--) {
-    					par1World.func_94575_c(var7+i, var8+j, var9+k, Block.sand.blockID);
+    					par1World.setBlock(var7+i, var8+j, var9+k, Block.sand.blockID);
     				}
     			}
     		}
@@ -139,14 +139,14 @@ public class WorldGenOasis extends WorldGenerator
     		for (int k = -width2-1; k <= width2+1; k++) {
     			int numGrassAway = par2Random.nextInt(rngGrassAway)+minGrassAway;
     			for (int i = width; i <= width+numGrassAway; i++) {
-    				par1World.func_94575_c(var7+i, var8, var9+k, Block.grass.blockID);
+    				par1World.setBlock(var7+i, var8, var9+k, Block.grass.blockID);
     				for (int j = 1; j < 3; j++) {
-    					par1World.func_94575_c(var7+i, var8+j, var9+k, 0);
+    					par1World.setBlock(var7+i, var8+j, var9+k, 0);
     				}
     			}
     			for (int i = (width+numGrassAway+1); i <= (width+numGrassAway+3); i++) {
     				for (int j = 0; j > -5; j--) {
-    					par1World.func_94575_c(var7+i, var8+j, var9+k, Block.sand.blockID);
+    					par1World.setBlock(var7+i, var8+j, var9+k, Block.sand.blockID);
     				}
     			}
     		}
@@ -155,48 +155,48 @@ public class WorldGenOasis extends WorldGenerator
     		for (int k = -width2-1; k <= width2+1; k++) {
     			int numGrassAway = par2Random.nextInt(rngGrassAway)+minGrassAway;
     			for (int i = -width-1; i >= -width-numGrassAway; i--) {
-    				par1World.func_94575_c(var7+i, var8, var9+k, Block.grass.blockID);
+    				par1World.setBlock(var7+i, var8, var9+k, Block.grass.blockID);
     				for (int j = 1; j < 3; j++) {
-    					par1World.func_94575_c(var7+i, var8+j, var9+k, 0);
+    					par1World.setBlock(var7+i, var8+j, var9+k, 0);
     				}
     			}
     			for (int i = -(width+numGrassAway+1); i >= -(width+numGrassAway+3); i--) {
-    				//par1World.func_94575_c(var7+i, var8, var9+k, Block.grass.blockID);
+    				//par1World.setBlock(var7+i, var8, var9+k, Block.grass.blockID);
     				for (int j = 0; j > -5; j--) {
-    					par1World.func_94575_c(var7+i, var8+j, var9+k, Block.sand.blockID);
+    					par1World.setBlock(var7+i, var8+j, var9+k, Block.sand.blockID);
     				}
     			}
     		}
     		//Fill Corners With Sand
     		for (int j = 0; j > -3; j--) {
     			int blockIDToPlace = Block.sand.blockID;
-    			par1World.func_94575_c(var7+(width+2), var8+j, var9+(width2+2), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+0), var8+j, var9+(width2+2+1), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+0), var8+j, var9+(width2+2+2), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+1), var8+j, var9+(width2+2+0), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+2), var8+j, var9+(width2+2+0), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+1), var8+j, var9+(width2+2+1), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2), var8+j, var9+(width2+2), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+0), var8+j, var9+(width2+2+1), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+0), var8+j, var9+(width2+2+2), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+1), var8+j, var9+(width2+2+0), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+2), var8+j, var9+(width2+2+0), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+1), var8+j, var9+(width2+2+1), blockIDToPlace);
 
-    			par1World.func_94575_c(var7-(width+2), var8+j, var9+(width2+2), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+0), var8+j, var9+(width2+2+1), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+0), var8+j, var9+(width2+2+2), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+1), var8+j, var9+(width2+2+0), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+2), var8+j, var9+(width2+2+0), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+1), var8+j, var9+(width2+2+1), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2), var8+j, var9+(width2+2), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+0), var8+j, var9+(width2+2+1), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+0), var8+j, var9+(width2+2+2), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+1), var8+j, var9+(width2+2+0), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+2), var8+j, var9+(width2+2+0), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+1), var8+j, var9+(width2+2+1), blockIDToPlace);
 
-    			par1World.func_94575_c(var7+(width+2), var8+j, var9-(width2+2), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+0), var8+j, var9-(width2+2+1), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+0), var8+j, var9-(width2+2+2), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+1), var8+j, var9-(width2+2+0), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+2), var8+j, var9-(width2+2+0), blockIDToPlace);
-    			par1World.func_94575_c(var7+(width+2+1), var8+j, var9-(width2+2+1), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2), var8+j, var9-(width2+2), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+0), var8+j, var9-(width2+2+1), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+0), var8+j, var9-(width2+2+2), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+1), var8+j, var9-(width2+2+0), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+2), var8+j, var9-(width2+2+0), blockIDToPlace);
+    			par1World.setBlock(var7+(width+2+1), var8+j, var9-(width2+2+1), blockIDToPlace);
 
-    			par1World.func_94575_c(var7-(width+2), var8+j, var9-(width2+2), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+0), var8+j, var9-(width2+2+1), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+0), var8+j, var9-(width2+2+2), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+1), var8+j, var9-(width2+2+0), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+2), var8+j, var9-(width2+2+0), blockIDToPlace);
-    			par1World.func_94575_c(var7-(width+2+1), var8+j, var9-(width2+2+1), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2), var8+j, var9-(width2+2), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+0), var8+j, var9-(width2+2+1), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+0), var8+j, var9-(width2+2+2), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+1), var8+j, var9-(width2+2+0), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+2), var8+j, var9-(width2+2+0), blockIDToPlace);
+    			par1World.setBlock(var7-(width+2+1), var8+j, var9-(width2+2+1), blockIDToPlace);
     		}
 
     		//Generate Trees
@@ -268,38 +268,38 @@ public class WorldGenOasis extends WorldGenerator
     		while(localY <= height){
     			//Place Log above by 1
     			localY++;
-    			par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
+    			par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
 
     			if(favoredDirectionX > 0){
     				localX++;    		
     				favoredDirectionX = Math.max(favoredDirectionX-horizontalFactor,0);
-    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
+    				par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
 
     			}else if(favoredDirectionX < 0){
     				localX--;    		
     				favoredDirectionX = Math.min(favoredDirectionX+horizontalFactor,0);
-    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
+    				par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
 
     			}
 
     			if(favoredDirectionZ > 0){
     				localZ++;
     				favoredDirectionZ = Math.max(favoredDirectionZ-horizontalFactor,0);
-    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
+    				par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);
 
     			}else if(favoredDirectionZ < 0){
     				localZ--;
     				favoredDirectionZ = Math.min(favoredDirectionZ+horizontalFactor,0);
-    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ, palmTreeLogID);    			
+    				par1World.setBlock(par2+localX, par3+localY, par4+localZ, palmTreeLogID);    			
     			}
 
     			if(localY+1 == height){
     				localY++;
-    				par1World.func_94575_c(par2+localX, par3+localY, par4+localZ,palmTreeLogID);
+    				par1World.setBlock(par2+localX, par3+localY, par4+localZ,palmTreeLogID);
     				localY++;
     				spawnLeaves(par1World, par2+localX, par3+localY, par4+localZ, par5Random, height);
     				//Place block at original sapling locations
-    				par1World.func_94575_c(par2, par3, par4, palmTreeLogID);
+    				par1World.setBlock(par2, par3, par4, palmTreeLogID);
     			}
     		}
     	}
@@ -310,44 +310,44 @@ public class WorldGenOasis extends WorldGenerator
     	
     	//TODO: Add more Leave Spawn Templates
     	if (height + 1 >= 7 ) {
-    		par1World.func_94575_c(par2, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2-1, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2-2, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2-3, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2-4, par3-1, par4, palmTreeLeavesID);
+    		par1World.setBlock(par2, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2-1, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2-2, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2-3, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2-4, par3-1, par4, palmTreeLeavesID);
 	    	
-	    	par1World.func_94575_c(par2+1, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2+2, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2+3, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2+3, par3-1, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2+1, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2+2, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2+3, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2+3, par3-1, par4, palmTreeLeavesID);
 	    	
-	    	par1World.func_94575_c(par2, par3, par4-1, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3, par4-2, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3, par4-3, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3-1, par4-3, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4-1, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4-2, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4-3, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3-1, par4-3, palmTreeLeavesID);
 	    	
-	    	par1World.func_94575_c(par2, par3, par4+1, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3, par4+2, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3, par4+3, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3-1, par4+3, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4+1, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4+2, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4+3, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3-1, par4+3, palmTreeLeavesID);
 			
 		}else{
-			par1World.func_94575_c(par2, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2-1, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2-2, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2-2, par3-1, par4, palmTreeLeavesID);
+			par1World.setBlock(par2, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2-1, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2-2, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2-2, par3-1, par4, palmTreeLeavesID);
 	    	
-	    	par1World.func_94575_c(par2+1, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2+2, par3, par4, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2+2, par3-1, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2+1, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2+2, par3, par4, palmTreeLeavesID);
+	    	par1World.setBlock(par2+2, par3-1, par4, palmTreeLeavesID);
 	    	
-	    	par1World.func_94575_c(par2, par3, par4-1, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3, par4-2, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3-1, par4-2, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4-1, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4-2, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3-1, par4-2, palmTreeLeavesID);
 	    	
-	    	par1World.func_94575_c(par2, par3, par4+1, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3, par4+2, palmTreeLeavesID);
-	    	par1World.func_94575_c(par2, par3-1, par4+2, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4+1, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3, par4+2, palmTreeLeavesID);
+	    	par1World.setBlock(par2, par3-1, par4+2, palmTreeLeavesID);
 		}
     	
     }

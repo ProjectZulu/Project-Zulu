@@ -160,7 +160,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      */
     public void updateEntity(){    	
     	if(maxSpawnableEntities > 0 && spawnedEntities >= maxSpawnableEntities){
-    		worldObj.func_94575_c(xCoord, yCoord, zCoord, 0);
+    		worldObj.setBlock(xCoord, yCoord, zCoord, 0);
     	}
     	
         if (this.anyPlayerInRange()){

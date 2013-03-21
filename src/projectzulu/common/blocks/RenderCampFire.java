@@ -16,6 +16,8 @@ import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class RenderCampFire implements ISimpleBlockRenderingHandler{
 
@@ -31,7 +33,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 		
         float scaleItem = 1.5f;
         GL11.glPushMatrix();
-        Minecraft.getMinecraft().renderEngine.func_98187_b("/terrain.png");
+        Minecraft.getMinecraft().renderEngine.bindTexture("/terrain.png");
         GL11.glRotatef((float) (90f*Math.PI/180f), 1, 0, 0);
         GL11.glScalef(scaleItem, scaleItem, scaleItem);
 		itemRenderer.doRenderItem(entityItemToRender, 0, 0, 0, 0, 0);
@@ -140,12 +142,11 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 	 */
 	private boolean renderCampireRectangle2Sides(Block par1Block, int index1, int index2, int par2, double par3, double par5, double par7, RenderBlocks renderer, double xWidth, double zWidth, double yMax, double angle){
 		Tessellator var9 = Tessellator.instance;		
-    	Icon var10 = renderer.func_94165_a(Block.wood, 2, 0);
-    	double var13 = var10.func_94209_e();
-    	double var15 = var10.func_94209_e() + (var10.func_94212_f() - var10.func_94209_e())/2.01f;
-    	double var17 = var10.func_94206_g();
-    	double var19 = var10.func_94206_g() + (var10.func_94210_h() - var10.func_94206_g())/2.01f;
-    	
+    	Icon var10 = renderer.getBlockIconFromSideAndMetadata(Block.wood, 2, 0);
+    	double var13 = var10.getMinU();
+    	double var15 = var10.getMinU() + (var10.getMaxU() - var10.getMinU())/2.01f;
+    	double var17 = var10.getMinV();
+    	double var19 = var10.getMinV() + (var10.getMaxV() - var10.getMinV())/2.01f;
 		double yMin = 0.0f;
 				
 		double intermedVarX = -xWidth/2;
@@ -213,11 +214,11 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 		var9.addVertexWithUV(point2X, par5 + yMin, point2Z, var13, var19);
 		var9.addVertexWithUV(point1X, par5 + yMin, point1Z, var13, var17);
 		
-    	var10 = renderer.func_94165_a(Block.wood, 1, 0);
-    	var13 = var10.func_94209_e() + (var10.func_94212_f() - var10.func_94209_e())*0.99f/4f;
-    	var15 = var10.func_94209_e() + (var10.func_94212_f() - var10.func_94209_e())*2.99f/4f;
-    	var17 = var10.func_94206_g() + (var10.func_94210_h() - var10.func_94206_g())*0.99f/4f;
-    	var19 = var10.func_94206_g() + (var10.func_94210_h() - var10.func_94206_g())*2.99f/4f;
+    	var10 = renderer.getBlockIconFromSideAndMetadata(Block.wood, 1, 0);
+    	var13 = var10.getMinU() + (var10.getMaxU() - var10.getMinU())*0.99f/4f;
+    	var15 = var10.getMinU() + (var10.getMaxU() - var10.getMinU())*2.99f/4f;
+    	var17 = var10.getMinV() + (var10.getMaxV() - var10.getMinV())*0.99f/4f;
+    	var19 = var10.getMinV() + (var10.getMaxV() - var10.getMinV())*2.99f/4f;
 		
 		/* Side 1 */
 		var9.addVertexWithUV(point1X, par5 + yMin, point1Z, var13, var17);
@@ -261,11 +262,11 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 	 */
 	private boolean renderCampireRectangle(Block par1Block, int var10, int par2, double par3, double par5, double par7, RenderBlocks renderer, double xWidth, double zWidth, double yMax, double angle){
 		Tessellator var9 = Tessellator.instance;		
-    	Icon icon = renderer.func_94165_a(Block.cobblestone,3, 2);
-    	double var13 = icon.func_94209_e();
-    	double var15 = icon.func_94209_e() + (icon.func_94212_f() - icon.func_94209_e())/2.01f;
-    	double var17 = icon.func_94206_g();
-    	double var19 = icon.func_94206_g() + (icon.func_94210_h() - icon.func_94206_g())/2.01f;
+    	Icon icon = renderer.getBlockIconFromSideAndMetadata(Block.cobblestone,3, 2);
+    	double var13 = icon.getMinU();
+    	double var15 = icon.getMinU() + (icon.getMaxU() - icon.getMinU())/2.01f;
+    	double var17 = icon.getMinV();
+    	double var19 = icon.getMinV() + (icon.getMaxV() - icon.getMinV())/2.01f;
 		
 		double yMin = 0.0f;
 				
@@ -366,11 +367,11 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 		var5.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 		var5.setBrightness(par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4));
 		
-    	Icon icon = renderer.func_94165_a(Block.fire, 0, 0);
-    	double var9 = icon.func_94209_e();
-    	double var11 = icon.func_94212_f();
-    	double var13 = icon.func_94206_g();
-    	double var15 = icon.func_94210_h();
+    	Icon icon = renderer.getBlockIconFromSideAndMetadata(Block.fire, 0, 0);
+    	double var9 = icon.getMinU();
+    	double var11 = icon.getMaxU();
+    	double var13 = icon.getMinV();
+    	double var15 = icon.getMaxV();
 		
 		float var17 = 1.4F;
 		double var20;
@@ -386,10 +387,10 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 			float var19 = 0.0625F;
 
 			if ((par2 + par3 + par4 & 1) == 1){
-		    	var9 = icon.func_94209_e();
-		    	var11 = icon.func_94212_f();
-		    	var13 = icon.func_94206_g();
-		    	var15 = icon.func_94210_h();
+		    	var9 = icon.getMinU();
+		    	var11 = icon.getMaxU();
+		    	var13 = icon.getMinV();
+		    	var15 = icon.getMaxV();
 
 			}
 
@@ -454,10 +455,10 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 				var32 = (double)par4 + 0.5D - 0.5D;
 				double var34 = (double)par4 + 0.5D + 0.5D;
 
-		    	var9 = icon.func_94209_e();
-		    	var11 = icon.func_94212_f();
-		    	var13 = icon.func_94206_g();
-		    	var15 = icon.func_94210_h();
+		    	var9 = icon.getMinU();
+		    	var11 = icon.getMaxU();
+		    	var13 = icon.getMinV();
+		    	var15 = icon.getMaxV();
 
 				++par3;
 				var17 = -0.2F;
@@ -468,10 +469,10 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 					var5.addVertexWithUV(var20, (double)(par3 + 0), (double)(par4 + 1), var9, var15);
 					var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 1), var9, var13);
 
-					var9 = icon.func_94209_e();
-			    	var11 = icon.func_94212_f();
-			    	var13 = icon.func_94206_g();
-			    	var15 = icon.func_94210_h();
+					var9 = icon.getMinU();
+			    	var11 = icon.getMaxU();
+			    	var13 = icon.getMinV();
+			    	var15 = icon.getMaxV();
 
 					var5.addVertexWithUV(var30, (double)((float)par3 + var17), (double)(par4 + 1), var11, var13);
 					var5.addVertexWithUV(var22, (double)(par3 + 0), (double)(par4 + 1), var11, var15);
@@ -484,10 +485,10 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 					var5.addVertexWithUV((double)(par2 + 1), (double)(par3 + 0), var26, var9, var15);
 					var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17), var34, var9, var13);
 
-					var9 = icon.func_94209_e();
-			    	var11 = icon.func_94212_f();
-			    	var13 = icon.func_94206_g();
-			    	var15 = icon.func_94210_h();
+					var9 = icon.getMinU();
+			    	var11 = icon.getMaxU();
+			    	var13 = icon.getMinV();
+			    	var15 = icon.getMaxV();
 
 					var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17), var32, var11, var13);
 					var5.addVertexWithUV((double)(par2 + 1), (double)(par3 + 0), var24, var11, var15);
@@ -514,10 +515,10 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 			var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0.8), var9, var13);
 
 
-	    	var9 = icon.func_94209_e();
-	    	var11 = icon.func_94212_f();
-	    	var13 = icon.func_94206_g();
-	    	var15 = icon.func_94210_h();
+	    	var9 = icon.getMinU();
+	    	var11 = icon.getMaxU();
+	    	var13 = icon.getMinV();
+	    	var15 = icon.getMaxV();
 
 			var5.addVertexWithUV( (double)(par2 + 0.8), (double)((float)par3 + var17), var32, var11, var13);
 			var5.addVertexWithUV( (double)(par2 + 0.8), (double)(par3 + 0), var24, var11, var15);
@@ -546,10 +547,10 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 			var5.addVertexWithUV(var20, (double)(par3 + 0),            (double)(par4 + 0.2), var11, var15);
 			var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0.2), var11, var13);
 			
-	    	var9 = icon.func_94209_e();
-	    	var11 = icon.func_94212_f();
-	    	var13 = icon.func_94206_g();
-	    	var15 = icon.func_94210_h();
+	    	var9 = icon.getMinU();
+	    	var11 = icon.getMaxU();
+	    	var13 = icon.getMinV();
+	    	var15 = icon.getMaxV();
 
 			var5.addVertexWithUV((double)(par2 + 0.2), (double)((float)par3 + var17), var32, var9, var13);
 			var5.addVertexWithUV((double)(par2 + 0.2), (double)(par3 + 0), var24, var9, var15);

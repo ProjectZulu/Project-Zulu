@@ -290,7 +290,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     public void drawDefaultBackground() {
     	super.drawDefaultBackground();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.func_98187_b(DefaultProps.dungeonDiretory+"mobspawnergui.png");
+        this.mc.renderEngine.bindTexture(DefaultProps.dungeonDiretory+"mobspawnergui.png");
         int xCoord = (width - backgroundSize.getX()) / 2;
         int yCoord = (height - backgroundSize.getY()) / 2;
         this.drawTexturedModalRect(xCoord, yCoord, 0, 0, backgroundSize.getX(), backgroundSize.getY());

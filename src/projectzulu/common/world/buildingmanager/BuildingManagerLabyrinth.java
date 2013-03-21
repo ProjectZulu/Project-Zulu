@@ -157,7 +157,7 @@ public class BuildingManagerLabyrinth extends BuildingManager{
 			for (int j = yHeight; j <= yHeight+5; j++) {
 				for (int i = -1; i <= cellSize; i++) {
 					if(i >= 0 && i < cellSize && j == yHeight){
-						HandleBlockPlacement(new BlockWithMeta(Block.stairsStoneBrickSmooth.blockID, 2), 
+						HandleBlockPlacement(new BlockWithMeta(Block.stairsStoneBrick.blockID, 2), 
 								new ChunkCoordinates((int)startingPos.xCoord+i, (int)startingPos.yCoord+j, (int)startingPos.zCoord+k+(width-cellSize)),
 								new Random());
 					}else if(i >= 0 && i < cellSize && j == yHeight+5){
