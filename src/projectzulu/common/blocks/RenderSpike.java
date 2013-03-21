@@ -11,13 +11,13 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 public class RenderSpike implements ISimpleBlockRenderingHandler{
 
 	/* Leaving This here For Reference*/
-//	ProjectZuluLog.info("func_94209_e %s", var10.func_94209_e()); // 0.46875
+//	ProjectZuluLog.info("func_94209_e %s", var10.getMinU()); // 0.46875
 //	ProjectZuluLog.info("func_94216_b %s", var10.func_94216_b()); // 192
-//	ProjectZuluLog.info("func_94209_e %s", var10.func_94209_e()); // 0.46875
-//	ProjectZuluLog.info("func_94212_f %s", var10.func_94212_f()); // 0.5
-//	ProjectZuluLog.info("func_94214_a %s", var10.func_94214_a(8D)); // 0: 0.46875, 8: 0.484375
-//	ProjectZuluLog.info("func_94206_g %s", var10.func_94206_g()); // 0.375
-//	ProjectZuluLog.info("func_94210_h %s", var10.func_94210_h()); // 0.40625
+//	ProjectZuluLog.info("func_94209_e %s", var10.getMinU()); // 0.46875
+//	ProjectZuluLog.info("func_94212_f %s", var10.getMaxU()); // 0.5
+//	ProjectZuluLog.info("func_94214_a %s", var10.getInterpolatedU(8D)); // 0: 0.46875, 8: 0.484375
+//	ProjectZuluLog.info("func_94206_g %s", var10.getMinV()); // 0.375
+//	ProjectZuluLog.info("func_94210_h %s", var10.getMaxV()); // 0.40625
 //	ProjectZuluLog.info("func_94207_b %s", var10.func_94207_b(8D)); // 0: 0.375, 8: 0.390625
 //	ProjectZuluLog.info("func_94215_i %s", var10.func_94215_i()); // NAME
 //	ProjectZuluLog.info("func_94213_j %s", var10.func_94213_j()); // 512
@@ -114,16 +114,16 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
 
     public void drawCrossedSquares(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer){
         Tessellator var9 = Tessellator.instance;
-        Icon var10 = renderer.func_94165_a(par1Block, 0, par2);
+        Icon var10 = renderer.getBlockIconFromSideAndMetadata(par1Block, 0, par2);
 
         if (renderer.overrideBlockTexture != null){
             var10 = renderer.overrideBlockTexture;
         }
         
-        double var13 = (double)var10.func_94209_e();
-        double var15 = (double)var10.func_94212_f();
-        double var17 = (double)var10.func_94206_g();
-        double var19 = (double)var10.func_94210_h();
+        double var13 = (double)var10.getMinU();
+        double var15 = (double)var10.getMaxU();
+        double var17 = (double)var10.getMinV();
+        double var19 = (double)var10.getMaxV();
     	
         double var21 = par3 + 0.5D - 0.5D;
         double var23 = par3 + 0.5D + 0.5D;
@@ -324,16 +324,16 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
     public void RenderFencePikes(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer) {
     	Tessellator var9 = Tessellator.instance;
     	//      Icon var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
-    	Icon var10 = renderer.func_94165_a(par1Block, 0, par2);
+    	Icon var10 = renderer.getBlockIconFromSideAndMetadata(par1Block, 0, par2);
 
     	if (renderer.overrideBlockTexture != null){
     		var10 = renderer.overrideBlockTexture;
     	}
 
-    	double var13 = var10.func_94209_e() + (var10.func_94212_f()-var10.func_94209_e())*1f/4f;
-    	double var15 = var10.func_94209_e() + (var10.func_94212_f()-var10.func_94209_e())*3f/4f;
-    	double var17 = var10.func_94206_g();
-    	double var19 = var10.func_94210_h();
+    	double var13 = var10.getMinU() + (var10.getMaxU()-var10.getMinU())*1f/4f;
+    	double var15 = var10.getMinU() + (var10.getMaxU()-var10.getMinU())*3f/4f;
+    	double var17 = var10.getMinV();
+    	double var19 = var10.getMaxV();
     	
         double var21 = par3 + 0.5D - (0.625-0.375)/2D;
         double var23 = par3 + 0.5D + (0.625-0.375)/2D;
@@ -368,16 +368,16 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
     public void drawSpikeCross(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer){
     	Tessellator var9 = Tessellator.instance;
     	//      Icon var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
-    	Icon var10 = renderer.func_94165_a(par1Block, 0, par2);
+    	Icon var10 = renderer.getBlockIconFromSideAndMetadata(par1Block, 0, par2);
 
     	if (renderer.overrideBlockTexture != null){
     		var10 = renderer.overrideBlockTexture;
     	}
     	
-    	double var13 = (double)var10.func_94209_e();
-    	double var15 = (double)var10.func_94212_f();
-    	double var17 = (double)var10.func_94206_g();
-    	double var19 = (double)var10.func_94210_h();
+    	double var13 = (double)var10.getMinU();
+    	double var15 = (double)var10.getMaxU();
+    	double var17 = (double)var10.getMinV();
+    	double var19 = (double)var10.getMaxV();
         
         /* Render Strip Along X */
         double var21 = par3 + 0.5D - 0.5;
@@ -447,7 +447,7 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
     
     public void drawSpikeStrip(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer, Boolean alongX, int type){    	
     	Tessellator var9 = Tessellator.instance;
-    	Icon var10 = renderer.func_94165_a(par1Block, 0, par2);
+    	Icon var10 = renderer.getBlockIconFromSideAndMetadata(par1Block, 0, par2);
 
     	if (renderer.overrideBlockTexture != null){
     		var10 = renderer.overrideBlockTexture;
@@ -460,25 +460,25 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
         
     	switch (type) {
     	case 1:
-        	var13 = var10.func_94214_a(8D);
-        	var15 = var10.func_94212_f();
-        	var17 = var10.func_94206_g();
-        	var19 = var10.func_94210_h();
+        	var13 = var10.getInterpolatedU(8D);
+        	var15 = var10.getMaxU();
+        	var17 = var10.getMinV();
+        	var19 = var10.getMaxV();
         	break;
 			
 		case 2:
-        	var13 = var10.func_94209_e();
-        	var15 = var10.func_94214_a(8D); //var10.func_94212_f();
-        	var15 = var10.func_94209_e() + (var10.func_94212_f() - var10.func_94209_e())/2f; //var10.func_94212_f();
-        	var17 = var10.func_94206_g();
-        	var19 = var10.func_94210_h();
+        	var13 = var10.getMinU();
+        	var15 = var10.getInterpolatedU(8D); //var10.getMaxU();
+        	var15 = var10.getMinU() + (var10.getMaxU() - var10.getMinU())/2f; //var10.getMaxU();
+        	var17 = var10.getMinV();
+        	var19 = var10.getMaxV();
 			break;
 			
 		default:
-        	var13 = (double)var10.func_94209_e();
-        	var15 = (double)var10.func_94212_f();
-        	var17 = (double)var10.func_94206_g();
-        	var19 = (double)var10.func_94210_h();
+        	var13 = (double)var10.getMinU();
+        	var15 = (double)var10.getMaxU();
+        	var17 = (double)var10.getMinV();
+        	var19 = (double)var10.getMaxV();
 		}
     	
         double var21;

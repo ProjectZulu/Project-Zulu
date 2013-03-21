@@ -24,6 +24,6 @@ public class BlockWithMeta {
 	 * Helper Function to Place Block/TileEntity/Spawner. Overriden in Child to make use of specific knowleadge, i.e. A Chests Loot Chance
 	 */
 	public void placeBlock(World world, ChunkCoordinates position, Random random){
-		world.setBlockAndMetadataWithNotify(position.posX, position.posY, position.posZ, blockID, meta, 3);
+		world.setBlock(position.posX, position.posY, position.posZ, blockID, meta, 3);
 	}
 }

@@ -86,9 +86,9 @@ public class BlockCampfire extends Block implements ITempBlock{
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister par1IconRegister){
+    public void registerIcons(IconRegister par1IconRegister){
     	for (Type type : Type.values()) {
-    		type.setIcon(par1IconRegister.func_94245_a(func_94330_A()+"_"+type.toString().toLowerCase()));
+    		type.setIcon(par1IconRegister.registerIcon(getUnlocalizedName2()+"_"+type.toString().toLowerCase()));
 		}
     }
     
@@ -134,19 +134,19 @@ public class BlockCampfire extends Block implements ITempBlock{
 			
 			if(meta > 1){
 				if( canBlockCatchFire(par1World, par2, par3+1, par4, ForgeDirection.UP) ){
-					par1World.func_94575_c(par2, par3+1, par4, Block.fire.blockID);
+					par1World.setBlock(par2, par3+1, par4, Block.fire.blockID);
 				}
 			}
 			
 			if(meta == 2){
 				if( 	  canBlockCatchFire(par1World, par2,   par3, par4+1, ForgeDirection.NORTH) ){
-					par1World.func_94575_c(	   par2,   par3, par4+1, Block.fire.blockID);
+					par1World.setBlock(	   par2,   par3, par4+1, Block.fire.blockID);
 				}else if( canBlockCatchFire(par1World, par2,   par3, par4-1, ForgeDirection.SOUTH) ){
-					par1World.func_94575_c(	   par2,   par3, par4-1, Block.fire.blockID);
+					par1World.setBlock(	   par2,   par3, par4-1, Block.fire.blockID);
 				}else if( canBlockCatchFire(par1World, par2+1, par3, par4,   ForgeDirection.WEST) ){
-					par1World.func_94575_c(	   par2+1, par3, par4,   Block.fire.blockID);
+					par1World.setBlock(	   par2+1, par3, par4,   Block.fire.blockID);
 				}else if( canBlockCatchFire(par1World, par2-1, par3, par4,   ForgeDirection.EAST) ){
-					par1World.func_94575_c(	   par2-1, par3, par4,   Block.fire.blockID);
+					par1World.setBlock(	   par2-1, par3, par4,   Block.fire.blockID);
 				}
 			}
 

@@ -28,8 +28,8 @@ public class ItemStructurePlacer extends Item{
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94581_a(IconRegister par1IconRegister) {
-        iconIndex = par1IconRegister.func_94245_a(Item.paper.getUnlocalizedName().substring(5)); //Substring removes "item."
+    public void updateIcons(IconRegister par1IconRegister) {
+        iconIndex = par1IconRegister.registerIcon(Item.paper.getUnlocalizedName().substring(5)); //Substring removes "item."
     }
 	
 	@Override

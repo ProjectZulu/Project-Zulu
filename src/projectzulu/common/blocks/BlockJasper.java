@@ -198,8 +198,8 @@ public class BlockJasper extends Block
     		prepareToSummonBoss = true;
     	}else{
     		this.dropBlockAsItem(par1World, par2, par3, par4, 0, 0);
-    		par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 0);
-    		par1World.func_94575_c(par2, par3, par4, 0);
+    		par1World.setBlock(par2, par3, par4, 0, 0, 0);
+    		par1World.setBlock(par2, par3, par4, 0);
     	}
     }
     
@@ -213,7 +213,7 @@ public class BlockJasper extends Block
 			Random par5Random) {
 		
 		if(prepareToSummonBoss == false){
-			par1World.func_94575_c(par2, par3, par4, 0);
+			par1World.setBlock(par2, par3, par4, 0);
 		}
 		
 		if(MathHelper.floor_double(counter/20)>= 5 && MathHelper.floor_double(counter/20) < 35){
@@ -231,14 +231,14 @@ public class BlockJasper extends Block
 			
     		EntityMummyPharaoh var17 = new EntityMummyPharaoh(par1World,par2,par3+3,par4);
     		par1World.spawnEntityInWorld(var17);
-    		par1World.func_94575_c(par2, par3, par4, 0);
+    		par1World.setBlock(par2, par3, par4, 0);
 		}
 	}
 	public void buildAlter(World par1World, int par2, int par3, int par4, Random par5Random, int iterator){
 		int alterX = MathHelper.floor_double(alterBlockLocations[iterator].xCoord);
 		int alterY = MathHelper.floor_double(alterBlockLocations[iterator].yCoord);
 		int alterZ = MathHelper.floor_double(alterBlockLocations[iterator].zCoord);
-		par1World.func_94575_c(alterX+par2, alterY+par3, alterZ+par4 ,Block.sandStone.blockID);
+		par1World.setBlock(alterX+par2, alterY+par3, alterZ+par4 ,Block.sandStone.blockID);
 	}
     
 //    /**

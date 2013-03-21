@@ -38,21 +38,21 @@ public class WorldGenOnSurface extends WorldGenerator
     				
     				if(BlockList.aloeVera.isPresent() && plantBlockId == BlockList.aloeVera.get().blockID && (i == Block.grass.blockID || i == Block.dirt.blockID || i == Block.sand.blockID)
     						&& (biome == BiomeGenBase.desert || biome == BiomeGenBase.desertHills) ){
-    					par1World.func_94575_c(var7, var8, var9, this.plantBlockId);
+    					par1World.setBlock(var7, var8, var9, this.plantBlockId);
     				} 
     				
     				if(BlockList.palmTreeSapling.isPresent() && plantBlockId == BlockList.palmTreeSapling.get().blockID && (i == Block.sand.blockID || i == Block.dirt.blockID || i == Block.grass.blockID)
     						&& (biome==BiomeGenBase.beach || biome==BiomeGenBase.river) ){
-    					par1World.func_94575_c(var7, var8, var9, this.plantBlockId);
+    					par1World.setBlock(var7, var8, var9, this.plantBlockId);
     				} 
     				if(BlockList.nightBloom.isPresent() && plantBlockId == BlockList.nightBloom.get().blockID && (i == Block.tilledField.blockID || i == Block.dirt.blockID 
     						|| i == Block.grass.blockID || (BlockList.aloeVera.isPresent() && i == BlockList.aloeVera.get().blockID))
     						&& (biome==BiomeGenBase.plains || biome==BiomeGenBase.river) ){
-    					par1World.func_94575_c(var7, var8, var9, this.plantBlockId);
+    					par1World.setBlock(var7, var8, var9, this.plantBlockId);
     				} 
     				if(BlockList.creeperBlossom.isPresent() && plantBlockId == BlockList.creeperBlossom.get().blockID && (i == Block.dirt.blockID || i == Block.grass.blockID)
     						&& (biome==BiomeGenBase.forest || biome==BiomeGenBase.forestHills) ){
-    					par1World.func_94575_c(var7, var8, var9, this.plantBlockId);
+    					par1World.setBlock(var7, var8, var9, this.plantBlockId);
     				}
     			}
     		}

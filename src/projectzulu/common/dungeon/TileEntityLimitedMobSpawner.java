@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -159,7 +160,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
      */
     public void updateEntity(){    	
     	if(maxSpawnableEntities > 0 && spawnedEntities >= maxSpawnableEntities){
-    		worldObj.func_94575_c(xCoord, yCoord, zCoord, 0);
+    		worldObj.setBlock(xCoord, yCoord, zCoord, 0);
     	}
     	
         if (this.anyPlayerInRange()){
@@ -390,7 +391,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity{
     @SideOnly(Side.CLIENT)
     public Entity getMobEntity(){
         if (this.displayEntity == null){
-            Entity var1 = EntityList.createEntityByName(this.getEntityName(), (World)null);
+            Entity var1 = EntityList.createEntityByName(this.getEntityName(), Minecraft.getMinecraft().theWorld);
             this.writeNBTTagsTo(var1);
             this.displayEntity = var1;
         }

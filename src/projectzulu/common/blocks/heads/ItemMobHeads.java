@@ -70,7 +70,7 @@ public class ItemMobHeads extends ItemBlock{
 				return false;
 			}
 			else if(BlockList.mobHeads.isPresent()){
-				par3World.setBlockAndMetadataWithNotify(par4, par5, par6, BlockList.mobHeads.get().blockID, par7, 3);
+				par3World.setBlock(par4, par5, par6, BlockList.mobHeads.get().blockID, par7, 3);
 				int var11 = 0;
 
 				if (par7 == 1){

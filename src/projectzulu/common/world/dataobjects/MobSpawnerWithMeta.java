@@ -19,7 +19,7 @@ public class MobSpawnerWithMeta extends BlockWithMeta{
 	@Override
 	public void placeBlock(World world, ChunkCoordinates position, Random random) {
 		/* Create Mob Spawner */
-		world.func_94575_c( 
+		world.setBlock( 
 				position.posX,
 				position.posY,
 				position.posZ,
@@ -30,7 +30,7 @@ public class MobSpawnerWithMeta extends BlockWithMeta{
 				position.posZ);
 
 		if (tileEntityMobSpawner != null){
-			tileEntityMobSpawner.func_98049_a().func_98272_a(mobName);
+			tileEntityMobSpawner.func_98049_a().setMobID(mobName);
 		}
 	}
 

@@ -49,10 +49,10 @@ public class BlockSpikes extends Block{
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister){
+	public void registerIcons(IconRegister par1IconRegister){
 		this.icons = new Icon[imageSuffix.length];
 		for (int i = 0; i < this.icons.length; ++i){
-			this.icons[i] = par1IconRegister.func_94245_a(func_94330_A()+imageSuffix[i]);
+			this.icons[i] = par1IconRegister.registerIcon(getUnlocalizedName2()+imageSuffix[i]);
 		}
 	}
 	
@@ -198,9 +198,9 @@ public class BlockSpikes extends Block{
 			
 			/* If not Poison (meta<6) increase by 6, if sticky(>11) reduce by 6*/
 			if(par1World.getBlockMetadata(par2, par3, par4) < 6){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
+				par1World.setBlock(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
 			}else{
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) - 6, 3);
+				par1World.setBlock(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) - 6, 3);
 			}
 		}
 		
@@ -215,9 +215,9 @@ public class BlockSpikes extends Block{
 			
 			/* If not Poison or Sticky (meta<6) increase by 12, if Poison(>6 & <11) increase by 6*/
 			if( par1World.getBlockMetadata(par2, par3, par4) < 6 ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 12, 3);
+				par1World.setBlock(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 12, 3);
 			}else{
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
+				par1World.setBlock(par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
 			}
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,

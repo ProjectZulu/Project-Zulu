@@ -34,10 +34,10 @@ public class BlockWateredDirt extends Block{
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister par1IconRegister){
+    public void registerIcons(IconRegister par1IconRegister){
         this.icons = new Icon[imageSuffix.length];
         for (int i = 0; i < this.icons.length; ++i){
-            this.icons[i] = par1IconRegister.func_94245_a(func_94330_A()+imageSuffix[i]);
+            this.icons[i] = par1IconRegister.registerIcon(getUnlocalizedName2()+imageSuffix[i]);
         }
     }
         

@@ -16,7 +16,7 @@ public class BlueprintCemetaryFountain extends Blueprint{
 		if(curHeight == 0){
 			switch (cellIndexDirection.calcDirection(cellIndex, cellSize)){
 			case NorthMiddle:
-				return new BlockWithMeta(Block.stairsStoneBrickSmooth.blockID, 2);
+				return new BlockWithMeta(Block.stairsStoneBrick.blockID, 2);
 			case NorthEastCorner:
 			case NorthWestCorner:
 				return new BlockWithMeta(Block.stoneSingleSlab.blockID, 5);
@@ -44,9 +44,9 @@ public class BlueprintCemetaryFountain extends Blueprint{
 		if(curHeight == maxHeight - 2){
 			switch (cellIndexDirection.calcDirection(cellIndex, cellSize)){
 			case SouthEastCorner:
-				return new BlockWithMeta(Block.stairsStoneBrickSmooth.blockID, 1);
+				return new BlockWithMeta(Block.stairsStoneBrick.blockID, 1);
 			case SouthWestCorner:
-				return new BlockWithMeta(Block.stairsStoneBrickSmooth.blockID, 0);
+				return new BlockWithMeta(Block.stairsStoneBrick.blockID, 0);
 			case SouthWall:
 			case SouthMiddle:
 			case EastWall:

@@ -39,7 +39,7 @@ public class BlockCoconut extends BlockCocoa
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.func_94575_c(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, 0);
         }
         else if (par1World.rand.nextInt(5) == 0)
         {
@@ -174,7 +174,7 @@ public class BlockCoconut extends BlockCocoa
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.func_94575_c(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, 0);
         }
     }
 

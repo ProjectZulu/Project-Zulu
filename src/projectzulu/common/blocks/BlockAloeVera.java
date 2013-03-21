@@ -36,10 +36,10 @@ public class BlockAloeVera extends BlockFlower {
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister par1IconRegister){
+    public void registerIcons(IconRegister par1IconRegister){
         this.blockIcons = new Icon[imageSuffix.length];
         for (int i = 0; i < this.blockIcons.length; ++i){
-            this.blockIcons[i] = par1IconRegister.func_94245_a(func_94330_A()+imageSuffix[i]);
+            this.blockIcons[i] = par1IconRegister.registerIcon(getUnlocalizedName2()+imageSuffix[i]);
         }
     }
     
@@ -57,7 +57,7 @@ public class BlockAloeVera extends BlockFlower {
 			int holdRand = par5Random.nextInt(probabilityOutOf);
 			//Growth is proportional to the lightlevel, more light more likely to advance
 			if( par1World.getLightBrightness(par2, par3, par4) - holdRand >= 0 ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1, 3);
+				par1World.setBlock(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1, 3);
 			}
 		}
 		
@@ -68,7 +68,7 @@ public class BlockAloeVera extends BlockFlower {
 			if(par1World.getBlockId(par2, par3+1, par4) == 0 && par1World.getBlockId(par2, par3-1, par4) != BlockList.aloeVera.get().blockID){
 				int holdRand = par5Random.nextInt(probabilityOutOf);
 				if( par1World.getLightBrightness(par2, par3+1, par4) - holdRand >= 0 ){
-					par1World.setBlockAndMetadataWithNotify(par2, par3+1, par4, BlockList.aloeVera.get().blockID, 4, 3);
+					par1World.setBlock(par2, par3+1, par4, BlockList.aloeVera.get().blockID, 4, 3);
 				}
 			}
 		}
@@ -84,7 +84,7 @@ public class BlockAloeVera extends BlockFlower {
 			int holdRand = par5Random.nextInt(probabilityOutOf);
 			//Growth is proportional to the lightlevel, more light more likely to advance
 			if( par1World.getLightBrightness(par2, par3, par4) - holdRand >= 0 ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1, 3);
+				par1World.setBlock(par2, par3, par4, BlockList.aloeVera.get().blockID, tempAVMeta+1, 3);
 			}			
 		}
 
@@ -98,9 +98,9 @@ public class BlockAloeVera extends BlockFlower {
 				//Place Tumbleweed
 				if (suitableBlockLoc != null){
 					//Place Tumbleweed at that desired location
-					par1World.func_94575_c((int)suitableBlockLoc.xCoord, (int)suitableBlockLoc.yCoord, (int)suitableBlockLoc.zCoord, BlockList.tumbleweed.get().blockID);
+					par1World.setBlock((int)suitableBlockLoc.xCoord, (int)suitableBlockLoc.yCoord, (int)suitableBlockLoc.zCoord, BlockList.tumbleweed.get().blockID);
 					//Remove Flower as Tumbleweed is dead plant I guess
-					par1World.func_94575_c(par2, par3, par4, 0);
+					par1World.setBlock(par2, par3, par4, 0);
 				}
 			}
 		}
@@ -110,12 +110,12 @@ public class BlockAloeVera extends BlockFlower {
 		int holdRand = par5Random.nextInt(probabilityOutOf/2);
 		if(par1World.getBlockId(par2, par3-1, par4) == Block.dirt.blockID && waterRate - holdRand >= 0){
 			if( BlockList.wateredDirt.isPresent() ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 0, 3);
+				par1World.setBlock(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 0, 3);
 			}
 		}
 		if(par1World.getBlockId(par2, par3-1, par4) == Block.sand.blockID && waterRate - holdRand >= 0){
 			if( BlockList.wateredDirt.isPresent() ){
-				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 4, 3);
+				par1World.setBlock(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, 4, 3);
 			}
 		}
 
@@ -123,7 +123,7 @@ public class BlockAloeVera extends BlockFlower {
 		if(BlockList.wateredDirt.isPresent() && par1World.getBlockId(par2, par3-1, par4) == BlockList.wateredDirt.get().blockID && waterRate - holdRand >= 0){
 			int tempMeta = par1World.getBlockMetadata(par2, par3-1, par4);
 			if(tempMeta != 3 &&  tempMeta != 7){
-				par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, tempMeta+1, 3);
+				par1World.setBlock(par2, par3-1, par4, BlockList.wateredDirt.get().blockID, tempMeta+1, 3);
 			}
 		}
 		super.updateTick(par1World, par2, par3, par4, par5Random);

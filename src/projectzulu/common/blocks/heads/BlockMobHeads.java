@@ -68,9 +68,9 @@ public class BlockMobHeads extends BlockContainer{
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister par1IconRegister){
+    public void registerIcons(IconRegister par1IconRegister){
     	for (Head head : Head.values()) {
-    		head.icon = par1IconRegister.func_94245_a(func_94330_A()+"_"+head.toString().toLowerCase());
+    		head.icon = par1IconRegister.registerIcon(getUnlocalizedName2()+"_"+head.toString().toLowerCase());
 		}
     }
     

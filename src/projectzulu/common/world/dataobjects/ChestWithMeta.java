@@ -22,7 +22,7 @@ public class ChestWithMeta extends BlockWithMeta{
 
 	@Override
 	public void placeBlock(World world, ChunkCoordinates position, Random random) {
-		world.setBlockAndMetadataWithNotify(position.posX, position.posY,position.posZ, blockID, meta, 3);
+		world.setBlock(position.posX, position.posY,position.posZ, blockID, meta, 3);
 		world.setBlockTileEntity(position.posX, position.posY,position.posZ, tileEntityChest);
 		for (int slot = 0; slot < tileEntityChest.getSizeInventory(); slot++){
 			if( lootChance - random.nextInt(100) >= 0 ){

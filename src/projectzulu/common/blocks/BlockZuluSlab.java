@@ -39,7 +39,7 @@ public class BlockZuluSlab extends BlockWoodSlab{
 	
 	@Override
 	public String getFullSlabName(int par1) {
-        return super.getUnlocalizedName() + "_" + baseBlock.func_94330_A();
+        return super.getUnlocalizedName() + "_" + baseBlock.getUnlocalizedName2();
 	}
 	
 	@Override

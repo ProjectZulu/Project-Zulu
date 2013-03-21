@@ -55,7 +55,7 @@ public class BlockCreeperBlossom extends BlockFlower{
 			EntityCreeperBlossomPrimed var6 = new EntityCreeperBlossomPrimed(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F));
 			par1World.spawnEntityInWorld(var6);
 			par1World.playSoundAtEntity(var6, "random.fuse", 1.0F, 1.0F);
-			par1World.func_94575_c(par2, par3, par4, 0);
+			par1World.setBlock(par2, par3, par4, 0);
 		}
 	}
 

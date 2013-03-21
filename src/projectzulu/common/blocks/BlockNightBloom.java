@@ -40,10 +40,10 @@ public class BlockNightBloom extends BlockFlower{
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister par1IconRegister){
+    public void registerIcons(IconRegister par1IconRegister){
         this.icons = new Icon[imageSuffix.length];
         for (int i = 0; i < this.icons.length; ++i){
-            this.icons[i] = par1IconRegister.func_94245_a(func_94330_A()+imageSuffix[i]);
+            this.icons[i] = par1IconRegister.registerIcon(getUnlocalizedName2()+imageSuffix[i]);
         }
     }
     
@@ -61,7 +61,7 @@ public class BlockNightBloom extends BlockFlower{
 		//If Night Time && And is not open (meta != 4) : begin opening
 		if(mapTimeTo24000(par1World.getWorldTime()) > 13000 && par1World.getBlockMetadata(par2, par3, par4) != 4){
 			
-			par1World.setBlockAndMetadataWithNotify( par2, par3, par4, blockID, par1World.getBlockMetadata(par2, par3, par4) + 1, 3);
+			par1World.setBlock( par2, par3, par4, blockID, par1World.getBlockMetadata(par2, par3, par4) + 1, 3);
 			
 			par1World.scheduleBlockUpdate(par2, par3, par4, blockID, 20);
 		}
@@ -69,7 +69,7 @@ public class BlockNightBloom extends BlockFlower{
 		//If Day Time && And is not closed (meta != 0) : begin opening
 		if(mapTimeTo24000(par1World.getWorldTime()) < 13000 && par1World.getBlockMetadata(par2, par3, par4) != 0){
 			
-			par1World.setBlockAndMetadataWithNotify( par2, par3, par4, blockID, par1World.getBlockMetadata(par2, par3, par4) - 1, 3);
+			par1World.setBlock( par2, par3, par4, blockID, par1World.getBlockMetadata(par2, par3, par4) - 1, 3);
 
 			par1World.scheduleBlockUpdate(par2, par3, par4, blockID, 20);
 		}
