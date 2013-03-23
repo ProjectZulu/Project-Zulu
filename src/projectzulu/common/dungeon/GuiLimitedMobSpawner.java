@@ -22,6 +22,7 @@ import projectzulu.common.blocks.StringHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ObfuscationHelper;
 import projectzulu.common.core.PairFullShortName;
+import projectzulu.common.core.ProjectZuluLog;
 //TODO: Implement Try Write / Read to Test if Saving Would Cause a Crash
 public class GuiLimitedMobSpawner extends GuiScreen{
 	public TileEntityLimitedMobSpawner limitedMobSpawner;
@@ -37,9 +38,10 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 	/* Used by Scrolling Creature List to know which Field to Return a Selected String to */
 	GUISelectionList scrollingList;
 	public ListType currentListType = ListType.NONE;
-	List<PairFullShortName<String, String>> creatureListName = new ArrayList<PairFullShortName<String, String>>();
-	List<PairFullShortName<String, String>> soundListName = new ArrayList<PairFullShortName<String, String>>();
-    
+//	List<PairFullShortName<String, String>> creatureListName = new ArrayList<PairFullShortName<String, String>>();
+//	List<PairFullShortName<String, String>> soundListName = new ArrayList<PairFullShortName<String, String>>();
+    Node rootCreatureNode = new Node(null, "root");
+    Node rootSoundNode = new Node(null, "root");
     public GuiLimitedMobSpawner(TileEntityLimitedMobSpawner limitedMobSpawner){
     	this.limitedMobSpawner = limitedMobSpawner;
     	if(limitedMobSpawner.getSpawnList() != null){
@@ -87,11 +89,11 @@ public class GuiLimitedMobSpawner extends GuiScreen{
         
         switch (currentListType) {
         case Creature:
-        	scrollingList = new GUISelectionList(this, creatureListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
+            scrollingList = new GUISelectionList(this, rootCreatureNode, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.buttonList, 7, 8);
         	break;
         case Sound:
-        	scrollingList = new GUISelectionList(this, soundListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
+            scrollingList = new GUISelectionList(this, rootSoundNode, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.buttonList, 7, 8);
         	break;
 		default:
@@ -104,24 +106,23 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	switch (currentListType){
     	case Creature:
     		/* Create List if Empty */
-    		if(creatureListName == null || creatureListName.isEmpty()){
+    		if(rootCreatureNode.numberOfChildren() == 0){
     			Iterator stringToClassIterator = EntityList.stringToClassMapping.keySet().iterator();
     	    	while(stringToClassIterator.hasNext()){
     	    		String stringKey = (String) stringToClassIterator.next();
     	    		if( EntityLiving.class.isAssignableFrom( ((Class)EntityList.stringToClassMapping.get(stringKey))) ){
-    	                creatureListName.add(new PairFullShortName<String, String>(
-    	                		stringKey,
-    	                		StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 14, "\\."))));
+    	    			if(stringKey.equals("Mob")){
+    	    				continue;
+    	    			}
+    	    			rootCreatureNode.addChild("root."+stringKey);
     	    		}
     	    	}
-    	    	Collections.sort(creatureListName);
     		}
-    		
-            scrollingList = new GUISelectionList(this, creatureListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
+            scrollingList = new GUISelectionList(this, rootCreatureNode, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.buttonList, 7, 8);
 			break;
 		case Sound:
-			if(soundListName == null || soundListName.isEmpty()){
+    		if(rootSoundNode.numberOfChildren() == 0){
 				SoundPool soundPool = mc.sndManager.soundPoolSounds;
 				
 				/* Grab "nameToSoundPoolEntriesMapping" : OBFSC: "m" : nameToSoundPoolEntriesMapping --> fields.csv --> joined.srg --> d */
@@ -135,14 +136,12 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 					Iterator stringSoundIterator = soundHash.keySet().iterator();
 					while(stringSoundIterator.hasNext()){
 						String stringKey = (String) stringSoundIterator.next();
-						soundListName.add(new PairFullShortName<String, String>(
-								stringKey,
-								StringHelper.toTitleCase(StringHelper.simplifyStringNameForDisplay(stringKey, 14, "\\."))));
+						rootSoundNode.addChild("root."+stringKey);
 					}
-					Collections.sort(soundListName);
+//					Collections.sort(soundListName);
 				}
 			}
-            scrollingList = new GUISelectionList(this, soundListName, currentListType, 85, new Point(this.width, this.height), backgroundSize);
+            scrollingList = new GUISelectionList(this, rootSoundNode, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.buttonList, 7, 8);
 			break;
 		default:
@@ -259,6 +258,10 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	if(dataFields.get(currentDataField).isEnabled()){
 			dataFields.get(currentDataField).mouseClicked(this, mc, par1, par2, par3);
 		}
+    	
+    	if(currentListType != ListType.NONE){
+        	scrollingList.mouseClicked(par1, par2, par3);
+        }
     }
     
     /**
