@@ -108,7 +108,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     		/* Create List if Empty */
     		if(rootCreatureNode.numberOfChildren() == 0){
     			Iterator stringToClassIterator = EntityList.stringToClassMapping.keySet().iterator();
-    	    	while(stringToClassIterator.hasNext()){
+    	    	while(stringToClassIterator.hasNext()) {
     	    		String stringKey = (String) stringToClassIterator.next();
     	    		if( EntityLiving.class.isAssignableFrom( ((Class)EntityList.stringToClassMapping.get(stringKey))) ){
     	    			if(stringKey.equals("Mob")){
@@ -117,6 +117,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
     	    			rootCreatureNode.addChild("root."+stringKey);
     	    		}
     	    	}
+    	    	rootCreatureNode.sortNodeTree();
     		}
             scrollingList = new GUISelectionList(this, rootCreatureNode, currentListType, 85, new Point(this.width, this.height), backgroundSize);
             scrollingList.registerScrollButtons(this.buttonList, 7, 8);
@@ -138,7 +139,7 @@ public class GuiLimitedMobSpawner extends GuiScreen{
 						String stringKey = (String) stringSoundIterator.next();
 						rootSoundNode.addChild("root."+stringKey);
 					}
-//					Collections.sort(soundListName);
+					rootSoundNode.sortNodeTree();
 				}
 			}
             scrollingList = new GUISelectionList(this, rootSoundNode, currentListType, 85, new Point(this.width, this.height), backgroundSize);
