@@ -55,12 +55,8 @@ public class Node implements Comparable<Node>{
 	public void sortNodeTree(){
 		Collections.sort(children);
 		for (Node child : children) {
-			
+			child.sortNodeTree();
 		}
-	}
-	
-	private void sortChildren(Node node){
-		Collections.sort(node.children);
 	}
 	
 	/**
@@ -145,7 +141,16 @@ public class Node implements Comparable<Node>{
 	}
 
 	@Override
-	public int compareTo(Node node) {
-		return node.name.compareTo(node.name);
+	public int compareTo(Node node) {		
+		if(node != null && node.children.size() > 0){
+			if(children.size() > 0){
+				return this.name.compareTo(node.name);
+			}else{
+				return +1;
+			}
+		}else if(this.children.size() > 0){
+			return -1;
+		}
+		return this.name.compareTo(node.name);
 	}
 }
