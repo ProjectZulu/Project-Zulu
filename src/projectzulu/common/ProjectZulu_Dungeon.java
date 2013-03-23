@@ -1,7 +1,11 @@
 package projectzulu.common;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;
@@ -51,15 +55,17 @@ public class ProjectZulu_Dungeon {
 		ProjectZuluLog.info("Finished Dungeon Module ItemBlock Init ");
         zuluConfig.save();
         
-		ProjectZuluLog.info("Searching For Sounds Files");
-        File[] soundFiles = finder(new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory));
-        File[] streamingFiles = finder(new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory + DefaultProps.streamingResourcesDirectory));
-		File[] allSoundFiles = ObjectArrays.concat(soundFiles, streamingFiles, File.class);
-		if(allSoundFiles != null){
-			for (File file : allSoundFiles) {
-				ProjectZuluLog.info("Found sound %s", file.getName());
-				Sounds.addSound(file);
-			}
+		ProjectZuluLog.info("Searching For Sound Files");
+		File customResourceDir = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory);
+		File streamingDir = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory + DefaultProps.streamingResourcesDirectory);
+		File soundDir = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory + DefaultProps.soundResourcesDirectory);
+		streamingDir.mkdir();
+		soundDir.mkdir();
+		List<File> sounds = getFileListingNoSort(streamingDir);
+		sounds.addAll(getFileListingNoSort(soundDir));
+		for (File file : sounds) {
+			ProjectZuluLog.info("Found sound %s", file.getName());
+			Sounds.addSound(file, customResourceDir);
 		}
 	}
 	
@@ -70,6 +76,20 @@ public class ProjectZulu_Dungeon {
     	              { return filename.endsWith(".ogg"); }
     	} );
     }
+	
+	private List<File> getFileListingNoSort(File directory) {
+		List<File> result = new ArrayList<File>();
+		List<File> filesDirs = Arrays.asList(directory.listFiles());
+		for (File file : filesDirs) {
+			if (!file.isFile()) {
+				List<File> deeperList = getFileListingNoSort(file);
+				result.addAll(deeperList);
+			}else{
+				result.add(file);
+			}
+		}
+		return result;
+	}
 	
 	@Init
 	public void load(FMLInitializationEvent event){
