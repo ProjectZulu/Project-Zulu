@@ -12,18 +12,17 @@ public class SoundHandlerClass{
     	ProjectZuluLog.info("Registering Sounds");
     	for (PairDirectoryFile<URL, String> sounds : Sounds.getSounds()) {
     		try {
-
-    			if(sounds.getFile().toLowerCase().contains("streaming.")){
-    				soundLoadEvent.manager.soundPoolStreaming.addSound("stream/" + sounds.getFile().toLowerCase().replace("streaming.", ""),
-    						sounds.getDirectory());
-    			}else if(sounds.getDirectory().toString().toLowerCase().contains("streaming")){
-    				soundLoadEvent.manager.soundPoolStreaming.addSound("stream/" + sounds.getFile(), sounds.getDirectory());
+    			String streamKey = "streaming";
+    			if(sounds.getFile().toString().length() >= streamKey.length() && sounds.getFile().toString().substring(0,streamKey.length()).equalsIgnoreCase(streamKey)){
+    				soundLoadEvent.manager.soundPoolStreaming.addSound(sounds.getFile(), sounds.getDirectory());
+    				ProjectZuluLog.info("Registering Streaming %s", sounds.getFile().replaceAll("/", "."));
     			}else{
-    				soundLoadEvent.manager.soundPoolSounds.addSound("sounds/" + sounds.getFile(), sounds.getDirectory());
+    				ProjectZuluLog.info("Registering Sound %s", sounds.getFile().replaceAll("/", "."));
+    				soundLoadEvent.manager.soundPoolSounds.addSound(sounds.getFile(), sounds.getDirectory());
     			}
     		} catch (Exception e) {
-    			e.printStackTrace();
     			ProjectZuluLog.severe("Could Not Load Sound %s", sounds.getFile());
+    			e.printStackTrace();
     		}
     	}
 	}
