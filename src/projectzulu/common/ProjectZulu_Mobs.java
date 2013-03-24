@@ -4,49 +4,49 @@ import java.io.File;
 
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.mobs.entitydefaults.AlligatorDefault;
-import projectzulu.common.mobs.entitydefaults.ArmadilloDefault;
-import projectzulu.common.mobs.entitydefaults.BearBlackDefault;
-import projectzulu.common.mobs.entitydefaults.BearBrownDefault;
-import projectzulu.common.mobs.entitydefaults.BearPolarDefault;
-import projectzulu.common.mobs.entitydefaults.BeaverDefault;
-import projectzulu.common.mobs.entitydefaults.BlueFinchDefault;
-import projectzulu.common.mobs.entitydefaults.BoarDefault;
-import projectzulu.common.mobs.entitydefaults.CentipedeDefault;
-import projectzulu.common.mobs.entitydefaults.EagleDefault;
-import projectzulu.common.mobs.entitydefaults.ElephantDefault;
-import projectzulu.common.mobs.entitydefaults.FollowerDefault;
-import projectzulu.common.mobs.entitydefaults.FoxDefault;
-import projectzulu.common.mobs.entitydefaults.FrogDefault;
-import projectzulu.common.mobs.entitydefaults.GiraffeDefault;
-import projectzulu.common.mobs.entitydefaults.GorillaDefault;
-import projectzulu.common.mobs.entitydefaults.GreenFinchDefault;
-import projectzulu.common.mobs.entitydefaults.HauntedArmorDefault;
-import projectzulu.common.mobs.entitydefaults.HornbillDefault;
-import projectzulu.common.mobs.entitydefaults.HorseBeigeDefault;
-import projectzulu.common.mobs.entitydefaults.HorseBlackDefault;
-import projectzulu.common.mobs.entitydefaults.HorseBrownDefault;
-import projectzulu.common.mobs.entitydefaults.HorseDarkBlackDefault;
-import projectzulu.common.mobs.entitydefaults.HorseDarkBrownDefault;
-import projectzulu.common.mobs.entitydefaults.HorseGreyDefault;
-import projectzulu.common.mobs.entitydefaults.HorseRandomDefault;
-import projectzulu.common.mobs.entitydefaults.HorseWhiteDefault;
-import projectzulu.common.mobs.entitydefaults.LizardDefault;
-import projectzulu.common.mobs.entitydefaults.LizardSpitDefault;
-import projectzulu.common.mobs.entitydefaults.MammothDefault;
-import projectzulu.common.mobs.entitydefaults.MimicDefault;
-import projectzulu.common.mobs.entitydefaults.MinotaurDefault;
-import projectzulu.common.mobs.entitydefaults.MummyDefault;
-import projectzulu.common.mobs.entitydefaults.OstrichDefault;
-import projectzulu.common.mobs.entitydefaults.PelicanDefault;
-import projectzulu.common.mobs.entitydefaults.PenguinDefault;
-import projectzulu.common.mobs.entitydefaults.PharaohDefault;
-import projectzulu.common.mobs.entitydefaults.RabbitDefault;
-import projectzulu.common.mobs.entitydefaults.RedFinchDefault;
-import projectzulu.common.mobs.entitydefaults.RhinoDefault;
-import projectzulu.common.mobs.entitydefaults.SandwormDefault;
-import projectzulu.common.mobs.entitydefaults.TreeEntDefault;
-import projectzulu.common.mobs.entitydefaults.VultureDefault;
+import projectzulu.common.mobs.entitydefaults.AlligatorDeclaration;
+import projectzulu.common.mobs.entitydefaults.ArmadilloDeclaration;
+import projectzulu.common.mobs.entitydefaults.BearBlackDeclaration;
+import projectzulu.common.mobs.entitydefaults.BearBrownDeclaration;
+import projectzulu.common.mobs.entitydefaults.BearPolarDeclaration;
+import projectzulu.common.mobs.entitydefaults.BeaverDeclaration;
+import projectzulu.common.mobs.entitydefaults.BlueFinchDeclaration;
+import projectzulu.common.mobs.entitydefaults.BoarDeclaration;
+import projectzulu.common.mobs.entitydefaults.CentipedeDeclaration;
+import projectzulu.common.mobs.entitydefaults.EagleDeclaration;
+import projectzulu.common.mobs.entitydefaults.ElephantDeclaration;
+import projectzulu.common.mobs.entitydefaults.FollowerDeclaration;
+import projectzulu.common.mobs.entitydefaults.FoxDeclaration;
+import projectzulu.common.mobs.entitydefaults.FrogDeclaration;
+import projectzulu.common.mobs.entitydefaults.GiraffeDeclaration;
+import projectzulu.common.mobs.entitydefaults.GorillaDeclaration;
+import projectzulu.common.mobs.entitydefaults.GreenFinchDeclaration;
+import projectzulu.common.mobs.entitydefaults.HauntedArmorDeclaration;
+import projectzulu.common.mobs.entitydefaults.HornbillDeclaration;
+import projectzulu.common.mobs.entitydefaults.HorseBeigeDeclaration;
+import projectzulu.common.mobs.entitydefaults.HorseBlackDeclaration;
+import projectzulu.common.mobs.entitydefaults.HorseBrownDeclaration;
+import projectzulu.common.mobs.entitydefaults.HorseDarkBlackDeclaration;
+import projectzulu.common.mobs.entitydefaults.HorseDarkBrownDeclaration;
+import projectzulu.common.mobs.entitydefaults.HorseGreyDeclaration;
+import projectzulu.common.mobs.entitydefaults.HorseRandomDeclaration;
+import projectzulu.common.mobs.entitydefaults.HorseWhiteDeclaration;
+import projectzulu.common.mobs.entitydefaults.LizardDeclaration;
+import projectzulu.common.mobs.entitydefaults.LizardSpitDeclaration;
+import projectzulu.common.mobs.entitydefaults.MammothDeclaration;
+import projectzulu.common.mobs.entitydefaults.MimicDeclaration;
+import projectzulu.common.mobs.entitydefaults.MinotaurDeclaration;
+import projectzulu.common.mobs.entitydefaults.MummyDeclaration;
+import projectzulu.common.mobs.entitydefaults.OstrichDeclaration;
+import projectzulu.common.mobs.entitydefaults.PelicanDeclaration;
+import projectzulu.common.mobs.entitydefaults.PenguinDeclaration;
+import projectzulu.common.mobs.entitydefaults.PharaohDeclaration;
+import projectzulu.common.mobs.entitydefaults.RabbitDeclaration;
+import projectzulu.common.mobs.entitydefaults.RedFinchDeclaration;
+import projectzulu.common.mobs.entitydefaults.RhinoDeclaration;
+import projectzulu.common.mobs.entitydefaults.SandwormDeclaration;
+import projectzulu.common.mobs.entitydefaults.TreeEntDeclaration;
+import projectzulu.common.mobs.entitydefaults.VultureDeclaration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -86,16 +86,16 @@ public class ProjectZulu_Mobs {
 	
 	private void declareModuleEntities(){
 		CustomEntityManager.INSTANCE.addEntity(
-			new ArmadilloDefault(), 	new SandwormDefault(), 		new LizardDefault(), 		new LizardSpitDefault(),
-			new PharaohDefault(),		new MummyDefault(),			new VultureDefault(), 		new TreeEntDefault(),
-			new MammothDefault(), 		new FoxDefault(),			new BoarDefault(), 			new MimicDefault(),
-			new AlligatorDefault(), 	new FrogDefault(),			new PenguinDefault(),		new BeaverDefault(),
-			new BearBlackDefault(),		new BearBrownDefault(),		new BearPolarDefault(),		new OstrichDefault(),
-			new RhinoDefault(),			new RabbitDefault(),		new RedFinchDefault(),		new GreenFinchDefault(),
-			new BlueFinchDefault(),		new GorillaDefault(),		new GiraffeDefault(),		new ElephantDefault(),
-			new HorseBeigeDefault(),	new HorseBlackDefault(),	new HorseBrownDefault(),	new HorseDarkBlackDefault(),
-			new HorseDarkBrownDefault(),new HorseGreyDefault(),		new HorseWhiteDefault(),	new EagleDefault(),
-			new HornbillDefault(),		new PelicanDefault(),		new MinotaurDefault(),		new HauntedArmorDefault(),
-			new CentipedeDefault(),		new FollowerDefault(),		new HorseRandomDefault());
+			new ArmadilloDeclaration(), 	new SandwormDeclaration(), 		new LizardDeclaration(), 		new LizardSpitDeclaration(),
+			new PharaohDeclaration(),		new MummyDeclaration(),			new VultureDeclaration(), 		new TreeEntDeclaration(),
+			new MammothDeclaration(), 		new FoxDeclaration(),			new BoarDeclaration(), 			new MimicDeclaration(),
+			new AlligatorDeclaration(), 	new FrogDeclaration(),			new PenguinDeclaration(),		new BeaverDeclaration(),
+			new BearBlackDeclaration(),		new BearBrownDeclaration(),		new BearPolarDeclaration(),		new OstrichDeclaration(),
+			new RhinoDeclaration(),			new RabbitDeclaration(),		new RedFinchDeclaration(),		new GreenFinchDeclaration(),
+			new BlueFinchDeclaration(),		new GorillaDeclaration(),		new GiraffeDeclaration(),		new ElephantDeclaration(),
+			new HorseBeigeDeclaration(),	new HorseBlackDeclaration(),	new HorseBrownDeclaration(),	new HorseDarkBlackDeclaration(),
+			new HorseDarkBrownDeclaration(),new HorseGreyDeclaration(),		new HorseWhiteDeclaration(),	new EagleDeclaration(),
+			new HornbillDeclaration(),		new PelicanDeclaration(),		new MinotaurDeclaration(),		new HauntedArmorDeclaration(),
+			new CentipedeDeclaration(),		new FollowerDeclaration(),		new HorseRandomDeclaration());
 	}
 }
