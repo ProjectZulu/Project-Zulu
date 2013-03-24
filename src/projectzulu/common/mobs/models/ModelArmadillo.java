@@ -160,10 +160,9 @@ public class ModelArmadillo extends ModelBase {
 
   }
   
-  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-  {
-	  //super.render(entity, f, f1, f2, f3, f4, f5);
-	  setRotationAngles(f, f1, f2, f3, f4, f5);
+  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	  super.render(entity, f, f1, f2, f3, f4, f5);
+	  setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
 	    float field_78145_g = 8.0F;
 	    float field_78151_h = 4.0F;
@@ -182,13 +181,18 @@ public class ModelArmadillo extends ModelBase {
       }else{
     	  WHOLE.render(f5);
       }
-	  //counter++;
   }
 
   
-  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-  {
-    //super.setRotationAngles(f, f1, f2, f3, f4, f5);
+  public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
+      EntityArmadillo var5 = (EntityArmadillo)par7Entity;
+      if(var5.getEntityState() == EntityStates.inCover || var5.isCharging()==true){
+    	  HEADPIECE.rotateAngleX = var5.eHEADPIECE.rotateX(+0.05f*2.0f,0f,(float)(145*Math.PI/180f));  	  
+      }else if(var5.getEntityState() != EntityStates.inCover && var5.isCharging() == false){
+//    	  HEADPIECE.rotateAngleX = var5.eHEADPIECE.rotateX(-0.05f*animSpeed,0f,(float)(145*Math.PI/180f));  	  
+	      this.HEADPIECE.rotateAngleX = var5.eHEADPIECE.rotateAngleX = Math.min(Math.max(par5, -180), +180) * (float)(Math.PI/180f);
+	      this.HEADPIECE.rotateAngleY = var5.eHEADPIECE.rotateAngleY = Math.min(Math.max(par4, -30), +30) * (float)(Math.PI/180f);
+	  }
   }
 
   
@@ -219,8 +223,6 @@ public class ModelArmadillo extends ModelBase {
         	  /* Make Complete Body Circle */
         	  WHOLE.rotateAngleX = var5.eWHOLE.rotateX(+0.09f*animSpeed, 0f, (float)(390*Math.PI/180f));
     	  }
-    	  /* Rotate Face Inward */
-    	  HEADPIECE.rotateAngleX = var5.eHEADPIECE.rotateX(+0.05f*animSpeed,0f,(float)(145*Math.PI/180f));  	  
     	  /* Rear Segments (square) fold to form circle */
     	  REARRTR1.rotateAngleX = var5.eREARRTR1.rotateX(-0.01f*animSpeed,(float)(-44*Math.PI/180f),0f); 	  
     	  REARRTR2.rotateAngleX = var5.eREARRTR2.rotateX(-0.01f*animSpeed,(float)(-44*Math.PI/180f),0f);  	  
@@ -234,7 +236,6 @@ public class ModelArmadillo extends ModelBase {
     	  /* Make Complete Body Circle */
     	  WHOLE.rotateAngleX = var5.eWHOLE.rotateX(-0.09f*animSpeed, 0f, (float)((390+360)*Math.PI/180f) );
     	  /* Rotate Face Inward */
-    	  HEADPIECE.rotateAngleX = var5.eHEADPIECE.rotateX(-0.05f*animSpeed,0f,(float)(145*Math.PI/180f));  	  
     	  /* Rear Segments (square) fold to form circle */
     	  REARRTR1.rotateAngleX = var5.eREARRTR1.rotateX(+0.01f*animSpeed,(float)(-44*Math.PI/180f),0f); 	  
     	  REARRTR2.rotateAngleX = var5.eREARRTR2.rotateX(+0.01f*animSpeed,(float)(-44*Math.PI/180f),0f);  	  
