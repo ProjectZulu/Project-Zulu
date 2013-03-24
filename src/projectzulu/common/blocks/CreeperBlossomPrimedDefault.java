@@ -2,9 +2,9 @@ package projectzulu.common.blocks;
 
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
-import projectzulu.common.core.DefaultCreature;
+import projectzulu.common.core.entitydeclaration.CreatureDeclaration;
 
-public class CreeperBlossomPrimedDefault extends DefaultCreature{
+public class CreeperBlossomPrimedDefault extends CreatureDeclaration{
 
 	public CreeperBlossomPrimedDefault() {
 		super("CreeperBlossomPrimed", EntityCreeperBlossomPrimed.class, null);
