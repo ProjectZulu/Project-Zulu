@@ -57,6 +57,7 @@ public class ProjectZulu_Dungeon {
         
 		ProjectZuluLog.info("Searching For Sound Files");
 		File customResourceDir = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory);
+		customResourceDir.mkdir();
 		File streamingDir = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory + DefaultProps.streamingResourcesDirectory);
 		File soundDir = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory + DefaultProps.soundResourcesDirectory);
 		streamingDir.mkdir();
