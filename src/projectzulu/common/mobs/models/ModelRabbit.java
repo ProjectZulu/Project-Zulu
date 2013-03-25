@@ -11,9 +11,7 @@ import org.lwjgl.opengl.GL11;
 import projectzulu.common.mobs.entity.EntityRabbit;
 
 
-public class ModelRabbit extends ModelBase
-{
-	//fields
+public class ModelRabbit extends ModelBase {
 	ModelRenderer body;
 	ModelRenderer queue;
 	ModelRenderer neck;
@@ -25,8 +23,7 @@ public class ModelRabbit extends ModelBase
 	private ModelRenderer EARLEFROT;
 	private ModelRenderer EARRIGROT;
 
-	public ModelRabbit()
-	{
+	public ModelRabbit() {
 		textureWidth = 32;
 		textureHeight = 32;
 		setTextureOffset("LEGRIGROT.thigh2", 22, 18);
@@ -100,11 +97,9 @@ public class ModelRabbit extends ModelBase
 		HEADROT.addChild(EARRIGROT);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-
 		if (this.isChild){
 			float field_78145_x = 0.0f;
 			float field_78145_j = 4.0F;
@@ -140,84 +135,38 @@ public class ModelRabbit extends ModelBase
 			LEGLEFROT.render(f5);
 			HEADROT.render(f5);
 		}
-
-
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+		HEADROT.rotateAngleX = Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -45), +45) * (float)(Math.PI/180f);
 	}
 
 	@Override
 	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-
 		EntityRabbit var5 = (EntityRabbit)par1EntityLiving;
 
-		/* Constant Animation Rotations */
-		HEADROT.rotateAngleX = (float)( -0*Math.PI/180);
-
-		//State 1 = Sitting
 		if(!var5.onGround){
-			/* Jumping In Air */
-			//			BODYROT.rotateAngleX = (float)( -0*Math.PI/180);
-			//			LEG2TOPROT.rotateAngleX = (float)( +60*Math.PI/180);
-			//			LEG2TOPROT.rotateAngleY = (float)( -0*Math.PI/180);
-			//			LEG2TOPROT.rotateAngleZ = (float)( +60*Math.PI/180);
-			//			LEG2BOTROT.rotateAngleX = (float)( 45*Math.PI/180);
-			//			LEG2BOTROT.rotateAngleY = (float)( 0*Math.PI/180);
-			//
-			//			LEG1TOPROT.rotateAngleX = (float)( +60*Math.PI/180);
-			//			LEG1TOPROT.rotateAngleY = (float)( -0*Math.PI/180);
-			//			LEG1TOPROT.rotateAngleZ = (float)( +60*Math.PI/180);
-			//			LEG1BOTROT.rotateAngleX = (float)( 45*Math.PI/180);
-			//			LEG1BOTROT.rotateAngleY = (float)( 0*Math.PI/180);
-			//
-			//
-			//			LEG3TOPROT.rotateAngleX = (float)( -60*Math.PI/180);
-			//			LEG3BOTROT.rotateAngleX = (float)( 0*Math.PI/180);
-			//
-			//			LEG4TOPROT.rotateAngleX = (float)( -60*Math.PI/180);
-			//			LEG4BOTROT.rotateAngleX = (float)( 0*Math.PI/180);
-			//
-			//			HEADROT.rotateAngleX = (float)( 0*Math.PI/180);
-		}else{
+			
+		} else {
 			/* Walking On The Ground */
-			//			body.rotateAngleX = (float)( -45*Math.PI/180);
-			//			HEADROT.rotateAngleX = (float)( -45*Math.PI/180);
-
 			leg1.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.8F * par3 );
 			leg2.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.8F * par3 );
 
 			LEGLEFROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.8F * par3 );
 			LEGLEFROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.8F * par3 );
-			//			leg3.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.8F * par3 );
-			//			leg4.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.8F * par3 );
-
-			//			EARLEFROT.rotateAngleX = (float)( 45*Math.PI/180);
-			//			EARRIGROT.rotateAngleX = (float)( 45*Math.PI/180);
 		}
-		//		
-		//	    body.render(f5);
-		//	    queue.render(f5);
-		//	    neck.render(f5);
-		//	    leg1.render(f5);
-		//	    leg2.render(f5);
-		//	    LEGRIGROT.render(f5);
-		//	    LEGLEFROT.render(f5);
-		//	    HEADROT.render(f5);
-
-
 		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 	}
 
-	private double zeroIfNegative(double value){
+	private double zeroIfNegative(double value) {
 		if(value < 0){
 			return 0f;
 		}else{
@@ -225,21 +174,17 @@ public class ModelRabbit extends ModelBase
 		}
 	}
 
-	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max){
+	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max) {
 		return (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
 	}
 
-	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max){
+	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max) {
 		float value2 = (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
 		value2 = MathHelper.clamp_float(value2, set2min, set2max);
 		return value2;
 	}
 
-
-	private float func_78172_a(float par1, float par2)
-	{
+	private float func_78172_a(float par1, float par2) {
 		return (Math.abs(par1 % par2 - par2 * 0.5F) - par2 * 0.25F) / (par2 * 0.25F);
 	}
-
-
 }
