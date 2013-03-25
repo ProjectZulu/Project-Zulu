@@ -1,6 +1,7 @@
 package projectzulu.common.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -11,15 +12,15 @@ import net.minecraft.util.WeightedRandomItem;
 
 public class CustomMobData {
 	public String mobName = "";
+	public final HashMap<String, Object> customData = new HashMap<String, Object>();
 	public int secondarySpawnRate = 100;
 	public boolean reportSpawningInLog = false;
 	public boolean shouldDespawn = true;
 	public int maxSpawnInChunk = 4;
 	public EnumCreatureType creatureType;
 	public EnumCreatureType spawnType;
-
-	private List lootItems = new ArrayList<WeightedItemStack>();
 	
+	private List lootItems = new ArrayList<WeightedItemStack>();
 	public static class WeightedItemStack extends WeightedRandomItem{
 		public final ItemStack itemStack;
 		public WeightedItemStack(ItemStack itemStack, int weight) {

@@ -24,8 +24,9 @@ public abstract class EggableDeclaration extends CreatureDeclaration{
 	}
 	
 	/* Create loadCustomMobData() method which calls outputData to List. loadCustom contains calls that are the same for all creatures */
+	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData){
-		
+		super.outputDataToList(config, customMobData);
 	}
 	
 	@Override

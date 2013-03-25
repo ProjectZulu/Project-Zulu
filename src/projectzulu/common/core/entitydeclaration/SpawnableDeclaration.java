@@ -56,9 +56,11 @@ public abstract class SpawnableDeclaration extends EggableDeclaration{
 	}
 	
 	/* Create loadCustomMobData() method which calls outputData to List. loadCustom contains calls that are the same for all creatures */
+	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData){
-		customMobData.secondarySpawnRate = secondarySpawnRate;
-		customMobData.spawnType = spawnType;
+	    super.outputDataToList(config, customMobData);
+	    customMobData.secondarySpawnRate = secondarySpawnRate;
+	    customMobData.spawnType = spawnType;
 	}
 	
 	@Override
