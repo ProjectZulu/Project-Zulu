@@ -8,6 +8,7 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.common.mobs.entity.EntityEagle;
 import projectzulu.common.mobs.entity.EntityHornBill;
 import projectzulu.common.mobs.entity.EntityStates;
 
@@ -435,10 +436,7 @@ public class ModelHornBill extends ModelBase{
 
 	}
 
-
-
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		float scale = 0.6f*f5;
 		setRotationAngles(f, f1, f2, f3, f4, scale, entity);
@@ -466,7 +464,6 @@ public class ModelHornBill extends ModelBase{
 
 		//On Ground
 		if(var5.getEntityState() == EntityStates.attacking){
-			HEADROT.rotateAngleX = (float) (+50*Math.PI/180);
 			BODYROT.rotateAngleX = (float) (-30*Math.PI/180);
 			WINGLEFROT1.rotateAngleX = (float) (+10*Math.PI/180);
 			WINGRIGROT1.rotateAngleX = (float) (+10*Math.PI/180);
@@ -504,7 +501,6 @@ public class ModelHornBill extends ModelBase{
 			TAILFEATHER1ROT.rotateAngleY = (float) (45*Math.PI/180  - 10*Math.PI/180*par3);
 			TAILFEATHER5ROT.rotateAngleY = (float) (-45*Math.PI/180 + 10*Math.PI/180*par3);
 		}else{
-			HEADROT.rotateAngleX = (float) (0*Math.PI/180);
 			BODYROT.rotateAngleX = (float) (0*Math.PI/180);
 			WINGLEFROT1.rotateAngleX = (float) (0*Math.PI/180);
 			WINGRIGROT1.rotateAngleX = (float) (0*Math.PI/180);
@@ -544,8 +540,7 @@ public class ModelHornBill extends ModelBase{
 		}
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
@@ -553,6 +548,14 @@ public class ModelHornBill extends ModelBase{
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
 		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+		EntityHornBill var5 = (EntityHornBill)par7Entity;
+		float lookingDirX = Math.min(Math.max(f4, -15), +15) * (float) (Math.PI / 180f);
+		if (var5.getEntityState() == EntityStates.attacking) {
+			HEADROT.rotateAngleX = (float) (+50 * Math.PI / 180) + lookingDirX;
+		} else {
+			HEADROT.rotateAngleX = (float) (0*Math.PI/180) + lookingDirX;
+		}
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -20), +20) * (float)(Math.PI/180f);
 	}
 
 }
