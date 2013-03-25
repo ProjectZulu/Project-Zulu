@@ -59,7 +59,7 @@ public class EntityVulture extends EntityGenericAnimal {
 		this.maxFlightHeight = 20;
 		this.getNavigator().setAvoidsWater(true);	
 		
-        this.tasks.addTask(2, new EntityAIVultureFollow(this, this.moveSpeed, false));
+        this.tasks.addTask(2, new EntityAIVultureFollow(this, this.moveSpeed, false).setValidStates(EnumSet.of(EntityStates.following)) );
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
 		this.tasks.addTask(6, new EntityAIFlyingWander(this, this.moveSpeed));
 		
@@ -75,7 +75,8 @@ public class EntityVulture extends EntityGenericAnimal {
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.
 	 */
-	protected void fall(float par1){}
+	@Override
+    protected void fall(float par1){}
 
 	@Override
 	public String getTexture(){
@@ -86,12 +87,14 @@ public class EntityVulture extends EntityGenericAnimal {
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){ return "sounds.vulturehurt"; }
+	@Override
+    protected String getLivingSound(){ return "sounds.vulturehurt"; }
 
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound(){ return "sounds.vulturehurt"; }
+	@Override
+    protected String getHurtSound(){ return "sounds.vulturehurt"; }
 	
 	/**
 	 * Checks if the entity's current position is a valid location to spawn this entity.
@@ -119,7 +122,8 @@ public class EntityVulture extends EntityGenericAnimal {
 		return wasSuccesful;
 	}
 
-	public int getMaxHealth(){
+	@Override
+    public int getMaxHealth(){
 		return 14;
 	}
 
@@ -130,7 +134,7 @@ public class EntityVulture extends EntityGenericAnimal {
 		if(ticksExisted % ticksToCheckAbilities == 0){
 			
 			/* Check if their is a nearby Player to Follow */
-			EntityPlayer nearbyPlayer = this.worldObj.getClosestPlayerToEntity(this, 100.0D);
+			EntityPlayer nearbyPlayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 100.0D);
 			if(nearbyPlayer != null){
 				int distToTargetXZ = (int) Math.sqrt( Math.pow(nearbyPlayer.posX-this.posX, 2) + Math.pow(nearbyPlayer.posZ-this.posZ, 2) ); 
 				if(distToTargetXZ < 16){
@@ -141,7 +145,7 @@ public class EntityVulture extends EntityGenericAnimal {
 			curiosity = Math.max(curiosity - ticksToCheckAbilities, 0);
 			
 			/* Assuming we're following a Player, check if We Should Attack by Comparing number of Nearby Vultures to the Health of our Target */
-			Entity targetedEntity = this.getAttackTarget();
+			Entity targetedEntity = nearbyPlayer;
 			if(curiosity > 0 && targetedEntity != null){
 				int nearbyVultures = 0;
 				AxisAlignedBB var15 = this.boundingBox.copy();
