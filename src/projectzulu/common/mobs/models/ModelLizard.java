@@ -15,10 +15,7 @@ import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.mobs.entity.EntityLizard;
 
-public class ModelLizard extends ModelBase
-{
-	//fields
-
+public class ModelLizard extends ModelBase {
 	ModelRenderer leg1;
 	ModelRenderer leg1u;
 	ModelRenderer leg2;
@@ -42,8 +39,7 @@ public class ModelLizard extends ModelBase
 	ModelRenderer leg4;
 	ModelRenderer leg4u;
 
-	public ModelLizard()
-	{
+	public ModelLizard() {
 		textureWidth = 64;
 		textureHeight = 32;
 		setTextureOffset("TAILROT.dltfold1", 0, 0);
@@ -182,18 +178,19 @@ public class ModelLizard extends ModelBase
 		setRotation(leg3, 0F, 0F, 0F);
 	}
 
-
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
+		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+		HEADBASE.rotateAngleX = Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		HEADBASE.rotateAngleY = Math.min(Math.max(f3, -45), +45) * (float)(Math.PI/180f);
+	}
+	
 	@Override
 	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-
 		EntityLizard var5 = (EntityLizard)par1EntityLiving;
-
 		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
-
 		if(var5.prepareToSpit == true){
-
 			Frill1.rotateAngleY = (float)( MathHelper.cos(4*par2*0.6662F) * 1.0F * par3);
-
 			Frill2.rotateAngleY = (float)( MathHelper.cos(4*par2*0.6662F - (float)Math.PI) * 1.0F * par3);
 
 			Frill3.rotateAngleZ = (float)(  -45*Math.PI/180  );
@@ -203,30 +200,22 @@ public class ModelLizard extends ModelBase
 			Frill4.rotateAngleZ = (float)(  45*Math.PI/180  );
 			Frill4.rotateAngleY = (float)( MathHelper.cos(4*par2*0.6662F - (float)Math.PI) * 0.5F * par3);
 			Frill4.rotateAngleX = (float)( MathHelper.cos(4*par2*0.6662F - (float)Math.PI) * 0.5F * par3);
-
-
-		}else {
+		} else {
 			Frill1.rotateAngleZ = (float)(  -90*Math.PI/180  ); //This is on Right
 			Frill2.rotateAngleZ = (float)(  90*Math.PI/180  ); //This is on Left
 
 			Frill3.rotateAngleY = (float)(  -90*Math.PI/180  );
 			Frill4.rotateAngleY = (float)(  90*Math.PI/180  );
 		}
-
 		leg1.rotateAngleY = (float)( MathHelper.cos(4*par2*0.6662F + (float)Math.PI) * 1.4F * par3);
 		leg2.rotateAngleY = (float)( MathHelper.cos(4*par2*0.6662F			   	 ) * 1.4F * par3);
 		leg3.rotateAngleY = (float)( MathHelper.cos(4*par2*0.6662F + (float)Math.PI) * 1.4F * par3);
 		leg4.rotateAngleY = (float)( MathHelper.cos(4*par2*0.6662F				 ) * 1.4F * par3);
-
-
-
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
-		//super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);	  
-
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		super.render(entity, f, f1, f2, f3, f4, f5);
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		float field_78145_g = 8.0F;
 		float field_78151_h = 4.0F;
 
@@ -253,18 +242,11 @@ public class ModelLizard extends ModelBase
 			TAILROT.render(f5);
 			FRONTROT.render(f5);
 		}
-
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
-		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
-	}
-
 }
