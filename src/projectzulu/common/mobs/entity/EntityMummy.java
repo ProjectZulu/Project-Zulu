@@ -9,9 +9,12 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
@@ -46,15 +49,62 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
 		setPosition(parx, pary, parz);
 	}
 
-	public String getTexture() {
+	@Override
+    public String getTexture() {
 		return DefaultProps.mobDiretory + "mummy.png";
 	}
 
-	protected void entityInit() {
+	@Override
+    protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(16, new Byte((byte) 0));
 	}
 
+    @Override
+    public boolean getCanSpawnHere() {
+        int var1 = MathHelper.floor_double(this.posX);
+        int var2 = MathHelper.floor_double(this.boundingBox.minY);
+        int var3 = MathHelper.floor_double(this.posZ);
+        boolean wasSuccesful = false;
+
+        if (CustomEntityList.MUMMY.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()) {
+            wasSuccesful = true;
+        }
+
+        if (CustomEntityList.MUMMY.modData.get().reportSpawningInLog) {
+            if (wasSuccesful) {
+                ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s", getEntityName(), var1, var2,
+                        var3, worldObj.getBiomeGenForCoords(var1, var3));
+            } else {
+                ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",
+                        getEntityName(), var1, var2, var3, worldObj.getBiomeGenForCoords(var1, var3));
+            }
+        }
+        return wasSuccesful;
+    }
+
+	@Override
+    protected boolean isValidLightLevel(World world, int xCoord, int yCoord, int zCoord) {
+        int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.boundingBox.minY);
+        int k = MathHelper.floor_double(this.posZ);
+
+        if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, i, j, k) > this.rand.nextInt(32)) {
+            return false;
+        } else {
+            int l = this.worldObj.getBlockLightValue(i, j, k);
+
+            if (this.worldObj.isThundering()) {
+                int i1 = this.worldObj.skylightSubtracted;
+                this.worldObj.skylightSubtracted = 10;
+                l = this.worldObj.getBlockLightValue(i, j, k);
+                this.worldObj.skylightSubtracted = i1;
+            }
+
+            return l <= this.rand.nextInt(8);
+        }
+    }
+	
 	@Override
 	protected void updateAITick() {
 		setAngerLevel(100);
@@ -74,7 +124,7 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
 	 */
 	@Override
 	public double getMountedYOffset() {
-		return (double) this.height * 0.75D - 0.5D;
+		return this.height * 0.75D - 0.5D;
 	}
 
 	/**
