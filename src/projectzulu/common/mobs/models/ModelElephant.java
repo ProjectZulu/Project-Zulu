@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.mobs.entity.EntityElephant;
 
-public class ModelElephant extends ModelBase{
+public class ModelElephant extends ModelBase {
 
 	private static float heightToRaise = 12f;
 
@@ -37,7 +37,7 @@ public class ModelElephant extends ModelBase{
 	private ModelRenderer TUSKRIGROT;
 	private ModelRenderer TUSKLEFROT;
 
-	public ModelElephant(){
+	public ModelElephant() {
 		textureWidth = 128;
 		textureHeight = 64;
 		setTextureOffset("LEG4TOPROT.leg4top", 0, 40);
@@ -198,13 +198,11 @@ public class ModelElephant extends ModelBase{
 		HEADROT.addChild(TUSKLEFROT);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
 		float scale = 4;
-
 		if (this.isChild){
 			float field_78145_g = 1.0f;
 			float field_78151_h = 0.0f;
@@ -227,9 +225,6 @@ public class ModelElephant extends ModelBase{
 			LEG2TOPROT.render(f5*2);
 			GL11.glPopMatrix();
 		}else{
-//			GL11.glPushMatrix();
-//			GL11.glTranslatef(0.0F, -12f*f5*2, 0f);
-//			GL11.glScalef(1.0f, 1.0f, 1.0f);
 			body.render(f5*2);
 			tail.render(f5*2);
 			LEG4TOPROT.render(f5*2);
@@ -237,29 +232,25 @@ public class ModelElephant extends ModelBase{
 			LEG1TOPROT.render(f5*2);
 			LEG2TOPROT.render(f5*2);
 			HEADROT.render(f5*2);
-//			GL11.glPopMatrix();
 		}
-
-
-
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
+
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
 		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+		HEADROT.rotateAngleX = Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -30), +30) * (float)(Math.PI/180f);
 	}
 
 	@Override
 	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-
 		EntityElephant var5 = (EntityElephant)par1EntityLiving;
-		
 		LEG1TOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
 		LEG2TOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
 		LEG1BOTROT.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2 + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
@@ -269,12 +260,12 @@ public class ModelElephant extends ModelBase{
 		LEG4TOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
 		LEG3BOTROT.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2 + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
 		LEG4BOTROT.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		
+
 		tail.rotateAngleZ = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		
+
 		EARLEFROT.rotateAngleY = (float)( 70*Math.PI/180 + MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.2F * zeroIfNegative(Math.log(par3+1)) );
 		EARRIGROT.rotateAngleY = (float)( -70*Math.PI/180 - MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.2F * zeroIfNegative(Math.log(par3+1)) );
-		
+
 		float angle = (float) (90*Math.PI/180);
 		TRUNK1ROT.rotateAngleX = (float) (0.0*Math.PI/180*MathHelper.cos( (par2)*0.6662F + (float)Math.PI/2 ));
 		TRUNK2ROT.rotateAngleX = (float) (0.0*Math.PI/180*MathHelper.cos( par2*0.6662F ));
@@ -283,17 +274,15 @@ public class ModelElephant extends ModelBase{
 		TRUNK5ROT.rotateAngleX = (float) (Math.abs(45*Math.PI/180*MathHelper.cos( par2*0.6662F/4 + (float)Math.PI/2 )));
 		TRUNK6ROT.rotateAngleX = (float) (Math.abs(45*Math.PI/180*MathHelper.cos( par2*0.6662F/4 + (float)Math.PI/2 )));
 		TRUNK7ROT.rotateAngleX = (float) (Math.abs(45*Math.PI/180*MathHelper.cos( par2*0.6662F/4 + (float)Math.PI/2 )));
-		
+
 		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 	}
 
-	private double zeroIfNegative(double value){
-		if(value < 0){
+	private double zeroIfNegative(double value) {
+		if (value < 0) {
 			return 0f;
-		}else{
+		} else {
 			return value;
 		}
 	}
-
-
 }

@@ -10,9 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.mobs.entity.EntityOstrich;
 
-public class ModelOstrich extends ModelBase
-{
-	//fields
+public class ModelOstrich extends ModelBase {
 	ModelRenderer tail1;
 	ModelRenderer tail3;
 	ModelRenderer tail2;
@@ -42,8 +40,7 @@ public class ModelOstrich extends ModelBase
 	private ModelRenderer TOE23ROT;
 	private ModelRenderer TOE21ROT;
 
-	public ModelOstrich()
-	{
+	public ModelOstrich() {
 		textureWidth = 64;
 		textureHeight = 64;
 		setTextureOffset("BODYROT.body1", 12, 38);
@@ -242,74 +239,64 @@ public class ModelOstrich extends ModelBase
 		WINGRIGROT.addBox("wingrig", 0F, -5F, 0F, 1, 9, 15);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		
-	    float field_78145_g = 8.0F;
-	    float field_78151_h = 4.0F;
 
-        if (this.isChild){
-            float var8 = 2.0F;
-            GL11.glPushMatrix();
-            GL11.glTranslatef(0.0F, field_78145_g * f5, field_78151_h * f5);
-//    		HEADROT.render(f5);
-            GL11.glPopMatrix();
-            GL11.glPushMatrix();
-            GL11.glScalef(1.0F / var8, 1.0F / var8, 1.0F / var8);
-            GL11.glTranslatef(0.0F, 24.0F * f5, 0.0F);
-    		tail1.render(f5);
-    		tail3.render(f5);
-    		tail2.render(f5);
-    		tail4.render(f5);
-    		BODYROT.render(f5);
-    		WINGLEFROT.render(f5);
-    		WINGRIGROT.render(f5);
-            GL11.glPopMatrix();
-        }else{
-    		tail1.render(f5);
-    		tail3.render(f5);
-    		tail2.render(f5);
-    		tail4.render(f5);
-    		BODYROT.render(f5);
-    		WINGLEFROT.render(f5);
-    		WINGRIGROT.render(f5);
-        }
-        
+		float field_78145_g = 8.0F;
+		float field_78151_h = 4.0F;
+
+		if (this.isChild){
+			float var8 = 2.0F;
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0.0F, field_78145_g * f5, field_78151_h * f5);
+			//    		HEADROT.render(f5);
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+			GL11.glScalef(1.0F / var8, 1.0F / var8, 1.0F / var8);
+			GL11.glTranslatef(0.0F, 24.0F * f5, 0.0F);
+			tail1.render(f5);
+			tail3.render(f5);
+			tail2.render(f5);
+			tail4.render(f5);
+			BODYROT.render(f5);
+			WINGLEFROT.render(f5);
+			WINGRIGROT.render(f5);
+			GL11.glPopMatrix();
+		}else{
+			tail1.render(f5);
+			tail3.render(f5);
+			tail2.render(f5);
+			tail4.render(f5);
+			BODYROT.render(f5);
+			WINGLEFROT.render(f5);
+			WINGRIGROT.render(f5);
+		}
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+		float angle = f1*0.6625F*2f;
+		HEADROT.rotateAngleX = (float) ((+105 + MathHelper.cos( angle )) * Math.PI/180) + Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -45), +45) * (float)(Math.PI/180f);
 	}
 
 
 	@Override
 	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-
-		EntityOstrich var5 = (EntityOstrich)par1EntityLiving;
-
-
-		/* Constant Animation Rotations */
-
 		TOE22ROT.rotateAngleY = (float) (45*Math.PI/180);
-//		TOE23ROT.rotateAngleY = (float) (45*Math.PI/180);;
-		TOE21ROT.rotateAngleY = (float) (-45*Math.PI/180);;
+		TOE21ROT.rotateAngleY = (float) (-45*Math.PI/180);
 
 		TOE12ROT.rotateAngleY = (float) (45*Math.PI/180);
-//		TOE13ROT.rotateAngleY = (float) (45*Math.PI/180);;
-		TOE11ROT.rotateAngleY = (float) (-45*Math.PI/180);;
+		TOE11ROT.rotateAngleY = (float) (-45*Math.PI/180);
 
-		//State 1 = Sitting
 		float angle = par2*0.6625F*2f;
-//		angle = 0;
 		NECK1ROT.rotateAngleX = (float) ((-22.5 + MathHelper.cos( 0 ) ) * Math.PI/180);
 		NECK2ROT.rotateAngleX = (float) ((-22.5 + MathHelper.cos( angle ) +1 ) * Math.PI/180);
 		NECK3ROT.rotateAngleX = (float) ((-22.5 + MathHelper.cos( angle ) +1 ) * Math.PI/180);
@@ -319,141 +306,19 @@ public class ModelOstrich extends ModelBase
 		NECK7ROT.rotateAngleX = (float) ((-1.0 + MathHelper.cos(  angle ) +1 ) * Math.PI/180*1.2*par3);
 		NECK8ROT.rotateAngleX = (float) ((-1.0 + MathHelper.cos(  angle ) +1 ) * Math.PI/180);
 
-		HEADROT.rotateAngleX = (float) ((+105 + MathHelper.cos( angle )) * Math.PI/180);
-		
 		WINGLEFROT.rotateAngleY = (float) (-45.5 * Math.abs( MathHelper.cos( par2*0.6625f*2f )) * Math.PI/180) ;
 		WINGRIGROT.rotateAngleY = (float) (+45.5 * Math.abs( MathHelper.cos( par2*0.6625f*2f )) * Math.PI/180) ;
-				
+
 		LEGTOPROT1.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F/2 + (float)Math.PI) * 2.4F * zeroIfNegative(Math.log(par3+1)) );
-//		LEGTOPROT1.rotateAngleX = (float) +Math.abs( MathHelper.cos(par2*0.6662F/2*2 + (float)Math.PI/2) * 2.4F * zeroIfNegative(Math.log(par3+1)) );
 		LEGBOTROT1.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2*2 + (float)Math.PI/2) * 2.4F * zeroIfNegative(Math.log(par3+1)) );
 
 		LEGTOPROT2.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F/2			   	 ) * 2.4F * zeroIfNegative(Math.log(par3+1)) );
-//		LEGTOPROT2.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2*2			   	 ) * 2.4F * zeroIfNegative(Math.log(par3+1)) );
 		LEGBOTROT2.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2*2			   	 ) * 2.4F * zeroIfNegative(Math.log(par3+1)) );
 		
-//		ModelRenderer WINGLEFROT;
-//		ModelRenderer WINGRIGROT;
-//		private ModelRenderer LEGTOPROT1;
-//		private ModelRenderer LEGTOPROT2;
-
-		
-//		LEG1ROT2.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.2F * par3 );
-//		LEG3ROT2.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.2F * par3 );
-//		LEG2ROT2.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.2F * par3 );
-//		LEG4ROT2.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.2F * par3 );
-
-
-		
-		
-//		if(!var5.onGround){
-//			/* Jumping In Air */
-//			BODYROT.rotateAngleX = (float)( -0*Math.PI/180);
-//			LEG2TOPROT.rotateAngleX = (float)( +60*Math.PI/180);
-//			LEG2TOPROT.rotateAngleY = (float)( -0*Math.PI/180);
-//			LEG2TOPROT.rotateAngleZ = (float)( +60*Math.PI/180);
-//			LEG2BOTROT.rotateAngleX = (float)( 45*Math.PI/180);
-//			LEG2BOTROT.rotateAngleY = (float)( 0*Math.PI/180);
-//
-//			LEG1TOPROT.rotateAngleX = (float)( +60*Math.PI/180);
-//			LEG1TOPROT.rotateAngleY = (float)( -0*Math.PI/180);
-//			LEG1TOPROT.rotateAngleZ = (float)( +60*Math.PI/180);
-//			LEG1BOTROT.rotateAngleX = (float)( 45*Math.PI/180);
-//			LEG1BOTROT.rotateAngleY = (float)( 0*Math.PI/180);
-//
-//
-//			LEG3TOPROT.rotateAngleX = (float)( -60*Math.PI/180);
-//			LEG3BOTROT.rotateAngleX = (float)( 0*Math.PI/180);
-//
-//			LEG4TOPROT.rotateAngleX = (float)( -60*Math.PI/180);
-//			LEG4BOTROT.rotateAngleX = (float)( 0*Math.PI/180);
-//
-//			HEADROT.rotateAngleX = (float)( 0*Math.PI/180);
-//		}else{
-//			/* Standing On Ground */
-//
-//			BODYROT.rotateAngleX = (float)( -45*Math.PI/180);
-//			LEG2TOPROT.rotateAngleX = (float)( -65*Math.PI/180);
-//			LEG2TOPROT.rotateAngleY = (float)( -30*Math.PI/180);
-//			LEG2TOPROT.rotateAngleZ = (float)( 0*Math.PI/180);
-//
-//			LEG2BOTROT.rotateAngleX = (float)( 110*Math.PI/180);
-//			LEG2BOTROT.rotateAngleY = (float)( 25*Math.PI/180);
-//
-//
-//			LEG1TOPROT.rotateAngleX = (float)( -65*Math.PI/180);
-//			LEG1TOPROT.rotateAngleY = (float)( 30*Math.PI/180);
-//			LEG1TOPROT.rotateAngleZ = (float)( +0*Math.PI/180);
-//			LEG1BOTROT.rotateAngleX = (float)( 110*Math.PI/180);
-//			LEG1BOTROT.rotateAngleY = (float)( -25*Math.PI/180);
-//
-//
-//			LEG3TOPROT.rotateAngleX = (float)( 10*Math.PI/180);
-//			LEG3BOTROT.rotateAngleX = (float)( 35*Math.PI/180);
-//
-//			LEG4TOPROT.rotateAngleX = (float)( 10*Math.PI/180);
-//			LEG4BOTROT.rotateAngleX = (float)( 35*Math.PI/180);
-//
-//			HEADROT.rotateAngleX = (float)( 45*Math.PI/180);
-//		}
-
-
-
-
-		//		LEG4TOPROT.rotateAngleX = (float)( 12*Math.PI/180);
-		//		LEG1TOPROT.rotateAngleX = (float)( 12*Math.PI/180);
-		//		LEG3TOPROT.rotateAngleX = (float)( 12*Math.PI/180);
-
-
-
-		/* State Based Animations */
-
-		//	    BODYROT;
-		//	    HEADROT;
-
-		//		TAILROT.rotateAngleX = (float) (-23*Math.PI/180);
-		//		LEGROT1.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.8F * par3 );
-		//		LEGROT3.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.8F * par3 );
-		//		LEGROT2.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.8F * par3 );
-		//		LEGROT4.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.8F * par3 );
-
-		//		EARROTL;
-		//		EARROTR;
-
-
-
-		//		float animSpeed;
-		//		animSpeed = 1.0f;
-		//		LEGRIGTOPROT.rotateAngleX = var5.eLEGRIGTOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//		LEGLEFTTOPROT.rotateAngleX = var5.eLEGLEFTTOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//		LEGRIGBOTROT.rotateAngleX = var5.eLEGRIGBOTROT.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2 + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//		LEGLEFBOTROT.rotateAngleX = var5.eLEGLEFBOTROT.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//
-		//		if(var5.entityState == listStates.idle.index ||  var5.entityState == listStates.looking.index){
-		//			
-		//			ARMLEFTOPROT.rotateAngleX = var5.eARMRIGTOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//			ARMRIGTOPROT.rotateAngleX = var5.eARMLEFTOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//
-		//			ARMLEFBOTROT.rotateAngleX = var5.eARMRIGBOTROT.rotateAngleX = (float) -Math.abs( MathHelper.cos(par2*0.6662F/2 + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//			ARMRIGBOTROT.rotateAngleX = var5.eARMLEFBOTROT.rotateAngleX = (float) -Math.abs( MathHelper.cos(par2*0.6662F/2			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//
-		//		}else if(var5.entityState == listStates.attacking.index){
-		//			ARMRIGTOPROT.rotateAngleZ = var5.eARMRIGTOPROT.rotateAngleZ = (float)( -5*Math.PI/180 );
-		//			ARMRIGTOPROT.rotateAngleX = var5.eARMRIGTOPROT.rotateAngleX = (float)(Math.PI/180)*( -5 + 8*MathHelper.cos(par2*0.6662F) );
-		//			ARMRIGTOPROT.rotateAngleY = var5.eARMRIGTOPROT.rotateAngleY = (float)( 0*Math.PI/180 );
-		//			ARMRIGBOTROT.rotateAngleX = var5.eARMRIGBOTROT.rotateAngleX = (float)(Math.PI/180)*( -80 + 8*MathHelper.cos(par2*0.6662F) );
-		//
-		//			ARMLEFTOPROT.rotateAngleZ = var5.eARMLEFTOPROT.rotateAngleZ = (float)( 5*Math.PI/180 );
-		//			ARMLEFTOPROT.rotateAngleX = var5.eARMLEFTOPROT.rotateAngleX = (float)(Math.PI/180)*( -5 + 8*MathHelper.cos(par2*0.6662F+(float)Math.PI) );
-		//			ARMLEFTOPROT.rotateAngleY = var5.eARMLEFTOPROT.rotateAngleY = (float)( -0*Math.PI/180 );
-		//			ARMLEFBOTROT.rotateAngleX = var5.eARMLEFBOTROT.rotateAngleX = (float)(Math.PI/180)*( -80 + 8*MathHelper.cos(par2*0.6662F+(float)Math.PI) );			
-		//						
-		//		}
-
 		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 	}
 
-	private double zeroIfNegative(double value){
+	private double zeroIfNegative(double value) {
 		if(value < 0){
 			return 0f;
 		}else{
@@ -461,21 +326,18 @@ public class ModelOstrich extends ModelBase
 		}
 	}
 
-	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max){
+	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max) {
 		return (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
 	}
 
-	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max){
+	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max) {
 		float value2 = (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
 		value2 = MathHelper.clamp_float(value2, set2min, set2max);
 		return value2;
 	}
 
 
-	private float func_78172_a(float par1, float par2)
-	{
+	private float func_78172_a(float par1, float par2) {
 		return (Math.abs(par1 % par2 - par2 * 0.5F) - par2 * 0.25F) / (par2 * 0.25F);
 	}
-
-
 }

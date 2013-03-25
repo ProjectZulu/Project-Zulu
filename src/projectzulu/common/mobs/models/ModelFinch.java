@@ -11,9 +11,8 @@ import org.lwjgl.opengl.GL11;
 import projectzulu.common.mobs.entity.EntityFinch;
 import projectzulu.common.mobs.entity.EntityStates;
 
-public class ModelFinch extends ModelBase
-{
-	//fields
+public class ModelFinch extends ModelBase {
+	
 	ModelRenderer Body;
 	ModelRenderer wingrig;
 	ModelRenderer winglef;
@@ -25,8 +24,7 @@ public class ModelFinch extends ModelBase
 	private ModelRenderer LEGLEFBOTROT;
 	private ModelRenderer BEAKROT;
 
-	public ModelFinch()
-	{
+	public ModelFinch() {
 		textureWidth = 32;
 		textureHeight = 32;
 		setTextureOffset("LEGRIGTOPROT.lefrigtop", 0, 12);
@@ -93,13 +91,9 @@ public class ModelFinch extends ModelBase
 		BEAKROT.mirror = true;
 		BEAKROT.addBox("beak", -0.5333334F, 0.3F, -0.9F, 1, 1, 1);
 		HEADROT.addChild(BEAKROT);
-
 	}
 
-
-
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		float field_78145_g = 8.0F;
@@ -133,13 +127,12 @@ public class ModelFinch extends ModelBase
 		}
 	}
 
-	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4){
+	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
 		EntityFinch var5 = (EntityFinch)par1EntityLiving;
-
 		if(var5.getEntityState() == EntityStates.posture){
 			/* On Ground Idle Standing Animation */
 			float animSpeed = 2.0f;
-		}else{
+		} else {
 			winglef.rotateAngleZ = (float)( MathHelper.cos(var5.worldObj.getWorldTime()*0.6662F*2f			   	   ) * 1.8F * 0.5f);
 			wingrig.rotateAngleZ = (float)( MathHelper.cos(var5.worldObj.getWorldTime()*0.6662F*2f + (float)Math.PI) * 1.8F * 0.5f);
 			tail.rotateAngleX = (float)( MathHelper.cos(var5.worldObj.getWorldTime()*0.6662F*2f + (float)Math.PI) * 0.3f);
@@ -154,6 +147,7 @@ public class ModelFinch extends ModelBase
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+		HEADROT.rotateAngleX = Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -45), +45) * (float)(Math.PI/180f);
 	}
-
 }

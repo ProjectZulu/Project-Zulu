@@ -10,10 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.mobs.entity.EntityFrog;
 
+public class ModelFrog extends ModelBase {
 
-public class ModelFrog extends ModelBase
-{
-	//fields
 	ModelRenderer BODYROT;
 	private ModelRenderer	LEG2TOPROT;
 	private ModelRenderer	LEG2BOTROT;
@@ -31,8 +29,8 @@ public class ModelFrog extends ModelBase
 	private ModelRenderer	LEG4BOTROT;
 	private ModelRenderer	FOOTROT4;
 	private float heightToRaise = -30;
-	public ModelFrog()
-	{
+
+	public ModelFrog() {
 		textureWidth = 64;
 		textureHeight = 32;
 		setTextureOffset("BODYROT.body", 0, 18);
@@ -201,50 +199,48 @@ public class ModelFrog extends ModelBase
 		BODYROT.addChild(LEG4TOPROT);
 	}
 
-
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-	    float field_78145_g = 8.0F;
-	    float field_78151_h = 4.0F;
+		float field_78145_g = 8.0F;
+		float field_78151_h = 4.0F;
 
-        if (this.isChild){
-            float var8 = 2.0F;
-            GL11.glPushMatrix();
-            GL11.glTranslatef(0.0F, field_78145_g * f5, field_78151_h * f5);
-            GL11.glPopMatrix();
-            GL11.glPushMatrix();
-            GL11.glScalef(1.0F / var8, 1.0F / var8, 1.0F / var8);
-            GL11.glTranslatef(0.0F, 24.0F * f5, 0.0F);
-    		BODYROT.render(0.5f*f5);
-            GL11.glPopMatrix();
-        }else{
-    		BODYROT.render(0.5f*f5);
-        }
+		if (this.isChild){
+			float var8 = 2.0F;
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0.0F, field_78145_g * f5, field_78151_h * f5);
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+			GL11.glScalef(1.0F / var8, 1.0F / var8, 1.0F / var8);
+			GL11.glTranslatef(0.0F, 24.0F * f5, 0.0F);
+			BODYROT.render(0.5f*f5);
+			GL11.glPopMatrix();
+		}else{
+			BODYROT.render(0.5f*f5);
+		}
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5,entity);
+		EntityFrog var5 = (EntityFrog)entity;
+		if(!var5.onGround){
+			HEADROT.rotateAngleX = (float)( 0*Math.PI/180) + 0*Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		}else{
+			HEADROT.rotateAngleX = (float)( 45*Math.PI/180) + 0*Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		}
+//		HEADROT.rotateAngleY = -1F + Math.min(Math.max(f3, -45), +45) * (float)(Math.PI/180f);
+//		HEADROT.rotateAngleX = Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
 	}
 
 	@Override
-	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-
-		EntityFrog var5 = (EntityFrog)par1EntityLiving;
-
-
-		/* Constant Animation Rotations */
-
-		//State 1 = Sitting
+	public void setLivingAnimations(EntityLiving entityLiving, float par2, float par3, float par4) {
+		EntityFrog var5 = (EntityFrog)entityLiving;
 		if(!var5.onGround){
 			/* Jumping In Air */
 			BODYROT.rotateAngleX = (float)( -0*Math.PI/180);
@@ -253,128 +249,64 @@ public class ModelFrog extends ModelBase
 			LEG2TOPROT.rotateAngleZ = (float)( +60*Math.PI/180);
 			LEG2BOTROT.rotateAngleX = (float)( 45*Math.PI/180);
 			LEG2BOTROT.rotateAngleY = (float)( 0*Math.PI/180);
-
+			
 			LEG1TOPROT.rotateAngleX = (float)( +60*Math.PI/180);
 			LEG1TOPROT.rotateAngleY = (float)( -0*Math.PI/180);
 			LEG1TOPROT.rotateAngleZ = (float)( +60*Math.PI/180);
 			LEG1BOTROT.rotateAngleX = (float)( 45*Math.PI/180);
 			LEG1BOTROT.rotateAngleY = (float)( 0*Math.PI/180);
-
-
+			
 			LEG3TOPROT.rotateAngleX = (float)( -60*Math.PI/180);
 			LEG3BOTROT.rotateAngleX = (float)( 0*Math.PI/180);
 
 			LEG4TOPROT.rotateAngleX = (float)( -60*Math.PI/180);
 			LEG4BOTROT.rotateAngleX = (float)( 0*Math.PI/180);
-
-			HEADROT.rotateAngleX = (float)( 0*Math.PI/180);
 		}else{
 			/* Standing On Ground */
-
 			BODYROT.rotateAngleX = (float)( -45*Math.PI/180);
 			LEG2TOPROT.rotateAngleX = (float)( -65*Math.PI/180);
 			LEG2TOPROT.rotateAngleY = (float)( -30*Math.PI/180);
 			LEG2TOPROT.rotateAngleZ = (float)( 0*Math.PI/180);
-
+			
 			LEG2BOTROT.rotateAngleX = (float)( 110*Math.PI/180);
 			LEG2BOTROT.rotateAngleY = (float)( 25*Math.PI/180);
-
-
+			
 			LEG1TOPROT.rotateAngleX = (float)( -65*Math.PI/180);
 			LEG1TOPROT.rotateAngleY = (float)( 30*Math.PI/180);
 			LEG1TOPROT.rotateAngleZ = (float)( +0*Math.PI/180);
 			LEG1BOTROT.rotateAngleX = (float)( 110*Math.PI/180);
 			LEG1BOTROT.rotateAngleY = (float)( -25*Math.PI/180);
-
-
+			
 			LEG3TOPROT.rotateAngleX = (float)( 10*Math.PI/180);
 			LEG3BOTROT.rotateAngleX = (float)( 35*Math.PI/180);
-
+			
 			LEG4TOPROT.rotateAngleX = (float)( 10*Math.PI/180);
 			LEG4BOTROT.rotateAngleX = (float)( 35*Math.PI/180);
-
-			HEADROT.rotateAngleX = (float)( 45*Math.PI/180);
 		}
-
-
-
-
-		//		LEG4TOPROT.rotateAngleX = (float)( 12*Math.PI/180);
-		//		LEG1TOPROT.rotateAngleX = (float)( 12*Math.PI/180);
-		//		LEG3TOPROT.rotateAngleX = (float)( 12*Math.PI/180);
-
-
-
-		/* State Based Animations */
-
-		//	    BODYROT;
-		//	    HEADROT;
-
-		//		TAILROT.rotateAngleX = (float) (-23*Math.PI/180);
-		//		LEGROT1.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.8F * par3 );
-		//		LEGROT3.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.8F * par3 );
-		//		LEGROT2.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.8F * par3 );
-		//		LEGROT4.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.8F * par3 );
-
-		//		EARROTL;
-		//		EARROTR;
-
-
-
-		//		float animSpeed;
-		//		animSpeed = 1.0f;
-		//		LEGRIGTOPROT.rotateAngleX = var5.eLEGRIGTOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//		LEGLEFTTOPROT.rotateAngleX = var5.eLEGLEFTTOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//		LEGRIGBOTROT.rotateAngleX = var5.eLEGRIGBOTROT.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2 + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//		LEGLEFBOTROT.rotateAngleX = var5.eLEGLEFBOTROT.rotateAngleX = (float) Math.abs( MathHelper.cos(par2*0.6662F/2			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//
-		//		if(var5.entityState == listStates.idle.index ||  var5.entityState == listStates.looking.index){
-		//			
-		//			ARMLEFTOPROT.rotateAngleX = var5.eARMRIGTOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//			ARMRIGTOPROT.rotateAngleX = var5.eARMLEFTOPROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//
-		//			ARMLEFBOTROT.rotateAngleX = var5.eARMRIGBOTROT.rotateAngleX = (float) -Math.abs( MathHelper.cos(par2*0.6662F/2 + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//			ARMRIGBOTROT.rotateAngleX = var5.eARMLEFBOTROT.rotateAngleX = (float) -Math.abs( MathHelper.cos(par2*0.6662F/2			   	 ) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		//
-		//		}else if(var5.entityState == listStates.attacking.index){
-		//			ARMRIGTOPROT.rotateAngleZ = var5.eARMRIGTOPROT.rotateAngleZ = (float)( -5*Math.PI/180 );
-		//			ARMRIGTOPROT.rotateAngleX = var5.eARMRIGTOPROT.rotateAngleX = (float)(Math.PI/180)*( -5 + 8*MathHelper.cos(par2*0.6662F) );
-		//			ARMRIGTOPROT.rotateAngleY = var5.eARMRIGTOPROT.rotateAngleY = (float)( 0*Math.PI/180 );
-		//			ARMRIGBOTROT.rotateAngleX = var5.eARMRIGBOTROT.rotateAngleX = (float)(Math.PI/180)*( -80 + 8*MathHelper.cos(par2*0.6662F) );
-		//
-		//			ARMLEFTOPROT.rotateAngleZ = var5.eARMLEFTOPROT.rotateAngleZ = (float)( 5*Math.PI/180 );
-		//			ARMLEFTOPROT.rotateAngleX = var5.eARMLEFTOPROT.rotateAngleX = (float)(Math.PI/180)*( -5 + 8*MathHelper.cos(par2*0.6662F+(float)Math.PI) );
-		//			ARMLEFTOPROT.rotateAngleY = var5.eARMLEFTOPROT.rotateAngleY = (float)( -0*Math.PI/180 );
-		//			ARMLEFBOTROT.rotateAngleX = var5.eARMLEFBOTROT.rotateAngleX = (float)(Math.PI/180)*( -80 + 8*MathHelper.cos(par2*0.6662F+(float)Math.PI) );			
-		//						
-		//		}
-
-		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
+		super.setLivingAnimations(entityLiving, par2, par3, par4);
 	}
 
-	private double zeroIfNegative(double value){
-		if(value < 0){
+	private double zeroIfNegative(double value) {
+		if (value < 0) {
 			return 0f;
-		}else{
+		} else {
 			return value;
 		}
 	}
-
-	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max){
-		return (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
+	
+	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max) {
+		return (value - set1min) * ((set2max - set2min) / (set1max - set1min))
+				+ set2min;
 	}
-
+	
 	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max){
 		float value2 = (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
 		value2 = MathHelper.clamp_float(value2, set2min, set2max);
 		return value2;
 	}
-
-
-	private float func_78172_a(float par1, float par2)
-	{
-		return (Math.abs(par1 % par2 - par2 * 0.5F) - par2 * 0.25F) / (par2 * 0.25F);
+	
+	private float func_78172_a(float par1, float par2) {
+		return (Math.abs(par1 % par2 - par2 * 0.5F) - par2 * 0.25F)
+				/ (par2 * 0.25F);
 	}
-
-
 }

@@ -13,8 +13,6 @@ import projectzulu.common.mobs.entity.EntityStates;
 
 public class ModelMammoth extends ModelBase {
 	float heightToRais = 18;
-
-	//fields
 	ModelRenderer body3;
 	ModelRenderer body2;
 	ModelRenderer body1;
@@ -27,7 +25,6 @@ public class ModelMammoth extends ModelBase {
 	ModelRenderer TUSKRIGROT;
 	ModelRenderer NOSEROT1;
 	ModelRenderer TUSKLEFROT;
-
 
 	ModelRenderer NOSEROT2;
 	ModelRenderer NOSEROT3;
@@ -260,13 +257,12 @@ public class ModelMammoth extends ModelBase {
 		SADDLEROT.addBox("chairrail3", -5F, -5F, 0.5F, 10, 1, 1);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
 		float field_78145_g = 11.0f;
-	    float field_78151_h = 9.0f;
+		float field_78151_h = 9.0f;
 		float scale = 4;
 
 		if (this.isChild){
@@ -288,7 +284,7 @@ public class ModelMammoth extends ModelBase {
 			leg4.render(scale*f5);
 			SADDLEROT.render(scale*f5);
 			GL11.glPopMatrix();
-		}else{
+		} else {
 			body3.render(scale*f5);
 			body2.render(scale*f5);
 			body1.render(scale*f5);
@@ -308,8 +304,15 @@ public class ModelMammoth extends ModelBase {
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+		EntityMammoth var5 = (EntityMammoth)par7Entity;
+		if(var5.getEntityState() == EntityStates.attacking && var5.getAnimTime() > 0 ){
+			HEADROT.rotateAngleX = Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f) + (float)( MathHelper.cos((float) (f1*0.6662F/2f + (float)Math.PI)) * Math.PI/180*(20) );
+		}else{
+			HEADROT.rotateAngleX = Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		}
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -45), +45) * (float)(Math.PI/180f);
 	}
 
 	@Override
@@ -317,7 +320,7 @@ public class ModelMammoth extends ModelBase {
 		EntityMammoth var5 = (EntityMammoth)par1EntityLiving;
 		TUSKRIGROT.rotateAngleY = (float) (-22.5*Math.PI/180);
 		TUSKLEFROT.rotateAngleY = (float) (22.5*Math.PI/180);
-		
+
 		float angle = 0;
 		NOSEROT1.rotateAngleX = (float) (22.5*Math.PI/180*MathHelper.cos( angle ));
 		NOSEROT2.rotateAngleX = (float) (22.5*Math.PI/180*MathHelper.cos( angle ));
@@ -328,27 +331,21 @@ public class ModelMammoth extends ModelBase {
 		NOSEROT7.rotateAngleX = (float) (0*Math.PI/180);
 		NOSEROT8.rotateAngleX = (float) (0*Math.PI/180);
 		NOSEROT9.rotateAngleX = (float) (0*Math.PI/180);
-		
+
 		/*Left Side Legs*/
 		leg1.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
 		leg3.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		
+
 		/*Right Side Legs*/
 		leg2.rotateAngleX = -(float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
 		leg4.rotateAngleX = -(float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		
-		if(var5.getEntityState() == EntityStates.attacking && var5.getAnimTime() > 0 ){
-			HEADROT.rotateAngleX = (float)( MathHelper.cos((float) (par2*0.6662F/2f + (float)Math.PI)) * Math.PI/180*(20) );
-		}else{
-			HEADROT.rotateAngleX = (float)( 0 );
-		}
 		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 	}
 
-	private double zeroIfNegative(double value){
-		if(value < 0){
+	private double zeroIfNegative(double value) {
+		if (value < 0) {
 			return 0f;
-		}else{
+		} else {
 			return value;
 		}
 	}

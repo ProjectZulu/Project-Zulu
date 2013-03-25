@@ -8,9 +8,7 @@ import net.minecraft.util.MathHelper;
 import projectzulu.common.mobs.entity.EntityGiraffe;
 import projectzulu.common.mobs.entity.EntityStates;
 
-public class ModelGiraffe extends ModelBase
-{
-	//fields
+public class ModelGiraffe extends ModelBase {
 	ModelRenderer body;
 	ModelRenderer body2;
 	ModelRenderer body3;
@@ -28,7 +26,7 @@ public class ModelGiraffe extends ModelBase
 	private ModelRenderer NECKROT7;
 	private ModelRenderer HEADROT;
 
-	public ModelGiraffe(){
+	public ModelGiraffe() {
 		textureWidth = 128;
 		textureHeight = 64;
 		setTextureOffset("NECKROT1.neck1", 103, 36);
@@ -141,7 +139,7 @@ public class ModelGiraffe extends ModelBase
 		NECKROT1.addChild(NECKROT2);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		body.render(f5);
@@ -155,72 +153,79 @@ public class ModelGiraffe extends ModelBase
 		NECKROT1.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z){
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
-		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, par7Entity);
+		HEADROT.rotateAngleX = Math.min(Math.max(f4, -45), +30) * (float)(Math.PI/180f);
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -45), +45) * (float)(Math.PI/180f);
 	}
-
 
 	@Override
 	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-		EntityGiraffe var5 = (EntityGiraffe)par1EntityLiving;
-		
-		/* Constant Animation Rotations*/
-		if(var5.getEntityState() == EntityStates.attacking){
-			HEADROT.rotateAngleX = (float)(15*Math.PI/180);
-		}else{
-			HEADROT.rotateAngleX = (float)(0*Math.PI/180);
-		}
-		
-		/* State Animation Rotations*/
-		tail.rotateAngleZ = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		
-		/*Left Side Legs*/
-		leg1.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		leg1.rotateAngleZ = (float)(0*Math.PI/180);
-		leg3.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		
-		/*Right Side Legs*/
-		leg2.rotateAngleX = -(float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		leg2.rotateAngleZ = (float)(0*Math.PI/180);
-		leg4.rotateAngleX = -(float)( MathHelper.cos(par2*0.6662F + (float)Math.PI) * 1.8F * zeroIfNegative(Math.log(par3+1)) );
-		
+		EntityGiraffe var5 = (EntityGiraffe) par1EntityLiving;		
+		/* State Animation Rotations */
+		tail.rotateAngleZ = (float) (MathHelper.cos(par2 * 0.6662F
+				+ (float) Math.PI) * 1.8F * zeroIfNegative(Math.log(par3 + 1)));
+
+		/* Left Side Legs */
+		leg1.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F
+				+ (float) Math.PI) * 1.8F * zeroIfNegative(Math.log(par3 + 1)));
+		leg1.rotateAngleZ = (float) (0 * Math.PI / 180);
+		leg3.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F
+				+ (float) Math.PI) * 1.8F * zeroIfNegative(Math.log(par3 + 1)));
+
+		/* Right Side Legs */
+		leg2.rotateAngleX = -(float) (MathHelper.cos(par2 * 0.6662F
+				+ (float) Math.PI) * 1.8F * zeroIfNegative(Math.log(par3 + 1)));
+		leg2.rotateAngleZ = (float) (0 * Math.PI / 180);
+		leg4.rotateAngleX = -(float) (MathHelper.cos(par2 * 0.6662F
+				+ (float) Math.PI) * 1.8F * zeroIfNegative(Math.log(par3 + 1)));
+
 		float minTime;
 		float maxTime;
-		if(var5.getAnimTime() > 0){
-			minTime = var5.maxAnimTime*0;
+		if (var5.getAnimTime() > 0) {
+			minTime = var5.maxAnimTime * 0;
 			maxTime = var5.maxAnimTime;
-			
+
 			/* Left Side Legs */
-			leg1.rotateAngleX = mapValueofSet1ToSet2(var5.getAnimTime(), minTime, maxTime,(float)( 0*Math.PI/180 ),(float)( -130*Math.PI/180 ));
-			leg1.rotateAngleZ = mapValueofSet1ToSet2(var5.getAnimTime(), minTime, maxTime,(float)( 0*Math.PI/180 ),(float)( -30*Math.PI/180 ));
-			
+			leg1.rotateAngleX = mapValueofSet1ToSet2(var5.getAnimTime(),
+					minTime, maxTime, (float) (0 * Math.PI / 180),
+					(float) (-130 * Math.PI / 180));
+			leg1.rotateAngleZ = mapValueofSet1ToSet2(var5.getAnimTime(),
+					minTime, maxTime, (float) (0 * Math.PI / 180), (float) (-30
+							* Math.PI / 180));
+
 			/* Right Side Legs */
-			leg2.rotateAngleX = mapValueofSet1ToSet2(var5.getAnimTime(), minTime, maxTime,(float)( 0*Math.PI/180 ),(float)( -130*Math.PI/180 ));
-			leg2.rotateAngleZ = mapValueofSet1ToSet2(var5.getAnimTime(), minTime, maxTime,(float)( 0*Math.PI/180 ),(float)( 30*Math.PI/180 ));
+			leg2.rotateAngleX = mapValueofSet1ToSet2(var5.getAnimTime(),
+					minTime, maxTime, (float) (0 * Math.PI / 180),
+					(float) (-130 * Math.PI / 180));
+			leg2.rotateAngleZ = mapValueofSet1ToSet2(var5.getAnimTime(),
+					minTime, maxTime, (float) (0 * Math.PI / 180),
+					(float) (30 * Math.PI / 180));
 		}
 		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 	}
 
-	private double zeroIfNegative(double value){
-		if(value < 0){
+	private double zeroIfNegative(double value) {
+		if (value < 0) {
 			return 0f;
-		}else{
+		} else {
 			return value;
 		}
 	}
 
-	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max){
-		return (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
+	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max) {
+		return (value - set1min) * ((set2max - set2min) / (set1max - set1min))
+				+ set2min;
 	}
 
-	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max){
-		float value2 = (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
+	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max) {
+		float value2 = (value - set1min) * ((set2max - set2min) / (set1max - set1min)) + set2min;
 		value2 = MathHelper.clamp_float(value2, set2min, set2max);
 		return value2;
 	}

@@ -10,9 +10,7 @@ import org.lwjgl.opengl.GL11;
 import projectzulu.common.mobs.entity.EntityStates;
 import projectzulu.common.mobs.entity.EntityVulture;
 
-public class ModelVulture extends ModelBase
-{
-	//fields
+public class ModelVulture extends ModelBase {
 	ModelRenderer FEETROT;
 	ModelRenderer BODYROT;
 
@@ -67,14 +65,9 @@ public class ModelVulture extends ModelBase
 	ModelRenderer chestpuff;
 	ModelRenderer Body;
 
-
-	public ModelVulture()
-	{
+	public ModelVulture() {
 		textureWidth = 64;
 		textureHeight = 32;
-		// setTextureOffset("FEETROT.dltFEET", 0, 0);
-		// setTextureOffset("BODYROT.dltfold", 0, 0);
-
 		float xCorrection = -1.0f;
 
 		FEETROT = new ModelRenderer(this, "FEETROT");
@@ -364,10 +357,7 @@ public class ModelVulture extends ModelBase
 		setRotation(Body, 0F, 0F, 0F);
 	}
 
-
-
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		float field_78145_g = 8.0F;
@@ -423,7 +413,6 @@ public class ModelVulture extends ModelBase
 			NECKROT1.rotateAngleX = var5.eNECKROT1.rotateX(+0.09f*animSpeed, (float)(-30*Math.PI/180f), (float)(+30*Math.PI/180f) );
 			NECKROT2.rotateAngleX = var5.eNECKROT2.rotateX(-0.09f*animSpeed, (float)(+15*Math.PI/180f), (float)(+40*Math.PI/180f) );
 			NECKROT3.rotateAngleX = var5.eNECKROT3.rotateX(-0.09f*animSpeed, (float)(+35*Math.PI/180f), (float)(+60*Math.PI/180f) );
-			HEADROT.rotateAngleX = var5.eHEADROT.rotateX(-0.09f*animSpeed, (float)(-70*Math.PI/180f), (float)(-60*Math.PI/180f) );
 
 			LEFTWING.rotateAngleZ = var5.eLEFTWING.rotateZ(-0.09f*animSpeed, (float)(0*Math.PI/180f), (float)(90*Math.PI/180f), 0);
 			RIGTHWING.rotateAngleZ = var5.eRIGTHWING.rotateZ(+0.09f*animSpeed, (float)(-90*Math.PI/180f), (float)(0*Math.PI/180f), 0);
@@ -437,7 +426,6 @@ public class ModelVulture extends ModelBase
 			NECKROT1.rotateAngleX = var5.eNECKROT1.rotateX(-0.09f*animSpeed, (float)(-30*Math.PI/180f), (float)(+30*Math.PI/180f) );
 			NECKROT2.rotateAngleX = var5.eNECKROT2.rotateX(+0.09f*animSpeed, (float)(+20*Math.PI/180f), (float)(+40*Math.PI/180f) );
 			NECKROT3.rotateAngleX = var5.eNECKROT3.rotateX(+0.09f*animSpeed, (float)(+40*Math.PI/180f), (float)(+60*Math.PI/180f) );
-			HEADROT.rotateAngleX = var5.eHEADROT.rotateX(+0.09f*animSpeed, (float)(-88*Math.PI/180f), (float)(-60*Math.PI/180f) );
 
 			LEFTWING.rotateAngleZ = var5.eLEFTWING.rotateZ(+0.09f*animSpeed, (float)(0*Math.PI/180f), (float)(90*Math.PI/180f), 2);
 			RIGTHWING.rotateAngleZ = var5.eRIGTHWING.rotateZ(-0.09f*animSpeed, (float)(-90*Math.PI/180f), (float)(0*Math.PI/180f), 2);
@@ -450,7 +438,6 @@ public class ModelVulture extends ModelBase
 			NECKROT1.rotateAngleX = var5.eNECKROT1.rotateX(+0.09f*animSpeed, (float)(-30*Math.PI/180f), (float)(+30*Math.PI/180f) );
 			NECKROT2.rotateAngleX = var5.eNECKROT2.rotateX(-0.09f*animSpeed, (float)(+5*Math.PI/180f), (float)(+40*Math.PI/180f) );
 			NECKROT3.rotateAngleX = var5.eNECKROT3.rotateX(-0.09f*animSpeed, (float)(+10*Math.PI/180f), (float)(+60*Math.PI/180f) );
-			HEADROT.rotateAngleX = var5.eHEADROT.rotateX(-0.09f*animSpeed, (float)(-80*Math.PI/180f), (float)(-60*Math.PI/180f) );
 
 			LEFTWING.rotateAngleZ = var5.eLEFTWING.rotateZ(+0.09f*animSpeed, (float)(0*Math.PI/180f), (float)(90*Math.PI/180f), 2);
 			RIGTHWING.rotateAngleZ = var5.eRIGTHWING.rotateZ(-0.09f*animSpeed, (float)(-90*Math.PI/180f), (float)(0*Math.PI/180f), 2);
@@ -467,5 +454,15 @@ public class ModelVulture extends ModelBase
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, par7Entity);
+		EntityVulture var5 = (EntityVulture)par7Entity;
+		float lookingDirectionX = Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		if(var5.onGround){
+			HEADROT.rotateAngleX = (float)(-70*Math.PI/180f) + lookingDirectionX;
+		}else if(var5.getEntityState() == EntityStates.attacking|| var5.getEntityState() == EntityStates.following ){
+			HEADROT.rotateAngleX = (float)(-60*Math.PI/180f) + lookingDirectionX;
+		}else if(var5.getEntityState() == EntityStates.idle){
+			HEADROT.rotateAngleX = (float)(-80*Math.PI/180f) + lookingDirectionX;
+		}
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -45), +45) * (float)(Math.PI/180f);
 	}
 }
