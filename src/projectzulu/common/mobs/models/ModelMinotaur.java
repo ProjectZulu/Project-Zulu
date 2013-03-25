@@ -12,7 +12,6 @@ import projectzulu.common.mobs.entity.EntityMinotaur;
 import projectzulu.common.mobs.entity.EntityStates;
 
 public class ModelMinotaur extends ModelBase{
-
 	ModelRenderer BODYROT;
 	ModelRenderer LEGLEFTOPROT;
 	ModelRenderer BACKBELT2ROT;
@@ -371,6 +370,8 @@ public class ModelMinotaur extends ModelBase{
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, par7Entity);
+		HEADROT.rotateAngleX = Math.min(Math.max(f4, -15), +15) * (float)(Math.PI/180f);
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -45), +45) * (float)(Math.PI/180f);
 	}
 
 
@@ -400,10 +401,6 @@ public class ModelMinotaur extends ModelBase{
 		FINLEF2ROT.rotateAngleZ = (float) (-90*Math.PI/180);
 
 		BODYROT.rotateAngleX = (float) (5*Math.PI/180);
-
-		HEADROT.rotateAngleX = (float) (10*Math.PI/180);
-		HEADROT.rotateAngleY = (float) (0*Math.PI/180);
-		HEADROT.rotateAngleZ = (float) (0*Math.PI/180);
 
 		if(var5.getEntityState() == EntityStates.attacking){
 			ARMTOPLEFROT.rotateAngleX = (float) (-90*Math.PI/180 * MathHelper.cos(par2*0.6662F + (float)Math.PI) * par3);
@@ -499,7 +496,7 @@ public class ModelMinotaur extends ModelBase{
 		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 	}
 
-	private double zeroIfNegative(double value){
+	private double zeroIfNegative(double value) {
 		if(value < 0){
 			return 0f;
 		}else{
@@ -507,21 +504,18 @@ public class ModelMinotaur extends ModelBase{
 		}
 	}
 
-	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max){
+	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max) {
 		return (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
 	}
 
-	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max){
+	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max) {
 		float value2 = (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
 		value2 = MathHelper.clamp_float(value2, set2min, set2max);
 		return value2;
 	}
 
 
-	private float func_78172_a(float par1, float par2)
-	{
+	private float func_78172_a(float par1, float par2) {
 		return (Math.abs(par1 % par2 - par2 * 0.5F) - par2 * 0.25F) / (par2 * 0.25F);
 	}
-
-
 }
