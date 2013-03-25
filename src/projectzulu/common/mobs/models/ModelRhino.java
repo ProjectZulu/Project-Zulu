@@ -10,12 +10,10 @@ import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.mobs.entity.EntityRhino;
 
-public class ModelRhino extends ModelBase
-{
+public class ModelRhino extends ModelBase {
 	float heightToRaise = 9f;
 	float renderScale = 1.6f;
 
-	//fields
 	ModelRenderer LEG3ROT;
 	ModelRenderer LEG4ROT;
 	ModelRenderer LEG2ROT;
@@ -24,8 +22,7 @@ public class ModelRhino extends ModelBase
 	ModelRenderer TAILROT;
 	ModelRenderer BODYROT;
 
-	public ModelRhino()
-	{
+	public ModelRhino() {
 		textureWidth = 128;
 		textureHeight = 64;
 		setTextureOffset("LEG3ROT.leg3", 48, 13);
@@ -117,8 +114,7 @@ public class ModelRhino extends ModelBase
 		BODYROT.addBox("body", -7F, -7F, 0F, 14, 12, 20);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
@@ -152,43 +148,32 @@ public class ModelRhino extends ModelBase
 		}
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity){
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5,par7Entity);
+		HEADROT.rotateAngleX = Math.min(Math.max(f4, -14), +15) * (float)(Math.PI/180f);
+		HEADROT.rotateAngleY = Math.min(Math.max(f3, -15), +15) * (float)(Math.PI/180f);
 	}
 
 	@Override
 	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-
 		EntityRhino var5 = (EntityRhino)par1EntityLiving;
-
-
+		
 		/* Constant Animation Rotations */
-
 		LEG1ROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.2F * par3 );
 		LEG3ROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f			   	 ) * 1.2F * par3 );
 		LEG2ROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.2F * par3 );
 		LEG4ROT.rotateAngleX = (float)( MathHelper.cos(par2*0.6662F*2f + (float)Math.PI) * 1.2F * par3 );
-
-
-		//		HEADROT;
-		//		TAILROT;
-		//		BODYROT;
-
-
-		/* State Based Animations */
-
-
+		TAILROT.rotateAngleX = (float)( -90*Math.PI/180);
 		super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 	}
 
-	private double zeroIfNegative(double value){
+	private double zeroIfNegative(double value) {
 		if(value < 0){
 			return 0f;
 		}else{
@@ -196,21 +181,17 @@ public class ModelRhino extends ModelBase
 		}
 	}
 
-	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max){
+	private float mapValueofSet1ToSet2(float value, float set1min, float set1max, float set2min, float set2max) {
 		return (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
 	}
 
-	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max){
+	private float mapValueWithClamp(float value, float set1min, float set1max, float set2min, float set2max) {
 		float value2 = (value - set1min)*( (set2max - set2min) / (set1max - set1min) ) + set2min;
 		value2 = MathHelper.clamp_float(value2, set2min, set2max);
 		return value2;
 	}
 
-
-	private float func_78172_a(float par1, float par2)
-	{
+	private float func_78172_a(float par1, float par2) {
 		return (Math.abs(par1 % par2 - par2 * 0.5F) - par2 * 0.25F) / (par2 * 0.25F);
 	}
-
-
 }
