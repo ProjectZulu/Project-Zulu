@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Optional;
@@ -34,13 +33,18 @@ public enum CustomEntityList {
             result = lookupEnum.get(nameParts[0]);
         }
         if (result == null) {
-            ProjectZuluLog.info("Custom Entity Lookup Failed %s Does not Seem to Exist", CharMatcher.anyOf(" ")
-                    .removeFrom(mobName).toLowerCase());
+//            ProjectZuluLog.info("Custom Entity Lookup Failed %s Does not Seem to Exist", CharMatcher.anyOf(" ")
+//                    .removeFrom(mobName).toLowerCase());
         }
         return result;
     }
 
     public static CustomEntityList getByEntity(Entity entity) {
-        return getByName(EntityList.getEntityString(entity));
+        String mobName = EntityList.getEntityString(entity);
+        if(mobName != null){
+            return getByName(mobName);
+        }else{
+            return null;
+        }
     }
 }
