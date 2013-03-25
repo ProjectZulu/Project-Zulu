@@ -46,13 +46,12 @@ public class EntityVulture extends EntityGenericAnimal {
 	public EntityModelRotation eTAILROT = new EntityModelRotation();
 	
 	boolean manyVultures = false;
-	private int maxTargetHealthToAttack = 25; //15
+	private int maxTargetHealthToAttack = (int) CustomEntityList.getByEntity(this).modData.get().customData.get("maxTargetHealth");
 	float curiosity = 0;
 	int ticksToCheckAbilities = 3;
 	
 	public EntityVulture(World par1World) {
 		super(par1World);
-		//noClip = true;
 		this.setSize(1.0f, 1.4f);
 		this.moveSpeed = 0.18f;
 		

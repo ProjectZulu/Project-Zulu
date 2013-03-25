@@ -31,6 +31,8 @@ public class VultureDeclaration extends SpawnableDeclaration{
 	
 	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {
+	    	customMobData.customData.put("maxTargetHealth", config.get("MOB CONTROLS."+mobName, "Max Target Health To Attack", 20).getInt(20));
+
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.chickenRaw, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
