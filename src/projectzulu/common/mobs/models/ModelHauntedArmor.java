@@ -34,16 +34,11 @@ public class ModelHauntedArmor extends ModelBase{
 		this(0.0f, 0.0f);
 	}
 
-	public ModelHauntedArmor(float par1, float par2){
+	public ModelHauntedArmor(float par1, float par2) {
 		super();
 
 		int textureWidth = 64;
 		int textureHeight = 32;
-
-//        this.heldItemLeft = 0;
-//        this.heldItemRight = 0;
-//        this.isSneak = false;
-//        this.aimedBow = false;
         
         this.bipedHead = new ModelRenderer(this, 0, 0);
         this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, par1);
@@ -85,7 +80,7 @@ public class ModelHauntedArmor extends ModelBase{
 		setRotation(swordhand, 0F, 0F, 0F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z){
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
@@ -143,18 +138,15 @@ public class ModelHauntedArmor extends ModelBase{
 			this.bipedRightLeg.render(par7);
 			this.bipedLeftLeg.render(par7);
 		}
-
-		//swordhand.render(par7);
 	}
+	
 	@Override
-	public void setRotationAngles(float par1, float par2, float par3,
-			float par4, float par5, float par6, Entity par7Entity) {
-
+	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
+		super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
 	}
 
 	@Override
-	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2,
-			float par3, float par4) {
+	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
 		
 		EntityHauntedArmor var5 = (EntityHauntedArmor)par1EntityLiving;
 
@@ -223,7 +215,7 @@ public class ModelHauntedArmor extends ModelBase{
 					(float) (-70*Math.PI/180),(float) (10*Math.PI/180),(float) (30 *Math.PI/180));
 			
 			/* Living Animation */
-		}else{
+		} else {
 
 			float mapValue;
 			
@@ -258,8 +250,6 @@ public class ModelHauntedArmor extends ModelBase{
 			mapRotationPoint(bipedLeftLeg2, mapValue, mapStart,mapEnd, 1.9f,12f,0,  1.9f,12f,0);
 			mapRotation(bipedLeftLeg2, mapValue, mapStart,mapEnd,  (float)(10*Math.PI/180), 0, 0.05f,  (float)(-10*Math.PI/180),0,0);
 		}
-
-		
 	}
 	
 	private void mapRotationPoint(ModelRenderer modelRenderer, float mapValue, float mapMin, float mapMax,
