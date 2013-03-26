@@ -13,13 +13,14 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 public abstract class SpawnableDeclaration extends EggableDeclaration{
 
 	protected int spawnRate;
+	protected boolean useGlobalSpawn = false;
 	protected int secondarySpawnRate;
 	protected int minInChunk;
 	protected int maxInChunk;
 	protected EnumCreatureType spawnType;
 
 	protected ArrayList<String> defaultBiomesToSpawn = new ArrayList<String>();	
-	ArrayList<BiomeGenBase> biomesToSpawn = new ArrayList();
+	ArrayList<SpawnEntry> biomesToSpawn = new ArrayList<SpawnEntry>();
 	
 	protected SpawnableDeclaration(String mobName, Class mobClass, EnumCreatureType creatureType) {
 		super(mobName, mobClass, creatureType);
@@ -41,6 +42,8 @@ public abstract class SpawnableDeclaration extends EggableDeclaration{
 		minInChunk = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" minInChunk", minInChunk).getInt(minInChunk);
 		maxInChunk = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" maxInChunk", maxInChunk).getInt(maxInChunk);
 		spawnType = ConfigHelper.configGetCreatureType(config, "MOB CONTROLS."+mobName, "Spawn List Type", spawnType);
+		
+		useGlobalSpawn = config.get("MOB CONTROLS."+mobName, "Use Global Spawn Rates", useGlobalSpawn).getBoolean(useGlobalSpawn);
 	}
 	
 	@Override
@@ -49,9 +52,12 @@ public abstract class SpawnableDeclaration extends EggableDeclaration{
 			if(BiomeGenBase.biomeList[i] == null){
 				continue;
 			}
-			if(config.get("Mob Spawn Biome Controls."+mobName, mobName.toLowerCase()+" in "+BiomeGenBase.biomeList[i].biomeName, defaultBiomesToSpawn.contains(BiomeGenBase.biomeList[i].biomeName)).getBoolean(false)){
-				biomesToSpawn.add(BiomeGenBase.biomeList[i]);
-			}
+            SpawnEntry spawnEntry = ConfigHelper.configGetSpawnEntry(config, "Mob Spawn Biome Controls." + mobName, BiomeGenBase.biomeList[i],
+                    defaultBiomesToSpawn.contains(BiomeGenBase.biomeList[i].biomeName), spawnRate, minInChunk,
+                    maxInChunk);
+            if(spawnEntry != null){
+                biomesToSpawn.add(spawnEntry);
+            }
 		}
 	}
 	
@@ -70,10 +76,17 @@ public abstract class SpawnableDeclaration extends EggableDeclaration{
 		}
 		
 		for (int i = 0; i < biomesToSpawn.size(); i++){
-			EntityRegistry.addSpawn(mobClass, spawnRate, minInChunk, maxInChunk, spawnType, biomesToSpawn.get(i));
+		    if(useGlobalSpawn){
+                EntityRegistry.addSpawn(mobClass, spawnRate, minInChunk, maxInChunk, spawnType,
+                        biomesToSpawn.get(i).biome);
+		    }else{
+	            EntityRegistry.addSpawn(mobClass, biomesToSpawn.get(i).spawnRate, biomesToSpawn.get(i).minInChunk,
+	                    biomesToSpawn.get(i).maxInChunk, spawnType, biomesToSpawn.get(i).biome);
+		    }
 			if(reportSpawningInLog){
-				ProjectZuluLog.info("Registering %s to biome %s at rates of %s,%s,%s",
-						mobClass.getSimpleName(), biomesToSpawn.get(i).biomeName, spawnRate, minInChunk, maxInChunk);
+                ProjectZuluLog.info("Registering %s to biome %s at rates of %s,%s,%s", mobClass.getSimpleName(),
+                        biomesToSpawn.get(i).biome.biomeName, biomesToSpawn.get(i).spawnRate,
+                        biomesToSpawn.get(i).minInChunk, biomesToSpawn.get(i).maxInChunk);
 			}
 		}
 	}
