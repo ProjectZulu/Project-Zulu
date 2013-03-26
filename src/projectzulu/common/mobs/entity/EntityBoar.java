@@ -7,12 +7,9 @@ import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
@@ -67,31 +64,11 @@ public class EntityBoar extends EntityGenericAnimal implements IAnimals {
 		this.texture = DefaultProps.mobDiretory + "boar.png";
 		return super.getTexture();
 	}
-
-
-	/**
-	 * Checks if the entity's current position is a valid location to spawn this entity.
-	 */
-	@Override
-	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		boolean wasSuccesful = false;
-		
-		if (CustomEntityList.BOAR.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()){
-			wasSuccesful = true;
-		}
-		
-		if(CustomEntityList.BOAR.modData.get().reportSpawningInLog){
-			if(wasSuccesful){
-				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}else{
-				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}
-		}
-		return wasSuccesful;
-	}
+	
+    @Override
+    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
 
 	@Override
 	public int getMaxHealth(){

@@ -6,11 +6,8 @@ import net.minecraft.entity.EnumEntitySize;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
@@ -95,27 +92,6 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob{
 	@Override
 	protected void playStepSound(int par1, int par2, int par3, int par4) {
 		this.worldObj.playSoundAtEntity(this, "mob.cow.step", 0.15F, 1.0F);
-	}
-	
-	@Override
-	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		boolean wasSuccesful = false;
-		
-		if (CustomEntityList.MINOTAUR.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() ) {
-			wasSuccesful = true;
-		}
-		
-		if(CustomEntityList.MINOTAUR.modData.get().reportSpawningInLog){
-			if(wasSuccesful){
-				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}else{
-				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}
-		}
-		return wasSuccesful;
 	}
 	
 	@Override

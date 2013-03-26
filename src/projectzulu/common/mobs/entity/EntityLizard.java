@@ -10,12 +10,10 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
@@ -56,30 +54,10 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
 	}
 
-	/**
-	 * Checks if the entity's current position is a valid location to spawn this entity.
-	 */
 	@Override
-	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		boolean wasSuccesful = false;
-		
-		if (CustomEntityList.LIZARD.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() 
-				&& worldObj.getClosestPlayerToEntity(this, 32) == null && this.worldObj.canBlockSeeTheSky(var1, var2, var3)){
-			wasSuccesful = true;
-		}
-		
-		if(CustomEntityList.LIZARD.modData.get().reportSpawningInLog){
-			if(wasSuccesful){
-				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}else{
-				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}
-		}
-		return wasSuccesful;
-	}
+    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
 	
     /**
      * Checks to make sure the light is not too bright where the mob is spawning

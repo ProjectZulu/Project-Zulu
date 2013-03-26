@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -41,6 +42,35 @@ public class EntityCentipede extends EntityMaster implements IMob{
     public int getMaxHealth(){
 		return 20;
 	}
+	
+    /**
+     * Checks to make sure the light is not too bright where the mob is spawning
+     */
+    @Override
+    protected boolean isValidLightLevel(World world, int xCoord, int yCoord, int zCoord) {
+        int var1 = xCoord;
+        int var2 = yCoord;
+        int var3 = zCoord;
+        if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, var1, var2, var3) > this.rand.nextInt(32)) {
+            return false;
+        } else {
+            int var4 = this.worldObj.getBlockLightValue(var1, var2, var3);
+
+            if (this.worldObj.isThundering()) {
+                int var5 = this.worldObj.skylightSubtracted;
+                this.worldObj.skylightSubtracted = 10;
+                var4 = this.worldObj.getBlockLightValue(var1, var2, var3);
+                this.worldObj.skylightSubtracted = var5;
+            }
+
+            return var4 <= this.rand.nextInt(8);
+        }
+    }
+
+    @Override
+    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
 	
 	@Override
 	public int getTotalArmorValue() {

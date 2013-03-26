@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.PacketIDs;
+import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
@@ -229,18 +230,45 @@ public class EntityGenericAnimal extends EntityGenericTameable {
 	/**
 	 * Checks if the entity's current position is a valid location to spawn this entity.
 	 */
-	@Override
-	public boolean getCanSpawnHere(){
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		
-		return isValidLightLevel(worldObj, var1, var2, var3) //&& this.worldObj.canBlockSeeTheSky(var1, var2, var3)
-				&& 	super.getCanSpawnHere();
-	}
+    @Override
+    public boolean getCanSpawnHere() {
+        int xCoord = MathHelper.floor_double(this.posX);
+        int yCoord = MathHelper.floor_double(this.boundingBox.minY);
+        int zCoord = MathHelper.floor_double(this.posZ);
+        boolean wasSuccesful = false;
+        CustomEntityList customEntity = CustomEntityList.getByEntity(this);
+        if (customEntity == null) {
+            ProjectZuluLog
+                    .severe("Entity %s is Trying to Spawn but does not exist in the CustomEntityList. It will not spawn, please report this to Modder.",
+                            this.getClass().toString());
+            return false;
+        }
+
+        if (customEntity.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
+                && worldObj.getClosestPlayerToEntity(this, 32) == null
+                && isValidLightLevel(worldObj, xCoord, yCoord, zCoord)
+                && isValidLocation(worldObj, xCoord, yCoord, zCoord)) {
+            wasSuccesful = true;
+        }
+
+        if (customEntity.modData.get().reportSpawningInLog) {
+            if (wasSuccesful) {
+                ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s", getEntityName(), xCoord, yCoord,
+                        zCoord, worldObj.getBiomeGenForCoords(xCoord, zCoord));
+            } else {
+                ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",
+                        getEntityName(), xCoord, yCoord, zCoord, worldObj.getBiomeGenForCoords(xCoord, zCoord));
+            }
+        }
+        return wasSuccesful;
+    }
 	
 	protected boolean isValidLightLevel(World world, int xCoord, int yCoord, int zCoord){
 		return worldObj.getSavedLightValue(EnumSkyBlock.Block, xCoord, yCoord, zCoord) < 1;
+	}
+	
+	protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord){
+	    return true;
 	}
 	
     /**
