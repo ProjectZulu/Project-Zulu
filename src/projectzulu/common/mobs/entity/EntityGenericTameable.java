@@ -67,6 +67,11 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
         }
     }
     
+    @Override
+    protected boolean canDespawn() {
+        return isTamed() ? false : super.canDespawn();
+    }
+    
     public boolean isSitting() {
         return (this.dataWatcher.getWatchableObjectByte(22) & 1) != 0;
     }
@@ -115,15 +120,16 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
             double var6 = this.rand.nextGaussian() * 0.02D;
             double var8 = this.rand.nextGaussian() * 0.02D;
             this.worldObj.spawnParticle(var2, 
-            		this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, 
-            		this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), 
-            		this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, var4, var6, var8);
+            		this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, 
+            		this.posY + 0.5D + this.rand.nextFloat() * this.height, 
+            		this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, var4, var6, var8);
         }
     }
     
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound){
         super.writeEntityToNBT(par1NBTTagCompound);
         if (this.getOwnerName() == null){
@@ -147,6 +153,7 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound){
         super.readEntityFromNBT(par1NBTTagCompound);
         String owner = par1NBTTagCompound.getString("Owner");
@@ -221,28 +228,26 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     			}
     			
     			/* Toggle Animal Action Sitting --> Follow -- > Attack(Not Implemented) -- > None --> Sitting etc..*/
-    			if(!isValidBreedingItem(var2)){
-    				if(this.worldObj.isRemote){
-    					return true;
-    				}
-    				if(isSitting()){
-    					setSitting(false);
-    					shouldFollow = true;
-    				}else if(shouldFollow){
-    					shouldFollow = false;
-    					shouldAttack = true;
-    					setAngerLevel(3);
-    				}else if(shouldAttack){
-    					shouldAttack = false;
-    				}else{
-    					setSitting(true);
-    					this.isJumping = false;
-    				}
-    				return true;
-    			}
-    			
-    		}
-
+                if (!isValidBreedingItem(var2)) {
+                    if (this.worldObj.isRemote) {
+                        return true;
+                    }
+                    if (getEntityState() == EntityStates.sitting) {
+                        setSitting(false);
+                        shouldFollow = true;
+                    } else if (getEntityState() == EntityStates.following) {
+                        shouldFollow = false;
+                        shouldAttack = true;
+                        setAngerLevel(3);
+                    } else if (getEntityState() == EntityStates.attacking || getEntityState() == EntityStates.looking) {
+                        shouldAttack = false;
+                    } else if (getEntityState() == EntityStates.idle) {
+                        setSitting(true);
+                        this.isJumping = false;
+                    }
+                    return true;
+                }
+            }
     	}else if(var2 != null && isValidTamingItem(var2)) {
     		if (!par1EntityPlayer.capabilities.isCreativeMode){
     			--var2.stackSize;

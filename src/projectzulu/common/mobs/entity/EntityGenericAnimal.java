@@ -90,10 +90,11 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     @Override
     protected boolean canDespawn() {
     	CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
-    	if(entityEntry != null){
+    	if(entityEntry != null && !isTamed()){
     		return forceDespawn || entityEntry.modData.get().shouldDespawn;
+    	}else{
+    	    return super.canDespawn();
     	}
-    	return true;
     }
     
     @Override
