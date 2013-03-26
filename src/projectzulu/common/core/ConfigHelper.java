@@ -21,7 +21,7 @@ public class ConfigHelper {
     public static SpawnEntry configGetSpawnEntry(Configuration config, String category, BiomeGenBase biome,
             boolean shouldSpawn, int spawnRate, int minInChunk, int maxInChunk) {
         Property spawnProperty = config.get(category, "Spawn Entry: " + biome.biomeName.toString() + ":"
-                + biome.getClass().getPackage().toString().hashCode(),
+                + biome.getClass().toString().hashCode(),
                 Boolean.toString(shouldSpawn) + ":" + Integer.toString(spawnRate) + ":" + Integer.toString(minInChunk)
                         + ":" + Integer.toString(maxInChunk));
         String[] spawnProperties = spawnProperty.getString().split(":");
