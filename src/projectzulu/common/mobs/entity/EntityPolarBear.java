@@ -52,7 +52,8 @@ public class EntityPolarBear extends EntityBear{
 	/**
 	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
 	 */
-	public int getTotalArmorValue(){return 6;}
+	@Override
+    public int getTotalArmorValue(){return 6;}
 
 	/**
 	 * Checks if the entity's current position is a valid location to spawn this entity.
@@ -77,20 +78,6 @@ public class EntityPolarBear extends EntityBear{
 			}
 		}
 		return wasSuccesful;
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(3 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.POLARBEAR.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
 	}
 	
 	@Override

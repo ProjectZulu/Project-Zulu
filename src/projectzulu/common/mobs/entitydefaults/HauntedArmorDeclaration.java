@@ -16,6 +16,7 @@ public class HauntedArmorDeclaration extends EggableDeclaration{
 		super("Haunted Armor", EntityHauntedArmor.class, EnumCreatureType.monster);		
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelHauntedArmor.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (194 << 16) + (194 << 8) + 194;		eggColor2 = (251 << 16) + (246 << 8) + 36;
 	}

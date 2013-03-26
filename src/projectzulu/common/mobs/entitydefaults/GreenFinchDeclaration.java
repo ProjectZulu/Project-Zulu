@@ -17,6 +17,7 @@ public class GreenFinchDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 5, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelFinch.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 1);
 
 		eggColor1 =  (30 << 16) + (130 << 8) + 0;						eggColor2 = (164 << 16) + (234 << 8) + 143;
 		

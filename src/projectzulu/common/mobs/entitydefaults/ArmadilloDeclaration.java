@@ -18,6 +18,7 @@ public class ArmadilloDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 2, 4);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelArmadillo.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (116 << 16) + (64 << 8) + 33;
 		eggColor2 = (60 << 16) + (51 << 8) + 10;

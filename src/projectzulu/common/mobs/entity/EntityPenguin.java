@@ -120,24 +120,12 @@ public class EntityPenguin extends EntityGenericAnimal implements IAnimals {
 	 * Checks if the Provided ItemStack is considered an item that should be used for Breeding
 	 * This is overriden by each Entity if deviations from default are desired
 	 */
-	public boolean isValidBreedingItem(ItemStack itemStack){
+	@Override
+    public boolean isValidBreedingItem(ItemStack itemStack){
 		if( itemStack != null && (itemStack.itemID == Item.fishRaw.itemID || itemStack.itemID == Item.fishCooked.itemID) ){
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);
-		}
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.PENGUIN.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
 		}
 	}
 

@@ -3,7 +3,6 @@ package projectzulu.common.mobs.entity;
 import java.util.EnumSet;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -38,13 +37,15 @@ public class EntityHornBill extends EntityGenericAnimal{
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.
 	 */
-	protected void fall(float par1){}
+	@Override
+    protected void fall(float par1){}
 
 	/**
 	 * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
 	 * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
 	 */
-	protected void updateFallState(double par1, boolean par3) {}
+	@Override
+    protected void updateFallState(double par1, boolean par3) {}
 
 	@Override
 	public String getTexture(){
@@ -78,35 +79,24 @@ public class EntityHornBill extends EntityGenericAnimal{
 		return wasSuccesful;
 	}
 
-	public int getMaxHealth() {
+	@Override
+    public int getMaxHealth() {
 		return 20;
 	}
 
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){
+	@Override
+    protected String getLivingSound(){
 		return "sounds.hornbillliving";
 	}
 
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound(){
-		return "sounds.hornbillhurt";
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
 	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.HORNBILL.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
+    protected String getHurtSound(){
+		return "sounds.hornbillhurt";
 	}
 }

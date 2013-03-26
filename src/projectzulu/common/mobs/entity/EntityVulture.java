@@ -169,21 +169,6 @@ public class EntityVulture extends EntityGenericAnimal {
 		}
 	}
 
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.VULTURE.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
-	}
-
-
 	@Override
 	protected void dropRareDrop(int par1) {
 		if(Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()){
@@ -191,5 +176,4 @@ public class EntityVulture extends EntityGenericAnimal {
 		}
 		super.dropRareDrop(par1);
 	}
-
 }

@@ -18,10 +18,10 @@ public class SandwormDeclaration extends SpawnableDeclaration{
 	
 	public SandwormDeclaration(){
 		super("SandWorm", EntitySandWorm.class, EnumCreatureType.monster);
-		
 		setSpawnProperties(1, 100, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelSandWorm.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (24 << 16) + (0 << 8) + 8;
 		eggColor2 = (49 << 16) + (16 << 8) + 8;

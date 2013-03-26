@@ -18,6 +18,7 @@ public class MammothDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(1, 7, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelMammoth.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 4);
 
 		eggColor1 = (20 << 16) + (12 << 8) + 0;
 		eggColor2 = (69 << 16) + (42 << 8) + 0;

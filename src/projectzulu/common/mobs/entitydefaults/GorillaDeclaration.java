@@ -19,6 +19,7 @@ public class GorillaDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelGorilla.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 3);
 
 		eggColor1 =  (25 << 16) + (25 << 8) + 25;						eggColor2 = (93 << 16) + (93 << 8) + 93;
 		

@@ -111,12 +111,14 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){return "sounds.ostrichlivingsound";}
+	@Override
+    protected String getLivingSound(){return "sounds.ostrichlivingsound";}
 
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound(){ return "sounds.ostrichhurtsound"; }
+	@Override
+    protected String getHurtSound(){ return "sounds.ostrichhurtsound"; }
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
@@ -124,20 +126,6 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);
-		}
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.OSTRICH.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
 		}
 	}
 	

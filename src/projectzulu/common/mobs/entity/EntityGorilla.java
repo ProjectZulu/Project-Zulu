@@ -130,9 +130,9 @@ public class EntityGorilla extends EntityGenericAnimal {
 		this.motionX /= 2.0D;
 		this.motionY /= 2.0D;
 		this.motionZ /= 2.0D;
-		this.motionX -= par3 / (double)var7 * (double)var8*0.2;
-		this.motionY += (double)var8;
-		this.motionZ -= par5 / (double)var7 * (double)var8*0.2;
+		this.motionX -= par3 / var7 * var8*0.2;
+		this.motionY += var8;
+		this.motionZ -= par5 / var7 * var8*0.2;
 
 		if (this.motionY > 0.1000000059604645D)
 		{
@@ -146,20 +146,6 @@ public class EntityGorilla extends EntityGenericAnimal {
 			return true;
 		}
 		return super.isValidBreedingItem(itemStack);
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(3 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.GORILLA.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
 	}
 
 	@Override

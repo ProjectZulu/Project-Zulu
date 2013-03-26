@@ -4,9 +4,7 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
@@ -39,7 +37,8 @@ public class EntityCentipede extends EntityMaster implements IMob{
 		return texture;
 	}
 	
-	public int getMaxHealth(){
+	@Override
+    public int getMaxHealth(){
 		return 20;
 	}
 	
@@ -55,20 +54,6 @@ public class EntityCentipede extends EntityMaster implements IMob{
 		float var3 = this.getBrightness(1.0F);
 		if(var3 < 0.5){
 			angerLevel = 120;
-		}
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.CENTIPEDE.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
 		}
 	}
 }

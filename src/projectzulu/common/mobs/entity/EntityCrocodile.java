@@ -100,7 +100,8 @@ public class EntityCrocodile extends EntityGenericAnimal{
 	@Override
 	protected String getHurtSound(){ return "sounds.crocoodileliving"; }
 	
-	public float getSpeedModifier() {
+	@Override
+    public float getSpeedModifier() {
 		float var1 = super.getSpeedModifier();
 		if(isInWater()){
 			var1 *= 2.0f;
@@ -127,19 +128,6 @@ public class EntityCrocodile extends EntityGenericAnimal{
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);
-		}
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(3 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.ALLIGATOR.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
 		}
 	}
 

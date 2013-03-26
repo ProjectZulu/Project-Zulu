@@ -18,6 +18,7 @@ public class BeaverDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelBeaver.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (54 << 16) + (36 << 8) + 9;
 		eggColor2 = (67 << 16) + (45 << 8) + 11;

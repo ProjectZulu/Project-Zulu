@@ -19,6 +19,7 @@ public class HornbillDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 25, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelHornBill.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 =  (26 << 16) + (19 << 8) + 15;						eggColor2 = (199 << 16) + (33 << 8) + 14;
 		defaultBiomesToSpawn.add(BiomeGenBase.jungle.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.jungleHills.biomeName); 			

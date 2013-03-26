@@ -22,6 +22,7 @@ public class GiraffeDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelGiraffe.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 3);
 
 		eggColor1 =  (239 << 16) + (228 << 8) + 109;					eggColor2 = (91 << 16) + (87 << 8) + 41;
 		

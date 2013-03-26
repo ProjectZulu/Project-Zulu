@@ -138,18 +138,4 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
 	 */
 	@Override
 	protected void playStepSound(int par1, int par2, int par3, int par4){ /*Does Not Play a Step Sound*/ }
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(1 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.RABBIT.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
-	}
-
 }

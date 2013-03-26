@@ -5,7 +5,6 @@ import java.util.EnumSet;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.api.CustomEntityList;
@@ -94,7 +93,8 @@ public class EntityMimic extends EntityGenericAnimal implements IMob {
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){
+	@Override
+    protected String getLivingSound(){
 		return null;
 	}
 
@@ -130,25 +130,14 @@ public class EntityMimic extends EntityGenericAnimal implements IMob {
 	/**
 	 * Determines if an entity can be despawned, used on idle far away entities
 	 */
-	protected boolean canDespawn(){
+	@Override
+    protected boolean canDespawn(){
 		return false;
 	}
 
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(1 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.MIMIC.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
-	}
-
 	//	Called when player interacts with mob, eg get milk, saddle
-	public boolean interact(EntityPlayer par1EntityPlayer){
+	@Override
+    public boolean interact(EntityPlayer par1EntityPlayer){
 		entityAttackedReaction(par1EntityPlayer);
 		return super.interact(par1EntityPlayer);
 	}

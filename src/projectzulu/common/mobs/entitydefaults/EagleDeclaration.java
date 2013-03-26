@@ -19,6 +19,7 @@ public class EagleDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(5, 5, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelEagle.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 =  (224 << 16) + (224 << 8) + 224;						eggColor2 = (28 << 16) + (21 << 8) + 17;
 		defaultBiomesToSpawn.add(BiomeGenBase.extremeHills.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.extremeHillsEdge.biomeName);

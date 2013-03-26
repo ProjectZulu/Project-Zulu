@@ -1,5 +1,6 @@
 package projectzulu.common.mobs.entity;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
@@ -201,6 +203,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
      * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
      * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
      */
+    @Override
     public float getSpeedModifier() {
         float var1 = super.getSpeedModifier();
         
@@ -240,6 +243,24 @@ public class EntityGenericAnimal extends EntityGenericTameable {
 		return worldObj.getSavedLightValue(EnumSkyBlock.Block, xCoord, yCoord, zCoord) < 1;
 	}
 	
+    /**
+     * Drop 0-2 items of this living's type
+     */
+    @Override
+    protected void dropFewItems(boolean par1, int par2) {
+        CustomEntityList customEntity = CustomEntityList.getByEntity(this);
+        if (customEntity != null) {
+            Collection<ItemStack> loot = customEntity.modData.get().getLoot(rand, par2);
+            Iterator<ItemStack> lootIterator = loot.iterator();
+            while (lootIterator.hasNext()) {
+                ItemStack itemStack = lootIterator.next();
+                if (itemStack != null) {
+                    entityDropItem(itemStack, 1);
+                }
+            }
+        }
+    }
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeEntityToNBT(par1nbtTagCompound);

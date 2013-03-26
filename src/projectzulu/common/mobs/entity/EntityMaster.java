@@ -10,10 +10,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.api.CustomEntityList;
-import projectzulu.common.api.ItemList;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
-import cpw.mods.fml.common.Loader;
 
 public class EntityMaster extends EntityGenericAnimal{
 	
@@ -98,9 +95,9 @@ public class EntityMaster extends EntityGenericAnimal{
 				EntityFollower entityFollower = followerList.get(i);
 				
 				/* Get Position From Position List*/
-				double setXAround = positionList.get( (int) ((i+1)*distanceIncrements) ).xCoord;
-				double setZAround = positionList.get( (int) ((i+1)*distanceIncrements) ).zCoord;
-				double setYAround = positionList.get( (int) ((i+1)*distanceIncrements) ).yCoord;
+				double setXAround = positionList.get( (i+1)*distanceIncrements ).xCoord;
+				double setZAround = positionList.get( (i+1)*distanceIncrements ).zCoord;
+				double setYAround = positionList.get( (i+1)*distanceIncrements ).yCoord;
 				entityFollower.setTargetPosition(Vec3.createVectorHelper(
 						setXAround, 
 						posY, 
@@ -227,21 +224,5 @@ public class EntityMaster extends EntityGenericAnimal{
 	
 	private double calcDistance(double x1, double z1, double x2, double z2){
 		return Math.sqrt( (x2 - x1)*(x2 - x1) + (z2 - z1)*(z2 - z1) );
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(2 + par2)+2;
-
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-			for (int i = 0; i < var3; ++i){
-				if(ItemList.scrapMeat.isPresent()){
-					this.dropItem(ItemList.scrapMeat.get().itemID, 1);
-				}
-			}
-		}
 	}
 }

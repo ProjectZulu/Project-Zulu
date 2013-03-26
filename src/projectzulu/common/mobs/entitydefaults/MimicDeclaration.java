@@ -15,6 +15,7 @@ public class MimicDeclaration extends EggableDeclaration{
 		super("Mimic", EntityMimic.class, null);		
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelMimic.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 1);
 
 		eggColor1 = (171 << 16) + (121 << 8) + 45;
 		eggColor2 = (143 << 16) + (105 << 8) + 29;

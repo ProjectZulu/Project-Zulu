@@ -17,7 +17,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -70,11 +69,13 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 		yOffset = 0.0f;
     }
     
+    @Override
     public ItemStack getHeldItem(){
     	return defaultHeldItem;
     }
     
-	public int getTotalArmorValue(){
+	@Override
+    public int getTotalArmorValue(){
 		switch (stage) {
 		case 1:
 			return 4;
@@ -246,7 +247,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 		//Note this is not final Y height, this is just for ground level
 		int desY = this.worldObj.getHeightValue((int)desX,(int)desZ);
 		//If the block is not air
-		if(worldObj.getBlockId((int)desX, (int)desY-2, (int)desZ) != 0){
+		if(worldObj.getBlockId((int)desX, desY-2, (int)desZ) != 0){
 			worldObj.setBlock((int)desX, desY-0, (int)desZ, 0);
 			worldObj.setBlock((int)desX, desY-1, (int)desZ, 0);
 		}
@@ -271,7 +272,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 			double sourcePositionZ = this.posZ+holdRand;
 			
 	        double var11 = targetedEntity.posX - sourcePositionX;
-	        double var13 = targetedEntity.boundingBox.minY + (double)(targetedEntity.height / 2.0F) - (sourcePositionY + (double)(this.height / 2.0F));
+	        double var13 = targetedEntity.boundingBox.minY + targetedEntity.height / 2.0F - (sourcePositionY + this.height / 2.0F);
 	        double var15 = targetedEntity.posZ - sourcePositionZ;
 	        this.renderYawOffset = this.rotationYaw = -((float)Math.atan2(var11, var15)) * 180.0F / (float)Math.PI;
 
@@ -280,7 +281,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	        double var18 = 1.0D;
 	        Vec3 var20 = this.getLook(1.0F);
 	        var17.posX = sourcePositionX + var20.xCoord * var18;
-	        var17.posY = sourcePositionY + (double)(this.height / 2.0F) + 0.5D;
+	        var17.posY = sourcePositionY + this.height / 2.0F + 0.5D;
 	        var17.posZ = sourcePositionZ + var20.zCoord * var18;
 	        this.worldObj.spawnEntityInWorld(var17);			
 		}
@@ -300,16 +301,16 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 			int desY = this.worldObj.getHeightValue((int)desX,(int)desZ);
 
 			double var11 = desX - sourcePositionX;
-			double var13 = targetedEntity.boundingBox.minY + (double)(targetedEntity.height / 2.0F) - (sourcePositionY + (double)(this.height / 2.0F));
+			double var13 = targetedEntity.boundingBox.minY + targetedEntity.height / 2.0F - (sourcePositionY + this.height / 2.0F);
 			double var15 = desZ - sourcePositionZ;
 			this.renderYawOffset = this.rotationYaw = -((float)Math.atan2(var11, var15)) * 180.0F / (float)Math.PI;
 
-			this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1008, (int)desX, (int)desY, (int)desZ, 0);
+			this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1008, (int)desX, desY, (int)desZ, 0);
 			EntityFireball var17 = new EntityLargeFireball(this.worldObj, this, var11, var13, var15);
 			double var18 = 4.0D;
 			Vec3 var20 = this.getLook(1.0F);
 			var17.posX = sourcePositionX + var20.xCoord * var18;
-			var17.posY = sourcePositionY + (double)(this.height / 2.0F) + 0.5D;
+			var17.posY = sourcePositionY + this.height / 2.0F + 0.5D;
 			var17.posZ = sourcePositionZ + var20.zCoord * var18;
 			this.worldObj.spawnEntityInWorld(var17);
 		}
@@ -373,14 +374,14 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
             short var30 = 128;
 
             for (var18 = 0; var18 < var30; ++var18){
-                double var19 = (double)var18 / ((double)var30 - 1.0D);
+                double var19 = var18 / (var30 - 1.0D);
                 float var21 = (this.rand.nextFloat() - 0.5F) * 0.2F;
                 float var22 = (this.rand.nextFloat() - 0.5F) * 0.2F;
                 float var23 = (this.rand.nextFloat() - 0.5F) * 0.2F;
-                double var24 = var7 + (this.posX - var7) * var19 + (this.rand.nextDouble() - 0.5D) * (double)this.width * 2.0D;
-                double var26 = var9 + (this.posY - var9) * var19 + this.rand.nextDouble() * (double)this.height;
-                double var28 = var11 + (this.posZ - var11) * var19 + (this.rand.nextDouble() - 0.5D) * (double)this.width * 2.0D;
-                this.worldObj.spawnParticle("portal", var24, var26, var28, (double)var21, (double)var22, (double)var23);
+                double var24 = var7 + (this.posX - var7) * var19 + (this.rand.nextDouble() - 0.5D) * this.width * 2.0D;
+                double var26 = var9 + (this.posY - var9) * var19 + this.rand.nextDouble() * this.height;
+                double var28 = var11 + (this.posZ - var11) * var19 + (this.rand.nextDouble() - 0.5D) * this.width * 2.0D;
+                this.worldObj.spawnParticle("portal", var24, var26, var28, var21, var22, var23);
             }
 
             this.worldObj.playSoundEffect(var7, var9, var11, "mob.endermen.portal", 1.0F, 1.0F);
@@ -406,20 +407,6 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
     public EnumCreatureAttribute getCreatureAttribute(){
         return EnumCreatureAttribute.UNDEAD;
     }
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-    @Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(3 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.MUMMYPHARAOH.modData.get().getLootItem(rand);
-			if (loot != null) {
-				entityDropItem(loot, 1);
-			}
-		}
-	}
     
 	@Override
 	protected void dropRareDrop(int par1) {

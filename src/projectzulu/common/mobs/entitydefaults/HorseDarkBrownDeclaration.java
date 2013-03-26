@@ -19,6 +19,7 @@ public class HorseDarkBrownDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(5, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelHorse.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 3);
 
 		eggColor1 =  (102 << 16) + (73 << 8) + 34;						eggColor2 = (60 << 16) + (43 << 8) + 20;
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName); 		

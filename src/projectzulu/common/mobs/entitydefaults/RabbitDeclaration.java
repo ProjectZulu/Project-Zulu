@@ -18,10 +18,9 @@ public class RabbitDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(15, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelRabbit.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
-
+        setDropAmount(0, 1);
 		
 		eggColor1 = (239 << 16) + (179 << 8) + 83;						eggColor2 = (237 << 16) + (208 << 8) + 166;
-		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName); 
 		defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName); 
 		defaultBiomesToSpawn.add("Autumn Woods");						defaultBiomesToSpawn.add("Birch Forest");	

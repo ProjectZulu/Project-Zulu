@@ -6,7 +6,6 @@ import net.minecraft.entity.EnumEntitySize;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.api.CustomEntityList;
@@ -157,19 +156,5 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob{
 			var1 *= chargeSpeedModifier;
 		}
 		return super.getSpeedModifier();
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.MINOTAUR.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
 	}
 }

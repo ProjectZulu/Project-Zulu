@@ -19,6 +19,7 @@ public class BoarDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelBoar.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (122 << 16) + (77 << 8) + 32;
 		eggColor2 = (158 << 16) + (99 << 8) + 42;

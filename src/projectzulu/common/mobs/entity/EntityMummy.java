@@ -8,7 +8,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -134,20 +133,6 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
 	@Override
 	protected boolean canTriggerWalking() {
 		return true;
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.MUMMY.modData.get().getLootItem(rand);
-			if (loot != null) {
-				entityDropItem(loot, 1);
-			}
-		}
 	}
 
 	/**

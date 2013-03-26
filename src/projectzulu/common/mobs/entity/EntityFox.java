@@ -143,6 +143,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
      * Validates if Itemstack can be used to Heal Entity
      * Caution: ItemStack may be Null
       */
+    @Override
     public int getHealingValueIfValid(ItemStack itemStack){
 
     	if(itemStack == null){
@@ -169,19 +170,6 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 			return false;
 		}else{
 			return true;
-		}
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.FOX.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
 		}
 	}
 }

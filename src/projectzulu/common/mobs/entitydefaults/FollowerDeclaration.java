@@ -12,7 +12,6 @@ public class FollowerDeclaration extends CreatureDeclaration{
 		super("Follower", EntityFollower.class, null);		
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelFollower.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
-
 	}
 	
 	@Override

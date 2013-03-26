@@ -19,9 +19,10 @@ public class HorseRandomDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(5, 100, 3, 4);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelHorse.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 3);
+
 		shouldExist = false;
 		eggColor1 =  (200 << 16) + (245 << 8) + 245;					eggColor2 = (51 << 16) + (51 << 8) + 51;
-		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName); 		
 		defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName); 		
 		defaultBiomesToSpawn.add("Autumn Woods");						defaultBiomesToSpawn.add("Birch Forest");

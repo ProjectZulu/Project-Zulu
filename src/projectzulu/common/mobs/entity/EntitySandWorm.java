@@ -5,7 +5,6 @@ import java.util.EnumSet;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -90,7 +89,8 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob{
 		return wasSuccesful;
 	}
 
-	public int getMaxHealth(){
+	@Override
+    public int getMaxHealth(){
 		return 20;
 	}
 	
@@ -115,7 +115,8 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob{
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
-	public void onLivingUpdate(){
+	@Override
+    public void onLivingUpdate(){
 		if(this.worldObj.isDaytime() && !this.worldObj.isRemote && ticksExisted % (10*20) == 0){
 			heal(1);
 		}
@@ -130,42 +131,32 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob{
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){
+	@Override
+    protected String getLivingSound(){
 		return null;
 	}
 
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound(){
+	@Override
+    protected String getHurtSound(){
 		return null;
 	}
 
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
-	protected String getDeathSound(){
+	@Override
+    protected String getDeathSound(){
 		return null;
 	}
 
 	/**
 	 * Plays step sound at given x, y, z for the entity
 	 */
-	protected void playStepSound(int par1, int par2, int par3, int par4){
-		this.worldObj.playSoundAtEntity(this, "sand", 1.0F, 1.0F);
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
 	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.SANDWORM.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
+    protected void playStepSound(int par1, int par2, int par3, int par4){
+		this.worldObj.playSoundAtEntity(this, "sand", 1.0F, 1.0F);
 	}
 }

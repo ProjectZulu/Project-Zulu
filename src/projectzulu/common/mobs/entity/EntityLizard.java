@@ -182,20 +182,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 		this.worldObj.playSoundAtEntity(this, "mob.irongolem.walk", 1.0F, 1.0F);
 	}
 
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-    protected void dropFewItems(boolean par1, int par2) {
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.LIZARD.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
-	}
-
 	@Override
 	protected void dropRareDrop(int par1) {
 		if(Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()){

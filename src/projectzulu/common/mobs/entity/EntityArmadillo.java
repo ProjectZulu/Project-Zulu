@@ -136,14 +136,16 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 		return wasSuccesful;
 	}
 
-	public int getMaxHealth(){
+	@Override
+    public int getMaxHealth(){
 		return 12;
 	}
 	
 	/**
 	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
 	 */
-	public int getTotalArmorValue() {
+	@Override
+    public int getTotalArmorValue() {
 		if(getEntityState() == EntityStates.inCover){
 			return 30;
 		}else{
@@ -154,7 +156,8 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){ return "sounds.armadilloliving"; }
+	@Override
+    protected String getLivingSound(){ return "sounds.armadilloliving"; }
 	
 	@Override
 	public void updateAIState() {
@@ -182,14 +185,14 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 
 				//Condition 2: Is the player facing the target. "boolean canSee"
 				double angleEntToPlayer = Math.atan2(posX-tempE.posX, tempE.posZ-posZ)*(180.0/Math.PI)+180;
-				double playerRotationYaw = (double)tempE.rotationYaw;
+				double playerRotationYaw = tempE.rotationYaw;
 				double difference = Math.abs( MathHelper.wrapAngleTo180_double( normalizeTo360(angleEntToPlayer) - normalizeTo360(playerRotationYaw) ));
 				if (difference < 90){
 					isFacing = true;
 				}
 				
 				//Condition 3: Can the player see the target
-				canSee = this.worldObj.rayTraceBlocks(worldObj.getWorldVec3Pool().getVecFromPool(tempE.posX, tempE.posY+(double)tempE.getEyeHeight(), tempE.posZ),
+				canSee = this.worldObj.rayTraceBlocks(worldObj.getWorldVec3Pool().getVecFromPool(tempE.posX, tempE.posY+tempE.getEyeHeight(), tempE.posZ),
 						worldObj.getWorldVec3Pool().getVecFromPool(this.posX,this.posY,this.posZ)) == null;
 			}
 			/* If any of the conditions above failed, then Armadillo should not be in Cover */
@@ -257,20 +260,6 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);
-		}
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.ARMADILLO.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
 		}
 	}
 	

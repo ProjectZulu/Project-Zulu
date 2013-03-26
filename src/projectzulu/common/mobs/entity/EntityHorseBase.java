@@ -112,32 +112,4 @@ public class EntityHorseBase extends EntityGenericAnimal{
 		}
 		return false;
 	}
-
-	/**
-	 * Returns the item ID for the item the mob drops on death.
-	 */	
-	protected int getDropItemId() {
-		if(rand.nextBoolean()){
-			return Item.rottenFlesh.itemID;
-		}else{
-			return Item.beefRaw.itemID;
-		}
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	protected void dropFewItems(boolean par1, int par2) {
-		int var3 = this.rand.nextInt(3 + par2) + 1;
-		int var4;
-
-		for (var4 = 0; var4 < var3; ++var4) {
-			if(var4 == 2){
-				this.dropItem(Item.leather.itemID,1);
-			}else{
-				this.dropItem(Item.beefRaw.itemID,1);
-			}
-		}
-	}
-
 }

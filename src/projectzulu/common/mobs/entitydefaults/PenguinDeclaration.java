@@ -19,6 +19,7 @@ public class PenguinDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelPenguin.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (22 << 16) + (16 << 8) + 13;
 		eggColor2 = (235 << 16) + (235 << 8) + 235;

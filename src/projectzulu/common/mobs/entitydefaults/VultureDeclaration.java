@@ -19,6 +19,7 @@ public class VultureDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(2, 5, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelVulture.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (78 << 16) + (72 << 8) + 56;
 		eggColor2 = (120 << 16) + (110 << 8) + 86;

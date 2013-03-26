@@ -19,6 +19,7 @@ public class BearBrownDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelBrownBear.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (51 << 16) + (34 << 8) + 8;							eggColor2 = (63 << 16) + (42 << 8) + 10;
 		defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName); 	defaultBiomesToSpawn.add(BiomeGenBase.iceMountains.biomeName);	

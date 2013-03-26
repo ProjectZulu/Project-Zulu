@@ -78,33 +78,18 @@ public class EntityBlackBear extends EntityBear{
 		return 15;
 		}
 
-	/**
-	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-	 */
-	public int getTotalArmorValue(){
-		return 2;
-	}
+	    /**
+     * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
+     */
+    @Override
+    public int getTotalArmorValue() {
+        return 2;
+    }
 
-
-	
-	public void onUpdate()
-	{
-		super.onUpdate();
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.BLACKBEAR.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
-	}
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+    }
 	
 	@Override
 	protected void dropRareDrop(int par1) {
