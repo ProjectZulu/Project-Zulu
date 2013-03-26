@@ -43,7 +43,7 @@ public class EntityVulture extends EntityGenericAnimal {
 	public EntityModelRotation eTAILROT = new EntityModelRotation();
 	
 	boolean manyVultures = false;
-	private int maxTargetHealthToAttack = (int) CustomEntityList.getByEntity(this).modData.get().customData.get("maxTargetHealth");
+	private int maxTargetHealthToAttack = (Integer) CustomEntityList.getByEntity(this).modData.get().customData.get("maxTargetHealth");
 	float curiosity = 0;
 	int ticksToCheckAbilities = 3;
 	
