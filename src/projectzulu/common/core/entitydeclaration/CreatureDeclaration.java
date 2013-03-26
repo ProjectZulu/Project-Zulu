@@ -75,7 +75,7 @@ public abstract class CreatureDeclaration implements EntityDeclaration{
 		shouldExist = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" shouldExist", shouldExist).getBoolean(shouldExist);
 		reportSpawningInLog = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" reportSpawningInLog", reportSpawningInLog).getBoolean(reportSpawningInLog);
 		updateFrequency = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" UpdateFrequency", updateFrequency).getInt(updateFrequency);
-		maxSpawnInChunk = config.get("MOB CONTROLS."+mobName, "MaxSpawnInChunk", maxSpawnInChunk).getInt(maxSpawnInChunk);
+		maxSpawnInChunk = config.get("MOB CONTROLS."+mobName, "Max Pack Size", maxSpawnInChunk).getInt(maxSpawnInChunk);
 	}
 	
 	@Override
