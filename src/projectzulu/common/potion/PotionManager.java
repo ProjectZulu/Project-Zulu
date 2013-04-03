@@ -22,9 +22,11 @@ import com.google.common.base.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
 public enum PotionManager {
 	bubbling(21) {
-		@Override
+		
+        @Override
 		protected void setupPotion(HashMap potionRequirements, HashMap potionAmplifiers) {
 			/* Bubbling Potion */
 			PotionList.bubbling = Optional.of((new PotionZulu(potionID, true, (165 << 16) + (131 << 8) + 70, 1, 2)).setPotionName("potion.shining"));
@@ -52,7 +54,7 @@ public enum PotionManager {
 		}
 	},
 	slowfall(23) {
-		@Override
+        @Override
 		protected void setupPotion(HashMap potionRequirements, HashMap potionAmplifiers) {
 			PotionList.slowfall = Optional.of((new PotionSlowFall(potionID, true, (214 << 16) + (214 << 8) + 214)).setPotionName("potion.slowfall"));
 	        potionRequirements.put(Integer.valueOf(PotionList.slowfall.get().getId()), "!0 & 1 & !2 & !3 & 10 & 1+6+9+9");
@@ -108,8 +110,8 @@ public enum PotionManager {
 		}
 	};
 	int potionID;
-	static boolean replaceVanillaBrewingStand = true;
-	static boolean alterVanillaPotionRequirements = true;
+	public static boolean replaceVanillaBrewingStand = true;
+	public static boolean alterVanillaPotionRequirements = true;
 	public static boolean potionModuleEnabled = true;
 	public static boolean enableNullPotionHandler = true;
 

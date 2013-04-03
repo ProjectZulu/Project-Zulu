@@ -10,12 +10,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.tileentity.TileEntityBrewingStand;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.brewing.PotionBrewedEvent;
 import projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 //TODO: Look back at Original TileEntityBrewingStand To See what to replace, this may not work anymore
-public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
+public class TileEntityZuluBrewingStand extends TileEntityBrewingStand {
+    private static final int[] field_102017_a = new int[] {3};
+    private static final int[] field_102016_b = new int[] {0, 1, 2};
+
     /** The itemstacks currently placed in the slots of the brewing stand */
     private ItemStack[] brewingItemStacks = new ItemStack[4];
     private int brewTime;
@@ -25,20 +30,39 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
      */
     private int filledSlots;
     private int ingredientID;
+    private String field_94132_e;
 
     /**
      * Returns the name of the inventory.
      */
     @Override
-    public String getInvName(){
-        return "container.brewing";
+    public String getInvName()
+    {
+        return this.isInvNameLocalized() ? this.field_94132_e : "container.brewing";
+    }
+
+    /**
+     * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
+     * language. Otherwise it will be used directly.
+     */
+    @Override
+    public boolean isInvNameLocalized()
+    {
+        return this.field_94132_e != null && this.field_94132_e.length() > 0;
+    }
+
+    @Override
+    public void func_94131_a(String par1Str)
+    {
+        this.field_94132_e = par1Str;
     }
 
     /**
      * Returns the number of slots in the inventory.
      */
     @Override
-    public int getSizeInventory(){
+    public int getSizeInventory()
+    {
         return this.brewingItemStacks.length;
     }
 
@@ -47,219 +71,264 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
      * ticks and creates a new spawn inside its implementation.
      */
     @Override
-    public void updateEntity(){
-        if (this.brewTime > 0){
+    public void updateEntity()
+    {
+        if (this.brewTime > 0)
+        {
             --this.brewTime;
 
-            if (this.brewTime == 0){
+            if (this.brewTime == 0)
+            {
                 this.brewPotions();
                 this.onInventoryChanged();
             }
-            else if (!this.canBrew()){
+            else if (!this.canBrew())
+            {
                 this.brewTime = 0;
                 this.onInventoryChanged();
             }
-            else if (this.ingredientID != this.brewingItemStacks[3].itemID){
+            else if (this.ingredientID != this.brewingItemStacks[3].itemID)
+            {
                 this.brewTime = 0;
                 this.onInventoryChanged();
             }
         }
-        else if (this.canBrew()){
+        else if (this.canBrew())
+        {
             this.brewTime = 400;
             this.ingredientID = this.brewingItemStacks[3].itemID;
         }
 
-        int var1 = this.getFilledSlots();
+        int i = this.getFilledSlots();
 
-        if (var1 != this.filledSlots){
-            this.filledSlots = var1;
-            this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, var1, 3);
+        if (i != this.filledSlots)
+        {
+            this.filledSlots = i;
+            this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, i, 2);
         }
 
-//        super.updateEntity();
+        super.updateEntity();
     }
 
     @Override
-    public int getBrewTime(){
+    public int getBrewTime()
+    {
         return this.brewTime;
     }
 
-    private boolean canBrew(){
-        if (this.brewingItemStacks[3] != null && this.brewingItemStacks[3].stackSize > 0){
-            ItemStack var1 = this.brewingItemStacks[3];
-            
-            
-            if ( !Item.itemsList[var1.itemID].isPotionIngredient() ){
+    private boolean canBrew()
+    {
+        if (this.brewingItemStacks[3] != null && this.brewingItemStacks[3].stackSize > 0)
+        {
+            ItemStack itemstack = this.brewingItemStacks[3];
+
+            if (!Item.itemsList[itemstack.itemID].isPotionIngredient())
+            {
                 return false;
             }
             else
             {
-                boolean var2 = false;
+                boolean flag = false;
 
-                for (int var3 = 0; var3 < 3; ++var3){
-                    if (this.brewingItemStacks[var3] != null && this.brewingItemStacks[var3].itemID == Item.potion.itemID){
-                        int var4 = this.brewingItemStacks[var3].getItemDamage();
-                        int var5 = this.getPotionResult(var4, var1);
+                for (int i = 0; i < 3; ++i)
+                {
+                    if (this.brewingItemStacks[i] != null && this.brewingItemStacks[i].getItem() instanceof ItemPotion)
+                    {
+                        int j = this.brewingItemStacks[i].getItemDamage();
+                        int k = this.getPotionResult(j, itemstack);
 
-                        if (!ItemPotion.isSplash(var4) && ItemPotion.isSplash(var5)){
-                            var2 = true;
+                        if (!ItemPotion.isSplash(j) && ItemPotion.isSplash(k))
+                        {
+                            flag = true;
                             break;
                         }
 
-                        List var6 = Item.potion.getEffects(var4);
-                        List var7 = Item.potion.getEffects(var5);
+                        List list = Item.potion.getEffects(j);
+                        List list1 = Item.potion.getEffects(k);
 
-                        if ((var4 <= 0 || var6 != var7) && (var6 == null || !var6.equals(var7) && var7 != null) && var4 != var5){
-                            var2 = true;
+                        if ((j <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null) && j != k)
+                        {
+                            flag = true;
                             break;
                         }
                     }
                 }
 
-                return var2;
+                return flag;
             }
         }
-        else{
+        else
+        {
             return false;
         }
     }
 
-    private void brewPotions(){
-        if (this.canBrew()){
-            ItemStack var1 = this.brewingItemStacks[3];
+    private void brewPotions()
+    {
+        if (this.canBrew())
+        {
+            ItemStack itemstack = this.brewingItemStacks[3];
 
-            for (int var2 = 0; var2 < 3; ++var2){
-                if (this.brewingItemStacks[var2] != null && this.brewingItemStacks[var2].itemID == Item.potion.itemID){
-                    int var3 = this.brewingItemStacks[var2].getItemDamage();
-                    int var4 = this.getPotionResult(var3, var1);
-                    List var5 = Item.potion.getEffects(var3);
-                    List var6 = Item.potion.getEffects(var4);
+            for (int i = 0; i < 3; ++i)
+            {
+                if (this.brewingItemStacks[i] != null && this.brewingItemStacks[i].getItem() instanceof ItemPotion)
+                {
+                    int j = this.brewingItemStacks[i].getItemDamage();
+                    int k = this.getPotionResult(j, itemstack);
+                    List list = Item.potion.getEffects(j);
+                    List list1 = Item.potion.getEffects(k);
 
-                    if ((var3 <= 0 || var5 != var6) && (var5 == null || !var5.equals(var6) && var6 != null))
+                    if ((j <= 0 || list != list1) && (list == null || !list.equals(list1) && list1 != null))
                     {
-                        if (var3 != var4)
+                        if (j != k)
                         {
-                            this.brewingItemStacks[var2].setItemDamage(var4);
+                            this.brewingItemStacks[i].setItemDamage(k);
                         }
                     }
-                    else if (!ItemPotion.isSplash(var3) && ItemPotion.isSplash(var4))
+                    else if (!ItemPotion.isSplash(j) && ItemPotion.isSplash(k))
                     {
-                        this.brewingItemStacks[var2].setItemDamage(var4);
+                        this.brewingItemStacks[i].setItemDamage(k);
                     }
                 }
             }
 
-            if (Item.itemsList[var1.itemID].hasContainerItem()){
-                this.brewingItemStacks[3] = Item.itemsList[var1.itemID].getContainerItemStack(brewingItemStacks[3]);
+            if (Item.itemsList[itemstack.itemID].hasContainerItem())
+            {
+                this.brewingItemStacks[3] = Item.itemsList[itemstack.itemID].getContainerItemStack(brewingItemStacks[3]);
             }
-            else{
+            else
+            {
                 --this.brewingItemStacks[3].stackSize;
 
-                if (this.brewingItemStacks[3].stackSize <= 0){
+                if (this.brewingItemStacks[3].stackSize <= 0)
+                {
                     this.brewingItemStacks[3] = null;
                 }
             }
+            
+            MinecraftForge.EVENT_BUS.post(new PotionBrewedEvent(brewingItemStacks));
         }
     }
+
     /**
      * The result of brewing a potion of the specified damage value with an ingredient itemstack.
      */
-    private int getPotionResult(int brewingIndex, ItemStack ingredientItemStack){
-    	if(ingredientItemStack != null){
-    		if(ingredientItemStack.getItem() instanceof ItemGenerics){
-        		ItemGenerics itemGeneric = ((ItemGenerics)ingredientItemStack.getItem());
-        		if( itemGeneric.isPotionIngredient(brewingIndex, ingredientItemStack) ){
-        			return PotionHelper.applyIngredient(brewingIndex, itemGeneric.getPotionEffect(brewingIndex, ingredientItemStack));
-        		}else{
-        			return brewingIndex;
-        		}
-    		}
-    		
-    		/* Potion Effects For Vanilla Items */
-    		if( ingredientItemStack.getItem().itemID == Item.feather.itemID){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1-2-3&8-8+9+10" : "-0+1-2-3+10&4-4"; // Slowfall
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().itemID == Item.blazePowder.itemID){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2+3&4-4+13";
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().itemID == Item.ghastTear.itemID){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2-3&4-4+13";
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().itemID == Item.spiderEye.itemID){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2-3&4-4+13";
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().itemID == Item.speckledMelon.itemID){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1+2-3&8-8+9+13" : "+0-1+2-3&4-4+13";
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().itemID == Item.sugar.itemID){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1-2-3&8-8+9+13" : "-0+1-2-3&4-4+13";
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().itemID == Item.magmaCream.itemID){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0+1-2-3&8-8+9+13" : "+0+1-2-3&4-4+13";
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().itemID == Item.goldenCarrot.itemID){
-    			String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1+2-3&8-8+9+13" : "-0+1+2-3+13&4-4"; // NightVision
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}
-    		
-    		else if( ingredientItemStack.getItem().itemID == Item.fermentedSpiderEye.itemID){
-    			String potionEffect = (brewingIndex & 1 << 10) > 0 ? "-0&10-4+10" : "-0+3&13-4+13";
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}else if( ingredientItemStack.getItem().itemID == Item.gunpowder.itemID){
-    			String potionEffect = (brewingIndex & 1 << 10) > 0 ? "+14&10" : "+14&13-13";
-    			return PotionHelper.applyIngredient(brewingIndex, potionEffect);
-    		}
-    	}
-        return ingredientItemStack == null ? brewingIndex : (Item.itemsList[ingredientItemStack.itemID].isPotionIngredient() ? PotionHelper.applyIngredient(brewingIndex, Item.itemsList[ingredientItemStack.itemID].getPotionEffect()) : brewingIndex);
+    private int getPotionResult(int brewingIndex, ItemStack ingredientItemStack) {
+        if (ingredientItemStack != null) {
+            if (ingredientItemStack.getItem() instanceof ItemGenerics) {
+                ItemGenerics itemGeneric = ((ItemGenerics) ingredientItemStack.getItem());
+                if (itemGeneric.isPotionIngredient(brewingIndex, ingredientItemStack)) {
+                    return PotionHelper.applyIngredient(brewingIndex,
+                            itemGeneric.getPotionEffect(brewingIndex, ingredientItemStack));
+                } else {
+                    return brewingIndex;
+                }
+            }
+
+            /* Potion Effects For Vanilla Items */
+            if (ingredientItemStack.getItem().itemID == Item.feather.itemID) {
+                String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1-2-3&8-8+9+10" : "-0+1-2-3+10&4-4"; // Slowfall
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            } else if (ingredientItemStack.getItem().itemID == Item.blazePowder.itemID) {
+                String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2+3&4-4+13";
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            } else if (ingredientItemStack.getItem().itemID == Item.ghastTear.itemID) {
+                String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2-3&4-4+13";
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            } else if (ingredientItemStack.getItem().itemID == Item.spiderEye.itemID) {
+                String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1-2+3&8-8+9+13" : "+0-1-2-3&4-4+13";
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            } else if (ingredientItemStack.getItem().itemID == Item.speckledMelon.itemID) {
+                String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0-1+2-3&8-8+9+13" : "+0-1+2-3&4-4+13";
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            } else if (ingredientItemStack.getItem().itemID == Item.sugar.itemID) {
+                String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1-2-3&8-8+9+13" : "-0+1-2-3&4-4+13";
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            } else if (ingredientItemStack.getItem().itemID == Item.magmaCream.itemID) {
+                String potionEffect = (brewingIndex & 1 << 8) > 0 ? "0+1-2-3&8-8+9+13" : "+0+1-2-3&4-4+13";
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            } else if (ingredientItemStack.getItem().itemID == Item.goldenCarrot.itemID) {
+                String potionEffect = (brewingIndex & 1 << 8) > 0 ? "-0+1+2-3&8-8+9+13" : "-0+1+2-3+13&4-4"; // NightVision
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            }
+
+            else if (ingredientItemStack.getItem().itemID == Item.fermentedSpiderEye.itemID) {
+                String potionEffect = (brewingIndex & 1 << 10) > 0 ? "-0&10-4+10" : "-0+3&13-4+13";
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            } else if (ingredientItemStack.getItem().itemID == Item.gunpowder.itemID) {
+                String potionEffect = (brewingIndex & 1 << 10) > 0 ? "+14&10" : "+14&13-13";
+                return PotionHelper.applyIngredient(brewingIndex, potionEffect);
+            }
+        }
+        return ingredientItemStack == null ? brewingIndex : (Item.itemsList[ingredientItemStack.itemID]
+                .isPotionIngredient() ? PotionHelper.applyIngredient(brewingIndex,
+                Item.itemsList[ingredientItemStack.itemID].getPotionEffect()) : brewingIndex);
     }
-    
+
     /**
      * Reads a tile entity from NBT.
      */
     @Override
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound){
+    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
         super.readFromNBT(par1NBTTagCompound);
-        NBTTagList var2 = par1NBTTagCompound.getTagList("Items");
+        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
         this.brewingItemStacks = new ItemStack[this.getSizeInventory()];
 
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3){
-            NBTTagCompound var4 = (NBTTagCompound)var2.tagAt(var3);
-            byte var5 = var4.getByte("Slot");
+        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+        {
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+            byte b0 = nbttagcompound1.getByte("Slot");
 
-            if (var5 >= 0 && var5 < this.brewingItemStacks.length){
-                this.brewingItemStacks[var5] = ItemStack.loadItemStackFromNBT(var4);
+            if (b0 >= 0 && b0 < this.brewingItemStacks.length)
+            {
+                this.brewingItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
 
         this.brewTime = par1NBTTagCompound.getShort("BrewTime");
+
+        if (par1NBTTagCompound.hasKey("CustomName"))
+        {
+            this.field_94132_e = par1NBTTagCompound.getString("CustomName");
+        }
     }
 
     /**
      * Writes a tile entity to NBT.
      */
     @Override
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound){
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setShort("BrewTime", (short)this.brewTime);
-        NBTTagList var2 = new NBTTagList();
+        NBTTagList nbttaglist = new NBTTagList();
 
-        for (int var3 = 0; var3 < this.brewingItemStacks.length; ++var3){
-            if (this.brewingItemStacks[var3] != null){
-                NBTTagCompound var4 = new NBTTagCompound();
-                var4.setByte("Slot", (byte)var3);
-                this.brewingItemStacks[var3].writeToNBT(var4);
-                var2.appendTag(var4);
+        for (int i = 0; i < this.brewingItemStacks.length; ++i)
+        {
+            if (this.brewingItemStacks[i] != null)
+            {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setByte("Slot", (byte)i);
+                this.brewingItemStacks[i].writeToNBT(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
             }
         }
 
-        par1NBTTagCompound.setTag("Items", var2);
+        par1NBTTagCompound.setTag("Items", nbttaglist);
+
+        if (this.isInvNameLocalized())
+        {
+            par1NBTTagCompound.setString("CustomName", this.field_94132_e);
+        }
     }
 
     /**
      * Returns the stack in slot i
      */
     @Override
-    public ItemStack getStackInSlot(int par1){
+    public ItemStack getStackInSlot(int par1)
+    {
         return par1 >= 0 && par1 < this.brewingItemStacks.length ? this.brewingItemStacks[par1] : null;
     }
 
@@ -268,13 +337,16 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
      * new stack.
      */
     @Override
-    public ItemStack decrStackSize(int par1, int par2){
-        if (par1 >= 0 && par1 < this.brewingItemStacks.length){
-            ItemStack var3 = this.brewingItemStacks[par1];
+    public ItemStack decrStackSize(int par1, int par2)
+    {
+        if (par1 >= 0 && par1 < this.brewingItemStacks.length)
+        {
+            ItemStack itemstack = this.brewingItemStacks[par1];
             this.brewingItemStacks[par1] = null;
-            return var3;
+            return itemstack;
         }
-        else{
+        else
+        {
             return null;
         }
     }
@@ -284,13 +356,16 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
      * like when you close a workbench GUI.
      */
     @Override
-    public ItemStack getStackInSlotOnClosing(int par1){
-        if (par1 >= 0 && par1 < this.brewingItemStacks.length){
-            ItemStack var2 = this.brewingItemStacks[par1];
+    public ItemStack getStackInSlotOnClosing(int par1)
+    {
+        if (par1 >= 0 && par1 < this.brewingItemStacks.length)
+        {
+            ItemStack itemstack = this.brewingItemStacks[par1];
             this.brewingItemStacks[par1] = null;
-            return var2;
+            return itemstack;
         }
-        else{
+        else
+        {
             return null;
         }
     }
@@ -299,8 +374,10 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
     @Override
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack){
-        if (par1 >= 0 && par1 < this.brewingItemStacks.length){
+    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    {
+        if (par1 >= 0 && par1 < this.brewingItemStacks.length)
+        {
             this.brewingItemStacks[par1] = par2ItemStack;
         }
     }
@@ -310,25 +387,39 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
      * this more of a set than a get?*
      */
     @Override
-    public int getInventoryStackLimit(){
-        return 1;
+    public int getInventoryStackLimit()
+    {
+        return 64;
     }
 
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
     @Override
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer){
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    {
+        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
+
     @Override
     public void openChest() {}
+
     @Override
     public void closeChest() {}
 
-    @SideOnly(Side.CLIENT)
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     */
     @Override
-    public void setBrewTime(int par1){
+    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
+    {
+        return par1 == 3 ? Item.itemsList[par2ItemStack.itemID].isPotionIngredient() : par2ItemStack.getItem() instanceof ItemPotion || par2ItemStack.itemID == Item.glassBottle.itemID;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void setBrewTime(int par1)
+    {
         this.brewTime = par1;
     }
 
@@ -336,27 +427,40 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand{
      * returns an integer with each bit specifying wether that slot of the stand contains a potion
      */
     @Override
-    public int getFilledSlots(){
-        int var1 = 0;
+    public int getFilledSlots()
+    {
+        int i = 0;
 
-        for (int var2 = 0; var2 < 3; ++var2){
-            if (this.brewingItemStacks[var2] != null){
-                var1 |= 1 << var2;
+        for (int j = 0; j < 3; ++j)
+        {
+            if (this.brewingItemStacks[j] != null)
+            {
+                i |= 1 << j;
             }
         }
 
-        return var1;
+        return i;
     }
 
-  //TODO: Commented
-//    @Override
-//    public int getStartInventorySide(ForgeDirection side){
-//        return (side == ForgeDirection.UP ? 3 : 0);
-//    }
+    /**
+     * Get the size of the side inventory.
+     */
+    @Override
+    public int[] getSizeInventorySide(int par1)
+    {
+        return par1 == 1 ? field_102017_a : field_102016_b;
+    }
 
-  //TODO: Commented
-//    @Override
-//    public int getSizeInventorySide(ForgeDirection side){
-//        return (side == ForgeDirection.UP ? 1 : 3);
-//    }
+    @Override
+    public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3)
+    {
+        return this.isStackValidForSlot(par1, par2ItemStack);
+    }
+
+    @Override
+    public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3)
+    {
+        return true;
+    }
+
 }

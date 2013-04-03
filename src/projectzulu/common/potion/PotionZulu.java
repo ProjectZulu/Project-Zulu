@@ -23,6 +23,7 @@ public class PotionZulu extends Potion{
 	public int getStatusIconIndex() {
 		Minecraft mc = Minecraft.getMinecraft();
 //		mc.renderEngine.bindTexture(mc.renderEngine.getTexture(getTextureFile())); //TODO: Commented
+		mc.renderEngine.bindTexture(getTextureFile()); //TODO: Commented
 		return super.getStatusIconIndex();
 	}
 	
@@ -33,6 +34,7 @@ public class PotionZulu extends Potion{
     /**
      * Returns true if the potion has an instant effect instead of a continuous one (eg Harming)
      */
+    @Override
     public boolean isInstant() {
         return false;
     }
