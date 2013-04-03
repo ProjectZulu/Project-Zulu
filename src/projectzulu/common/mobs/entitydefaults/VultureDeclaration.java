@@ -19,6 +19,7 @@ public class VultureDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(2, 5, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelVulture.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (78 << 16) + (72 << 8) + 56;
 		eggColor2 = (120 << 16) + (110 << 8) + 86;
@@ -31,6 +32,8 @@ public class VultureDeclaration extends SpawnableDeclaration{
 	
 	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {
+	    	customMobData.customData.put("maxTargetHealth", config.get("MOB CONTROLS."+mobName, "Max Target Health To Attack", 20).getInt(20));
+
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.chickenRaw, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,

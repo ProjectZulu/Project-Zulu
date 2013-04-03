@@ -19,6 +19,7 @@ public class TreeEntDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(1, 7, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelTreeEnt.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (17 << 16) + (6 << 8) + 3;
 		eggColor2 = (83 << 16) + (56 << 8) + 29;

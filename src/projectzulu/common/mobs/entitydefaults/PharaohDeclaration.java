@@ -14,6 +14,8 @@ public class PharaohDeclaration extends CreatureDeclaration{
 	public PharaohDeclaration(){
 		super("Mummy Pharaoh", EntityMummyPharaoh.class, EnumCreatureType.monster);		
 		setRegistrationProperties(128, 3, true);
+        setDropAmount(0, 3);
+
 		setModelAndRender("projectzulu.common.mobs.models.ModelMummyPharaoh", "projectzulu.common.mobs.renders.RenderMummyPharaoh");
 	}
 	

@@ -29,11 +29,14 @@ public abstract class CreatureDeclaration implements EntityDeclaration{
 	protected boolean shouldExist = true;
 	protected boolean reportSpawningInLog = false;
 	protected int maxSpawnInChunk = 4;
-
+	
 	protected int trackingRange;
 	protected int updateFrequency;
 	protected boolean sendsVelocityUpdates;
 	protected boolean shouldDespawn;
+	
+	protected int minDropNum = 0;
+	protected int maxDropNum = 0;
 	
 	protected CreatureDeclaration(String mobName, Class mobClass, EnumCreatureType creatureType){
 		this.mobName = mobName;
@@ -45,6 +48,11 @@ public abstract class CreatureDeclaration implements EntityDeclaration{
 	protected void setModelAndRender(String modelClass, String renderClass){
 		this.modelClass = modelClass;
 		this.renderClass = renderClass;
+	}
+	
+	protected void setDropAmount(int minDropNum, int maxDropNum){
+	    this.minDropNum = minDropNum;
+	    this.maxDropNum = maxDropNum;
 	}
 	
 	protected void setModelAndRender(Class modelClass, String renderClass){
@@ -67,7 +75,7 @@ public abstract class CreatureDeclaration implements EntityDeclaration{
 		shouldExist = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" shouldExist", shouldExist).getBoolean(shouldExist);
 		reportSpawningInLog = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" reportSpawningInLog", reportSpawningInLog).getBoolean(reportSpawningInLog);
 		updateFrequency = config.get("MOB CONTROLS."+mobName, mobName.toLowerCase()+" UpdateFrequency", updateFrequency).getInt(updateFrequency);
-		maxSpawnInChunk = config.get("MOB CONTROLS."+mobName, "MaxSpawnInChunk", maxSpawnInChunk).getInt(maxSpawnInChunk);
+		maxSpawnInChunk = config.get("MOB CONTROLS."+mobName, "Max Pack Size", maxSpawnInChunk).getInt(maxSpawnInChunk);
 	}
 	
 	@Override
@@ -101,6 +109,8 @@ public abstract class CreatureDeclaration implements EntityDeclaration{
 		customMobData.shouldDespawn = config.get("MOB CONTROLS."+mobName, mobName+" Should Despawn", shouldDespawn).getBoolean(true);
 		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		customMobData.maxSpawnInChunk = maxSpawnInChunk;
+		customMobData.minDropNum = config.get("MOB CONTROLS."+mobName, "Items to Drop Min", minDropNum).getInt(minDropNum);
+		customMobData.maxDropNum = config.get("MOB CONTROLS."+mobName, "Items to Drop Max", maxDropNum).getInt(maxDropNum);
 	}
 	
 	@Override

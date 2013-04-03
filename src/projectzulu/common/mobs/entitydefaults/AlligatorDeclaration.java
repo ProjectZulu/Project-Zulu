@@ -19,6 +19,7 @@ public class AlligatorDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelCrocodile.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+		setDropAmount(0, 3);
 		
 		eggColor1 = (32 << 16) + (39 << 8) + 33;
 		eggColor2 = (52 << 16) + (65 << 8) + 54;

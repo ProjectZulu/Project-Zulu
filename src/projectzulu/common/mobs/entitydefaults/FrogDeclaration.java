@@ -18,6 +18,7 @@ public class FrogDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelFrog.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 1);
 
 		eggColor1 = (95 << 16) + (186 << 8) + 50;
 		eggColor2 = (105 << 16) + (203 << 8) + 67;

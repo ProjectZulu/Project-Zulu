@@ -19,6 +19,7 @@ public class BearPolarDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelPolarBear.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (255 << 16) + (255 << 8) + 255;						eggColor2 = (201 << 16) + (201 << 8) + 201;
 		defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName); 		

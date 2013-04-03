@@ -5,13 +5,9 @@ import java.util.EnumSet;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsTarget;
@@ -66,31 +62,13 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob{
 		return super.getTexture();
 	}
 
-	/**
-	 * Checks if the entity's current position is a valid location to spawn this entity.
-	 */
 	@Override
-	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		boolean wasSuccesful = false;
-		
-		if (CustomEntityList.SANDWORM.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && this.worldObj.canBlockSeeTheSky(var1, var2, var3) && super.getCanSpawnHere() ) {
-			wasSuccesful = true;
-		}
-		
-		if(CustomEntityList.SANDWORM.modData.get().reportSpawningInLog){
-			if(wasSuccesful){
-				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}else{
-				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}
-		}
-		return wasSuccesful;
-	}
+    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
 
-	public int getMaxHealth(){
+	@Override
+    public int getMaxHealth(){
 		return 20;
 	}
 	
@@ -115,7 +93,8 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob{
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
-	public void onLivingUpdate(){
+	@Override
+    public void onLivingUpdate(){
 		if(this.worldObj.isDaytime() && !this.worldObj.isRemote && ticksExisted % (10*20) == 0){
 			heal(1);
 		}
@@ -130,42 +109,32 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob{
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){
+	@Override
+    protected String getLivingSound(){
 		return null;
 	}
 
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound(){
+	@Override
+    protected String getHurtSound(){
 		return null;
 	}
 
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
-	protected String getDeathSound(){
+	@Override
+    protected String getDeathSound(){
 		return null;
 	}
 
 	/**
 	 * Plays step sound at given x, y, z for the entity
 	 */
-	protected void playStepSound(int par1, int par2, int par3, int par4){
-		this.worldObj.playSoundAtEntity(this, "sand", 1.0F, 1.0F);
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
 	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.SANDWORM.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
+    protected void playStepSound(int par1, int par2, int par3, int par4){
+		this.worldObj.playSoundAtEntity(this, "sand", 1.0F, 1.0F);
 	}
 }

@@ -1,5 +1,6 @@
 package projectzulu.common.mobs.entity;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
@@ -17,6 +19,7 @@ import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.PacketIDs;
+import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.packets.PacketManagerAnimTime;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
@@ -87,10 +90,11 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     @Override
     protected boolean canDespawn() {
     	CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
-    	if(entityEntry != null){
+    	if(entityEntry != null && !isTamed()){
     		return forceDespawn || entityEntry.modData.get().shouldDespawn;
+    	}else{
+    	    return super.canDespawn();
     	}
-    	return true;
     }
     
     @Override
@@ -201,6 +205,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
      * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
      * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
      */
+    @Override
     public float getSpeedModifier() {
         float var1 = super.getSpeedModifier();
         
@@ -226,20 +231,65 @@ public class EntityGenericAnimal extends EntityGenericTameable {
 	/**
 	 * Checks if the entity's current position is a valid location to spawn this entity.
 	 */
-	@Override
-	public boolean getCanSpawnHere(){
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		
-		return isValidLightLevel(worldObj, var1, var2, var3) //&& this.worldObj.canBlockSeeTheSky(var1, var2, var3)
-				&& 	super.getCanSpawnHere();
-	}
+    @Override
+    public boolean getCanSpawnHere() {
+        int xCoord = MathHelper.floor_double(this.posX);
+        int yCoord = MathHelper.floor_double(this.boundingBox.minY);
+        int zCoord = MathHelper.floor_double(this.posZ);
+        boolean wasSuccesful = false;
+        CustomEntityList customEntity = CustomEntityList.getByEntity(this);
+        if (customEntity == null) {
+            ProjectZuluLog
+                    .severe("Entity %s is Trying to Spawn but does not exist in the CustomEntityList. It will not spawn, please report this to Modder.",
+                            this.getClass().toString());
+            return false;
+        }
+
+        if (customEntity.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
+                && worldObj.getClosestPlayerToEntity(this, 32) == null
+                && isValidLightLevel(worldObj, xCoord, yCoord, zCoord)
+                && isValidLocation(worldObj, xCoord, yCoord, zCoord)) {
+            wasSuccesful = true;
+        }
+
+        if (customEntity.modData.get().reportSpawningInLog) {
+            if (wasSuccesful) {
+                ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s", getEntityName(), xCoord, yCoord,
+                        zCoord, worldObj.getBiomeGenForCoords(xCoord, zCoord));
+            } else {
+                ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",
+                        getEntityName(), xCoord, yCoord, zCoord, worldObj.getBiomeGenForCoords(xCoord, zCoord));
+            }
+        }
+        return wasSuccesful;
+    }
 	
 	protected boolean isValidLightLevel(World world, int xCoord, int yCoord, int zCoord){
 		return worldObj.getSavedLightValue(EnumSkyBlock.Block, xCoord, yCoord, zCoord) < 1;
 	}
 	
+	protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord){
+	    return true;
+	}
+	
+    /**
+     * Drop 0-2 items of this living's type
+     */
+    @Override
+    protected void dropFewItems(boolean par1, int par2) {
+        CustomEntityList customEntity = CustomEntityList.getByEntity(this);
+        if (customEntity != null) {
+            Collection<ItemStack> loot = customEntity.modData.get().getLoot(rand, par2);
+            Iterator<ItemStack> lootIterator = loot.iterator();
+            while (lootIterator.hasNext()) {
+                ItemStack itemStack = lootIterator.next();
+                if (itemStack != null) {
+                    entityDropItem(itemStack, 1);
+                }
+            }
+        }
+    }
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeEntityToNBT(par1nbtTagCompound);

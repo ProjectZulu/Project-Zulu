@@ -19,6 +19,7 @@ public class PelicanDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(7, 5, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelPelican.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 =  (214 << 16) + (214 << 8) + 214;					eggColor2 = (168 << 16) + (62 << 8) + 10;
 		defaultBiomesToSpawn.add(BiomeGenBase.river.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.beach.biomeName);

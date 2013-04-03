@@ -19,6 +19,7 @@ public class OstrichDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelOstrich.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (25 << 16) + (18 << 8) + 14;						eggColor2 = (232 << 16) + (107 << 8) + 101;
 		

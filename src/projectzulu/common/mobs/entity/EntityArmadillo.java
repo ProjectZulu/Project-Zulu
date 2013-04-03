@@ -10,9 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
@@ -106,44 +104,21 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 		return this.texture;
 	}
 
-
-	/**
-	 * Checks if the entity's current position is a valid location to spawn this entity.
-	 */
 	@Override
-	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		boolean wasSuccesful = false;
-		
-		if (CustomEntityList.ARMADILLO.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
-				&& worldObj.canBlockSeeTheSky(var1, var2, var3)){
-			wasSuccesful = true;
-		}
-		
-//		if(CustomEntityList.getByName(EntityList.getEntityString(this)).modData.get().reportSpawningInLog){
-//			
-//		}
-		
-		if(CustomEntityList.ARMADILLO.modData.get().reportSpawningInLog){
-			if(wasSuccesful){
-				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}else{
-				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}
-		}
-		return wasSuccesful;
+	protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+	    return super.isValidLocation(world, xCoord, yCoord, zCoord) && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
 	}
-
-	public int getMaxHealth(){
+	
+	@Override
+    public int getMaxHealth(){
 		return 12;
 	}
 	
 	/**
 	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
 	 */
-	public int getTotalArmorValue() {
+	@Override
+    public int getTotalArmorValue() {
 		if(getEntityState() == EntityStates.inCover){
 			return 30;
 		}else{
@@ -154,7 +129,8 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){ return "sounds.armadilloliving"; }
+	@Override
+    protected String getLivingSound(){ return "sounds.armadilloliving"; }
 	
 	@Override
 	public void updateAIState() {
@@ -182,14 +158,14 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 
 				//Condition 2: Is the player facing the target. "boolean canSee"
 				double angleEntToPlayer = Math.atan2(posX-tempE.posX, tempE.posZ-posZ)*(180.0/Math.PI)+180;
-				double playerRotationYaw = (double)tempE.rotationYaw;
+				double playerRotationYaw = tempE.rotationYaw;
 				double difference = Math.abs( MathHelper.wrapAngleTo180_double( normalizeTo360(angleEntToPlayer) - normalizeTo360(playerRotationYaw) ));
 				if (difference < 90){
 					isFacing = true;
 				}
 				
 				//Condition 3: Can the player see the target
-				canSee = this.worldObj.rayTraceBlocks(worldObj.getWorldVec3Pool().getVecFromPool(tempE.posX, tempE.posY+(double)tempE.getEyeHeight(), tempE.posZ),
+				canSee = this.worldObj.rayTraceBlocks(worldObj.getWorldVec3Pool().getVecFromPool(tempE.posX, tempE.posY+tempE.getEyeHeight(), tempE.posZ),
 						worldObj.getWorldVec3Pool().getVecFromPool(this.posX,this.posY,this.posZ)) == null;
 			}
 			/* If any of the conditions above failed, then Armadillo should not be in Cover */
@@ -257,20 +233,6 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);
-		}
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.ARMADILLO.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
 		}
 	}
 	

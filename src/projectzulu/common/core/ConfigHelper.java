@@ -1,18 +1,58 @@
 package projectzulu.common.core;
 
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.blocks.StringHelper;
+import projectzulu.common.core.entitydeclaration.SpawnEntry;
 
 import com.google.common.base.Optional;
 
 public class ConfigHelper {
 	
+    public static SpawnEntry configGetSpawnEntry(Configuration config, String category, BiomeGenBase biome,
+            boolean shouldSpawn, int spawnRate, int minInChunk, int maxInChunk) {
+        Property spawnProperty = config.get(category, "Spawn Entry: " + biome.biomeName.toString() + ":"
+                + biome.getClass().toString().hashCode(),
+                Boolean.toString(shouldSpawn) + ":" + Integer.toString(spawnRate) + ":" + Integer.toString(minInChunk)
+                        + ":" + Integer.toString(maxInChunk));
+        String[] spawnProperties = spawnProperty.getString().split(":");
+        if (spawnProperties.length != 4) {
+            ProjectZuluLog.severe("Error Parseing %s as String %s is does not have the requried number of parameters",
+                    biome.biomeName, spawnProperty.getString());
+            return null;
+        }
+        Scanner scanner = new Scanner(spawnProperty.getString());
+        scanner.useDelimiter(":");
+        try {
+            shouldSpawn = scanner.hasNextBoolean() ? scanner.nextBoolean() : shouldSpawn;
+            spawnRate = scanner.hasNextInt() ? scanner.nextInt() : spawnRate;
+            minInChunk = scanner.hasNextInt() ? scanner.nextInt() : minInChunk;
+            maxInChunk = scanner.hasNextInt() ? scanner.nextInt() : maxInChunk;
+        } catch (NoSuchElementException e) {
+            ProjectZuluLog
+                    .severe("Error Parsing %s as the parameters in String %s are not in a parseable format. The Format is shouldSpawn:spawnRate:MinInChunk:MaxInChunk",
+                            biome.biomeName, spawnProperty.getString());
+            spawnProperty.set(Boolean.toString(shouldSpawn) + ":" + Integer.toString(spawnRate) + ":"
+                    + Integer.toString(minInChunk) + ":" + Integer.toString(maxInChunk));
+        } finally {
+            scanner.close();
+        }
+
+        if (shouldSpawn == true) {
+            return new SpawnEntry(biome, spawnRate, minInChunk, maxInChunk);
+        }
+        return null;
+    }
+    
 	public static EnumCreatureType configGetCreatureType(Configuration config, String category, String key, EnumCreatureType creatureType){
 		Property creatureProperty = config.get(category, key, creatureType != null ? creatureType.toString() : "None");
 		for (EnumCreatureType enumCreatureType : EnumCreatureType.values()) {

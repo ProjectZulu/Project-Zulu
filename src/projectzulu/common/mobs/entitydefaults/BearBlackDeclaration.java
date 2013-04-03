@@ -19,6 +19,7 @@ public class BearBlackDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelBlackBear.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (0 << 16) + (0 << 8) + 0;							eggColor2 = (23 << 16) + (17 << 8) + 17;
 		

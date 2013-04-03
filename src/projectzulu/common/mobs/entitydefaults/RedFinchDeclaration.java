@@ -17,9 +17,9 @@ public class RedFinchDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 5, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelFinch.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 1);
 
 		eggColor1 = (255 << 16) + (29 << 8) + 0;						eggColor2 = (255 << 16) + (203 << 8) + 186;
-		
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName); 
 		defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName); 
 		defaultBiomesToSpawn.add("Autumn Woods");						defaultBiomesToSpawn.add("Birch Forest");	

@@ -17,6 +17,7 @@ public class LizardDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelLizard.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (114 << 16) + (102 << 8) + 74;
 		eggColor2 = (181 << 16) + (171 << 8) + 146;

@@ -18,9 +18,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFollowOwner;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
@@ -107,30 +105,10 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 		return super.getTexture();
 	}
 	
-	/**
-	 * Checks if the entity's current position is a valid location to spawn this entity.
-	 */
 	@Override
-	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		boolean wasSuccesful = false;
-		
-		if (CustomEntityList.MAMMOTH.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
-				&& worldObj.canBlockSeeTheSky(var1, var2, var3))  {
-			wasSuccesful = true;
-		}
-		
-		if(CustomEntityList.MAMMOTH.modData.get().reportSpawningInLog){
-			if(wasSuccesful){
-				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}else{
-				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}
-		}
-		return wasSuccesful;
-	}
+    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
 	
 	@Override
 	public int getMaxHealth(){return 30;}
@@ -152,9 +130,9 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 		this.motionX /= 2.0D;
 		this.motionY /= 2.0D;
 		this.motionZ /= 2.0D;
-		this.motionX -= par3 / (double)var7 * (double)var8*0.2;
-		this.motionY += (double)var8;
-		this.motionZ -= par5 / (double)var7 * (double)var8*0.2;
+		this.motionX -= par3 / var7 * var8*0.2;
+		this.motionY += var8;
+		this.motionZ -= par5 / var7 * var8*0.2;
 
 		if (this.motionY > 0.1000000059604645D)
 		{
@@ -255,19 +233,6 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 			return true;
 		}else{
 			return super.isValidBreedingItem(itemStack);
-		}
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(4 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.MAMMOTH.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
 		}
 	}
 

@@ -18,6 +18,7 @@ public class CentipedeDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(1, 35, 1, 1);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelCentipede.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (77 << 16) + (22 << 8) + 17;						eggColor2 = (212 << 16) + (97 << 8) + 38;
 		defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.extremeHills.biomeName);

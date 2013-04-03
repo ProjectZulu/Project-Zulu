@@ -16,6 +16,7 @@ public class MinotaurDeclaration extends EggableDeclaration{
 		super("Minotaur", EntityMinotaur.class, EnumCreatureType.monster);		
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelMinotaur.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (51 << 16) + (34 << 8) + 8;			eggColor2 = (255 << 16) + (255 << 8) + 255;
 	}

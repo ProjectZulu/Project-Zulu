@@ -1,5 +1,7 @@
 package projectzulu.common.mobs.entityai;
 
+import java.util.EnumSet;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
@@ -30,6 +32,7 @@ public class EntityAIVultureFollow extends EntityAIBase
     
     float attackDistanceSq;
     int heightToFollow = 10;
+    private EnumSet<EntityStates> setOfValidStates = EnumSet.allOf(EntityStates.class);
     
     public EntityAIVultureFollow(EntityGenericCreature par1EntityLiving, Class par2Class, float par3, boolean par4, float attackDistanceSq) {
         this.attackTick = 0;
@@ -54,13 +57,19 @@ public class EntityAIVultureFollow extends EntityAIBase
         this(par1EntityLiving, null, par2, par3, attackDistanceSq);
     }
     
+    public EntityAIVultureFollow setValidStates(EnumSet<EntityStates> setOfValidStates){
+        this.setOfValidStates = setOfValidStates;
+        return this;
+    }
+    
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {    	
         EntityLiving var1 = this.attacker.getAttackTarget();
         
-        if(attacker.getEntityState() != EntityStates.following){
+        if(!setOfValidStates.contains(attacker.getEntityState())){
         	return false;
         }
         
@@ -84,6 +93,7 @@ public class EntityAIVultureFollow extends EntityAIBase
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         EntityLiving var1 = this.attacker.getAttackTarget();
         if(var1 == null || !this.entityTarget.isEntityAlive()){
@@ -105,6 +115,7 @@ public class EntityAIVultureFollow extends EntityAIBase
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         if(attacker.isEntityGrounded()){
             this.attacker.getNavigator().setPath(this.entityPathEntity, this.moveSpeed);
@@ -118,6 +129,7 @@ public class EntityAIVultureFollow extends EntityAIBase
     /**
      * Resets the task
      */
+    @Override
     public void resetTask() {
         this.entityTarget = null;
         this.attacker.getNavigator().clearPathEntity();
@@ -126,6 +138,7 @@ public class EntityAIVultureFollow extends EntityAIBase
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         this.attacker.getLookHelper().setLookPositionWithEntity(this.entityTarget, 30.0F, 30.0F);
         
@@ -142,7 +155,7 @@ public class EntityAIVultureFollow extends EntityAIBase
 
         /* Decrement attackTick and Try to Attack if Target is Close Enough*/
         this.attackTick = Math.max(this.attackTick - 1, 0);
-        double var1 = (double)(attackDistanceSq);        
+        double var1 = (attackDistanceSq);        
         if (this.attacker.getDistanceSq(this.entityTarget.posX, this.entityTarget.boundingBox.minY, this.entityTarget.posZ) <= var1) {
             if (this.attackTick <= 0)
             {

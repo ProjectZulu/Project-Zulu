@@ -11,7 +11,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -19,10 +18,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.api.ItemList;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
-import cpw.mods.fml.common.Loader;
 @Deprecated
 public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 {	
@@ -126,7 +122,8 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 	/**
 	 * Determines if an entity can be despawned, used on idle far away entities
 	 */
-	protected boolean canDespawn(){
+	@Override
+    protected boolean canDespawn(){
 		return false;
 	}
 
@@ -156,16 +153,19 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
-	public boolean isAIEnabled(){return false;}
+	@Override
+    public boolean isAIEnabled(){return false;}
 	/**
 	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
 	 */
-	public int getTotalArmorValue(){return 0;}
+	@Override
+    public int getTotalArmorValue(){return 0;}
 
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound){
+	@Override
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound){
 		super.writeEntityToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setShort("Anger", (short)this.angerLevel);
 		par1NBTTagCompound.setShort("LoveCooldown", (short)this.loveCooldown);
@@ -175,13 +175,15 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound){
+	@Override
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound){
 		super.readEntityFromNBT(par1NBTTagCompound);
 		this.angerLevel = par1NBTTagCompound.getShort("Anger");
 		this.loveCooldown = par1NBTTagCompound.getShort("LoveCooldown");
 	}
 
-	public void onUpdate(){
+	@Override
+    public void onUpdate(){
 		if(worldObj.difficultySetting == 0 && ProjectZulu_Core.despawnInPeaceful){
 			this.setDead();
 		}
@@ -243,7 +245,7 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 		}else if( isEntityInLove() ){ 
 			/* If In Love Mode, Cycle through Nearby Entities for a breeding Target*/
 			float var1 = 24.0F;
-			List beedingTargetList = worldObj.getEntitiesWithinAABB(this.getClass(), this.boundingBox.expand((double)var1, (double)var1, (double)var1));
+			List beedingTargetList = worldObj.getEntitiesWithinAABB(this.getClass(), this.boundingBox.expand(var1, var1, var1));
 			Iterator beedingTargetIterator = beedingTargetList.iterator();
 			EntityRideableZulu breedingTarget = null;
 			do
@@ -264,7 +266,7 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 
 		}else{
 			/* Check For Player Holding Breeding item */
-			EntityPlayer nearbyPlayer = (EntityPlayer)this.worldObj.getClosestPlayerToEntity(this, 100.0D);
+			EntityPlayer nearbyPlayer = this.worldObj.getClosestPlayerToEntity(this, 100.0D);
 			if(nearbyPlayer != null &&  isValidFollowItem(nearbyPlayer.inventory.getCurrentItem()) ){
 				targetedEntity = nearbyPlayer;
 				distToTarget = nearbyPlayer.getDistanceToEntity(this);
@@ -409,7 +411,7 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 				double var2 = this.rand.nextGaussian() * 0.02D;
 				double var4 = this.rand.nextGaussian() * 0.02D;
 				double var6 = this.rand.nextGaussian() * 0.02D;
-				this.worldObj.spawnParticle(var1, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, var2, var4, var6);
+				this.worldObj.spawnParticle(var1, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, var2, var4, var6);
 			}
 		}
 	}
@@ -467,9 +469,9 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 					double var6 = var2.nextGaussian() * 0.02D;
 					double var8 = var2.nextGaussian() * 0.02D;
 					this.worldObj.spawnParticle("heart",
-							this.posX + (double)(var2.nextFloat() * this.width * 2.0F) - (double)this.width,
-							this.posY + 0.5D + (double)(var2.nextFloat() * this.height),
-							this.posZ + (double)(var2.nextFloat() * this.width * 2.0F) - (double)this.width,
+							this.posX + var2.nextFloat() * this.width * 2.0F - this.width,
+							this.posY + 0.5D + var2.nextFloat() * this.height,
+							this.posZ + var2.nextFloat() * this.width * 2.0F - this.width,
 							var4, var6, var8);
 				}
 			}
@@ -609,9 +611,9 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 
 		for (int var6 = 0; var6 < 10; ++var6)
 		{
-			int var7 = MathHelper.floor_double(this.posX + (double)this.rand.nextInt(13) - 6.0D);
-			int var8 = MathHelper.floor_double(this.posY + (double)this.rand.nextInt(7) - 3.0D);
-			int var9 = MathHelper.floor_double(this.posZ + (double)this.rand.nextInt(13) - 6.0D);
+			int var7 = MathHelper.floor_double(this.posX + this.rand.nextInt(13) - 6.0D);
+			int var8 = MathHelper.floor_double(this.posY + this.rand.nextInt(7) - 3.0D);
+			int var9 = MathHelper.floor_double(this.posZ + this.rand.nextInt(13) - 6.0D);
 			float var10 = this.getBlockPathWeight(var7, var8, var9);
 
 			if (var10 > var5)
@@ -673,28 +675,6 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 		}else {
 			return super.interact(par1EntityPlayer);
 		}		
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = this.rand.nextInt(2 + par2);
-		int var4;
-
-		if(Loader.isModLoaded(DefaultProps.BlocksModId)){
-			if(var3 == 0){
-				if(ItemList.furPelt.isPresent()){
-					this.dropItem(ItemList.furPelt.get().itemID, 1);
-				}
-			}else{
-				this.dropItem(Item.beefRaw.itemID,1);
-			}
-		}else{
-			this.dropItem(Item.beefRaw.itemID,1);
-		}
-
 	}
 
 	@Override

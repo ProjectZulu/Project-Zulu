@@ -18,6 +18,7 @@ public class ElephantDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelElephant.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 4);
 
 		eggColor1 =  (88 << 16) + (67 << 8) + 50;				eggColor2 = (190 << 16) + (165 << 8) + 145;
 		

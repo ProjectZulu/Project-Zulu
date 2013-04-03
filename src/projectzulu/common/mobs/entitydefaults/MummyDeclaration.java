@@ -14,6 +14,7 @@ public class MummyDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(5, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender("projectzulu.common.mobs.models.ModelMummy", "projectzulu.common.mobs.renders.RenderGenericLiving");
+        setDropAmount(0, 2);
 
 		eggColor1 = (255 << 16) + (255 << 8) + 255;	
 		eggColor2 = (255 << 16) + (255 << 8) + 255;

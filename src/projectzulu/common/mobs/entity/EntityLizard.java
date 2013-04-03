@@ -10,14 +10,11 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsTarget;
 import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
@@ -56,43 +53,22 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
 	}
 
-	/**
-	 * Checks if the entity's current position is a valid location to spawn this entity.
-	 */
 	@Override
-	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		boolean wasSuccesful = false;
-		
-		if (CustomEntityList.LIZARD.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() 
-				&& worldObj.getClosestPlayerToEntity(this, 32) == null && this.worldObj.canBlockSeeTheSky(var1, var2, var3)){
-			wasSuccesful = true;
-		}
-		
-		if(CustomEntityList.LIZARD.modData.get().reportSpawningInLog){
-			if(wasSuccesful){
-				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}else{
-				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}
-		}
-		return wasSuccesful;
-	}
+    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
 	
     /**
      * Checks to make sure the light is not too bright where the mob is spawning
      */
-	@Override
+    @Override
     protected boolean isValidLightLevel(World world, int xCoord, int yCoord, int zCoord) {
         int var1 = xCoord;
         int var2 = yCoord;
         int var3 = zCoord;
         if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, var1, var2, var3) > this.rand.nextInt(32)) {
             return false;
-        }
-        else{
+        } else {
             int var4 = this.worldObj.getBlockLightValue(var1, var2, var3);
 
             if (this.worldObj.isThundering()) {
@@ -101,12 +77,12 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
                 var4 = this.worldObj.getBlockLightValue(var1, var2, var3);
                 this.worldObj.skylightSubtracted = var5;
             }
-
             return var4 <= this.rand.nextInt(8);
         }
     }
 	
-	public int getMaxHealth() {
+	@Override
+    public int getMaxHealth() {
 		return 20;
 	}
 
@@ -114,7 +90,8 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
-	public void onLivingUpdate() {
+	@Override
+    public void onLivingUpdate() {
 		if(this.worldObj.isDaytime() && !this.worldObj.isRemote && counter % (10*20) == 0){
 			heal(1);
 		}
@@ -138,7 +115,7 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 			if(tempTarget != null && getDistanceToEntity(tempTarget) < 15){
 
 				double var11 = tempTarget.posX - this.posX;
-				double var13 = tempTarget.boundingBox.minY + (double)(tempTarget.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
+				double var13 = tempTarget.boundingBox.minY + tempTarget.height / 2.0F - (this.posY + this.height / 2.0F);
 				double var15 = tempTarget.posZ - this.posZ;
 
 				if(!worldObj.isRemote){
@@ -146,7 +123,7 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 					double var18 = 1.0D;
 					Vec3 var20 = this.getLook(1.0F);
 					var17.posX = this.posX + var20.xCoord * var18;
-					var17.posY = this.posY + (double)(this.height / 2.0F);
+					var17.posY = this.posY + this.height / 2.0F;
 					var17.posZ = this.posZ + var20.zCoord * var18;
 					this.worldObj.spawnEntityInWorld(var17);
 				}
@@ -169,26 +146,15 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound() { return "sounds.lizardhurt"; }
+	@Override
+    protected String getHurtSound() { return "sounds.lizardhurt"; }
 
 	/**
 	 * Plays step sound at given x, y, z for the entity
 	 */
-	protected void playStepSound(int par1, int par2, int par3, int par4) {
+	@Override
+    protected void playStepSound(int par1, int par2, int par3, int par4) {
 		this.worldObj.playSoundAtEntity(this, "mob.irongolem.walk", 1.0F, 1.0F);
-	}
-
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	protected void dropFewItems(boolean par1, int par2) {
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.LIZARD.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
 	}
 
 	@Override

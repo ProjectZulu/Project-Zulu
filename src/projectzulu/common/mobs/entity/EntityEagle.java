@@ -4,12 +4,8 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFlyingWander;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
@@ -38,13 +34,15 @@ public class EntityEagle extends EntityGenericAnimal{
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.
 	 */
-	protected void fall(float par1){}
+	@Override
+    protected void fall(float par1){}
 
 	/**
 	 * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
 	 * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
 	 */
-	protected void updateFallState(double par1, boolean par3) {}
+	@Override
+    protected void updateFallState(double par1, boolean par3) {}
 
 
 	@Override
@@ -53,65 +51,33 @@ public class EntityEagle extends EntityGenericAnimal{
 		return super.getTexture();
 	}
 	
-	/**
-	 * Checks if the entity's current position is a valid location to spawn this entity.
-	 */
-	@Override
-	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		boolean wasSuccesful = false;
-		
-		if (CustomEntityList.EAGLE.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere() 
-				&& worldObj.getClosestPlayerToEntity(this, 32) == null && this.worldObj.getSavedLightValue(EnumSkyBlock.Block, var1, var2, var3) < 1
-				&& worldObj.canBlockSeeTheSky(var1, var2, var3) ){
-			wasSuccesful = true;
-		}
-		
-		if(CustomEntityList.EAGLE.modData.get().reportSpawningInLog){
-			if(wasSuccesful){
-				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}else{
-				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
-			}
-		}
-		return wasSuccesful;
-	}
+    @Override
+    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
 	
-	public int getMaxHealth() {
+	@Override
+    public int getMaxHealth() {
 		return 20;
 	}
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound(){
+	@Override
+    protected String getLivingSound(){
 		return "sounds.eagleliving";
 	}
 	
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound(){
+	@Override
+    protected String getHurtSound(){
 		return "sounds.eaglehurt";
 	}
 	
 	@Override
 	public boolean isValidBreedingItem(ItemStack itemStack) {
 		return false;
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.EAGLE.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
-		}
 	}
 }

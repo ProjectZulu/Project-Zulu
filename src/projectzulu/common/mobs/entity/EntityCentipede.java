@@ -4,9 +4,8 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
@@ -39,9 +38,39 @@ public class EntityCentipede extends EntityMaster implements IMob{
 		return texture;
 	}
 	
-	public int getMaxHealth(){
+	@Override
+    public int getMaxHealth(){
 		return 20;
 	}
+	
+    /**
+     * Checks to make sure the light is not too bright where the mob is spawning
+     */
+    @Override
+    protected boolean isValidLightLevel(World world, int xCoord, int yCoord, int zCoord) {
+        int var1 = xCoord;
+        int var2 = yCoord;
+        int var3 = zCoord;
+        if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, var1, var2, var3) > this.rand.nextInt(32)) {
+            return false;
+        } else {
+            int var4 = this.worldObj.getBlockLightValue(var1, var2, var3);
+
+            if (this.worldObj.isThundering()) {
+                int var5 = this.worldObj.skylightSubtracted;
+                this.worldObj.skylightSubtracted = 10;
+                var4 = this.worldObj.getBlockLightValue(var1, var2, var3);
+                this.worldObj.skylightSubtracted = var5;
+            }
+
+            return var4 <= this.rand.nextInt(8);
+        }
+    }
+
+    @Override
+    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
 	
 	@Override
 	public int getTotalArmorValue() {
@@ -55,20 +84,6 @@ public class EntityCentipede extends EntityMaster implements IMob{
 		float var3 = this.getBrightness(1.0F);
 		if(var3 < 0.5){
 			angerLevel = 120;
-		}
-	}
-	
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(2 + par2);
-		for (int i = 0; i < var3; i++) {
-			ItemStack loot = CustomEntityList.CENTIPEDE.modData.get().getLootItem(rand);
-			if(loot != null){
-				entityDropItem(loot, 1);
-			}
 		}
 	}
 }

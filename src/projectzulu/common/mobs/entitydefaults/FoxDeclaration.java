@@ -19,6 +19,7 @@ public class FoxDeclaration extends SpawnableDeclaration{
 		setSpawnProperties(10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelFox.class, "projectzulu.common.mobs.renders.RenderTameable");
+        setDropAmount(0, 2);
 
 		eggColor1 = (204 << 16) + (132 << 8) + 22;
 		eggColor2 = (224 << 16) + (224 << 8) + 224;
@@ -34,7 +35,8 @@ public class FoxDeclaration extends SpawnableDeclaration{
 		defaultBiomesToSpawn.add("Woodlands");
 	}
 	
-	public void outputDataToList(Configuration config, CustomMobData customMobData) {
+	@Override
+    public void outputDataToList(Configuration config, CustomMobData customMobData) {
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.beefRaw, 0, 5);		
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.furPelt, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 15);
