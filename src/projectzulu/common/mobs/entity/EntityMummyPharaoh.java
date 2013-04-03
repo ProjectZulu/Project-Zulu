@@ -62,7 +62,6 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
     	this(par1World);
     	this.setSize(0.6F, 1.4F);
 		this.moveSpeed = 0.4f;
-		this.texture = DefaultProps.mobDiretory + "mummy_pharaoh.png";
 		
 		setLocationAndAngles(parx, pary, parz, 1, 1);
 		setPosition(parx, pary, parz);
@@ -92,7 +91,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	
 	@Override
     public String getTexture(){
-    	return DefaultProps.mobDiretory + "Mummy_Pharaoh.png";
+        return DefaultProps.mobDiretory + "mummy_pharaoh.png";
     }
 
 	@Override
