@@ -109,8 +109,8 @@ public class ModelHauntedArmor extends ModelBase {
 	    var4 = var5.getCurrentArmor(3 - 2);
 	    if (var4 != null && var4.getItem() instanceof ItemArmor) {
 		ItemArmor var6 = (ItemArmor) var4.getItem();
-		textureLocation = ForgeHooksClient.getArmorTexture(var4, "/armor/"
-			+ RenderBiped.bipedArmorFilenamePrefix[var6.renderIndex] + "_" + 2 + ".png");
+		textureLocation = ForgeHooksClient.getArmorTexture(par1Entity, var4, "/armor/"
+            + RenderBiped.bipedArmorFilenamePrefix[var6.renderIndex] + "_" + 2 + ".png", 2, 1);
 	    }
 	    GL11.glBindTexture(GL11.GL_TEXTURE_2D,
 		    ModLoader.getMinecraftInstance().renderEngine.getTexture(textureLocation));
@@ -122,8 +122,8 @@ public class ModelHauntedArmor extends ModelBase {
 	    var4 = var5.getCurrentArmor(3 - 1);
 	    if (var4 != null && var4.getItem() instanceof ItemArmor) {
 		ItemArmor var6 = (ItemArmor) var4.getItem();
-		textureLocation = ForgeHooksClient.getArmorTexture(var4, "/armor/"
-			+ RenderBiped.bipedArmorFilenamePrefix[var6.renderIndex] + "_" + 1 + ".png");
+		textureLocation = ForgeHooksClient.getArmorTexture(par1Entity, var4, "/armor/"
+		        + RenderBiped.bipedArmorFilenamePrefix[var6.renderIndex] + "_" + 1 + ".png", 1, 1);
 	    }
 	    GL11.glBindTexture(GL11.GL_TEXTURE_2D,
 		    ModLoader.getMinecraftInstance().renderEngine.getTexture(textureLocation));
