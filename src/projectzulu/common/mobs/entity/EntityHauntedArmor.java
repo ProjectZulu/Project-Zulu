@@ -62,10 +62,10 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
     }
 
     public void setPersistenceRequired(boolean persistenceRequired) {
-        if (ObfuscationHelper.isUnObfuscated(EntityLiving.class, "EntityLiving")) {
+        try {
+            ObfuscationHelper.setCatchableFieldUsingReflection("field_82179_bU", EntityLiving.class, this, true, true);
+        } catch (NoSuchFieldException e) {
             ObfuscationHelper.setFieldUsingReflection("persistenceRequired", EntityLiving.class, this, true, true);
-        } else {
-            ObfuscationHelper.setFieldUsingReflection("field_82179_bU", EntityLiving.class, this, true, true);
         }
     }
 
