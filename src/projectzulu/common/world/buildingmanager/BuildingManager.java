@@ -41,7 +41,10 @@ public abstract class BuildingManager {
 	public abstract void createSpecial(Vec3 startingPos, int width, int floorHeight, int floorNumber, int cellSize);
 
 	protected void HandleBlockPlacement(BlockWithMeta blockWithMeta, ChunkCoordinates position, Random random){
-		
+        if (!world.blockExists(position.posX, position.posY, position.posZ)) {
+            return;
+        }
+	    
 		/* Check if There is a Tile At This Block, if so, remove it
 		 * This Doesn't Seem to Work, So Block Is only placed if there is not TileEntity so as to prevent crash
 		 */
@@ -50,7 +53,6 @@ public abstract class BuildingManager {
 			tileEntity.invalidate();
 			world.removeBlockTileEntity(position.posX, position.posY, position.posZ);
 		}else{
-			
 			/* Check Block to See How Block wants to be Placed */
 			blockWithMeta.placeBlock(world, position, random);
 		}
