@@ -17,9 +17,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCreeperBlossom extends BlockFlower{
 
-	public BlockCreeperBlossom(int par1, int par2){
+	public BlockCreeperBlossom(int par1){
 		super(par1, Material.tnt);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setHardness(0.5F);
+        setStepSound(Block.soundGrassFootstep);
 	}
 	
 	@Override
@@ -31,7 +33,8 @@ public class BlockCreeperBlossom extends BlockFlower{
 	/**
 	 * Returns the quantity of items to drop on block destruction.
 	 */
-	public int quantityDropped(Random par1Random){
+	@Override
+    public int quantityDropped(Random par1Random){
 		return 1;
 	}
 
@@ -40,7 +43,7 @@ public class BlockCreeperBlossom extends BlockFlower{
 	 */
 	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4){
 		if (!par1World.isRemote){
-			EntityCreeperBlossomPrimed var5 = new EntityCreeperBlossomPrimed(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F));
+			EntityCreeperBlossomPrimed var5 = new EntityCreeperBlossomPrimed(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F);
 			var5.fuse = par1World.rand.nextInt(var5.fuse / 4) + var5.fuse / 8;
 			par1World.spawnEntityInWorld(var5);
 		}
@@ -49,10 +52,11 @@ public class BlockCreeperBlossom extends BlockFlower{
 	/**
 	 * Called whenever an entity is walking on top of this block. Args: world, x, y, z, entity
 	 */
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
+	@Override
+    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		
 		if(par5Entity instanceof EntityPlayer && !par1World.isRemote && !((EntityPlayer)par5Entity).isSneaking()){
-			EntityCreeperBlossomPrimed var6 = new EntityCreeperBlossomPrimed(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F));
+			EntityCreeperBlossomPrimed var6 = new EntityCreeperBlossomPrimed(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F);
 			par1World.spawnEntityInWorld(var6);
 			par1World.playSoundAtEntity(var6, "random.fuse", 1.0F, 1.0F);
 			par1World.setBlock(par2, par3, par4, 0);
@@ -68,7 +72,8 @@ public class BlockCreeperBlossom extends BlockFlower{
 	 * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
 	 * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
 	 */
-	protected ItemStack createStackedBlock(int par1){
+	@Override
+    protected ItemStack createStackedBlock(int par1){
 		return null;
 	}
 

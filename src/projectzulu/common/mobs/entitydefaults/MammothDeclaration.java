@@ -33,9 +33,9 @@ public class MammothDeclaration extends SpawnableDeclaration{
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.furPelt, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems,
 				ItemGenerics.Properties.LargeHeart.meta(), 4);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems,
 				ItemGenerics.Properties.Tusk.meta(), 4);
 		super.outputDataToList(config, customMobData);
 	}

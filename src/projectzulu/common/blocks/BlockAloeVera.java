@@ -22,10 +22,12 @@ public class BlockAloeVera extends BlockFlower {
     @SideOnly(Side.CLIENT)
     private Icon[] blockIcons;
 
-	public BlockAloeVera(int i, int j){
+	public BlockAloeVera(int i){
 		super(i, Material.plants);
 		setTickRandomly(true);
-		this.disableStats();
+		disableStats();
+		setHardness(0);
+		setStepSound(soundGrassFootstep);
 	}
 	
     @Override
@@ -227,14 +229,17 @@ public class BlockAloeVera extends BlockFlower {
         return ret;
     }
 	
+    @Override
     public boolean isOpaqueCube(){
             return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock(){
             return false;
     }
 
+    @Override
     public int getRenderType(){
             return 1;
     }

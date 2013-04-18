@@ -9,15 +9,18 @@ import projectzulu.common.ProjectZulu_Core;
 
 public class BlockPalmTreeLog extends Block{
 	
-    public BlockPalmTreeLog(int par1, int par2){
+    public BlockPalmTreeLog(int par1){
         super(par1, Material.wood);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         Block.setBurnProperties(this.blockID, 5, 20);
+        setHardness(2.0F);
+        setStepSound(soundWoodFootstep);
     }
 
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType(){
         return 0;
     }
@@ -25,6 +28,7 @@ public class BlockPalmTreeLog extends Block{
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random){
         return 1;
     }
@@ -32,6 +36,7 @@ public class BlockPalmTreeLog extends Block{
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3){
         return this.blockID;
     }
@@ -39,6 +44,7 @@ public class BlockPalmTreeLog extends Block{
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
+    @Override
     public int damageDropped(int par1){
         return par1;
     }    
@@ -46,6 +52,7 @@ public class BlockPalmTreeLog extends Block{
     /**
      * ejects contained items into the world, and notifies neighbors of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6){
         byte var7 = 4;
         int var8 = var7 + 1;

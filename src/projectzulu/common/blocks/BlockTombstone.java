@@ -1,5 +1,6 @@
 package projectzulu.common.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -26,7 +27,9 @@ public class BlockTombstone extends BlockContainer{
         
         float var4 = 0.4F;
         float var5 = 1.0F;
-        this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var5, 0.5F + var4);
+        setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var5, 0.5F + var4);
+        setHardness(0.5F);
+        setStepSound(Block.soundMetalFootstep);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -38,6 +41,7 @@ public class BlockTombstone extends BlockContainer{
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4){
         return null;
     }
@@ -45,6 +49,7 @@ public class BlockTombstone extends BlockContainer{
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType(){
         return -1;
     }
@@ -52,10 +57,12 @@ public class BlockTombstone extends BlockContainer{
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock(){
         return false;
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4){
         return true;
     }
@@ -64,6 +71,7 @@ public class BlockTombstone extends BlockContainer{
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube(){
         return false;
     }
@@ -71,6 +79,7 @@ public class BlockTombstone extends BlockContainer{
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World){
         try{
             return (TileEntity)this.signEntityClass.newInstance();
@@ -98,9 +107,9 @@ public class BlockTombstone extends BlockContainer{
 	public boolean onBlockActivated(World par1World, int par2, int par3,
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
-		if(par5EntityPlayer instanceof EntityPlayer && ((EntityPlayer)par5EntityPlayer).inventory.getCurrentItem() != null
-				&& isValidItemForEditing( ((EntityPlayer)par5EntityPlayer).inventory.getCurrentItem().getItem().itemID ) ){
-			((EntityPlayer)par5EntityPlayer).openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
+		if(par5EntityPlayer instanceof EntityPlayer && par5EntityPlayer.inventory.getCurrentItem() != null
+				&& isValidItemForEditing( par5EntityPlayer.inventory.getCurrentItem().getItem().itemID ) ){
+			par5EntityPlayer.openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
 			return true;
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);

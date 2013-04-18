@@ -18,12 +18,14 @@ public class BlockZuluSlab extends BlockWoodSlab{
 	Block baseBlock;	
 	public BlockZuluSlab(int id, boolean isDouble, Block baseBlock) {
 		super(id, isDouble);
-		
 		if (!isDouble) singleSlabID = id;
 		this.baseBlock = baseBlock;
 		setBurnProperties(blockID, 5, 20);
 		setLightOpacity(0);
-        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setHardness(2.0F);
+        setResistance(5.0F);
+        setStepSound(soundWoodFootstep);
+        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 	}	
 	
 	@Override

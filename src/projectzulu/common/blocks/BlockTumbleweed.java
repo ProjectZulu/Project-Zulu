@@ -14,11 +14,12 @@ public class BlockTumbleweed extends Block
 {
 	boolean prepareToSummonBoss = false;
 
-	public BlockTumbleweed(int par1, int par2)
+	public BlockTumbleweed(int par1)
     {
         super(par1, Material.plants);
-        //this.setTickRandomly(true);
-        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setHardness(0.7F);
+        setStepSound(Block.soundWoodFootstep);
     }
 	
     @SideOnly(Side.CLIENT)
@@ -27,11 +28,13 @@ public class BlockTumbleweed extends Block
             return DefaultProps.blockSpriteSheet;
     }
 
-	public int quantityDropped(Random random){
+	@Override
+    public int quantityDropped(Random random){
 		return 1;
 	}
 
-	public int idDropped(int i, Random random, int j){
+	@Override
+    public int idDropped(int i, Random random, int j){
 		
 		return this.blockID;
 	}
@@ -39,6 +42,7 @@ public class BlockTumbleweed extends Block
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
     	super.onBlockAdded(par1World, par2, par3, par4);

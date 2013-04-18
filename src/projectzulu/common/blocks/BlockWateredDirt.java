@@ -17,8 +17,10 @@ public class BlockWateredDirt extends Block{
     @SideOnly(Side.CLIENT)
     private Icon[] icons;
     
-	public BlockWateredDirt(int par1, int par2){
+	public BlockWateredDirt(int par1){
         super(par1, Material.sand);
+        setHardness(0.5f);
+        setResistance(1.0f);
     }
 	
     @Override
@@ -79,6 +81,7 @@ public class BlockWateredDirt extends Block{
     /**
      * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public int getRenderBlockPass(){
         return 0;
@@ -88,6 +91,7 @@ public class BlockWateredDirt extends Block{
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube(){
         return false;
     }
@@ -95,11 +99,13 @@ public class BlockWateredDirt extends Block{
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-	public boolean renderAsNormalBlock(){
+	@Override
+    public boolean renderAsNormalBlock(){
 		return true;
 	}
 
-	public int getRenderType(){
+	@Override
+    public int getRenderType(){
 	return 0;
 	}
 }

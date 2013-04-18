@@ -30,9 +30,9 @@ public class HornbillDeclaration extends SpawnableDeclaration{
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.chickenRaw, 0, 10);
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems,
 				ItemGenerics.Properties.SmallHeart.meta(), 4);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems,
 				ItemGenerics.Properties.Talon.meta(), 4);
 		super.outputDataToList(config, customMobData);
 	}

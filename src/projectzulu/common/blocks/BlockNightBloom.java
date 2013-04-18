@@ -25,11 +25,13 @@ public class BlockNightBloom extends BlockFlower{
 		return tickInterval;
 	}
 
-	public BlockNightBloom(int i, int j){
+	public BlockNightBloom(int i){
 		super(i, Material.plants);
 		setTickRandomly(true);
-        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-		this.disableStats();
+        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+		disableStats();
+		setHardness(0.5F);
+        setStepSound(Block.soundGrassFootstep);
 	}
 	
     @Override
@@ -103,18 +105,22 @@ public class BlockNightBloom extends BlockFlower{
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}
 	
+    @Override
     public boolean isOpaqueCube(){
             return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock(){
             return false;
     }
 
+    @Override
     public int getRenderType(){
             return 1;
     }
         
+    @Override
     protected boolean canThisPlantGrowOnThisBlockID(int i){
             return i == Block.grass.blockID || i == Block.dirt.blockID || i == Block.tilledField.blockID  
             		|| ( BlockList.wateredDirt.isPresent() && i == BlockList.wateredDirt.get().blockID);
