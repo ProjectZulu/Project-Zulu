@@ -59,13 +59,13 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
     @Override
     public final void register(Side side) {
         if (isCreated) {
-            if(!(side == Side.SERVER)){
-                clientRegisterBlock(side);
+            if(!side.isServer()){
+                clientRegisterBlock();
             }
             registerBlock();
         }
     }
 
     protected abstract void registerBlock();
-    protected void clientRegisterBlock(Side side){};
+    protected void clientRegisterBlock(){};
 }

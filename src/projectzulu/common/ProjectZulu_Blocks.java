@@ -90,7 +90,7 @@ public class ProjectZulu_Blocks {
 
     @Init
     public void load(FMLInitializationEvent event) {
-        ProjectZulu_Core.proxy.registerSimpleBlockRenderingHandlers();
+        
     }
 
     @PostInit
