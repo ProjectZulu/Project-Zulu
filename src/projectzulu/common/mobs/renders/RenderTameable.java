@@ -10,7 +10,7 @@ import net.minecraft.entity.EntityLiving;
 
 import org.lwjgl.opengl.GL11;
 
-import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.Properties;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entity.EntityGenericAnimal;
 import projectzulu.common.mobs.entity.EntityGenericTameable;
@@ -57,7 +57,7 @@ public class RenderTameable extends RenderLiving {
         double var10 = tameableEntity.getDistanceSqToEntity(this.renderManager.livingPlayer);
         if (var10 <= par9 * par9) {
             FontRenderer var12 = this.getFontRendererFromRenderManager();
-            float var14 = ProjectZulu_Core.namePlateScale;
+            float var14 = Properties.namePlateScale;
             GL11.glPushMatrix();
             GL11.glTranslatef((float) par3 + 0.0F, (float) par5 + tameableEntity.height, (float) par7);
             GL11.glNormal3f(0.0F, 1.0F, 0.0F);
@@ -75,7 +75,7 @@ public class RenderTameable extends RenderLiving {
             /* Set Name Plate Opacity */
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, ProjectZulu_Core.namePlateOpacity);
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, Properties.namePlateOpacity);
 
             /* Draw Background */
             String textureLocation = DefaultProps.coreDiretory + "gui/guielements.png";

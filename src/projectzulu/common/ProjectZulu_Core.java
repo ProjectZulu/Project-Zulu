@@ -65,13 +65,6 @@ public class ProjectZulu_Core {
 
     public static boolean enableTestBlock = false;
     public static boolean enableTemperature = false;
-    public static boolean tombstoneOnDeath = true;
-    public static boolean replaceFlowerPot = true;
-
-    /* Mob Spawn Controls */
-    public static boolean despawnInPeaceful = true;
-    public static float namePlateScale = 0.016666668F * 1.6f * 0.5f;
-    public static float namePlateOpacity = 0.85F;
 
     public static int testBlockID = 2540;
     public static Block testBlock;
@@ -102,24 +95,12 @@ public class ProjectZulu_Core {
         ProjectZuluLog.configureLogging();
         Configuration zuluConfig = new Configuration(new File(event.getModConfigurationDirectory(),
                 DefaultProps.configDirectory + DefaultProps.defaultConfigFile));
-
+        Properties.loadFromConfig(modConfigDirectoryFile);
         zuluConfig.load();
         enableTestBlock = zuluConfig.get("Developer Debug Variables", "enableTestBlock", enableTestBlock).getBoolean(
                 enableTestBlock);
-        // enableTemperature = zuluConfig.get("General Controls", "enableTemperature",
-        // enableTemperature).getBoolean(enableTemperature);
-
-        tombstoneOnDeath = zuluConfig.get("General Controls", "Drop Tombstone On Death", tombstoneOnDeath).getBoolean(
-                tombstoneOnDeath);
-        replaceFlowerPot = zuluConfig.get("General Controls", "Replace Default Flower Pot", replaceFlowerPot)
-                .getBoolean(replaceFlowerPot);
-        despawnInPeaceful = zuluConfig.get("MOB CONTROLS", "despawnInPeaceful", despawnInPeaceful).getBoolean(
-                despawnInPeaceful);
-
-        namePlateScale = (float) zuluConfig.get("MOB CONTROLS", "namePlateScale", namePlateScale).getDouble(
-                namePlateScale);
-        namePlateOpacity = (float) zuluConfig.get("MOB CONTROLS", "namePlateOpacity", namePlateOpacity).getDouble(
-                namePlateScale);
+        enableTemperature = zuluConfig.get("General Controls", "enableTemperature", enableTemperature).getBoolean(
+                enableTemperature);
         zuluConfig.save();
 
         /* Should Enable Temperature System ? */
@@ -143,19 +124,24 @@ public class ProjectZulu_Core {
         }
         NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
 
+        ProjectZuluLog.info("Load Entity Models and Render");
         ProjectZulu_Core.proxy.registerModelsAndRender();
+        
         ProjectZuluLog.info("Load Entity Properties");
         CustomEntityManager.INSTANCE.loadCreaturesFromConfig(modConfigDirectoryFile);
-        ProjectZuluLog.info("Starting ItemBlock Setup ");
+        
+        ProjectZuluLog.info("Starting ItemBlock Setup");
         ItemBlockManager.INSTANCE.createBlocks(modConfigDirectoryFile);
-        ProjectZuluLog.info("Starting ItemBlock Registration ");
+        
+        ProjectZuluLog.info("Starting ItemBlock Registration");
         ItemBlockManager.INSTANCE.registerBlocks();
+        
+        ProjectZuluLog.info("Registering Entites");
+        CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
     }
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {
-        ProjectZuluLog.info("Registering Entites");
-        CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
 
         ProjectZuluLog.info("Registering Events");
         MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
@@ -166,5 +152,4 @@ public class ProjectZulu_Core {
         ProjectZuluLog.info("Register Entity Spawns");
         CustomEntityManager.INSTANCE.addSpawns();
     }
-
 }

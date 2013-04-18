@@ -20,7 +20,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
-import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.Properties;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.TileEntityTombstone;
@@ -155,7 +155,7 @@ public class EventHookContainerClass {
 //			}
 //		}
 		
-		if( (Loader.isModLoaded(DefaultProps.MobsModId) && ProjectZulu_Core.tombstoneOnDeath 
+		if( (Loader.isModLoaded(DefaultProps.MobsModId) && Properties.tombstoneOnDeath 
 				&& event.entity instanceof EntityPlayer && BlockList.tombstone.isPresent() )){
 			EntityPlayer player = (EntityPlayer)event.entity;
 			World worldObj = player.worldObj;
@@ -221,7 +221,7 @@ public class EventHookContainerClass {
 					Iterator entIterator = listOfTreeEnts.iterator();
 					while(entIterator.hasNext()){
 						Entity entity = (Entity)entIterator.next();
-						if( ((EntityTreeEnt)entity).getAngerLevel() <= 0 && worldObj.rayTraceBlocks(worldObj.getWorldVec3Pool().getVecFromPool(player.posX, player.posY+(double)player.getEyeHeight(), player.posZ),
+						if( ((EntityTreeEnt)entity).getAngerLevel() <= 0 && worldObj.rayTraceBlocks(worldObj.getWorldVec3Pool().getVecFromPool(player.posX, player.posY+player.getEyeHeight(), player.posZ),
 								worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY, entity.posZ)) == null  ){
 							
 							if(!worldObj.isRemote){

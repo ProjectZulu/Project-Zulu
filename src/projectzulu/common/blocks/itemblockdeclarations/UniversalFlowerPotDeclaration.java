@@ -3,6 +3,7 @@ package projectzulu.common.blocks.itemblockdeclarations;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.Properties;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.BlockUniversalFlowerPot;
 import projectzulu.common.blocks.ItemUniversalFlowerPot;
@@ -33,7 +34,7 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        if (ProjectZulu_Core.replaceFlowerPot) {
+        if (Properties.replaceFlowerPot) {
             Block.blocksList[Block.flowerPot.blockID] = null;
             BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(Block.flowerPot.blockID, renderID)
                     .setUnlocalizedName("flowerPot"));
@@ -46,7 +47,7 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
 
     @Override
     protected void registerBlock() {
-        if (!ProjectZulu_Core.replaceFlowerPot) {
+        if (!Properties.replaceFlowerPot) {
             Block block = BlockList.universalFlowerPot.get();
             GameRegistry.registerBlock(block, name.toLowerCase());
             LanguageRegistry.addName(block, "Universal Flower Pot");

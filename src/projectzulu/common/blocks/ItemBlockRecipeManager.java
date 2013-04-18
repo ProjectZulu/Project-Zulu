@@ -10,7 +10,7 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.Properties;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ItemGenerics;
@@ -111,7 +111,7 @@ public class ItemBlockRecipeManager {
 		}
 		
 		/* Flower Pot */
-		if(!ProjectZulu_Core.replaceFlowerPot){
+		if(!Properties.replaceFlowerPot){
 			addShapelessRecipe(new OptionalItemStack(Item.flowerPot), new OptionalItemStack(BlockList.universalFlowerPot) );
 			addShapelessRecipe(new OptionalItemStack(BlockList.universalFlowerPot), new OptionalItemStack(Item.flowerPot) );
 		}
