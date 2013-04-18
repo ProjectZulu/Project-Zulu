@@ -32,7 +32,7 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
     }
 
     @Override
-    public void loadFromConfig(Configuration config, boolean readOnly) {
+    public final void createWithConfig(Configuration config, boolean readOnly) {
         /* ID Not -1 indicates ItemBlock is already loaded */
         if (iD != -1) {
             return;
@@ -44,14 +44,20 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
         }
         if (property != null || !readOnly) {
             iD = config.getBlock(key, ProjectZulu_Core.getNextDefaultBlockID()).getInt();
+            preCreateLoadConfig(config);
+            if (iD > 0 && !isCreated) {
+                isCreated = createBlock(iD);
+            }
+            postCreateLoadConfig(config);
         }
     }
 
-    @Override
-    public final void create() {
-        if (iD > 0 && !isCreated) {
-            isCreated = createBlock(iD);
-        }
+    protected void preCreateLoadConfig(Configuration config) {
+
+    }
+
+    protected void postCreateLoadConfig(Configuration config) {
+
     }
 
     protected abstract boolean createBlock(int iD);
@@ -59,7 +65,7 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
     @Override
     public final void register(Side side) {
         if (isCreated) {
-            if(!side.isServer()){
+            if (!side.isServer()) {
                 clientRegisterBlock();
             }
             registerBlock();
@@ -67,5 +73,7 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
     }
 
     protected abstract void registerBlock();
-    protected void clientRegisterBlock(){};
+
+    protected void clientRegisterBlock() {
+    };
 }

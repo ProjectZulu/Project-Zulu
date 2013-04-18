@@ -22,14 +22,7 @@ public interface ItemBlockDeclaration {
      * @param config Configuration file to read save from
      * @param readOnly Boolean indicating this is the pass for ItemBlock already in the Configuration file
      */
-    public abstract void loadFromConfig(Configuration config, boolean readOnly);
-
-    /**
-     * Creates the ItemBlock and registers it in the Item/Block Lists
-     * 
-     * Called Twice, can be called twice once for Blocks already in Config, then a Second time for newly added blocks.
-     */
-    public abstract void create();
+    public abstract void createWithConfig(Configuration config, boolean readOnly);
 
     /**
      * Registers the Created Block with the Environment

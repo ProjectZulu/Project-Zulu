@@ -32,7 +32,7 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
     }
 
     @Override
-    public void loadFromConfig(Configuration config, boolean readOnly) {
+    public void createWithConfig(Configuration config, boolean readOnly) {
         if (iD != -1) {
             return;
         }
@@ -44,14 +44,20 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
         }
         if (property != null || !readOnly) {
             iD = config.getItem(key, ProjectZulu_Core.getNextDefaultItemID()).getInt();
+            preCreateLoadConfig(config);
+            if (iD > 0 && !isCreated) {
+                isCreated = createItem(iD);
+            }
+            postCreateLoadConfig(config);
         }
     }
+    
+    protected void preCreateLoadConfig(Configuration config) {
 
-    @Override
-    public final void create() {
-        if (iD > 0 && !isCreated) {
-            isCreated = createItem(iD);
-        }
+    }
+
+    protected void postCreateLoadConfig(Configuration config) {
+
     }
 
     protected abstract boolean createItem(int iD);

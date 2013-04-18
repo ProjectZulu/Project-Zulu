@@ -33,8 +33,7 @@ public enum ItemBlockManager {
             hasNextPass = false;
             for (ItemBlockDeclaration itemBlock : itemBlocks) {
                 if (currentRenderPass == itemBlock.getRegisterPass()) {
-                    itemBlock.loadFromConfig(config, readOnly);
-                    itemBlock.create();
+                    itemBlock.createWithConfig(config, readOnly);
                 } else if (currentRenderPass < itemBlock.getRegisterPass()) {
                     hasNextPass = true;
                 }
