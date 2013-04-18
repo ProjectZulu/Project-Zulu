@@ -7,7 +7,7 @@ import projectzulu.common.ProjectZulu_Core;
 public abstract class ItemDeclaration implements ItemBlockDeclaration {
 
     private int registerPass;
-    private String name;
+    public final String name;
     private int iD = -1;
     private boolean isCreated = false;
     
@@ -41,8 +41,8 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
         if (readOnly) {
             property = config.get(Configuration.CATEGORY_ITEM, key, (String) null);
         }
-        if (property != null) {
-            iD = config.getBlock(key, ProjectZulu_Core.getNextDefaultItemID()).getInt();
+        if (property != null || !readOnly) {
+            iD = config.getItem(key, ProjectZulu_Core.getNextDefaultItemID()).getInt();
         }
     }
 

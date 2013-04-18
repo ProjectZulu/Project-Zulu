@@ -20,18 +20,19 @@ public enum ItemBlockManager {
         Configuration config = new Configuration(new File(configDirectory, DefaultProps.configDirectory
                 + DefaultProps.defaultConfigFile));
         config.load();
+        createFromConfig(config, true);
+        createFromConfig(config, false);
+        config.save();
+    }
+
+    private void createFromConfig(Configuration config, boolean readOnly) {
         int currentRenderPass = 0;
-        boolean hasNextPass = false;
+        boolean hasNextPass;
         do {
+            hasNextPass = false;
             for (ItemBlockDeclaration itemBlock : itemBlocks) {
                 if (currentRenderPass == itemBlock.getRegisterPass()) {
-                    itemBlock.loadFromConfig(config, true);
-                    itemBlock.create();
-                }
-            }
-            for (ItemBlockDeclaration itemBlock : itemBlocks) {
-                if (currentRenderPass == itemBlock.getRegisterPass()) {
-                    itemBlock.loadFromConfig(config, false);
+                    itemBlock.loadFromConfig(config, readOnly);
                     itemBlock.create();
                 } else if (currentRenderPass < itemBlock.getRegisterPass()) {
                     hasNextPass = true;
@@ -39,8 +40,6 @@ public enum ItemBlockManager {
             }
             currentRenderPass++;
         } while (hasNextPass);
-
-        config.save();
     }
 
     public void registerBlocks() {

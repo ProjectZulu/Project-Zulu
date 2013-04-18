@@ -3,7 +3,6 @@ package projectzulu.common.core.itemblockdeclaration;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.core.ProjectZuluLog;
 
 public abstract class BlockDeclaration implements ItemBlockDeclaration {
 
@@ -42,8 +41,7 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
         if (readOnly) {
             property = config.get(Configuration.CATEGORY_BLOCK, key, (String) null);
         }
-        if (property != null) {
-            ProjectZuluLog.info("Run %s", readOnly);
+        if (property != null || !readOnly) {
             iD = config.getBlock(key, ProjectZulu_Core.getNextDefaultBlockID()).getInt();
         }
     }
