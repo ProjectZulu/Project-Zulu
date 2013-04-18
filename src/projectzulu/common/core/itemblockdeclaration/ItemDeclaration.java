@@ -3,6 +3,7 @@ package projectzulu.common.core.itemblockdeclaration;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import projectzulu.common.ProjectZulu_Core;
+import cpw.mods.fml.relauncher.Side;
 
 public abstract class ItemDeclaration implements ItemBlockDeclaration {
 
@@ -56,7 +57,7 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
     protected abstract boolean createItem(int iD);
 
     @Override
-    public final void register() {
+    public final void register(Side side) {
         if (isCreated) {
             registerItem();
         }

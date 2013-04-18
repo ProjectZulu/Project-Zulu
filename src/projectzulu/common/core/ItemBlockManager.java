@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.itemblockdeclaration.ItemBlockDeclaration;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public enum ItemBlockManager {
     INSTANCE;
@@ -44,7 +45,7 @@ public enum ItemBlockManager {
 
     public void registerBlocks() {
         for (ItemBlockDeclaration itemBlock : itemBlocks) {
-            itemBlock.register();
+            itemBlock.register(FMLCommonHandler.instance().getEffectiveSide());
         }
     }
 }

@@ -1,7 +1,6 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.item.Item;
-import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.ItemZuluArmor;
@@ -14,8 +13,11 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class BlueClothArmorDeclaration extends ItemSetDeclaration {
 
-    public BlueClothArmorDeclaration() {
+    public final int renderIndex;
+
+    public BlueClothArmorDeclaration(int renderIndex) {
         super(new String[] { "BlueClothHelmet", "BlueClothChest", "BlueClothLegs", "BlueClothBoots" });
+        this.renderIndex = renderIndex;
     }
 
     @Override
@@ -23,23 +25,19 @@ public class BlueClothArmorDeclaration extends ItemSetDeclaration {
         switch (partIndex) {
         case 0:
             ItemList.blueClothHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.desertClothMaterial,
-                    ProjectZulu_Blocks.blueWoolIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 1:
             ItemList.blueClothChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.desertClothMaterial,
-                    ProjectZulu_Blocks.blueWoolIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 2:
             ItemList.blueClothLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.desertClothMaterial,
-                    ProjectZulu_Blocks.blueWoolIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 3:
             ItemList.blueClothBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.desertClothMaterial,
-                    ProjectZulu_Blocks.blueWoolIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         }
         return false;

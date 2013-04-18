@@ -40,6 +40,5 @@ public class PalmTreeSlabDeclaration extends BlockDeclaration {
             OreDictionary.registerOre("slabWood", new ItemStack(block));
             OreDictionary.registerOre("slabPalm", new ItemStack(block));
         }
-    }
-
+    }    
 }

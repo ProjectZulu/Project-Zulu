@@ -1,7 +1,6 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.item.Item;
-import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.ItemZuluArmor;
@@ -14,8 +13,11 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class GoldScaleArmorDeclaration extends ItemSetDeclaration {
 
-    public GoldScaleArmorDeclaration() {
+    public final int renderIndex;
+
+    public GoldScaleArmorDeclaration(int renderIndex) {
         super(new String[] { "GoldScaleHelmet", "GoldScaleChest", "GoldScaleLegs", "GoldScaleBoots" });
+        this.renderIndex = renderIndex;
     }
 
     @Override
@@ -23,23 +25,19 @@ public class GoldScaleArmorDeclaration extends ItemSetDeclaration {
         switch (partIndex) {
         case 0:
             ItemList.goldScaleArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.goldScaleMaterial,
-                    ProjectZulu_Blocks.goldScaleIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 1:
             ItemList.goldScaleArmorChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.goldScaleMaterial,
-                    ProjectZulu_Blocks.goldScaleIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 2:
             ItemList.goldScaleArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.goldScaleMaterial,
-                    ProjectZulu_Blocks.goldScaleIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 3:
             ItemList.goldScaleArmorBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.goldScaleMaterial,
-                    ProjectZulu_Blocks.goldScaleIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         }
         return false;

@@ -1,7 +1,6 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.item.Item;
-import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.ItemZuluArmor;
@@ -14,8 +13,11 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class DiamondScaleArmorDeclaration extends ItemSetDeclaration {
 
-    public DiamondScaleArmorDeclaration() {
+    public final int renderIndex;
+
+    public DiamondScaleArmorDeclaration(int renderIndex) {
         super(new String[] { "DiamondScaleHelmet", "DiamondScaleChest", "DiamondScaleLegs", "DiamondScaleBoots" });
+        this.renderIndex = renderIndex;
     }
 
     @Override
@@ -23,23 +25,19 @@ public class DiamondScaleArmorDeclaration extends ItemSetDeclaration {
         switch (partIndex) {
         case 0:
             ItemList.diamondScaleArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.diamondScaleMaterial,
-                    ProjectZulu_Blocks.diamondScaleIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 1:
             ItemList.diamondScaleArmorChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.diamondScaleMaterial,
-                    ProjectZulu_Blocks.diamondScaleIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 2:
             ItemList.diamondScaleArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.diamondScaleMaterial,
-                    ProjectZulu_Blocks.diamondScaleIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 3:
             ItemList.diamondScaleArmorBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.diamondScaleMaterial,
-                    ProjectZulu_Blocks.diamondScaleIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+                    renderIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         }
         return false;

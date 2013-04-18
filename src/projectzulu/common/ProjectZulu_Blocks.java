@@ -71,30 +71,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class ProjectZulu_Blocks {
 
-    private static int defaultBlockID = 1200;
-
-    public static int getNextDefaultBlockID() {
-        return defaultBlockID++;
-    }
-
-    private static int defaultItemID = 9000;
-
-    public static int getNextDefaultItemID() {
-        return defaultItemID++;
-    }
-
-    /* Armor Indexes */
-    public static int scaleIndex;
-    public static int whiteWoolIndex;
-    public static int redWoolIndex;
-    public static int greenWoolIndex;
-    public static int blueWoolIndex;
-    public static int goldScaleIndex;
-    public static int ironScaleIndex;
-    public static int diamondScaleIndex;
-    public static int cactusIndex;
-    public static int furIndex;
-
     @Instance(DefaultProps.BlocksModId)
     public static ProjectZulu_Blocks modInstance;
 
@@ -103,27 +79,6 @@ public class ProjectZulu_Blocks {
         Configuration zuluConfig = new Configuration(new File(event.getModConfigurationDirectory(),
                 DefaultProps.configDirectory + DefaultProps.defaultConfigFile));
         zuluConfig.load();
-
-        scaleIndex = ProjectZulu_Core.proxy.addArmor("scaleArmor");
-        goldScaleIndex = ProjectZulu_Core.proxy.addArmor("goldscale");
-        ironScaleIndex = ProjectZulu_Core.proxy.addArmor("ironscale");
-        diamondScaleIndex = ProjectZulu_Core.proxy.addArmor("diamondscale");
-
-        whiteWoolIndex = ProjectZulu_Core.proxy.addArmor("whitedesertcloth");
-        redWoolIndex = ProjectZulu_Core.proxy.addArmor("reddesertcloth");
-        greenWoolIndex = ProjectZulu_Core.proxy.addArmor("greendesertcloth");
-        blueWoolIndex = ProjectZulu_Core.proxy.addArmor("bluedesertcloth");
-        cactusIndex = ProjectZulu_Core.proxy.addArmor("cactusarmor");
-        furIndex = ProjectZulu_Core.proxy.addArmor("mammothfur");
-
-        ProjectZuluLog.info("Starting ItemBlock Init ");
-        try {
-            // ItemBlockManager.preInit(zuluConfig);
-//            ArmorManager.preInit(zuluConfig);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        ProjectZuluLog.info("Finished ItemBlock Init ");
         ProjectZuluLog.info("Starting Potion Init ");
         PotionManager.loadSettings(zuluConfig);
         ProjectZuluLog.info("Finsished Potion Init ");
@@ -135,18 +90,6 @@ public class ProjectZulu_Blocks {
 
     @Init
     public void load(FMLInitializationEvent event) {
-
-//        ProjectZuluLog.info("Starting ItemBlock Setup ");
-//        try {
-            // ItemBlockManager.init();
-//            ArmorManager.init();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        }
-//        ProjectZuluLog.info("Finished ItemBlock Setup ");
-
         ProjectZulu_Core.proxy.registerSimpleBlockRenderingHandlers();
     }
 
@@ -199,9 +142,16 @@ public class ProjectZulu_Blocks {
                 new CoconutShellDeclaration(), new ScaleItemDeclaration(), new FurPeltDeclaration(),
                 new GenericCraftingItemsDeclaration(), new StructurePlacerDeclaration(), new CoconutItem());
 
-        ItemBlockManager.INSTANCE.addItemBlock(new ScaleArmorDeclaration(), new GoldScaleArmorDeclaration(),
-                new IronScaleArmorDeclaration(), new DiamondScaleArmorDeclaration(), new WhiteClothArmor(),
-                new RedClothArmorDeclaration(), new GreenClothArmorDeclaration(), new BlueClothArmorDeclaration(),
-                new CactusArmorDeclaration(), new FurArmorDeclaration());
+        ItemBlockManager.INSTANCE.addItemBlock(
+                new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),
+                new GoldScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("goldscale")),
+                new IronScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("ironscale")),
+                new DiamondScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("diamondscale")), new WhiteClothArmor(
+                        ProjectZulu_Core.proxy.addArmor("whitedesertcloth")), new RedClothArmorDeclaration(
+                        ProjectZulu_Core.proxy.addArmor("reddesertcloth")), new GreenClothArmorDeclaration(
+                        ProjectZulu_Core.proxy.addArmor("greendesertcloth")), new BlueClothArmorDeclaration(
+                        ProjectZulu_Core.proxy.addArmor("bluedesertcloth")), new CactusArmorDeclaration(
+                        ProjectZulu_Core.proxy.addArmor("cactusarmor")),
+                new FurArmorDeclaration(ProjectZulu_Core.proxy.addArmor("mammothfur")));
     }
 }

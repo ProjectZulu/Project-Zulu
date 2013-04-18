@@ -1,7 +1,6 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.item.Item;
-import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.ItemZuluArmor;
@@ -14,32 +13,33 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class FurArmorDeclaration extends ItemSetDeclaration {
 
-    public FurArmorDeclaration() {
+    public final int renderIndex;
+
+    public FurArmorDeclaration(int renderIndex) {
         super(new String[] { "FurHelmet", "FurChest", "FurLegs", "FurBoots" });
+        this.renderIndex = renderIndex;
     }
 
     @Override
     protected boolean createItem(int iD, int partIndex) {
         switch (partIndex) {
         case 0:
-            ItemList.furArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial,
-                    ProjectZulu_Blocks.furIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+            ItemList.furArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 0))
+                    .setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 1:
-            ItemList.furArmorChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial,
-                    ProjectZulu_Blocks.furIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+            ItemList.furArmorChest = Optional
+                    .of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 1))
+                            .setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 2:
-            ItemList.furArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial,
-                    ProjectZulu_Blocks.furIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+            ItemList.furArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 2))
+                    .setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 3:
-            ItemList.furArmorBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial,
-                    ProjectZulu_Blocks.furIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+            ItemList.furArmorBoots = Optional
+                    .of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 3))
+                            .setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         }
         return false;

@@ -3,6 +3,7 @@ package projectzulu.common.core.itemblockdeclaration;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import projectzulu.common.ProjectZulu_Core;
+import cpw.mods.fml.relauncher.Side;
 
 public abstract class BlockDeclaration implements ItemBlockDeclaration {
 
@@ -56,11 +57,15 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
     protected abstract boolean createBlock(int iD);
 
     @Override
-    public final void register() {
+    public final void register(Side side) {
         if (isCreated) {
+            if(!(side == Side.SERVER)){
+                clientRegisterBlock(side);
+            }
             registerBlock();
         }
     }
 
     protected abstract void registerBlock();
+    protected void clientRegisterBlock(Side side){};
 }

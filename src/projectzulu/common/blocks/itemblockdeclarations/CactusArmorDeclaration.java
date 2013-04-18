@@ -1,7 +1,6 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.item.Item;
-import projectzulu.common.ProjectZulu_Blocks;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.ItemZuluArmor;
@@ -14,32 +13,32 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class CactusArmorDeclaration extends ItemSetDeclaration {
 
-    public CactusArmorDeclaration() {
+    public final int renderIndex;
+
+    public CactusArmorDeclaration(int renderIndex) {
         super(new String[] { "CactusHelmet", "CactusChest", "CactusLegs", "CactusBoots" });
+        this.renderIndex = renderIndex;
     }
 
     @Override
     protected boolean createItem(int iD, int partIndex) {
         switch (partIndex) {
         case 0:
-            ItemList.cactusArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial,
-                    ProjectZulu_Blocks.cactusIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+            ItemList.cactusArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex,
+                    0)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 1:
-            ItemList.cactusArmorChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial,
-                    ProjectZulu_Blocks.cactusIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+            ItemList.cactusArmorChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex,
+                    1)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 2:
-            ItemList.cactusArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial,
-                    ProjectZulu_Blocks.cactusIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+            ItemList.cactusArmorLeg = Optional
+                    .of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 2))
+                            .setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         case 3:
-            ItemList.cactusArmorBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial,
-                    ProjectZulu_Blocks.cactusIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                    + name[partIndex].toLowerCase()));
+            ItemList.cactusArmorBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex,
+                    3)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
             return true;
         }
         return false;
