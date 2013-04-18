@@ -68,10 +68,6 @@ public class ProjectZulu_Core {
     public static boolean tombstoneOnDeath = true;
     public static boolean replaceFlowerPot = true;
 
-    public static int spikeRenderID = -1;
-    public static int campFireRenderID = -1;
-    public static int universalFlowerPotRenderID = -1;
-
     /* Mob Spawn Controls */
     public static boolean despawnInPeaceful = true;
     public static float namePlateScale = 0.016666668F * 1.6f * 0.5f;
@@ -101,7 +97,6 @@ public class ProjectZulu_Core {
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
-        /* Save COnfig Directory For Later Use */
         modConfigDirectoryFile = event.getModConfigurationDirectory();
 
         ProjectZuluLog.configureLogging();
@@ -125,12 +120,6 @@ public class ProjectZulu_Core {
                 namePlateScale);
         namePlateOpacity = (float) zuluConfig.get("MOB CONTROLS", "namePlateOpacity", namePlateOpacity).getDouble(
                 namePlateScale);
-
-        spikeRenderID = zuluConfig.get("Do Not Touch", "Spike Render ID", campFireRenderID).getInt(campFireRenderID);
-        campFireRenderID = zuluConfig.get("Do Not Touch", "Campfire Render ID", campFireRenderID).getInt(
-                campFireRenderID);
-        universalFlowerPotRenderID = zuluConfig.get("Do Not Touch", "Universal Flower Pot Render ID",
-                universalFlowerPotRenderID).getInt(universalFlowerPotRenderID);
         zuluConfig.save();
 
         /* Should Enable Temperature System ? */

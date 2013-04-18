@@ -27,14 +27,15 @@ public class BlockSpikes extends Block{
 	public static final String[] imageSuffix = new String[] {"", "_poison", "_sticky"};
     @SideOnly(Side.CLIENT)
     private Icon[] icons;
-	
-	public BlockSpikes(int i){
+	public final int renderID;
+	public BlockSpikes(int i, int renderID){
 		super(i, Material.iron);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 		disableStats();
         setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
         setHardness(0.5F);
         setStepSound(Block.soundMetalFootstep);
+        this.renderID = renderID;
 	}
 	
 	@Override
@@ -132,7 +133,7 @@ public class BlockSpikes extends Block{
 	
 	@Override
     public int getRenderType(){
-		return ProjectZulu_Core.spikeRenderID;
+		return renderID;
 	}
 	
 	@Override

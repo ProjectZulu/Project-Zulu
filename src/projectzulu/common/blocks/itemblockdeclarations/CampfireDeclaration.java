@@ -2,7 +2,7 @@ package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import projectzulu.common.ProjectZulu_Core;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.BlockCampfire;
 import projectzulu.common.blocks.ItemCampFire;
@@ -19,13 +19,21 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class CampfireDeclaration extends BlockDeclaration {
 
+    private int renderID = -1;
+
     public CampfireDeclaration() {
         super("Campfire");
     }
 
     @Override
+    protected void preCreateLoadConfig(Configuration config) {
+        renderID = config.get("Do Not Touch", "Campfire Render ID", renderID).getInt(renderID);
+        renderID = renderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : renderID;
+    }
+
+    @Override
     protected boolean createBlock(int iD) {
-        BlockList.campfire = Optional.of(new BlockCampfire(iD).setUnlocalizedName(DefaultProps.blockKey + ":"
+        BlockList.campfire = Optional.of(new BlockCampfire(iD, renderID).setUnlocalizedName(DefaultProps.blockKey + ":"
                 + name.toLowerCase()));
         return true;
     }
@@ -42,9 +50,7 @@ public class CampfireDeclaration extends BlockDeclaration {
 
     @Override
     protected void clientRegisterBlock() {
-        ProjectZulu_Core.campFireRenderID = ProjectZulu_Core.campFireRenderID == -1 ? RenderingRegistry
-                .getNextAvailableRenderId() : ProjectZulu_Core.campFireRenderID;
-        RenderingRegistry.registerBlockHandler(ProjectZulu_Core.campFireRenderID, new RenderCampFire());
-        ProjectZuluLog.info("Campfire Render ID Registed to %s", ProjectZulu_Core.campFireRenderID);
+        RenderingRegistry.registerBlockHandler(renderID, new RenderCampFire());
+        ProjectZuluLog.info("Campfire Render ID Registed to %s", renderID);
     }
 }

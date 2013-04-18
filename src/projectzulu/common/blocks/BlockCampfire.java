@@ -70,14 +70,15 @@ public class BlockCampfire extends Block implements ITempBlock{
 			return null;
     	}
     }
-    
-    public BlockCampfire(int par1) {
+    public final int renderID;
+    public BlockCampfire(int par1, int renderID) {
     	super(par1, Material.wood);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setTickRandomly(true);
         setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.35f, 1.0f);
         setHardness(0.5F);
         setStepSound(Block.soundStoneFootstep);
+        this.renderID = renderID;
 	}
     
     @Override
@@ -115,7 +116,7 @@ public class BlockCampfire extends Block implements ITempBlock{
     
     @Override
     public int getRenderType() {
-    	return ProjectZulu_Core.campFireRenderID;
+    	return renderID;
     }
     
     @Override

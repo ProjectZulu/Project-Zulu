@@ -12,7 +12,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockUniversalFlowerPot extends BlockContainer{
 	
-	public BlockUniversalFlowerPot(int par1) {
+    public final int renderID;
+	public BlockUniversalFlowerPot(int par1, int renderID) {
 		super(par1, Material.wood);
         this.setBlockBoundsForItemRender();        
         float var1 = 0.375F;
@@ -20,6 +21,7 @@ public class BlockUniversalFlowerPot extends BlockContainer{
         this.setBlockBounds(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, var1, 0.5F + var2);
         setHardness(0.0F);
         setStepSound(soundPowderFootstep);
+        this.renderID = renderID;
 	}
 	
     @Override
@@ -34,7 +36,7 @@ public class BlockUniversalFlowerPot extends BlockContainer{
      */
     @Override
     public int getRenderType(){
-        return ProjectZulu_Core.universalFlowerPotRenderID;
+        return renderID;
     }
 	
     /**

@@ -1,6 +1,7 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
+import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.BlockUniversalFlowerPot;
@@ -18,18 +19,27 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class UniversalFlowerPotDeclaration extends BlockDeclaration {
 
+    private int renderID = -1;
+
     public UniversalFlowerPotDeclaration() {
         super("UniversalFlowerPot");
+    }
+
+    @Override
+    protected void preCreateLoadConfig(Configuration config) {
+        renderID = config.get("Do Not Touch", "Universal Flower Pot Render ID", renderID).getInt(renderID);
+        renderID = renderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : renderID;
     }
 
     @Override
     protected boolean createBlock(int iD) {
         if (ProjectZulu_Core.replaceFlowerPot) {
             Block.blocksList[Block.flowerPot.blockID] = null;
-            BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(Block.flowerPot.blockID)
+            BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(Block.flowerPot.blockID, renderID)
                     .setUnlocalizedName("flowerPot"));
         } else {
-            BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(iD).setUnlocalizedName("flowerPot"));
+            BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(iD, renderID)
+                    .setUnlocalizedName("flowerPot"));
         }
         return true;
     }
@@ -49,11 +59,7 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
 
     @Override
     protected void clientRegisterBlock() {
-        ProjectZulu_Core.universalFlowerPotRenderID = ProjectZulu_Core.universalFlowerPotRenderID == -1 ? RenderingRegistry
-                .getNextAvailableRenderId() : ProjectZulu_Core.universalFlowerPotRenderID;
-        RenderingRegistry.registerBlockHandler(ProjectZulu_Core.universalFlowerPotRenderID,
-                new RenderUniversalFlowerPot());
-        ProjectZuluLog.info("Universal Flower Pot Render ID Registed to %s",
-                ProjectZulu_Core.universalFlowerPotRenderID);
+        RenderingRegistry.registerBlockHandler(renderID, new RenderUniversalFlowerPot());
+        ProjectZuluLog.info("Universal Flower Pot Render ID Registed to %s", renderID);
     }
 }
