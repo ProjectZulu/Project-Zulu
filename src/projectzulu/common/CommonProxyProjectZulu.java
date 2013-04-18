@@ -1,6 +1,5 @@
 package projectzulu.common;
 
-import net.minecraft.tileentity.TileEntity;
 import projectzulu.common.temperature.TemperatureTicker;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -17,7 +16,6 @@ public class CommonProxyProjectZulu{
 	}
 	
  	public void registerRenderThings(){}
- 	public void registerTileEntitySpecialRender(Class <? extends TileEntity> tileEntityClass, String specialRenderer){}
 	public int addArmor(String armor){ return 0; }
 	public void bossHealthTicker(){}
 	public void registerMobRenders(){}

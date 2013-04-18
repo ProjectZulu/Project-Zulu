@@ -9,13 +9,17 @@ import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.BlockTombstone;
 import projectzulu.common.blocks.TileEntityTombstone;
+import projectzulu.common.blocks.TileEntityTombstoneRenderer;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TombstoneDeclaration extends BlockDeclaration {
 
@@ -51,9 +55,11 @@ public class TombstoneDeclaration extends BlockDeclaration {
             property.set(true);
         }
         tempConfig.save();
+    }
 
-        /* Register TileEntity Render */
-        ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityTombstone.class,
-                "projectzulu.common.blocks.TileEntityTombstoneRenderer");
+    @Override
+    @SideOnly(Side.CLIENT)
+    protected void clientRegisterBlock() {
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTombstone.class, new TileEntityTombstoneRenderer());
     }
 }

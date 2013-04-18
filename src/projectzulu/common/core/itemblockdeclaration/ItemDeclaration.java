@@ -11,7 +11,7 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
     public final String name;
     private int iD = -1;
     private boolean isCreated = false;
-    
+
     public ItemDeclaration(String name) {
         this(name, 0);
     }
@@ -51,7 +51,7 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
             postCreateLoadConfig(config);
         }
     }
-    
+
     protected void preCreateLoadConfig(Configuration config) {
 
     }
@@ -66,8 +66,15 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
     public final void register(Side side) {
         if (isCreated) {
             registerItem();
+            if (!side.isServer()) {
+                clientRegisterItem();
+            }
         }
     }
 
     protected abstract void registerItem();
+
+    protected void clientRegisterItem() {
+
+    }
 }

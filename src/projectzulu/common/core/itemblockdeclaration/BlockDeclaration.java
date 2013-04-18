@@ -4,6 +4,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import projectzulu.common.ProjectZulu_Core;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class BlockDeclaration implements ItemBlockDeclaration {
 
@@ -65,15 +66,17 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
     @Override
     public final void register(Side side) {
         if (isCreated) {
+            registerBlock();
             if (!side.isServer()) {
                 clientRegisterBlock();
             }
-            registerBlock();
         }
     }
 
     protected abstract void registerBlock();
 
+    @SideOnly(Side.CLIENT)
     protected void clientRegisterBlock() {
-    };
+        
+    }
 }

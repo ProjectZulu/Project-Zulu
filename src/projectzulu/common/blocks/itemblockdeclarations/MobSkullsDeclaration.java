@@ -2,18 +2,21 @@ package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.heads.BlockMobHeads;
 import projectzulu.common.blocks.heads.ItemMobHeads;
 import projectzulu.common.blocks.heads.TileEntityMobHeads;
+import projectzulu.common.blocks.heads.TileEntityMobHeadsRenderer;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class MobSkullsDeclaration extends BlockDeclaration {
 
@@ -37,7 +40,11 @@ public class MobSkullsDeclaration extends BlockDeclaration {
             LanguageRegistry.addName(new ItemStack(block, 1, head.meta()), head.displayName());
         }
         GameRegistry.registerTileEntity(TileEntityMobHeads.class, "TileEntityMobHead");
-        ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityMobHeads.class,
-                "projectzulu.common.blocks.heads.TileEntityMobHeadsRenderer");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    protected void clientRegisterBlock() {
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMobHeads.class, new TileEntityMobHeadsRenderer());
     }
 }

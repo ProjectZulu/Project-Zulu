@@ -60,8 +60,7 @@ public abstract class ItemSetDeclaration implements ItemBlockDeclaration {
             }
         }
     }
-    
-    
+
     protected void preCreateLoadConfig(Configuration config) {
 
     }
@@ -77,9 +76,16 @@ public abstract class ItemSetDeclaration implements ItemBlockDeclaration {
         for (int i = 0; i < name.length; i++) {
             if (isCreated[i]) {
                 registerItem(i);
+                if (!side.isServer()) {
+                    clientRegisterBlock(i);
+                }
             }
         }
     }
 
     protected abstract void registerItem(int partIndex);
+
+    protected void clientRegisterBlock(int partIndex) {
+
+    }
 }

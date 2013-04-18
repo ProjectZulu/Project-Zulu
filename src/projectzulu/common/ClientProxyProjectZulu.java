@@ -1,13 +1,10 @@
 package projectzulu.common;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.blocks.EntityCreeperBlossomPrimed;
 import projectzulu.common.blocks.RenderCreeperBlossomPrimed;
 import projectzulu.common.core.CustomEntityManager;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.SoundHandlerClass;
 import projectzulu.common.core.SoundHookContainerClass;
 import projectzulu.common.mobs.BossHealthDisplayTicker;
@@ -85,36 +82,11 @@ import projectzulu.common.mobs.renders.RenderMummyPharaoh;
 import projectzulu.common.mobs.renders.RenderTameable;
 import projectzulu.common.temperature.DisplayTemperatureTicker;
 import projectzulu.common.temperature.TemperatureTicker;
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
-    
- 	/**
- 	 * Called during Init
- 	 */
- 	@Override
- 	public void registerTileEntitySpecialRender(Class <? extends TileEntity> tileEntityClass, String specialRenderer){
- 		try {
-			Object renderer = Class.forName(specialRenderer).newInstance();
- 			ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, (TileEntitySpecialRenderer) renderer);
-		} catch (InstantiationException e) {
-			ProjectZuluLog.severe("Failed Registering TileEntitySpecialRenderer from String %s due to %s", specialRenderer, e.getClass().getSimpleName());
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			ProjectZuluLog.severe("Failed Registering TileEntitySpecialRenderer from String %s due to %s", specialRenderer, e.getClass().getSimpleName());
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			ProjectZuluLog.severe("Failed Registering TileEntitySpecialRenderer from String %s due to %s", specialRenderer, e.getClass().getSimpleName());
-			e.printStackTrace();
-		} catch (ClassCastException e) {
-			ProjectZuluLog.severe("Failed Registering TileEntitySpecialRenderer from String %s due to %s", specialRenderer, e.getClass().getSimpleName());
-			e.printStackTrace();
-		}
- 	}
- 	
+public class ClientProxyProjectZulu extends CommonProxyProjectZulu{ 	
 	@Override
 	public void registerBlockRenders(){
 		RenderingRegistry.registerEntityRenderingHandler(EntityCreeperBlossomPrimed.class, new RenderCreeperBlossomPrimed(0.5f));
