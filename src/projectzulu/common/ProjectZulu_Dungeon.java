@@ -1,24 +1,20 @@
 package projectzulu.common;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ItemBlockManager;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.Sounds;
-import projectzulu.common.dungeon.ItemBlockManager;
 import projectzulu.common.dungeon.commands.CommandPlaceBlock;
 import projectzulu.common.dungeon.commands.CommandPlaySound;
 import projectzulu.common.dungeon.commands.CommandSpawnEntity;
 import projectzulu.common.dungeon.commands.CommandStreamSound;
-
-import com.google.common.collect.ObjectArrays;
-
+import projectzulu.common.dungeon.itemblockdeclaration.LimitedMobSpawnerDeclaration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -34,27 +30,12 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class ProjectZulu_Dungeon {
-	private static int defaultBlockID = 1300;
-	public static int getNextDefaultBlockID(){ return defaultBlockID++; }
-	private static int defaultItemID = 10000;
-	public static int getNextDefaultItemID(){ return defaultItemID++; }
-
+    
 	@Instance(DefaultProps.DungeonModId)
 	public static ProjectZulu_Dungeon modInstance;
 	
 	@PreInit
-	public void preInit(FMLPreInitializationEvent event){
-		Configuration zuluConfig = new Configuration(  new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.defaultConfigFile) );
-        zuluConfig.load();        
-		ProjectZuluLog.info("Starting Dungeon Module ItemBlock Init ");
-        try {
-			ItemBlockManager.preInit(zuluConfig);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		ProjectZuluLog.info("Finished Dungeon Module ItemBlock Init ");
-        zuluConfig.save();
-        
+	public void preInit(FMLPreInitializationEvent event){        
 		ProjectZuluLog.info("Searching For Sound Files");
 		File customResourceDir = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory);
 		customResourceDir.mkdir();
@@ -68,12 +49,14 @@ public class ProjectZulu_Dungeon {
 			ProjectZuluLog.info("Found sound %s", file.getName());
 			Sounds.addSound(file, customResourceDir);
 		}
+		declareModuleItemBlocks();
 	}
 	
 	public File[] finder(File directory){
 		directory.mkdirs();
     	return directory.listFiles(new FilenameFilter() { 
-    	         public boolean accept(File dir, String filename)
+    	         @Override
+                public boolean accept(File dir, String filename)
     	              { return filename.endsWith(".ogg"); }
     	} );
     }
@@ -92,19 +75,10 @@ public class ProjectZulu_Dungeon {
 		return result;
 	}
 	
-	@Init
-	public void load(FMLInitializationEvent event){
-		ProjectZuluLog.info("Starting Dungeon Module ItemBlock Setup ");
-			try {
-				ItemBlockManager.init();
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		ProjectZuluLog.info("Finished Dungeon Module ItemBlock Setup ");
-	}
-
+    @Init
+    public void load(FMLInitializationEvent event) {
+        
+    }
 	
 	@ServerStarting
 	public void serverStart(FMLServerStartingEvent event){		
@@ -118,5 +92,8 @@ public class ProjectZulu_Dungeon {
 		event.registerServerCommand(new CommandPlaceBlock());
 		LanguageRegistry.instance().addStringLocalization("commands.placeblock.usage", "/placeblock [targetPlayer] [blockID] <meta> <x> <y> <z>");
 	}
-	
+
+    private void declareModuleItemBlocks() {
+        ItemBlockManager.INSTANCE.addItemBlock(new LimitedMobSpawnerDeclaration());
+    }
 }

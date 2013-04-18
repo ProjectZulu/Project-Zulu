@@ -40,5 +40,4 @@ public class MobSkullsDeclaration extends BlockDeclaration {
         ProjectZulu_Core.proxy.registerTileEntitySpecialRender(TileEntityMobHeads.class,
                 "projectzulu.common.blocks.heads.TileEntityMobHeadsRenderer");
     }
-
 }
