@@ -34,7 +34,7 @@ public class CentipedeDeclaration extends SpawnableDeclaration{
 	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 15);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems,
 				ItemGenerics.Properties.Antennae.meta(), 1);
 		super.outputDataToList(config, customMobData);
 	}

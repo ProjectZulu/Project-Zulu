@@ -157,7 +157,9 @@ public class ProjectZulu_Core {
         ProjectZulu_Core.proxy.registerModelsAndRender();
         ProjectZuluLog.info("Load Entity Properties");
         CustomEntityManager.INSTANCE.loadCreaturesFromConfig(modConfigDirectoryFile);
+        ProjectZuluLog.info("Starting ItemBlock Setup ");
         ItemBlockManager.INSTANCE.createBlocks(modConfigDirectoryFile);
+        ProjectZuluLog.info("Starting ItemBlock Registration ");
         ItemBlockManager.INSTANCE.registerBlocks();
     }
 

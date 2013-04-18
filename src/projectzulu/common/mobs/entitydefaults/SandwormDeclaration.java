@@ -34,7 +34,7 @@ public class SandwormDeclaration extends SpawnableDeclaration{
 	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems,
 				ItemGenerics.Properties.SmallHeart.meta(), 4);
 		ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS."+mobName, customMobData);
 		config.save();

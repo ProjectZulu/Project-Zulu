@@ -23,11 +23,13 @@ public class BlockJasper extends Block
 	
 	Vec3[] alterBlockLocations = new Vec3[30];
 	
-	public BlockJasper(int par1, int par2)
+	public BlockJasper(int par1)
     {
         super(par1, Material.rock);
-        this.setTickRandomly(true);
-        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setTickRandomly(true);
+        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setHardness(1.0f);
+        setResistance(1.0f);
         initialiseAlterBlocks();
     }
 	
@@ -81,11 +83,13 @@ public class BlockJasper extends Block
             return DefaultProps.blockSpriteSheet;
     }
 
-	public int quantityDropped(Random random){
+	@Override
+    public int quantityDropped(Random random){
 		return 1;
 	}
 
-	public int idDropped(int i, Random random, int j){
+	@Override
+    public int idDropped(int i, Random random, int j){
 		
 		return this.blockID;
 	}
@@ -93,6 +97,7 @@ public class BlockJasper extends Block
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
 

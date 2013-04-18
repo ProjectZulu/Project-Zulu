@@ -30,7 +30,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCampfire extends Block implements ITempBlock{    
-    enum Type{
+    public enum Type{
     	Wood(0, "Wood"),
     	Stone(1, "Stone Campfire"),
     	WoodFire(2, "Lit Campfire"),
@@ -73,9 +73,11 @@ public class BlockCampfire extends Block implements ITempBlock{
     
     public BlockCampfire(int par1) {
     	super(par1, Material.wood);
-        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setTickRandomly(true);
-        this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.35f, 1.0f);
+        setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.35f, 1.0f);
+        setHardness(0.5F);
+        setStepSound(Block.soundStoneFootstep);
 	}
     
     @Override
@@ -116,11 +118,13 @@ public class BlockCampfire extends Block implements ITempBlock{
     	return ProjectZulu_Core.campFireRenderID;
     }
     
+    @Override
     public boolean isOpaqueCube(){
 		return false;
 	}
 
-	public boolean renderAsNormalBlock(){
+	@Override
+    public boolean renderAsNormalBlock(){
 		return false;
 	}
 	
@@ -158,13 +162,15 @@ public class BlockCampfire extends Block implements ITempBlock{
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4){
-		return AxisAlignedBB.getAABBPool().getAABB((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + 0.3, (double)par4 + this.maxZ);
+	@Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4){
+		return AxisAlignedBB.getAABBPool().getAABB(par2 + this.minX, par3 + this.minY, par4 + this.minZ, par2 + this.maxX, par3 + 0.3, par4 + this.maxZ);
 	}
 	
     /**
      * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
      */
+    @Override
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5){
     	
     	if (par5 != 1){
@@ -188,21 +194,21 @@ public class BlockCampfire extends Block implements ITempBlock{
     		float par8, float par9) {
     	
     	/* Make sure Player Item is not Null*/
-    	if( ((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem() != null){
+    	if( par5EntityPlayer.getCurrentEquippedItem() != null){
     		/* If Fire is not Lit and Coal is in Hand, Light Fire */
-    		if( par1World.getBlockMetadata(par2, par3, par4) < 2 && ( ((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem().getItem().itemID == (Item.coal.itemID)) ){
-    			if( !((EntityPlayer)par5EntityPlayer).capabilities.isCreativeMode){
-    				((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem().stackSize -= 1;
+    		if( par1World.getBlockMetadata(par2, par3, par4) < 2 && ( par5EntityPlayer.getCurrentEquippedItem().getItem().itemID == (Item.coal.itemID)) ){
+    			if( !par5EntityPlayer.capabilities.isCreativeMode){
+    				par5EntityPlayer.getCurrentEquippedItem().stackSize -= 1;
     			}
     			par1World.setBlockMetadataWithNotify(par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4) + 2, 3);
     			return true;
     		}
     		
     		/* If Fire is Lit and Water is in Hand, Put out Fire */
-    		if( par1World.getBlockMetadata(par2, par3, par4) > 1 && ((EntityPlayer)par5EntityPlayer).getCurrentEquippedItem().getItem().itemID == (Item.bucketWater.itemID) ){
+    		if( par1World.getBlockMetadata(par2, par3, par4) > 1 && par5EntityPlayer.getCurrentEquippedItem().getItem().itemID == (Item.bucketWater.itemID) ){
 
-    			if( !((EntityPlayer)par5EntityPlayer).capabilities.isCreativeMode){
-    				((EntityPlayer)par5EntityPlayer).inventory.setInventorySlotContents(((EntityPlayer)par5EntityPlayer).inventory.currentItem, new ItemStack(Item.bucketEmpty));
+    			if( !par5EntityPlayer.capabilities.isCreativeMode){
+    				par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, new ItemStack(Item.bucketEmpty));
     			}
     			par1World.setBlockMetadataWithNotify(par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4) - 2, 3);
     			return true;
@@ -218,7 +224,7 @@ public class BlockCampfire extends Block implements ITempBlock{
 
     	if(par1World.getBlockMetadata(par2, par3, par4) > 1){
     		if (par5Random.nextInt(24) == 0){
-    			par1World.playSound((double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), "fire.fire", 1.0F + par5Random.nextFloat(), par5Random.nextFloat() * 0.7F + 0.3F, false);
+    			par1World.playSound(par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, "fire.fire", 1.0F + par5Random.nextFloat(), par5Random.nextFloat() * 0.7F + 0.3F, false);
     		}
 
     		int var6;
@@ -229,55 +235,55 @@ public class BlockCampfire extends Block implements ITempBlock{
     		if (!par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && !canBlockCatchFire(par1World, par2, par3 - 1, par4, UP)){
     			if (Block.fire.canBlockCatchFire(par1World, par2 - 1, par3, par4, EAST)){
     				for (var6 = 0; var6 < 2; ++var6){
-    					var7 = (float)par2 + par5Random.nextFloat() * 0.1F;
-    					var8 = (float)par3 + par5Random.nextFloat();
-    					var9 = (float)par4 + par5Random.nextFloat();
-    					par1World.spawnParticle("largesmoke", (double)var7, (double)var8, (double)var9, 0.0D, 0.0D, 0.0D);
+    					var7 = par2 + par5Random.nextFloat() * 0.1F;
+    					var8 = par3 + par5Random.nextFloat();
+    					var9 = par4 + par5Random.nextFloat();
+    					par1World.spawnParticle("largesmoke", var7, var8, var9, 0.0D, 0.0D, 0.0D);
     				}
     			}
 
     			if (canBlockCatchFire(par1World, par2 + 1, par3, par4, WEST)){
     				for (var6 = 0; var6 < 2; ++var6){
-    					var7 = (float)(par2 + 1) - par5Random.nextFloat() * 0.1F;
-    					var8 = (float)par3 + par5Random.nextFloat();
-    					var9 = (float)par4 + par5Random.nextFloat();
-    					par1World.spawnParticle("largesmoke", (double)var7, (double)var8, (double)var9, 0.0D, 0.0D, 0.0D);
+    					var7 = par2 + 1 - par5Random.nextFloat() * 0.1F;
+    					var8 = par3 + par5Random.nextFloat();
+    					var9 = par4 + par5Random.nextFloat();
+    					par1World.spawnParticle("largesmoke", var7, var8, var9, 0.0D, 0.0D, 0.0D);
     				}
     			}
 
     			if (canBlockCatchFire(par1World, par2, par3, par4 - 1, SOUTH)){
     				for (var6 = 0; var6 < 2; ++var6){
-    					var7 = (float)par2 + par5Random.nextFloat();
-    					var8 = (float)par3 + par5Random.nextFloat();
-    					var9 = (float)par4 + par5Random.nextFloat() * 0.1F;
-    					par1World.spawnParticle("largesmoke", (double)var7, (double)var8, (double)var9, 0.0D, 0.0D, 0.0D);
+    					var7 = par2 + par5Random.nextFloat();
+    					var8 = par3 + par5Random.nextFloat();
+    					var9 = par4 + par5Random.nextFloat() * 0.1F;
+    					par1World.spawnParticle("largesmoke", var7, var8, var9, 0.0D, 0.0D, 0.0D);
     				}
     			}
 
     			if (canBlockCatchFire(par1World, par2, par3, par4 + 1, NORTH)){
     				for (var6 = 0; var6 < 2; ++var6){
-    					var7 = (float)par2 + par5Random.nextFloat();
-    					var8 = (float)par3 + par5Random.nextFloat();
-    					var9 = (float)(par4 + 1) - par5Random.nextFloat() * 0.1F;
-    					par1World.spawnParticle("largesmoke", (double)var7, (double)var8, (double)var9, 0.0D, 0.0D, 0.0D);
+    					var7 = par2 + par5Random.nextFloat();
+    					var8 = par3 + par5Random.nextFloat();
+    					var9 = par4 + 1 - par5Random.nextFloat() * 0.1F;
+    					par1World.spawnParticle("largesmoke", var7, var8, var9, 0.0D, 0.0D, 0.0D);
     				}
     			}
 
     			if (canBlockCatchFire(par1World, par2, par3 + 1, par4, DOWN)){
     				for (var6 = 0; var6 < 2; ++var6){
-    					var7 = (float)par2 + par5Random.nextFloat();
-    					var8 = (float)(par3 + 1) - par5Random.nextFloat() * 0.1F;
-    					var9 = (float)par4 + par5Random.nextFloat();
-    					par1World.spawnParticle("largesmoke", (double)var7, (double)var8, (double)var9, 0.0D, 0.0D, 0.0D);
+    					var7 = par2 + par5Random.nextFloat();
+    					var8 = par3 + 1 - par5Random.nextFloat() * 0.1F;
+    					var9 = par4 + par5Random.nextFloat();
+    					par1World.spawnParticle("largesmoke", var7, var8, var9, 0.0D, 0.0D, 0.0D);
     				}
     			}
     		}
     		else{
     			for (var6 = 0; var6 < 3; ++var6){
-    				var7 = (float)par2 + par5Random.nextFloat();
-    				var8 = (float)par3 + par5Random.nextFloat() * 0.5F + 0.5F;
-    				var9 = (float)par4 + par5Random.nextFloat();
-    				par1World.spawnParticle("largesmoke", (double)var7, (double)var8, (double)var9, 0.0D, 0.0D, 0.0D);
+    				var7 = par2 + par5Random.nextFloat();
+    				var8 = par3 + par5Random.nextFloat() * 0.5F + 0.5F;
+    				var9 = par4 + par5Random.nextFloat();
+    				par1World.spawnParticle("largesmoke", var7, var8, var9, 0.0D, 0.0D, 0.0D);
     			}
     		}
 

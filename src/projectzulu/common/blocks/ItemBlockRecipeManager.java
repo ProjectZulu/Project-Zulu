@@ -68,45 +68,45 @@ public class ItemBlockRecipeManager {
 		addShapelessRecipe(new OptionalItemStack(BlockList.aloeVera,2), new OptionalItemStack(BlockList.tumbleweed));
 		
 		/* Misc Generic Craftables */
-		if(ItemList.genericCraftingItems1.isPresent()){
+		if(ItemList.genericCraftingItems.isPresent()){
 			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(
-					new ItemStack(ItemList.genericCraftingItems1.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 3, 8, 35));			
+					new ItemStack(ItemList.genericCraftingItems.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 3, 8, 35));			
 		}
-		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,2,ItemGenerics.Properties.Salt.meta()),
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems,2,ItemGenerics.Properties.Salt.meta()),
 				new OptionalItemStack(Item.gunpowder));
 		addRecipe(new OptionalItemStack(BlockList.spike), new String[]{"   ","   ","TTT"}, 'T',
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Tusk.meta()) );
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.Tusk.meta()) );
 		addShapelessRecipe(new OptionalItemStack(Item.silk),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.RawFiber.meta()),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.RawFiber.meta()),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.RawFiber.meta()),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.RawFiber.meta()) ); //4 RawFib --> 1 String
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.RawFiber.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.RawFiber.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.RawFiber.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.RawFiber.meta()) ); //4 RawFib --> 1 String
 		
-		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,2,ItemGenerics.Properties.Pulp.meta()), 
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems,2,ItemGenerics.Properties.Pulp.meta()), 
 				new OptionalItemStack(Item.paper));
-		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.PricklyPowder.meta()),
-				new OptionalItemStack(Block.cactus), new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Pulp.meta()));
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.PricklyPowder.meta()),
+				new OptionalItemStack(Block.cactus), new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.Pulp.meta()));
 		
-		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.PowderSlush.meta()),
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.PowderSlush.meta()),
 				new OptionalItemStack(Item.bucketMilk), 
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Pulp.meta()),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.BlackLichen.meta()));
-		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.GlowingGoo.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.Pulp.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.BlackLichen.meta()));
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.GlowingGoo.meta()),
 				new OptionalItemStack(Item.bucketMilk), 
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Pulp.meta()),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Ectoplasm.meta()));
-		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.GlowingGoo.meta()),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.PowderSlush.meta()),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.Ectoplasm.meta()));
-		shapelessOreRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.SmallUnhealthyHeart.meta()),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.SmallHeart.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.Pulp.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.Ectoplasm.meta()));
+		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.GlowingGoo.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.PowderSlush.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.Ectoplasm.meta()));
+		shapelessOreRecipe(new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.SmallUnhealthyHeart.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.SmallHeart.meta()),
 				new OptionalItemStack("foodSalt") );
-		shapelessOreRecipe(new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.LargeUnhealthyHeart.meta()),
-				new OptionalItemStack(ItemList.genericCraftingItems1,1,ItemGenerics.Properties.LargeHeart.meta()),
+		shapelessOreRecipe(new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.LargeUnhealthyHeart.meta()),
+				new OptionalItemStack(ItemList.genericCraftingItems,1,ItemGenerics.Properties.LargeHeart.meta()),
 				new OptionalItemStack("foodSalt") );
 		
 		addShapelessRecipe(new OptionalItemStack(Item.leather), new OptionalItemStack(ItemList.furPelt));
-		if(ItemList.furPelt.isPresent() && ItemList.genericCraftingItems1.isPresent()){
+		if(ItemList.furPelt.isPresent() && ItemList.genericCraftingItems.isPresent()){
 				GameRegistry.registerCraftingHandler(new RawFiberCraftingHandler());
 		}
 		

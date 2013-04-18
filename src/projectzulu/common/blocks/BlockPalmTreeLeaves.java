@@ -37,9 +37,12 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
     private static final int METADATA_DECAYBIT      = 0x8;
     private static final int METADATA_CLEARDECAYBIT = -METADATA_DECAYBIT - 1;
 
-    public BlockPalmTreeLeaves(int par1, int par2){
+    public BlockPalmTreeLeaves(int par1){
         super(par1, Material.leaves, false);
         this.setTickRandomly(true);
+        setHardness(0.2F);
+        setLightOpacity(1);
+        setStepSound(Block.soundGrassFootstep);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
     }
 
@@ -70,6 +73,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
         }
     }
     
+    @Override
     @SideOnly(Side.CLIENT)
     public int getBlockColor(){
         double var1 = 0.5D;
@@ -80,6 +84,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
     /**
      * Returns the color this block should be rendered. Used by leaves.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public int getRenderColor(int par1){
     	return ColorizerFoliage.getFoliageColorBasic();
@@ -96,6 +101,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
      * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
      * when first determining what to render.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4){
             int var6 = 0;
@@ -231,14 +237,15 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && par5Random.nextInt(15) == 1)
         {
-            double var6 = (double)((float)par2 + par5Random.nextFloat());
-            double var8 = (double)par3 - 0.05D;
-            double var10 = (double)((float)par4 + par5Random.nextFloat());
+            double var6 = par2 + par5Random.nextFloat();
+            double var8 = par3 - 0.05D;
+            double var10 = par4 + par5Random.nextFloat();
             par1World.spawnParticle("dripWater", var6, var8, var10, 0.0D, 0.0D, 0.0D);
         }
     }
@@ -273,10 +280,12 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube(){
     	return false;
     }
     
+    @Override
     public boolean renderAsNormalBlock()	{	
     	return false;
     }
