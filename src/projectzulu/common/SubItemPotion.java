@@ -48,7 +48,7 @@ public abstract class SubItemPotion {
 
     public abstract boolean isEffectInstant(int damageMeta);
 
-    public abstract void addInformation(ItemStack itemStack, EntityPlayer player, List<PotionEffect> list, boolean par4);
+    public abstract void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean par4);
 
     public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer player) {
         ProjectZuluLog.info("onEaten Running");
@@ -87,7 +87,7 @@ public abstract class SubItemPotion {
             world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (world.rand.nextFloat() * 0.4F + 0.8F));
 
             if (!world.isRemote) {
-                world.spawnEntityInWorld(new EntityPotion(world, player, itemStack));
+                world.spawnEntityInWorld(getEntityPotion(itemStack, world, player));
             }
             return itemStack;
         } else {
@@ -96,4 +96,15 @@ public abstract class SubItemPotion {
         }
     }
 
+    /**
+     * Gets an Instance of The Entity Potion used for Throwing.
+     * 
+     * @param itemStack
+     * @param world
+     * @param player
+     * @return ? extends EntityPotion. Does not Return Null
+     */
+    protected EntityPotion getEntityPotion(ItemStack itemStack, World world, EntityPlayer player) {
+        return new EntityPotion(world, player, itemStack);
+    }
 }

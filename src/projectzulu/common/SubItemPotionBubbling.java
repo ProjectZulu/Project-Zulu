@@ -35,7 +35,7 @@ public class SubItemPotionBubbling extends SubItemPotion {
     }
 
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List<PotionEffect> list, boolean par4) {
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean par4) {
 
     }
 }
