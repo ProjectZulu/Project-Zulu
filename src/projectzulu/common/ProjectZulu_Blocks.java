@@ -52,6 +52,7 @@ import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemBlockManager;
 import projectzulu.common.core.ProjectZuluLog;
+import projectzulu.common.dungeon.PotionEvents;
 import projectzulu.common.potion.EventHandleNullPotions;
 import projectzulu.common.potion.PotionManager;
 import cpw.mods.fml.common.Mod;
@@ -104,6 +105,7 @@ public class ProjectZulu_Blocks {
             ProjectZuluLog.info("Starting Potion Setup ");
             PotionManager.setupAndRegisterPotions();
             ProjectZuluLog.info("Finsished Potion Setup ");
+            MinecraftForge.EVENT_BUS.register(new PotionEvents());
         }
 
         /* Turn on NullPotionHandler */
@@ -129,6 +131,8 @@ public class ProjectZulu_Blocks {
     }
 
     private void declareModuleItemBlocks() {
+        ItemBlockManager.INSTANCE.addItemBlock(new ZuluPotionDeclaration());
+
         ItemBlockManager.INSTANCE.addItemBlock(new AloeVeraDeclaration(), new WateredDirtDeclaration(),
                 new TumbleweedDeclaration(), new JasperDeclaration(), new PalmTreeLogDeclaration(),
                 new PalmTreePlankDeclaration(), new PalmTreeSlabDeclaration(), new PalmTreeDoubleSlab(),
@@ -136,7 +140,7 @@ public class ProjectZulu_Blocks {
                 new CoconutDeclaration(), new QuickSandDeclaration(), new NightBloomDeclaration(),
                 new CreeperBlossomDeclaration(), new SpikesDeclaration(), new CampfireDeclaration(),
                 new MobSkullsDeclaration(), new TombstoneDeclaration(), new UniversalFlowerPotDeclaration());
-
+        
         ItemBlockManager.INSTANCE.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(),
                 new WaterDropletDeclaration(), new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(),
                 new CoconutShellDeclaration(), new ScaleItemDeclaration(), new FurPeltDeclaration(),

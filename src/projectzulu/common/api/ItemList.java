@@ -23,7 +23,8 @@ public enum ItemList {
 	public static Optional<? extends Item>	scrapMeat = Optional.absent();
 	public static Optional<? extends Item>	structurePlacer = Optional.absent();
 	public static Optional<? extends Item>	potionIngredients = Optional.absent();
-	
+	public static Optional<? extends Item>  potion = Optional.absent();
+
 	/* Armor */
 	public static Optional<? extends Item>	scaleArmorHead = Optional.absent();
 	public static Optional<? extends Item>	scaleArmorChest = Optional.absent();

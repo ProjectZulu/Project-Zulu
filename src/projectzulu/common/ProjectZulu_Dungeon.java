@@ -35,7 +35,7 @@ public class ProjectZulu_Dungeon {
 	public static ProjectZulu_Dungeon modInstance;
 	
 	@PreInit
-	public void preInit(FMLPreInitializationEvent event){        
+	public void preInit(FMLPreInitializationEvent event){   
 		ProjectZuluLog.info("Searching For Sound Files");
 		File customResourceDir = new File(event.getModConfigurationDirectory(), DefaultProps.configDirectory + DefaultProps.customResourcesDirectory);
 		customResourceDir.mkdir();
@@ -48,8 +48,8 @@ public class ProjectZulu_Dungeon {
 		for (File file : sounds) {
 			ProjectZuluLog.info("Found sound %s", file.getName());
 			Sounds.addSound(file, customResourceDir);
-		}
-		declareModuleItemBlocks();
+        }
+        declareModuleItemBlocks();
 	}
 	
 	public File[] finder(File directory){

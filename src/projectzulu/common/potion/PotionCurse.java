@@ -8,7 +8,7 @@ import net.minecraft.potion.PotionEffect;
 
 public class PotionCurse extends PotionZulu{
 	
-	protected PotionCurse(int par1, boolean par2, int par3) {
+	public PotionCurse(int par1, boolean par2, int par3) {
 		super(par1, par2, par3);
 		
 		setIconIndex(2, 0);

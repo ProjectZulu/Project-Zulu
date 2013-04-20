@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityLiving;
 
 public class PotionCleansing extends PotionZulu{
 	
-	protected PotionCleansing(int par1, boolean par2, int par3) {
+	public PotionCleansing(int par1, boolean par2, int par3) {
 		super(par1, par2, par3);
 		
 		setIconIndex(1, 0);
