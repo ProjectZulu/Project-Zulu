@@ -27,7 +27,7 @@ public abstract class SubItemPotion {
     public String getDisplayName(ItemStack itemStack) {
         return baseName;
     }
-
+    
     public abstract boolean hasPotionEffects(ItemStack itemStack);
 
     /**

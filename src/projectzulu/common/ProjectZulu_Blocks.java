@@ -66,7 +66,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = DefaultProps.BlocksModId, name = "Project Zulu Block and Items", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -97,7 +96,6 @@ public class ProjectZulu_Blocks {
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {
         ItemBlockRecipeManager.setupBlockModuleRecipies();
-        LanguageRegistry.instance().addStringLocalization("itemGroup.projectZuluTab", "en_US", "Project Zulu");
 
         if (!PotionManager.potionModuleEnabled) {
             ProjectZuluLog.info("Skipping Potion Setup, Potion Module Disabled");

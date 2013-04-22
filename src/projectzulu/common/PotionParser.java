@@ -3,7 +3,7 @@ package projectzulu.common;
 /**
  * Helper Classes to Parse Generic Potion properties form damage.
  * 
- * Note the only damage values Gauranteed to work for any given SubItemPotion is subID and Splash. Any other bits are up
+ * Note the only damage values Guaranteed to work for any given SubItemPotion is subID and Splash. Any other bits are up
  * to individual subItem to parse and may not conform to standard.
  */
 public class PotionParser {

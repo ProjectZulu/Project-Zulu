@@ -23,7 +23,8 @@ public class ItemPZPotion extends ItemPotion {
 
     public ItemPZPotion(int itemID) {
         super(itemID);
-        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setCreativeTab(ProjectZulu_Core.projectZuluPotionTab);
+        setMaxStackSize(3);
     }
 
     /**
@@ -44,6 +45,7 @@ public class ItemPZPotion extends ItemPotion {
         return par2 == 0 ? contentIcon : getIconFromDamage(par1);
     }
 
+    // TODO: Get Rid Staticness and Check if it can be safely used instead of ItemPotion static isSplash
     public static boolean isSplash(int par0) {
         return PotionParser.isSplash(par0);
     }

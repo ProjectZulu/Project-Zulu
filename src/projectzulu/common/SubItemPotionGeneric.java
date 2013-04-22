@@ -27,9 +27,14 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     private int initialTicks = 0;
     private int ticksPerDuration = 20;
     private int ticksPerLevel = 10;
+    private int dTicksPerLevel_dLevel = 10;
+    private int powerPerLevel = 1;
 
-    protected String[] strengthNames = new String[] { "", "Thickened", "Strengthened", "Fortified" };
-    protected String[] durationNames = new String[] { "", "the Extended", "the Prolonged", "the Continuous" };
+    protected String[] strengthPrefixes = new String[] { "", "Thickened", "Strengthened", "Fortified" };
+    protected String[] durationPrefixes = new String[] { "", "Extended", "Prolonged", "Continuous" };
+
+    protected String[] durationPostfixes = new String[] { "", "of Extended", "of Prolonged", "of Continuous" };
+    protected String[] strengthPostfixes = new String[] { "", "Thickness", "Strength", "Fortification" };
 
     SubItemPotionGeneric(int itemID, int subID, String baseName) {
         super(itemID, subID, baseName);
@@ -42,10 +47,13 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
         this.type = type;
     }
 
-    protected void setEffectScale(int initialTicks, int ticksPerDuration, int ticksPerLevel) {
+    protected void setEffectScale(int initialTicks, int ticksPerDuration, int ticksPerLevel, int dTicksPerLevel_dLevel,
+            int powerPerLevel) {
         this.initialTicks = initialTicks;
         this.ticksPerDuration = ticksPerDuration;
         this.ticksPerLevel = ticksPerLevel;
+        this.powerPerLevel = powerPerLevel;
+        this.dTicksPerLevel_dLevel = dTicksPerLevel_dLevel;
     }
 
     abstract Optional<? extends Potion> getPotion();
@@ -56,17 +64,25 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
         int duration = PotionParser.readDuration(itemStack.getItemDamage());
         int power = PotionParser.readPower(itemStack.getItemDamage());
         String nameBuilder = "";
-        if (power > 0 && power < strengthNames.length) {
-            nameBuilder = nameBuilder.concat(strengthNames[power]).concat(" ");
+
+        /* Check For Prefix */
+        if (power <= 0 && duration > 0) {
+            nameBuilder = nameBuilder + durationPrefixes[duration] + " ";
+        } else if (power > 0 && duration <= 0) {
+            nameBuilder = nameBuilder + strengthPrefixes[power] + " ";
         }
-        nameBuilder = nameBuilder + baseName;
-        if (duration > 0 && duration < durationNames.length) {
-            nameBuilder = nameBuilder.concat(" ").concat(durationNames[duration]);
+
+        /* Add Potion Name */
+        nameBuilder = nameBuilder + baseName + " Potion";
+
+        /* Check for Postfix */
+        if (power > 0 && duration > 0) {
+            nameBuilder = nameBuilder + " " + durationPostfixes[duration] + " " + strengthPostfixes[power];
         }
         if (level > 0) {
-            nameBuilder = nameBuilder.concat(" ");
+            nameBuilder = nameBuilder + " ";
             for (int i = 1; i <= level; i++) {
-                nameBuilder = nameBuilder.concat("I");
+                nameBuilder = nameBuilder + "I";
             }
         }
         return nameBuilder;
@@ -81,9 +97,12 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     public List<PotionEffect> getPotionEffects(int damageMeta) {
         List<PotionEffect> effectList = new ArrayList<PotionEffect>();
         if (getPotion().isPresent()) {
-            int duration = initialTicks + ticksPerDuration * PotionParser.readDuration(damageMeta) + ticksPerLevel
-                    * PotionParser.readLevel(damageMeta);
-            int power = (PotionParser.readPower(damageMeta) + PotionParser.readLevel(damageMeta));
+            int baseLevel = PotionParser.readLevel(damageMeta);
+            int baseDuration = PotionParser.readDuration(damageMeta);
+
+            int duration = initialTicks + ticksPerDuration * baseDuration + ticksPerLevel * baseLevel
+                    + dTicksPerLevel_dLevel * baseLevel * baseLevel;
+            int power = (PotionParser.readPower(damageMeta) + powerPerLevel * PotionParser.readLevel(damageMeta));
             effectList.add(new PotionEffect(getPotion().get().id, duration, power));
         }
         return effectList;
@@ -91,16 +110,28 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
 
     @Override
     public void getSubItems(int itemID, CreativeTabs creativeTab, List<ItemStack> list) {
-        for (int level = 0; level < maxLevel; level++) {
-            for (int power = 0; power < maxPower; power++) {
-                for (int duration = 0; duration < maxDuration; duration++) {
-                    if (type == 0 || type == 1) {
+        if (!getPotion().isPresent()) {
+            return;
+        }
+
+        /* Add Regular Potion Variations */
+        if (type == 0 || type == 1) {
+            for (int level = 0; level < maxLevel; level++) {
+                for (int power = 0; power < maxPower; power++) {
+                    for (int duration = 0; duration < maxDuration; duration++) {
                         int damage = PotionParser.setPower(power,
                                 PotionParser.setDuration(duration, PotionParser.setLevel(level, subID)));
                         list.add(new ItemStack(itemID, 1, damage));
                     }
+                }
+            }
+        }
 
-                    if (type == 0 || type == 2) {
+        /* Add Splash Potion Variations */
+        if (type == 0 || type == 2) {
+            for (int level = 0; level < maxLevel; level++) {
+                for (int power = 0; power < maxPower; power++) {
+                    for (int duration = 0; duration < maxDuration; duration++) {
                         int damage = PotionParser.setSplash(PotionParser.setPower(power,
                                 PotionParser.setDuration(duration, PotionParser.setLevel(level, subID))));
                         list.add(new ItemStack(itemID, 1, damage));
@@ -132,7 +163,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
 
                 line1 = line1.concat(" - Power ").concat(Integer.toString(potioneffect.getAmplifier() + 1));
 
-                if (potioneffect.getDuration() > 20) {
+                if (potioneffect.getDuration() > 20 && !isEffectInstant(itemStack.getItemDamage())) {
                     line1 = line1 + " (" + parseDuration(potioneffect.getDuration()) + ")";
                 }
 
@@ -152,7 +183,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
         duration = duration / 20;
         return String.format("%02d:%02d", (duration % 3600) / 60, (duration % 60)).trim();
     }
-    
+
     @Override
     protected EntityPotion getEntityPotion(ItemStack itemStack, World world, EntityPlayer player) {
         return new EntityPZPotion(world, player, itemStack);

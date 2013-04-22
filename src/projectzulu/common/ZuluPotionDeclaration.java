@@ -32,7 +32,9 @@ public class ZuluPotionDeclaration extends ItemDeclaration {
         List<SubItemPotion> list = new ArrayList<SubItemPotion>();
         list.add(new SubItemPotionBubbling(itemID, i++));
         list.add(new SubItemPotionIncendiary(itemID, i++));
-
+        list.add(new SubItemPotionSlowfall(itemID, i++));
+        list.add(new SubItemPotionCleansing(itemID, i++));
+        list.add(new SubItemPotionThorns(itemID, i++));
         for (SubItemPotion subItemPotion : list) {
             SubItemPotionRegistry.INSTANCE.addSubPotions(subItemPotion);
         }
