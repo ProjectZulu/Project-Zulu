@@ -9,13 +9,13 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
-import projectzulu.common.mobs.entity.EntityHorseBeige;
+import projectzulu.common.mobs.entity.EntityHorseGrey;
 import projectzulu.common.mobs.models.ModelHorse;
 
 public class HorseGreyDeclaration extends SpawnableDeclaration{
 	
 	public HorseGreyDeclaration(){
-		super("Horse Grey", EntityHorseBeige.class, EnumCreatureType.creature);		
+		super("Horse Grey", EntityHorseGrey.class, EnumCreatureType.creature);		
 		setSpawnProperties(5, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setModelAndRender(ModelHorse.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
