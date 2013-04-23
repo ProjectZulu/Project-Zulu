@@ -9,21 +9,21 @@ import projectzulu.common.core.itemblockdeclaration.ItemDeclaration;
 
 import com.google.common.base.Optional;
 
-public class ZuluPotionDeclaration extends ItemDeclaration {
+public class PZExtraPotionDeclaration extends ItemDeclaration {
 
-    public ZuluPotionDeclaration() {
+    public PZExtraPotionDeclaration() {
         super("ZuluPotion");
     }
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.potion = Optional.of(new ItemPZPotion(iD).setUnlocalizedName(name.toLowerCase()));
+        ItemList.customPotions = Optional.of(new ItemPZPotion(iD).setUnlocalizedName(name.toLowerCase()));
         return true;
     }
 
     @Override
     protected void registerItem() {
-        Item item = ItemList.potion.get();
+        Item item = ItemList.customPotions.get();
         registerSubPotions(item.itemID);
     }
 
@@ -35,6 +35,11 @@ public class ZuluPotionDeclaration extends ItemDeclaration {
         list.add(new SubItemPotionSlowfall(itemID, i++));
         list.add(new SubItemPotionCleansing(itemID, i++));
         list.add(new SubItemPotionThorns(itemID, i++));
+        list.add(new SubItemPotionJump(itemID, i++));
+        list.add(new SubItemPotionDigspeed(itemID, i++));
+        list.add(new SubItemPotionDigslowdown(itemID, i++));
+        list.add(new SubItemPotionResistance(itemID, i++));
+        list.add(new SubItemPotionWaterBreathing(itemID, i++));
         for (SubItemPotion subItemPotion : list) {
             SubItemPotionRegistry.INSTANCE.addSubPotions(subItemPotion);
         }

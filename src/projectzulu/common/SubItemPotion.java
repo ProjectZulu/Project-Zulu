@@ -27,7 +27,7 @@ public abstract class SubItemPotion {
     public String getDisplayName(ItemStack itemStack) {
         return baseName;
     }
-    
+
     public abstract boolean hasPotionEffects(ItemStack itemStack);
 
     /**
@@ -56,7 +56,6 @@ public abstract class SubItemPotion {
             --itemStack.stackSize;
         }
         if (!world.isRemote) {
-            ProjectZuluLog.info("Checking to Add Potion Effect");
             List<PotionEffect> list = getPotionEffects(itemStack);
 
             if (list != null) {
@@ -64,7 +63,6 @@ public abstract class SubItemPotion {
 
                 while (iterator.hasNext()) {
                     PotionEffect potioneffect = iterator.next();
-                    ProjectZuluLog.info("Add Potion effect %s", potioneffect.toString());
                     player.addPotionEffect(new PotionEffect(potioneffect));
                 }
             }

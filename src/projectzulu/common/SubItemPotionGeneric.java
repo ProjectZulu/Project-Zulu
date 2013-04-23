@@ -18,17 +18,17 @@ import com.google.common.base.Optional;
 
 public abstract class SubItemPotionGeneric extends SubItemPotion {
 
-    private int maxLevel = 2;
-    private int maxDuration = 2;
-    private int maxPower = 2;
+    protected int maxLevel = 2;
+    protected int maxDuration = 2;
+    protected int maxPower = 2;
     /* Forms This Potion can Take. 0 = Regular and Splash, 1 == Regular Only, 2 == Only Splash */
-    private int type = 2;
+    protected int type = 2;
 
-    private int initialTicks = 0;
-    private int ticksPerDuration = 20;
-    private int ticksPerLevel = 10;
-    private int dTicksPerLevel_dLevel = 10;
-    private int powerPerLevel = 1;
+    protected int initialTicks = 0;
+    protected int ticksPerDuration = 20;
+    protected int ticksPerLevel = 10;
+    protected int dTicksPerLevel_dLevel = 10;
+    protected int powerPerLevel = 1;
 
     protected String[] strengthPrefixes = new String[] { "", "Thickened", "Strengthened", "Fortified" };
     protected String[] durationPrefixes = new String[] { "", "Extended", "Prolonged", "Continuous" };
@@ -164,7 +164,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
                 line1 = line1.concat(" - Power ").concat(Integer.toString(potioneffect.getAmplifier() + 1));
 
                 if (potioneffect.getDuration() > 20 && !isEffectInstant(itemStack.getItemDamage())) {
-                    line1 = line1 + " (" + parseDuration(potioneffect.getDuration()) + ")";
+                    line1 = line1 + " (" + Potion.getDurationString(potioneffect) + ")";
                 }
 
                 if (Potion.potionTypes[potioneffect.getPotionID()].isBadEffect()) {
@@ -177,11 +177,6 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
             String s1 = StatCollector.translateToLocal("potion.empty").trim();
             list.add(EnumChatFormatting.GRAY + s1);
         }
-    }
-
-    private String parseDuration(int duration) {
-        duration = duration / 20;
-        return String.format("%02d:%02d", (duration % 3600) / 60, (duration % 60)).trim();
     }
 
     @Override
