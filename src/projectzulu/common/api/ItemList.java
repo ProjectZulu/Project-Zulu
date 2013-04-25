@@ -24,6 +24,7 @@ public enum ItemList {
     public static Optional<? extends Item> structurePlacer = Optional.absent();
     public static Optional<? extends Item> potionIngredients = Optional.absent();
     public static Optional<? extends Item> customPotions = Optional.absent();
+    public static Optional<? extends Item> vanillaPotions = Optional.absent();
 
     /* Armor */
     public static Optional<? extends Item> scaleArmorHead = Optional.absent();

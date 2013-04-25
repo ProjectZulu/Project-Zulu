@@ -103,7 +103,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
             int duration = initialTicks + ticksPerDuration * baseDuration + ticksPerLevel * baseLevel
                     + dTicksPerLevel_dLevel * baseLevel * baseLevel;
             int power = (PotionParser.readPower(damageMeta) + powerPerLevel * PotionParser.readLevel(damageMeta));
-            effectList.add(new PotionEffect(getPotion().get().id, duration, power));
+            effectList.add(new PotionEffect(getPotion().get().id, getPotion().get().isInstant() ? 1 : duration, power));
         }
         return effectList;
     }

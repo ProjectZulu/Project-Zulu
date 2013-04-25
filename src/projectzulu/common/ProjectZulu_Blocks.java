@@ -129,7 +129,7 @@ public class ProjectZulu_Blocks {
     }
 
     private void declareModuleItemBlocks() {
-        ItemBlockManager.INSTANCE.addItemBlock(new PZExtraPotionDeclaration());
+        ItemBlockManager.INSTANCE.addItemBlock(new PZExtraPotionDeclaration(), new PZVanillaPotionDeclaration());
 
         ItemBlockManager.INSTANCE.addItemBlock(new AloeVeraDeclaration(), new WateredDirtDeclaration(),
                 new TumbleweedDeclaration(), new JasperDeclaration(), new PalmTreeLogDeclaration(),

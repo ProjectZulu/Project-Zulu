@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import projectzulu.common.core.ProjectZuluLog;
 
 public abstract class SubItemPotion {
 
@@ -51,7 +50,6 @@ public abstract class SubItemPotion {
     public abstract void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean par4);
 
     public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer player) {
-        ProjectZuluLog.info("onEaten Running");
         if (!player.capabilities.isCreativeMode) {
             --itemStack.stackSize;
         }

@@ -1,8 +1,12 @@
 package projectzulu.common.potion;
 
+import java.lang.reflect.Array;
+
+import net.minecraft.potion.Potion;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.api.PotionList;
+import projectzulu.common.core.ObfuscationHelper;
 
 import com.google.common.base.Optional;
 
@@ -86,6 +90,30 @@ public enum PotionManager {
             LanguageRegistry.instance().addStringLocalization("potion.thorn.postfix", "Thorn Potion");
             LanguageRegistry.instance().addStringLocalization("potion.thorn", "Thorn");
         }
+    },
+    heal2(27) {
+        @Override
+        protected void setupPotion() {
+            PotionList.heal2 = Optional.of((new PotionHeal2(potionID, false).setPotionName("potion.heal2")));
+        }
+
+        @Override
+        protected void registerPotion() {
+            LanguageRegistry.instance().addStringLocalization("potion.heal2.postfix", "Heal Potion");
+            LanguageRegistry.instance().addStringLocalization("potion.heal2", "Heal");
+        }
+    },
+    harm2(28) {
+        @Override
+        protected void setupPotion() {
+            PotionList.harm2 = Optional.of((new PotionHarm2(potionID, true).setPotionName("potion.harm2")));
+        }
+
+        @Override
+        protected void registerPotion() {
+            LanguageRegistry.instance().addStringLocalization("potion.harm2.postfix", "Harm Potion");
+            LanguageRegistry.instance().addStringLocalization("potion.harm2", "Harm");
+        }
     };
 
     int potionID;
@@ -112,6 +140,7 @@ public enum PotionManager {
     }
 
     public static void setupAndRegisterPotions() {
+        increaseVanillaPotionArray(64);
         for (PotionManager potion : PotionManager.values()) {
             if (potion.potionID > 0) {
                 potion.setupPotion();
@@ -122,6 +151,21 @@ public enum PotionManager {
         /** Register Events and Tickers Responsible for PotionEffect if appropriate potionEffects are declared */
         if (PotionList.cleansing.isPresent() || PotionList.thorn.isPresent()) {
             MinecraftForge.EVENT_BUS.register(new PotionEventHookContainerClass());
+        }
+    }
+
+    private static void increaseVanillaPotionArray(int newSize) {
+        if (Potion.potionTypes.length < newSize) {
+            Potion[] a = Potion.potionTypes;
+            Class<? extends Potion[]> potionClass = a.getClass();
+            if (potionClass.isArray()) {
+                int length = Array.getLength(a);
+                Class<? extends Potion> componentType = (Class<? extends Potion>) a.getClass().getComponentType();
+                Potion[] newArray = (Potion[]) Array.newInstance(componentType, newSize);
+                System.arraycopy(a, 0, newArray, 0, length);
+                ObfuscationHelper.setFieldUsingReflection("potionTypes", Potion.class, Potion[].class, false, true,
+                        newArray);
+            }
         }
     }
 }
