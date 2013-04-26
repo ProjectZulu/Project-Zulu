@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.core.GuiID;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -79,7 +80,7 @@ public class BlockUniversalFlowerPot extends BlockContainer{
 			return false;
 		}
 		//opens gui, to be implemented later
-		player.openGui(ProjectZulu_Core.modInstance, 1, world, x, y, z);
+		player.openGui(ProjectZulu_Core.modInstance, GuiID.FlowerPot.getID(), world, x, y, z);
 		return true;
 	}
 	

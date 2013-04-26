@@ -7,6 +7,14 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.api.PotionList;
 import projectzulu.common.core.ObfuscationHelper;
+import projectzulu.common.potion.effects.PotionCleansing;
+import projectzulu.common.potion.effects.PotionCurse;
+import projectzulu.common.potion.effects.PotionHarm2;
+import projectzulu.common.potion.effects.PotionHeal2;
+import projectzulu.common.potion.effects.PotionIncendiary;
+import projectzulu.common.potion.effects.PotionSlowFall;
+import projectzulu.common.potion.effects.PotionThorns;
+import projectzulu.common.potion.effects.PotionZulu;
 
 import com.google.common.base.Optional;
 
