@@ -7,9 +7,9 @@ import net.minecraft.block.BlockBrewingStand;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import projectzulu.common.api.BlockList;
 import projectzulu.common.core.RenderHelper;
 import projectzulu.common.core.RenderHelper.Surface;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -97,34 +97,42 @@ public class RenderBrewingStandSingle implements ISimpleBlockRenderingHandler {
         RenderHelper.renderRotatedRectangle(stoneIcon, iconScale, renderer, posX, posY + 0.410f, posZ - 0.17f, 0.10f,
                 0.189f, 0.3f, 0);
         
-        int potionNumber = 3;
+        TileEntity tileEntity = blockAccess.getBlockTileEntity(posX, posY, posZ);
+        int potionNumber = 1;
+        if (tileEntity != null && tileEntity instanceof TileEntityBrewingTriple) {
+            potionNumber = ((TileEntityBrewingTriple) tileEntity).brewingItemStacks.length - 1;
+        }
         for (int i = 0; i < potionNumber; i++) {
-            Icon potionIcon = ((BlockBrewingStandSingle) BlockList.brewingStandSingle.get()).potionIcon;
             switch (i) {
             case 0:
-                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 1.0f, renderer, posX, posY, posZ, 0.20f, 0.05f, 0.20f, 0);
-                RenderHelper.renderRotated2D(potionIcon, 1.0f, renderer, posX, posY + 0.03f, posZ, 0.3f, 0.3f, 45);
-                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX, posY + 0.38f, posZ, 0.08f, 0.2f, 0.08f, 0);
+                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 1.0f, renderer, posX, posY, posZ, 0.20f, 0.05f,
+                        0.20f, 0);
+                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX, posY + 0.38f, posZ, 0.08f, 0.2f,
+                        0.08f, 0);
                 break;
             case 1:
-                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 2.0f, renderer, posX, posY, posZ + 0.30f, 0.20f, 0.05f, 0.20f, 0);
-                RenderHelper.renderRotated2D(potionIcon, 1.0f, renderer, posX, posY + 0.03f, posZ+0.30f, 0.3f, 0.3f, 90);
-                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX, posY + 0.30f, posZ+0.125, 0.25f, 0.08f, 0.08f, 0);
+                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 2.0f, renderer, posX, posY, posZ + 0.30f, 0.20f,
+                        0.05f, 0.20f, 0);
+                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX, posY + 0.30f, posZ + 0.125,
+                        0.25f, 0.08f, 0.08f, 0);
                 break;
             case 2:
-                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 2.0f, renderer, posX, posY, posZ - 0.30f, 0.20f, 0.05f, 0.20f, 0);
-                RenderHelper.renderRotated2D(potionIcon, 1.0f, renderer, posX, posY + 0.03f, posZ-0.30f, 0.3f, 0.3f, 90);
-                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX, posY + 0.30f, posZ-0.13, 0.25f, 0.08f, 0.08f, 0);
+                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 2.0f, renderer, posX, posY, posZ - 0.30f, 0.20f,
+                        0.05f, 0.20f, 0);
+                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX, posY + 0.30f, posZ - 0.13, 0.25f,
+                        0.08f, 0.08f, 0);
                 break;
             case 3:
-                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 2.0f, renderer, posX + 0.30f, posY, posZ, 0.20f, 0.05f, 0.20f, 0);
-                RenderHelper.renderRotated2D(potionIcon, 1.0f, renderer, posX+0.30f, posY + 0.03f, posZ, 0.3f, 0.3f, 0);
-                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX+0.16, posY + 0.30f, posZ, 0.23f, 0.08f, 0.08f, 90);
+                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 2.0f, renderer, posX + 0.30f, posY, posZ, 0.20f,
+                        0.05f, 0.20f, 0);
+                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX + 0.16, posY + 0.30f, posZ, 0.23f,
+                        0.08f, 0.08f, 90);
                 break;
             case 4:
-                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 2.0f, renderer, posX - 0.30f, posY, posZ, 0.20f, 0.05f, 0.20f, 0);
-                RenderHelper.renderRotated2D(potionIcon, 1.0f, renderer, posX-0.30f, posY + 0.03f, posZ, 0.3f, 0.3f, 0);
-                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX-0.16, posY + 0.30f, posZ, 0.23f, 0.08f, 0.08f, 90);
+                RenderHelper.renderRotatedRectangle(brewingPlateIcon, 2.0f, renderer, posX - 0.30f, posY, posZ, 0.20f,
+                        0.05f, 0.20f, 0);
+                RenderHelper.renderRotatedRectangle(glassIcon, 1.10f, renderer, posX - 0.16, posY + 0.30f, posZ, 0.23f,
+                        0.08f, 0.08f, 90);
                 break;
             }
         }
@@ -141,8 +149,10 @@ public class RenderBrewingStandSingle implements ISimpleBlockRenderingHandler {
         RenderHelper.renderRotatedRectangle(barkIcon, 3.0f, renderer, posX - 0.13f, posY+0.01f, posZ - 0.13f, 0.10f, 0.19f, 0.10f, 45+180);
 
         /* Feet */
-        EnumSet<Surface> barkSides = EnumSet.of(Surface.TOP, Surface.BOTTOM, Surface.RIGHT, Surface.FRONT, Surface.BACK);
+        
         EnumSet<Surface> plainSides = EnumSet.of(Surface.LEFT);
+        EnumSet<Surface> barkSides = EnumSet.allOf(Surface.class);
+        barkSides.remove(Surface.LEFT);
         RenderHelper.renderRotatedRectangle(barkIcon, 3.0f, renderer, posX+0.25f, posY, posZ-0.25f, 0.10f, 0.10f, 0.25f, -45, barkSides);
         RenderHelper.renderRotatedRectangle(barkIcon, 3.0f, renderer, posX-0.25f, posY, posZ+0.25f, 0.10f, 0.10f, 0.25f, -45+180, barkSides);
         RenderHelper.renderRotatedRectangle(barkIcon, 3.0f, renderer, posX+0.25f, posY, posZ+0.25f, 0.10f, 0.10f, 0.25f, +45, barkSides);

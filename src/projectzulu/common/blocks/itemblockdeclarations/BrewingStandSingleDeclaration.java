@@ -7,10 +7,12 @@ import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import projectzulu.common.potion.brewingstands.BlockBrewingStandSingle;
 import projectzulu.common.potion.brewingstands.RenderBrewingStandSingle;
-import projectzulu.common.potion.brewingstands.TileEntityBrewingTriple;
+import projectzulu.common.potion.brewingstands.TileEntityBrewingSingle;
+import projectzulu.common.potion.brewingstands.TileEntityBrewingStandRenderer;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -43,7 +45,7 @@ public class BrewingStandSingleDeclaration extends BlockDeclaration {
         Block block = BlockList.brewingStandSingle.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
         LanguageRegistry.addName(block, "Brewing Stand Single");
-        GameRegistry.registerTileEntity(TileEntityBrewingTriple.class, "TileEntityBrewingSingle");
+        GameRegistry.registerTileEntity(TileEntityBrewingSingle.class, "TileEntityBrewingSingle");
     }
 
     @Override
@@ -51,7 +53,7 @@ public class BrewingStandSingleDeclaration extends BlockDeclaration {
     protected void clientRegisterBlock() {
         RenderingRegistry.registerBlockHandler(renderID, new RenderBrewingStandSingle(1));
         ProjectZuluLog.info("Brewing Stand Single Render ID Registed to %s", renderID);
-        // ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBrewingSingle.class,
-        // new RenderBrewingStandSingle());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBrewingSingle.class,
+                new TileEntityBrewingStandRenderer());
     }
 }
