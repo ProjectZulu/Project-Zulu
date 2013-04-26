@@ -5,26 +5,25 @@ import java.io.File;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import projectzulu.common.blocks.CoconutShellDeclaration;
 import projectzulu.common.blocks.CreeperBlossomPrimedDefault;
 import projectzulu.common.blocks.FurPeltDeclaration;
-import projectzulu.common.blocks.GenericCraftingItemsDeclaration;
 import projectzulu.common.blocks.ItemBlockRecipeManager;
-import projectzulu.common.blocks.ScaleItemDeclaration;
-import projectzulu.common.blocks.StructurePlacerDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.AloeVeraDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.AloeVeraSeedsDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.AnkhDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.BlueClothArmorDeclaration;
+import projectzulu.common.blocks.itemblockdeclarations.BrewingStandSingleDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.CactusArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.CampfireDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.CoconutDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.CoconutItem;
 import projectzulu.common.blocks.itemblockdeclarations.CoconutMilkFragmentDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.CoconutSeedDeclaration;
+import projectzulu.common.blocks.itemblockdeclarations.CoconutShellDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.CreeperBlossomDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.DiamondScaleArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.FurArmorDeclaration;
+import projectzulu.common.blocks.itemblockdeclarations.GenericCraftingItemsDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.GoldScaleArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.GreenClothArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.IronScaleArmorDeclaration;
@@ -41,7 +40,9 @@ import projectzulu.common.blocks.itemblockdeclarations.PalmTreeStairsDeclaration
 import projectzulu.common.blocks.itemblockdeclarations.QuickSandDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.RedClothArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.ScaleArmorDeclaration;
+import projectzulu.common.blocks.itemblockdeclarations.ScaleItemDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.SpikesDeclaration;
+import projectzulu.common.blocks.itemblockdeclarations.StructurePlacerDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.TombstoneDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.TumbleweedDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.UniversalFlowerPotDeclaration;
@@ -54,6 +55,8 @@ import projectzulu.common.core.ItemBlockManager;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.dungeon.PotionEvents;
 import projectzulu.common.potion.EventHandleNullPotions;
+import projectzulu.common.potion.PZExtraPotionDeclaration;
+import projectzulu.common.potion.PZVanillaPotionDeclaration;
 import projectzulu.common.potion.PotionManager;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -137,7 +140,8 @@ public class ProjectZulu_Blocks {
                 new PalmTreeStairsDeclaration(), new PalmTreeLeavesDeclaration(), new PalmTreeSapling(),
                 new CoconutDeclaration(), new QuickSandDeclaration(), new NightBloomDeclaration(),
                 new CreeperBlossomDeclaration(), new SpikesDeclaration(), new CampfireDeclaration(),
-                new MobSkullsDeclaration(), new TombstoneDeclaration(), new UniversalFlowerPotDeclaration());
+                new MobSkullsDeclaration(), new TombstoneDeclaration(), new UniversalFlowerPotDeclaration(),
+                new BrewingStandSingleDeclaration());
         
         ItemBlockManager.INSTANCE.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(),
                 new WaterDropletDeclaration(), new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(),

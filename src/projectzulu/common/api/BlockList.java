@@ -34,4 +34,6 @@ public enum BlockList {
 	public static Optional<? extends Block>	universalFlowerPot = Optional.absent();
 	public static Optional<? extends Block>	customBrewingStand = Optional.absent();
 	public static Optional<? extends Block>	limitedMobSpawner = Optional.absent();
+	public static Optional<? extends Block> brewingStandSingle = Optional.absent();
+
 }
