@@ -43,7 +43,7 @@ public class ItemGenerics extends Item{
 		LargeUnhealthyHeart("Large Unhealthy Heart", 38, "+0-1-2+3&4-4+13", "0-1-2+3&8-8+9+13"); // Strength-
 		
 		private String displayName; public String getDisplayName(){ return displayName; }
-		private int meta; public int meta(){ return meta; }
+		public final int meta; public int meta(){ return meta; }
         @SideOnly(Side.CLIENT)
     	private Icon icon;
 		private String defaultPotionEffect;

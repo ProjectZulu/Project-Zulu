@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import projectzulu.common.potion.EntityPZPotion;
-import projectzulu.common.potion.PotionParser;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityPotion;
@@ -16,6 +13,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import projectzulu.common.potion.EntityPZPotion;
+import projectzulu.common.potion.PotionParser;
 
 import com.google.common.base.Optional;
 
@@ -43,6 +42,11 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
         super(itemID, subID, baseName);
     }
 
+    @Override
+    public void register() {
+        
+    }
+    
     protected void setSubItemBounds(int maxLevel, int maxDuration, int maxPower, int type) {
         this.maxLevel = maxLevel;
         this.maxDuration = maxDuration;

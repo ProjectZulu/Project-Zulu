@@ -1,5 +1,7 @@
 package projectzulu.common.potion.subitem;
 
+import java.util.Collection;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import projectzulu.common.core.ProjectZuluLog;
@@ -22,8 +24,8 @@ import com.google.common.collect.Table;
  */
 public enum SubItemPotionRegistry {
     INSTANCE;
-    private Table<Integer, Integer, SubItemPotion> subPotions = HashBasedTable.create(2, 256);
-    private Table<Integer, String, Integer> itemAndNameToSubIDMap = HashBasedTable.create(2, 256);
+    private Table<Integer, Integer, SubItemPotion> subPotions = HashBasedTable.create(2, 16);
+    private Table<Integer, String, Integer> itemAndNameToSubIDMap = HashBasedTable.create(2, 16);
 
     public void addSubPotions(SubItemPotion... potionSubItems) {
         for (SubItemPotion subItemPotion : potionSubItems) {
@@ -36,6 +38,10 @@ public enum SubItemPotionRegistry {
         }
     }
 
+    public Collection<SubItemPotion> getPotions(int itemID) {
+        return subPotions.row(itemID).values();
+    }
+    
     public SubItemPotion getPotion(ItemStack itemStack) {
         return getPotion(itemStack.itemID, PotionParser.readID(itemStack.getItemDamage()));
     }

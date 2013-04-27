@@ -1,11 +1,8 @@
 package projectzulu.common.potion;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.potion.subitem.SubItemPotion;
-import projectzulu.common.potion.subitem.SubItemPotionRegistry;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,6 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.potion.subitem.SubItemPotion;
+import projectzulu.common.potion.subitem.SubItemPotionRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -117,11 +117,9 @@ public class ItemPZPotion extends ItemPotion {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(int itemID, CreativeTabs creativeTabs, List list) {
-        for (int subID = 0; subID < 256; subID++) {
-            SubItemPotion potion = SubItemPotionRegistry.INSTANCE.getPotion(itemID, subID);
-            if (potion != null) {
-                potion.getSubItems(itemID, creativeTabs, list);
-            }
+        Collection<SubItemPotion> potion = SubItemPotionRegistry.INSTANCE.getPotions(itemID);
+        for (SubItemPotion subItemPotion : potion) {
+            subItemPotion.getSubItems(itemID, creativeTabs, list);
         }
     }
 

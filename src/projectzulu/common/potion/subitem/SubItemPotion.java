@@ -3,9 +3,6 @@ package projectzulu.common.potion.subitem;
 import java.util.Iterator;
 import java.util.List;
 
-import projectzulu.common.potion.PotionParser;
-
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityPotion;
@@ -13,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import projectzulu.common.potion.PotionParser;
 
 public abstract class SubItemPotion {
 
@@ -30,6 +28,8 @@ public abstract class SubItemPotion {
         return baseName;
     }
 
+    public abstract void register();
+    
     public abstract boolean hasPotionEffects(ItemStack itemStack);
 
     /**
@@ -40,7 +40,7 @@ public abstract class SubItemPotion {
      * @return Resulting Potion, null if Items should not be brewed
      */
     public ItemStack getPotionResult(ItemStack ingredient, ItemStack brewingStack) {
-        return new ItemStack(Block.grass);
+        return null;
     }
 
     /**
