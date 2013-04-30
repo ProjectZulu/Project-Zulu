@@ -12,6 +12,7 @@ import projectzulu.common.core.itemblockdeclaration.ItemDeclaration;
 import projectzulu.common.potion.subitem.SubItemPotion;
 import projectzulu.common.potion.subitem.SubItemPotionBubbling;
 import projectzulu.common.potion.subitem.SubItemPotionCleansing;
+import projectzulu.common.potion.subitem.SubItemPotionCurse;
 import projectzulu.common.potion.subitem.SubItemPotionDigslowdown;
 import projectzulu.common.potion.subitem.SubItemPotionIncendiary;
 import projectzulu.common.potion.subitem.SubItemPotionJump;
@@ -39,6 +40,7 @@ public class PZExtraPotionDeclaration extends ItemDeclaration {
         addToLists(item.itemID, i++, SubItemPotionList.INCENDIARY, list, SubItemPotionIncendiary.class);
         addToLists(item.itemID, i++, SubItemPotionList.SLOWFALL, list, SubItemPotionSlowfall.class);
         addToLists(item.itemID, i++, SubItemPotionList.CLEANSING, list, SubItemPotionCleansing.class);
+        addToLists(item.itemID, i++, SubItemPotionList.CURSE, list, SubItemPotionCurse.class);
         addToLists(item.itemID, i++, SubItemPotionList.THORNS, list, SubItemPotionThorns.class);
         addToLists(item.itemID, i++, SubItemPotionList.JUMP, list, SubItemPotionJump.class);
         addToLists(item.itemID, i++, SubItemPotionList.DIG_SPEED, list, SubItemPotionDigslowdown.class);
@@ -71,7 +73,7 @@ public class PZExtraPotionDeclaration extends ItemDeclaration {
         try {
             SubItemPotion subItemPotion = potionClass.getConstructor(new Class[] { int.class, int.class }).newInstance(
                     new Object[] { itemID, subID });
-            entry.subItem = Optional.of(subItemPotion);
+            entry.set(subItemPotion);
             registryList.add(subItemPotion);
         } catch (Exception e) {
             e.printStackTrace();

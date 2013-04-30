@@ -7,12 +7,15 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import projectzulu.common.api.ItemList;
+import projectzulu.common.core.ItemGenerics.Properties;
 import projectzulu.common.potion.EntityPZPotion;
 import projectzulu.common.potion.PotionParser;
 
@@ -38,15 +41,67 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     protected String[] durationPostfixes = new String[] { "", "of Extended", "of Prolonged", "of Continuous" };
     protected String[] strengthPostfixes = new String[] { "", "Thickness", "Strength", "Fortification" };
 
+    enum TYPE {
+        CHEMICAL, POWER, DURATION, TIER, NONE;
+    }
+
     SubItemPotionGeneric(int itemID, int subID, String baseName) {
         super(itemID, subID, baseName);
     }
 
     @Override
     public void register() {
-        
+
     }
-    
+
+    @Override
+    @SuppressWarnings("incomplete-switch")
+    public final ItemStack getPotionResult(ItemStack ingredient, ItemStack brewingStack) {
+        switch (getIngredientType(ingredient, brewingStack)) {
+        case POWER:
+            int power = PotionParser.readPower(brewingStack.getItemDamage());
+            if (power < maxPower - 1) {
+                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setPower(power + 1,
+                        brewingStack.getItemDamage()));
+            }
+            break;
+        case DURATION:
+            int duration = PotionParser.readDuration(brewingStack.getItemDamage());
+            if (duration < maxDuration - 1) {
+                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setDuration(
+                        duration + 1, brewingStack.getItemDamage()));
+            }
+            break;
+        case TIER:
+            int level = PotionParser.readLevel(brewingStack.getItemDamage());
+            if (level < maxLevel - 1) {
+                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setLevel(level + 1,
+                        brewingStack.getItemDamage()));
+            }
+            break;
+        case CHEMICAL:
+            return getChemicalPotionResult(ingredient, brewingStack);
+        }
+        return super.getPotionResult(ingredient, brewingStack);
+    }
+
+    protected ItemStack getChemicalPotionResult(ItemStack ingredient, ItemStack brewingStack) {
+        return null;
+    }
+
+    protected TYPE getIngredientType(ItemStack ingredient, ItemStack brewingStack) {
+        if (ingredient.itemID == Item.redstone.itemID) {
+            return TYPE.POWER;
+        } else if (ingredient.itemID == Item.lightStoneDust.itemID) {
+            return TYPE.DURATION;
+        } else if (ItemList.genericCraftingItems.isPresent()
+                && ingredient.itemID == ItemList.genericCraftingItems.get().itemID
+                && ingredient.getItemDamage() == Properties.ShinyBauble.meta) {
+            return TYPE.TIER;
+        }
+        return TYPE.NONE;
+    }
+
     protected void setSubItemBounds(int maxLevel, int maxDuration, int maxPower, int type) {
         this.maxLevel = maxLevel;
         this.maxDuration = maxDuration;

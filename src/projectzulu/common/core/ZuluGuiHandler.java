@@ -13,7 +13,7 @@ import projectzulu.common.dungeon.GuiLimitedMobSpawner;
 import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
 import projectzulu.common.potion.brewingstands.ContainerBrewingStandSingle;
 import projectzulu.common.potion.brewingstands.GuiBrewingStandSingle;
-import projectzulu.common.potion.brewingstands.TileEntityBrewingTriple;
+import projectzulu.common.potion.brewingstands.TileEntityBrewingBase;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class ZuluGuiHandler implements IGuiHandler {
@@ -31,8 +31,8 @@ public class ZuluGuiHandler implements IGuiHandler {
             }
         case BrewingStand:
             tileEntityServer = world.getBlockTileEntity(x, y, z);
-            if (tileEntityServer instanceof TileEntityBrewingTriple) {
-                return new ContainerBrewingStandSingle(player.inventory, (TileEntityBrewingTriple) tileEntityServer);
+            if (tileEntityServer instanceof TileEntityBrewingBase) {
+                return new ContainerBrewingStandSingle(player.inventory, (TileEntityBrewingBase) tileEntityServer);
             }
         case Unknown:
             throw new IllegalStateException("GuiID cannot be Found" + guiID);
@@ -69,8 +69,8 @@ public class ZuluGuiHandler implements IGuiHandler {
             }
         case BrewingStand:
             tileEntityClient = world.getBlockTileEntity(x, y, z);
-            if (tileEntityClient instanceof TileEntityBrewingTriple) {
-                return new GuiBrewingStandSingle(player.inventory, (TileEntityBrewingTriple) tileEntityClient);
+            if (tileEntityClient instanceof TileEntityBrewingBase) {
+                return new GuiBrewingStandSingle(player.inventory, (TileEntityBrewingBase) tileEntityClient);
             }
         case Unknown:
             throw new IllegalStateException("GuiID cannot be Found" + guiID);

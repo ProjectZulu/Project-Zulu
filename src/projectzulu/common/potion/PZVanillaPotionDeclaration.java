@@ -14,6 +14,7 @@ import projectzulu.common.potion.subitem.SubItemPotionDamageBoost;
 import projectzulu.common.potion.subitem.SubItemPotionFireResistance;
 import projectzulu.common.potion.subitem.SubItemPotionHarm;
 import projectzulu.common.potion.subitem.SubItemPotionHeal;
+import projectzulu.common.potion.subitem.SubItemPotionInvisibility;
 import projectzulu.common.potion.subitem.SubItemPotionMoveSlowdown;
 import projectzulu.common.potion.subitem.SubItemPotionMoveSpeed;
 import projectzulu.common.potion.subitem.SubItemPotionNightVision;
@@ -45,6 +46,7 @@ public class PZVanillaPotionDeclaration extends ItemDeclaration {
         addToLists(item.itemID, i++, SubItemPotionList.MOVE_SLOW, list, SubItemPotionMoveSlowdown.class);
         addToLists(item.itemID, i++, SubItemPotionList.FIRE_RESISTANCE, list, SubItemPotionFireResistance.class);
         addToLists(item.itemID, i++, SubItemPotionList.NIGHT_VISION, list, SubItemPotionNightVision.class);
+        addToLists(item.itemID, i++, SubItemPotionList.INVISIBILITY, list, SubItemPotionInvisibility.class);
         addToLists(item.itemID, i++, SubItemPotionList.BLINDNESS, list, SubItemPotionBlindness.class);
         addToLists(item.itemID, i++, SubItemPotionList.HEAL, list, SubItemPotionHeal.class);
         addToLists(item.itemID, i++, SubItemPotionList.HARM, list, SubItemPotionHarm.class);
@@ -73,7 +75,7 @@ public class PZVanillaPotionDeclaration extends ItemDeclaration {
         try {
             SubItemPotion subItemPotion = potionClass.getConstructor(new Class[] { int.class, int.class }).newInstance(
                     new Object[] { itemID, subID });
-            entry.subItem = Optional.of(subItemPotion);
+            entry.set(subItemPotion);
             registryList.add(subItemPotion);
         } catch (Exception e) {
             e.printStackTrace();
