@@ -10,9 +10,9 @@ import projectzulu.common.core.DefaultProps;
 
 public class GuiBrewingStandSingle extends GuiContainer {
 
-    private TileEntityBrewingTriple brewingStand;
+    private TileEntityBrewingBase brewingStand;
 
-    public GuiBrewingStandSingle(InventoryPlayer inventoryPlayer, TileEntityBrewingTriple tileEntity) {
+    public GuiBrewingStandSingle(InventoryPlayer inventoryPlayer, TileEntityBrewingBase tileEntity) {
         super(new ContainerBrewingStandSingle(inventoryPlayer, tileEntity));
         brewingStand = tileEntity;
     }

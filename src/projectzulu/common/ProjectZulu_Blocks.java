@@ -13,6 +13,7 @@ import projectzulu.common.blocks.itemblockdeclarations.AloeVeraSeedsDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.AnkhDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.BlueClothArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.BrewingStandSingleDeclaration;
+import projectzulu.common.blocks.itemblockdeclarations.BrewingStandTripleDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.CactusArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.CampfireDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.CoconutDeclaration;
@@ -93,7 +94,7 @@ public class ProjectZulu_Blocks {
 
     @Init
     public void load(FMLInitializationEvent event) {
-        
+
     }
 
     @PostInit
@@ -141,8 +142,8 @@ public class ProjectZulu_Blocks {
                 new CoconutDeclaration(), new QuickSandDeclaration(), new NightBloomDeclaration(),
                 new CreeperBlossomDeclaration(), new SpikesDeclaration(), new CampfireDeclaration(),
                 new MobSkullsDeclaration(), new TombstoneDeclaration(), new UniversalFlowerPotDeclaration(),
-                new BrewingStandSingleDeclaration());
-        
+                new BrewingStandSingleDeclaration(), new BrewingStandTripleDeclaration());
+
         ItemBlockManager.INSTANCE.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(),
                 new WaterDropletDeclaration(), new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(),
                 new CoconutShellDeclaration(), new ScaleItemDeclaration(), new FurPeltDeclaration(),

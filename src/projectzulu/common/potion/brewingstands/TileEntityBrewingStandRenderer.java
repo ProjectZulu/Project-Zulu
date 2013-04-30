@@ -14,10 +14,10 @@ public class TileEntityBrewingStandRenderer extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double xRenderCoord, double yRenderCoord,
             double zRenderCoord, float var8) {
-        renderTileEntity((TileEntityBrewingSingle) tileEntity, xRenderCoord, yRenderCoord, zRenderCoord, var8);
+        renderTileEntity((TileEntityBrewingBase) tileEntity, xRenderCoord, yRenderCoord, zRenderCoord, var8);
     }
 
-    private void renderTileEntity(TileEntityBrewingSingle tileEntity, double xRenderCoord, double yRenderCoord,
+    private void renderTileEntity(TileEntityBrewingBase tileEntity, double xRenderCoord, double yRenderCoord,
             double zRenderCoord, float var8) {
         RenderItem itemRenderer = new RenderItem();
         itemRenderer.setRenderManager(RenderManager.instance);
@@ -26,10 +26,10 @@ public class TileEntityBrewingStandRenderer extends TileEntitySpecialRenderer {
         if (ingredientStack != null) {
             if (ingredientStack.stackSize > 1) {
                 renderItemStack(ingredientStack, itemRenderer, tileEntity.worldObj, xRenderCoord, yRenderCoord + 0.3D,
-                        zRenderCoord, (float) (Math.pow(400 - tileEntity.getBrewTime(), 2)) / 20, 0.28f);
+                        zRenderCoord, (float) (Math.pow(400 - tileEntity.getBrewTime(), 2)) / 20 + 90f, 0.28f);
             } else {
                 renderItemStack(ingredientStack, itemRenderer, tileEntity.worldObj, xRenderCoord, yRenderCoord + 0.3D,
-                        zRenderCoord, (float) (Math.pow(400 - tileEntity.getBrewTime(), 2)) / 20, 0.4f);
+                        zRenderCoord, (float) (Math.pow(400 - tileEntity.getBrewTime(), 2)) / 20 + 90f, 0.4f);
             }
         }
 

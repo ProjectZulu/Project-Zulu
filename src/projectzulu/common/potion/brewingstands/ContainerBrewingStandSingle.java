@@ -11,14 +11,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerBrewingStandSingle extends Container {
 
-    private TileEntityBrewingTriple tileBrewingStand;
+    private TileEntityBrewingBase tileBrewingStand;
 
     /** Instance of Slot. */
     private final Slot theSlot;
     private int brewTime = 0;
     public final int potionSlots;
 
-    public ContainerBrewingStandSingle(InventoryPlayer par1InventoryPlayer, TileEntityBrewingTriple brewingStand) {
+    public ContainerBrewingStandSingle(InventoryPlayer par1InventoryPlayer, TileEntityBrewingBase brewingStand) {
         this.tileBrewingStand = brewingStand;
         potionSlots = tileBrewingStand.getSizeInventory() - 1;
         int slotID = 0;
