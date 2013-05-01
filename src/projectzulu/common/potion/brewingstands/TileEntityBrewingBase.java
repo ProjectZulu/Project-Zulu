@@ -11,6 +11,8 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
+import projectzulu.common.api.ItemList;
+import projectzulu.common.api.SubItemPotionList;
 import projectzulu.common.potion.subitem.SubItemPotion;
 import projectzulu.common.potion.subitem.SubItemPotionRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -99,6 +101,8 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
                         if (resultPotion != null) {
                             return true;
                         }
+                    } else if (isWaterBottleOverride(ingredientStack, brewingItemStacks[i])) {
+                        return true;
                     }
                 }
             }
@@ -118,9 +122,9 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
                         brewingItemStacks[i].itemID = resultPotion.itemID;
                         brewingItemStacks[i].setItemDamage(resultPotion.getItemDamage());
                     }
-                } else if (brewingItemStacks[i] != null && brewingItemStacks[i].itemID == Item.potion.itemID
-                        && brewingItemStacks[i].getItemDamage() == 0) {
-
+                } else if (isWaterBottleOverride(ingredientStack, brewingItemStacks[i])) {
+                    brewingItemStacks[i].itemID = SubItemPotionList.BUBBLING.get().itemID;
+                    brewingItemStacks[i].setItemDamage(SubItemPotionList.BUBBLING.get().subID);
                 }
             }
 
@@ -137,6 +141,28 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
         }
     }
 
+    /**
+     * Determines if the base regular Non-Potion Item that gets converted into a base Potion is present
+     * 
+     * @param ingredient
+     * @param brewingStack
+     * @return
+     */
+    private boolean isWaterBottleOverride(ItemStack ingredient, ItemStack brewingStack) {
+        if (brewingStack == null || ingredient == null || !ItemList.genericCraftingItems.isPresent()) {
+            return false;
+        }
+
+        if (brewingStack.itemID == Item.potion.itemID && brewingStack.getItemDamage() == 0) {
+            if (ingredient.itemID == Item.netherStalkSeeds.itemID) {
+                if (SubItemPotionList.BUBBLING.isPresent()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     /**
      * Returns the stack in slot i
      */
