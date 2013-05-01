@@ -76,13 +76,6 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
             this.brewTime = 400;
             this.ingredientID = this.brewingItemStacks[brewingItemStacks.length - 1].itemID;
         }
-
-        int i = this.getFilledSlots();
-
-        if (i != this.filledSlots) {
-            this.filledSlots = i;
-            this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, i, 2);
-        }
         super.updateEntity();
     }
 
@@ -95,7 +88,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
                 && this.brewingItemStacks[brewingItemStacks.length - 1].stackSize > 0) {
             ItemStack ingredientStack = this.brewingItemStacks[brewingItemStacks.length - 1];
 
-            if (!Item.itemsList[ingredientStack.itemID].isPotionIngredient()) {
+            if (!PotionIngredients.isPotionIngredient(ingredientStack)) {
                 return false;
             } else {
                 for (int i = 0; i < brewingItemStacks.length - 1; ++i) {
@@ -125,6 +118,9 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
                         brewingItemStacks[i].itemID = resultPotion.itemID;
                         brewingItemStacks[i].setItemDamage(resultPotion.getItemDamage());
                     }
+                } else if (brewingItemStacks[i] != null && brewingItemStacks[i].itemID == Item.potion.itemID
+                        && brewingItemStacks[i].getItemDamage() == 0) {
+
                 }
             }
 
@@ -220,27 +216,13 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
      */
     @Override
     public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
-        return par1 == 3 ? Item.itemsList[par2ItemStack.itemID].isPotionIngredient()
+        return par1 == 3 ? PotionIngredients.isPotionIngredient(par2ItemStack)
                 : par2ItemStack.getItem() instanceof ItemPotion || par2ItemStack.itemID == Item.glassBottle.itemID;
     }
 
     @SideOnly(Side.CLIENT)
     public void setBrewTime(int par1) {
         this.brewTime = par1;
-    }
-
-    /**
-     * returns an integer with each bit specifying wether that slot of the stand contains a potion
-     */
-    // TODO: Removeif we Use TileEntity to Draw Potions
-    public int getFilledSlots() {
-        int i = 0;
-        for (int j = 0; j < brewingItemStacks.length; ++j) {
-            if (this.brewingItemStacks[j] != null) {
-                i |= 1 << j;
-            }
-        }
-        return i;
     }
 
     /**

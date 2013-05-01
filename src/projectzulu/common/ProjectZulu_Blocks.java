@@ -106,8 +106,8 @@ public class ProjectZulu_Blocks {
         } else {
             ProjectZuluLog.info("Starting Potion Setup ");
             PotionManager.setupAndRegisterPotions();
-            ProjectZuluLog.info("Finsished Potion Setup ");
             MinecraftForge.EVENT_BUS.register(new PotionEvents());
+            ProjectZuluLog.info("Finsished Potion Setup ");
         }
 
         /* Turn on NullPotionHandler */

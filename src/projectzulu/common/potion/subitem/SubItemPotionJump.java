@@ -32,8 +32,8 @@ public class SubItemPotionJump extends SubItemPotionGeneric {
 
     @Override
     protected ItemStack getChemicalPotionResult(ItemStack ingredient, ItemStack brewingStack) {
-        if (SubItemPotionList.JUMP.isPresent()) {
-            SubItemPotion subItemPotion = SubItemPotionList.JUMP.get();
+        if (SubItemPotionList.SLOWFALL.isPresent()) {
+            SubItemPotion subItemPotion = SubItemPotionList.SLOWFALL.get();
             return new ItemStack(subItemPotion.itemID, 1, PotionParser.setID(subItemPotion.subID,
                     brewingStack.getItemDamage()));
         }
