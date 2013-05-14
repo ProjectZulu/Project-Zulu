@@ -12,12 +12,16 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockUniversalFlowerPot extends BlockContainer{
 	
-	protected BlockUniversalFlowerPot(int par1) {
+    public final int renderID;
+	public BlockUniversalFlowerPot(int par1, int renderID) {
 		super(par1, Material.wood);
         this.setBlockBoundsForItemRender();        
         float var1 = 0.375F;
         float var2 = var1 / 2.0F;
         this.setBlockBounds(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, var1, 0.5F + var2);
+        setHardness(0.0F);
+        setStepSound(soundPowderFootstep);
+        this.renderID = renderID;
 	}
 	
     @Override
@@ -30,14 +34,16 @@ public class BlockUniversalFlowerPot extends BlockContainer{
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType(){
-        return ProjectZulu_Core.universalFlowerPotRenderID;
+        return renderID;
     }
 	
     /**
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube(){
         return false;
     }
@@ -45,6 +51,7 @@ public class BlockUniversalFlowerPot extends BlockContainer{
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock(){
         return false;
     }
@@ -52,6 +59,7 @@ public class BlockUniversalFlowerPot extends BlockContainer{
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender(){
         float var1 = 0.375F;
         float var2 = var1 / 2.0F;

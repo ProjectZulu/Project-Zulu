@@ -18,12 +18,14 @@ public class BlockZuluSlab extends BlockWoodSlab{
 	Block baseBlock;	
 	public BlockZuluSlab(int id, boolean isDouble, Block baseBlock) {
 		super(id, isDouble);
-		
 		if (!isDouble) singleSlabID = id;
 		this.baseBlock = baseBlock;
 		setBurnProperties(blockID, 5, 20);
 		setLightOpacity(0);
-        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setHardness(2.0F);
+        setResistance(5.0F);
+        setStepSound(soundWoodFootstep);
+        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
 	}	
 	
 	@Override
@@ -33,13 +35,13 @@ public class BlockZuluSlab extends BlockWoodSlab{
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
-        return baseBlock.getBlockTextureFromSideAndMetadata(par1, par2 & 7);
+	public Icon getIcon(int par1, int par2) {
+        return baseBlock.getIcon(par1, par2 & 7);
 	}
 	
 	@Override
 	public String getFullSlabName(int par1) {
-        return super.getUnlocalizedName() + "_" + baseBlock.getUnlocalizedName2();
+        return super.getUnlocalizedName() + "_" + baseBlock.getUnlocalizedName().substring(5);
 	}
 	
 	@Override

@@ -19,7 +19,7 @@ public enum ItemList {
 	public static Optional<? extends Item>	coconutShell = Optional.absent();
 	public static Optional<? extends Item>	coconutMilkFragment = Optional.absent();
 	
-	public static Optional<? extends Item>	genericCraftingItems1 = Optional.absent();
+	public static Optional<? extends Item>	genericCraftingItems = Optional.absent();
 	public static Optional<? extends Item>	scrapMeat = Optional.absent();
 	public static Optional<? extends Item>	structurePlacer = Optional.absent();
 	public static Optional<? extends Item>	potionIngredients = Optional.absent();

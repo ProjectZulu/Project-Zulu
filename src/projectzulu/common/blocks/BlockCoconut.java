@@ -3,6 +3,7 @@ package projectzulu.common.blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
@@ -22,7 +23,9 @@ public class BlockCoconut extends BlockCocoa
     public BlockCoconut(int par1)
     {
         super(par1);
-        //this.setCreativeTab(CreativeTabs.tabMisc);
+        setHardness(0.2F);
+        setResistance(5.0F);
+        setStepSound(Block.soundWoodFootstep);
     }
 
     @SideOnly(Side.CLIENT)
@@ -34,6 +37,7 @@ public class BlockCoconut extends BlockCocoa
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!this.canBlockStay(par1World, par2, par3, par4))
@@ -57,6 +61,7 @@ public class BlockCoconut extends BlockCocoa
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
         int var5 = getDirection(par1World.getBlockMetadata(par2, par3, par4));
@@ -71,6 +76,7 @@ public class BlockCoconut extends BlockCocoa
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType()
     {
         return 28;
@@ -79,6 +85,7 @@ public class BlockCoconut extends BlockCocoa
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
@@ -88,6 +95,7 @@ public class BlockCoconut extends BlockCocoa
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
@@ -97,12 +105,14 @@ public class BlockCoconut extends BlockCocoa
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**
@@ -117,6 +127,7 @@ public class BlockCoconut extends BlockCocoa
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
@@ -124,21 +135,21 @@ public class BlockCoconut extends BlockCocoa
         int var7 = func_72219_c(var5);
         int var8 = 4 + var7 * 2;
         int var9 = 5 + var7 * 2;
-        float var10 = (float)var8 / 2.0F;
+        float var10 = var8 / 2.0F;
 
         switch (var6)
         {
             case 0:
-                this.setBlockBounds((8.0F - var10) / 16.0F, (12.0F - (float)var9) / 16.0F, (15.0F - (float)var8) / 16.0F, (8.0F + var10) / 16.0F, 0.75F, 0.9375F);
+                this.setBlockBounds((8.0F - var10) / 16.0F, (12.0F - var9) / 16.0F, (15.0F - var8) / 16.0F, (8.0F + var10) / 16.0F, 0.75F, 0.9375F);
                 break;
             case 1:
-                this.setBlockBounds(0.0625F, (12.0F - (float)var9) / 16.0F, (8.0F - var10) / 16.0F, (1.0F + (float)var8) / 16.0F, 0.75F, (8.0F + var10) / 16.0F);
+                this.setBlockBounds(0.0625F, (12.0F - var9) / 16.0F, (8.0F - var10) / 16.0F, (1.0F + var8) / 16.0F, 0.75F, (8.0F + var10) / 16.0F);
                 break;
             case 2:
-                this.setBlockBounds((8.0F - var10) / 16.0F, (12.0F - (float)var9) / 16.0F, 0.0625F, (8.0F + var10) / 16.0F, 0.75F, (1.0F + (float)var8) / 16.0F);
+                this.setBlockBounds((8.0F - var10) / 16.0F, (12.0F - var9) / 16.0F, 0.0625F, (8.0F + var10) / 16.0F, 0.75F, (1.0F + var8) / 16.0F);
                 break;
             case 3:
-                this.setBlockBounds((15.0F - (float)var8) / 16.0F, (12.0F - (float)var9) / 16.0F, (8.0F - var10) / 16.0F, 0.9375F, 0.75F, (8.0F + var10) / 16.0F);
+                this.setBlockBounds((15.0F - var8) / 16.0F, (12.0F - var9) / 16.0F, (8.0F - var10) / 16.0F, 0.9375F, 0.75F, (8.0F + var10) / 16.0F);
         }
     }
 
@@ -147,28 +158,30 @@ public class BlockCoconut extends BlockCocoa
      */
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
     {
-        int var6 = ((MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 0) % 4;
+        int var6 = ((MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3) + 0) % 4;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, var6, 3);
     }
 
-    /**
-     * called before onBlockPlacedBy by ItemBlock and ItemReed
-     */
-    public void updateBlockMetadata(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8)
-    {
-        if (par5 == 1 || par5 == 0)
-        {
-            par5 = 2;
-        }
-
-        int var9 = Direction.footInvisibleFaceRemap[Direction.vineGrowth[par5]];
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, var9, 3);
-    }
+//    /**
+//     * called before onBlockPlacedBy by ItemBlock and ItemReed
+//     */
+//    @Override
+//    public void updateBlockMetadata(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8)
+//    {
+//        if (par5 == 1 || par5 == 0)
+//        {
+//            par5 = 2;
+//        }
+//
+//        int var9 = Direction.footInvisibleFaceRemap[Direction.vineGrowth[par5]];
+//        par1World.setBlockMetadataWithNotify(par2, par3, par4, var9, 3);
+//    }
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         if (!this.canBlockStay(par1World, par2, par3, par4))
@@ -187,6 +200,7 @@ public class BlockCoconut extends BlockCocoa
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
     {
         if (!par1World.isRemote)
@@ -220,6 +234,7 @@ public class BlockCoconut extends BlockCocoa
 		}    	
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**
@@ -233,6 +248,7 @@ public class BlockCoconut extends BlockCocoa
     	}
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**

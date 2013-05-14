@@ -43,7 +43,7 @@ public class RawFiberCraftingHandler implements ICraftingHandler{
 
 		if(!contsinsFur) return;
 		
-		ItemStack itemToPlace = new ItemStack(ItemList.genericCraftingItems1.get(), 2, ItemGenerics.Properties.RawFiber.meta());
+		ItemStack itemToPlace = new ItemStack(ItemList.genericCraftingItems.get(), 2, ItemGenerics.Properties.RawFiber.meta());
 
 		if(furInSlot == 0){
 			craftMatrix.setInventorySlotContents(1, itemToPlace);

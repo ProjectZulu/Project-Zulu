@@ -94,7 +94,7 @@ public class ItemGenerics extends Item{
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister) {
     	for (Properties type : Properties.values()) {
     		type.setIcon(par1IconRegister.registerIcon(DefaultProps.blockKey+":"+type.toString().toLowerCase()));
     	}   

@@ -23,7 +23,7 @@ public class HauntedArmorDeclaration extends EggableDeclaration{
 	
 	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems1,
+		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems,
 				ItemGenerics.Properties.Ectoplasm.meta(), 4);
 		super.outputDataToList(config, customMobData);
 	}

@@ -17,7 +17,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.Properties;
 import projectzulu.common.core.ProjectZuluLog;
 @Deprecated
 public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
@@ -184,7 +184,7 @@ public class EntityRideableZulu extends EntityRideableHerd implements IAnimals
 
 	@Override
     public void onUpdate(){
-		if(worldObj.difficultySetting == 0 && ProjectZulu_Core.despawnInPeaceful){
+		if(worldObj.difficultySetting == 0 && Properties.despawnInPeaceful){
 			this.setDead();
 		}
 

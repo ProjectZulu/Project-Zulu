@@ -3,6 +3,7 @@ package projectzulu.common.blocks.heads;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -55,14 +56,16 @@ public class BlockMobHeads extends BlockContainer{
 	}
 	}
 	
-	public BlockMobHeads(int par1, int par2){
+	public BlockMobHeads(int par1){
 		super(par1, Material.circuits);
-		this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+		setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+		setHardness(1.0F);
+        setStepSound(Block.soundStoneFootstep);
 	}
 	
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2){
+    public Icon getIcon(int par1, int par2){
     	return Head.getByMeta(par2).icon;
     }
     
@@ -82,37 +85,44 @@ public class BlockMobHeads extends BlockContainer{
 		}
     }
 	
-	public int quantityDropped(Random par1Random){
+	@Override
+    public int quantityDropped(Random par1Random){
 		return 1;
 	}
 
-	public int getRenderType(){
+	@Override
+    public int getRenderType(){
 		return -1;
 	} 
 
-	public boolean isOpaqueCube(){
+	@Override
+    public boolean isOpaqueCube(){
 		return false;
 	} 
 
-	public boolean renderAsNormalBlock(){
+	@Override
+    public boolean renderAsNormalBlock(){
 		return false;
 	} 
 	
 	/**
 	 * Determines the damage on the item the block drops. Used in cloth and wood.
 	 */
-	public int damageDropped(int par1){
+	@Override
+    public int damageDropped(int par1){
 		return par1;
 	}
 
 	/**
 	 * Drops the block items with a specified chance of dropping the specified items
 	 */
-	public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {}
+	@Override
+    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {}
 
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4){
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4) & 7;
 
@@ -165,7 +175,7 @@ public class BlockMobHeads extends BlockContainer{
 	 */
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack){
-		int var6 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+		int var6 = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 2.5D) & 3;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, var6, 3);
 	}
 
@@ -178,7 +188,8 @@ public class BlockMobHeads extends BlockContainer{
 	/**
 	 * Get the block's damage value (for use with pick block).
 	 */
-	public int getDamageValue(World par1World, int par2, int par3, int par4){
+	@Override
+    public int getDamageValue(World par1World, int par2, int par3, int par4){
 		TileEntity var5 = par1World.getBlockTileEntity(par2, par3, par4);
 		return var5 != null && var5 instanceof TileEntityMobHeads ? ((TileEntityMobHeads)var5).getSkullType() : super.getDamageValue(par1World, par2, par3, par4);
 	}

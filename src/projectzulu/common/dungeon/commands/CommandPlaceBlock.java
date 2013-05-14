@@ -20,6 +20,7 @@ public class CommandPlaceBlock extends CommandBase{
     /**
      * Return the required permission level for this command.
      */
+    @Override
     public int getRequiredPermissionLevel(){
         return 2;
     }
@@ -96,7 +97,7 @@ public class CommandPlaceBlock extends CommandBase{
 				stringDouble = stringDouble.substring(1);
 			}
 
-			targetPos += func_82363_b(commandSender, stringDouble);
+			targetPos += parseDouble(commandSender, stringDouble);
 
 			if (!hasDecimal && !isRelativeCoords){
 				targetPos += 0.5D;
@@ -104,11 +105,11 @@ public class CommandPlaceBlock extends CommandBase{
 		}
 
 		if (lowerLimit != 0 || upperLimit != 0){
-			if (targetPos < (double)lowerLimit){
+			if (targetPos < lowerLimit){
 				throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[] {Double.valueOf(targetPos), Integer.valueOf(lowerLimit)});
 			}
 
-			if (targetPos > (double)upperLimit){
+			if (targetPos > upperLimit){
 				throw new NumberInvalidException("commands.generic.double.tooBig", new Object[] {Double.valueOf(targetPos), Integer.valueOf(upperLimit)});
 			}
 		}

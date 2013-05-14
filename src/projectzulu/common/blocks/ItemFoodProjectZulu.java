@@ -42,7 +42,7 @@ public class ItemFoodProjectZulu extends ItemFood
     /** probably of the set potion effect occurring */
     private float potionEffectProbability;
 
-    public ItemFoodProjectZulu(int par1, int par2, float par3, boolean par4, int par5)
+    public ItemFoodProjectZulu(int par1, int par2, float par3, boolean par4)
     {
         super(par1, par2, par3, par4);
         this.itemUseDuration = 32;
@@ -55,7 +55,7 @@ public class ItemFoodProjectZulu extends ItemFood
 
     public ItemFoodProjectZulu(int par1, int par2, boolean par3, int par4)
     {
-        this(par1, par2, 0.6F, par3, par4);
+        this(par1, par2, 0.6F, par3);
     }
 
 	@SideOnly(Side.CLIENT)
@@ -84,6 +84,7 @@ public class ItemFoodProjectZulu extends ItemFood
     /**
      * How long it takes to use or consume an item
      */
+    @Override
     public int getMaxItemUseDuration(ItemStack par1ItemStack)
     {
         return 32;
@@ -92,6 +93,7 @@ public class ItemFoodProjectZulu extends ItemFood
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
+    @Override
     public EnumAction getItemUseAction(ItemStack par1ItemStack)
     {
         return EnumAction.eat;
@@ -100,6 +102,7 @@ public class ItemFoodProjectZulu extends ItemFood
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
         if (par3EntityPlayer.canEat(this.alwaysEdible))
@@ -110,6 +113,7 @@ public class ItemFoodProjectZulu extends ItemFood
         return par1ItemStack;
     }
 
+    @Override
     public int getHealAmount()
     {
         return this.healAmount;
@@ -118,6 +122,7 @@ public class ItemFoodProjectZulu extends ItemFood
     /**
      * gets the saturationModifier of the ItemFood
      */
+    @Override
     public float getSaturationModifier()
     {
         return this.saturationModifier;
@@ -126,6 +131,7 @@ public class ItemFoodProjectZulu extends ItemFood
     /**
      * Whether wolves like this food (true for raw and cooked porkchop).
      */
+    @Override
     public boolean isWolfsFavoriteMeat()
     {
         return this.isWolfsFavoriteMeat;
@@ -135,6 +141,7 @@ public class ItemFoodProjectZulu extends ItemFood
      * sets a potion effect on the item. Args: int potionId, int duration (will be multiplied by 20), int amplifier,
      * float probability of effect happening
      */
+    @Override
     public ItemFoodProjectZulu setPotionEffect(int par1, int par2, int par3, float par4)
     {
         this.potionId = par1;
@@ -147,6 +154,7 @@ public class ItemFoodProjectZulu extends ItemFood
     /**
      * Set the field 'alwaysEdible' to true, and make the food edible even if the player don't need to eat.
      */
+    @Override
     public ItemFoodProjectZulu setAlwaysEdible()
     {
         this.alwaysEdible = true;

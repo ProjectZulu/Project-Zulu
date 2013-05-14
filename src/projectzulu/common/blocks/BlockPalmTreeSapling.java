@@ -12,7 +12,7 @@ import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 
 public class BlockPalmTreeSapling extends BlockFlower{
-    public BlockPalmTreeSapling(int par1, int par2){
+    public BlockPalmTreeSapling(int par1){
         super(par1);
         float var3 = 0.4F;
         this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
@@ -22,6 +22,7 @@ public class BlockPalmTreeSapling extends BlockFlower{
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random){
     	if (!par1World.isRemote){
     		super.updateTick(par1World, par2, par3, par4, par5Random);
@@ -169,6 +170,7 @@ public class BlockPalmTreeSapling extends BlockFlower{
     	
     }
 
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9){
     	ItemStack itemstack = par5EntityPlayer.inventory.getCurrentItem();
     	if(itemstack != null && itemstack.itemID == Item.dyePowder.itemID){

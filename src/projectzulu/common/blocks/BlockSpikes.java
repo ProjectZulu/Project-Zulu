@@ -27,17 +27,20 @@ public class BlockSpikes extends Block{
 	public static final String[] imageSuffix = new String[] {"", "_poison", "_sticky"};
     @SideOnly(Side.CLIENT)
     private Icon[] icons;
-	
-	public BlockSpikes(int i){
+	public final int renderID;
+	public BlockSpikes(int i, int renderID){
 		super(i, Material.iron);
-        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-		this.disableStats();
-        this.setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
+        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+		disableStats();
+        setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
+        setHardness(0.5F);
+        setStepSound(Block.soundMetalFootstep);
+        this.renderID = renderID;
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+	public Icon getIcon(int par1, int par2) {
 		if(par2 <= 5){
 			return icons[0];
 		}else if(par2 > 5 && par2 <= 11){
@@ -128,15 +131,18 @@ public class BlockSpikes extends Block{
         
 	}
 	
-	public int getRenderType(){
-		return ProjectZulu_Core.spikeRenderID;
+	@Override
+    public int getRenderType(){
+		return renderID;
 	}
 	
-	public boolean isOpaqueCube(){
+	@Override
+    public boolean isOpaqueCube(){
 		return false;
 	}
 	
-	public boolean renderAsNormalBlock(){
+	@Override
+    public boolean renderAsNormalBlock(){
 		return false;
 	}
 	
@@ -144,18 +150,21 @@ public class BlockSpikes extends Block{
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4){
         return null;
     }
 
-	public int quantityDropped(Random random){
+	@Override
+    public int quantityDropped(Random random){
 		return 1;
 	}
 
 	/**
 	 * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
 	 */
-	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5){
+	@Override
+    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5){
 		return this.canPlaceBlockAt(par1World, par2, par3, par4);
 	}
 
@@ -187,7 +196,7 @@ public class BlockSpikes extends Block{
 			float par8, float par9) {
 
 		/* Check if Item is Poison Droplet, is so Make Poisonous */
-		if( par5EntityPlayer.inventory.getCurrentItem() != null && ItemList.genericCraftingItems1.isPresent() && par5EntityPlayer.inventory.getCurrentItem().getItem().itemID == ItemList.genericCraftingItems1.get().itemID
+		if( par5EntityPlayer.inventory.getCurrentItem() != null && ItemList.genericCraftingItems.isPresent() && par5EntityPlayer.inventory.getCurrentItem().getItem().itemID == ItemList.genericCraftingItems.get().itemID
 				&& par5EntityPlayer.inventory.getCurrentItem().getItemDamage() == ItemGenerics.Properties.PoisonDroplet.meta() 
 				&& ( par1World.getBlockMetadata(par2, par3, par4) < 6 || par1World.getBlockMetadata(par2, par3, par4) > 11 ) ){
 			
