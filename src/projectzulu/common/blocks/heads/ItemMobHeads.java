@@ -25,7 +25,7 @@ public class ItemMobHeads extends ItemBlock{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int par1) {
-		return Block.blocksList[this.itemID].getBlockTextureFromSideAndMetadata(2, par1);
+		return Block.blocksList[this.itemID].getIcon(2, par1);
 	}
 	
 	/**

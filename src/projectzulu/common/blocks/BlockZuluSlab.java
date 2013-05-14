@@ -35,8 +35,8 @@ public class BlockZuluSlab extends BlockWoodSlab{
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
-        return baseBlock.getBlockTextureFromSideAndMetadata(par1, par2 & 7);
+	public Icon getIcon(int par1, int par2) {
+        return baseBlock.getIcon(par1, par2 & 7);
 	}
 	
 	@Override

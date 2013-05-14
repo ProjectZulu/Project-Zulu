@@ -33,7 +33,7 @@ public class CoconutCraftingHandler implements ICraftingHandler{
 
 		if(shouldBeSword != null && shouldBeCoconut != null 
 				&& (shouldBeSword.getItem().itemID == Item.swordWood.itemID || shouldBeSword.getItem().itemID == Item.swordStone.itemID 
-				|| shouldBeSword.getItem().itemID == Item.swordSteel.itemID || shouldBeSword.getItem().itemID == Item.swordGold.itemID 
+				|| shouldBeSword.getItem().itemID == Item.swordIron.itemID || shouldBeSword.getItem().itemID == Item.swordGold.itemID 
 				|| shouldBeSword.getItem().itemID == Item.swordDiamond.itemID) 
 				&& ItemList.coconutItem.isPresent() && shouldBeCoconut.getItem() == ItemList.coconutItem.get()){
 			//Put Sword Back

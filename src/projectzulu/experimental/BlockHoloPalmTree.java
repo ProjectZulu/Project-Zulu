@@ -22,7 +22,7 @@ public class BlockHoloPalmTree extends Block{
 	}
 	
 	//TODO Commented
-//	public int getBlockTextureFromSideAndMetadata(int par1, int par2) 
+//	public int getIcon(int par1, int par2) 
 //	{
 //			switch (par2) {
 //			case 0:

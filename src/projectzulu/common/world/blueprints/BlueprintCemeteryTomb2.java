@@ -23,26 +23,26 @@ public class BlueprintCemeteryTomb2 extends Blueprint{
 		if( curHeight == 0 && cellIndexDirection.calcDirection(cellIndex, cellSize).equals(cellIndexDirection) ){
 			switch (cellIndexDirection){
 			case NorthMiddle:
-				return new BlockWithMeta(Block.doorSteel.blockID, 3);
+				return new BlockWithMeta(Block.doorIron.blockID, 3);
 			case SouthMiddle:
-				return new BlockWithMeta(Block.doorSteel.blockID, 4);
+				return new BlockWithMeta(Block.doorIron.blockID, 4);
 			case EastMiddle:
-				return new BlockWithMeta(Block.doorSteel.blockID, 5);
+				return new BlockWithMeta(Block.doorIron.blockID, 5);
 			case WestMiddle:
-				return new BlockWithMeta(Block.doorSteel.blockID, 2);
+				return new BlockWithMeta(Block.doorIron.blockID, 2);
 			default:
 				break;
 			}
 		}else if( curHeight == 1 && cellIndexDirection.calcDirection(cellIndex, cellSize).equals(cellIndexDirection) ){
 			switch (cellIndexDirection){
 			case NorthMiddle:
-				return new BlockWithMeta(Block.doorSteel.blockID, 11);
+				return new BlockWithMeta(Block.doorIron.blockID, 11);
 			case SouthMiddle:
-				return new BlockWithMeta(Block.doorSteel.blockID, 12);
+				return new BlockWithMeta(Block.doorIron.blockID, 12);
 			case EastMiddle:
-				return new BlockWithMeta(Block.doorSteel.blockID, 13);
+				return new BlockWithMeta(Block.doorIron.blockID, 13);
 			case WestMiddle:
-				return new BlockWithMeta(Block.doorSteel.blockID, 10);
+				return new BlockWithMeta(Block.doorIron.blockID, 10);
 			default:
 				break;
 			}

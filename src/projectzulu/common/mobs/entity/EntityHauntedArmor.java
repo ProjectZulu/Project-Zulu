@@ -73,11 +73,11 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
         int number = world.rand.nextInt(2);
         switch (number) {
         case 0:
-            setCurrentItemOrArmor(0, new ItemStack(Item.swordSteel));
-            setCurrentItemOrArmor(1, new ItemStack(Item.helmetSteel));
-            setCurrentItemOrArmor(2, new ItemStack(Item.plateSteel));
-            setCurrentItemOrArmor(3, new ItemStack(Item.legsSteel));
-            setCurrentItemOrArmor(4, new ItemStack(Item.bootsSteel));
+            setCurrentItemOrArmor(0, new ItemStack(Item.swordIron));
+            setCurrentItemOrArmor(1, new ItemStack(Item.helmetIron));
+            setCurrentItemOrArmor(2, new ItemStack(Item.plateIron));
+            setCurrentItemOrArmor(3, new ItemStack(Item.legsIron));
+            setCurrentItemOrArmor(4, new ItemStack(Item.bootsIron));
             break;
         case 1:
             setCurrentItemOrArmor(0, new ItemStack(Item.swordGold));

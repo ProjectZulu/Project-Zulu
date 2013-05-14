@@ -64,7 +64,7 @@ public class SpawnerFields implements DataFields{
 				boxSize.getX(), boxSize.getY());
 		newTextField.setText(text);
 		newTextField.setTextColor(-1);
-		newTextField.func_82266_h(-1);
+		newTextField.setDisabledTextColour(-1);
 		newTextField.setEnableBackgroundDrawing(false);
 		newTextField.setMaxStringLength(3);		
 		return newTextField;

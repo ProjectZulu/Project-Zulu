@@ -446,19 +446,19 @@ public class TileEntityZuluBrewingStand extends TileEntityBrewingStand {
      * Get the size of the side inventory.
      */
     @Override
-    public int[] getSizeInventorySide(int par1)
+    public int[] getAccessibleSlotsFromSide(int par1)
     {
         return par1 == 1 ? field_102017_a : field_102016_b;
     }
 
     @Override
-    public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3)
+    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
     {
         return this.isStackValidForSlot(par1, par2ItemStack);
     }
 
     @Override
-    public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3)
+    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
     {
         return true;
     }
