@@ -11,6 +11,7 @@ import projectzulu.common.blocks.FurPeltDeclaration;
 import projectzulu.common.blocks.GenericCraftingItemsDeclaration;
 import projectzulu.common.blocks.ItemBlockRecipeManager;
 import projectzulu.common.blocks.ScaleItemDeclaration;
+import projectzulu.common.blocks.ScrapMeatDeclaration;
 import projectzulu.common.blocks.StructurePlacerDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.AloeVeraDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.AloeVeraSeedsDeclaration;
@@ -90,7 +91,7 @@ public class ProjectZulu_Blocks {
 
     @Init
     public void load(FMLInitializationEvent event) {
-        
+
     }
 
     @PostInit
@@ -140,7 +141,8 @@ public class ProjectZulu_Blocks {
         ItemBlockManager.INSTANCE.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(),
                 new WaterDropletDeclaration(), new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(),
                 new CoconutShellDeclaration(), new ScaleItemDeclaration(), new FurPeltDeclaration(),
-                new GenericCraftingItemsDeclaration(), new StructurePlacerDeclaration(), new CoconutItem());
+                new GenericCraftingItemsDeclaration(), new StructurePlacerDeclaration(), new CoconutItem(),
+                new ScrapMeatDeclaration());
 
         ItemBlockManager.INSTANCE.addItemBlock(
                 new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),
