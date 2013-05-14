@@ -15,16 +15,16 @@ public class GUIEditNodeTextField extends GuiTextField{
 	
 	public GUIEditNodeTextField(FontRenderer fontRenderer, int maxTextChars, Point screenSize, Point backgroundSize, Point position, Point boxSize) {
 		this(fontRenderer, 
-				(screenSize.getX() - (int)backgroundSize.getX())/2+position.getX(),
-				(screenSize.getY() - (int)backgroundSize.getY())/2+position.getY(),
+				(screenSize.getX() - backgroundSize.getX())/2+position.getX(),
+				(screenSize.getY() - backgroundSize.getY())/2+position.getY(),
 				boxSize.getX(), boxSize.getY());
 		setupTextField(30000);
 	}
 	
 	public GUIEditNodeTextField(GUIEditNodeTextField oldTextFields, FontRenderer fontRenderer, int maxTextChars, Point screenSize, Point backgroundSize, Point position, Point boxSize) {
 		this(fontRenderer, 
-				(screenSize.getX() - (int)backgroundSize.getX())/2+position.getX(),
-				(screenSize.getY() - (int)backgroundSize.getY())/2+position.getY(),
+				(screenSize.getX() - backgroundSize.getX())/2+position.getX(),
+				(screenSize.getY() - backgroundSize.getY())/2+position.getY(),
 				boxSize.getX(), boxSize.getY());
 		
 		this.selectedNode = oldTextFields.selectedNode;
@@ -34,7 +34,7 @@ public class GUIEditNodeTextField extends GuiTextField{
 	
 	private void setupTextField(int maxTextChars){
 		setTextColor(-1);
-		func_82266_h(-1);
+		setDisabledTextColour(-1);
 		setMaxStringLength(maxTextChars);
 		setEnableBackgroundDrawing(false);
 	}

@@ -83,7 +83,7 @@ public class BlockCampfire extends Block implements ITempBlock{
     
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+    public Icon getIcon(int par1, int par2) {
     	return BlockCampfire.Type.getTypeByMeta(par2).getIcon();
     }
     

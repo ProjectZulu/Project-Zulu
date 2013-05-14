@@ -162,19 +162,20 @@ public class BlockCoconut extends BlockCocoa
         par1World.setBlockMetadataWithNotify(par2, par3, par4, var6, 3);
     }
 
-    /**
-     * called before onBlockPlacedBy by ItemBlock and ItemReed
-     */
-    public void updateBlockMetadata(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8)
-    {
-        if (par5 == 1 || par5 == 0)
-        {
-            par5 = 2;
-        }
-
-        int var9 = Direction.footInvisibleFaceRemap[Direction.vineGrowth[par5]];
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, var9, 3);
-    }
+//    /**
+//     * called before onBlockPlacedBy by ItemBlock and ItemReed
+//     */
+//    @Override
+//    public void updateBlockMetadata(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8)
+//    {
+//        if (par5 == 1 || par5 == 0)
+//        {
+//            par5 = 2;
+//        }
+//
+//        int var9 = Direction.footInvisibleFaceRemap[Direction.vineGrowth[par5]];
+//        par1World.setBlockMetadataWithNotify(par2, par3, par4, var9, 3);
+//    }
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are

@@ -130,7 +130,7 @@ public class ItemPZPotion extends ItemPotion {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister) {
         this.regularIcon = par1IconRegister.registerIcon("potion");
         this.splashIcon = par1IconRegister.registerIcon("potion_splash");
         this.contentIcon = par1IconRegister.registerIcon("potion_contents");

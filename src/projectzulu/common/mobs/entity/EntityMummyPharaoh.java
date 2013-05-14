@@ -39,7 +39,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 	boolean shootFireball = false;
 	int shootCooldown = 6*20;
 	int shootTimer = 30;
-	private static final ItemStack defaultHeldItem = ItemList.ankh.isPresent() ? new ItemStack(ItemList.ankh.get()) : new ItemStack(Item.swordSteel);
+	private static final ItemStack defaultHeldItem = ItemList.ankh.isPresent() ? new ItemStack(ItemList.ankh.get()) : new ItemStack(Item.swordIron);
 	
 	public EntityMummyPharaoh(World par1World) {
 		super(par1World);

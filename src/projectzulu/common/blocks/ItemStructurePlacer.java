@@ -28,8 +28,8 @@ public class ItemStructurePlacer extends Item{
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister par1IconRegister) {
-        iconIndex = par1IconRegister.registerIcon(Item.paper.getUnlocalizedName().substring(5)); //Substring removes "item."
+    public void registerIcons(IconRegister par1IconRegister) {
+        itemIcon = par1IconRegister.registerIcon(Item.paper.getUnlocalizedName().substring(5)); //Substring removes "item."
     }
 	
 	@Override
@@ -95,7 +95,8 @@ public class ItemStructurePlacer extends Item{
         return EnumAction.bow;
     }
 	
-	public String getUnlocalizedName(ItemStack itemstack) {
+	@Override
+    public String getUnlocalizedName(ItemStack itemstack) {
 		try{
 			return structureName[itemstack.getItemDamage()];
 		}catch(Exception e){

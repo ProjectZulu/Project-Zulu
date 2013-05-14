@@ -95,7 +95,7 @@ public class CommandStreamSound extends CommandBase{
 				stringDouble = stringDouble.substring(1);
 			}
 
-			targetPos += func_82363_b(commandSender, stringDouble);
+			targetPos += parseDouble(commandSender, stringDouble);
 
 			if (!hasDecimal && !isRelativeCoords){
 				targetPos += 0.5D;

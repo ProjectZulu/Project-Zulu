@@ -55,7 +55,7 @@ public class ItemBlockRecipeManager {
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
 				new char[]{'X','Y'}, new OptionalItemStack(Item.swordStone,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
-				new char[]{'X','Y'}, new OptionalItemStack(Item.swordSteel,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
+				new char[]{'X','Y'}, new OptionalItemStack(Item.swordIron,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 
 				new char[]{'X','Y'}, new OptionalItemStack(Item.swordGold,1,OreDictionary.WILDCARD_VALUE), new OptionalItemStack(ItemList.coconutItem));
 		addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[]{" X "," Y ","   "}, 

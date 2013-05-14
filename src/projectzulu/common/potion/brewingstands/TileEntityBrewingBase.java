@@ -255,7 +255,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
      * Get the size of the inventory relative to a specific side (integer) of the block. Related to Hopper.
      */
     @Override
-    public int[] getSizeInventorySide(int side) {
+    public int[] getAccessibleSlotsFromSide(int side) {
         return side == 1 ? getIngredientSlotsForSide(side) : getPotionSlotsForSide(side);
     }
 
@@ -270,12 +270,12 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
     private int[] getIngredientSlotsForSide(int side) {
         return new int[] { brewingItemStacks.length - 1 };
     }
-
+    
     /**
      * Related to Hopper?
      */
     @Override
-    public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3) {
+    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
         return this.isStackValidForSlot(par1, par2ItemStack);
     }
 
@@ -283,7 +283,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
      * Related to Hopper?
      */
     @Override
-    public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3) {
+    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3) {
         return true;
     }
 

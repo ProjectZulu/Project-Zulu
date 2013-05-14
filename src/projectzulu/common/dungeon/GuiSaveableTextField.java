@@ -12,15 +12,15 @@ public class GuiSaveableTextField extends GuiTextField{
 	}
 	
 	public GuiSaveableTextField(FontRenderer fontRenderer, int maxTextChars, Point screenSize, Point backgroundSize, Point position, Point boxSize) {
-		this(fontRenderer, (screenSize.getX() - (int)backgroundSize.getX())/2+position.getX(),
-				(screenSize.getY() - (int)backgroundSize.getY())/2+position.getY(),
+		this(fontRenderer, (screenSize.getX() - backgroundSize.getX())/2+position.getX(),
+				(screenSize.getY() - backgroundSize.getY())/2+position.getY(),
 				boxSize.getX(), boxSize.getY());	
 		setupTextField(maxTextChars);
 	}
 	
 	public GuiSaveableTextField(GuiSaveableTextField oldTextFields, FontRenderer fontRenderer, int maxTextChars, Point screenSize, Point backgroundSize, Point position, Point boxSize) {
-		this(fontRenderer, (screenSize.getX() - (int)backgroundSize.getX())/2+position.getX(),
-				(screenSize.getY() - (int)backgroundSize.getY())/2+position.getY(),
+		this(fontRenderer, (screenSize.getX() - backgroundSize.getX())/2+position.getX(),
+				(screenSize.getY() - backgroundSize.getY())/2+position.getY(),
 				boxSize.getX(), boxSize.getY());
 		setText(oldTextFields.getText());
 		setupTextField(maxTextChars);
@@ -28,7 +28,7 @@ public class GuiSaveableTextField extends GuiTextField{
 	
 	private void setupTextField(int maxTextChars){
 		setTextColor(-1);
-		func_82266_h(-1);
+		setDisabledTextColour(-1);
 		setMaxStringLength(maxTextChars);
 		setEnableBackgroundDrawing(false);
 	}

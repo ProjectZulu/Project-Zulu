@@ -63,7 +63,7 @@ public class RenderBrewingStandSingle implements ISimpleBlockRenderingHandler {
             potionNumber = ((TileEntityBrewingBase) tileEntity).brewingItemStacks.length - 1;
         }
 
-        Icon brewingPlateIcon = ((BlockBrewingStand) Block.brewingStand).func_94448_e();
+        Icon brewingPlateIcon = ((BlockBrewingStand) Block.brewingStand).getBrewingStandIcon();
         Icon bowlIcon = renderer.getBlockIconFromSideAndMetadata(Block.glass, 2, 0);
         Icon bowlRing = renderer.getBlockIconFromSideAndMetadata(Block.cobblestone, 2, 0);
         Icon legSkin = renderer.getBlockIconFromSideAndMetadata(Block.wood, 2, 0);

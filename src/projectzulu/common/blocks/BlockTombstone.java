@@ -117,7 +117,7 @@ public class BlockTombstone extends BlockContainer{
 	
 	private boolean isValidItemForEditing(int itemID){		
 		if(itemID == Item.pickaxeWood.itemID || itemID == Item.pickaxeStone.itemID || itemID == Item.pickaxeGold.itemID 
-				|| itemID == Item.pickaxeSteel.itemID || itemID == Item.pickaxeDiamond.itemID){
+				|| itemID == Item.pickaxeIron.itemID || itemID == Item.pickaxeDiamond.itemID){
 			return true;
 		}
 		return false;

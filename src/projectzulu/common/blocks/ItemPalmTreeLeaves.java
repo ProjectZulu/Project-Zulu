@@ -35,7 +35,7 @@ public class ItemPalmTreeLeaves extends ItemBlock
 //     */
 //    public int getIconFromDamage(int par1)
 //    {
-//        return Block.leaves.getBlockTextureFromSideAndMetadata(0, par1);
+//        return Block.leaves.getIcon(0, par1);
 //    }
 
     @SideOnly(Side.CLIENT)

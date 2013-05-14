@@ -26,9 +26,9 @@ public class RenderUniversalFlowerPot implements ISimpleBlockRenderingHandler{
         float var6 = 1.0F;
         int var7 = par1Block.colorMultiplier(blockAccess, par2, par3, par4);
         Icon var8 = par1Block.getBlockTextureFromSide(0);
-        float var9 = (float)(var7 >> 16 & 255) / 255.0F;
-        float var10 = (float)(var7 >> 8 & 255) / 255.0F;
-        float var11 = (float)(var7 & 255) / 255.0F;
+        float var9 = (var7 >> 16 & 255) / 255.0F;
+        float var10 = (var7 >> 8 & 255) / 255.0F;
+        float var11 = (var7 & 255) / 255.0F;
         float var12;
         float var14;
 
@@ -43,13 +43,13 @@ public class RenderUniversalFlowerPot implements ISimpleBlockRenderingHandler{
 
         var5.setColorOpaque_F(var6 * var9, var6 * var10, var6 * var11);
         var12 = 0.1865F;
-        renderer.renderSouthFace(par1Block, (double)((float)par2 - 0.5F + var12), (double)par3, (double)par4, var8);
-        renderer.renderNorthFace(par1Block, (double)((float)par2 + 0.5F - var12), (double)par3, (double)par4, var8);
-        renderer.renderWestFace(par1Block, (double)par2, (double)par3, (double)((float)par4 - 0.5F + var12), var8);
-        renderer.renderEastFace(par1Block, (double)par2, (double)par3, (double)((float)par4 + 0.5F - var12), var8);
-        renderer.renderBottomFace(Block.dirt, (double)par2, (double)((float)par3 - 0.35F + var12 + 0.1875F), (double)par4, Block.dirt.getBlockTextureFromSide(0));
-        renderer.renderTopFace(Block.dirt, (double)par2, (double)((float)par3 - 0.5F + var12 + 0.1875F), (double)par4, Block.dirt.getBlockTextureFromSide(0));		
-		return true;
+        renderer.renderFaceXPos(par1Block, par2 - 0.5F + var12, par3, par4, var8);
+        renderer.renderFaceXNeg(par1Block, par2 + 0.5F - var12, par3, par4, var8);
+        renderer.renderFaceZPos(par1Block, par2, par3, par4 - 0.5F + var12, var8);
+        renderer.renderFaceZNeg(par1Block, par2, par3, par4 + 0.5F - var12, var8);
+        renderer.renderFaceYNeg(Block.dirt, par2, par3 - 0.35F + var12 + 0.1875F, par4, Block.dirt.getBlockTextureFromSide(0));
+        renderer.renderFaceYPos(Block.dirt, par2, par3 - 0.5F + var12 + 0.1875F, par4, Block.dirt.getBlockTextureFromSide(0));		
+        return true;
 	}
 
 	@Override

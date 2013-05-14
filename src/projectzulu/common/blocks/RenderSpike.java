@@ -323,7 +323,7 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
     	
     public void RenderFencePikes(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer) {
     	Tessellator var9 = Tessellator.instance;
-    	//      Icon var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+    	//      Icon var10 = par1Block.getIcon(0, par2);
     	Icon var10 = renderer.getBlockIconFromSideAndMetadata(par1Block, 0, par2);
 
     	if (renderer.overrideBlockTexture != null){
@@ -367,7 +367,7 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
 
     public void drawSpikeCross(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderer){
     	Tessellator var9 = Tessellator.instance;
-    	//      Icon var10 = par1Block.getBlockTextureFromSideAndMetadata(0, par2);
+    	//      Icon var10 = par1Block.getIcon(0, par2);
     	Icon var10 = renderer.getBlockIconFromSideAndMetadata(par1Block, 0, par2);
 
     	if (renderer.overrideBlockTexture != null){
