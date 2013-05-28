@@ -233,11 +233,11 @@ public enum NBTHelper {
 		@Override
 		void writeToNBT(NBTTagCompound nbtTagCompound, NBTNode currentNode) {
 			NBTTagString nbtTag = (NBTTagString)currentNode.getData();
-			nbtTagCompound.setString(nbtTag.getName(), nbtTag.data);
+            nbtTagCompound.setString(nbtTag.getName(), nbtTag.data != null ? nbtTag.data : "");
 		}
 		@Override
 		String getValue(NBTBase currentTag) {
-			return ((NBTTagString)currentTag).data;
+			return ((NBTTagString)currentTag).data != null ? ((NBTTagString)currentTag).data : "";
 		}
 		@Override
 		NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
