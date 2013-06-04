@@ -46,10 +46,10 @@ public class CommandPlaceBlock extends CommandBase{
 				throw new PlayerNotFoundException();
 			}
 			
-			Block blockToPlace = Block.blocksList[parseIntBounded(commandSender, stringArgs[1], 0, 4095)];
-			if(blockToPlace == null){
-				 throw new WrongUsageException("commands.placeblock.noentity", new Object[0]);
-			}
+            int blockID = parseIntBounded(commandSender, stringArgs[1], 0, 4095);
+            if (blockID > 0 && Block.blocksList[blockID] == null) {
+                throw new WrongUsageException("commands.placeblock.noblock", new Object[0]);
+            }
 						
 			if(stringArgs.length == 3 || stringArgs.length == 6){
 				blockMeta = parseIntBounded(commandSender, stringArgs[2], 0, 4095);
@@ -66,7 +66,7 @@ public class CommandPlaceBlock extends CommandBase{
 				targetZ = (int)parsePosition(commandSender, targetPlayer.posZ, stringArgs[indexOfPos++]);
 			}
 			
-			targetPlayer.worldObj.setBlock(targetX, targetY, targetZ, blockToPlace.blockID, blockMeta, 3);
+			targetPlayer.worldObj.setBlock(targetX, targetY, targetZ, blockID, blockMeta, 3);
 		}
 	}    
     
