@@ -246,7 +246,6 @@ public class EntityGenericAnimal extends EntityGenericTameable {
         }
 
         if (customEntity.modData.get().secondarySpawnRate - rand.nextInt(100) >= 0 && super.getCanSpawnHere()
-                && worldObj.getClosestPlayerToEntity(this, 32) == null
                 && isValidLightLevel(worldObj, xCoord, yCoord, zCoord)
                 && isValidLocation(worldObj, xCoord, yCoord, zCoord)) {
             wasSuccesful = true;
