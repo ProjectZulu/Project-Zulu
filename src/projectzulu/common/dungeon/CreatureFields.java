@@ -115,7 +115,10 @@ public class CreatureFields implements DataFields {
     }
 
     private boolean isEntryValid() {
-        if (creatureNameField.getText().length() > 0
+        if (nbtTree == null) {
+            ProjectZuluLog.info("Rejecting Mob Spawner Entry due to Invalid NBT data");
+            return false;
+        } else if (creatureNameField.getText().length() > 0
                 && EntityList.stringToClassMapping.containsKey(creatureNameField.getText())
                 && weightedChanceField.getText().length() > 0) {
             return true;
