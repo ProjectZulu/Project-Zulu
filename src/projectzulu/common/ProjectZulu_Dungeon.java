@@ -91,6 +91,7 @@ public class ProjectZulu_Dungeon {
 		LanguageRegistry.instance().addStringLocalization("commands.spawnentity.usage", "/spawnentity [targetPlayer] [entityName] <yaw> <pitch> <x> <y> <z>");
 		event.registerServerCommand(new CommandPlaceBlock());
 		LanguageRegistry.instance().addStringLocalization("commands.placeblock.usage", "/placeblock [targetPlayer] [blockID] <meta> <x> <y> <z>");
+	    LanguageRegistry.instance().addStringLocalization("commands.placeblock.noblock", "/placeblock blockID does not exist");
 	}
 
     private void declareModuleItemBlocks() {
