@@ -25,6 +25,10 @@ public enum CustomEntityList {
     }
 
     public static CustomEntityList getByName(String mobName) {
+        if (mobName == null) {
+            return null;
+        }
+        
         String[] nameParts = CharMatcher.anyOf(" ").removeFrom(mobName).toLowerCase().split("\\.");
         CustomEntityList result;
         if (nameParts.length > 1) {
