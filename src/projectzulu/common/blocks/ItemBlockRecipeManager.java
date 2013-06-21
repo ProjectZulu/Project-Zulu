@@ -27,7 +27,7 @@ public class ItemBlockRecipeManager {
 		setupArmorRecipies();
 
 		/* Palm Tree Recipies */
-		addSmelting(new OptionalItemStack(Item.coal), 0, new OptionalItemStack(BlockList.palmTreeLog));
+        addSmelting(new OptionalItemStack(Item.coal, 1, 1), 0, new OptionalItemStack(BlockList.palmTreeLog));
 		addShapelessRecipe(new OptionalItemStack(BlockList.palmTreePlank,4), new OptionalItemStack(BlockList.palmTreeLog));
 		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{"X  ","X  ","   "}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
 		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{" X "," X ","   "}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
