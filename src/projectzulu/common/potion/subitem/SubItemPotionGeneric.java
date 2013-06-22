@@ -58,27 +58,49 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     @SuppressWarnings("incomplete-switch")
     public final ItemStack getPotionResult(ItemStack ingredient, ItemStack brewingStack) {
         switch (getIngredientType(ingredient, brewingStack)) {
-        case POWER:
+        case POWER: {
             int power = PotionParser.readPower(brewingStack.getItemDamage());
-            if (power < maxPower - 1) {
-                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setPower(power + 1,
-                        brewingStack.getItemDamage()));
-            }
-            break;
-        case DURATION:
             int duration = PotionParser.readDuration(brewingStack.getItemDamage());
+            int metaDamage = brewingStack.getItemDamage();
+            if (power < maxPower - 1) {
+                if (duration > 0) {
+                    metaDamage = PotionParser.setDuration(duration - 1, metaDamage);
+                }
+                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setPower(power + 1,
+                        metaDamage));
+            }
+            break;
+        }
+        case DURATION: {
+            int power = PotionParser.readPower(brewingStack.getItemDamage());
+            int duration = PotionParser.readDuration(brewingStack.getItemDamage());
+            int metaDamage = brewingStack.getItemDamage();
             if (duration < maxDuration - 1) {
+                if (power > 0) {
+                    metaDamage = PotionParser.setPower(power - 1, metaDamage);
+                }
                 return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setDuration(
-                        duration + 1, brewingStack.getItemDamage()));
+                        duration + 1, metaDamage));
             }
             break;
-        case TIER:
+        }
+        case TIER: {
             int level = PotionParser.readLevel(brewingStack.getItemDamage());
+            int power = PotionParser.readPower(brewingStack.getItemDamage());
+            int duration = PotionParser.readDuration(brewingStack.getItemDamage());
+            int metaDamage = brewingStack.getItemDamage();
             if (level < maxLevel - 1) {
+                if (power > 0) {
+                    metaDamage = PotionParser.setPower(power - 1, metaDamage);
+                }
+                if (duration > 0) {
+                    metaDamage = PotionParser.setDuration(duration - 1, metaDamage);
+                }
                 return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setLevel(level + 1,
-                        brewingStack.getItemDamage()));
+                        metaDamage));
             }
             break;
+        }
         case CHEMICAL:
             return getChemicalPotionResult(ingredient, brewingStack);
         }
