@@ -25,7 +25,7 @@ public class ItemBlockRecipeManager {
 		}
 		setupCampfireRecipies();
 		setupArmorRecipies();
-
+		
 		/* Palm Tree Recipies */
 		addSmelting(new OptionalItemStack(Item.coal), 0, new OptionalItemStack(BlockList.palmTreeLog));
 		addShapelessRecipe(new OptionalItemStack(BlockList.palmTreePlank,4), new OptionalItemStack(BlockList.palmTreeLog));
@@ -70,8 +70,11 @@ public class ItemBlockRecipeManager {
 		/* Misc Generic Craftables */
 		if(ItemList.genericCraftingItems.isPresent()){
 			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(
-					new ItemStack(ItemList.genericCraftingItems.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 3, 8, 35));			
+					new ItemStack(ItemList.genericCraftingItems.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 3, 8, 35));		
 		}
+        addRecipe(new OptionalItemStack(ItemList.genericCraftingItems, 1, ItemGenerics.Properties.ShinyBauble.meta()),
+                new String[] { " G ", "GNG", " G " }, new char[] { 'G', 'N' }, new OptionalItemStack(
+                        Item.lightStoneDust), new OptionalItemStack(Item.netherStalkSeeds));
 		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems,2,ItemGenerics.Properties.Salt.meta()),
 				new OptionalItemStack(Item.gunpowder));
 		addRecipe(new OptionalItemStack(BlockList.spike), new String[]{"   ","   ","TTT"}, 'T',

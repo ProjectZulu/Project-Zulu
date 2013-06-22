@@ -13,6 +13,7 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.api.SubItemPotionList;
+import projectzulu.common.core.ItemGenerics.Properties;
 import projectzulu.common.potion.subitem.SubItemPotion;
 import projectzulu.common.potion.subitem.SubItemPotionRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -154,7 +155,8 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
         }
 
         if (brewingStack.itemID == Item.potion.itemID && brewingStack.getItemDamage() == 0) {
-            if (ingredient.itemID == Item.netherStalkSeeds.itemID) {
+            if (ingredient.itemID == ItemList.genericCraftingItems.get().itemID
+                    && ingredient.getItemDamage() == Properties.ShinyBauble.meta) {
                 if (SubItemPotionList.BUBBLING.isPresent()) {
                     return true;
                 }
