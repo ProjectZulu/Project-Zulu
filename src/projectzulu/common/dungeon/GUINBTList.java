@@ -81,15 +81,15 @@ public class GUINBTList extends GuiScrollingList {
 
         String renderResult = "";
         int countChildren = nodeList.get(listIndex).getChildren().size();
+        int parentCount = nodeList.get(listIndex).countParents();
         if (countChildren == 0) {
             renderResult = NBTHelper.getByID(nodeList.get(listIndex).getData().getId()).getValue(
                     nodeList.get(listIndex).getData());
         }
-
-        // (160 << 16) + (145 << 8) + 114)
-        parent.mc.fontRenderer.drawStringWithShadow(renderString, this.left + 3, var3 + 2, 16777215); // Red: 0xFF2222
-                                                                                                      // //Blck: 4210752
-        parent.mc.fontRenderer.drawStringWithShadow(renderResult.length() > 4 ? renderResult.substring(0, 3)
+        
+        int maxResultLength = 13 - parentCount * 2;
+        parent.mc.fontRenderer.drawStringWithShadow(renderString, this.left + 3, var3 + 2, 16777215); // Red: 0xFF2222                                                                  // //Blck: 4210752
+        parent.mc.fontRenderer.drawStringWithShadow(renderResult.length() > maxResultLength ? renderResult.substring(0, maxResultLength)
                 : renderResult, this.left + 140, var3 + 2, 16777215); // Red: 0xFF2222 //Blck: 4210752
     }
 
