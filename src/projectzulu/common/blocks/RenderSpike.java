@@ -36,9 +36,9 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
         tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4));
         float var6 = 1.0F;
         int var7 = par1Block.colorMultiplier(blockAccess, par2, par3, par4);
-        float var8 = (float)(var7 >> 16 & 255) / 255.0F;
-        float var9 = (float)(var7 >> 8 & 255) / 255.0F;
-        float var10 = (float)(var7 & 255) / 255.0F;
+        float var8 = (var7 >> 16 & 255) / 255.0F;
+        float var9 = (var7 >> 8 & 255) / 255.0F;
+        float var10 = (var7 & 255) / 255.0F;
 
         if (EntityRenderer.anaglyphEnable)
         {
@@ -51,9 +51,9 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
         }
 
         tessellator.setColorOpaque_F(var6 * var8, var6 * var9, var6 * var10);
-        double var19 = (double)par2;
-        double var20 = (double)par3;
-        double var15 = (double)par4;
+        double var19 = par2;
+        double var20 = par3;
+        double var15 = par4;
 
 ////        if (par1Block == Block.tallGrass)
 ////        {
@@ -120,10 +120,10 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
             var10 = renderer.overrideBlockTexture;
         }
         
-        double var13 = (double)var10.getMinU();
-        double var15 = (double)var10.getMaxU();
-        double var17 = (double)var10.getMinV();
-        double var19 = (double)var10.getMaxV();
+        double var13 = var10.getMinU();
+        double var15 = var10.getMaxU();
+        double var17 = var10.getMinV();
+        double var19 = var10.getMaxV();
     	
         double var21 = par3 + 0.5D - 0.5D;
         double var23 = par3 + 0.5D + 0.5D;
@@ -374,10 +374,10 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
     		var10 = renderer.overrideBlockTexture;
     	}
     	
-    	double var13 = (double)var10.getMinU();
-    	double var15 = (double)var10.getMaxU();
-    	double var17 = (double)var10.getMinV();
-    	double var19 = (double)var10.getMaxV();
+    	double var13 = var10.getMinU();
+    	double var15 = var10.getMaxU();
+    	double var17 = var10.getMinV();
+    	double var19 = var10.getMaxV();
         
         /* Render Strip Along X */
         double var21 = par3 + 0.5D - 0.5;
@@ -475,10 +475,10 @@ public class RenderSpike implements ISimpleBlockRenderingHandler{
 			break;
 			
 		default:
-        	var13 = (double)var10.getMinU();
-        	var15 = (double)var10.getMaxU();
-        	var17 = (double)var10.getMinV();
-        	var19 = (double)var10.getMaxV();
+        	var13 = var10.getMinU();
+        	var15 = var10.getMaxU();
+        	var17 = var10.getMinV();
+        	var19 = var10.getMaxV();
 		}
     	
         double var21;

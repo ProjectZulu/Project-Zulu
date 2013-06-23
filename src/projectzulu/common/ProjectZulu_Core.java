@@ -8,7 +8,8 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
-import projectzulu.common.core.CreativeTab;
+import projectzulu.common.core.CreativePZPotionTab;
+import projectzulu.common.core.CreativePZGeneralTab;
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.EventHookContainerClass;
@@ -60,8 +61,10 @@ public class ProjectZulu_Core {
         return defaulteggID++;
     }
 
-    public static final CreativeTabs projectZuluCreativeTab = new CreativeTab(CreativeTabs.creativeTabArray.length,
+    public static final CreativeTabs projectZuluCreativeTab = new CreativePZGeneralTab(CreativeTabs.creativeTabArray.length,
             "projectZuluTab");
+    public static final CreativeTabs projectZuluPotionTab = new CreativePZPotionTab(CreativeTabs.creativeTabArray.length,
+            "projectZuluPotionTab");
 
     public static boolean enableTestBlock = false;
     public static boolean enableTemperature = false;
@@ -126,23 +129,22 @@ public class ProjectZulu_Core {
 
         ProjectZuluLog.info("Load Entity Models and Render");
         ProjectZulu_Core.proxy.registerModelsAndRender();
-        
+
         ProjectZuluLog.info("Load Entity Properties");
         CustomEntityManager.INSTANCE.loadCreaturesFromConfig(modConfigDirectoryFile);
-        
+
         ProjectZuluLog.info("Starting ItemBlock Setup");
         ItemBlockManager.INSTANCE.createBlocks(modConfigDirectoryFile);
-        
+
         ProjectZuluLog.info("Starting ItemBlock Registration");
         ItemBlockManager.INSTANCE.registerBlocks();
-        
+
         ProjectZuluLog.info("Registering Entites");
         CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
     }
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {
-
         ProjectZuluLog.info("Registering Events");
         MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
         GameRegistry.registerWorldGenerator(new ProjectZuluGenerator());

@@ -16,8 +16,6 @@ import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class RenderCampFire implements ISimpleBlockRenderingHandler{
 
@@ -54,9 +52,9 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 		var5.setBrightness(par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4));
 		float var6 = 1.0F;
 		int var7 = par1Block.colorMultiplier(blockAccess, par2, par3, par4);
-		float var8 = (float)(var7 >> 16 & 255) / 255.0F;
-		float var9 = (float)(var7 >> 8 & 255) / 255.0F;
-		float var10 = (float)(var7 & 255) / 255.0F;
+		float var8 = (var7 >> 16 & 255) / 255.0F;
+		float var9 = (var7 >> 8 & 255) / 255.0F;
+		float var10 = (var7 & 255) / 255.0F;
 
 		if (EntityRenderer.anaglyphEnable){
 			float var11 = (var8 * 30.0F + var9 * 59.0F + var10 * 11.0F) / 100.0F;
@@ -68,9 +66,9 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 		}
 
 		var5.setColorOpaque_F(var6 * var8, var6 * var9, var6 * var10);
-		double var19 = (double)par2;
-		double var20 = (double)par3;
-		double var15 = (double)par4;
+		double var19 = par2;
+		double var20 = par3;
+		double var15 = par4;
 		
 		switch (BlockCampfire.Type.getTypeByMeta(blockAccess.getBlockMetadata(par2, par3, par4))) {
 		case WoodFire:
@@ -140,7 +138,8 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 	 * @param angle
 	 * @return
 	 */
-	private boolean renderCampireRectangle2Sides(Block par1Block, int index1, int index2, int par2, double par3, double par5, double par7, RenderBlocks renderer, double xWidth, double zWidth, double yMax, double angle){
+    private boolean renderCampireRectangle2Sides(Block par1Block, int index1, int index2, int par2, double par3,
+            double par5, double par7, RenderBlocks renderer, double xWidth, double zWidth, double yMax, double angle) {
 		Tessellator var9 = Tessellator.instance;		
     	Icon var10 = renderer.getBlockIconFromSideAndMetadata(Block.wood, 2, 0);
     	double var13 = var10.getMinU();
@@ -401,59 +400,59 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 			}
 
 			if (Block.fire.canBlockCatchFire(blockAccess, par2 - 1, par3, par4, ForgeDirection.EAST)){
-				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
-				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
-				var5.addVertexWithUV((double)((float)par2 + var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
+				var5.addVertexWithUV(par2 + var36, par3 + var17 + var19, par4 + 1, var11, var13);
+				var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 1, var11, var15);
+				var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 0, var9, var15);
+				var5.addVertexWithUV(par2 + var36, par3 + var17 + var19, par4 + 0, var9, var13);
+				var5.addVertexWithUV(par2 + var36, par3 + var17 + var19, par4 + 0, var9, var13);
+				var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 0, var9, var15);
+				var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 1, var11, var15);
+				var5.addVertexWithUV(par2 + var36, par3 + var17 + var19, par4 + 1, var11, var13);
 			}
 
 			if (Block.fire.canBlockCatchFire(blockAccess, par2 + 1, par3, par4, ForgeDirection.WEST)){
-				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
-				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
-				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
-				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 1), var11, var13);
-				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1), var11, var15);
-				var5.addVertexWithUV((double)(par2 + 1 - 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-				var5.addVertexWithUV((double)((float)(par2 + 1) - var36), (double)((float)par3 + var17 + var19), (double)(par4 + 0), var9, var13);
+				var5.addVertexWithUV(par2 + 1 - var36, par3 + var17 + var19, par4 + 0, var9, var13);
+				var5.addVertexWithUV(par2 + 1 - 0, par3 + 0 + var19, par4 + 0, var9, var15);
+				var5.addVertexWithUV(par2 + 1 - 0, par3 + 0 + var19, par4 + 1, var11, var15);
+				var5.addVertexWithUV(par2 + 1 - var36, par3 + var17 + var19, par4 + 1, var11, var13);
+				var5.addVertexWithUV(par2 + 1 - var36, par3 + var17 + var19, par4 + 1, var11, var13);
+				var5.addVertexWithUV(par2 + 1 - 0, par3 + 0 + var19, par4 + 1, var11, var15);
+				var5.addVertexWithUV(par2 + 1 - 0, par3 + 0 + var19, par4 + 0, var9, var15);
+				var5.addVertexWithUV(par2 + 1 - var36, par3 + var17 + var19, par4 + 0, var9, var13);
 			}
 
 			if (Block.fire.canBlockCatchFire(blockAccess, par2, par3, par4 - 1, ForgeDirection.SOUTH)){
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var11, var13);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var11, var15);
-				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var9, var13);
-				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var9, var13);
-				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var9, var15);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 0), var11, var15);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)par4 + var36), var11, var13);
+				var5.addVertexWithUV(par2 + 0, par3 + var17 + var19, par4 + var36, var11, var13);
+				var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 0, var11, var15);
+				var5.addVertexWithUV(par2 + 1, par3 + 0 + var19, par4 + 0, var9, var15);
+				var5.addVertexWithUV(par2 + 1, par3 + var17 + var19, par4 + var36, var9, var13);
+				var5.addVertexWithUV(par2 + 1, par3 + var17 + var19, par4 + var36, var9, var13);
+				var5.addVertexWithUV(par2 + 1, par3 + 0 + var19, par4 + 0, var9, var15);
+				var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 0, var11, var15);
+				var5.addVertexWithUV(par2 + 0, par3 + var17 + var19, par4 + var36, var11, var13);
 			}
 
 			if (Block.fire.canBlockCatchFire(blockAccess, par2, par3, par4 + 1, ForgeDirection.NORTH)){
-				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var9, var13);
-				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var9, var15);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var11, var15);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var11, var13);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var11, var13);
-				var5.addVertexWithUV((double)(par2 + 0), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var11, var15);
-				var5.addVertexWithUV((double)(par2 + 1), (double)((float)(par3 + 0) + var19), (double)(par4 + 1 - 0), var9, var15);
-				var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17 + var19), (double)((float)(par4 + 1) - var36), var9, var13);
+				var5.addVertexWithUV(par2 + 1, par3 + var17 + var19, par4 + 1 - var36, var9, var13);
+				var5.addVertexWithUV(par2 + 1, par3 + 0 + var19, par4 + 1 - 0, var9, var15);
+				var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 1 - 0, var11, var15);
+				var5.addVertexWithUV(par2 + 0, par3 + var17 + var19, par4 + 1 - var36, var11, var13);
+				var5.addVertexWithUV(par2 + 0, par3 + var17 + var19, par4 + 1 - var36, var11, var13);
+				var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 1 - 0, var11, var15);
+				var5.addVertexWithUV(par2 + 1, par3 + 0 + var19, par4 + 1 - 0, var9, var15);
+				var5.addVertexWithUV(par2 + 1, par3 + var17 + var19, par4 + 1 - var36, var9, var13);
 			}
 
 			if (Block.fire.canBlockCatchFire(blockAccess, par2, par3 + 1, par4, ForgeDirection.DOWN)){
-				var20 = (double)par2 + 0.5D + 0.5D; // 1
-				var22 = (double)par2 + 0.5D - 0.5D; // 0
-				var24 = (double)par4 + 0.5D + 0.5D; 
-				var26 = (double)par4 + 0.5D - 0.5D;
+				var20 = par2 + 0.5D + 0.5D; // 1
+				var22 = par2 + 0.5D - 0.5D; // 0
+				var24 = par4 + 0.5D + 0.5D; 
+				var26 = par4 + 0.5D - 0.5D;
 
-				var28 = (double)par2 + 0.5D - 0.5D;
-				var30 = (double)par2 + 0.5D + 0.5D;
-				var32 = (double)par4 + 0.5D - 0.5D;
-				double var34 = (double)par4 + 0.5D + 0.5D;
+				var28 = par2 + 0.5D - 0.5D;
+				var30 = par2 + 0.5D + 0.5D;
+				var32 = par4 + 0.5D - 0.5D;
+				double var34 = par4 + 0.5D + 0.5D;
 
 		    	var9 = icon.getMinU();
 		    	var11 = icon.getMaxU();
@@ -464,55 +463,55 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 				var17 = -0.2F;
 
 				if ((par2 + par3 + par4 & 1) == 0){
-					var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0), var11, var13);
-					var5.addVertexWithUV(var20, (double)(par3 + 0), (double)(par4 + 0), var11, var15);
-					var5.addVertexWithUV(var20, (double)(par3 + 0), (double)(par4 + 1), var9, var15);
-					var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 1), var9, var13);
+					var5.addVertexWithUV(var28, par3 + var17, par4 + 0, var11, var13);
+					var5.addVertexWithUV(var20, par3 + 0, par4 + 0, var11, var15);
+					var5.addVertexWithUV(var20, par3 + 0, par4 + 1, var9, var15);
+					var5.addVertexWithUV(var28, par3 + var17, par4 + 1, var9, var13);
 
 					var9 = icon.getMinU();
 			    	var11 = icon.getMaxU();
 			    	var13 = icon.getMinV();
 			    	var15 = icon.getMaxV();
 
-					var5.addVertexWithUV(var30, (double)((float)par3 + var17), (double)(par4 + 1), var11, var13);
-					var5.addVertexWithUV(var22, (double)(par3 + 0), (double)(par4 + 1), var11, var15);
-					var5.addVertexWithUV(var22, (double)(par3 + 0), (double)(par4 + 0), var9, var15);
-					var5.addVertexWithUV(var30, (double)((float)par3 + var17), (double)(par4 + 0), var9, var13);
+					var5.addVertexWithUV(var30, par3 + var17, par4 + 1, var11, var13);
+					var5.addVertexWithUV(var22, par3 + 0, par4 + 1, var11, var15);
+					var5.addVertexWithUV(var22, par3 + 0, par4 + 0, var9, var15);
+					var5.addVertexWithUV(var30, par3 + var17, par4 + 0, var9, var13);
 				}
 				else{
-					var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17), var34, var11, var13);
-					var5.addVertexWithUV((double)(par2 + 0), (double)(par3 + 0), var26, var11, var15);
-					var5.addVertexWithUV((double)(par2 + 1), (double)(par3 + 0), var26, var9, var15);
-					var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17), var34, var9, var13);
+					var5.addVertexWithUV(par2 + 0, par3 + var17, var34, var11, var13);
+					var5.addVertexWithUV(par2 + 0, par3 + 0, var26, var11, var15);
+					var5.addVertexWithUV(par2 + 1, par3 + 0, var26, var9, var15);
+					var5.addVertexWithUV(par2 + 1, par3 + var17, var34, var9, var13);
 
 					var9 = icon.getMinU();
 			    	var11 = icon.getMaxU();
 			    	var13 = icon.getMinV();
 			    	var15 = icon.getMaxV();
 
-					var5.addVertexWithUV((double)(par2 + 1), (double)((float)par3 + var17), var32, var11, var13);
-					var5.addVertexWithUV((double)(par2 + 1), (double)(par3 + 0), var24, var11, var15);
-					var5.addVertexWithUV((double)(par2 + 0), (double)(par3 + 0), var24, var9, var15);
-					var5.addVertexWithUV((double)(par2 + 0), (double)((float)par3 + var17), var32, var9, var13);
+					var5.addVertexWithUV(par2 + 1, par3 + var17, var32, var11, var13);
+					var5.addVertexWithUV(par2 + 1, par3 + 0, var24, var11, var15);
+					var5.addVertexWithUV(par2 + 0, par3 + 0, var24, var9, var15);
+					var5.addVertexWithUV(par2 + 0, par3 + var17, var32, var9, var13);
 				}
 			}
 		}else{
-			double var18 = (double)par2 + 0.5D + 0.2D;
-			var20 = (double)par2 + 0.5D - 0.2D; // 
-			var22 = (double)par4 + 0.5D + 0.2D;
-			var24 = (double)par4 + 0.5D - 0.2D;
-			var26 = (double)par2 + 0.5D - 0.3D;
-			var28 = (double)par2 + 0.5D + 0.3D;
-			var30 = (double)par4 + 0.5D - 0.3D;
-			var32 = (double)par4 + 0.5D + 0.3D;
-			var5.addVertexWithUV(var26, (double)((float)par3 + var17), (double)(par4 + 0.8), var11, var13);
-			var5.addVertexWithUV(var18, (double)(par3 + 0),            (double)(par4 + 0.8), var11, var15);
-			var5.addVertexWithUV(var18, (double)(par3 + 0),            (double)(par4 + 0.2), var9, var15);
-			var5.addVertexWithUV(var26, (double)((float)par3 + var17), (double)(par4 + 0.2), var9, var13);
-			var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0.2), var11, var13);
-			var5.addVertexWithUV(var20, (double)(par3 + 0),            (double)(par4 + 0.2), var11, var15);
-			var5.addVertexWithUV(var20, (double)(par3 + 0),            (double)(par4 + 0.8), var9, var15);
-			var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0.8), var9, var13);
+			double var18 = par2 + 0.5D + 0.2D;
+			var20 = par2 + 0.5D - 0.2D; // 
+			var22 = par4 + 0.5D + 0.2D;
+			var24 = par4 + 0.5D - 0.2D;
+			var26 = par2 + 0.5D - 0.3D;
+			var28 = par2 + 0.5D + 0.3D;
+			var30 = par4 + 0.5D - 0.3D;
+			var32 = par4 + 0.5D + 0.3D;
+			var5.addVertexWithUV(var26, par3 + var17, par4 + 0.8, var11, var13);
+			var5.addVertexWithUV(var18, par3 + 0,            par4 + 0.8, var11, var15);
+			var5.addVertexWithUV(var18, par3 + 0,            par4 + 0.2, var9, var15);
+			var5.addVertexWithUV(var26, par3 + var17, par4 + 0.2, var9, var13);
+			var5.addVertexWithUV(var28, par3 + var17, par4 + 0.2, var11, var13);
+			var5.addVertexWithUV(var20, par3 + 0,            par4 + 0.2, var11, var15);
+			var5.addVertexWithUV(var20, par3 + 0,            par4 + 0.8, var9, var15);
+			var5.addVertexWithUV(var28, par3 + var17, par4 + 0.8, var9, var13);
 
 
 	    	var9 = icon.getMinU();
@@ -520,46 +519,46 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler{
 	    	var13 = icon.getMinV();
 	    	var15 = icon.getMaxV();
 
-			var5.addVertexWithUV( (double)(par2 + 0.8), (double)((float)par3 + var17), var32, var11, var13);
-			var5.addVertexWithUV( (double)(par2 + 0.8), (double)(par3 + 0), var24, var11, var15);
-			var5.addVertexWithUV( (double)(par2 + 0.2), (double)(par3 + 0), var24, var9, var15);
-			var5.addVertexWithUV( (double)(par2 + 0.2), (double)((float)par3 + var17), var32, var9, var13);
-			var5.addVertexWithUV( (double)(par2 + 0.2), (double)((float)par3 + var17), var30, var11, var13);
-			var5.addVertexWithUV( (double)(par2 + 0.2), (double)(par3 + 0), var22, var11, var15);
-			var5.addVertexWithUV( (double)(par2 + 0.8), (double)(par3 + 0), var22, var9, var15);
-			var5.addVertexWithUV( (double)(par2 + 0.8), (double)((float)par3 + var17), var30, var9, var13);
+			var5.addVertexWithUV( par2 + 0.8, par3 + var17, var32, var11, var13);
+			var5.addVertexWithUV( par2 + 0.8, par3 + 0, var24, var11, var15);
+			var5.addVertexWithUV( par2 + 0.2, par3 + 0, var24, var9, var15);
+			var5.addVertexWithUV( par2 + 0.2, par3 + var17, var32, var9, var13);
+			var5.addVertexWithUV( par2 + 0.2, par3 + var17, var30, var11, var13);
+			var5.addVertexWithUV( par2 + 0.2, par3 + 0, var22, var11, var15);
+			var5.addVertexWithUV( par2 + 0.8, par3 + 0, var22, var9, var15);
+			var5.addVertexWithUV( par2 + 0.8, par3 + var17, var30, var9, var13);
 
 
-			var18 = (double)par2 + 0.5D - 0.3D; //
-			var20 = (double)par2 + 0.5D + 0.3D; ///
-			var22 = (double)par4 + 0.5D - 0.3D;
-			var24 = (double)par4 + 0.5D + 0.3D;
-			var26 = (double)par2 + 0.5D - 0.3D; //
-			var28 = (double)par2 + 0.5D + 0.3D; ///
-			var30 = (double)par4 + 0.5D - 0.3D;
-			var32 = (double)par4 + 0.5D + 0.3D;
-			var5.addVertexWithUV(var26, (double)((float)par3 + var17), (double)(par4 + 0.2), var9, var13);
-			var5.addVertexWithUV(var18, (double)(par3 + 0),            (double)(par4 + 0.2), var9, var15);
-			var5.addVertexWithUV(var18, (double)(par3 + 0),            (double)(par4 + 0.8), var11, var15);
-			var5.addVertexWithUV(var26, (double)((float)par3 + var17), (double)(par4 + 0.8), var11, var13);
-			var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0.8), var9, var13);
-			var5.addVertexWithUV(var20, (double)(par3 + 0),            (double)(par4 + 0.8), var9, var15);
-			var5.addVertexWithUV(var20, (double)(par3 + 0),            (double)(par4 + 0.2), var11, var15);
-			var5.addVertexWithUV(var28, (double)((float)par3 + var17), (double)(par4 + 0.2), var11, var13);
+			var18 = par2 + 0.5D - 0.3D; //
+			var20 = par2 + 0.5D + 0.3D; ///
+			var22 = par4 + 0.5D - 0.3D;
+			var24 = par4 + 0.5D + 0.3D;
+			var26 = par2 + 0.5D - 0.3D; //
+			var28 = par2 + 0.5D + 0.3D; ///
+			var30 = par4 + 0.5D - 0.3D;
+			var32 = par4 + 0.5D + 0.3D;
+			var5.addVertexWithUV(var26, par3 + var17, par4 + 0.2, var9, var13);
+			var5.addVertexWithUV(var18, par3 + 0,            par4 + 0.2, var9, var15);
+			var5.addVertexWithUV(var18, par3 + 0,            par4 + 0.8, var11, var15);
+			var5.addVertexWithUV(var26, par3 + var17, par4 + 0.8, var11, var13);
+			var5.addVertexWithUV(var28, par3 + var17, par4 + 0.8, var9, var13);
+			var5.addVertexWithUV(var20, par3 + 0,            par4 + 0.8, var9, var15);
+			var5.addVertexWithUV(var20, par3 + 0,            par4 + 0.2, var11, var15);
+			var5.addVertexWithUV(var28, par3 + var17, par4 + 0.2, var11, var13);
 			
 	    	var9 = icon.getMinU();
 	    	var11 = icon.getMaxU();
 	    	var13 = icon.getMinV();
 	    	var15 = icon.getMaxV();
 
-			var5.addVertexWithUV((double)(par2 + 0.2), (double)((float)par3 + var17), var32, var9, var13);
-			var5.addVertexWithUV((double)(par2 + 0.2), (double)(par3 + 0), var24, var9, var15);
-			var5.addVertexWithUV((double)(par2 + 0.8), (double)(par3 + 0), var24, var11, var15);
-			var5.addVertexWithUV((double)(par2 + 0.8), (double)((float)par3 + var17), var32, var11, var13);
-			var5.addVertexWithUV((double)(par2 + 0.8), (double)((float)par3 + var17), var30, var9, var13);
-			var5.addVertexWithUV((double)(par2 + 0.8), (double)(par3 + 0), var22, var9, var15);
-			var5.addVertexWithUV((double)(par2 + 0.2), (double)(par3 + 0), var22, var11, var15);
-			var5.addVertexWithUV((double)(par2 + 0.2), (double)((float)par3 + var17), var30, var11, var13);
+			var5.addVertexWithUV(par2 + 0.2, par3 + var17, var32, var9, var13);
+			var5.addVertexWithUV(par2 + 0.2, par3 + 0, var24, var9, var15);
+			var5.addVertexWithUV(par2 + 0.8, par3 + 0, var24, var11, var15);
+			var5.addVertexWithUV(par2 + 0.8, par3 + var17, var32, var11, var13);
+			var5.addVertexWithUV(par2 + 0.8, par3 + var17, var30, var9, var13);
+			var5.addVertexWithUV(par2 + 0.8, par3 + 0, var22, var9, var15);
+			var5.addVertexWithUV(par2 + 0.2, par3 + 0, var22, var11, var15);
+			var5.addVertexWithUV(par2 + 0.2, par3 + var17, var30, var11, var13);
 		}
 			
 		return true;
