@@ -48,13 +48,13 @@ public abstract class BaseFeature implements TerrainFeature {
     protected abstract void loadDefaultSettings();
 
     protected void loadSettings(Configuration config) {
-        shouldSpawn = config.get("World Generation Controls." + featureName, getFeatureName() + " Should Generate",
+        shouldSpawn = config.get("Feature." + featureName + ".General", getFeatureName() + " Should Generate",
                 shouldSpawn).getBoolean(shouldSpawn);
-        minChunkDistance = config.get("World Generation Controls." + featureName,
+        minChunkDistance = config.get("Feature." + featureName + ".General",
                 featureName.toLowerCase() + " minChunkDistance", minChunkDistance).getInt(minChunkDistance);
-        chunksPerSpawn = config.get("World Generation Controls." + featureName,
+        chunksPerSpawn = config.get("Feature." + featureName + ".General",
                 featureName.toLowerCase() + " chunksPerSpawn", chunksPerSpawn).getInt(chunksPerSpawn);
-        printToLog = config.get("World Generation Controls." + featureName, featureName.toLowerCase() + " printToLog",
+        printToLog = config.get("Feature." + featureName + ".General", featureName.toLowerCase() + " printToLog",
                 printToLog).getBoolean(printToLog);
     }
 

@@ -9,7 +9,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 
-/** Terrain Feature that is Restricted by Biome */
+/**
+ * Terrain Feature that is Restricted by Biome
+ */
 public abstract class BiomeFeature extends BaseFeature {
 
     protected ArrayList<BiomeGenBase> biomesToSpawn = new ArrayList<BiomeGenBase>();
@@ -31,12 +33,13 @@ public abstract class BiomeFeature extends BaseFeature {
 
     @Override
     protected void loadSettings(Configuration config) {
+        super.loadSettings(config);
         Collection<String> defaultBiomesToSpawn = getDefaultBiomeList();
         for (int i = 0; i < BiomeGenBase.biomeList.length; i++) {
             if (BiomeGenBase.biomeList[i] == null) {
                 continue;
             }
-            if (config.get("Mob Spawn Biome Controls." + getFeatureName(),
+            if (config.get("Feature." + getFeatureName() + ".GeneratingBiomes",
                     getFeatureName() + " in " + BiomeGenBase.biomeList[i].biomeName,
                     defaultBiomesToSpawn.contains(BiomeGenBase.biomeList[i].biomeName)).getBoolean(false)) {
                 biomesToSpawn.add(BiomeGenBase.biomeList[i]);
