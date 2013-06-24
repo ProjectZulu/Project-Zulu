@@ -16,6 +16,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.WeightedRandom;
 import projectzulu.common.core.PacketIDs;
 import projectzulu.common.core.ProjectZuluLog;
@@ -311,6 +312,9 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
 
     private boolean optionalCanSpawnHere(EntityLiving entity, OptionalSettingsSpawning optionalSpawning) {
         boolean canSpawn = optionalSpawning.isOptionalEnabled() ? !optionalSpawning.isInverted() : false;
+        int xCoord = MathHelper.floor_double(entity.posX);
+        int yCoord = MathHelper.floor_double(entity.boundingBox.minY);
+        int zCoord = MathHelper.floor_double(entity.posZ);
         if (!optionalSpawning.isValidLocation(entity.worldObj, entity, xCoord, yCoord, zCoord)) {
             canSpawn = optionalSpawning.isInverted();
         }
