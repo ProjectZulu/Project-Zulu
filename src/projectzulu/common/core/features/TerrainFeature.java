@@ -1,4 +1,4 @@
-package projectzulu.common.core;
+package projectzulu.common.core.features;
 
 import java.io.File;
 import java.util.Random;

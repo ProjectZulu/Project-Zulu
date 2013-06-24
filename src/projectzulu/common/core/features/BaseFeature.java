@@ -1,4 +1,4 @@
-package projectzulu.common.core;
+package projectzulu.common.core.features;
 
 import java.io.File;
 import java.util.Random;
@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.Configuration;
+import projectzulu.common.core.DefaultProps;
 
 public abstract class BaseFeature implements TerrainFeature {
     private boolean shouldSpawn = true;
