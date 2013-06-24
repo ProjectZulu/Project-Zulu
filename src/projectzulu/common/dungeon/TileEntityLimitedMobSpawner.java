@@ -21,6 +21,7 @@ import projectzulu.common.core.PacketIDs;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.packets.PacketManagerPlaySound;
 import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
+import projectzulu.common.dungeon.spawner.tag.settings.OptionalSettingsSpawning;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -269,8 +270,15 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
                         EntityLiving var11 = var13 instanceof EntityLiving ? (EntityLiving) var13 : null;
                         this.writeNBTTagsTo(var13);
                         var13.setLocationAndAngles(var5, var7, var9, this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
-                        if (var11 == null || var11.getCanSpawnHere()) {
 
+                        boolean canSpawnHere = false;
+                        if (spawnerTags != null && spawnerTags.optionalSpawning.isOptionalEnabled()) {
+                            canSpawnHere = optionalCanSpawnHere(var11, spawnerTags.optionalSpawning);
+                        } else {
+                            canSpawnHere = var11.getCanSpawnHere();
+                        }
+
+                        if (var11 == null || canSpawnHere) {
                             this.worldObj.spawnEntityInWorld(var13);
                             this.worldObj.playAuxSFX(2004, this.xCoord, this.yCoord, this.zCoord, 0);
                             if (!isDebugEnabled()) {
@@ -299,6 +307,15 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
 
             super.updateEntity();
         }
+    }
+
+    private boolean optionalCanSpawnHere(EntityLiving entity, OptionalSettingsSpawning optionalSpawning) {
+        boolean canSpawn = optionalSpawning.isOptionalEnabled() ? !optionalSpawning.isInverted() : false;
+        if (!optionalSpawning.isValidLocation(entity.worldObj, entity, xCoord, yCoord, zCoord)) {
+            canSpawn = optionalSpawning.isInverted();
+        }
+        return canSpawn && entity.worldObj.checkNoEntityCollision(entity.boundingBox)
+                && entity.worldObj.getCollidingBoundingBoxes(entity, entity.boundingBox).isEmpty();
     }
 
     public void writeNBTTagsTo(Entity par1Entity) {
@@ -373,7 +390,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
         this.mobID = par1NBTTagCompound.getString("EntityId");
         this.delay = par1NBTTagCompound.getShort("Delay");
         if (par1NBTTagCompound.hasKey("SpawnPotentials")) {
-            this.spawnList = new ArrayList();
+            this.spawnList = new ArrayList<TileEntityLimitedMobSpawnData>();
             NBTTagList var2 = par1NBTTagCompound.getTagList("SpawnPotentials");
 
             for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
@@ -384,7 +401,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
         }
         if (par1NBTTagCompound.hasKey("SpawnData")) {
             this.spawnerTags = new TileEntityLimitedMobSpawnData(this, par1NBTTagCompound.getCompoundTag("SpawnData"),
-                    this.mobID, "");
+                    this.mobID, "", "");
         } else {
             this.spawnerTags = null;
         }
