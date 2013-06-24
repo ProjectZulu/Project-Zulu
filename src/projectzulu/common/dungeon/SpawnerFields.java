@@ -23,6 +23,13 @@ public class SpawnerFields implements DataFields {
     private GuiTextField requiredPlayerRange;
     private GuiTextField maxNearbyEntities;
 
+    private GuiTextField spawnRangeVertical;
+    private GuiTextField spawnRangeHorizontal;
+
+    private GuiTextField spawnOffsetX;
+    private GuiTextField spawnOffsetY;
+    private GuiTextField spawnOffsetZ;
+
     private GuiButton toggleDebug;
     private GuiButton resetDebug;
 
@@ -48,6 +55,20 @@ public class SpawnerFields implements DataFields {
         maxNearbyEntities = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize,
                 new Point(201, 58 + 17), new Point(39, 14), maxNearbyEntities != null ? maxNearbyEntities.getText()
                         : "");
+
+        spawnRangeVertical = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize,
+                new Point(201, 58 + 17 * 2), new Point(20, 14),
+                spawnRangeVertical != null ? spawnRangeVertical.getText() : "");
+        spawnRangeHorizontal = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize,
+                new Point(177, 58 + 17 * 2), new Point(20, 14),
+                spawnRangeHorizontal != null ? spawnRangeHorizontal.getText() : "");
+
+        spawnOffsetX = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(
+                177, 58 + 17 * 3), new Point(20, 14), spawnOffsetX != null ? spawnOffsetX.getText() : "");
+        spawnOffsetZ = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(
+                201, 58 + 17 * 3), new Point(20, 14), spawnOffsetZ != null ? spawnOffsetZ.getText() : "");
+        spawnOffsetY = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize,
+                new Point(201, 58 + 17 * 4), new Point(20, 14), spawnOffsetY != null ? spawnOffsetY.getText() : "");
 
         toggleDebug = new GuiButton(1, (screenWidth - backgroundSize.getX()) / 2 + 5,
                 (screenHeight - backgroundSize.getY()) / 2 + 175, 70, 20, "Toggle Debug");
@@ -77,6 +98,11 @@ public class SpawnerFields implements DataFields {
         maxToSpawn.setText(Integer.toString(limitedMobSpawner.getMaxSpawnableEntities()));
         requiredPlayerRange.setText(Integer.toString(limitedMobSpawner.getRequriedPLayerRange()));
         maxNearbyEntities.setText(Integer.toString(limitedMobSpawner.getMaxNearbyEntities()));
+        spawnRangeHorizontal.setText(Integer.toString(limitedMobSpawner.getSpawnRangeHorizontal()));
+        spawnRangeVertical.setText(Integer.toString(limitedMobSpawner.getSpawnRangeVertial()));
+        spawnOffsetX.setText(Integer.toString(limitedMobSpawner.spawnRangeOffsetX));
+        spawnOffsetY.setText(Integer.toString(limitedMobSpawner.spawnRangeOffsetY));
+        spawnOffsetZ.setText(Integer.toString(limitedMobSpawner.spawnRangeOffsetZ));
     }
 
     @Override
@@ -86,6 +112,11 @@ public class SpawnerFields implements DataFields {
         limitedMobSpawner.setMaxSpawnableEntities(Integer.parseInt(maxToSpawn.getText()));
         limitedMobSpawner.setRequiredPlayerRange(Integer.parseInt(requiredPlayerRange.getText()));
         limitedMobSpawner.setMaxNearbyEntities(Integer.parseInt(maxNearbyEntities.getText()));
+        limitedMobSpawner.setSpawnRangeHorizontal(Integer.parseInt(spawnRangeHorizontal.getText()));
+        limitedMobSpawner.setSpawnRangeVertical(Integer.parseInt(spawnRangeVertical.getText()));
+        limitedMobSpawner.spawnRangeOffsetX = Integer.parseInt(spawnOffsetX.getText());
+        limitedMobSpawner.spawnRangeOffsetY = Integer.parseInt(spawnOffsetY.getText());
+        limitedMobSpawner.spawnRangeOffsetZ = Integer.parseInt(spawnOffsetZ.getText());
     }
 
     @Override
@@ -104,15 +135,24 @@ public class SpawnerFields implements DataFields {
             return correctIfInvalid(minSpawnDelay, keyChar, keyID) || correctIfInvalid(maxSpawnDelay, keyChar, keyID)
                     || correctIfInvalid(maxToSpawn, keyChar, keyID)
                     || correctIfInvalid(maxNearbyEntities, keyChar, keyID)
-                    || correctIfInvalid(requiredPlayerRange, keyChar, keyID);
+                    || correctIfInvalid(requiredPlayerRange, keyChar, keyID)
+                    || correctIfInvalid(spawnRangeVertical, keyChar, keyID)
+                    || correctIfInvalid(spawnRangeHorizontal, keyChar, keyID)
+                    || correctIfInvalid(spawnOffsetX, "-0123456789", keyChar, keyID)
+                    || correctIfInvalid(spawnOffsetZ, "-0123456789", keyChar, keyID)
+                    || correctIfInvalid(spawnOffsetY, "-0123456789", keyChar, keyID);
         }
         return false;
     }
 
     private boolean correctIfInvalid(GuiTextField guiTextField, char keyChar, int keyID) {
+        return correctIfInvalid(guiTextField, "0123456789", keyChar, keyID);
+    }
+
+    private boolean correctIfInvalid(GuiTextField guiTextField, String retainable, char keyChar, int keyID) {
         if (guiTextField.textboxKeyTyped(keyChar, keyID)) {
             String originalString = guiTextField.getText();
-            String numericString = CharMatcher.anyOf("0123456789").retainFrom(guiTextField.getText())
+            String numericString = CharMatcher.anyOf(retainable).retainFrom(guiTextField.getText())
                     .replaceAll("^0*", "");
             if (!originalString.equals(numericString)) {
                 guiTextField.setText(numericString);
@@ -124,7 +164,7 @@ public class SpawnerFields implements DataFields {
         }
         return false;
     }
-
+    
     @Override
     public void mouseClicked(GuiLimitedMobSpawner spawnerGUI, Minecraft mc, int par1, int par2, int par3) {
         if (isEnabled) {
@@ -133,6 +173,11 @@ public class SpawnerFields implements DataFields {
             maxToSpawn.mouseClicked(par1, par2, par3);
             maxNearbyEntities.mouseClicked(par1, par2, par3);
             requiredPlayerRange.mouseClicked(par1, par2, par3);
+            spawnRangeVertical.mouseClicked(par1, par2, par3);
+            spawnRangeHorizontal.mouseClicked(par1, par2, par3);
+            spawnOffsetX.mouseClicked(par1, par2, par3);
+            spawnOffsetZ.mouseClicked(par1, par2, par3);
+            spawnOffsetY.mouseClicked(par1, par2, par3);
 
             if (par3 == 0 && toggleDebug.mousePressed(mc, par1, par2)) {
                 if (parent.limitedMobSpawner.isDebugEnabled()) {
@@ -185,9 +230,19 @@ public class SpawnerFields implements DataFields {
             mc.fontRenderer.drawString("Player Activation Range", (screenSize.getX() - backgroundSize.getX()) / 2 + 46,
                     (screenSize.getY() - backgroundSize.getY()) / 2 + 26 + 17, 4210752);
             mc.fontRenderer.drawString("Maximum To Spawn", (screenSize.getX() - backgroundSize.getX()) / 2 + 46,
-                    (screenSize.getY() - backgroundSize.getY()) / 2 + 75 - 17, 4210752);
+                    (screenSize.getY() - backgroundSize.getY()) / 2 + 26 + 17 * 2, 4210752);
             mc.fontRenderer.drawString("Maximum Nearby", (screenSize.getX() - backgroundSize.getX()) / 2 + 46,
-                    (screenSize.getY() - backgroundSize.getY()) / 2 + 75, 4210752);
+                    (screenSize.getY() - backgroundSize.getY()) / 2 + 26 + 17 * 3, 4210752);
+
+            mc.fontRenderer.drawString("Spawn Range [Hor/Ver]", (screenSize.getX() - backgroundSize.getX()) / 2 + 46,
+                    (screenSize.getY() - backgroundSize.getY()) / 2 + 26 + 17 * 4, 4210752);
+            mc.fontRenderer.drawString("Spawn Offset [X / Z]", (screenSize.getX() - backgroundSize.getX()) / 2 + 46,
+                    (screenSize.getY() - backgroundSize.getY()) / 2 + 26 + 17 * 5, 4210752);
+            mc.fontRenderer.drawString(
+                    "[Y]",
+                    (screenSize.getX() - backgroundSize.getX()) / 2 + 46
+                            + mc.fontRenderer.getStringWidth("Spawn Offset X / "),
+                    (screenSize.getY() - backgroundSize.getY()) / 2 + 26 + 17 * 6, 4210752);
 
             /* Draw TextBox Background Objects */
             mc.renderEngine.bindTexture(DefaultProps.dungeonDiretory + "creaturelistgui.png");
@@ -197,6 +252,7 @@ public class SpawnerFields implements DataFields {
 
             Point smallBoxImageLocation = new Point(154, 0);
             Point smallBoxSize = new Point(22, 14);
+            Point verySmallBoxSize = new Point(22 - 7, 14);
             drawBackgroundBox(new Point(175, 21), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
             drawBackgroundBox(new Point(199, 21), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
             drawBackgroundBox(new Point(199, 21 + 17), screenSize, backgroundSize, smallBoxImageLocation, smallBoxSize);
@@ -206,12 +262,29 @@ public class SpawnerFields implements DataFields {
             drawBackgroundBox(new Point(199, 21 + 17 * 3), screenSize, backgroundSize, smallBoxImageLocation,
                     smallBoxSize);
 
+            drawBackgroundBox(new Point(175, 21 + 17 * 4), screenSize, backgroundSize, smallBoxImageLocation,
+                    smallBoxSize);
+            drawBackgroundBox(new Point(199, 21 + 17 * 4), screenSize, backgroundSize, smallBoxImageLocation,
+                    smallBoxSize);
+
+            drawBackgroundBox(new Point(199, 21 + 17 * 6), screenSize, backgroundSize, smallBoxImageLocation,
+                    smallBoxSize);
+            drawBackgroundBox(new Point(175, 21 + 17 * 5), screenSize, backgroundSize, smallBoxImageLocation,
+                    smallBoxSize);
+            drawBackgroundBox(new Point(199, 21 + 17 * 5), screenSize, backgroundSize, smallBoxImageLocation,
+                    smallBoxSize);
+
             /* Draw Interactive Text Boxes */
             minSpawnDelay.drawTextBox();
             maxSpawnDelay.drawTextBox();
             maxToSpawn.drawTextBox();
             maxNearbyEntities.drawTextBox();
             requiredPlayerRange.drawTextBox();
+            spawnRangeVertical.drawTextBox();
+            spawnRangeHorizontal.drawTextBox();
+            spawnOffsetX.drawTextBox();
+            spawnOffsetZ.drawTextBox();
+            spawnOffsetY.drawTextBox();
         }
     }
 

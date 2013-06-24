@@ -126,7 +126,36 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
     }
 
     /** Range for spawning new entities with mob spawners */
-    private int spawnRange = 4;
+    private int spawnRangeHorizontal = 4;
+    private int spawnRangeVertical = 1;
+
+    public int spawnRangeOffsetX = 0;
+    public int spawnRangeOffsetY = 0;
+    public int spawnRangeOffsetZ = 0;
+
+    public int getSpawnRangeHorizontal() {
+        return spawnRangeHorizontal;
+    }
+
+    public int getSpawnRangeVertial() {
+        return spawnRangeVertical;
+    }
+
+    public void setSpawnRangeHorizontal(int horizontal) {
+        if (horizontal < 0) {
+            spawnRangeHorizontal = 0;
+        } else {
+            spawnRangeHorizontal = horizontal;
+        }
+    }
+
+    public void setSpawnRangeVertical(int vertical) {
+        if (vertical < 0) {
+            spawnRangeVertical = 0;
+        } else {
+            spawnRangeVertical = vertical;
+        }
+    }
 
     public TileEntityLimitedMobSpawner() {
         this.delay = 20;
@@ -145,11 +174,11 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
      */
     public boolean anyPlayerInRange() {
         if (isDebugEnabled()) {
-            return this.worldObj.getClosestPlayer(this.xCoord + 0.5D, this.yCoord + 0.5D,
-                    this.zCoord + 0.5D, this.requiredPlayerRange) != null;
+            return this.worldObj.getClosestPlayer(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D,
+                    this.requiredPlayerRange) != null;
         } else {
-            return this.worldObj.getClosestVulnerablePlayer(this.xCoord + 0.5D, this.yCoord + 0.5D,
-                    this.zCoord + 0.5D, this.requiredPlayerRange) != null;
+            return this.worldObj.getClosestVulnerablePlayer(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D,
+                    this.requiredPlayerRange) != null;
         }
     }
 
@@ -219,11 +248,11 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
                             var13.getClass(),
                             AxisAlignedBB
                                     .getAABBPool()
-                                    .getAABB(this.xCoord, this.yCoord, this.zCoord,
-                                            this.xCoord + 1, this.yCoord + 1,
-                                            this.zCoord + 1)
-                                    .expand(this.spawnRange * 2, 4.0D, this.spawnRange * 2))
-                            .size();
+                                    .getAABB(xCoord + spawnRangeOffsetX, yCoord + spawnRangeOffsetY,
+                                            zCoord + spawnRangeOffsetZ, xCoord + spawnRangeOffsetX + 1,
+                                            yCoord + spawnRangeOffsetY + 1, zCoord + spawnRangeOffsetZ + 1)
+                                    .expand(spawnRangeHorizontal * 2, spawnRangeVertical * 2 + 2,
+                                            spawnRangeHorizontal * 2)).size();
 
                     if (var4 >= this.maxNearbyEntities) {
                         this.updateDelay();
@@ -231,13 +260,12 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
                     }
 
                     if (var13 != null) {
-                        var5 = this.xCoord
-                                + (this.worldObj.rand.nextDouble() - this.worldObj.rand.nextDouble())
-                                * this.spawnRange;
-                        double var7 = this.yCoord + this.worldObj.rand.nextInt(3) - 1;
-                        double var9 = this.zCoord
-                                + (this.worldObj.rand.nextDouble() - this.worldObj.rand.nextDouble())
-                                * this.spawnRange;
+                        var5 = xCoord + spawnRangeOffsetX + (worldObj.rand.nextDouble() - worldObj.rand.nextDouble())
+                                * spawnRangeHorizontal;
+                        double var7 = yCoord + spawnRangeOffsetY + worldObj.rand.nextInt(spawnRangeVertical * 2 + 1)
+                                - spawnRangeVertical / 2f;
+                        double var9 = zCoord + spawnRangeOffsetZ
+                                + (worldObj.rand.nextDouble() - worldObj.rand.nextDouble()) * spawnRangeHorizontal;
                         EntityLiving var11 = var13 instanceof EntityLiving ? (EntityLiving) var13 : null;
                         this.writeNBTTagsTo(var13);
                         var13.setLocationAndAngles(var5, var7, var9, this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
@@ -370,12 +398,33 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
             this.maxNearbyEntities = par1NBTTagCompound.getShort("MaxNearbyEntities");
             this.requiredPlayerRange = par1NBTTagCompound.getShort("RequiredPlayerRange");
         }
-        if (par1NBTTagCompound.hasKey("SpawnRange")) {
-            this.spawnRange = par1NBTTagCompound.getShort("SpawnRange");
+
+        if (par1NBTTagCompound.hasKey("SpawnRangeHori")) {
+            this.spawnRangeHorizontal = par1NBTTagCompound.getShort("SpawnRangeHori");
+        } else if (par1NBTTagCompound.hasKey("SpawnRange")) {
+            this.spawnRangeHorizontal = par1NBTTagCompound.getShort("SpawnRange");
         }
+
+        if (par1NBTTagCompound.hasKey("SpawnRangeVert")) {
+            this.spawnRangeVertical = par1NBTTagCompound.getShort("SpawnRangeVert");
+        }
+
         if (par1NBTTagCompound.hasKey("DebugSavedSetup")) {
             debugSavedSetup = par1NBTTagCompound.getCompoundTag("DebugSavedSetup");
         }
+
+        if (par1NBTTagCompound.hasKey("OffsetX")) {
+            spawnRangeOffsetX = par1NBTTagCompound.getShort("OffsetX");
+        }
+
+        if (par1NBTTagCompound.hasKey("OffsetY")) {
+            spawnRangeOffsetY = par1NBTTagCompound.getShort("OffsetY");
+        }
+
+        if (par1NBTTagCompound.hasKey("OffsetZ")) {
+            spawnRangeOffsetZ = par1NBTTagCompound.getShort("OffsetZ");
+        }
+
         if (this.worldObj != null && this.worldObj.isRemote) {
             this.displayEntity = null;
         }
@@ -395,8 +444,12 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
         par1NBTTagCompound.setShort("SpawnCount", (short) this.spawnCount);
         par1NBTTagCompound.setShort("MaxNearbyEntities", (short) this.maxNearbyEntities);
         par1NBTTagCompound.setShort("RequiredPlayerRange", (short) this.requiredPlayerRange);
-        par1NBTTagCompound.setShort("SpawnRange", (short) this.spawnRange);
+        par1NBTTagCompound.setShort("SpawnRangeHori", (short) this.spawnRangeHorizontal);
+        par1NBTTagCompound.setShort("SpawnRangeVert", (short) this.spawnRangeVertical);
         par1NBTTagCompound.setShort("MaxSpawnableEntities", (short) this.maxSpawnableEntities);
+        par1NBTTagCompound.setShort("OffsetX", (short) this.spawnRangeOffsetX);
+        par1NBTTagCompound.setShort("OffsetY", (short) this.spawnRangeOffsetY);
+        par1NBTTagCompound.setShort("OffsetZ", (short) this.spawnRangeOffsetZ);
 
         if (this.spawnerTags != null) {
             par1NBTTagCompound.setCompoundTag("SpawnData", (NBTTagCompound) this.spawnerTags.properties.copy());
