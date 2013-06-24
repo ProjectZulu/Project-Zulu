@@ -8,8 +8,8 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
-import projectzulu.common.core.CreativePZPotionTab;
 import projectzulu.common.core.CreativePZGeneralTab;
+import projectzulu.common.core.CreativePZPotionTab;
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.EventHookContainerClass;
@@ -95,7 +95,7 @@ public class ProjectZulu_Core {
     public void preInit(FMLPreInitializationEvent event) {
         modConfigDirectoryFile = event.getModConfigurationDirectory();
 
-        ProjectZuluLog.configureLogging();
+        ProjectZuluLog.configureLogging(modConfigDirectoryFile);
         Configuration zuluConfig = new Configuration(new File(event.getModConfigurationDirectory(),
                 DefaultProps.configDirectory + DefaultProps.defaultConfigFile));
         Properties.loadFromConfig(modConfigDirectoryFile);
