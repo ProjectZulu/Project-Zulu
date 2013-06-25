@@ -14,9 +14,9 @@ import projectzulu.common.core.features.BiomeFeature;
 import projectzulu.common.world.WorldGenPyramid;
 
 public class PyramidFeature extends BiomeFeature {
-
+    public static final String PYRAMID = "Pyramid";
     public PyramidFeature() {
-        super("Pyramid", Size.LARGE);
+        super(PYRAMID, Size.LARGE);
     }
 
     @Override

@@ -12,16 +12,17 @@ import cpw.mods.fml.common.IWorldGenerator;
 
 public class FeatureGenerator implements IWorldGenerator {
 
+    /** Mapping From FeatureName to feature instance. Feature name is in lower case */
     private ConcurrentHashMap<String, TerrainFeature> structures = new ConcurrentHashMap<String, TerrainFeature>();
 
     public void registerStructure(TerrainFeature... feature) {
         for (TerrainFeature terrainFeature : feature) {
-            structures.put(terrainFeature.getFeatureName(), terrainFeature);
+            structures.put(terrainFeature.getFeatureName().toLowerCase(), terrainFeature);
         }
     }
 
     public TerrainFeature getRegisteredStructure(String featureName) {
-        return structures.get(featureName);
+        return structures.get(featureName.toLowerCase());
     }
 
     public void initialize(File modConfigDirectory) {

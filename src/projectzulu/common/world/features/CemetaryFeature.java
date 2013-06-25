@@ -15,9 +15,10 @@ import projectzulu.common.world.MazeGenerator;
 import projectzulu.common.world.buildingmanager.BuildingManagerCemetary;
 
 public class CemetaryFeature extends BiomeFeature {
+    public static final String CEMETARY = "Cemetary";
 
     public CemetaryFeature() {
-        super("Cemetary", Size.MEDIUM);
+        super(CEMETARY, Size.MEDIUM);
     }
 
     @Override

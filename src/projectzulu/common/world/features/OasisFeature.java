@@ -15,9 +15,10 @@ import projectzulu.common.core.features.BiomeFeature;
 import projectzulu.common.world.WorldGenOasis;
 
 public class OasisFeature extends BiomeFeature {
+    public static final String OASIS = "Oasis";
 
     public OasisFeature() {
-        super("Oasis", Size.SMALL);
+        super(OASIS, Size.SMALL);
     }
 
     @Override

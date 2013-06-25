@@ -15,9 +15,10 @@ import projectzulu.common.world.MazeGenerator;
 import projectzulu.common.world.buildingmanager.BuildingManagerLabyrinth;
 
 public class LabyrinthFeature extends BiomeFeature {
+    public static final String LABYRINTH = "Labyrinth";
 
     public LabyrinthFeature() {
-        super("Labyrinth", Size.LARGE);
+        super(LABYRINTH, Size.LARGE);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class LabyrinthFeature extends BiomeFeature {
         return new ChunkCoordinates[] { new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord),
                 zCoord) };
     }
-    
+
     @Override
     public boolean canGenerateHere(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
         if (super.canGenerateHere(world, chunkX, chunkZ, genBlockCoords, random)) {

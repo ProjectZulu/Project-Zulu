@@ -14,10 +14,10 @@ import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.EventHookContainerClass;
 import projectzulu.common.core.ItemBlockManager;
-import projectzulu.common.core.ProjectZuluGenerator;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.ZuluGuiHandler;
 import projectzulu.common.core.ZuluPacketHandler;
+import projectzulu.common.core.features.FeatureGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -88,6 +88,8 @@ public class ProjectZulu_Core {
 
     public static File modConfigDirectoryFile;
 
+    public static final FeatureGenerator featureGenerator = new FeatureGenerator();
+    
     @SidedProxy(clientSide = "projectzulu.common.ClientProxyProjectZulu", serverSide = "projectzulu.common.CommonProxyProjectZulu")
     public static CommonProxyProjectZulu proxy;
 
@@ -147,11 +149,14 @@ public class ProjectZulu_Core {
     public void postInit(FMLPostInitializationEvent event) {
         ProjectZuluLog.info("Registering Events");
         MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
-        GameRegistry.registerWorldGenerator(new ProjectZuluGenerator());
 
         ProjectZuluLog.info("Load Entity Biomes");
         CustomEntityManager.INSTANCE.loadBiomesFromConfig(modConfigDirectoryFile);
         ProjectZuluLog.info("Register Entity Spawns");
         CustomEntityManager.INSTANCE.addSpawns();
+        
+        ProjectZuluLog.info("Initializing TerrainFeatures");
+        featureGenerator.initialize(modConfigDirectoryFile);
+        GameRegistry.registerWorldGenerator(featureGenerator);
     }
 }

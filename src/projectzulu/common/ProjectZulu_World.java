@@ -1,10 +1,10 @@
 package projectzulu.common;
 
-import java.io.File;
-
-import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.world.StructureManager;
+import projectzulu.common.world.features.CemetaryFeature;
+import projectzulu.common.world.features.LabyrinthFeature;
+import projectzulu.common.world.features.OasisFeature;
+import projectzulu.common.world.features.PyramidFeature;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -25,21 +25,15 @@ public class ProjectZulu_World {
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		Configuration structureConfig = new Configuration(  new File(ProjectZulu_Core.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.defaultConfigFile) );
-		structureConfig.load();
-		StructureManager.loadGeneralSettings(structureConfig);
-		structureConfig.save();
+        ProjectZulu_Core.featureGenerator.registerStructure(new CemetaryFeature(), new LabyrinthFeature(),
+                new OasisFeature(), new PyramidFeature());
 	}
 	
-	@Init
-	public void load(FMLInitializationEvent event) {}
+    @Init
+    public void load(FMLInitializationEvent event) {
+    }
 
-	@PostInit
-	public void load(FMLPostInitializationEvent event) {
-		Configuration structureBiomeConfig = new Configuration(  new File(ProjectZulu_Core.modConfigDirectoryFile, DefaultProps.configDirectory + DefaultProps.structureBiomeConfigFile) );
-		structureBiomeConfig.load();
-		StructureManager.loadBiomeSettings(structureBiomeConfig);
-		structureBiomeConfig.save();
-	}
-	
+    @PostInit
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 }
