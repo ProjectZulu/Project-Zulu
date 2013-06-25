@@ -50,14 +50,14 @@ public class CemetaryFeature extends BiomeFeature {
         return new ChunkCoordinates[] { new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord),
                 zCoord) };
     }
-    
+
     @Override
     public boolean canGenerateHere(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
         if (super.canGenerateHere(world, chunkX, chunkZ, genBlockCoords, random)) {
             if (world.getBlockMaterial(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ) != Material.water
                     && world.getBlockMaterial(genBlockCoords.posX, genBlockCoords.posY - 1, genBlockCoords.posZ) != Material.ice
                     && world.getBlockMaterial(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ) != Material.sand) {
-                if (TerrainFeatureHelper.doesTerrainFluctuate(world, genBlockCoords.posX, genBlockCoords.posY,
+                if (!TerrainFeatureHelper.doesTerrainFluctuate(world, genBlockCoords.posX, genBlockCoords.posY,
                         genBlockCoords.posZ, 2, 6)) {
                     if (printToLog) {
                         ProjectZuluLog.info("Generating %s at %s, %s, %s", getFeatureName(), genBlockCoords.posX,
