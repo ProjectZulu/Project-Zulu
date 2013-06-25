@@ -8,6 +8,10 @@ import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.blocks.CreeperBlossomPrimedDefault;
 import projectzulu.common.blocks.FurPeltDeclaration;
 import projectzulu.common.blocks.ItemBlockRecipeManager;
+import projectzulu.common.blocks.features.AloeVeraFeature;
+import projectzulu.common.blocks.features.CreeperBlossomFeature;
+import projectzulu.common.blocks.features.NightBloomFeature;
+import projectzulu.common.blocks.features.PalmTreeFeature;
 import projectzulu.common.blocks.itemblockdeclarations.AloeVeraDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.AloeVeraSeedsDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.AnkhDeclaration;
@@ -90,6 +94,7 @@ public class ProjectZulu_Blocks {
 
         declareModuleEntities();
         declareModuleItemBlocks();
+        declareModuleTerrainFeatures();
     }
 
     @Init
@@ -160,5 +165,10 @@ public class ProjectZulu_Blocks {
                         ProjectZulu_Core.proxy.addArmor("bluedesertcloth")), new CactusArmorDeclaration(
                         ProjectZulu_Core.proxy.addArmor("cactusarmor")),
                 new FurArmorDeclaration(ProjectZulu_Core.proxy.addArmor("mammothfur")));
+    }
+    
+    private void declareModuleTerrainFeatures() {
+        ProjectZulu_Core.featureGenerator.registerStructure(new AloeVeraFeature(), new CreeperBlossomFeature(),
+                new NightBloomFeature(), new PalmTreeFeature());        
     }
 }

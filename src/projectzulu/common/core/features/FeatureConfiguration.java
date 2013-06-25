@@ -1,0 +1,38 @@
+package projectzulu.common.core.features;
+
+import java.io.File;
+
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
+import projectzulu.common.core.DefaultProps;
+
+public class FeatureConfiguration extends Configuration {
+
+    public FeatureConfiguration(File configDirectory) {
+        super(new File(configDirectory, DefaultProps.configDirectory + DefaultProps.structureBiomeConfigFile));
+    }
+
+    public Property getFeatureProperty(TerrainFeature terrainFeature, String subCategory, String propertyName,
+            int defaultValue) {
+        return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
+                + subCategory, propertyName, defaultValue);
+    }
+
+    public Property getFeatureProperty(TerrainFeature terrainFeature, String subCategory, String propertyName,
+            boolean defaultValue) {
+        return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
+                + subCategory, propertyName, defaultValue);
+    }
+
+    public Property getFeatureProperty(TerrainFeature terrainFeature, String subCategory, String propertyName,
+            String defaultValue) {
+        return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
+                + subCategory, propertyName, defaultValue);
+    }
+
+    public Property getFeatureProperty(TerrainFeature terrainFeature, String subCategory, String propertyName,
+            Double defaultValue) {
+        return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
+                + subCategory, propertyName, defaultValue);
+    }
+}
