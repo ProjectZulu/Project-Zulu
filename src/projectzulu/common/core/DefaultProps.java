@@ -44,5 +44,5 @@ public class DefaultProps {
 	public static final String defaultConfigFile = "ProjectZuluConfig.cfg";
 	public static final String tempConfigFile = "tempSettingsConfig.cfg";
 	public static final String mobBiomeSpawnConfigFile = "ProjectZuluMobBiomeConfig.cfg";
-	public static final String structureBiomeConfigFile = "ProjectZuluStructureBiomeConfig.cfg";
+	public static final String structureBiomeConfigFile = "ProjectZuluTerrainFeature.cfg";
 }
