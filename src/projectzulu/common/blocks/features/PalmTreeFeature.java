@@ -49,7 +49,7 @@ public class PalmTreeFeature extends BiomeFeature {
         long randomFactor2 = random.nextLong() / 2L * 2L + 1L;
         random.setSeed(chunkX * 16 * randomFactor1 + chunkZ * 16 * randomFactor2 ^ world.getSeed());
 
-        ChunkCoordinates[] coordinates = new ChunkCoordinates[3];
+        ChunkCoordinates[] coordinates = new ChunkCoordinates[density];
         for (int i = 0; i < density; i++) {
             int xCoord = chunkX + random.nextInt(16);
             int zCoord = chunkZ + random.nextInt(16);
