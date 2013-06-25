@@ -35,10 +35,6 @@ public class FeatureGenerator implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator,
             IChunkProvider chunkProvider) {
 
-        if (world.provider.dimensionId != 0) {
-            return;
-        }
-
         for (Size featureSize : Size.values()) {
             for (TerrainFeature terrainFeature : structures.values()) {
                 if (terrainFeature.getFeatureSize() != featureSize) {
