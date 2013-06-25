@@ -8,10 +8,10 @@ import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.features.BiomeFeature;
+import projectzulu.common.core.features.FeatureConfiguration;
 
 public class NightBloomFeature extends BiomeFeature {
     private int density = 2;
@@ -32,9 +32,9 @@ public class NightBloomFeature extends BiomeFeature {
     }
 
     @Override
-    protected void loadSettings(Configuration config) {
+    protected void loadSettings(FeatureConfiguration config) {
         super.loadSettings(config);
-        density = config.get("Feature." + getFeatureName() + ".General", "Density", density).getInt(density);
+        density = config.get("Feature." + getFeatureSize() + "." + getFeatureName() + ".General", "Density", density).getInt(density);
     }
 
     @Override

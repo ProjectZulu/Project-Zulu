@@ -5,8 +5,6 @@ import java.util.Random;
 
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
-import net.minecraftforge.common.Configuration;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 
 public abstract class BaseFeature implements TerrainFeature {
@@ -40,30 +38,27 @@ public abstract class BaseFeature implements TerrainFeature {
 
     @Override
     public final void initialize(File modConfigDirectory) {
-        Configuration structureBiomeConfig = new Configuration(new File(modConfigDirectory,
-                DefaultProps.configDirectory + DefaultProps.structureBiomeConfigFile));
-        structureBiomeConfig.load();
-        loadSettings(structureBiomeConfig);
-        structureBiomeConfig.save();
+        FeatureConfiguration configuration = new FeatureConfiguration(modConfigDirectory);
+        configuration.load();
+        loadSettings(configuration);
+        configuration.save();
     }
 
     protected abstract void loadDefaultSettings();
 
-    protected void loadSettings(Configuration config) {
+    protected void loadSettings(FeatureConfiguration config) {
         loadDefaultSettings();
-        shouldSpawn = config.get("Feature." + featureName + ".General", getFeatureName() + " Should Generate",
-                shouldSpawn).getBoolean(shouldSpawn);
-        
-        minChunkDistance = config.get("Feature." + featureName + ".General",
-                featureName.toLowerCase() + " minChunkDistance", minChunkDistance).getInt(minChunkDistance);
+
+        shouldSpawn = config.getFeatureProperty(this, "General", "Should Generate", shouldSpawn).getBoolean(shouldSpawn);
+
+        minChunkDistance = config.getFeatureProperty(this, "General", "minChunkDistance", minChunkDistance).getInt(
+                minChunkDistance);
         minChunkDistance = minChunkDistance < 1 ? 1 : minChunkDistance;
-        
-        chunksPerSpawn = config.get("Feature." + featureName + ".General",
-                featureName.toLowerCase() + " chunksPerSpawn", chunksPerSpawn).getInt(chunksPerSpawn);
+
+        chunksPerSpawn = config.getFeatureProperty(this, "General", "chunksPerSpawn", chunksPerSpawn).getInt(chunksPerSpawn);
         chunksPerSpawn = chunksPerSpawn < 1 ? 1 : chunksPerSpawn;
-        
-        printToLog = config.get("Feature." + featureName + ".General", featureName.toLowerCase() + " printToLog",
-                printToLog).getBoolean(printToLog);
+
+        printToLog = config.getFeatureProperty(this, "General", "printToLog", printToLog).getBoolean(printToLog);
     }
 
     @Override
