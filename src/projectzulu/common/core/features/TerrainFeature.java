@@ -8,6 +8,10 @@ import net.minecraft.world.World;
 
 public interface TerrainFeature {
 
+    /**
+     * The ordinal declaration of this ENUM determines priority during feature generation. Value declared first gets
+     * precedent.
+     */
     enum Size {
         /* Feature is larger than a single chunk */
         LARGE,

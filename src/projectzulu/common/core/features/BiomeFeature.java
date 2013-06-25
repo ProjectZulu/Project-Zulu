@@ -14,7 +14,7 @@ import net.minecraftforge.common.Configuration;
  */
 public abstract class BiomeFeature extends BaseFeature {
 
-    protected ArrayList<BiomeGenBase> biomesToSpawn = new ArrayList<BiomeGenBase>();
+    protected ArrayList<String> biomesToSpawn = new ArrayList<String>();
 
     public BiomeFeature(String featureName, Size size) {
         super(featureName, size);
@@ -23,10 +23,10 @@ public abstract class BiomeFeature extends BaseFeature {
     @Override
     public boolean canGenerateHere(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
         if (super.canGenerateHere(world, chunkX, chunkZ, genBlockCoords, random)) {
-            return biomesToSpawn.contains(world.getBiomeGenForCoords(genBlockCoords.posX, genBlockCoords.posZ));
-        } else {
-            return false;
+            return biomesToSpawn
+                    .contains(world.getBiomeGenForCoords(genBlockCoords.posX, genBlockCoords.posZ).biomeName);
         }
+        return false;
     }
 
     protected abstract Collection<String> getDefaultBiomeList();
@@ -42,8 +42,12 @@ public abstract class BiomeFeature extends BaseFeature {
             if (config.get("Feature." + getFeatureName() + ".GeneratingBiomes",
                     getFeatureName() + " in " + BiomeGenBase.biomeList[i].biomeName,
                     defaultBiomesToSpawn.contains(BiomeGenBase.biomeList[i].biomeName)).getBoolean(false)) {
-                biomesToSpawn.add(BiomeGenBase.biomeList[i]);
+                biomesToSpawn.add(BiomeGenBase.biomeList[i].biomeName);
             }
         }
     }
+    
+//    private String getBiomePackageName() {
+//
+//    }
 }

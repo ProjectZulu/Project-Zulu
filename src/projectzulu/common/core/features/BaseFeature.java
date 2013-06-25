@@ -7,6 +7,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ProjectZuluLog;
 
 public abstract class BaseFeature implements TerrainFeature {
     private boolean shouldSpawn = true;
@@ -49,20 +50,26 @@ public abstract class BaseFeature implements TerrainFeature {
     protected abstract void loadDefaultSettings();
 
     protected void loadSettings(Configuration config) {
+        loadDefaultSettings();
         shouldSpawn = config.get("Feature." + featureName + ".General", getFeatureName() + " Should Generate",
                 shouldSpawn).getBoolean(shouldSpawn);
+        
         minChunkDistance = config.get("Feature." + featureName + ".General",
                 featureName.toLowerCase() + " minChunkDistance", minChunkDistance).getInt(minChunkDistance);
+        minChunkDistance = minChunkDistance < 1 ? 1 : minChunkDistance;
+        
         chunksPerSpawn = config.get("Feature." + featureName + ".General",
                 featureName.toLowerCase() + " chunksPerSpawn", chunksPerSpawn).getInt(chunksPerSpawn);
+        chunksPerSpawn = chunksPerSpawn < 1 ? 1 : chunksPerSpawn;
+        
         printToLog = config.get("Feature." + featureName + ".General", featureName.toLowerCase() + " printToLog",
                 printToLog).getBoolean(printToLog);
     }
 
     @Override
     public boolean canGenerateHere(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
-        if (shouldSpawn && random.nextInt(chunksPerSpawn) != 0) {
-            if (chunkX % minChunkDistance == 0 && chunkZ % minChunkDistance == 0) {
+        if (shouldSpawn && (chunkX % minChunkDistance == 0 || chunkZ % minChunkDistance == 0)) {
+            if (random.nextInt(chunksPerSpawn) == 0) {
                 return true;
             }
         }
@@ -72,5 +79,12 @@ public abstract class BaseFeature implements TerrainFeature {
     @Override
     public boolean isStructureHere(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
         throw new UnsupportedOperationException("Reverse lookup feature has not been implemented yet.");
+    }
+
+    protected void logGeneration(ChunkCoordinates genBlockCoords) {
+        if (printToLog) {
+            ProjectZuluLog.info("Generating %s at %s, %s, %s", getFeatureName(), genBlockCoords.posX,
+                    genBlockCoords.posY, genBlockCoords.posZ);
+        }
     }
 }
