@@ -40,7 +40,10 @@ public class BlueprintLabyrinthHiddenWall extends Blueprint{
                     return new BlockWithMeta(Block.stoneBrick.blockID, 2);
                 }
 			}else if(curHeight == 1){
-				return new ChestWithMeta(Block.chest.blockID, 0, new TileEntityChest(), 25);
+                LabyrinthFeature feature = (LabyrinthFeature) ProjectZulu_Core.featureGenerator
+                        .getRegisteredStructure(LabyrinthFeature.LABYRINTH);
+                return new ChestWithMeta(Block.chest.blockID, 0, new TileEntityChest(), feature.chestLootChance,
+                        feature.chestMaxLoot);
 			}
 			break;
 			

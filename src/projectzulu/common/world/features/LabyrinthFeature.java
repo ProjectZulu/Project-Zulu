@@ -25,6 +25,8 @@ public class LabyrinthFeature extends BiomeFeature {
     public static final String LABYRINTH = "Labyrinth";
 
     private List<EntityEntry> entityEntries = new ArrayList<EntityEntry>();
+    public int chestLootChance;
+    public int chestMaxLoot;
 
     public String getEntityEntry(Random rand) {
         if (entityEntries.isEmpty()) {
@@ -32,7 +34,7 @@ public class LabyrinthFeature extends BiomeFeature {
         }
         return ((EntityEntry) WeightedRandom.getRandomItem(rand, entityEntries)).entityname;
     }
-    
+
     public LabyrinthFeature() {
         super(LABYRINTH, Size.LARGE);
     }
@@ -41,6 +43,8 @@ public class LabyrinthFeature extends BiomeFeature {
     protected void loadDefaultSettings() {
         minChunkDistance = 9;
         chunksPerSpawn = 100;
+        chestLootChance = 20;
+        chestMaxLoot = -1;
         entityEntries.add(new EntityEntry("EMPTY", 4));
         entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Haunted Armor"), 3));
         entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Minotaur"), 1));
@@ -62,11 +66,16 @@ public class LabyrinthFeature extends BiomeFeature {
     @Override
     protected void loadSettings(FeatureConfiguration config) {
         super.loadSettings(config);
+        chestMaxLoot = config.getFeatureProperty(this, "general", "Chest Max Loot", chestMaxLoot).getInt(chestMaxLoot);
+        chestLootChance = config.getFeatureProperty(this, "general", "Chest Loot Chance", chestLootChance).getInt(
+                chestLootChance);
+
         String entries = "";
         Iterator<EntityEntry> iterator = entityEntries.iterator();
         while (iterator.hasNext()) {
             EntityEntry entityEntry = iterator.next();
-            entries = entries.concat(entityEntry.entityname).concat("-").concat(Integer.toString(entityEntry.itemWeight));
+            entries = entries.concat(entityEntry.entityname).concat("-")
+                    .concat(Integer.toString(entityEntry.itemWeight));
             if (iterator.hasNext()) {
                 entries = entries.concat(",");
             }
