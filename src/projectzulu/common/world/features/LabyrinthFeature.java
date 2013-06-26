@@ -1,22 +1,38 @@
 package projectzulu.common.world.features;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.IllegalFormatException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
 import projectzulu.common.core.features.BiomeFeature;
+import projectzulu.common.core.features.FeatureConfiguration;
 import projectzulu.common.world.MazeGenerator;
 import projectzulu.common.world.buildingmanager.BuildingManagerLabyrinth;
 
 public class LabyrinthFeature extends BiomeFeature {
     public static final String LABYRINTH = "Labyrinth";
 
+    private List<EntityEntry> entityEntries = new ArrayList<EntityEntry>();
+
+    public String getEntityEntry(Random rand) {
+        if (entityEntries.isEmpty()) {
+            return "EMPTY";
+        }
+        return ((EntityEntry) WeightedRandom.getRandomItem(rand, entityEntries)).entityname;
+    }
+    
     public LabyrinthFeature() {
         super(LABYRINTH, Size.LARGE);
     }
@@ -25,6 +41,9 @@ public class LabyrinthFeature extends BiomeFeature {
     protected void loadDefaultSettings() {
         minChunkDistance = 9;
         chunksPerSpawn = 100;
+        entityEntries.add(new EntityEntry("EMPTY", 4));
+        entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Haunted Armor"), 3));
+        entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Minotaur"), 1));
     }
 
     @Override
@@ -38,6 +57,48 @@ public class LabyrinthFeature extends BiomeFeature {
                 BiomeGenBase.jungleHills.biomeName, "Birch Forest", "Forested Island", "Forested Hills", "Green Hills",
                 "Mountain Taiga", "Pine Forest", "Rainforest", "Redwood Forest", "Lush Redwoods", "Snow Forest",
                 "Snowy Rainforest", "Temperate Rainforest", "Woodlands", "Mountainous Desert" });
+    }
+
+    @Override
+    protected void loadSettings(FeatureConfiguration config) {
+        super.loadSettings(config);
+        String entries = "";
+        Iterator<EntityEntry> iterator = entityEntries.iterator();
+        while (iterator.hasNext()) {
+            EntityEntry entityEntry = iterator.next();
+            entries = entries.concat(entityEntry.entityname).concat("-").concat(Integer.toString(entityEntry.itemWeight));
+            if (iterator.hasNext()) {
+                entries = entries.concat(",");
+            }
+        }
+
+        entries = config.getFeatureProperty(this, "general", "SpawnerEntities", entries,
+                "Entities that appear in Spawner. Format: Entityname-Weight,").getString();
+        entityEntries.clear();
+
+        for (String entry : entries.split(",")) {
+            if (entry.trim().equals("")) {
+                continue;
+            }
+
+            String[] pair = entry.trim().split("-");
+            if (pair.length != 2) {
+                ProjectZuluLog.severe("Skipping Entity parsing for TF %s. %s has Invalid Number of Arguments.",
+                        getFeatureName(), entries);
+            }
+            try {
+                EntityEntry entityEntry = new EntityEntry(pair[0].trim(), Integer.parseInt(pair[1]));
+                entityEntries.add(entityEntry);
+            } catch (IllegalFormatException e) {
+                ProjectZuluLog.severe("Skipping Entity parsing for TF %s. %s has invalid format.", getFeatureName(),
+                        entries);
+                continue;
+            } catch (IllegalArgumentException e) {
+                ProjectZuluLog.severe("Skipping Entity parsing for TF %s. %s has invalid format.", getFeatureName(),
+                        entries);
+                continue;
+            }
+        }
     }
 
     @Override
