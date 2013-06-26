@@ -35,4 +35,28 @@ public class FeatureConfiguration extends Configuration {
         return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
                 + subCategory, propertyName, defaultValue);
     }
+    
+    public Property getFeatureProperty(TerrainFeature terrainFeature, String subCategory, String propertyName,
+            int defaultValue, String comment) {
+        return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
+                + subCategory, propertyName, defaultValue, comment);
+    }
+
+    public Property getFeatureProperty(TerrainFeature terrainFeature, String subCategory, String propertyName,
+            boolean defaultValue, String comment) {
+        return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
+                + subCategory, propertyName, defaultValue, comment);
+    }
+
+    public Property getFeatureProperty(TerrainFeature terrainFeature, String subCategory, String propertyName,
+            String defaultValue, String comment) {
+        return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
+                + subCategory, propertyName, defaultValue, comment);
+    }
+
+    public Property getFeatureProperty(TerrainFeature terrainFeature, String subCategory, String propertyName,
+            Double defaultValue, String comment) {
+        return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
+                + subCategory, propertyName, defaultValue, comment);
+    }
 }
