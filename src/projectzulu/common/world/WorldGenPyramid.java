@@ -369,22 +369,20 @@ public class WorldGenPyramid extends WorldGenerator
 						}
 					}
 
-					/*Cell Type 3 Generate Air*/
-					if( allCells[i][k].getLocation(m) != null && allCells[i][k].getCellType() == 3){
-						for (int j = 0; j < floorHeight; j++) {
+                    /* Cell Type 3 Generate Air */
+                    if (allCells[i][k].getLocation(m) != null && allCells[i][k].getCellType() == 3) {
+                        for (int j = 0; j < floorHeight; j++) {
 
-							par1World.setBlock( 
-									(int)allCells[i][k].getLocation(m).xCoord,
-									(int)allCells[i][k].getLocation(m).yCoord+j,
-									(int)allCells[i][k].getLocation(m).zCoord,
-									0);
-						}
-					}
+                            par1World.setBlock((int) allCells[i][k].getLocation(m).xCoord,
+                                    (int) allCells[i][k].getLocation(m).yCoord + j,
+                                    (int) allCells[i][k].getLocation(m).zCoord, 0);
+                        }
+                    }
 
-					/*Cell Type 4 Generate Spawner*/
-					if( allCells[i][k].getLocation(m) != null && allCells[i][k].getCellType() == 4){
-						for (int j = 0; j < floorHeight; j++) {
-							if(j == 0 && m == 0){
+                    /* Cell Type 4 Generate Spawner */
+                    if (allCells[i][k].getLocation(m) != null && allCells[i][k].getCellType() == 4) {
+                        for (int j = 0; j < floorHeight; j++) {
+                            if (j == 0 && m == 0) {
                                 PyramidFeature terrainFeature = (PyramidFeature) ProjectZulu_Core.featureGenerator
                                         .getRegisteredStructure(PyramidFeature.PYRAMID);
                                 String entityName = terrainFeature.getEntityEntry(classRandom);
@@ -398,6 +396,11 @@ public class WorldGenPyramid extends WorldGenerator
                                             (int) allCells[i][k].getLocation(m).yCoord + j,
                                             (int) allCells[i][k].getLocation(m).zCoord);
                                     var19.func_98049_a().setMobID(entityName);
+                                    ProjectZuluLog.info("Spawner with entity name %s @(%s, %s, %s).", entityName,
+                                            (int) allCells[i][k].getLocation(m).xCoord,
+                                            (int) allCells[i][k].getLocation(m).yCoord + j,
+                                            (int) allCells[i][k].getLocation(m).zCoord);
+
                                 } else {
                                     if (!entityName.equalsIgnoreCase("EMPTY")) {
                                         ProjectZuluLog
@@ -407,17 +410,13 @@ public class WorldGenPyramid extends WorldGenerator
                                             (int) allCells[i][k].getLocation(m).yCoord + j,
                                             (int) allCells[i][k].getLocation(m).zCoord, 0);
                                 }
-							}else{
-								par1World.setBlock( 
-										(int)allCells[i][k].getLocation(m).xCoord,
-										(int)allCells[i][k].getLocation(m).yCoord+j,
-										(int)allCells[i][k].getLocation(m).zCoord,
-										0);
-							}
-						}
-					}
-
-
+                            } else {
+                                par1World.setBlock((int) allCells[i][k].getLocation(m).xCoord,
+                                        (int) allCells[i][k].getLocation(m).yCoord + j,
+                                        (int) allCells[i][k].getLocation(m).zCoord, 0);
+                            }
+                        }
+                    }
 				}
 			}
 		}
