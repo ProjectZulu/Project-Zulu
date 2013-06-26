@@ -26,6 +26,10 @@ public class ItemBlockRecipeManager {
 		setupCampfireRecipies();
 		setupArmorRecipies();
 		
+        /* Tombstone */
+        addRecipe(new OptionalItemStack(BlockList.tombstone), new String[] { "CCC", "CSC", "CCC" }, new char[] { 'C',
+                'S' }, new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.sign));
+
 		/* Palm Tree Recipies */
         addSmelting(new OptionalItemStack(Item.coal, 1, 1), 0, new OptionalItemStack(BlockList.palmTreeLog));
 		addShapelessRecipe(new OptionalItemStack(BlockList.palmTreePlank,4), new OptionalItemStack(BlockList.palmTreeLog));
