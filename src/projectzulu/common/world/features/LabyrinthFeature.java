@@ -20,6 +20,7 @@ import projectzulu.common.core.features.BiomeFeature;
 import projectzulu.common.core.features.FeatureConfiguration;
 import projectzulu.common.world.MazeGenerator;
 import projectzulu.common.world.buildingmanager.BuildingManagerLabyrinth;
+import cpw.mods.fml.common.Loader;
 
 public class LabyrinthFeature extends BiomeFeature {
     public static final String LABYRINTH = "Labyrinth";
@@ -46,8 +47,12 @@ public class LabyrinthFeature extends BiomeFeature {
         chestLootChance = 20;
         chestMaxLoot = -1;
         entityEntries.add(new EntityEntry("EMPTY", 4));
-        entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Haunted Armor"), 3));
-        entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Minotaur"), 1));
+        if (Loader.isModLoaded("ProjectZulu|Mobs")) {
+            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Haunted Armor"), 3));
+            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Minotaur"), 1));
+        } else {
+            entityEntries.add(new EntityEntry("Zombie", 4));
+        }
     }
 
     @Override
