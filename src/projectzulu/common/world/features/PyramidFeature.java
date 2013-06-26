@@ -13,6 +13,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
@@ -46,7 +47,8 @@ public class PyramidFeature extends BiomeFeature {
         chestLootChance = 15;
         chestMaxLoot = -1;
         if (Loader.isModLoaded(DefaultProps.MobsModId)) {
-            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Mummy"), 4));
+            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
+                    CustomEntityList.MUMMY.modData.get().mobName), 4));
         } else {
             entityEntries.add(new EntityEntry("Zombie", 4));
         }

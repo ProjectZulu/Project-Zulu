@@ -13,6 +13,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
@@ -47,9 +48,11 @@ public class LabyrinthFeature extends BiomeFeature {
         chestLootChance = 20;
         chestMaxLoot = -1;
         entityEntries.add(new EntityEntry("EMPTY", 4));
-        if (Loader.isModLoaded("ProjectZulu|Mobs")) {
-            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Haunted Armor"), 3));
-            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".Minotaur"), 1));
+        if (Loader.isModLoaded(DefaultProps.MobsModId)) {
+            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
+                    CustomEntityList.HAUNTEDARMOR.modData.get().mobName), 3));
+            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
+                    CustomEntityList.MINOTAUR.modData.get().mobName), 1));
         } else {
             entityEntries.add(new EntityEntry("Zombie", 4));
         }
