@@ -19,9 +19,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jars/bin/minecraft.jar"/>
-	<classpathentry kind="lib" path="lib/argo-3.2-src.jar"/>
-	<classpathentry kind="lib" path="lib/asm-debug-all-4.1.jar"/>
-	<classpathentry kind="lib" path="lib/bcprov-debug-jdk15on-148.jar"/>
-	<classpathentry kind="lib" path="lib/guava-14.0-rc3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MCP_LIB"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
