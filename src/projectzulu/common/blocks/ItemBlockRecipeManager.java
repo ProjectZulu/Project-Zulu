@@ -71,6 +71,19 @@ public class ItemBlockRecipeManager {
 		addRecipe(new OptionalItemStack(Item.silk,6), new String[]{"  C","  C","  C"}, 'C', new OptionalItemStack(BlockList.tumbleweed));
 		addShapelessRecipe(new OptionalItemStack(BlockList.aloeVera,2), new OptionalItemStack(BlockList.tumbleweed));
 		
+		/* Brewing Stand */
+        addRecipe(new OptionalItemStack(BlockList.brewingStandSingle), new String[] { "GGG", "CLC", "LLL" },
+                new char[] { 'G', 'C', 'L' }, new OptionalItemStack(Block.glass), new OptionalItemStack(
+                        Block.cobblestone), new OptionalItemStack("log"));
+        addRecipe(new OptionalItemStack(BlockList.brewingStandSingle), new String[] { "GGG", "CLC", "LLL" },
+                new char[] { 'G', 'C', 'L' }, new OptionalItemStack(Block.glass), new OptionalItemStack("cobbleRed"),
+                new OptionalItemStack("log"));
+
+        addRecipe(new OptionalItemStack(BlockList.brewingStandTriple), new String[] { "GGG", "LNL", "NNN" },
+                new char[] { 'G', 'C', 'L' }, new OptionalItemStack(Block.glass), new OptionalItemStack("log"),
+                new OptionalItemStack(Block.netherBrick));
+        
+        
 		/* Misc Generic Craftables */
 		if(ItemList.genericCraftingItems.isPresent()){
 			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(
