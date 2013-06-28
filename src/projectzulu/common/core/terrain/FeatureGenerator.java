@@ -1,4 +1,4 @@
-package projectzulu.common.core.features;
+package projectzulu.common.core.terrain;
 
 import java.io.File;
 import java.util.Random;
@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import projectzulu.common.core.features.TerrainFeature.Size;
+import projectzulu.common.core.terrain.TerrainFeature.Size;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class FeatureGenerator implements IWorldGenerator {

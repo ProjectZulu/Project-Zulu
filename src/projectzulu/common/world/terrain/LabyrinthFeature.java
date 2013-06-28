@@ -1,4 +1,4 @@
-package projectzulu.common.world.features;
+package projectzulu.common.world.terrain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,38 +17,42 @@ import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
-import projectzulu.common.core.features.BiomeFeature;
-import projectzulu.common.core.features.FeatureConfiguration;
-import projectzulu.common.world.WorldGenPyramid;
+import projectzulu.common.core.terrain.BiomeFeature;
+import projectzulu.common.core.terrain.FeatureConfiguration;
+import projectzulu.common.world.MazeGenerator;
+import projectzulu.common.world.buildingmanager.BuildingManagerLabyrinth;
 import cpw.mods.fml.common.Loader;
 
-public class PyramidFeature extends BiomeFeature {
-    public static final String PYRAMID = "Pyramid";
-    
+public class LabyrinthFeature extends BiomeFeature {
+    public static final String LABYRINTH = "Labyrinth";
+
     private List<EntityEntry> entityEntries = new ArrayList<EntityEntry>();
     public int chestLootChance;
     public int chestMaxLoot;
-    
+
     public String getEntityEntry(Random rand) {
         if (entityEntries.isEmpty()) {
             return "EMPTY";
         }
         return ((EntityEntry) WeightedRandom.getRandomItem(rand, entityEntries)).entityname;
     }
-    
-    public PyramidFeature() {
-        super(PYRAMID, Size.LARGE);
+
+    public LabyrinthFeature() {
+        super(LABYRINTH, Size.LARGE);
     }
 
     @Override
     protected void loadDefaultSettings() {
         minChunkDistance = 9;
         chunksPerSpawn = 100;
-        chestLootChance = 15;
+        chestLootChance = 20;
         chestMaxLoot = -1;
+        entityEntries.add(new EntityEntry("EMPTY", 4));
         if (Loader.isModLoaded(DefaultProps.MobsModId)) {
             entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
-                    CustomEntityList.MUMMY.modData.get().mobName), 4));
+                    CustomEntityList.HAUNTEDARMOR.modData.get().mobName), 3));
+            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
+                    CustomEntityList.MINOTAUR.modData.get().mobName), 1));
         } else {
             entityEntries.add(new EntityEntry("Zombie", 4));
         }
@@ -56,7 +60,15 @@ public class PyramidFeature extends BiomeFeature {
 
     @Override
     protected Collection<String> getDefaultBiomeList() {
-        return Arrays.asList(new String[] { BiomeGenBase.desert.biomeName, "Mountainous Desert" });
+        return Arrays.asList(new String[] { BiomeGenBase.plains.biomeName, BiomeGenBase.desert.biomeName,
+                BiomeGenBase.extremeHills.biomeName, BiomeGenBase.forest.biomeName, BiomeGenBase.taiga.biomeName,
+                BiomeGenBase.swampland.biomeName, BiomeGenBase.river.biomeName, BiomeGenBase.icePlains.biomeName,
+                BiomeGenBase.iceMountains.biomeName, BiomeGenBase.desertHills.biomeName,
+                BiomeGenBase.forestHills.biomeName, BiomeGenBase.taigaHills.biomeName,
+                BiomeGenBase.extremeHillsEdge.biomeName, BiomeGenBase.jungle.biomeName, BiomeGenBase.desert.biomeName,
+                BiomeGenBase.jungleHills.biomeName, "Birch Forest", "Forested Island", "Forested Hills", "Green Hills",
+                "Mountain Taiga", "Pine Forest", "Rainforest", "Redwood Forest", "Lush Redwoods", "Snow Forest",
+                "Snowy Rainforest", "Temperate Rainforest", "Woodlands", "Mountainous Desert" });
     }
 
     @Override
@@ -105,7 +117,7 @@ public class PyramidFeature extends BiomeFeature {
             }
         }
     }
-    
+
     @Override
     public ChunkCoordinates[] getGenerationCoordinates(World world, int chunkX, int chunkZ) {
         Random random = new Random(world.getSeed());
@@ -138,7 +150,7 @@ public class PyramidFeature extends BiomeFeature {
 
     @Override
     public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
-        (new WorldGenPyramid(1, 1)).generate(world, random, genBlockCoords.posX, genBlockCoords.posY,
-                genBlockCoords.posZ);
+        new MazeGenerator(new BuildingManagerLabyrinth(world), 1, 4, 3, 24, 1, 1).generate(world, random,
+                genBlockCoords.posX, genBlockCoords.posY - (11), genBlockCoords.posZ);
     }
 }

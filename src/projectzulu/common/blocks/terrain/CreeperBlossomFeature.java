@@ -1,4 +1,4 @@
-package projectzulu.common.blocks.features;
+package projectzulu.common.blocks.terrain;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -10,25 +10,25 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.core.features.BiomeFeature;
-import projectzulu.common.core.features.FeatureConfiguration;
+import projectzulu.common.core.terrain.BiomeFeature;
+import projectzulu.common.core.terrain.FeatureConfiguration;
 
-public class NightBloomFeature extends BiomeFeature {
-    private int density = 2;
+public class CreeperBlossomFeature extends BiomeFeature {
+    private int density = 1;
 
-    public NightBloomFeature() {
-        super("Night Bloom", Size.TINY);
+    public CreeperBlossomFeature() {
+        super("Creeper Blossom", Size.TINY);
     }
 
     @Override
     public boolean isEnabled() {
-        return BlockList.nightBloom.isPresent() && super.isEnabled();
+        return BlockList.creeperBlossom.isPresent() && super.isEnabled();
     }
 
     @Override
     protected void loadDefaultSettings() {
         minChunkDistance = 1;
-        chunksPerSpawn = 2;
+        chunksPerSpawn = 20;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class NightBloomFeature extends BiomeFeature {
 
     @Override
     protected Collection<String> getDefaultBiomeList() {
-        return Arrays.asList(new String[] { BiomeGenBase.plains.biomeName, BiomeGenBase.river.biomeName });
+        return Arrays.asList(new String[] { BiomeGenBase.forest.biomeName, BiomeGenBase.forestHills.biomeName });
     }
 
     @Override
@@ -63,9 +63,7 @@ public class NightBloomFeature extends BiomeFeature {
         if (super.canGenerateHere(world, chunkX, chunkZ, genBlockCoords, random)) {
             if (world.isAirBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ)) {
                 int iDBelow = world.getBlockId(genBlockCoords.posX, genBlockCoords.posY - 1, genBlockCoords.posZ);
-                if (iDBelow == Block.tilledField.blockID || iDBelow == Block.dirt.blockID
-                        || iDBelow == Block.grass.blockID
-                        || (BlockList.aloeVera.isPresent() && iDBelow == BlockList.aloeVera.get().blockID)) {
+                if (iDBelow == Block.dirt.blockID || iDBelow == Block.grass.blockID) {
                     if (printToLog) {
                         ProjectZuluLog.info("Generating %s at %s, %s, %s", getFeatureName(), genBlockCoords.posX,
                                 genBlockCoords.posY, genBlockCoords.posZ);
@@ -80,6 +78,6 @@ public class NightBloomFeature extends BiomeFeature {
     @Override
     public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
         world.setBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ,
-                BlockList.nightBloom.get().blockID);
+                BlockList.creeperBlossom.get().blockID);
     }
 }

@@ -1,4 +1,4 @@
-package projectzulu.common.world.features;
+package projectzulu.common.world.terrain;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,7 +11,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
-import projectzulu.common.core.features.BiomeFeature;
+import projectzulu.common.core.terrain.BiomeFeature;
 import projectzulu.common.world.WorldGenOasis;
 
 public class OasisFeature extends BiomeFeature {

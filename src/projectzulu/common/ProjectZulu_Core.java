@@ -17,7 +17,7 @@ import projectzulu.common.core.ItemBlockManager;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.ZuluGuiHandler;
 import projectzulu.common.core.ZuluPacketHandler;
-import projectzulu.common.core.features.FeatureGenerator;
+import projectzulu.common.core.terrain.FeatureGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;

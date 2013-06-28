@@ -1,4 +1,4 @@
-package projectzulu.common.core.features;
+package projectzulu.common.core.terrain;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package projectzulu.common.blocks.features;
+package projectzulu.common.blocks.terrain;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -10,14 +10,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.core.features.BiomeFeature;
-import projectzulu.common.core.features.FeatureConfiguration;
+import projectzulu.common.core.terrain.BiomeFeature;
+import projectzulu.common.core.terrain.FeatureConfiguration;
 
-public class AloeVeraFeature extends BiomeFeature {
+public class PalmTreeFeature extends BiomeFeature {
     private int density = 3;
 
-    public AloeVeraFeature() {
-        super("Aloe Vera", Size.TINY);
+    public PalmTreeFeature() {
+        super("Palm Tree", Size.TINY);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class AloeVeraFeature extends BiomeFeature {
     @Override
     protected void loadDefaultSettings() {
         minChunkDistance = 1;
-        chunksPerSpawn = 20;
+        chunksPerSpawn = 10;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AloeVeraFeature extends BiomeFeature {
 
     @Override
     protected Collection<String> getDefaultBiomeList() {
-        return Arrays.asList(new String[] { BiomeGenBase.desert.biomeName, BiomeGenBase.desertHills.biomeName });
+        return Arrays.asList(new String[] { BiomeGenBase.beach.biomeName, BiomeGenBase.river.biomeName });
     }
 
     @Override
@@ -77,6 +77,7 @@ public class AloeVeraFeature extends BiomeFeature {
 
     @Override
     public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
-        world.setBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ, BlockList.aloeVera.get().blockID);
+        world.setBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ,
+                BlockList.palmTreeSapling.get().blockID);
     }
 }

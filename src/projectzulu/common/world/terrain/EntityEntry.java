@@ -1,4 +1,4 @@
-package projectzulu.common.world.features;
+package projectzulu.common.world.terrain;
 
 import net.minecraft.util.WeightedRandomItem;
 

@@ -9,7 +9,7 @@ import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
 import projectzulu.common.world.dataobjects.ChestWithMeta;
 import projectzulu.common.world.dataobjects.MimicWithMeta;
-import projectzulu.common.world.features.LabyrinthFeature;
+import projectzulu.common.world.terrain.LabyrinthFeature;
 
 public class BlueprintDeadEndChest extends Blueprint{
 

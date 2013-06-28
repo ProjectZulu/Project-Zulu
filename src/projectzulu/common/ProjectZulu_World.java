@@ -1,10 +1,10 @@
 package projectzulu.common;
 
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.world.features.CemetaryFeature;
-import projectzulu.common.world.features.LabyrinthFeature;
-import projectzulu.common.world.features.OasisFeature;
-import projectzulu.common.world.features.PyramidFeature;
+import projectzulu.common.world.terrain.CemetaryFeature;
+import projectzulu.common.world.terrain.LabyrinthFeature;
+import projectzulu.common.world.terrain.OasisFeature;
+import projectzulu.common.world.terrain.PyramidFeature;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
