@@ -9,7 +9,6 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.api.SubItemPotionList;
 import projectzulu.common.core.itemblockdeclaration.ItemDeclaration;
 import projectzulu.common.potion.subitem.SubItemPotion;
-import projectzulu.common.potion.subitem.SubItemPotionBlindness;
 import projectzulu.common.potion.subitem.SubItemPotionDamageBoost;
 import projectzulu.common.potion.subitem.SubItemPotionFireResistance;
 import projectzulu.common.potion.subitem.SubItemPotionHarm;
@@ -47,7 +46,6 @@ public class PZVanillaPotionDeclaration extends ItemDeclaration {
         addToLists(item.itemID, i++, SubItemPotionList.FIRE_RESISTANCE, list, SubItemPotionFireResistance.class);
         addToLists(item.itemID, i++, SubItemPotionList.NIGHT_VISION, list, SubItemPotionNightVision.class);
         addToLists(item.itemID, i++, SubItemPotionList.INVISIBILITY, list, SubItemPotionInvisibility.class);
-        addToLists(item.itemID, i++, SubItemPotionList.BLINDNESS, list, SubItemPotionBlindness.class);
         addToLists(item.itemID, i++, SubItemPotionList.HEAL, list, SubItemPotionHeal.class);
         addToLists(item.itemID, i++, SubItemPotionList.HARM, list, SubItemPotionHarm.class);
 

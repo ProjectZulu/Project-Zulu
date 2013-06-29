@@ -10,10 +10,12 @@ import projectzulu.common.api.SubItemPotionList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.itemblockdeclaration.ItemDeclaration;
 import projectzulu.common.potion.subitem.SubItemPotion;
+import projectzulu.common.potion.subitem.SubItemPotionBlindness;
 import projectzulu.common.potion.subitem.SubItemPotionBubbling;
 import projectzulu.common.potion.subitem.SubItemPotionCleansing;
 import projectzulu.common.potion.subitem.SubItemPotionCurse;
 import projectzulu.common.potion.subitem.SubItemPotionDigslowdown;
+import projectzulu.common.potion.subitem.SubItemPotionDigspeed;
 import projectzulu.common.potion.subitem.SubItemPotionIncendiary;
 import projectzulu.common.potion.subitem.SubItemPotionJump;
 import projectzulu.common.potion.subitem.SubItemPotionRegistry;
@@ -43,10 +45,11 @@ public class PZExtraPotionDeclaration extends ItemDeclaration {
         addToLists(item.itemID, i++, SubItemPotionList.CURSE, list, SubItemPotionCurse.class);
         addToLists(item.itemID, i++, SubItemPotionList.THORNS, list, SubItemPotionThorns.class);
         addToLists(item.itemID, i++, SubItemPotionList.JUMP, list, SubItemPotionJump.class);
-        addToLists(item.itemID, i++, SubItemPotionList.DIG_SPEED, list, SubItemPotionDigslowdown.class);
+        addToLists(item.itemID, i++, SubItemPotionList.DIG_SPEED, list, SubItemPotionDigspeed.class);
         addToLists(item.itemID, i++, SubItemPotionList.DIG_SLOW, list, SubItemPotionDigslowdown.class);
         addToLists(item.itemID, i++, SubItemPotionList.RESISTANCE, list, SubItemPotionResistance.class);
         addToLists(item.itemID, i++, SubItemPotionList.WATER_BREATHING, list, SubItemPotionWaterBreathing.class);
+        addToLists(item.itemID, i++, SubItemPotionList.BLINDNESS, list, SubItemPotionBlindness.class);
         for (SubItemPotion subItemPotion : list) {
             SubItemPotionRegistry.INSTANCE.addSubPotions(subItemPotion);
         }

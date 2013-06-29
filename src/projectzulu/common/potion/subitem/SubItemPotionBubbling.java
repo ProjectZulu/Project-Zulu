@@ -30,8 +30,6 @@ public class SubItemPotionBubbling extends SubItemPotion {
         recipies.addResultPotion(Item.spiderEye.itemID, SubItemPotionList.POISON);
         recipies.addResultPotion(Item.ghastTear.itemID, SubItemPotionList.REGENERATION);
         recipies.addResultPotion(Item.fermentedSpiderEye.itemID, SubItemPotionList.WEAKNESS);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.Antennae.meta,
-                SubItemPotionList.BLINDNESS);
         recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.Talon.meta,
                 SubItemPotionList.STRENGTH);
         recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.LargeHeart.meta,
