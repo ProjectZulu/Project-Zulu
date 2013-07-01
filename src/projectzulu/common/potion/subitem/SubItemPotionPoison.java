@@ -18,7 +18,7 @@ public class SubItemPotionPoison extends SubItemPotionGeneric {
     public SubItemPotionPoison(int itemID, int subID) {
         super(itemID, subID, "Poison");
         setSubItemBounds(4, 4, 4, 0);
-        setEffectScale(20 * 10, 20 * 10, 20 * 15, 20 * 20, 1);
+        setEffectScale(20 * 10, 15, 6, 10, 1);
     }
 
     @Override
@@ -34,8 +34,10 @@ public class SubItemPotionPoison extends SubItemPotionGeneric {
             int baseDuration = PotionParser.readDuration(damageMeta);
             int basePower = PotionParser.readPower(damageMeta);
 
-            int duration = initialTicks + ticksPerDuration * baseDuration + ticksPerLevel * baseLevel
-                    + dTicksPerLevel_dLevel * baseLevel * baseLevel;
+            int tempBase = (initialTicks + baseLevel * ticksPerLevel);
+            int tempBonus = (baseDuration * baseDuration + 11 - durationSpread + baseDuration)
+                    / (maxDuration * maxDuration + maxDuration);
+            int duration = tempBase * tempBonus;
             int power = (MathHelper.ceiling_float_int(basePower / 2f) + MathHelper.ceiling_float_int(baseLevel / 2f));
             if (power > 3) {
                 power = 3;

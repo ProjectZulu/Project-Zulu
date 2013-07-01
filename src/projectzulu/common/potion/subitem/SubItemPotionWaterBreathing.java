@@ -9,7 +9,7 @@ public class SubItemPotionWaterBreathing extends SubItemPotionGeneric {
     public SubItemPotionWaterBreathing(int itemID, int subID) {
         super(itemID, subID, "Water Breathing");
         setSubItemBounds(4, 4, 1, 0);
-        setEffectScale(20 * 20, 20 * 25, 20 * 35, 20 * 45, 1);
+        setEffectScale(20 * 20, 20 * 5, 14, 10, 1);
     }
 
     @Override

@@ -15,7 +15,7 @@ public class SubItemPotionResistance extends SubItemPotionGeneric {
     public SubItemPotionResistance(int itemID, int subID) {
         super(itemID, subID, "Resistance");
         setSubItemBounds(4, 4, 4, 0);
-        setEffectScale(20 * 20, 20 * 25, 20 * 35, 20 * 45, 1);
+        setEffectScale(20 * 20, 20 * 5, 13, 10, 1);
     }
 
     @Override
@@ -31,8 +31,10 @@ public class SubItemPotionResistance extends SubItemPotionGeneric {
             int baseDuration = PotionParser.readDuration(damageMeta);
             int basePower = PotionParser.readPower(damageMeta);
 
-            int duration = initialTicks + ticksPerDuration * baseDuration + ticksPerLevel * baseLevel
-                    + dTicksPerLevel_dLevel * baseLevel * baseLevel;
+            int tempBase = (initialTicks + baseLevel * ticksPerLevel);
+            int tempBonus = (baseDuration * baseDuration + 11 - durationSpread + baseDuration)
+                    / (maxDuration * maxDuration + maxDuration);
+            int duration = tempBase * tempBonus;
             int power = (MathHelper.ceiling_float_int(basePower / 2f) + MathHelper.ceiling_float_int(baseLevel / 2f));
             effectList.add(new PotionEffect(getPotion().get().id, duration, power));
         }

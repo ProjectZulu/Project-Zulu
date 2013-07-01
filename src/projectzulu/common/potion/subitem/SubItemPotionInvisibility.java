@@ -9,7 +9,7 @@ public class SubItemPotionInvisibility extends SubItemPotionGeneric {
     public SubItemPotionInvisibility(int itemID, int subID) {
         super(itemID, subID, "Invisibility");
         setSubItemBounds(4, 4, 1, 0);
-        setEffectScale(20 * 15, 20 * 20, 20 * 30, 20 * 40, 1);
+        setEffectScale(20 * 10, 20 * 5, 16, 10, 1);
     }
 
     @Override

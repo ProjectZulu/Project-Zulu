@@ -13,7 +13,7 @@ public class SubItemPotionJump extends SubItemPotionGeneric {
     public SubItemPotionJump(int itemID, int subID) {
         super(itemID, subID, "Jump");
         setSubItemBounds(4, 4, 4, 0);
-        setEffectScale(20 * 20, 20 * 25, 20 * 35, 20 * 45, 2);
+        setEffectScale(20 * 20, 20 * 5, 14, 10, 2);
     }
 
     @Override

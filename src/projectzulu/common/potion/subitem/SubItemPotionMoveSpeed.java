@@ -13,7 +13,7 @@ public class SubItemPotionMoveSpeed extends SubItemPotionGeneric {
     public SubItemPotionMoveSpeed(int itemID, int subID) {
         super(itemID, subID, "Swiftness");
         setSubItemBounds(4, 4, 4, 0);
-        setEffectScale(20 * 10, 20 * 10, 20 * 15, 20 * 20, 2);
+        setEffectScale(20 * 10, 20 * 5, 6, 10, 2);
     }
 
     @Override

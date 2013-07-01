@@ -30,9 +30,9 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     protected int type = 2;
 
     protected int initialTicks = 0;
-    protected int ticksPerDuration = 20;
     protected int ticksPerLevel = 10;
-    protected int dTicksPerLevel_dLevel = 10;
+    protected int durationScale = 12;
+    protected int durationSpread = 10;
     protected int powerPerLevel = 1;
 
     protected String[] strengthPrefixes = new String[] { "", "Thickened", "Strengthened", "Fortified" };
@@ -131,13 +131,13 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
         this.type = type;
     }
 
-    protected void setEffectScale(int initialTicks, int ticksPerDuration, int ticksPerLevel, int dTicksPerLevel_dLevel,
+    protected void setEffectScale(int initialTicks, int ticksPerLevel, int durationScale, int durationSpread,
             int powerPerLevel) {
         this.initialTicks = initialTicks;
-        this.ticksPerDuration = ticksPerDuration;
         this.ticksPerLevel = ticksPerLevel;
+        this.durationScale = 12;
+        this.durationSpread = 10;
         this.powerPerLevel = powerPerLevel;
-        this.dTicksPerLevel_dLevel = dTicksPerLevel_dLevel;
     }
 
     abstract Optional<? extends Potion> getPotion();
@@ -184,8 +184,11 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
             int baseLevel = PotionParser.readLevel(damageMeta);
             int baseDuration = PotionParser.readDuration(damageMeta);
 
-            int duration = initialTicks + ticksPerDuration * baseDuration + ticksPerLevel * baseLevel
-                    + dTicksPerLevel_dLevel * baseLevel * baseLevel;
+            int tempBase = (initialTicks + baseLevel * ticksPerLevel);
+            int tempBonus = (baseDuration * baseDuration + 11 - durationSpread + baseDuration)
+                    / (maxDuration * maxDuration + maxDuration);
+            int duration = tempBase * tempBonus;
+            
             int power = (PotionParser.readPower(damageMeta) + powerPerLevel * PotionParser.readLevel(damageMeta));
             effectList.add(new PotionEffect(getPotion().get().id, getPotion().get().isInstant() ? 1 : duration, power));
         }

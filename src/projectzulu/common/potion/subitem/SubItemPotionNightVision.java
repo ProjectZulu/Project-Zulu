@@ -15,7 +15,7 @@ public class SubItemPotionNightVision extends SubItemPotionGeneric {
     public SubItemPotionNightVision(int itemID, int subID) {
         super(itemID, subID, "Night Vision");
         setSubItemBounds(4, 4, 1, 0);
-        setEffectScale(20 * 15, 20 * 20, 20 * 30, 20 * 40, 1);
+        setEffectScale(20 * 13, 20 * 5, 14, 10, 1);
     }
 
     @Override

@@ -10,7 +10,7 @@ public class SubItemPotionHarm extends SubItemPotionGeneric {
     public SubItemPotionHarm(int itemID, int subID) {
         super(itemID, subID, "Harming");
         setSubItemBounds(4, 1, 4, 0);
-        setEffectScale(20 * 15, 20 * 20, 20 * 30, 20 * 40, 2);
+        setEffectScale(20 * 10, 20 * 5, 16, 10, 2);
     }
 
     @Override

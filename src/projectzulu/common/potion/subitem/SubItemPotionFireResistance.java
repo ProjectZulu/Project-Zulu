@@ -13,7 +13,7 @@ public class SubItemPotionFireResistance extends SubItemPotionGeneric {
     public SubItemPotionFireResistance(int itemID, int subID) {
         super(itemID, subID, "Fire Resistance");
         setSubItemBounds(4, 4, 1, 0);
-        setEffectScale(20 * 10, 20 * 10, 20 * 15, 20 * 20, 1);
+        setEffectScale(20 * 20, 20 * 5, 6, 10, 1);
     }
 
     @Override

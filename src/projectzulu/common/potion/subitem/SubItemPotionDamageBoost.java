@@ -20,7 +20,7 @@ public class SubItemPotionDamageBoost extends SubItemPotionGeneric {
     public SubItemPotionDamageBoost(int itemID, int subID) {
         super(itemID, subID, "Strength");
         setSubItemBounds(4, 4, 4, 0);
-        setEffectScale(20 * 10, 20 * 10, 20 * 15, 20 * 20, 1);
+        setEffectScale(20 * 20, 20 * 5, 6, 10, 1);
     }
 
     @Override
@@ -36,8 +36,10 @@ public class SubItemPotionDamageBoost extends SubItemPotionGeneric {
             int baseDuration = PotionParser.readDuration(damageMeta);
             int basePower = PotionParser.readPower(damageMeta);
 
-            int duration = initialTicks + ticksPerDuration * baseDuration + ticksPerLevel * baseLevel
-                    + dTicksPerLevel_dLevel * baseLevel * baseLevel;
+            int tempBase = (initialTicks + baseLevel * ticksPerLevel);
+            int tempBonus = (baseDuration * baseDuration + 11 - durationSpread + baseDuration)
+                    / (maxDuration * maxDuration + maxDuration);
+            int duration = tempBase * tempBonus;
             int power = (MathHelper.ceiling_float_int(basePower / 2f) + MathHelper.ceiling_float_int(baseLevel / 2f));
             if (power > 3) {
                 power = 3;

@@ -10,7 +10,7 @@ public class SubItemPotionCurse extends SubItemPotionGeneric {
     public SubItemPotionCurse(int itemID, int subID) {
         super(itemID, subID, "Curse");
         setSubItemBounds(4, 4, 4, 0);
-        setEffectScale(20 * 10, 20 * 10, 20 * 15, 20 * 20, 2);
+        setEffectScale(20 * 20, 20 * 5, 6, 10, 2);
     }
 
     @Override
