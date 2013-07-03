@@ -2,7 +2,9 @@ package projectzulu.common.blocks.heads;
 
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 
@@ -68,112 +70,117 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  0.9F, 0.5F), new Position(0.5F,  0.9F, 0.59F),
 			new Position(0.5F,  0.9F, 0.41F), new Position(0.59F, 0.9F, 0.5F), new Position(0.41F, 0.9F, 0.5F)});
 		
-		private final ModelBase model;
-		private final int iD;
-		private final float scale;
-		private final Position[] transOffset;
-		private HeadRender(int iD, ModelBase model, float scale, Position[] offSets){
-			this.iD = iD;
-			this.model = model;
-			this.transOffset = offSets;
-			this.scale = scale;
-		}
-		
-		public ModelBase getModel(){
-			return model;
-		}
-		
-		public int getID(){
-			return iD;
-		}
-		
-		public Position getOffset(int index){
-			return transOffset[index];
-		}
-		
-		public static HeadRender getByID(int iD){
-			for (HeadRender head : HeadRender.values()) {
-				if(head.iD == iD) return head;
-			}
-			return null;
-		}
-	}
-	
-	public static class Position {
-	    public final float x; 
-	    public final float y; 
-	    public final float z;
-	    
-	    public Position(float x, float y, float z) { 
-	        this.x = x; 
-	        this.y = y; 
-	        this.z = z; 
-	    }
-	}
-		
-	public TileEntityMobHeadsRenderer(){}
+        private final ModelBase model;
+        private final int iD;
+        private final float scale;
+        private final Position[] transOffset;
+        public final ResourceLocation resourceLocation;
 
-	public void renderAModelAt(TileEntityMobHeads tile, float par1, float par2, float par3, float f){
-		
-		/* Get Rotation */
-		float rotation = (float)(tile.getRotation()*360)/16f;
+        private HeadRender(int iD, ModelBase model, float scale, Position[] offSets) {
+            this.iD = iD;
+            this.model = model;
+            this.transOffset = offSets;
+            this.scale = scale;
+            resourceLocation = new ResourceLocation(DefaultProps.mobDiretory + this.toString().toLowerCase() + ".png");
+        }
 
-		/* Get Meta */
-		int meta = 0;
-		if(tile.worldObj != null){
-			meta = (tile.worldObj.getBlockMetadata(tile.xCoord, tile.yCoord, tile.zCoord) & 7 );
-		}
-		/* Get And Set Attributes Specific to Skull Type */
-		int skullType = tile.getSkullType();
-		HeadRender mobhead = HeadRender.getByID(skullType);
-		float scale = mobhead.scale;
-		String textureLocation = DefaultProps.mobDiretory + mobhead.toString().toLowerCase()+".png"; 
-		int skullState = 0;
-		if(meta == 1){
-			switch (mobhead) {
-			case Giraffe:
-			case Mammoth:
-			case Ostrich:
-			case Vulture:
-			case Elephant:
-				skullState = 1;
-				break;
-			default:
-				break;
-			}
-		}
-		
-		bindTextureByName(textureLocation);
-		GL11.glPushMatrix();
-		GL11.glDisable(GL11.GL_CULL_FACE);
+        public ModelBase getModel() {
+            return model;
+        }
 
-		GL11.glTranslatef(par1 + (float)mobhead.getOffset(meta).x, par2 + (float)mobhead.getOffset(meta).y, par3 + (float)mobhead.getOffset(meta).z);
-		/* Override Rotation if on the Side of a Block */
-		switch (meta){
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			rotation = 180.0F;
-			break;
-		case 4:
-			rotation = 270.0F;
-			break;
-		case 5:
-		default:
-			rotation = 90.0F;
-		}
-		
-		GL11.glRotatef(0.0f, 0.0f, 1.0F, 0.0f);
-		GL11.glScalef(-1.0f, -1.0F, 1.0F);
-		mobhead.model.render((Entity)null, 0.0F, 0.0F, 0.0F, rotation, skullState, scale);
-		GL11.glPopMatrix();
-	}
+        public int getID() {
+            return iD;
+        }
 
+        public Position getOffset(int index) {
+            return transOffset[index];
+        }
 
-	public void renderTileEntityAt(TileEntity tileentity, double par2, double par4, double par6, float par8){
-		renderAModelAt((TileEntityMobHeads) tileentity, (float)par2, (float)par4, (float)par6, par8); //where to render
-	}
+        public static HeadRender getByID(int iD) {
+            for (HeadRender head : HeadRender.values()) {
+                if (head.iD == iD)
+                    return head;
+            }
+            return null;
+        }
+    }
 
+    public static class Position {
+        public final float x;
+        public final float y;
+        public final float z;
+
+        public Position(float x, float y, float z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+    }
+
+    public TileEntityMobHeadsRenderer() {
+    }
+
+    public void renderAModelAt(TileEntityMobHeads tile, float par1, float par2, float par3, float f) {
+
+        /* Get Rotation */
+        float rotation = (float) (tile.getRotation() * 360) / 16f;
+
+        /* Get Meta */
+        int meta = 0;
+        if (tile.worldObj != null) {
+            meta = (tile.worldObj.getBlockMetadata(tile.xCoord, tile.yCoord, tile.zCoord) & 7);
+        }
+        /* Get And Set Attributes Specific to Skull Type */
+        int skullType = tile.getSkullType();
+        HeadRender mobhead = HeadRender.getByID(skullType);
+        float scale = mobhead.scale;
+        String textureLocation = DefaultProps.mobDiretory + mobhead.toString().toLowerCase() + ".png";
+        int skullState = 0;
+        if (meta == 1) {
+            switch (mobhead) {
+            case Giraffe:
+            case Mammoth:
+            case Ostrich:
+            case Vulture:
+            case Elephant:
+                skullState = 1;
+                break;
+            default:
+                break;
+            }
+        }
+        func_110628_a(mobhead.resourceLocation);
+
+        GL11.glPushMatrix();
+        GL11.glDisable(GL11.GL_CULL_FACE);
+
+        GL11.glTranslatef(par1 + (float) mobhead.getOffset(meta).x, par2 + (float) mobhead.getOffset(meta).y, par3
+                + (float) mobhead.getOffset(meta).z);
+        /* Override Rotation if on the Side of a Block */
+        switch (meta) {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            rotation = 180.0F;
+            break;
+        case 4:
+            rotation = 270.0F;
+            break;
+        case 5:
+        default:
+            rotation = 90.0F;
+        }
+
+        GL11.glRotatef(0.0f, 0.0f, 1.0F, 0.0f);
+        GL11.glScalef(-1.0f, -1.0F, 1.0F);
+        mobhead.model.render((Entity) null, 0.0F, 0.0F, 0.0F, rotation, skullState, scale);
+        GL11.glPopMatrix();
+    }
+
+    public void renderTileEntityAt(TileEntity tileentity, double par2, double par4, double par6, float par8) {
+        renderAModelAt((TileEntityMobHeads) tileentity, (float) par2, (float) par4, (float) par6, par8); // where to
+                                                                                                         // render
+    }
 }

@@ -36,7 +36,7 @@ public class ItemAnkh extends Item{
 	@Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer){
     	
-    	if(par3EntityPlayer.getHealth() > 1){
+    	if(par3EntityPlayer.func_110143_aJ() > 1f){
     		shootFireball(par2World, par3EntityPlayer);
     		par3EntityPlayer.heal(-1);
     	}

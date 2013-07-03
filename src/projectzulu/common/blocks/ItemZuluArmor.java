@@ -1,18 +1,18 @@
 package projectzulu.common.blocks;
 
-import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.IArmorTextureProvider;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.temperature.ITempArmor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemZuluArmor extends ItemArmor implements ITempArmor, IArmorTextureProvider
+public class ItemZuluArmor extends ItemArmor implements ITempArmor
 {
     /** Holds the 'base' maxDamage that each armorType have. */
     private static final int[] maxDamageArray = new int[] {11, 16, 15, 13};
@@ -108,8 +108,9 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor, IArmorTextur
 		return false;
 	}
 
-	@Override
-	public String getArmorTextureFile(ItemStack itemstack) {
-		return DefaultProps.blockDiretory + "armor_sets/" + RenderPlayer.armorFilenamePrefix[renderIndex] + "_" + (armorType == 2 ? 2 : 1) + ".png";
-	}
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
+        return DefaultProps.blockDiretory + "armor_sets/" + RenderBiped.bipedArmorFilenamePrefix[renderIndex] + "_"
+                + (armorType == 2 ? 2 : 1) + ".png";
+    }
 }

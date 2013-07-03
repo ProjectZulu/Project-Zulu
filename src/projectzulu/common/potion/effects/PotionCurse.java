@@ -3,7 +3,7 @@ package projectzulu.common.potion.effects;
 import java.util.Collection;
 import java.util.Iterator;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 
 public class PotionCurse extends PotionZulu{
@@ -16,7 +16,7 @@ public class PotionCurse extends PotionZulu{
 	}
 	
 	@Override
-	public void performEffect(EntityLiving effectedEntity, int par2) {
+	public void performEffect(EntityLivingBase effectedEntity, int par2) {
 		
 		/* Get Active Potion effect Collection from Entity*/
 		Collection potionEffects = effectedEntity.getActivePotionEffects();

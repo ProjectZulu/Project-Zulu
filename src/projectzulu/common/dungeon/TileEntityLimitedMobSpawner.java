@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -355,7 +356,8 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
                 }
             }
         } else if (par1Entity instanceof EntityLiving && par1Entity.worldObj != null) {
-            ((EntityLiving) par1Entity).initCreature();
+            EntityLivingData livingData = null;
+            livingData = ((EntityLiving) par1Entity).func_110161_a(livingData);
         }
     }
 

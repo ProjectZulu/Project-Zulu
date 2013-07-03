@@ -2,6 +2,7 @@ package projectzulu.common.potion.brewingstands;
 
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -52,7 +53,7 @@ public class TileEntityBrewingStandRenderer extends TileEntitySpecialRenderer {
 
         float scaleItem = scale;
         GL11.glPushMatrix();
-        bindTextureByName("/terrain.png");
+        func_110628_a(TextureMap.field_110575_b);
         GL11.glTranslatef((float) xRenderCoord + 0.5f, (float) (yRenderCoord + 0.3), (float) zRenderCoord + 0.5f);
         GL11.glScalef(scaleItem, scaleItem, scaleItem);
         GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);

@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -90,17 +91,17 @@ public class BlockTombstone extends BlockContainer{
     }
 
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
-		int var6 = (Math.round(-par5EntityLiving.rotationYaw / 45f) + 4) & 7;
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase livingBase, ItemStack par6ItemStack) {
+		int var6 = (Math.round(-livingBase.rotationYaw / 45f) + 4) & 7;
 		
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, var6, 3);
 		
 		
-		if(par5EntityLiving instanceof EntityPlayer){
-			((EntityPlayer)par5EntityLiving).openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
+		if(livingBase instanceof EntityPlayer){
+			((EntityPlayer)livingBase).openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
 		} 
 		
-		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack);
+		super.onBlockPlacedBy(par1World, par2, par3, par4, livingBase, par6ItemStack);
 	}
 	
 	@Override

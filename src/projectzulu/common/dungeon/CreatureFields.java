@@ -3,6 +3,7 @@ package projectzulu.common.dungeon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,6 +40,8 @@ public class CreatureFields implements DataFields {
     Point screenSize;
     Point backgroundSize;
 
+    public static final ResourceLocation CREATURE_LIST = new ResourceLocation(DefaultProps.dungeonDiretory + "creaturelistgui.png");
+    
     CreatureFields(Minecraft mc) {
         this.mc = mc;
     }
@@ -294,7 +297,7 @@ public class CreatureFields implements DataFields {
 
     private void bindTexture(Minecraft mc) {
         /* Setup Required Texture Sheet */
-        this.mc.renderEngine.bindTexture(DefaultProps.dungeonDiretory + "creaturelistgui.png");
+        this.mc.renderEngine.func_110581_b(CREATURE_LIST).func_110552_b();
         // int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         // mc.renderEngine.bindTexture(textureID); //TODO: Commented

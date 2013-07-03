@@ -1,6 +1,6 @@
 package projectzulu.common.potion.effects;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 
 public class PotionSlowFall extends PotionZulu {
 
@@ -12,7 +12,7 @@ public class PotionSlowFall extends PotionZulu {
     }
 
     @Override
-    public void performEffect(EntityLiving par1EntityLiving, int amplifier) {
+    public void performEffect(EntityLivingBase par1EntityLiving, int amplifier) {
         amplifier = amplifier > 10 ? 10 : amplifier < 0 ? 0 : amplifier;
         if (par1EntityLiving.fallDistance > (10 - amplifier) * 2) {
             par1EntityLiving.fallDistance = (10 - amplifier) * 2;

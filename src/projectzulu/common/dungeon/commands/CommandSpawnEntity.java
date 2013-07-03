@@ -27,7 +27,7 @@ public class CommandSpawnEntity extends CommandBase{
     
     @Override
     public String getCommandUsage(ICommandSender par1ICommandSender){
-        return par1ICommandSender.translateString("commands.spawnentity.usage", new Object[0]);
+        return "commands.spawnentity.usage";
     }
     
 	/**

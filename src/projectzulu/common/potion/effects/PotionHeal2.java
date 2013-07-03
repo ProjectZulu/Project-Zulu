@@ -1,6 +1,7 @@
 package projectzulu.common.potion.effects;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 
 public class PotionHeal2 extends PotionZulu {
@@ -12,12 +13,12 @@ public class PotionHeal2 extends PotionZulu {
     }
 
     @Override
-    public void performEffect(EntityLiving par1EntityLiving, int amplifier) {
+    public void performEffect(EntityLivingBase par1EntityLiving, int amplifier) {
         par1EntityLiving.heal(amplifier * 3);
     }
 
     @Override
-    public void affectEntity(EntityLiving par1EntityLiving, EntityLiving par2EntityLiving, int amplifier, double par4) {
+    public void affectEntity(EntityLivingBase par1EntityLiving, EntityLivingBase par2EntityLiving, int amplifier, double par4) {
         int damage = par4 < 0.5 ? (int) (0.5f * (amplifier * 3) + 1.0D) : (int) ((amplifier * 3) + 1.0D);
 
         if (par2EntityLiving.isEntityUndead()) {

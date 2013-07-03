@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -73,7 +74,7 @@ public class BlockMobHeads extends BlockContainer{
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister){
     	for (Head head : Head.values()) {
-    		head.icon = par1IconRegister.registerIcon(getUnlocalizedName2()+"_"+head.toString().toLowerCase());
+    		head.icon = par1IconRegister.registerIcon(getUnlocalizedName().substring(5)+"_"+head.toString().toLowerCase());
 		}
     }
     
@@ -174,7 +175,7 @@ public class BlockMobHeads extends BlockContainer{
 	 * Called when the block is placed in the world.
 	 */
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack){
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack){
 		int var6 = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 2.5D) & 3;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, var6, 3);
 	}

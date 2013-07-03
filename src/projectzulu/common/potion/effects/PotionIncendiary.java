@@ -1,6 +1,6 @@
 package projectzulu.common.potion.effects;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 
 public class PotionIncendiary extends PotionZulu {
 
@@ -11,12 +11,12 @@ public class PotionIncendiary extends PotionZulu {
     }
 
     @Override
-    public void performEffect(EntityLiving par1EntityLiving, int par2) {
+    public void performEffect(EntityLivingBase par1EntityLiving, int par2) {
         super.performEffect(par1EntityLiving, par2);
     }
 
     @Override
-    public void affectEntity(EntityLiving par1EntityLiving, EntityLiving par2EntityLiving, int par3, double par4) {
+    public void affectEntity(EntityLivingBase par1EntityLiving, EntityLivingBase par2EntityLiving, int par3, double par4) {
         par2EntityLiving.setFire((int) (2 + 1.5 * par3));
         super.affectEntity(par1EntityLiving, par2EntityLiving, par3, par4);
     }

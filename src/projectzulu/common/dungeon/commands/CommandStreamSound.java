@@ -29,7 +29,7 @@ public class CommandStreamSound extends CommandBase{
 	
     @Override
     public String getCommandUsage(ICommandSender par1ICommandSender){
-        return par1ICommandSender.translateString("commands.streamsound.usage", new Object[0]);
+        return "commands.streamsound.usage";
     }
 	
 	/**

@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundPool;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 
@@ -27,7 +28,7 @@ public class GuiLimitedMobSpawner extends GuiScreen {
     int numberOfFields = 1;
     int currentDataField = 0;
     private List<DataFields> dataFields = new ArrayList<DataFields>();
-
+    public static ResourceLocation SPAWNER_GUI = new ResourceLocation(DefaultProps.dungeonDiretory + "mobspawnergui.png");
     public DataFields getDataField(int index) {
         return dataFields.get(index);
     }
@@ -315,7 +316,7 @@ public class GuiLimitedMobSpawner extends GuiScreen {
     public void drawDefaultBackground() {
         super.drawDefaultBackground();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(DefaultProps.dungeonDiretory + "mobspawnergui.png");
+        this.mc.renderEngine.func_110581_b(SPAWNER_GUI).func_110552_b();
         int xCoord = (width - backgroundSize.getX()) / 2;
         int yCoord = (height - backgroundSize.getY()) / 2;
         this.drawTexturedModalRect(xCoord, yCoord, 0, 0, backgroundSize.getX(), backgroundSize.getY());

@@ -3,6 +3,7 @@ package projectzulu.common.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 
@@ -18,6 +19,8 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
     /** The ModelSign instance used by the TileEntityTombstoneRenderer */
     private ModelTombstone modelSign = new ModelTombstone();
 
+    public static final ResourceLocation TOMBSTONE = new ResourceLocation(DefaultProps.blockDiretory+"Tombstone.png");
+    
     public void renderTileEntityTombstoneAt(TileEntityTombstone par1TileEntityTombstone, double par2, double par4, double par6, float par8){
         Block var9 = par1TileEntityTombstone.getBlockType();
         int meta;
@@ -30,7 +33,7 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
             rotation = par1TileEntityTombstone.getBlockMetadata()*360/8;
         }
         
-        this.bindTextureByName(DefaultProps.blockDiretory+"Tombstone.png");
+        this.func_110628_a(TOMBSTONE);
         
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);

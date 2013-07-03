@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
@@ -35,7 +36,7 @@ public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRende
 			if(itemToRender != null && Item.itemsList[itemToRender.itemID] instanceof ItemBlock && Block.blocksList[itemToRender.itemID].getRenderType() != -1){
 				Block blockToRender = Block.blocksList[itemToRender.itemID];
 				int meta = itemStackToRender.getItemDamage() > 16 ? 16 : itemStackToRender.getItemDamage() < 0 ? 0 : itemStackToRender.getItemDamage();
-				bindTextureByName("/terrain.png");
+		        this.func_110628_a(TextureMap.field_110575_b);
 		        GL11.glPushMatrix();
 		        float scaleBlock = (float) (0.29f / (blockToRender.getBlockBoundsMaxX() - blockToRender.getBlockBoundsMinX()));
 		        float scaleY = (float) (scaleBlock * (blockToRender.getBlockBoundsMaxY() - blockToRender.getBlockBoundsMinY()));
@@ -57,7 +58,7 @@ public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRende
 				
 		        float scaleItem = 0.6f;
 		        GL11.glPushMatrix();
-		        bindTextureByName("/terrain.png");
+                this.func_110628_a(TextureMap.field_110575_b);
 		        GL11.glTranslatef((float)xRenderCoord + 0.5f, (float)(yRenderCoord + 0.3), (float)zRenderCoord + 0.5f);
 		        GL11.glScalef(scaleItem, scaleItem, scaleItem);
 				itemRenderer.doRenderItem(entityItemToRender, 0, 0, 0, 0, 0);

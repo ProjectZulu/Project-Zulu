@@ -2,6 +2,7 @@ package projectzulu.common.dungeon;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
@@ -17,6 +18,7 @@ public class GUISelectionList extends GuiScrollingList {
 
     Node currentNode;
     GuiButton previous;
+    public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonDiretory + "creaturelistgui.png");
 
     public GUISelectionList(GuiLimitedMobSpawner parent, Node rootSoundNode, ListType listType, int listWidth,
             Point screenSize, Point backgroundSize) {
@@ -65,7 +67,7 @@ public class GUISelectionList extends GuiScrollingList {
 
     @Override
     protected void drawBackground() {
-        parent.getMinecraft().renderEngine.bindTexture(DefaultProps.dungeonDiretory + "creaturelistgui.png");
+        parent.getMinecraft().renderEngine.func_110581_b(CREATURE_GUI).func_110552_b();
         // int textureID =
         // parent.getMinecraft().renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -110,7 +112,7 @@ public class GUISelectionList extends GuiScrollingList {
 
     private void drawScrollOverlay(int leftOffset, int topHeight, int botHeight, int alphaBottom, int alphaTop) {
         Tessellator var5 = Tessellator.instance;
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, parent.getMinecraft().renderEngine.getTexture(getBackgroundTexture()));
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, parent.getMinecraft().renderEngine.func_110581_b(getBackgroundTexture()).func_110552_b());
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         float imageSize = 32.0F;
         var5.startDrawingQuads();

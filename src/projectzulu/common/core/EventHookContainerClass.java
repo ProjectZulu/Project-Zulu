@@ -79,55 +79,55 @@ public class EventHookContainerClass {
 
 	@ForgeSubscribe
 	public void OnPlayerUpdateFreeze(LivingUpdateEvent event){
-		World worldObj = event.entity.worldObj;
-		if(worldObj != null && event.entity != null && event.entity instanceof EntityPlayer){
-
-
-			EntityPlayer thePlayer = (EntityPlayer)event.entity;
-
-			int var1 = MathHelper.floor_double(thePlayer.posX);
-			int var2 = MathHelper.floor_double(thePlayer.boundingBox.minY);
-			int var3 = MathHelper.floor_double(thePlayer.posZ);
-			BiomeGenBase currentBiome = worldObj.getBiomeGenForCoords(var1, var3);
-			boolean isSnowArea = currentBiome.getEnableSnow();
-
-			/* Armor Effect Only Occurs When Block/Item Package is Installed*/
-			if(!thePlayer.capabilities.isCreativeMode && isSnowArea && Loader.isModLoaded(DefaultProps.BlocksModId) ){
-				float velocityModifier = 0;
-
-				/* Slow Player if on snow */
-				if( worldObj.getBlockMaterial( (int)thePlayer.posX, (int)thePlayer.posY-1, (int)thePlayer.posZ) == Material.snow
-						|| worldObj.getBlockMaterial( (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ) == Material.snow){
-					velocityModifier -= 0.01;
-				}
-
-				/* Slow Player if it is Snowing */
-				if(worldObj.isRaining() && worldObj.canBlockSeeTheSky((int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ)){
-					velocityModifier -= 0.01;
-				}
-
-				/* Increase Speed if Wearing Fur */
-				if(thePlayer.inventory.armorInventory[0] != null && ItemList.furArmorBoots.isPresent() && thePlayer.inventory.armorInventory[0].itemID == ItemList.furArmorBoots.get().itemID ){
-					velocityModifier += 0.005;
-				}
-				if(thePlayer.inventory.armorInventory[1] != null && ItemList.furArmorLeg.isPresent() && thePlayer.inventory.armorInventory[1].itemID == ItemList.furArmorLeg.get().itemID){
-					velocityModifier += 0.005;
-				}
-				if(thePlayer.inventory.armorInventory[2] != null && ItemList.furArmorChest.isPresent() && thePlayer.inventory.armorInventory[2].itemID == ItemList.furArmorChest.get().itemID){
-					velocityModifier += 0.005;
-				}
-				if(thePlayer.inventory.armorInventory[3] != null && ItemList.furArmorHead.isPresent() && thePlayer.inventory.armorInventory[3].itemID == ItemList.furArmorHead.get().itemID){
-					velocityModifier += 0.005;
-				}
-
-				/*Apply VelocityModifier to landMovementFactor*/
-				if(thePlayer.isSprinting() ){
-					thePlayer.landMovementFactor = 0.13f+velocityModifier ;
-				}else{
-					thePlayer.landMovementFactor = 0.1f+velocityModifier ;
-				}
-			}
-		}
+//		World worldObj = event.entity.worldObj;
+//		if(worldObj != null && event.entity != null && event.entity instanceof EntityPlayer){
+//
+//
+//			EntityPlayer thePlayer = (EntityPlayer)event.entity;
+//
+//			int var1 = MathHelper.floor_double(thePlayer.posX);
+//			int var2 = MathHelper.floor_double(thePlayer.boundingBox.minY);
+//			int var3 = MathHelper.floor_double(thePlayer.posZ);
+//			BiomeGenBase currentBiome = worldObj.getBiomeGenForCoords(var1, var3);
+//			boolean isSnowArea = currentBiome.getEnableSnow();
+//
+//			/* Armor Effect Only Occurs When Block/Item Package is Installed*/
+//			if(!thePlayer.capabilities.isCreativeMode && isSnowArea && Loader.isModLoaded(DefaultProps.BlocksModId) ){
+//				float velocityModifier = 0;
+//
+//				/* Slow Player if on snow */
+//				if( worldObj.getBlockMaterial( (int)thePlayer.posX, (int)thePlayer.posY-1, (int)thePlayer.posZ) == Material.snow
+//						|| worldObj.getBlockMaterial( (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ) == Material.snow){
+//					velocityModifier -= 0.01;
+//				}
+//
+//				/* Slow Player if it is Snowing */
+//				if(worldObj.isRaining() && worldObj.canBlockSeeTheSky((int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ)){
+//					velocityModifier -= 0.01;
+//				}
+//
+//				/* Increase Speed if Wearing Fur */
+//				if(thePlayer.inventory.armorInventory[0] != null && ItemList.furArmorBoots.isPresent() && thePlayer.inventory.armorInventory[0].itemID == ItemList.furArmorBoots.get().itemID ){
+//					velocityModifier += 0.005;
+//				}
+//				if(thePlayer.inventory.armorInventory[1] != null && ItemList.furArmorLeg.isPresent() && thePlayer.inventory.armorInventory[1].itemID == ItemList.furArmorLeg.get().itemID){
+//					velocityModifier += 0.005;
+//				}
+//				if(thePlayer.inventory.armorInventory[2] != null && ItemList.furArmorChest.isPresent() && thePlayer.inventory.armorInventory[2].itemID == ItemList.furArmorChest.get().itemID){
+//					velocityModifier += 0.005;
+//				}
+//				if(thePlayer.inventory.armorInventory[3] != null && ItemList.furArmorHead.isPresent() && thePlayer.inventory.armorInventory[3].itemID == ItemList.furArmorHead.get().itemID){
+//					velocityModifier += 0.005;
+//				}
+//
+//				/*Apply VelocityModifier to landMovementFactor*/
+//                if (thePlayer.isSprinting()) {
+//                    thePlayer.landMovementFactor = 0.13f + velocityModifier;
+//                } else {
+//                    thePlayer.landMovementFactor = 0.1f + velocityModifier;
+//                }
+//			}
+//		}
 	}
 	
 	@ForgeSubscribe
@@ -155,22 +155,25 @@ public class EventHookContainerClass {
 //			}
 //		}
 		
-		if( (Loader.isModLoaded(DefaultProps.MobsModId) && Properties.tombstoneOnDeath 
-				&& event.entity instanceof EntityPlayer && BlockList.tombstone.isPresent() )){
-			EntityPlayer player = (EntityPlayer)event.entity;
-			World worldObj = player.worldObj;
-			
-			/* Check if Location is Valid for Tombstone */
-			if(worldObj.isAirBlock((int)player.posX, (int)player.posY, (int)player.posZ)){
-				/* Place a Tombstone */
-				worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, BlockList.tombstone.get().blockID);
-				TileEntity tileEntity = worldObj.getBlockTileEntity((int)player.posX, (int)player.posY, (int)player.posZ);
-				if(tileEntity != null && tileEntity instanceof TileEntityTombstone ){
-					((TileEntityTombstone)tileEntity).setSignString(event.source.getDeathMessage((EntityPlayer)event.entity));
-				}
-			}
-		}
-	}
+        if ((Loader.isModLoaded(DefaultProps.MobsModId) && Properties.tombstoneOnDeath
+                && event.entity instanceof EntityPlayer && BlockList.tombstone.isPresent())) {
+            EntityPlayer player = (EntityPlayer) event.entity;
+            World worldObj = player.worldObj;
+
+            /* Check if Location is Valid for Tombstone */
+            if (worldObj.isAirBlock((int) player.posX, (int) player.posY, (int) player.posZ)) {
+                /* Place a Tombstone */
+                worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ,
+                        BlockList.tombstone.get().blockID);
+                TileEntity tileEntity = worldObj.getBlockTileEntity((int) player.posX, (int) player.posY,
+                        (int) player.posZ);
+                if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
+                    ((TileEntityTombstone) tileEntity).setSignString(event.source.func_111181_b(
+                            (EntityPlayer) event.entity).toString());
+                }
+            }
+        }
+    }
 
 	
 	/* Armor Effect Only Occurs When Block/Item Package is Installed*/

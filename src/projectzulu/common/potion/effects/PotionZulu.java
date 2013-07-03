@@ -1,12 +1,15 @@
 package projectzulu.common.potion.effects;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.potion.Potion;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class PotionZulu extends Potion {
+
+    public ResourceLocation resourceLocation = new ResourceLocation(DefaultProps.coreDiretory + "gui/guielements.png");
 
     protected PotionZulu(int par1, boolean par2, int par3) {
         super(par1, par2, par3);
@@ -22,12 +25,12 @@ public class PotionZulu extends Potion {
     @SideOnly(Side.CLIENT)
     public int getStatusIconIndex() {
         Minecraft mc = Minecraft.getMinecraft();
-        mc.renderEngine.bindTexture(getTextureFile());
+        mc.renderEngine.func_110577_a(getTextureFile());
         return super.getStatusIconIndex();
     }
 
-    private String getTextureFile() {
-        return DefaultProps.coreDiretory + "gui/guielements.png";
+    private ResourceLocation getTextureFile() {
+        return resourceLocation;
     }
 
     /**

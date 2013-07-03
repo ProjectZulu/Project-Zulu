@@ -45,7 +45,7 @@ public class BlockNightBloom extends BlockFlower{
     public void registerIcons(IconRegister par1IconRegister){
         this.icons = new Icon[imageSuffix.length];
         for (int i = 0; i < this.icons.length; ++i){
-            this.icons[i] = par1IconRegister.registerIcon(getUnlocalizedName2()+imageSuffix[i]);
+            this.icons[i] = par1IconRegister.registerIcon(getUnlocalizedName().substring(5)+imageSuffix[i]);
         }
     }
     

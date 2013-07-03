@@ -1,6 +1,6 @@
 package projectzulu.common.potion.effects;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 
 public class PotionCleansing extends PotionZulu {
 
@@ -12,7 +12,7 @@ public class PotionCleansing extends PotionZulu {
     }
 
     @Override
-    public void performEffect(EntityLiving effectedEntity, int par2) {
+    public void performEffect(EntityLivingBase effectedEntity, int par2) {
         super.performEffect(effectedEntity, par2);
     }
 
