@@ -61,11 +61,11 @@ public class DeathGamerules {
                 "Percentage of Max durability dealth on Drop to hotbar slot items"), 0, 0, 100);
 
         armorDropChance = handlePropMinMax(config.get(category + ".Armor", "armorDropChance", 100,
-                "Chance that each armor slot item will drop on death"), 0, 0, 100);
+                "Chance that each armor slot item will drop on death"), 100, 0, 100);
         inventoryDropChance = handlePropMinMax(config.get(category + ".Inventory", "inventoryDropChance", 100,
-                "Chance that each inventory slot item will drop on death"), 0, 0, 100);
+                "Chance that each inventory slot item will drop on death"), 100, 0, 100);
         hotbarDropChance = handlePropMinMax(config.get(category + ".Hotbar", "hotbarDropChance", 100,
-                "Chance that each hotbar slot item will drop on death"), 0, 0, 100);
+                "Chance that each hotbar slot item will drop on death"), 100, 0, 100);
 
         armorMaxDrop = handlePropMinMax(config.get(category + ".Armor", "armorMaxDrop", 0,
                 "Max number of armor slot items that can drop on death."), 0, 0, null);
@@ -179,7 +179,7 @@ public class DeathGamerules {
             if (itemStack != null) {
                 boolean shouldDrop = false;
                 if ((armorMaxDrop == 0 || countDrops < armorMaxDrop)
-                        && armorDeathDamage - player.worldObj.rand.nextInt(100) <= 1) {
+                        && (armorDropChance - player.worldObj.rand.nextInt(100) >= 1)) {
                     shouldDrop = true;
                 }
                 int percentDamage = shouldDrop ? armorDeathDamage + armorDropDamage : armorDeathDamage;
@@ -219,7 +219,7 @@ public class DeathGamerules {
                 if (itemStack != null) {
                     boolean shouldDrop = false;
                     if ((inventoryMaxDrop == 0 || countDrops < inventoryMaxDrop)
-                            && inventoryDropChance - player.worldObj.rand.nextInt(100) <= 1) {
+                            && inventoryDropChance - player.worldObj.rand.nextInt(100) >= 1) {
                         shouldDrop = true;
                     }
                     int percentDamage = shouldDrop ? inventoryDeathDamage + inventoryDropDamage : inventoryDeathDamage;
@@ -261,7 +261,7 @@ public class DeathGamerules {
             if (itemStack != null) {
                 boolean shouldDrop = false;
                 if ((hotbarMaxDrop == 0 || countDrops < hotbarMaxDrop)
-                        && hotbarDropChance - player.worldObj.rand.nextInt(100) <= 1) {
+                        && hotbarDropChance - player.worldObj.rand.nextInt(100) >= 1) {
                     shouldDrop = true;
                 }
                 int percentDamage = shouldDrop ? hotbarDeathDamage + hotbarDropDamage : hotbarDeathDamage;
