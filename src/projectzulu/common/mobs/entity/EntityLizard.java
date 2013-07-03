@@ -35,7 +35,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 		//boundingBox.setBounds(-20,-20,-5.0,0.05,0.5,2.5);		
 		//this.setSize(1.4F, 2.9F);
 		this.moveSpeed = 0.4f;
-		this.texture = DefaultProps.mobDiretory + "lizard.png";
 
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));

@@ -12,6 +12,7 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -201,17 +202,17 @@ public class TemperatureTicker implements ITickHandler, IPlayerTracker{
 					/* Handle Effect Of Temperature on Player */
 					if( playerTemperatureDegrees < 20){
 						/* Handle Very Cold */
-						((EntityLiving)player).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1, 3));
+						((EntityLivingBase)player).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1, 3));
 					}else if( playerTemperatureDegrees < 30 ){
 						/* Handle Medium Cold */
-						((EntityLiving)player).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1, 1));
+						((EntityLivingBase)player).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1, 1));
 					}else if ( playerTemperatureDegrees < 40 ){
 						/* Handle Little Cold */
 
 					}else if( playerTemperatureDegrees > 100 ){
 						/* Handle High Heat */
 						if(inGameTicks % 80 > 8){
-			            	((EntityLiving)player).addPotionEffect(new PotionEffect(Potion.confusion.id, 62,100));
+			            	((EntityLivingBase)player).addPotionEffect(new PotionEffect(Potion.confusion.id, 62,100));
 						}
 
 					}else if( playerTemperatureDegrees > 90 ){

@@ -60,18 +60,6 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals{
 			return 3;
 		}
 	}
-
-	@Override
-	public String getTexture() {
-		if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
-				|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-			this.texture = DefaultProps.mobDiretory + "treeent_snow.png";
-		}else{
-			this.texture = DefaultProps.mobDiretory + "treeent.png";
-		}
-
-		return super.getTexture();
-	}
 	
 	@Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {

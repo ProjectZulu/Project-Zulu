@@ -5,6 +5,7 @@ import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
@@ -158,5 +159,7 @@ public class ProjectZulu_Core {
         ProjectZuluLog.info("Initializing TerrainFeatures");
         featureGenerator.initialize(modConfigDirectoryFile);
         GameRegistry.registerWorldGenerator(featureGenerator);
+        
+        BiomeDictionary.registerAllBiomes();
     }
 }

@@ -34,13 +34,6 @@ public class EntityBlackBear extends EntityBear{
 			return 3;
 		}
 	}
-	
-	@Override
-	public String getTexture() {
-		
-		this.texture = DefaultProps.mobDiretory + "bearblack.png";
-		return this.texture;
-	}
 
 	@Override
 	protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {

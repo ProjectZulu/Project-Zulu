@@ -1,5 +1,9 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -7,10 +11,13 @@ import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityBlackBear;
+import projectzulu.common.mobs.models.ModelArmadillo;
 import projectzulu.common.mobs.models.ModelBlackBear;
+import projectzulu.common.mobs.renders.RenderGenericLiving;
 
 public class BearBlackDeclaration extends SpawnableDeclaration{
 	
@@ -18,7 +25,6 @@ public class BearBlackDeclaration extends SpawnableDeclaration{
 		super("Black Bear", EntityBlackBear.class, EnumCreatureType.creature);		
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
-		setModelAndRender(ModelBlackBear.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
         setDropAmount(0, 2);
 
 		eggColor1 = (0 << 16) + (0 << 8) + 0;							eggColor2 = (23 << 16) + (17 << 8) + 17;
@@ -43,4 +49,10 @@ public class BearBlackDeclaration extends SpawnableDeclaration{
 				ItemGenerics.Properties.SmallHeart.meta(), 4);
 		super.outputDataToList(config, customMobData);
 	}
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+        return new RenderGenericLiving(new ModelBlackBear(), 0.5f, DefaultProps.mobDiretory + "bearblack.png");
+    }
 }

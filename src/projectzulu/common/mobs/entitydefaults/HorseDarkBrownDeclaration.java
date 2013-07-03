@@ -1,5 +1,9 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -7,10 +11,12 @@ import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityHorseDarkBrown;
 import projectzulu.common.mobs.models.ModelHorse;
+import projectzulu.common.mobs.renders.RenderGenericHorse;
 
 public class HorseDarkBrownDeclaration extends SpawnableDeclaration{
 	
@@ -18,7 +24,6 @@ public class HorseDarkBrownDeclaration extends SpawnableDeclaration{
 		super("Horse Dark Brown", EntityHorseDarkBrown.class, EnumCreatureType.creature);		
 		setSpawnProperties(5, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
-		setModelAndRender(ModelHorse.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
         setDropAmount(0, 3);
 
 		eggColor1 =  (102 << 16) + (73 << 8) + 34;						eggColor2 = (60 << 16) + (43 << 8) + 20;
@@ -39,4 +44,11 @@ public class HorseDarkBrownDeclaration extends SpawnableDeclaration{
 				ItemGenerics.Properties.LargeHeart.meta(), 4);
 		super.outputDataToList(config, customMobData);
 	}
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+        return new RenderGenericHorse(new ModelHorse(), 0.5f, DefaultProps.mobDiretory + "Horse/horse_dark_brown.png",
+                DefaultProps.mobDiretory + "Horse/horse_dark_brown_saddled.png");
+    }
 }

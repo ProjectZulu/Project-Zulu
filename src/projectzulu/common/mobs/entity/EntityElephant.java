@@ -63,12 +63,6 @@ public class EntityElephant extends EntityGenericAnimal{
 			return 5;
 		}
 	}
-
-	@Override
-	public String getTexture() {	
-		this.texture = DefaultProps.mobDiretory + "elephant.png";
-		return super.getTexture();
-	}
 	
 	@Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {

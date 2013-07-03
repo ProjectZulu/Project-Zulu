@@ -88,11 +88,6 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 			return 2;
 		}
 	}
-	
-	@Override
-    public String getTexture(){
-        return DefaultProps.mobDiretory + "mummy_pharaoh.png";
-    }
 
 	@Override
 	public int getMaxHealth(){

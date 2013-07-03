@@ -3,7 +3,7 @@ package projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 
 import org.lwjgl.opengl.GL11;
 
@@ -221,7 +221,7 @@ public class ModelFrog extends ModelBase {
     }
 
     @Override
-    public void setLivingAnimations(EntityLiving entityLiving, float par2, float par3, float par4) {
+    public void setLivingAnimations(EntityLivingBase entityLiving, float par2, float par3, float par4) {
 	EntityFrog var5 = (EntityFrog) entityLiving;
 	if (!var5.onGround) {
 	    /* Jumping In Air */

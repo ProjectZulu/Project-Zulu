@@ -43,13 +43,6 @@ public class EntityEagle extends EntityGenericAnimal{
 	 */
 	@Override
     protected void updateFallState(double par1, boolean par3) {}
-
-
-	@Override
-	public String getTexture(){
-		this.texture = DefaultProps.mobDiretory + "eagle.png";
-		return super.getTexture();
-	}
 	
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {

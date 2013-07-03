@@ -3,7 +3,7 @@ package projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
@@ -276,7 +276,7 @@ public class ModelOstrich extends ModelBase {
     }
 
     @Override
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+    public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	TOE22ROT.rotateAngleY = (float) (45 * Math.PI / 180);
 	TOE21ROT.rotateAngleY = (float) (-45 * Math.PI / 180);
 

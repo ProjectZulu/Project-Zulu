@@ -3,7 +3,7 @@ package projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 
 import org.lwjgl.opengl.GL11;
 
@@ -382,7 +382,7 @@ public class ModelVulture extends ModelBase {
     }
 
     @Override
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+    public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	EntityVulture var5 = (EntityVulture) par1EntityLiving;
 
 	if (var5.eFEETROT.isSetup == false) {

@@ -3,7 +3,7 @@ package projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import projectzulu.common.core.ModelHelper;
 import projectzulu.common.mobs.entity.EntityGiraffe;
@@ -168,7 +168,7 @@ public class ModelGiraffe extends ModelBase {
     }
 
     @Override
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+    public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	EntityGiraffe var5 = (EntityGiraffe) par1EntityLiving;
 	/* State Animation Rotations */
 	tail.rotateAngleZ = (float) (MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.8F * ModelHelper.abs(Math

@@ -1,14 +1,21 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityBlueFinch;
+import projectzulu.common.mobs.models.ModelBeaver;
 import projectzulu.common.mobs.models.ModelFinch;
+import projectzulu.common.mobs.renders.RenderGenericLiving;
 
 public class BlueFinchDeclaration extends SpawnableDeclaration{
 	
@@ -16,7 +23,6 @@ public class BlueFinchDeclaration extends SpawnableDeclaration{
 		super("Blue Finch", EntityBlueFinch.class, EnumCreatureType.ambient);		
 		setSpawnProperties(10, 5, 1, 1);
 		setRegistrationProperties(128, 3, true);
-		setModelAndRender(ModelFinch.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
         setDropAmount(0, 1);
 
 		eggColor1 =  (38 << 16) + (103 << 8) + 255;						eggColor2 = (224 << 16) + (233 << 8) + 255;
@@ -35,4 +41,10 @@ public class BlueFinchDeclaration extends SpawnableDeclaration{
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.feather, 0, 8);
 		super.outputDataToList(config, customMobData);
 	}
+	
+    @Override
+    @SideOnly(Side.CLIENT)
+    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+        return new RenderGenericLiving(new ModelFinch(), 0.5f, DefaultProps.mobDiretory + "finch_blue.png");
+    }
 }

@@ -61,13 +61,6 @@ public class EntityGiraffe extends EntityGenericAnimal {
 			return 3;
 		}
 	}
-
-	@Override
-	public String getTexture() {
-
-		this.texture = DefaultProps.mobDiretory + "giraffe.png";
-		return super.getTexture();
-	}
 	
 	@Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {

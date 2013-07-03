@@ -43,7 +43,7 @@ public abstract class EntityGenericCreature extends EntityAerial
     public EntityGenericCreature(World par1World){
         super(par1World);
     }
-    
+        
 	@Override
 	protected boolean isAIEnabled() {
 		return true;

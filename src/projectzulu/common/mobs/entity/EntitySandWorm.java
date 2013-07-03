@@ -53,16 +53,6 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob{
     }
 
 	@Override
-	public String getTexture() {
-		if (getEntityState() == EntityStates.idle) {
-			this.texture = DefaultProps.mobDiretory + "sandworm_hidden.png";
-		}else{
-			this.texture = DefaultProps.mobDiretory + "sandworm.png";
-		}
-		return super.getTexture();
-	}
-
-	@Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }

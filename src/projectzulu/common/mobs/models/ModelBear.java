@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
@@ -157,7 +158,7 @@ public class ModelBear extends ModelBase {
     }
 
     @Override
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+    public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	EntityBear var5 = (EntityBear) par1EntityLiving;
 	LEG1ROT2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
 	LEG3ROT2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;

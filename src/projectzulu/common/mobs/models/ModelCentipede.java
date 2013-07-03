@@ -3,7 +3,7 @@ package projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelCentipede extends ModelBase {
@@ -166,7 +166,7 @@ public class ModelCentipede extends ModelBase {
     }
 
     @Override
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+    public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 
 	ANTENLEFROT2.rotateAngleX = (float) (-15 * Math.PI / 180 + 20 * Math.PI / 180

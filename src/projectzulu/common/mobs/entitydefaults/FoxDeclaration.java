@@ -1,5 +1,7 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -7,10 +9,14 @@ import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityFox;
 import projectzulu.common.mobs.models.ModelFox;
+import projectzulu.common.mobs.renders.RenderTameable;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class FoxDeclaration extends SpawnableDeclaration{
 
@@ -18,7 +24,6 @@ public class FoxDeclaration extends SpawnableDeclaration{
 		super("Fox", EntityFox.class, EnumCreatureType.creature);		
 		setSpawnProperties(10, 100, 1, 3);
 		setRegistrationProperties(128, 3, true);
-		setModelAndRender(ModelFox.class, "projectzulu.common.mobs.renders.RenderTameable");
         setDropAmount(0, 2);
 
 		eggColor1 = (204 << 16) + (132 << 8) + 22;
@@ -43,5 +48,11 @@ public class FoxDeclaration extends SpawnableDeclaration{
 		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems, ItemGenerics.Properties.SmallHeart.meta(), 4);
 		super.outputDataToList(config, customMobData);
 	}
+	
+    @Override
+    @SideOnly(Side.CLIENT)
+    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+        return new RenderTameable(new ModelFox(), 0.5f, DefaultProps.mobDiretory + "fox.png");
+    }
 }
 

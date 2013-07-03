@@ -62,12 +62,6 @@ public class EntityPenguin extends EntityGenericAnimal implements IAnimals {
 	}
 	
 	@Override
-	public String getTexture() {
-		this.texture = DefaultProps.mobDiretory + "penguin.png";
-		return super.getTexture();
-	}
-	
-	@Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }

@@ -1,8 +1,12 @@
 package projectzulu.common.mobs.entity;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import projectzulu.common.core.DefaultProps;
+import projectzulu.common.api.CustomEntityList;
 
 public class EntityHorseRandom extends EntityHorseBase{
 
@@ -26,76 +30,59 @@ public class EntityHorseRandom extends EntityHorseBase{
 
 	public int getHorseType(){
 		return this.dataWatcher.getWatchableObjectShort(26);
-	}
-	
-	@Override
-	public String getTexture() {
-		switch (horseType) {
-		case 0:
-			if(getSaddled()){
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_beige_saddled.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_beige.png";
-			}
-			break;
-		case 1:
-			if(getSaddled()){
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_black_saddled.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_black.png";
-			}
-			break;
-		case 2:
-			if(getSaddled()){
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_brown_saddled.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_brown.png";
-			}
-			break;
-		case 3:
-			if(getSaddled()){
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_black_saddled.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_black.png";
-			}
-			break;
-		case 4:
-			if(getSaddled()){
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_brown_saddled.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_dark_brown.png";
-			}
-			break;
-		case 5:
-			if(getSaddled()){
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_grey_saddled.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_grey.png";
-			}
-			break;
-		case 6:
-			if(getSaddled()){
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_white_saddled.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_white.png";
-			}
-			break;
-		default:
-			if(getSaddled()){
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_beige_saddled.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_beige.png";
-			}
-			break;
-		}
-		return this.texture;
-	}
-	
-	@Override
-	public void onUpdate() {
-		horseType = getHorseType();
-		super.onUpdate();
-	}
+    }
+
+    @Override
+    public void onUpdate() {
+        horseType = getHorseType();
+        if (!this.isDead) {
+            List<EntityHorseBase> horses = new ArrayList<EntityHorseBase>();
+            if (CustomEntityList.HORSEBEIGE.modData.isPresent()) {
+                horses.add(new EntityHorseBeige(worldObj));
+            }
+
+            if (CustomEntityList.HORSEBLACK.modData.isPresent()) {
+                horses.add(new EntityHorseBlack(worldObj));
+            }
+
+            if (CustomEntityList.HORSEBROWN.modData.isPresent()) {
+                horses.add(new EntityHorseBrown(worldObj));
+            }
+
+            if (CustomEntityList.HORSEDARKBLACK.modData.isPresent()) {
+                horses.add(new EntityHorseDarkBlack(worldObj));
+            }
+
+            if (CustomEntityList.HORSEDARKBROWN.modData.isPresent()) {
+                horses.add(new EntityHorseDarkBrown(worldObj));
+            }
+
+            if (CustomEntityList.HORSEGREY.modData.isPresent()) {
+                horses.add(new EntityHorseGrey(worldObj));
+            }
+
+            if (CustomEntityList.HORSEWHITE.modData.isPresent()) {
+                horses.add(new EntityHorseWhite(worldObj));
+            }
+
+            EntityHorseBase entityToReplace;
+            if (horses.isEmpty()) {
+                entityToReplace = null;
+            } else if (horseType < horses.size()) {
+                entityToReplace = horses.get(horseType);
+            } else {
+                Collections.shuffle(horses);
+                entityToReplace = horses.get(0);
+            }
+
+            this.setDead();
+            if (entityToReplace != null) {
+                entityToReplace.setPositionAndRotation(posX, posY, posZ, rotationYaw, rotationPitch);
+                worldObj.spawnEntityInWorld(entityToReplace);
+            }
+        }
+        super.onUpdate();
+    }
 	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {

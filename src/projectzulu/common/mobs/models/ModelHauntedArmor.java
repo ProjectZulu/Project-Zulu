@@ -3,8 +3,10 @@ package projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
@@ -16,6 +18,7 @@ import org.lwjgl.opengl.GL11;
 import projectzulu.common.core.ModelHelper;
 import projectzulu.common.mobs.entity.EntityHauntedArmor;
 import projectzulu.common.mobs.entity.EntityStates;
+import projectzulu.common.mobs.renders.RenderHauntedArmor;
 
 public class ModelHauntedArmor extends ModelBase {
     public ModelRenderer swordhand;
@@ -83,62 +86,57 @@ public class ModelHauntedArmor extends ModelBase {
 
     @Override
     public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-	if (this.isChild) {
-	    float var8 = 2.0F;
-	    GL11.glPushMatrix();
-	    GL11.glScalef(1.5F / var8, 1.5F / var8, 1.5F / var8);
-	    GL11.glTranslatef(0.0F, 16.0F * par7, 0.0F);
-	    this.bipedHead.render(par7);
-	    GL11.glPopMatrix();
-	    GL11.glPushMatrix();
-	    GL11.glScalef(1.0F / var8, 1.0F / var8, 1.0F / var8);
-	    GL11.glTranslatef(0.0F, 24.0F * par7, 0.0F);
-	    this.bipedBody.render(par7);
-	    this.bipedRightArm.render(par7);
-	    this.bipedLeftArm.render(par7);
-	    this.bipedRightLeg.render(par7);
-	    this.bipedLeftLeg.render(par7);
-	    GL11.glPopMatrix();
-	} else {
-	    String textureLocation;
-	    ItemStack var4;
-	    float scale;
+        if (this.isChild) {
+            float var8 = 2.0F;
+            GL11.glPushMatrix();
+            GL11.glScalef(1.5F / var8, 1.5F / var8, 1.5F / var8);
+            GL11.glTranslatef(0.0F, 16.0F * par7, 0.0F);
+            this.bipedHead.render(par7);
+            GL11.glPopMatrix();
+            GL11.glPushMatrix();
+            GL11.glScalef(1.0F / var8, 1.0F / var8, 1.0F / var8);
+            GL11.glTranslatef(0.0F, 24.0F * par7, 0.0F);
+            this.bipedBody.render(par7);
+            this.bipedRightArm.render(par7);
+            this.bipedLeftArm.render(par7);
+            this.bipedRightLeg.render(par7);
+            this.bipedLeftLeg.render(par7);
+            GL11.glPopMatrix();
+        } else {
+            String textureLocation;
+            ResourceLocation resource;
+            ItemStack itemStack;
+            float scale;
 
-	    textureLocation = "/armor/iron_2.png";
-	    EntityHauntedArmor var5 = (EntityHauntedArmor) par1Entity;
-	    var4 = var5.getCurrentArmor(3 - 2);
-	    if (var4 != null && var4.getItem() instanceof ItemArmor) {
-		ItemArmor var6 = (ItemArmor) var4.getItem();
-		textureLocation = ForgeHooksClient.getArmorTexture(par1Entity, var4, "/armor/"
-            + RenderBiped.bipedArmorFilenamePrefix[var6.renderIndex] + "_" + 2 + ".png", 2, 1);
-	    }
-	    GL11.glBindTexture(GL11.GL_TEXTURE_2D,
-		    ModLoader.getMinecraftInstance().renderEngine.getTexture(textureLocation));
-	    scale = par7 * 0.85f;
-	    this.bipedRightLeg2.render(scale);
-	    this.bipedLeftLeg2.render(scale);
+            /* Render Armor Legs */
+            textureLocation = "/armor/iron_2.png";
+            EntityHauntedArmor var5 = (EntityHauntedArmor) par1Entity;
+            itemStack = var5.getCurrentArmor(3 - 2);
+            resource = RenderHauntedArmor.getArmorResource(par1Entity, itemStack, 1, null);
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine
+                    .func_110581_b(resource).func_110552_b());
+            scale = par7 * 0.85f;
+            this.bipedRightLeg2.render(scale);
+            this.bipedLeftLeg2.render(scale);
 
-	    textureLocation = "/armor/iron_1.png";
-	    var4 = var5.getCurrentArmor(3 - 1);
-	    if (var4 != null && var4.getItem() instanceof ItemArmor) {
-		ItemArmor var6 = (ItemArmor) var4.getItem();
-		textureLocation = ForgeHooksClient.getArmorTexture(par1Entity, var4, "/armor/"
-		        + RenderBiped.bipedArmorFilenamePrefix[var6.renderIndex] + "_" + 1 + ".png", 1, 1);
-	    }
-	    GL11.glBindTexture(GL11.GL_TEXTURE_2D,
-		    ModLoader.getMinecraftInstance().renderEngine.getTexture(textureLocation));
-	    this.bipedHead.render(par7);
-	    this.bipedBody.render(par7);
-	    this.bipedRightArm.render(par7);
-	    this.bipedLeftArm.render(par7);
-	    this.bipedRightLeg.render(par7);
-	    this.bipedLeftLeg.render(par7);
-	}
+            /* Render Armor Upper Body */
+            textureLocation = "/armor/iron_1.png";
+            itemStack = var5.getCurrentArmor(3 - 1);
+            resource = RenderHauntedArmor.getArmorResource(par1Entity, itemStack, 2, null);
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine
+                    .func_110581_b(resource).func_110552_b());
+            this.bipedHead.render(par7);
+            this.bipedBody.render(par7);
+            this.bipedRightArm.render(par7);
+            this.bipedLeftArm.render(par7);
+            this.bipedRightLeg.render(par7);
+            this.bipedLeftLeg.render(par7);
+        }
     }
 
     @Override
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-	EntityHauntedArmor var5 = (EntityHauntedArmor) par1EntityLiving;
+    public void setLivingAnimations(EntityLivingBase livingBase, float par2, float par3, float par4) {
+	EntityHauntedArmor var5 = (EntityHauntedArmor) livingBase;
 	/* Sleeping Animation */
 	if (var5.getEntityState() == EntityStates.idle) {
 	    bipedHead.setRotationPoint(-4f, 15.9f, 0f);

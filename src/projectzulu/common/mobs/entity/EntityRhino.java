@@ -62,12 +62,6 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
 			return 3;
 		}
 	}
-
-	@Override
-	public String getTexture() {
-		this.texture = DefaultProps.mobDiretory + "rhino.png";
-		return super.getTexture();
-	}
 	
 	@Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {

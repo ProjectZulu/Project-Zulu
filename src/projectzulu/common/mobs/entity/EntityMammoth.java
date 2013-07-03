@@ -82,27 +82,6 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals{
 			return 5;
 		}
 	}
-
-	@Override
-	public String getTexture() {
-		if(getSaddled()){
-			if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
-					|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-				this.texture = DefaultProps.mobDiretory + "mammoth_snow_saddle.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "mammoth_saddle.png";
-			}
-
-		}else{
-			if(worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taiga 
-					|| worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ) == BiomeGenBase.taigaHills){
-				this.texture = DefaultProps.mobDiretory + "mammoth_snow.png";
-			}else{
-				this.texture = DefaultProps.mobDiretory + "mammoth.png";
-			}
-		}
-		return super.getTexture();
-	}
 	
 	@Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {

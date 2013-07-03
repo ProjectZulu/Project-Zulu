@@ -33,12 +33,6 @@ public class EntityBrownBear extends EntityBear{
             return 3;
         }
     }
-	
-    @Override
-    public String getTexture() {
-        this.texture = DefaultProps.mobDiretory + "bearbrown.png";
-        return super.getTexture();
-    }
 
     @Override
     public int getMaxHealth() {

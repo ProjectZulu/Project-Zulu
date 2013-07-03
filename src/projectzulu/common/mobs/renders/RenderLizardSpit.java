@@ -2,6 +2,8 @@ package projectzulu.common.mobs.renders;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
@@ -23,12 +25,12 @@ public class RenderLizardSpit extends Render
     public void doRenderLizardSpit(EntityLizardSpit par1EntityLizardSpit, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
+        this.func_110777_b(par1EntityLizardSpit);
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         float var10 = this.field_77002_a;
         GL11.glScalef(var10 / 1.0F, var10 / 1.0F, var10 / 1.0F);
         byte var11 = 9;
-        this.loadTexture(DefaultProps.itemSpriteSheet);
         Tessellator var12 = Tessellator.instance;
         float var13 = (float)(var11 % 16 * 16 + 0) / 256.0F;
         float var14 = (float)(var11 % 16 * 16 + 16) / 256.0F;
@@ -56,8 +58,12 @@ public class RenderLizardSpit extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-    {
-        this.doRenderLizardSpit((EntityLizardSpit)par1Entity, par2, par4, par6, par8, par9);
+    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
+        this.doRenderLizardSpit((EntityLizardSpit) par1Entity, par2, par4, par6, par8, par9);
+    }
+
+    @Override
+    protected ResourceLocation func_110775_a(Entity entity) {
+        return TextureMap.field_110576_c;
     }
 }

@@ -48,12 +48,6 @@ public class EntityMimic extends EntityGenericAnimal implements IMob {
 	}
 
 	@Override
-	public String getTexture() {
-		this.texture = DefaultProps.mobDiretory + "mimicchest.png";
-		return super.getTexture();
-	}
-
-	@Override
 	public int getMaxHealth(){
 		return 20;
 	}

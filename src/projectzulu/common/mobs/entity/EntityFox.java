@@ -59,11 +59,6 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 	}
 	
 	@Override
-	public String getTexture() {
-		return DefaultProps.mobDiretory + "fox.png";
-	}
-	
-	@Override
 	public int getMaxHealth() {	return 12; }
 	@Override
 	public int getTotalArmorValue(){return 2;}

@@ -3,7 +3,7 @@ package projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
@@ -148,7 +148,7 @@ public class ModelRhino extends ModelBase {
     }
 
     @Override
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+    public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	/* Constant Animation Rotations */
 	LEG1ROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
 	LEG3ROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;

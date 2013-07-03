@@ -1,16 +1,24 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityTreeEnt;
+import projectzulu.common.mobs.models.ModelSandWorm;
 import projectzulu.common.mobs.models.ModelTreeEnt;
+import projectzulu.common.mobs.renders.RenderGenericIdle;
+import projectzulu.common.mobs.renders.RenderSnow;
 
 public class TreeEntDeclaration extends SpawnableDeclaration{
 	
@@ -18,7 +26,6 @@ public class TreeEntDeclaration extends SpawnableDeclaration{
 		super("TreeEnt", EntityTreeEnt.class, EnumCreatureType.creature);		
 		setSpawnProperties(1, 7, 1, 1);
 		setRegistrationProperties(128, 3, true);
-		setModelAndRender(ModelTreeEnt.class, "projectzulu.common.mobs.renders.RenderGenericLiving");
         setDropAmount(0, 2);
 
 		eggColor1 = (17 << 16) + (6 << 8) + 3;
@@ -41,4 +48,11 @@ public class TreeEntDeclaration extends SpawnableDeclaration{
 				ItemGenerics.Properties.BlackLichen.meta(), 4);
 		super.outputDataToList(config, customMobData);
 	}
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+        return new RenderSnow(new ModelTreeEnt(), 0.5f, DefaultProps.mobDiretory + "treeent.png",
+                DefaultProps.mobDiretory + "treeent_snow.png");
+    }
 }

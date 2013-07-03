@@ -58,12 +58,6 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
 			return 2;
 		}
 	}
-
-	@Override
-	public String getTexture() {
-		this.texture = DefaultProps.mobDiretory + "rabbit.png";
-		return super.getTexture();
-	}
 	
 	@Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {

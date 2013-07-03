@@ -47,11 +47,6 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
 	}
 
 	@Override
-    public String getTexture() {
-		return DefaultProps.mobDiretory + "mummy.png";
-	}
-
-	@Override
     protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(16, new Byte((byte) 0));

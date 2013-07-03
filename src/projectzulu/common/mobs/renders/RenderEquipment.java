@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -16,16 +17,16 @@ public class RenderEquipment extends RenderGenericLiving {
     ModelHauntedArmor hauntedModel;
 
     public RenderEquipment(ModelBase modelBase, float shadowSize) {
-        super(modelBase, shadowSize);
+        super(modelBase, shadowSize, null);
         hauntedModel = (ModelHauntedArmor) modelBase;
     }
 
     @Override
-    protected void renderEquippedItems(EntityLiving par1EntityLiving, float par2) {
+    protected void renderEquippedItems(EntityLivingBase par1EntityLiving, float par2) {
         renderItemInHand(par1EntityLiving);
     }
 
-    private void renderItemInHand(EntityLiving par1EntityLiving) {
+    private void renderItemInHand(EntityLivingBase par1EntityLiving) {
         ItemStack var3 = par1EntityLiving.getHeldItem();
         if (var3 != null) {
             GL11.glPushMatrix();

@@ -31,12 +31,6 @@ public class EntityCentipede extends EntityMaster implements IMob{
 		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
 //		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
 	}
-
-	@Override
-	public String getTexture() {
-		texture = DefaultProps.mobDiretory + "serpent.png";
-		return texture;
-	}
 	
 	@Override
     public int getMaxHealth(){

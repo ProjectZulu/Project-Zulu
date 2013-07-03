@@ -59,12 +59,6 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
 			return 3;
 		}
 	}
-
-	@Override
-	public String getTexture() {
-		this.texture = DefaultProps.mobDiretory + "ostrich.png";
-		return super.getTexture();
-	}
 	
 	@Override
 	public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {

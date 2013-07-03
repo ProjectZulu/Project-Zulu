@@ -73,12 +73,6 @@ public class EntityVulture extends EntityGenericAnimal {
 	 */
 	@Override
     protected void fall(float par1){}
-
-	@Override
-	public String getTexture(){
-		this.texture = DefaultProps.mobDiretory + "vulture.png";
-		return super.getTexture();
-	}
 	
 	/**
 	 * Returns the sound this mob makes while it's alive.
