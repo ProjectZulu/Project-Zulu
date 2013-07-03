@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.minecraftforge.common.MinecraftForge;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemBlockManager;
 import projectzulu.common.core.ProjectZuluLog;
@@ -50,6 +51,9 @@ public class ProjectZulu_Dungeon {
 			Sounds.addSound(file, customResourceDir);
         }
         declareModuleItemBlocks();
+        
+        MinecraftForge.EVENT_BUS.register(new DeathGamerules()
+                .loadConfiguration(event.getModConfigurationDirectory()));
 	}
 	
 	public File[] finder(File directory){
@@ -81,7 +85,7 @@ public class ProjectZulu_Dungeon {
     }
 	
 	@ServerStarting
-	public void serverStart(FMLServerStartingEvent event){		
+	public void serverStart(FMLServerStartingEvent event){			    
 		/* Add Custom Commands */
 		event.registerServerCommand(new CommandPlaySound());
 		LanguageRegistry.instance().addStringLocalization("commands.playsound.usage", "/playsound [targetPlayer] [fileName] <range> <x> <y> <z>");

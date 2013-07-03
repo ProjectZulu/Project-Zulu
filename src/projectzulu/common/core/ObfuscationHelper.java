@@ -58,25 +58,62 @@ public class ObfuscationHelper {
 	 * @return
 	 */
 	public static <T> T getFieldFromReflection(String fieldName, Object containterInstance, Class<T> type){
-		try {
-			Field desiredField = containterInstance.getClass().getDeclaredField(fieldName);
-			desiredField.setAccessible(true);
-			return type.cast(desiredField.get(containterInstance));
-		}catch (NoSuchFieldException e) {
-			ProjectZuluLog.severe("Obfuscation needs to be updated to access the %s %s. Please notify modmaker Immediately.", fieldName, type.getSimpleName());
-			e.printStackTrace();
-		}catch (IllegalArgumentException e) {
-			ProjectZuluLog.severe("Obfuscation needs to be updated to access the %s %s. Please notify modmaker Immediately.", fieldName, type.getSimpleName());
-			e.printStackTrace();
-		}catch (IllegalAccessException e) {
-			ProjectZuluLog.severe("Obfuscation needs to be updated to access the %s %s. Please notify modmaker Immediately.", fieldName, type.getSimpleName());
-			e.printStackTrace();
-		}catch (SecurityException e) {
-			ProjectZuluLog.severe("Obfuscation needs to be updated to access the %s %s. Please notify modmaker Immediately.", fieldName, type.getSimpleName());
-			e.printStackTrace();
-		}
-		return null;
+	    return getFieldFromReflection(fieldName, containterInstance.getClass(), containterInstance, type);
 	}
+	
+    public static <T> T getFieldFromReflection(String fieldName, Class<?> containingClass, Object containterInstance,
+            Class<T> type) {
+        try {
+            return getCatchableFieldFromReflection(fieldName, containingClass, containterInstance, type);
+        } catch (NoSuchFieldException e) {
+            ProjectZuluLog.severe(
+                    "Obfuscation needs to be updated to access the %s %s. Please notify modmaker Immediately.",
+                    fieldName, type.getSimpleName());
+            e.printStackTrace();
+        }
+        return null;
+    }
+	
+    /**
+     * Helper method to Perform Reflection to Get non-static Field of Provided Type. Field is assumed Private.
+     * 
+     * @param fieldName
+     * @param type
+     * @return
+     */
+    public static <T> T getCatchableFieldFromReflection(String fieldName, Object containterInstance, Class<T> type)
+            throws NoSuchFieldException {
+        return getCatchableFieldFromReflection(fieldName, containterInstance.getClass(), containterInstance, type);
+    }
+    
+    /**
+     * Helper method to Perform Reflection to Get non-static Field of Provided Type. Field is assumed Private.
+     * 
+     * @param fieldName
+     * @param type
+     * @return
+     */
+    public static <T> T getCatchableFieldFromReflection(String fieldName, Class<?> containingClass, Object containterInstance, Class<T> type)
+            throws NoSuchFieldException {
+        try {
+            Field desiredField = containingClass.getDeclaredField(fieldName);
+            desiredField.setAccessible(true);
+            return type.cast(desiredField.get(containterInstance));
+        } catch (IllegalArgumentException e) {
+            ProjectZuluLog.severe(
+                    "Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            ProjectZuluLog.severe(
+                    "Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            ProjectZuluLog.severe(
+                    "Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
+            e.printStackTrace();
+        }
+        return null;
+    }
 	
     /**
      * Helper method to Perform Reflection to Set non-static Field of Provided Type. Field is assumed Private.
@@ -110,35 +147,6 @@ public class ObfuscationHelper {
             ProjectZuluLog.severe("Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
             e.printStackTrace();
         }
-    }
-    
-    /**
-     * Helper method to Perform Reflection to Get non-static Field of Provided Type. Field is assumed Private.
-     * 
-     * @param fieldName
-     * @param type
-     * @return
-     */
-    public static <T> T getCatchableFieldFromReflection(String fieldName, Object containterInstance, Class<T> type)
-            throws NoSuchFieldException {
-        try {
-            Field desiredField = containterInstance.getClass().getDeclaredField(fieldName);
-            desiredField.setAccessible(true);
-            return type.cast(desiredField.get(containterInstance));
-        } catch (IllegalArgumentException e) {
-            ProjectZuluLog.severe(
-                    "Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            ProjectZuluLog.severe(
-                    "Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            ProjectZuluLog.severe(
-                    "Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
-            e.printStackTrace();
-        }
-        return null;
     }
     
     /**
