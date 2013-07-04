@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
 import projectzulu.common.mobs.entity.EntityGenericCreature;
 
@@ -11,7 +12,7 @@ public class EntityAIHurtByTarget extends EntityAITarget {
     boolean shouldCallAllies;
 
     /** The PathNavigate of our entity. */
-    EntityLiving entityPathNavigate;
+    EntityLivingBase entityPathNavigate;
     int fleeChance = 0;
     /** Task Owner in the form of out Generic Creature, used to access Specialized information, such as Anger or EntityState */
     EntityGenericCreature genericTaskOwner;
@@ -28,6 +29,7 @@ public class EntityAIHurtByTarget extends EntityAITarget {
      */
     public boolean shouldExecute() {
     	return this.isSuitableTarget(this.taskOwner.getAITarget(), true);
+    	
     }
 
     /**

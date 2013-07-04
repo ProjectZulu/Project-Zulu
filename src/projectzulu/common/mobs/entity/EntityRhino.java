@@ -20,102 +20,106 @@ import projectzulu.common.mobs.entityai.EntityAITempt;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
-public class EntityRhino extends EntityGenericAnimal implements IAnimals {		
-	public EntityRhino(World par1World) {
-		super(par1World);
-		setSize(2.0f, 2.0f);
-		this.moveSpeed = 0.2f;
+public class EntityRhino extends EntityGenericAnimal implements IAnimals {
 
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, this.moveSpeed));
+    public EntityRhino(World par1World) {
+        super(par1World);
+        setSize(2.0f, 2.0f);
+        movementSpeed = 0.2f;
 
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, this.moveSpeed, false, 2.7f*2.7f));
-//		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
+        getNavigator().setAvoidsWater(true);
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 1.25f));
 
-		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Block.tallGrass.blockID, false));
-		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
-		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false, 2.7f * 2.7f));
+        // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
-		this.targetTasks.addTask(3,	new EntityAIHurtByTarget(this, false, false));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
-//		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
-	}
-	
-	/** 
-	 * Set Entity Attack Strength
-	 * This is overriden by each Entity if deviations from default are desired
-	 */
-	@Override
-	protected int getAttackStrength(World par1World) {
-		switch (par1World.difficultySetting) {
-		case 0:
-			return 3; 
-		case 1:
-			return 3; 
-		case 2:
-			return 4; 
-		case 3:
-			return 6; 
-		default:
-			return 3;
-		}
-	}
-	
-	@Override
+        tasks.addTask(5, new EntityAIMate(this, 1.0f));
+        tasks.addTask(6, new EntityAITempt(this, 1.2f, Block.tallGrass.blockID, false));
+        tasks.addTask(7, new EntityAIFollowParent(this, 1.1f));
+        tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
+
+        targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
+        targetTasks.addTask(4,
+                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+                        EntityPlayer.class, 16.0F, 0, true));
+        // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true,
+        // IMob.mobSelector));
+    }
+
+    /**
+     * Set Entity Attack Strength This is overriden by each Entity if deviations from default are desired
+     */
+    @Override
+    protected int getAttackStrength(World par1World) {
+        switch (par1World.difficultySetting) {
+        case 0:
+            return 3;
+        case 1:
+            return 3;
+        case 2:
+            return 4;
+        case 3:
+            return 6;
+        default:
+            return 3;
+        }
+    }
+
+    @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }
-	
-	@Override
-	public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
-		return true;
-	}
 
-	@Override
-	public int getMaxHealth(){
-		return 20;
-	}
-	/**
-	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-	 */
-	@Override
-	public int getTotalArmorValue(){
-		return 0;
-	}
+    @Override
+    public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
+        return true;
+    }
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-	protected String getLivingSound(){
-		return "sounds.rhinolivingsound";
-	}
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound(){ 
-		return "sounds.rhinohurtsound"; 
-	}
-	
-	@Override
-	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && itemStack.getItem().itemID == Block.tallGrass.blockID){
-			return true;
-		}else{
-			return super.isValidBreedingItem(itemStack);
-		}
-	}
+    /**
+     * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
+     */
+    @Override
+    public int getTotalArmorValue() {
+        return 0;
+    }
 
-	@Override
-	protected void dropRareDrop(int par1) {
-		if(Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()){
-			entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID,1,14), 1);
-		}
-		super.dropRareDrop(par1);
-	}
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return "sounds.rhinolivingsound";
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return "sounds.rhinohurtsound";
+    }
+
+    @Override
+    public boolean isValidBreedingItem(ItemStack itemStack) {
+        if (itemStack != null && itemStack.getItem().itemID == Block.tallGrass.blockID) {
+            return true;
+        } else {
+            return super.isValidBreedingItem(itemStack);
+        }
+    }
+
+    @Override
+    protected void dropRareDrop(int par1) {
+        if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
+            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 14), 1);
+        }
+        super.dropRareDrop(par1);
+    }
 
 }

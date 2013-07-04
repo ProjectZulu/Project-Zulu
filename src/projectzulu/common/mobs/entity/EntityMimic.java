@@ -14,98 +14,100 @@ import projectzulu.common.mobs.entityai.EntityAIPanic;
 import projectzulu.common.mobs.entityai.EntityAIStayStill;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 
-public class EntityMimic extends EntityGenericAnimal implements IMob {	
-	
-	protected int wakeUpTimer = 0;
-	public int getWakeUpTimer(){
-		return wakeUpTimer;
-	}
-	boolean shouldHover = false;
+public class EntityMimic extends EntityGenericAnimal implements IMob {
 
-	public EntityMimic(World par1World){
-		super(par1World);
-		this.moveSpeed = 0.2f;
-		setSize(1.0f, 1.5f);
-		
-		this.moveSpeed = 0.4f;
-		this.getNavigator().setAvoidsWater(true);
-		
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, this.moveSpeed));
-		this.tasks.addTask(2, new EntityAIStayStill(this, EntityStates.idle));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
-		this.tasks.addTask(5, new EntityAIWander(this, this.moveSpeed, 120));
+    protected int wakeUpTimer = 0;
 
-		this.targetTasks.addTask(3,	new EntityAIHurtByTarget(this, false, false));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
-	}
+    public int getWakeUpTimer() {
+        return wakeUpTimer;
+    }
 
-	public EntityMimic(World par1World, double parx, double pary, double parz, boolean shouldHover){
-		this(par1World);
-		setLocationAndAngles(parx, pary, parz, 1, 1);
-		setPosition(parx, pary, parz);
-		this.shouldHover = shouldHover;
-	}
+    boolean shouldHover = false;
 
-	@Override
-	public int getMaxHealth(){
-		return 20;
-	}
+    public EntityMimic(World par1World) {
+        super(par1World);
+        setSize(1.0f, 1.5f);
+        movementSpeed = 0.4f;
+        getNavigator().setAvoidsWater(true);
 
-	@Override
-	public int getTotalArmorValue(){
-		return 6;
-	}
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 1.25f));
+        tasks.addTask(2, new EntityAIStayStill(this, EntityStates.idle));
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false));
+        tasks.addTask(5, new EntityAIWander(this, 1.0f, 120));
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-    protected String getLivingSound(){
-		return null;
-	}
+        targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
+        targetTasks.addTask(4,
+                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+                        EntityPlayer.class, 16.0F, 0, true));
+    }
 
-	@Override
-	public void onLivingUpdate() {
-		if(shouldHover == true){
-			this.motionY = 0;
-			if(ticksExisted > (20*10) ){
-				shouldHover = false;
-			}
-		}
-		
-		super.onLivingUpdate();
+    public EntityMimic(World par1World, double parx, double pary, double parz, boolean shouldHover) {
+        this(par1World);
+        setLocationAndAngles(parx, pary, parz, 1, 1);
+        setPosition(parx, pary, parz);
+        this.shouldHover = shouldHover;
+    }
 
-		/* If Player is Still Nearby after activation, do not become passive*/
-		if(getEntityState() != EntityStates.idle && worldObj.getClosestPlayerToEntity(this, 5D) != null){
-			setAngerLevel(400);
-		}
-	}
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
 
-	/**
-	 * Returns true if this entity should push and be pushed by other entities when colliding.
-	 */
-	@Override
-	public boolean canBePushed(){
-		if(getEntityState() == EntityStates.idle){
-			return false;
-		}else{
-			return !this.isDead;
-		}
-	}
+    @Override
+    public int getTotalArmorValue() {
+        return 6;
+    }
 
-	/**
-	 * Determines if an entity can be despawned, used on idle far away entities
-	 */
-	@Override
-    protected boolean canDespawn(){
-		return false;
-	}
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return null;
+    }
 
-	//	Called when player interacts with mob, eg get milk, saddle
-	@Override
-    public boolean interact(EntityPlayer par1EntityPlayer){
-		entityAttackedReaction(par1EntityPlayer);
-		return super.interact(par1EntityPlayer);
-	}
+    @Override
+    public void onLivingUpdate() {
+        if (shouldHover == true) {
+            this.motionY = 0;
+            if (ticksExisted > (20 * 10)) {
+                shouldHover = false;
+            }
+        }
+
+        super.onLivingUpdate();
+
+        /* If Player is Still Nearby after activation, do not become passive */
+        if (getEntityState() != EntityStates.idle && worldObj.getClosestPlayerToEntity(this, 5D) != null) {
+            setAngerLevel(400);
+        }
+    }
+
+    /**
+     * Returns true if this entity should push and be pushed by other entities when colliding.
+     */
+    @Override
+    public boolean canBePushed() {
+        if (getEntityState() == EntityStates.idle) {
+            return false;
+        } else {
+            return !this.isDead;
+        }
+    }
+
+    /**
+     * Determines if an entity can be despawned, used on idle far away entities
+     */
+    @Override
+    protected boolean canDespawn() {
+        return false;
+    }
+
+    // Called when player interacts with mob, eg get milk, saddle
+    @Override
+    public boolean interact(EntityPlayer par1EntityPlayer) {
+        entityAttackedReaction(par1EntityPlayer);
+        return super.interact(par1EntityPlayer);
+    }
 }

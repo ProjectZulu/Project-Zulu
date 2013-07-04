@@ -19,40 +19,42 @@ import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 
 public class EntityMummy extends EntityGenericAnimal implements IMob {
-	
-	public EntityMummy(World par1World) {
-		super(par1World);
-		this.setSize(0.6F, 1.8F);
-		this.moveSpeed = 0.25F;
-		
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
 
-		this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed, 80));
-		
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
-		
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, true));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
-	}
+    public EntityMummy(World par1World) {
+        super(par1World);
+        setSize(0.6F, 1.8F);
+        movementSpeed = 0.25F;
 
-	public EntityMummy(World par1World, double parx, double pary, double parz) {
-		this(par1World);
-		yOffset = 0.0f;
-		setLocationAndAngles(parx, pary, parz, 1, 1);
-		setPosition(parx, pary, parz);
-	}
+        getNavigator().setAvoidsWater(true);
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0f, true));
 
-	@Override
+        tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0f));
+        tasks.addTask(6, new EntityAIWander(this, 1.0f, 80));
+
+        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        tasks.addTask(8, new EntityAILookIdle(this));
+
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, true));
+        targetTasks.addTask(4,
+                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+                        EntityPlayer.class, 16.0F, 0, true));
+    }
+
+    public EntityMummy(World par1World, double parx, double pary, double parz) {
+        this(par1World);
+        yOffset = 0.0f;
+        setLocationAndAngles(parx, pary, parz, 1, 1);
+        setPosition(parx, pary, parz);
+    }
+
+    @Override
     protected void entityInit() {
-		super.entityInit();
-		this.dataWatcher.addObject(16, new Byte((byte) 0));
-	}
+        super.entityInit();
+        this.dataWatcher.addObject(16, new Byte((byte) 0));
+    }
 
-	@Override
+    @Override
     protected boolean isValidLightLevel(World world, int xCoord, int yCoord, int zCoord) {
         int i = MathHelper.floor_double(this.posX);
         int j = MathHelper.floor_double(this.boundingBox.minY);
@@ -73,80 +75,79 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
             return l <= this.rand.nextInt(8);
         }
     }
-	
-	@Override
-	protected void updateAITick() {
-		setAngerLevel(100);
 
-		this.setBesideClimbableBlock(this.isCollidedHorizontally);
-		super.updateAITick();
-	}
+    @Override
+    protected void updateAITick() {
+        setAngerLevel(100);
 
-	@Override
-	public int getMaxHealth() {
-		return 16;
-	}
+        this.setBesideClimbableBlock(this.isCollidedHorizontally);
+        super.updateAITick();
+    }
 
-	/**
-	 * Returns the Y offset from the entity's position for any entity riding
-	 * this one.
-	 */
-	@Override
-	public double getMountedYOffset() {
-		return this.height * 0.75D - 0.5D;
-	}
+    @Override
+    public int getMaxHealth() {
+        return 16;
+    }
 
-	/**
-	 * returns if this entity triggers Block.onEntityWalking on the blocks they
-	 * walk on. used for spiders and wolves to prevent them from trampling crops
-	 */
-	@Override
-	protected boolean canTriggerWalking() {
-		return true;
-	}
+    /**
+     * Returns the Y offset from the entity's position for any entity riding this one.
+     */
+    @Override
+    public double getMountedYOffset() {
+        return this.height * 0.75D - 0.5D;
+    }
 
-	/**
-	 * returns true if this entity is by a ladder, false otherwise
-	 */
-	@Override
-	public boolean isOnLadder() {
-		return this.isBesideClimbableBlock();
-	}
+    /**
+     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
+     * prevent them from trampling crops
+     */
+    @Override
+    protected boolean canTriggerWalking() {
+        return true;
+    }
 
-	/**
-	 * Sets the Entity inside a web block.
-	 */
-	@Override
-	public void setInWeb() {
-	}
+    /**
+     * returns true if this entity is by a ladder, false otherwise
+     */
+    @Override
+    public boolean isOnLadder() {
+        return this.isBesideClimbableBlock();
+    }
 
-	/**
-	 * Get this Entity's EnumCreatureAttribute
-	 */
-	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
-		return EnumCreatureAttribute.UNDEAD;
-	}
+    /**
+     * Sets the Entity inside a web block.
+     */
+    @Override
+    public void setInWeb() {
+    }
 
-	/**
-	 * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns
-	 * false. The WatchableObject is updated using setBesideClimableBlock.
-	 */
-	public boolean isBesideClimbableBlock() {
-		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
-	}
+    /**
+     * Get this Entity's EnumCreatureAttribute
+     */
+    @Override
+    public EnumCreatureAttribute getCreatureAttribute() {
+        return EnumCreatureAttribute.UNDEAD;
+    }
 
-	/**
-	 * Updates the WatchableObject (Byte) created in entityInit(), setting it to
-	 * 0x01 if par1 is true or 0x00 if it is false.
-	 */
-	public void setBesideClimbableBlock(boolean par1) {
-		byte var2 = this.dataWatcher.getWatchableObjectByte(16);
-		if (par1) {
-			var2 = (byte) (var2 | 1);
-		} else {
-			var2 &= -2;
-		}
-		this.dataWatcher.updateObject(16, Byte.valueOf(var2));
-	}
+    /**
+     * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns false. The WatchableObject is updated using
+     * setBesideClimableBlock.
+     */
+    public boolean isBesideClimbableBlock() {
+        return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+    }
+
+    /**
+     * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
+     * false.
+     */
+    public void setBesideClimbableBlock(boolean par1) {
+        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
+        if (par1) {
+            var2 = (byte) (var2 | 1);
+        } else {
+            var2 &= -2;
+        }
+        this.dataWatcher.updateObject(16, Byte.valueOf(var2));
+    }
 }

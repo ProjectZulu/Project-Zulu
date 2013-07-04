@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entityai;
 import java.util.EnumSet;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChunkCoordinates;
@@ -16,7 +17,7 @@ public class EntityAIVultureFollow extends EntityAIBase
 {
     World worldObj;
     EntityGenericCreature attacker;
-    EntityLiving entityTarget;
+    EntityLivingBase entityTarget;
 
     /**
      * An amount of decrementing ticks that allows the entity to attack once the tick reaches 0.
@@ -67,7 +68,7 @@ public class EntityAIVultureFollow extends EntityAIBase
      */
     @Override
     public boolean shouldExecute() {    	
-        EntityLiving var1 = this.attacker.getAttackTarget();
+        EntityLivingBase var1 = this.attacker.getAttackTarget();
         
         if(!setOfValidStates.contains(attacker.getEntityState())){
         	return false;
@@ -95,7 +96,7 @@ public class EntityAIVultureFollow extends EntityAIBase
      */
     @Override
     public boolean continueExecuting() {
-        EntityLiving var1 = this.attacker.getAttackTarget();
+        EntityLivingBase var1 = this.attacker.getAttackTarget();
         if(var1 == null || !this.entityTarget.isEntityAlive()){
         	return false;
         }else if(!this.continuousPathing){

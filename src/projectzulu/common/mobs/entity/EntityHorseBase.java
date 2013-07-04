@@ -18,93 +18,104 @@ import projectzulu.common.mobs.entityai.EntityAIPanic;
 import projectzulu.common.mobs.entityai.EntityAITempt;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 
-public class EntityHorseBase extends EntityGenericAnimal{	
-	
+public class EntityHorseBase extends EntityGenericAnimal {
+
     private final EntityAIControlledByPlayer aiControlledByPlayer;
 
-	public EntityHorseBase(World par1World) {
-		super(par1World);
-		setSize(1.5f, 2.0f);
-		
-		this.moveSpeed = 0.3f;
-        this.getNavigator().setAvoidsWater(true);
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        
-        this.tasks.addTask(1, aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F)  );
-        
-        this.tasks.addTask(2, new EntityAIPanic(this, this.moveSpeed));
-        this.tasks.addTask(3, new EntityAIMate(this, this.moveSpeed));
-        this.tasks.addTask(4, new EntityAITempt(this, this.moveSpeed, Item.appleRed.itemID, false));
-        this.tasks.addTask(5, new EntityAIFollowParent(this, this.moveSpeed));
-        
-        this.tasks.addTask(6, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
-        this.tasks.addTask(8, new EntityAIWander(this, this.moveSpeed, 20));
-    	
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));		
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
-//        jumpMovementFactor = 2.0f;
-//        stepHeight = 1.0f;
-	}
-	
-	@Override
-	public boolean isRideable() { return true;	}
-	
-	@Override
-	protected int getAttackStrength(World par1World) {
-		switch (par1World.difficultySetting) {
-		case 0:
-			return 0;
-		case 1:
-			return 3; 
-		case 2:
-			return 4; 
-		case 3:
-			return 5; 
-		default:
-			return super.getAttackStrength(par1World);
-		}
-	}
-	
-	@Override
-	public int getMaxHealth(){return 20;}
-	@Override
-	public int getTotalArmorValue(){return 0;}
+    public EntityHorseBase(World par1World) {
+        super(par1World);
+        setSize(1.5f, 2.0f);
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-	protected String getLivingSound(){ return "sounds.horse"; }
-	
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound(){ return "sounds.horsehurt"; }
-	
-	@Override
+        movementSpeed = 0.3f;
+        getNavigator().setAvoidsWater(true);
+        tasks.addTask(0, new EntityAISwimming(this));
+
+        tasks.addTask(1, aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F));
+
+        tasks.addTask(2, new EntityAIPanic(this, 1.25f));
+        tasks.addTask(3, new EntityAIMate(this, 1.0f));
+        tasks.addTask(4, new EntityAITempt(this, 1.2f, Item.appleRed.itemID, false));
+        tasks.addTask(5, new EntityAIFollowParent(this, 1.1f));
+
+        tasks.addTask(6, new EntityAIAttackOnCollide(this, 1.0f, false));
+        tasks.addTask(8, new EntityAIWander(this, 1.0f, 20));
+
+        targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
+        targetTasks.addTask(4,
+                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+                        EntityPlayer.class, 16.0F, 0, true));
+    }
+
+    @Override
+    public boolean isRideable() {
+        return true;
+    }
+
+    @Override
+    protected int getAttackStrength(World par1World) {
+        switch (par1World.difficultySetting) {
+        case 0:
+            return 0;
+        case 1:
+            return 3;
+        case 2:
+            return 4;
+        case 3:
+            return 5;
+        default:
+            return super.getAttackStrength(par1World);
+        }
+    }
+
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+
+    @Override
+    public int getTotalArmorValue() {
+        return 0;
+    }
+
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return "sounds.horse";
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return "sounds.horsehurt";
+    }
+
+    @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }
-	
-	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
-//		return false;
-		if( this.riddenByEntity != null && 
-				(par1DamageSource.getEntity() != null && par1DamageSource.getEntity().equals(this.riddenByEntity)) ||
-				(par1DamageSource.getSourceOfDamage() != null && par1DamageSource.getSourceOfDamage().equals(this.riddenByEntity)) ){
-			return false;
-		}else{
-			return super.attackEntityFrom(par1DamageSource, par2);
-		}
-	}
-	
-	@Override
-	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && (itemStack.getItem().itemID == Item.appleRed.itemID 
-				|| itemStack.getItem().itemID == Item.carrot.itemID )){
-			return true;
-		}
-		return false;
-	}
+
+    @Override
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
+        if (this.riddenByEntity != null
+                && (par1DamageSource.getEntity() != null && par1DamageSource.getEntity().equals(this.riddenByEntity))
+                || (par1DamageSource.getSourceOfDamage() != null && par1DamageSource.getSourceOfDamage().equals(
+                        this.riddenByEntity))) {
+            return false;
+        } else {
+            return super.attackEntityFrom(par1DamageSource, par2);
+        }
+    }
+
+    @Override
+    public boolean isValidBreedingItem(ItemStack itemStack) {
+        if (itemStack != null
+                && (itemStack.getItem().itemID == Item.appleRed.itemID || itemStack.getItem().itemID == Item.carrot.itemID)) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -39,8 +40,8 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
 		/* Handles the Entity's name */
         this.dataWatcher.addObject(24, "");
         
-		/* Handles the Entity's Health */
-        this.dataWatcher.addObject(25, Short.valueOf((short) getMaxHealth()));
+//		/* Handles the Entity's Health */
+//        this.dataWatcher.addObject(25, Short.valueOf((short) getMaxHealth()));
 
 	}
 	
@@ -94,17 +95,17 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
         this.dataWatcher.updateObject(23, par1Str);
     }
 
-    public EntityLiving getOwner() {
+    public EntityLivingBase getOwner() {
         return this.worldObj.getPlayerEntityByName(this.getOwnerName());
     }
     
-    public void updateDWHealth(int health) {
-        this.dataWatcher.updateObject(25, (short)health);
-    }
-
-    public int getDWHealth() {
-        return this.dataWatcher.getWatchableObjectShort(25);
-    }
+//    public void updateDWHealth(int health) {
+//        this.dataWatcher.updateObject(25, (short)health);
+//    }
+//
+//    public int getDWHealth() {
+//        return this.dataWatcher.getWatchableObjectShort(25);
+//    }
     /**
      * Play the taming effect, will either be hearts or smoke depending on status
      */
@@ -197,10 +198,10 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     @Override
     public void onUpdate() {
     	super.onUpdate();
-    	if(!worldObj.isRemote){
-        	updateDWHealth(health);
-    	}
-    	health = getDWHealth();
+//    	if(!worldObj.isRemote){
+//        	updateDWHealth(health);
+//    	}
+//    	health = getDWHealth();
     }
     
     @Override
@@ -214,7 +215,7 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     				if(var2.getItem().itemID == Item.paper.itemID){
     					par1EntityPlayer.openGui(ProjectZulu_Core.modInstance, 2, par1EntityPlayer.worldObj, entityId, 0, 0);
     					return true;
-    				}else if( getHealingValueIfValid(var2) > 0 && getHealth() < getMaxHealth() ){
+    				}else if( getHealingValueIfValid(var2) > 0 && func_110143_aJ() < func_110138_aP() ){
     					 if (!par1EntityPlayer.capabilities.isCreativeMode) {
                              --var2.stackSize;
                          }
@@ -263,7 +264,7 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     				this.setTamed(true);
     				this.setAttackTarget((EntityLiving)null);
     				setSitting(true);
-    				this.setEntityHealth(getMaxHealth());
+                    this.setEntityHealth(func_110138_aP());
     				this.setOwner(par1EntityPlayer.username);
     				setUsername(getEntityName());
     				tameEffectSuccess = true;

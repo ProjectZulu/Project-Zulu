@@ -3,13 +3,14 @@ package projectzulu.common.mobs.entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityAerial extends EntityLiving{
-
+public class EntityAerial extends EntityLiving {
+    
 	protected ChunkCoordinates targetPosition;
 	/** Tries to Assign targetPosition 
 	 * Checks if Valid first using isTargetPositionValid 
@@ -28,11 +29,6 @@ public class EntityAerial extends EntityLiving{
 		super(par1World);
 	}
 
-	@Override
-	public int getMaxHealth() {
-		return 20;
-	}
-	
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -77,27 +73,6 @@ public class EntityAerial extends EntityLiving{
 		if(par1NBTTagCompound.hasKey("Is Grounded")){
 			this.dataWatcher.updateObject(17, par1NBTTagCompound.getByte("Is Grounded"));
 		}
-	}
-	public void onUpdate(){
-		
-		if(!isEntityGrounded() && targetPosition != null && this instanceof EntityZulu){
-				/* Get The Direction I want to travel in */
-				double var1 = (double)this.targetPosition.posX + 0.5D - this.posX;
-				double var3 = (double)this.targetPosition.posY + 0.1D - this.posY;
-				double var5 = (double)this.targetPosition.posZ + 0.5D - this.posZ;
-
-				/* Change Velocity */
-				/* Normalize the Direction I want to travel in, then add and scale it to Motion */
-				this.motionX += (Math.signum(var1) * 0.5D - this.motionX) * 0.10000000149011612D*0.3D;
-				this.motionY += (Math.signum(var3) * 0.699999988079071D - this.motionY) * 0.10000000149011612D*0.3D;
-				this.motionZ += (Math.signum(var5) * 0.5D - this.motionZ) * 0.10000000149011612D*0.3D;
-				float var7 = (float)(Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) - 90.0F;
-				float var8 = MathHelper.wrapAngleTo180_float(var7 - this.rotationYaw);
-				this.moveForward = 0.5F;
-				this.rotationYaw += var8;
-		}
-		
-		super.onUpdate();
 	}
 	
 	@Override

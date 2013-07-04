@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -15,218 +16,228 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 /**
  * Reminder: This is technically a 'Flying' Entity
  */
-public class EntityFollower extends EntityLiving{
+public class EntityFollower extends EntityLiving {
 
-	EntityMaster masterEntity;
-	int followerIndex = -1;
-	public int getFollowerIndex(){
-		return followerIndex;
-	}
-	private Vec3 targetPosition = Vec3.createVectorHelper(0, 0, 0);
-	public void setTargetPosition(Vec3 targetPosition){	this.targetPosition = targetPosition;}
+    EntityMaster masterEntity;
+    int followerIndex = -1;
 
-	float targetRotation;
-	public void setTargetRotation(float targetRotation){ this.targetRotation = wrapAngleTo360(targetRotation); }
-	
-	boolean shouldBeDying = false;
-	
-	/*Client Side Variable that Controls if it should Sync its Contents with Client Master*/
-	boolean isClientSetup = false;
-	
-	public EntityFollower(World par1World){
-		super(par1World);
-		moveSpeed = 0.0f;
-		noClip = true;
-		setSize(0.65f, 0.5f);
-	}
+    public int getFollowerIndex() {
+        return followerIndex;
+    }
 
-	public EntityFollower(World par1World, double parx, double pary, double parz, EntityMaster masterEntity, int followerIndex) {
-		this(par1World);
-		this.masterEntity = masterEntity;
-		targetPosition = Vec3.createVectorHelper(masterEntity.posX, masterEntity.posY, masterEntity.posZ);
-		setLocationAndAngles(parx, pary, parz, 1, 1);
-		setPosition(parx, pary, parz);
-		this.followerIndex = followerIndex;
-	}
-	
-	@Override
-	public String getTexture() {
-		texture = DefaultProps.mobDiretory + "serpent.png";
-		return this.texture;
-	}
-	
-	@Override
-	public int getMaxHealth() {
-		return 20;
-	}
-	@Override
-	public int getTotalArmorValue() {
-		return 2;
-	}
-	
-	/**
-	 * Returns False so that Entity doesn't Suffocate while in a wall
-	 */
-	@Override
-	public boolean isEntityInsideOpaqueBlock() {
-		return false;
-	}
-	
-	@Override
-	public boolean canBePushed() {
-		return false;
-	}
-	
-	@Override
-	protected boolean isAIEnabled() {
-		return true;
-	}
-	
-	@Override
-	protected void updateAITick() {
-		super.updateAITick();
+    private Vec3 targetPosition = Vec3.createVectorHelper(0, 0, 0);
 
-		/* 
-		 * Note that the Client Side Entity will exists for several ticks before the masterEntity is Synced from server,
-		 * So we only Check if should SetDead on Server
-		 * 
-		 * Also, onReload, the Server will re-create its Children, this the old Children must dye.
-		 */
-		if(masterEntity == null && ticksExisted > 0){
-			this.kill();
-		}
-	}
-	
-	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-		
-		/* If Master Head is dead, Entity should be dead */
-		if(masterEntity != null && (masterEntity.isDead || masterEntity.deathTime > 0 || shouldBeDying)){
-			onDeathUpdate();
-		}
-		
-		/* Send Packet Server -> Client with EntityData to Connect Child+Master : Packet calls linkMasterWithFollower from Child */
-		if(ticksExisted % 40 == 0 && !worldObj.isRemote && masterEntity != null){
-			PacketManagerFollowerMasterData packetManager = (PacketManagerFollowerMasterData) PacketIDs.followerMasterData.createPacketManager();
-			packetManager.setPacketData(entityId, masterEntity.entityId, followerIndex);
-			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 60, dimension, packetManager.createPacket());
-		}
-		
-		moveToTargetPosition(0.5f);
-		adjustRotationToTarget(10.0f);
-	}
-	
-	/* Helper Method Responsible for Moving Follower to its Target Position */
-	public void moveToTargetPosition(float velocity){
-		moveEntity(targetPosition.xCoord - posX, targetPosition.yCoord - posY, targetPosition.zCoord - posZ);
-	}
-	
-	/* Helper Method Responsible for rotating Follower to its Target Rotation */
-	public void adjustRotationToTarget(float angularVelocity){
-		setRotation(targetRotation, rotationPitch);
-		rotationYawHead = rotationYaw;		
-	}
+    public void setTargetPosition(Vec3 targetPosition) {
+        this.targetPosition = targetPosition;
+    }
 
-	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
-		if(masterEntity != null){
-			if(masterEntity.attackEntityFromChild(this, par1DamageSource, par2)){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public boolean hurtChildFromMaster(DamageSource par1DamageSource, int par2){
-		return super.attackEntityFrom(par1DamageSource, par2);
-	}
-	
-	/* Gets Master Entity from World and sets it in the masterEntity container */
-	public void linkMasterWithFollower(int masterEntityID, int followerIndex){
-		
-		Entity master = worldObj.getEntityByID(masterEntityID);
-		if(master != null && master instanceof EntityMaster && isClientSetup == false){
-			EntityMaster masterEntity = (EntityMaster)master;
-			this.followerIndex = followerIndex;
-			this.masterEntity = masterEntity;
-			targetPosition = Vec3.createVectorHelper(masterEntity.posX, masterEntity.posY, masterEntity.posZ);
-			masterEntity.linkFollowerWithMaster(this, followerIndex);
-			isClientSetup = true;
-		}
-	}
-	
-	@Override
-	protected void fall(float par1) {}
-	
-	@Override
-	public void moveEntityWithHeading(float par1, float par2){
-		if (this.isInWater()){
-			this.moveFlying(par1, par2, 0.02F);
-			this.moveEntity(this.motionX, this.motionY, this.motionZ);
-			this.motionX *= 0.800000011920929D;
-			this.motionY *= 0.800000011920929D;
-			this.motionZ *= 0.800000011920929D;
-		}
-		else if (this.handleLavaMovement()){
-			this.moveFlying(par1, par2, 0.02F);
-			this.moveEntity(this.motionX, this.motionY, this.motionZ);
-			this.motionX *= 0.5D;
-			this.motionY *= 0.5D;
-			this.motionZ *= 0.5D;
-		}
-		else{
-			float var3 = 0.91F;
+    float targetRotation;
 
-			if (this.onGround){
-				var3 = 0.54600006F;
-				int var4 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
+    public void setTargetRotation(float targetRotation) {
+        this.targetRotation = wrapAngleTo360(targetRotation);
+    }
 
-				if (var4 > 0){
-					var3 = Block.blocksList[var4].slipperiness * 0.91F;
-				}
-			}
+    boolean shouldBeDying = false;
 
-			float var8 = 0.16277136F / (var3 * var3 * var3);
-			this.moveFlying(par1, par2, this.onGround ? 0.1F * var8 : 0.02F);
-			var3 = 0.91F;
+    /* Client Side Variable that Controls if it should Sync its Contents with Client Master */
+    boolean isClientSetup = false;
 
-			if (this.onGround){
-				var3 = 0.54600006F;
-				int var5 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
+    public EntityFollower(World par1World) {
+        super(par1World);
+        noClip = true;
+        setSize(0.65f, 0.5f);
+    }
 
-				if (var5 > 0){
-					var3 = Block.blocksList[var5].slipperiness * 0.91F;
-				}
-			}
+    public EntityFollower(World par1World, double parx, double pary, double parz, EntityMaster masterEntity,
+            int followerIndex) {
+        this(par1World);
+        this.masterEntity = masterEntity;
+        targetPosition = Vec3.createVectorHelper(masterEntity.posX, masterEntity.posY, masterEntity.posZ);
+        setLocationAndAngles(parx, pary, parz, 1, 1);
+        setPosition(parx, pary, parz);
+        this.followerIndex = followerIndex;
+    }
 
-			this.moveEntity(this.motionX, this.motionY, this.motionZ);
-			this.motionX *= (double)var3;
-			this.motionY *= (double)var3;
-			this.motionZ *= (double)var3;
-		}
+    @Override
+    protected void func_110147_ax() {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0);
+    }
 
-		this.prevLimbYaw = this.limbYaw;
-		double var10 = this.posX - this.prevPosX;
-		double var9 = this.posZ - this.prevPosZ;
-		float var7 = MathHelper.sqrt_double(var10 * var10 + var9 * var9) * 4.0F;
+    @Override
+    public int getTotalArmorValue() {
+        return 2;
+    }
 
-		if (var7 > 1.0F){
-			var7 = 1.0F;
-		}
+    /**
+     * Returns False so that Entity doesn't Suffocate while in a wall
+     */
+    @Override
+    public boolean isEntityInsideOpaqueBlock() {
+        return false;
+    }
 
-		this.limbYaw += (var7 - this.limbYaw) * 0.4F;
-		this.limbSwing += this.limbYaw;
-	}
-	
-	private float wrapAngleTo360(float angle){
-		while(angle > 360){
-			angle -= 360;
-		}
-		while(angle < 0){
-			angle += 360;
-		}
-		return angle;
-	}
+    @Override
+    public boolean canBePushed() {
+        return false;
+    }
+
+    @Override
+    protected boolean isAIEnabled() {
+        return true;
+    }
+
+    @Override
+    protected void updateAITick() {
+        super.updateAITick();
+
+        /*
+         * Note that the Client Side Entity will exists for several ticks before the masterEntity is Synced from server,
+         * So we only Check if should SetDead on Server
+         * 
+         * Also, onReload, the Server will re-create its Children, this the old Children must dye.
+         */
+        if (masterEntity == null && ticksExisted > 0) {
+            this.kill();
+        }
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+
+        /* If Master Head is dead, Entity should be dead */
+        if (masterEntity != null && (masterEntity.isDead || masterEntity.deathTime > 0 || shouldBeDying)) {
+            onDeathUpdate();
+        }
+
+        /*
+         * Send Packet Server -> Client with EntityData to Connect Child+Master : Packet calls linkMasterWithFollower
+         * from Child
+         */
+        if (ticksExisted % 40 == 0 && !worldObj.isRemote && masterEntity != null) {
+            PacketManagerFollowerMasterData packetManager = (PacketManagerFollowerMasterData) PacketIDs.followerMasterData
+                    .createPacketManager();
+            packetManager.setPacketData(entityId, masterEntity.entityId, followerIndex);
+            PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 60, dimension, packetManager.createPacket());
+        }
+
+        moveToTargetPosition(0.5f);
+        adjustRotationToTarget(10.0f);
+    }
+
+    /* Helper Method Responsible for Moving Follower to its Target Position */
+    public void moveToTargetPosition(float velocity) {
+        moveEntity(targetPosition.xCoord - posX, targetPosition.yCoord - posY, targetPosition.zCoord - posZ);
+    }
+
+    /* Helper Method Responsible for rotating Follower to its Target Rotation */
+    public void adjustRotationToTarget(float angularVelocity) {
+        setRotation(targetRotation, rotationPitch);
+        rotationYawHead = rotationYaw;
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
+        if (masterEntity != null) {
+            if (masterEntity.attackEntityFromChild(this, par1DamageSource, par2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hurtChildFromMaster(DamageSource par1DamageSource, float par2) {
+        return super.attackEntityFrom(par1DamageSource, par2);
+    }
+
+    /* Gets Master Entity from World and sets it in the masterEntity container */
+    public void linkMasterWithFollower(int masterEntityID, int followerIndex) {
+
+        Entity master = worldObj.getEntityByID(masterEntityID);
+        if (master != null && master instanceof EntityMaster && isClientSetup == false) {
+            EntityMaster masterEntity = (EntityMaster) master;
+            this.followerIndex = followerIndex;
+            this.masterEntity = masterEntity;
+            targetPosition = Vec3.createVectorHelper(masterEntity.posX, masterEntity.posY, masterEntity.posZ);
+            masterEntity.linkFollowerWithMaster(this, followerIndex);
+            isClientSetup = true;
+        }
+    }
+
+    @Override
+    protected void fall(float par1) {
+    }
+
+    @Override
+    public void moveEntityWithHeading(float par1, float par2) {
+        if (this.isInWater()) {
+            this.moveFlying(par1, par2, 0.02F);
+            this.moveEntity(this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.800000011920929D;
+            this.motionY *= 0.800000011920929D;
+            this.motionZ *= 0.800000011920929D;
+        } else if (this.handleLavaMovement()) {
+            this.moveFlying(par1, par2, 0.02F);
+            this.moveEntity(this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.5D;
+            this.motionY *= 0.5D;
+            this.motionZ *= 0.5D;
+        } else {
+            float var3 = 0.91F;
+
+            if (this.onGround) {
+                var3 = 0.54600006F;
+                int var4 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX),
+                        MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
+
+                if (var4 > 0) {
+                    var3 = Block.blocksList[var4].slipperiness * 0.91F;
+                }
+            }
+
+            float var8 = 0.16277136F / (var3 * var3 * var3);
+            this.moveFlying(par1, par2, this.onGround ? 0.1F * var8 : 0.02F);
+            var3 = 0.91F;
+
+            if (this.onGround) {
+                var3 = 0.54600006F;
+                int var5 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX),
+                        MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
+
+                if (var5 > 0) {
+                    var3 = Block.blocksList[var5].slipperiness * 0.91F;
+                }
+            }
+
+            this.moveEntity(this.motionX, this.motionY, this.motionZ);
+            this.motionX *= (double) var3;
+            this.motionY *= (double) var3;
+            this.motionZ *= (double) var3;
+        }
+
+        this.prevLimbYaw = this.limbYaw;
+        double var10 = this.posX - this.prevPosX;
+        double var9 = this.posZ - this.prevPosZ;
+        float var7 = MathHelper.sqrt_double(var10 * var10 + var9 * var9) * 4.0F;
+
+        if (var7 > 1.0F) {
+            var7 = 1.0F;
+        }
+
+        this.limbYaw += (var7 - this.limbYaw) * 0.4F;
+        this.limbSwing += this.limbYaw;
+    }
+
+    private float wrapAngleTo360(float angle) {
+        while (angle > 360) {
+            angle -= 360;
+        }
+        while (angle < 0) {
+            angle += 360;
+        }
+        return angle;
+    }
 
 }

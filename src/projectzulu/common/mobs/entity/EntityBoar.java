@@ -20,85 +20,94 @@ import projectzulu.common.mobs.entityai.EntityAITempt;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
-public class EntityBoar extends EntityGenericAnimal implements IAnimals {	
-	public EntityBoar(World par1World){
-		super(par1World);
-		setSize(1.2f, 0.9f);
-		
-		this.moveSpeed = 0.3f;
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, this.moveSpeed));
+public class EntityBoar extends EntityGenericAnimal implements IAnimals {
+    public EntityBoar(World par1World) {
+        super(par1World);
+        setSize(1.2f, 0.9f);
 
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
-//		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
+        movementSpeed = 0.3f;
+        getNavigator().setAvoidsWater(true);
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 1.25f));
 
-		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.appleRed.itemID, false));
-		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
-		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false));
+        // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
-		this.targetTasks.addTask(3,	new EntityAIHurtByTarget(this, false, false));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
-//		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
-	}
+        tasks.addTask(5, new EntityAIMate(this, 1.0f));
+        tasks.addTask(6, new EntityAITempt(this, 1.2f, Item.appleRed.itemID, false));
+        tasks.addTask(7, new EntityAIFollowParent(this, 1.1f));
+        tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
-	@Override
-	protected int getAttackStrength(World par1World) {
-		switch (par1World.difficultySetting) {
-		case 0:
-			return 3; 
-		case 1:
-			return 3; 
-		case 2:
-			return 4; 
-		case 3:
-			return 6; 
-		default:
-			return 3;
-		}
-	}
-	
+        targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
+        targetTasks.addTask(4,
+                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+                        EntityPlayer.class, 16.0F, 0, true));
+        // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true,
+        // IMob.mobSelector));
+    }
+
+    @Override
+    protected int getAttackStrength(World par1World) {
+        switch (par1World.difficultySetting) {
+        case 0:
+            return 3;
+        case 1:
+            return 3;
+        case 2:
+            return 4;
+        case 3:
+            return 6;
+        default:
+            return 3;
+        }
+    }
+
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }
 
-	@Override
-	public int getMaxHealth(){
-		return 15;
-	}
-	@Override
-	public int getTotalArmorValue(){
-		return 1;
-	}
+    @Override
+    public int getMaxHealth() {
+        return 15;
+    }
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-	protected String getLivingSound(){ return "sounds.boarliving"; }
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound(){ return "sounds.boarliving"; }
+    @Override
+    public int getTotalArmorValue() {
+        return 1;
+    }
 
-	@Override
-	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && itemStack.getItem().itemID == Item.appleRed.itemID){
-			return true;
-		}else{
-			return super.isValidBreedingItem(itemStack);
-		}
-	}
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return "sounds.boarliving";
+    }
 
-	@Override
-	protected void dropRareDrop(int par1) {
-		if(Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()){
-			entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID,1,7), 1);
-		}
-		super.dropRareDrop(par1);
-	}
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return "sounds.boarliving";
+    }
+
+    @Override
+    public boolean isValidBreedingItem(ItemStack itemStack) {
+        if (itemStack != null && itemStack.getItem().itemID == Item.appleRed.itemID) {
+            return true;
+        } else {
+            return super.isValidBreedingItem(itemStack);
+        }
+    }
+
+    @Override
+    protected void dropRareDrop(int par1) {
+        if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
+            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 7), 1);
+        }
+        super.dropRareDrop(par1);
+    }
 
 }

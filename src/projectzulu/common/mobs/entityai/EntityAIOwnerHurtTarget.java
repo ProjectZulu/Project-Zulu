@@ -1,15 +1,15 @@
 package projectzulu.common.mobs.entityai;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import projectzulu.common.mobs.entity.EntityGenericTameable;
 
 public class EntityAIOwnerHurtTarget extends EntityAITarget{
-	EntityGenericTameable theEntityTameable;
-    EntityLiving theTarget;
+	EntityGenericTameable theDefendingTameable;
+	EntityLivingBase theTarget;
 
     public EntityAIOwnerHurtTarget(EntityGenericTameable par1EntityTameable){
         super(par1EntityTameable, 32.0F, false);
-        this.theEntityTameable = par1EntityTameable;
+        this.theDefendingTameable = par1EntityTameable;
         this.setMutexBits(1);
     }
 
@@ -17,16 +17,16 @@ public class EntityAIOwnerHurtTarget extends EntityAITarget{
      * Returns whether the EntityAIBase should begin execution.
      */
     public boolean shouldExecute(){
-        if (!this.theEntityTameable.isTamed()){
+        if (!this.theDefendingTameable.isTamed()){
             return false;
         }
         else{
-            EntityLiving var1 = this.theEntityTameable.getOwner();
+            EntityLivingBase var1 = this.theDefendingTameable.getOwner();
 
             if (var1 == null){
             	return false;
             }else{
-                this.theTarget = var1.getLastAttackingEntity();
+                this.theTarget = var1.getAITarget();
                 return this.isSuitableTarget(this.theTarget, false);
             }
         }
