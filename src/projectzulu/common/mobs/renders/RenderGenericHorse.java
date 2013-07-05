@@ -6,15 +6,16 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 
-public class RenderGenericHorse extends RenderLiving {
-    public final ResourceLocation saddledTexture;
-    public final ResourceLocation wildTexture;
-    public RenderGenericHorse(ModelBase modelBase, float shadowSize, String wildTexture, String saddledTexture) {
-        super(modelBase, shadowSize);
-        this.wildTexture = new ResourceLocation(wildTexture);
-        this.saddledTexture = new ResourceLocation(saddledTexture);
-    }
+public class RenderGenericHorse extends RenderGenericLiving {
     
+    public final ResourceLocation saddledTexture;
+
+    public RenderGenericHorse(ModelBase modelBase, float shadowSize, ResourceLocation wildTexture,
+            ResourceLocation saddledTexture) {
+        super(modelBase, shadowSize, wildTexture);
+        this.saddledTexture = saddledTexture;
+    }
+
     @Override
     protected ResourceLocation func_110775_a(Entity entity) {
         if (entity instanceof EntityGenericAnimal) {
@@ -23,6 +24,6 @@ public class RenderGenericHorse extends RenderLiving {
                 return saddledTexture;
             }
         }
-        return wildTexture;
+        return livingTexture;
     }
 }

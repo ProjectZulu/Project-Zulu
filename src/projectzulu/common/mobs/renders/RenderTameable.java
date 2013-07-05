@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -22,12 +21,8 @@ public class RenderTameable extends RenderGenericLiving {
     
     protected float zLevel = 0.1F;
 
-    public RenderTameable(ModelBase modelBase, float shadowSize, String textureLocation) {
+    public RenderTameable(ModelBase modelBase, float shadowSize, ResourceLocation textureLocation) {
         super(modelBase, shadowSize, textureLocation);
-    }
-
-    public RenderTameable(ModelBase modelBase, float shadowSize, String domain, String textureLocation) {
-        this(modelBase, shadowSize, domain + ":" + textureLocation);
     }
 
     public void renderTameable(EntityGenericAnimal par1EntityFox, double par2, double par4, double par6, float par8,
@@ -201,11 +196,4 @@ public class RenderTameable extends RenderGenericLiving {
         var9.addVertexWithUV(par1 + 0, par2 + 0, this.zLevel, (par3 + 0) * var7, (par4 + 0) * var8);
         var9.draw();
     }
-
-    @Override
-    protected ResourceLocation func_110775_a(Entity entity) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }

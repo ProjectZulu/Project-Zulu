@@ -14,6 +14,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
+import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -40,8 +41,12 @@ public class BlockAloeVera extends BlockFlower {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister){
         this.blockIcons = new Icon[imageSuffix.length];
+        ProjectZuluLog.info("XXX: Registering %s Icons", getUnlocalizedName());
         for (int i = 0; i < this.blockIcons.length; ++i){
             this.blockIcons[i] = par1IconRegister.registerIcon(getUnlocalizedName().substring(5)+imageSuffix[i]);
+            if(this.blockIcons[i] == null){
+                ProjectZuluLog.severe("Failed register %s Icon %s", getUnlocalizedName(), i);
+            }
         }
     }
     

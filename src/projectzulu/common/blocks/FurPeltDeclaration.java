@@ -17,8 +17,7 @@ public class FurPeltDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.furPelt = Optional.of(new ItemScale(iD, 23, false).setUnlocalizedName(DefaultProps.blockKey + ":"
-                + name.toLowerCase()));
+        ItemList.furPelt = Optional.of(new ItemScale(iD, false, name));
         return true;
     }
 

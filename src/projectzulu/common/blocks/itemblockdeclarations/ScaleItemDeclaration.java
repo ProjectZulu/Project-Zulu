@@ -18,8 +18,7 @@ public class ScaleItemDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.scaleItem = Optional.of(new ItemScale(iD, 1, false).setUnlocalizedName(DefaultProps.blockKey + ":"
-                + name.toLowerCase()));
+        ItemList.scaleItem = Optional.of(new ItemScale(iD, false, name));
         return true;
     }
 

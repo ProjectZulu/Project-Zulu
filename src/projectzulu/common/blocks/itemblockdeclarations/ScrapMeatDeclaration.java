@@ -18,8 +18,7 @@ public class ScrapMeatDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.scrapMeat = Optional.of(new ItemFoodProjectZulu(iD, 1, 1.0f, false)
-                .setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+        ItemList.scrapMeat = Optional.of(new ItemFoodProjectZulu(iD, 1, 1.0f, false, name));
         return true;
     }
 

@@ -168,7 +168,7 @@ public class EventHookContainerClass {
                 TileEntity tileEntity = worldObj.getBlockTileEntity((int) player.posX, (int) player.posY,
                         (int) player.posZ);
                 if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
-                    ((TileEntityTombstone) tileEntity).setSignString(event.source.func_111181_b(
+                    ((TileEntityTombstone) tileEntity).setSignString(event.source.getDeathMessage(
                             (EntityPlayer) event.entity).toString());
                 }
             }

@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingData;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -132,6 +133,14 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
             var1 = 20;
         }
         return var1;
+    }
+
+    /**
+     * Get this Entity's EnumCreatureAttribute
+     */
+    @Override
+    public EnumCreatureAttribute getCreatureAttribute() {
+        return EnumCreatureAttribute.UNDEAD;
     }
 
     @Override

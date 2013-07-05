@@ -34,7 +34,7 @@ public class PZExtraPotionDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        Item item = new ItemPZPotion(iD).setUnlocalizedName(name.toLowerCase());
+        Item item = new ItemPZPotion(iD, name);
         ItemList.customPotions = Optional.of(item);
         int i = 0;
         List<SubItemPotion> list = new ArrayList<SubItemPotion>();

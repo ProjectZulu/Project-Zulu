@@ -14,13 +14,14 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class CoconutDeclaration extends BlockDeclaration {
 
     public CoconutDeclaration() {
-        super("Coconut");
+        super("coconut");
     }
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.coconut = Optional.of(new BlockCoconut(iD).setUnlocalizedName(DefaultProps.blockKey + ":"
-                + name.toLowerCase()));
+        BlockList.coconut = Optional.of(new BlockCoconut(iD).setUnlocalizedName(
+                DefaultProps.blockKey + ":" + name.toLowerCase()).func_111022_d(
+                DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

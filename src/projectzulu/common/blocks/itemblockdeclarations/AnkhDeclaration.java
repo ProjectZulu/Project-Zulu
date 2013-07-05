@@ -18,8 +18,7 @@ public class AnkhDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.ankh = Optional.of(new ItemAnkh(iD).setUnlocalizedName(DefaultProps.blockKey + ":"
-                + name.toLowerCase()));
+        ItemList.ankh = Optional.of(new ItemAnkh(iD, name));
         return true;
     }
 
@@ -28,5 +27,4 @@ public class AnkhDeclaration extends ItemDeclaration {
         Item item = ItemList.ankh.get();
         LanguageRegistry.addName(item, "Ankh");
     }
-
 }

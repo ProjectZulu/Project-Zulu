@@ -82,6 +82,12 @@ public class ProjectZulu_Blocks {
     @Instance(DefaultProps.BlocksModId)
     public static ProjectZulu_Blocks modInstance;
 
+    static {
+        declareModuleEntities();
+        declareModuleItemBlocks();
+        declareModuleTerrainFeatures();
+    }
+
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
         Configuration zuluConfig = new Configuration(new File(event.getModConfigurationDirectory(),
@@ -91,10 +97,6 @@ public class ProjectZulu_Blocks {
         PotionManager.loadSettings(zuluConfig);
         ProjectZuluLog.info("Finsished Potion Init ");
         zuluConfig.save();
-
-        declareModuleEntities();
-        declareModuleItemBlocks();
-        declareModuleTerrainFeatures();
     }
 
     @Init
@@ -133,11 +135,11 @@ public class ProjectZulu_Blocks {
         }
     }
 
-    private void declareModuleEntities() {
+    private static void declareModuleEntities() {
         CustomEntityManager.INSTANCE.addEntity(new CreeperBlossomPrimedDefault());
     }
 
-    private void declareModuleItemBlocks() {
+    private static void declareModuleItemBlocks() {
         ItemBlockManager.INSTANCE.addItemBlock(new PZExtraPotionDeclaration(), new PZVanillaPotionDeclaration());
 
         ItemBlockManager.INSTANCE.addItemBlock(new AloeVeraDeclaration(), new WateredDirtDeclaration(),
@@ -166,9 +168,9 @@ public class ProjectZulu_Blocks {
                         ProjectZulu_Core.proxy.addArmor("cactusarmor")),
                 new FurArmorDeclaration(ProjectZulu_Core.proxy.addArmor("mammothfur")));
     }
-    
-    private void declareModuleTerrainFeatures() {
+
+    private static void declareModuleTerrainFeatures() {
         ProjectZulu_Core.featureGenerator.registerStructure(new AloeVeraFeature(), new CreeperBlossomFeature(),
-                new NightBloomFeature(), new PalmTreeFeature());        
+                new NightBloomFeature(), new PalmTreeFeature());
     }
 }

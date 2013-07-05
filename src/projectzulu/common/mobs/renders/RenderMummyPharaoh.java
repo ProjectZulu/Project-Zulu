@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.BossHealthDisplayTicker;
 import projectzulu.common.mobs.entity.EntityMummyPharaoh;
 import projectzulu.common.mobs.models.ModelMummyPharaoh;
@@ -20,7 +21,7 @@ import projectzulu.common.mobs.models.ModelMummyPharaoh;
 public class RenderMummyPharaoh extends RenderGenericLiving {
     protected ModelMummyPharaoh modelBipedMain;
 
-    public RenderMummyPharaoh(ModelBase modelBase, float par1, String textureLocation) {
+    public RenderMummyPharaoh(ModelBase modelBase, float par1, ResourceLocation textureLocation) {
         super(modelBase, par1, textureLocation);
         this.modelBipedMain = (ModelMummyPharaoh) modelBase;
     }

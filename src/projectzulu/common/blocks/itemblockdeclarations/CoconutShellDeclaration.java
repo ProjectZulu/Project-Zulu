@@ -18,8 +18,7 @@ public class CoconutShellDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.coconutShell = Optional.of(new ItemCoconutShell(iD, 7, false).setUnlocalizedName(DefaultProps.blockKey
-                + ":" + name.toLowerCase()));
+        ItemList.coconutShell = Optional.of(new ItemCoconutShell(iD, false, name));
         return true;
     }
 

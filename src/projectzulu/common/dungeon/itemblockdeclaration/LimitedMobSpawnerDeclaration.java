@@ -2,6 +2,7 @@ package projectzulu.common.dungeon.itemblockdeclaration;
 
 import net.minecraft.block.Block;
 import projectzulu.common.api.BlockList;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import projectzulu.common.dungeon.BlockLimitedMobSpawner;
 import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
@@ -24,7 +25,7 @@ public class LimitedMobSpawnerDeclaration extends BlockDeclaration {
     @Override
     protected boolean createBlock(int iD) {
         BlockList.limitedMobSpawner = Optional.of(new BlockLimitedMobSpawner(iD).setHardness(0.5F)
-                .setStepSound(Block.soundMetalFootstep).setUnlocalizedName("mobSpawner"));
+                .setStepSound(Block.soundMetalFootstep).setUnlocalizedName("mob_spawner").func_111022_d("mob_spawner"));
         return true;
     }
 

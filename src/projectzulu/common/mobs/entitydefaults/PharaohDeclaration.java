@@ -1,6 +1,7 @@
 package projectzulu.common.mobs.entitydefaults;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class PharaohDeclaration extends CreatureDeclaration {
-    
+
     public PharaohDeclaration() {
         super("Mummy Pharaoh", EntityMummyPharaoh.class, EnumCreatureType.monster);
         setRegistrationProperties(128, 3, true);
@@ -37,6 +38,7 @@ public class PharaohDeclaration extends CreatureDeclaration {
     @Override
     @SideOnly(Side.CLIENT)
     public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
-        return new RenderMummyPharaoh(new ModelMummyPharaoh(), 0.5f, DefaultProps.mobDiretory + "mummy_pharaoh.png");
+        return new RenderMummyPharaoh(new ModelMummyPharaoh(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
+                "mummy_pharaoh.png"));
     }
 }

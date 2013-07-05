@@ -81,7 +81,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
             this.model = model;
             this.transOffset = offSets;
             this.scale = scale;
-            resourceLocation = new ResourceLocation(DefaultProps.mobDiretory + this.toString().toLowerCase() + ".png");
+            resourceLocation = new ResourceLocation(DefaultProps.mobKey, this.toString().toLowerCase() + ".png");
         }
 
         public ModelBase getModel() {

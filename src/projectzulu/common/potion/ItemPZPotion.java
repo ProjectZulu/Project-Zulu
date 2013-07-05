@@ -13,12 +13,14 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.potion.subitem.SubItemPotion;
 import projectzulu.common.potion.subitem.SubItemPotionRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemPZPotion extends ItemPotion {
+
     @SideOnly(Side.CLIENT)
     private Icon splashIcon;
     @SideOnly(Side.CLIENT)
@@ -26,10 +28,12 @@ public class ItemPZPotion extends ItemPotion {
     @SideOnly(Side.CLIENT)
     private Icon contentIcon;
 
-    public ItemPZPotion(int itemID) {
+    public ItemPZPotion(int itemID, String name) {
         super(itemID);
         setCreativeTab(ProjectZulu_Core.projectZuluPotionTab);
         setMaxStackSize(3);
+        setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase());
+        func_111206_d(DefaultProps.blockKey + ":" + name.toLowerCase());
     }
 
     /**
@@ -130,9 +134,9 @@ public class ItemPZPotion extends ItemPotion {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
-        this.regularIcon = par1IconRegister.registerIcon("potion");
-        this.splashIcon = par1IconRegister.registerIcon("potion_splash");
-        this.contentIcon = par1IconRegister.registerIcon("potion_contents");
+    public void registerIcons(IconRegister iconRegister) {
+        this.regularIcon = iconRegister.registerIcon("potion_bottle_drinkable");
+        this.splashIcon = iconRegister.registerIcon("potion_bottle_splash");
+        this.contentIcon = iconRegister.registerIcon("potion_overlay");
     }
 }

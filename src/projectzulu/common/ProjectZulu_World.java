@@ -17,18 +17,21 @@ import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid = DefaultProps.WorldModId, name = "Project Zulu World", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-
 public class ProjectZulu_World {
 
-	@Instance(DefaultProps.WorldModId)
-	public static ProjectZulu_World modInstance;
-	
-	@PreInit
-	public void preInit(FMLPreInitializationEvent event) {
+    @Instance(DefaultProps.WorldModId)
+    public static ProjectZulu_World modInstance;
+
+    static {
         ProjectZulu_Core.featureGenerator.registerStructure(new CemetaryFeature(), new LabyrinthFeature(),
                 new OasisFeature(), new PyramidFeature());
-	}
-	
+    }
+
+    @PreInit
+    public void preInit(FMLPreInitializationEvent event) {
+
+    }
+
     @Init
     public void load(FMLInitializationEvent event) {
     }

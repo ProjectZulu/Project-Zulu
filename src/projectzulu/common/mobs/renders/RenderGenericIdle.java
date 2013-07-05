@@ -10,9 +10,10 @@ public class RenderGenericIdle extends RenderGenericLiving {
 
     public final ResourceLocation idleTexture;
 
-    public RenderGenericIdle(ModelBase par1ModelBase, float shadowSize, String livingTexture, String idleTexture) {
+    public RenderGenericIdle(ModelBase par1ModelBase, float shadowSize, ResourceLocation livingTexture,
+            ResourceLocation idleTexture) {
         super(par1ModelBase, shadowSize, livingTexture);
-        this.idleTexture = new ResourceLocation(idleTexture);
+        this.idleTexture = idleTexture;
     }
 
     @Override

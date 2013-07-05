@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entitydefaults;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -48,6 +49,6 @@ public class CentipedeDeclaration extends SpawnableDeclaration{
     @Override
     @SideOnly(Side.CLIENT)
     public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
-        return new RenderGenericLiving(new ModelCentipede(), 0.5f, DefaultProps.mobDiretory + "serpent.png");
+        return new RenderGenericLiving(new ModelCentipede(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "serpent.png"));
     }
 }

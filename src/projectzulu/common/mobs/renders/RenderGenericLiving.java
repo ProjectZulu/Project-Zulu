@@ -9,9 +9,9 @@ public class RenderGenericLiving extends RenderLiving {
 
     public final ResourceLocation livingTexture;
 
-    public RenderGenericLiving(ModelBase modelBase, float shadowSize, String textureLocation) {
+    public RenderGenericLiving(ModelBase modelBase, float shadowSize, ResourceLocation livingTexture) {
         super(modelBase, shadowSize);
-        livingTexture = new ResourceLocation(textureLocation);
+        this.livingTexture = livingTexture;
     }
 
     @Override

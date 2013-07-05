@@ -19,8 +19,9 @@ public class TumbleweedDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.tumbleweed = Optional.of((new BlockTumbleweed(iD)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                + name.toLowerCase()));
+        BlockList.tumbleweed = Optional.of((new BlockTumbleweed(iD)).setUnlocalizedName(
+                DefaultProps.blockKey + ":" + name.toLowerCase()).func_111022_d(
+                DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

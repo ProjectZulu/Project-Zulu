@@ -18,8 +18,7 @@ public class CoconutMilkFragmentDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.coconutMilkFragment = Optional.of(new ItemFoodProjectZulu(iD, 2, 2.4f, false)
-                .setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+        ItemList.coconutMilkFragment = Optional.of(new ItemFoodProjectZulu(iD, 2, 2.4f, false, name));
         return true;
     }
 

@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entitydefaults;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
@@ -19,36 +20,41 @@ import projectzulu.common.mobs.models.ModelBrownBear;
 import projectzulu.common.mobs.models.ModelPolarBear;
 import projectzulu.common.mobs.renders.RenderGenericLiving;
 
-public class BearPolarDeclaration extends SpawnableDeclaration{
-	
-	public BearPolarDeclaration(){
-		super("Polar Bear", EntityPolarBear.class, EnumCreatureType.creature);		
-		setSpawnProperties(10, 100, 1, 2);
-		setRegistrationProperties(128, 3, true);
+public class BearPolarDeclaration extends SpawnableDeclaration {
+
+    public BearPolarDeclaration() {
+        super("Polar Bear", EntityPolarBear.class, EnumCreatureType.creature);
+        setSpawnProperties(10, 100, 1, 2);
+        setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);
 
-		eggColor1 = (255 << 16) + (255 << 8) + 255;						eggColor2 = (201 << 16) + (201 << 8) + 201;
-		defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName); 		
-		defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName); 		defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName);	
-		defaultBiomesToSpawn.add("Ice Wasteland");						defaultBiomesToSpawn.add("Glacier");		
-		
-	}
-	
-	@Override
-	public void outputDataToList(Configuration config, CustomMobData customMobData) {
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, Item.beefRaw, 0, 10);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.furPelt, 0, 8);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.scrapMeat, 0, 10);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems,
-				ItemGenerics.Properties.BlackLichen.meta(), 4);
-		ConfigHelper.configDropToMobData(config, "MOB CONTROLS."+mobName, customMobData, ItemList.genericCraftingItems,
-				ItemGenerics.Properties.LargeHeart.meta(), 4);
-		super.outputDataToList(config, customMobData);
-	}
-	
+        eggColor1 = (255 << 16) + (255 << 8) + 255;
+        eggColor2 = (201 << 16) + (201 << 8) + 201;
+        defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName);
+        defaultBiomesToSpawn.add("Ice Wasteland");
+        defaultBiomesToSpawn.add("Glacier");
+
+    }
+
+    @Override
+    public void outputDataToList(Configuration config, CustomMobData customMobData) {
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Item.beefRaw, 0, 10);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, ItemList.furPelt, 0, 8);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, ItemList.scrapMeat, 0, 10);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
+                ItemList.genericCraftingItems, ItemGenerics.Properties.BlackLichen.meta(), 4);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
+                ItemList.genericCraftingItems, ItemGenerics.Properties.LargeHeart.meta(), 4);
+        super.outputDataToList(config, customMobData);
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
-        return new RenderGenericLiving(new ModelPolarBear(), 0.5f, DefaultProps.mobDiretory + "bearpolar.png");
+        return new RenderGenericLiving(new ModelPolarBear(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
+                "bearpolar.png"));
+
     }
 }

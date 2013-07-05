@@ -42,26 +42,15 @@ public class ItemFoodProjectZulu extends ItemFood
     /** probably of the set potion effect occurring */
     private float potionEffectProbability;
 
-    public ItemFoodProjectZulu(int par1, int par2, float par3, boolean par4)
-    {
+    public ItemFoodProjectZulu(int par1, int par2, float par3, boolean par4, String name) {
         super(par1, par2, par3, par4);
-        this.itemUseDuration = 32;
-        this.healAmount = par2;
-        this.isWolfsFavoriteMeat = par4;
-        this.saturationModifier = par3;
-        this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-//        this.iconIndex = par5;
-    }
-
-    public ItemFoodProjectZulu(int par1, int par2, boolean par3, int par4)
-    {
-        this(par1, par2, 0.6F, par3);
-    }
-
-	@SideOnly(Side.CLIENT)
-	public String getTextureFile()
-    {
-            return DefaultProps.itemSpriteSheet;
+        itemUseDuration = 32;
+        healAmount = par2;
+        isWolfsFavoriteMeat = par4;
+        saturationModifier = par3;
+        setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase());
+        func_111206_d(DefaultProps.blockKey + ":" + name.toLowerCase());
     }
 
     @Override

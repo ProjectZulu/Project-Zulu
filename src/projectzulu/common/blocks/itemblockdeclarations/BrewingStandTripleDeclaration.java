@@ -36,8 +36,8 @@ public class BrewingStandTripleDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.brewingStandTriple = Optional.of(new BlockBrewingStandTriple(iD, renderID)
-                .setUnlocalizedName(DefaultProps.blockKey + ":brewingtriple"));
+        BlockList.brewingStandTriple = Optional.of(new BlockBrewingStandTriple(iD, renderID).setUnlocalizedName(
+                DefaultProps.blockKey + ":brewingtriple").func_111022_d(DefaultProps.blockKey + ":brewingtriple"));
         return true;
     }
 

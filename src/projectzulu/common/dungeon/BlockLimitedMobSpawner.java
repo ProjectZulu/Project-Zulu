@@ -12,7 +12,7 @@ import projectzulu.common.core.GuiID;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockLimitedMobSpawner extends BlockContainer{
+public class BlockLimitedMobSpawner extends BlockContainer {
 	
     public BlockLimitedMobSpawner(int blockID){
         super(blockID, Material.rock);

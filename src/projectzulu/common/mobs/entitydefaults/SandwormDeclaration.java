@@ -1,7 +1,7 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -14,10 +14,8 @@ import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntitySandWorm;
-import projectzulu.common.mobs.models.ModelRhino;
 import projectzulu.common.mobs.models.ModelSandWorm;
 import projectzulu.common.mobs.renders.RenderGenericIdle;
-import projectzulu.common.mobs.renders.RenderGenericLiving;
 
 import com.google.common.base.Optional;
 
@@ -54,7 +52,7 @@ public class SandwormDeclaration extends SpawnableDeclaration {
     @Override
     @SideOnly(Side.CLIENT)
     public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
-        return new RenderGenericIdle(new ModelSandWorm(), 0.5f, DefaultProps.mobDiretory + "sandworm.png",
-                DefaultProps.mobDiretory + "sandworm_hidden.png");
+        return new RenderGenericIdle(new ModelSandWorm(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
+                "sandworm.png"), new ResourceLocation(DefaultProps.mobKey, "sandworm_hidden.png"));
     }
 }

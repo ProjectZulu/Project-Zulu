@@ -15,7 +15,6 @@ public class CommonProxyProjectZulu{
         return tempTicker;
 	}
 	
- 	public void registerRenderThings(){}
 	public int addArmor(String armor){ return 0; }
 	public void bossHealthTicker(){}
 	public void registerMobRenders(){}

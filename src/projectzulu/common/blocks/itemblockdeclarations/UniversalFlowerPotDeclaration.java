@@ -40,10 +40,10 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
         if (Properties.replaceFlowerPot) {
             Block.blocksList[Block.flowerPot.blockID] = null;
             BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(Block.flowerPot.blockID, renderID)
-                    .setUnlocalizedName("flowerPot"));
+                    .setUnlocalizedName("flowerPot").func_111022_d("flower_pot"));
         } else {
-            BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(iD, renderID)
-                    .setUnlocalizedName("flowerPot"));
+            BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(iD, renderID).setUnlocalizedName(
+                    "uniFlowerPot").func_111022_d("flower_pot"));
         }
         return true;
     }
@@ -54,7 +54,7 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
             Block block = BlockList.universalFlowerPot.get();
             GameRegistry.registerBlock(block, name.toLowerCase());
             LanguageRegistry.addName(block, "Universal Flower Pot");
-            new ItemUniversalFlowerPot(block.blockID - 256, block).setUnlocalizedName("flowerPot");
+            new ItemUniversalFlowerPot(block.blockID - 256, block);
         }
         GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");
     }

@@ -3,6 +3,7 @@ package projectzulu.common;
 import java.io.File;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraftforge.common.BiomeDictionary;
@@ -62,10 +63,10 @@ public class ProjectZulu_Core {
         return defaulteggID++;
     }
 
-    public static final CreativeTabs projectZuluCreativeTab = new CreativePZGeneralTab(CreativeTabs.creativeTabArray.length,
-            "projectZuluTab");
-    public static final CreativeTabs projectZuluPotionTab = new CreativePZPotionTab(CreativeTabs.creativeTabArray.length,
-            "projectZuluPotionTab");
+    public static final CreativeTabs projectZuluCreativeTab = new CreativePZGeneralTab(
+            CreativeTabs.creativeTabArray.length, "projectZuluTab");
+    public static final CreativeTabs projectZuluPotionTab = new CreativePZPotionTab(
+            CreativeTabs.creativeTabArray.length, "projectZuluPotionTab");
 
     public static boolean enableTestBlock = false;
     public static boolean enableTemperature = false;
@@ -90,12 +91,14 @@ public class ProjectZulu_Core {
     public static File modConfigDirectoryFile;
 
     public static final FeatureGenerator featureGenerator = new FeatureGenerator();
-    
+
     @SidedProxy(clientSide = "projectzulu.common.ClientProxyProjectZulu", serverSide = "projectzulu.common.CommonProxyProjectZulu")
     public static CommonProxyProjectZulu proxy;
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
+        Minecraft.getMinecraft().func_110434_K();
+        // mc.func_110442_L();
         modConfigDirectoryFile = event.getModConfigurationDirectory();
 
         ProjectZuluLog.configureLogging(modConfigDirectoryFile);
@@ -109,18 +112,8 @@ public class ProjectZulu_Core {
                 enableTemperature);
         zuluConfig.save();
 
-        /* Should Enable Temperature System ? */
-        // if(enableTemperature){
-        // TemperatureTicker temperatureTicker = proxy.initializeTempTicker();
-        // GameRegistry.registerPlayerTracker(temperatureTicker);
-        // }
         proxy.bossHealthTicker();
         ProjectZulu_Core.proxy.registerMobSounds();
-    }
-
-    @Init
-    public void load(FMLInitializationEvent event) {
-        proxy.registerRenderThings();
 
         if (enableTestBlock) {
             testBlock = (new BlockTestBlock(testBlockID, 32)).setHardness(1.0f).setResistance(1.0f)
@@ -128,7 +121,6 @@ public class ProjectZulu_Core {
             GameRegistry.registerBlock(testBlock, "testZuluBlock");
             LanguageRegistry.addName(testBlock, "Test block");
         }
-        NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
 
         ProjectZuluLog.info("Load Entity Models and Render");
         ProjectZulu_Core.proxy.registerModelsAndRender();
@@ -146,20 +138,25 @@ public class ProjectZulu_Core {
         CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
     }
 
+    @Init
+    public void load(FMLInitializationEvent event) {
+        NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
+    }
+
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {
+        BiomeDictionary.registerAllBiomes();
+
         ProjectZuluLog.info("Registering Events");
         MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
 
         ProjectZuluLog.info("Load Entity Biomes");
         CustomEntityManager.INSTANCE.loadBiomesFromConfig(modConfigDirectoryFile);
         ProjectZuluLog.info("Register Entity Spawns");
-        CustomEntityManager.INSTANCE.addSpawns();
-        
+//        CustomEntityManager.INSTANCE.addSpawns();
+
         ProjectZuluLog.info("Initializing TerrainFeatures");
         featureGenerator.initialize(modConfigDirectoryFile);
         GameRegistry.registerWorldGenerator(featureGenerator);
-        
-        BiomeDictionary.registerAllBiomes();
     }
 }

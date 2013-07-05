@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entitydefaults;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
@@ -53,6 +54,6 @@ public class BearBlackDeclaration extends SpawnableDeclaration{
     @Override
     @SideOnly(Side.CLIENT)
     public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
-        return new RenderGenericLiving(new ModelBlackBear(), 0.5f, DefaultProps.mobDiretory + "bearblack.png");
+        return new RenderGenericLiving(new ModelBlackBear(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "bearblack.png"));
     }
 }

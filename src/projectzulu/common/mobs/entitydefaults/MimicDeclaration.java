@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entitydefaults;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
@@ -39,6 +40,6 @@ public class MimicDeclaration extends EggableDeclaration {
     @Override
     @SideOnly(Side.CLIENT)
     public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
-        return new RenderMimic(new ModelMimic(), 0.5f, DefaultProps.mobDiretory + "mimicchest.png");
+        return new RenderMimic(new ModelMimic(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "mimicchest.png"));
     }
 }

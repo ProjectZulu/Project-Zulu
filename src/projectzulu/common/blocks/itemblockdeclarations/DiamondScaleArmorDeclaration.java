@@ -25,19 +25,19 @@ public class DiamondScaleArmorDeclaration extends ItemSetDeclaration {
         switch (partIndex) {
         case 0:
             ItemList.diamondScaleArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.diamondScaleMaterial,
-                    renderIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 0, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 1:
             ItemList.diamondScaleArmorChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.diamondScaleMaterial,
-                    renderIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 1, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 2:
             ItemList.diamondScaleArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.diamondScaleMaterial,
-                    renderIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 2, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 3:
             ItemList.diamondScaleArmorBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.diamondScaleMaterial,
-                    renderIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 3, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         }
         return false;

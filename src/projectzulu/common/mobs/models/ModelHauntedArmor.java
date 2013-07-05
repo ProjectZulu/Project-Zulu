@@ -1,24 +1,20 @@
 package projectzulu.common.mobs.models;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.MathHelper;
-import net.minecraftforge.client.ForgeHooksClient;
 
 import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.core.ModelHelper;
 import projectzulu.common.mobs.entity.EntityHauntedArmor;
 import projectzulu.common.mobs.entity.EntityStates;
-import projectzulu.common.mobs.renders.RenderHauntedArmor;
 
 public class ModelHauntedArmor extends ModelBase {
     public ModelRenderer swordhand;
@@ -111,20 +107,18 @@ public class ModelHauntedArmor extends ModelBase {
             /* Render Armor Legs */
             textureLocation = "/armor/iron_2.png";
             EntityHauntedArmor var5 = (EntityHauntedArmor) par1Entity;
-            itemStack = var5.getCurrentArmor(3 - 2);
-            resource = RenderHauntedArmor.getArmorResource(par1Entity, itemStack, 1, null);
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine
-                    .func_110581_b(resource).func_110552_b());
+            itemStack = var5.getCurrentArmor(2);
+            resource = RenderBiped.getArmorResource(par1Entity, itemStack, 2, null);
+            Minecraft.getMinecraft().renderEngine.func_110577_a(resource);
             scale = par7 * 0.85f;
             this.bipedRightLeg2.render(scale);
             this.bipedLeftLeg2.render(scale);
 
             /* Render Armor Upper Body */
             textureLocation = "/armor/iron_1.png";
-            itemStack = var5.getCurrentArmor(3 - 1);
-            resource = RenderHauntedArmor.getArmorResource(par1Entity, itemStack, 2, null);
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine
-                    .func_110581_b(resource).func_110552_b());
+            itemStack = var5.getCurrentArmor(1);
+            resource = RenderBiped.getArmorResource(par1Entity, itemStack, 1, null);
+            Minecraft.getMinecraft().renderEngine.func_110577_a(resource);
             this.bipedHead.render(par7);
             this.bipedBody.render(par7);
             this.bipedRightArm.render(par7);
