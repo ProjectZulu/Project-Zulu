@@ -135,8 +135,8 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
             int powerPerLevel) {
         this.initialTicks = initialTicks;
         this.ticksPerLevel = ticksPerLevel;
-        this.durationScale = 12;
-        this.durationSpread = 10;
+        this.durationScale = durationScale;
+        this.durationSpread = durationSpread;
         this.powerPerLevel = powerPerLevel;
     }
 
@@ -183,12 +183,10 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
         if (getPotion().isPresent()) {
             int baseLevel = PotionParser.readLevel(damageMeta);
             int baseDuration = PotionParser.readDuration(damageMeta);
-
             int tempBase = (initialTicks + baseLevel * ticksPerLevel);
-            int tempBonus = (baseDuration * baseDuration + 11 - durationSpread + baseDuration)
-                    / (maxDuration * maxDuration + maxDuration);
-            int duration = tempBase * tempBonus;
-            
+            double tempBonus = (Math.pow(baseDuration + 11 - durationSpread, 2))
+                    / (Math.pow(maxDuration - 1, 2) + maxDuration - 1) * durationScale;
+            int duration = (int) (tempBase * tempBonus);
             int power = (PotionParser.readPower(damageMeta) + powerPerLevel * PotionParser.readLevel(damageMeta));
             effectList.add(new PotionEffect(getPotion().get().id, getPotion().get().isInstant() ? 1 : duration, power));
         }
