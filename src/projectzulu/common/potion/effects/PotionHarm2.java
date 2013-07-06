@@ -21,7 +21,8 @@ public class PotionHarm2 extends PotionZulu {
     }
 
     @Override
-    public void affectEntity(EntityLivingBase par1EntityLiving, EntityLivingBase par2EntityLiving, int amplifier, double par4) {
+    public void affectEntity(EntityLivingBase par1EntityLiving, EntityLivingBase par2EntityLiving, int amplifier,
+            double par4) {
         int damage = par4 < 0.5 ? (int) (0.5f * (amplifier * 3) + 1.0D) : (int) ((amplifier * 3) + 1.0D);
 
         if (!par2EntityLiving.isEntityUndead()) {

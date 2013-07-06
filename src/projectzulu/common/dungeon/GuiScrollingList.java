@@ -33,8 +33,7 @@ public abstract class GuiScrollingList {
     private boolean field_25123_p = true;
     private boolean field_27262_q;
     private int field_27261_r;
-    public static ResourceLocation background = new ResourceLocation(DefaultProps.dungeonDiretory
-            + "customspawnerbackground.png");
+    public static ResourceLocation background = new ResourceLocation(DefaultProps.dungeonKey, "customspawnerbackground.png");
 
     public GuiScrollingList(Minecraft client, int width, int height, int top, int bottom, int left, int entryHeight) {
         this.client = client;
@@ -217,7 +216,7 @@ public abstract class GuiScrollingList {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_FOG);
         Tessellator var18 = Tessellator.instance;
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.client.renderEngine.func_110581_b(getBackgroundTexture()).func_110552_b());
+        client.renderEngine.func_110577_a(getBackgroundTexture());
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         float var17 = 32.0F;
         var18.startDrawingQuads();
@@ -350,7 +349,7 @@ public abstract class GuiScrollingList {
 
     private void overlayBackground(int p_22239_1_, int p_22239_2_, int p_22239_3_, int p_22239_4_) {
         Tessellator var5 = Tessellator.instance;
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.client.renderEngine.func_110581_b(getBackgroundTexture()).func_110552_b());
+        client.renderEngine.func_110577_a(getBackgroundTexture());
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         float var6 = 32.0F;
         int leftOffset = 300;

@@ -12,9 +12,9 @@ import projectzulu.common.core.DefaultProps;
 public class GuiBrewingStandSingle extends GuiContainer {
 
     private TileEntityBrewingBase brewingStand;
-    
-    public static final ResourceLocation brewing1 = new ResourceLocation(DefaultProps.coreDiretory + "gui/brewing1.png");
-    public static final ResourceLocation brewing3 = new ResourceLocation(DefaultProps.coreDiretory + "gui/brewing3.png");
+
+    public static final ResourceLocation brewing1 = new ResourceLocation(DefaultProps.coreKey, "gui/brewing1.png");
+    public static final ResourceLocation brewing3 = new ResourceLocation(DefaultProps.coreKey, "gui/brewing3.png");
 
     public GuiBrewingStandSingle(InventoryPlayer inventoryPlayer, TileEntityBrewingBase tileEntity) {
         super(new ContainerBrewingStandSingle(inventoryPlayer, tileEntity));
@@ -43,7 +43,7 @@ public class GuiBrewingStandSingle extends GuiContainer {
         } else {
             this.mc.renderEngine.func_110577_a(brewing3);
         }
-        
+
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

@@ -18,7 +18,7 @@ public class GUISelectionList extends GuiScrollingList {
 
     Node currentNode;
     GuiButton previous;
-    public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonDiretory + "creaturelistgui.png");
+    public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonKey, "creaturelistgui.png");
 
     public GUISelectionList(GuiLimitedMobSpawner parent, Node rootSoundNode, ListType listType, int listWidth,
             Point screenSize, Point backgroundSize) {
@@ -67,11 +67,8 @@ public class GUISelectionList extends GuiScrollingList {
 
     @Override
     protected void drawBackground() {
-        parent.getMinecraft().renderEngine.func_110581_b(CREATURE_GUI).func_110552_b();
-        // int textureID =
-        // parent.getMinecraft().renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
+        parent.getMinecraft().renderEngine.func_110577_a(CREATURE_GUI);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        // parent.getMinecraft().renderEngine.bindTexture(textureID); //TODO: Commented
         int xCoord = (parent.width - parent.backgroundSize.getX()) / 2 + 230; // 277
         int yCoord = (parent.height - parent.backgroundSize.getY()) / 2;
         parent.drawTexturedModalRect(xCoord, yCoord, 0, 0, 91, 244);

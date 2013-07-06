@@ -9,7 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class PotionZulu extends Potion {
 
-    public ResourceLocation resourceLocation = new ResourceLocation(DefaultProps.coreDiretory + "gui/guielements.png");
+    public ResourceLocation resourceLocation = new ResourceLocation(DefaultProps.coreKey, "gui/guielements.png");
 
     protected PotionZulu(int par1, boolean par2, int par3) {
         super(par1, par2, par3);

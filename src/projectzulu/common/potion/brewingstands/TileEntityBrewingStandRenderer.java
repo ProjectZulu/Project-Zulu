@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityBrewingStandRenderer extends TileEntitySpecialRenderer {
+    
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double xRenderCoord, double yRenderCoord,
             double zRenderCoord, float var8) {

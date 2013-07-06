@@ -153,7 +153,7 @@ public class ProjectZulu_Core {
         ProjectZuluLog.info("Load Entity Biomes");
         CustomEntityManager.INSTANCE.loadBiomesFromConfig(modConfigDirectoryFile);
         ProjectZuluLog.info("Register Entity Spawns");
-//        CustomEntityManager.INSTANCE.addSpawns();
+        CustomEntityManager.INSTANCE.addSpawns();
 
         ProjectZuluLog.info("Initializing TerrainFeatures");
         featureGenerator.initialize(modConfigDirectoryFile);

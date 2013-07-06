@@ -19,7 +19,7 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
     /** The ModelSign instance used by the TileEntityTombstoneRenderer */
     private ModelTombstone modelSign = new ModelTombstone();
 
-    public static final ResourceLocation TOMBSTONE = new ResourceLocation(DefaultProps.blockDiretory+"Tombstone.png");
+    public static final ResourceLocation TOMBSTONE = new ResourceLocation(DefaultProps.blockKey, "Tombstone.png");
     
     public void renderTileEntityTombstoneAt(TileEntityTombstone par1TileEntityTombstone, double par2, double par4, double par6, float par8){
         Block var9 = par1TileEntityTombstone.getBlockType();
