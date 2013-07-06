@@ -4,14 +4,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.ResourceLocation;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.ServersideAttributeMap;
 import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ObfuscationHelper;
 import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.CharMatcher;
@@ -40,7 +42,7 @@ public class CreatureFields implements DataFields {
     Point screenSize;
     Point backgroundSize;
 
-    public static final ResourceLocation CREATURE_LIST = new ResourceLocation(DefaultProps.dungeonDiretory + "creaturelistgui.png");
+    public static final ResourceLocation CREATURE_LIST = new ResourceLocation(DefaultProps.dungeonKey, "creaturelistgui.png");
     
     CreatureFields(Minecraft mc) {
         this.mc = mc;
@@ -153,9 +155,12 @@ public class CreatureFields implements DataFields {
     }
 
     private void resetNBTList() {
-        Entity desiredEntity = EntityList.createEntityByName(creatureNameField.getText(),
+        EntityLivingBase desiredEntity = (EntityLivingBase) EntityList.createEntityByName(creatureNameField.getText(),
                 Minecraft.getMinecraft().theWorld);
         if (desiredEntity != null) {
+            ObfuscationHelper.setFieldUsingReflection("field_110155_d", EntityLivingBase.class, desiredEntity, true,
+                    new ServersideAttributeMap());
+            ObfuscationHelper.invokeMethod("func_110147_ax", "func_110147_ax", EntityLivingBase.class, desiredEntity);
             loadedNBT = new NBTTagCompound("Properties");
             desiredEntity.writeToNBT(loadedNBT);
             nbtTree = new NBTTree(loadedNBT);
@@ -296,11 +301,8 @@ public class CreatureFields implements DataFields {
     }
 
     private void bindTexture(Minecraft mc) {
-        /* Setup Required Texture Sheet */
-        this.mc.renderEngine.func_110581_b(CREATURE_LIST).func_110552_b();
-        // int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
+        mc.renderEngine.func_110577_a(CREATURE_LIST);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        // mc.renderEngine.bindTexture(textureID); //TODO: Commented
     }
 
     private void drawBackgroundBox(Point position, Point screenSize, Point backgroundSize, Point imageLocation,

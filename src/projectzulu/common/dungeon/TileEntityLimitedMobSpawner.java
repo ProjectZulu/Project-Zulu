@@ -357,7 +357,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
             }
         } else if (par1Entity instanceof EntityLiving && par1Entity.worldObj != null) {
             EntityLivingData livingData = null;
-            livingData = ((EntityLiving) par1Entity).func_110161_a(livingData);
+//            livingData = ((EntityLiving) par1Entity).func_110161_a(livingData);
         }
     }
 

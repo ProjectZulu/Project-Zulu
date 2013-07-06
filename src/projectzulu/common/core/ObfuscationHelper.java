@@ -1,7 +1,11 @@
 package projectzulu.common.core;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+
+import com.google.common.base.Optional;
 
 
 public class ObfuscationHelper {
@@ -23,6 +27,48 @@ public class ObfuscationHelper {
 	public static boolean isUnObfuscated(Class<?> regularClass, String regularClassName){
 	    return regularClass.getSimpleName().equals(regularClassName);
 	}
+	
+    public static Object invokeMethod(String eclipseName, String seargeName, Class<?> containingClass,
+            Object containterInstance, Object... args) {
+        try {
+            Method method;
+            method = getIntanceOfMethod(eclipseName, seargeName, containterInstance);
+            if (method == null) {
+                throw new NoSuchMethodException();
+            }
+            method.setAccessible(true);
+            return method.invoke(containterInstance, args);
+        } catch (NoSuchMethodException e) {
+            ProjectZuluLog.severe("Obfuscation needs updating to access method %s. Notify modmaker.", eclipseName);
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            ProjectZuluLog.severe("Obfuscation needs updating to access method %s. Notify modmaker.", eclipseName);
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            ProjectZuluLog.severe("Obfuscation needs updating to access method %s. Notify modmaker.", eclipseName);
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            ProjectZuluLog.severe("Obfuscation needs updating to access method %s. Notify modmaker.", eclipseName);
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            ProjectZuluLog.severe("Obfuscation needs updating to access method %s. Notify modmaker.", eclipseName);
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    private static Method getIntanceOfMethod(String eclipseName, String seargeName, Object containterInstance, Class<?>... topClassToLook) {
+        Class<?> classToSearch = containterInstance.getClass();
+        while (classToSearch.getSuperclass() != null) {
+            for (Method method : classToSearch.getDeclaredMethods()) {
+                if (eclipseName.equalsIgnoreCase(method.getName()) || seargeName.equalsIgnoreCase(method.getName())) {
+                    return method;
+                }
+            }
+            classToSearch = classToSearch.getSuperclass();
+        }
+        return null;
+    }
 	
 	/**
 	 * Helper method to Perform Reflection to Get Static Field of Provided Type. Field is assumed Private.

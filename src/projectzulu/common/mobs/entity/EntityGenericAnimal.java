@@ -50,7 +50,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     protected void func_110147_ax() {
         super.func_110147_ax();
         this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(getMaxHealth());
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.23000000417232513D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(getBaseSpeed());
     }
 
     public float getBaseSpeed() {
