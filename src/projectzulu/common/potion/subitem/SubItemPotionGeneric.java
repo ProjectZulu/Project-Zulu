@@ -181,18 +181,25 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     public List<PotionEffect> getPotionEffects(int damageMeta) {
         List<PotionEffect> effectList = new ArrayList<PotionEffect>();
         if (getPotion().isPresent()) {
-            int baseLevel = PotionParser.readLevel(damageMeta);
-            int baseDuration = PotionParser.readDuration(damageMeta);
-            int tempBase = (initialTicks + baseLevel * ticksPerLevel);
-            double tempBonus = (Math.pow(baseDuration + 11 - durationSpread, 2))
-                    / (Math.pow(maxDuration - 1, 2) + maxDuration - 1) * durationScale;
-            int duration = (int) (tempBase * tempBonus);
-            int power = (PotionParser.readPower(damageMeta) + powerPerLevel * PotionParser.readLevel(damageMeta));
-            effectList.add(new PotionEffect(getPotion().get().id, getPotion().get().isInstant() ? 1 : duration, power));
+            effectList.add(new PotionEffect(getPotion().get().id, getPotion().get().isInstant() ? 1
+                    : calculateDuration(damageMeta), calculatePower(damageMeta)));
         }
         return effectList;
     }
 
+    protected int calculateDuration(int damageMeta) {
+        int baseLevel = PotionParser.readLevel(damageMeta);
+        int baseDuration = PotionParser.readDuration(damageMeta);
+        int tempBase = (initialTicks + baseLevel * ticksPerLevel);
+        double tempBonus = (Math.pow(baseDuration + 11 - durationSpread, 2))
+                / (Math.pow(maxDuration - 1, 2) + maxDuration - 1) * durationScale;
+        return (int) (tempBase * tempBonus);
+    }
+    
+    protected int calculatePower(int damageMeta) {
+        return (PotionParser.readPower(damageMeta) + powerPerLevel * PotionParser.readLevel(damageMeta));
+    }
+    
     @Override
     public void getSubItems(int itemID, CreativeTabs creativeTab, List<ItemStack> list) {
         if (!getPotion().isPresent()) {
