@@ -16,6 +16,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ItemGenerics.Properties;
+import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.potion.EntityPZPotion;
 import projectzulu.common.potion.PotionParser;
 
@@ -42,7 +43,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     protected String[] strengthPostfixes = new String[] { "", "Thickness", "Strength", "Fortification" };
 
     enum TYPE {
-        CHEMICAL, POWER, DURATION, TIER, NONE;
+        CHEMICAL, POWER, DURATION, TIER, SPLASH, NONE;
     }
 
     SubItemPotionGeneric(int itemID, int subID, String baseName) {
@@ -55,8 +56,8 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     }
 
     @Override
-    @SuppressWarnings("incomplete-switch")
     public final ItemStack getPotionResult(ItemStack ingredient, ItemStack brewingStack) {
+        ProjectZuluLog.info("Ingredient Type is %s", getIngredientType(ingredient, brewingStack).toString());
         switch (getIngredientType(ingredient, brewingStack)) {
         case POWER: {
             int power = PotionParser.readPower(brewingStack.getItemDamage());
@@ -101,8 +102,18 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
             }
             break;
         }
-        case CHEMICAL:
+        case CHEMICAL: {
             return getChemicalPotionResult(ingredient, brewingStack);
+        }
+        case SPLASH: {
+            if (!PotionParser.isSplash(brewingStack.getItemDamage())) {
+                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setSplash(brewingStack
+                        .getItemDamage()));
+            }
+            break;
+        }
+        case NONE:
+            break;
         }
         return super.getPotionResult(ingredient, brewingStack);
     }
@@ -116,6 +127,8 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
             return TYPE.POWER;
         } else if (ingredient.itemID == Item.lightStoneDust.itemID) {
             return TYPE.DURATION;
+        } else if (ingredient.itemID == Item.gunpowder.itemID) {
+            return TYPE.SPLASH;
         } else if (ItemList.genericCraftingItems.isPresent()
                 && ingredient.itemID == ItemList.genericCraftingItems.get().itemID
                 && ingredient.getItemDamage() == Properties.ShinyBauble.meta) {
