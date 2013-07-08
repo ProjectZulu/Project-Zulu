@@ -1,13 +1,14 @@
 package projectzulu.common.mobs.entityai;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.Vec3;
 import projectzulu.common.mobs.entity.EntityGenericAnimal;
 
 public class EntityAIMoveTowardsTarget extends EntityAIBase {
     private EntityGenericAnimal theEntity;
-    private EntityLiving targetEntity;
+    private EntityLivingBase targetEntity;
     private double movePosX;
     private double movePosY;
     private double movePosZ;

@@ -4,8 +4,10 @@ import java.util.EnumSet;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLiving;
 
 import org.lwjgl.opengl.GL11;
@@ -60,10 +62,10 @@ public class BossHealthDisplayTicker implements ITickHandler {
                 / 2, healthBarHeight - 10, 16711935);
 
         /* Draw Health Bar */
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/gui/icons.png"));
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.func_110581_b(Gui.field_110324_m).func_110552_b());
         short fullHealthBarWidth = 182;
         int healthBarOffset = screenWidth / 2 - fullHealthBarWidth / 2;
-        int currHealthBarWidth = (int) ((float) boss.getDWHealth() / (float) boss.getMaxHealth() * (fullHealthBarWidth + 1));
+        int currHealthBarWidth = (int) ((float) boss.func_110143_aJ() / (float) boss.func_110138_aP() * (fullHealthBarWidth + 1));
 
         this.drawTexturedModalRect(healthBarOffset, healthBarHeight, 0, 74, fullHealthBarWidth, 5);
         if (currHealthBarWidth > 0) {

@@ -12,11 +12,6 @@ public class EntityGenericAgeable extends EntityGenericCreature{
 	public EntityGenericAgeable(World par1World) {
 		super(par1World);
 	}
-
-	@Override
-	public int getMaxHealth() {
-		return 20;
-	}
 	
 	@Override
 	protected void entityInit() {

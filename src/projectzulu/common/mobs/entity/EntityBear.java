@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAIMate;
@@ -18,44 +19,52 @@ import projectzulu.common.mobs.entityai.EntityAIPanic;
 import projectzulu.common.mobs.entityai.EntityAITempt;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 
-public class EntityBear extends EntityGenericAnimal implements IAnimals{		
-	
-	public EntityBear(World par1World){
-		super(par1World);
-		
-		this.moveSpeed = 0.3f;
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, this.moveSpeed));
+public class EntityBear extends EntityGenericAnimal implements IAnimals {
 
-		/* Attack On Collide Declared in SubClass */
-		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.itemID, false));
-		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
-		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
+    public EntityBear(World par1World) {
+        super(par1World);
 
-		this.targetTasks.addTask(3,	new EntityAIHurtByTarget(this, false, false));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
-	}
+        movementSpeed = 0.3f;
+        getNavigator().setAvoidsWater(true);
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 1.25f));
 
-	@Override
-	protected String getHurtSound() { return "sounds.bearliving"; }
-	
-	@Override
-	public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
-		return true;
-	}
-	
-	/** 
-	 * Checks if the Provided ItemStack is considered an item that should be used for Breeding
-	 * This is overriden by each Entity if deviations from default are desired
-	 */
-	public boolean isValidBreedingItem(ItemStack itemStack){
-		if( itemStack != null && (itemStack.itemID == Item.fishRaw.itemID || itemStack.itemID == Item.fishCooked.itemID) ){
-			return true;
-		}else{
-			return super.isValidBreedingItem(itemStack);
-		}
-	}
+        /* Attack On Collide Declared in SubClass */
+        tasks.addTask(5, new EntityAIMate(this, 1.0f));
+        tasks.addTask(6, new EntityAITempt(this, 1.2f, Item.spiderEye.itemID, false));
+        tasks.addTask(7, new EntityAIFollowParent(this, 1.1f));
+        tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
+
+        targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
+        targetTasks.addTask(4,
+                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+                        EntityPlayer.class, 16.0F, 0, true));
+        targetTasks.addTask(4,
+                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+                        EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
+    }
+
+    @Override
+    protected String getHurtSound() {
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "bearliving";
+    }
+
+    @Override
+    public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
+        return true;
+    }
+
+    /**
+     * Checks if the Provided ItemStack is considered an item that should be used for Breeding This is overriden by each
+     * Entity if deviations from default are desired
+     */
+    @Override
+    public boolean isValidBreedingItem(ItemStack itemStack) {
+        if (itemStack != null
+                && (itemStack.itemID == Item.fishRaw.itemID || itemStack.itemID == Item.fishCooked.itemID)) {
+            return true;
+        } else {
+            return super.isValidBreedingItem(itemStack);
+        }
+    }
 }

@@ -7,84 +7,86 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.core.GuiID;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockUniversalFlowerPot extends BlockContainer{
-	
+public class BlockUniversalFlowerPot extends BlockContainer {
+
     public final int renderID;
-	public BlockUniversalFlowerPot(int par1, int renderID) {
-		super(par1, Material.wood);
-        this.setBlockBoundsForItemRender();        
+
+    public BlockUniversalFlowerPot(int par1, int renderID) {
+        super(par1, Material.wood);
+        this.setBlockBoundsForItemRender();
         float var1 = 0.375F;
         float var2 = var1 / 2.0F;
         this.setBlockBounds(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, var1, 0.5F + var2);
         setHardness(0.0F);
         setStepSound(soundPowderFootstep);
         this.renderID = renderID;
-	}
-	
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister){
-		this.blockIcon = par1IconRegister.registerIcon("flowerPot");
+    public void registerIcons(IconRegister par1IconRegister) {
+        this.blockIcon = par1IconRegister.registerIcon("flowerPot");
 
     }
-	
+
     /**
      * The type of render function that is called for this block
      */
     @Override
-    public int getRenderType(){
+    public int getRenderType() {
         return renderID;
     }
-	
+
     /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
+     * Is this block (a) opaque and (b) a full 1m cube? This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
     @Override
-    public boolean isOpaqueCube(){
+    public boolean isOpaqueCube() {
         return false;
     }
-	
+
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
     @Override
-    public boolean renderAsNormalBlock(){
+    public boolean renderAsNormalBlock() {
         return false;
     }
-	
+
     /**
      * Sets the block's bounds for rendering it as an item
      */
     @Override
-    public void setBlockBoundsForItemRender(){
+    public void setBlockBoundsForItemRender() {
         float var1 = 0.375F;
         float var2 = var1 / 2.0F;
         this.setBlockBounds(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, var1, 0.5F + var2);
     }
-	
-	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		return new TileEntityUniversalFlowerPot();
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int idk, float what, float these, float are) {
-		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-		if (tileEntity == null || player.isSneaking()) {
-			return false;
-		}
-		//opens gui, to be implemented later
-		player.openGui(ProjectZulu_Core.modInstance, 1, world, x, y, z);
-		return true;
-	}
-	
-	@Override
-	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-		super.breakBlock(world, x, y, z, par5, par6);
-	}
+
+    @Override
+    public TileEntity createNewTileEntity(World var1) {
+        return new TileEntityUniversalFlowerPot();
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what,
+            float these, float are) {
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        if (tileEntity == null || player.isSneaking()) {
+            return false;
+        }
+        // opens gui, to be implemented later
+        player.openGui(ProjectZulu_Core.modInstance, GuiID.FlowerPot.getID(), world, x, y, z);
+        return true;
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+        super.breakBlock(world, x, y, z, par5, par6);
+    }
 }

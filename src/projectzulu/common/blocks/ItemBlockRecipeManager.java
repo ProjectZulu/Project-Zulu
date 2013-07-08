@@ -25,9 +25,13 @@ public class ItemBlockRecipeManager {
 		}
 		setupCampfireRecipies();
 		setupArmorRecipies();
+		
+        /* Tombstone */
+        addRecipe(new OptionalItemStack(BlockList.tombstone), new String[] { "CCC", "CSC", "CCC" }, new char[] { 'C',
+                'S' }, new OptionalItemStack(Block.cobblestone), new OptionalItemStack(Item.sign));
 
 		/* Palm Tree Recipies */
-		addSmelting(new OptionalItemStack(Item.coal), 0, new OptionalItemStack(BlockList.palmTreeLog));
+        addSmelting(new OptionalItemStack(Item.coal, 1, 1), 0, new OptionalItemStack(BlockList.palmTreeLog));
 		addShapelessRecipe(new OptionalItemStack(BlockList.palmTreePlank,4), new OptionalItemStack(BlockList.palmTreeLog));
 		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{"X  ","X  ","   "}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
 		addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[]{" X "," X ","   "}, 'X', new OptionalItemStack(BlockList.palmTreeSlab));
@@ -67,11 +71,25 @@ public class ItemBlockRecipeManager {
 		addRecipe(new OptionalItemStack(Item.silk,6), new String[]{"  C","  C","  C"}, 'C', new OptionalItemStack(BlockList.tumbleweed));
 		addShapelessRecipe(new OptionalItemStack(BlockList.aloeVera,2), new OptionalItemStack(BlockList.tumbleweed));
 		
+		/* Brewing Stand */
+        shapedOreRecipe(new OptionalItemStack(BlockList.brewingStandSingle), true,
+                new String[] { "GGG", "CLC", "LLL" }, new char[] { 'G', 'C', 'L' }, new OptionalItemStack(Block.glass),
+                new OptionalItemStack(Block.cobblestone), new OptionalItemStack("log"));
+        shapedOreRecipe(new OptionalItemStack(BlockList.brewingStandSingle), true,
+                new String[] { "GGG", "CLC", "LLL" }, new char[] { 'G', 'C', 'L' }, new OptionalItemStack(Block.glass),
+                new OptionalItemStack("cobbleRed"), new OptionalItemStack("log"));
+        shapedOreRecipe(new OptionalItemStack(BlockList.brewingStandTriple), true,
+                new String[] { "GGG", "LNL", "NNN" }, new char[] { 'G', 'L', 'N' }, new OptionalItemStack(Block.glass),
+                new OptionalItemStack(Item.glowstone), new OptionalItemStack(Block.netherBrick));
+        
 		/* Misc Generic Craftables */
 		if(ItemList.genericCraftingItems.isPresent()){
 			ChestGenHooks.getInfo(DUNGEON_CHEST).addItem(new WeightedRandomChestContent(
-					new ItemStack(ItemList.genericCraftingItems.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 3, 8, 35));			
+					new ItemStack(ItemList.genericCraftingItems.get(), 1, ItemGenerics.Properties.ShinyBauble.meta()), 3, 8, 35));		
 		}
+        addRecipe(new OptionalItemStack(ItemList.genericCraftingItems, 1, ItemGenerics.Properties.ShinyBauble.meta()),
+                new String[] { " G ", "GNG", " G " }, new char[] { 'G', 'N' }, new OptionalItemStack(
+                        Item.glowstone), new OptionalItemStack(Item.netherStalkSeeds));
 		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems,2,ItemGenerics.Properties.Salt.meta()),
 				new OptionalItemStack(Item.gunpowder));
 		addRecipe(new OptionalItemStack(BlockList.spike), new String[]{"   ","   ","TTT"}, 'T',

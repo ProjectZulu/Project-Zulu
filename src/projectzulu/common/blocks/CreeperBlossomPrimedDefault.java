@@ -1,15 +1,18 @@
 package projectzulu.common.blocks;
 
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.entitydeclaration.CreatureDeclaration;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class CreeperBlossomPrimedDefault extends CreatureDeclaration{
+public class CreeperBlossomPrimedDefault extends CreatureDeclaration {
 
 	public CreeperBlossomPrimedDefault() {
 		super("CreeperBlossomPrimed", EntityCreeperBlossomPrimed.class, null);
 		setRegistrationProperties(128, 3, true);
-		setModelAndRender("", "projectzulu.common.blocks.RenderCreeperBlossomPrimed");
 	}
 	
 	@Override
@@ -20,4 +23,9 @@ public class CreeperBlossomPrimedDefault extends CreatureDeclaration{
 		super.outputDataToList(config, customMobData);
 	}
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Render getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+        return new RenderCreeperBlossomPrimed(0.5f);
+    }
 }

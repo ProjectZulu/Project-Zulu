@@ -7,14 +7,14 @@ import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import cpw.mods.fml.common.Loader;
 
-public class EntityBrownBear extends EntityBear{
+public class EntityBrownBear extends EntityBear {
 
-	public EntityBrownBear(World par1World) {
-		super(par1World);
-		setSize(1.5f, 2.1f);
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
-	}
-	
+    public EntityBrownBear(World par1World) {
+        super(par1World);
+        setSize(1.5f, 2.1f);
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false));
+    }
+
     /**
      * Set Entity Attack Strength This is overriden by each Entity if deviations from default are desired
      */
@@ -32,12 +32,6 @@ public class EntityBrownBear extends EntityBear{
         default:
             return 3;
         }
-    }
-	
-    @Override
-    public String getTexture() {
-        this.texture = DefaultProps.mobDiretory + "bearbrown.png";
-        return super.getTexture();
     }
 
     @Override

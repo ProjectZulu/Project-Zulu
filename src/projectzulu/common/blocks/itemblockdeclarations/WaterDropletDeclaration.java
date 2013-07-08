@@ -18,8 +18,7 @@ public class WaterDropletDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.waterDroplets = Optional.of(new ItemFoodProjectZulu(iD, 1, 0.6f, false)
-                .setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+        ItemList.waterDroplets = Optional.of(new ItemFoodProjectZulu(iD, 1, 0.6f, false, name));
         return true;
     }
 

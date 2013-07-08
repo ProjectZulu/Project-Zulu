@@ -91,7 +91,7 @@ public class BlockCampfire extends Block implements ITempBlock{
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister){
     	for (Type type : Type.values()) {
-    		type.setIcon(par1IconRegister.registerIcon(getUnlocalizedName2()+"_"+type.toString().toLowerCase()));
+    		type.setIcon(par1IconRegister.registerIcon(getUnlocalizedName().substring(5)+"_"+type.toString().toLowerCase()));
 		}
     }
     

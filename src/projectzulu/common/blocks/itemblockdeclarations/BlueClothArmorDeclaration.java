@@ -25,19 +25,19 @@ public class BlueClothArmorDeclaration extends ItemSetDeclaration {
         switch (partIndex) {
         case 0:
             ItemList.blueClothHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.desertClothMaterial,
-                    renderIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 0, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 1:
             ItemList.blueClothChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.desertClothMaterial,
-                    renderIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 1, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 2:
             ItemList.blueClothLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.desertClothMaterial,
-                    renderIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 2, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 3:
             ItemList.blueClothBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.desertClothMaterial,
-                    renderIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 3, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         }
         return false;

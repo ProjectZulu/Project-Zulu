@@ -18,8 +18,7 @@ public class CoconutItem extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.coconutItem = Optional.of(new ItemCoconutItem(iD, 4, false).setUnlocalizedName(DefaultProps.blockKey
-                + ":" + name.toLowerCase()));
+        ItemList.coconutItem = Optional.of(new ItemCoconutItem(iD, false, name));
         return true;
     }
 

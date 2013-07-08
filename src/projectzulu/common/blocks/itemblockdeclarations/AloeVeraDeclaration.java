@@ -22,8 +22,9 @@ public class AloeVeraDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.aloeVera = Optional.of((new BlockAloeVera(iD)).setUnlocalizedName(DefaultProps.blockKey + ":"
-                + name.toLowerCase()));
+        BlockList.aloeVera = Optional.of((new BlockAloeVera(iD)).setUnlocalizedName(
+                DefaultProps.blockKey + ":" + name.toLowerCase()).func_111022_d(
+                DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

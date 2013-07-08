@@ -25,19 +25,19 @@ public class IronScaleArmorDeclaration extends ItemSetDeclaration {
         switch (partIndex) {
         case 0:
             ItemList.ironScaleArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.ironScaleMaterial,
-                    renderIndex, 0)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 0, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 1:
             ItemList.ironScaleArmorChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.ironScaleMaterial,
-                    renderIndex, 1)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 1, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 2:
             ItemList.ironScaleArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.ironScaleMaterial,
-                    renderIndex, 2)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 2, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 3:
             ItemList.ironScaleArmorBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.ironScaleMaterial,
-                    renderIndex, 3)).setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+                    renderIndex, 3, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         }
         return false;

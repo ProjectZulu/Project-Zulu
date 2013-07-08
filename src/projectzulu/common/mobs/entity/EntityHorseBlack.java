@@ -13,16 +13,6 @@ public class EntityHorseBlack extends EntityHorseBase{
 		super(par1World);
 	}
 	
-	@Override
-	public String getTexture() {
-		if(getSaddled()){
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_black_saddled.png";
-		}else{
-				this.texture = DefaultProps.mobDiretory + "Horse/horse_black.png";
-		}
-		return super.getTexture();
-	}
-	
 	/**
 	 * Checks if the entity's current position is a valid location to spawn this entity.
 	 */

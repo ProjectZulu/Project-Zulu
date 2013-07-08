@@ -4,9 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
@@ -16,11 +17,12 @@ import projectzulu.common.mobs.entity.EntityGenericAnimal;
 import projectzulu.common.mobs.entity.EntityGenericTameable;
 import projectzulu.common.mobs.entity.EntityStates;
 
-public class RenderTameable extends RenderLiving {
+public class RenderTameable extends RenderGenericLiving {
+    
     protected float zLevel = 0.1F;
 
-    public RenderTameable(ModelBase modelBase, float par1) {
-        super(modelBase, par1);
+    public RenderTameable(ModelBase modelBase, float shadowSize, ResourceLocation textureLocation) {
+        super(modelBase, shadowSize, textureLocation);
     }
 
     public void renderTameable(EntityGenericAnimal par1EntityFox, double par2, double par4, double par6, float par8,
@@ -78,8 +80,8 @@ public class RenderTameable extends RenderLiving {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, Properties.namePlateOpacity);
 
             /* Draw Background */
-            String textureLocation = DefaultProps.coreDiretory + "gui/guielements.png";
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture(textureLocation));
+            ResourceLocation textureLocation = new ResourceLocation(DefaultProps.coreDiretory + "gui/guielements.png");
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.func_110581_b(textureLocation).func_110552_b());
             int iconXCoord = 0;
             int iconYCoord = 0;
             iconXCoord = 16;
@@ -146,7 +148,7 @@ public class RenderTameable extends RenderLiving {
             }
 
             /* Draw Health Icon(s) */
-            int curHealth = tameableEntity.getHealth();
+            int curHealth = MathHelper.ceiling_float_int(tameableEntity.func_110143_aJ());
             zLevel = 0.1f;
             screenLocationX = -18 - 3;
             screenLocationY = 11;
@@ -194,5 +196,4 @@ public class RenderTameable extends RenderLiving {
         var9.addVertexWithUV(par1 + 0, par2 + 0, this.zLevel, (par3 + 0) * var7, (par4 + 0) * var8);
         var9.draw();
     }
-
 }

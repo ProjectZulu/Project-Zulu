@@ -30,7 +30,7 @@ public class MobSpawnerWithMeta extends BlockWithMeta{
 				position.posZ);
 
 		if (tileEntityMobSpawner != null){
-			tileEntityMobSpawner.func_98049_a().setMobID(mobName);
+			tileEntityMobSpawner.getSpawnerLogic().setMobID(mobName);
 		}
 	}
 

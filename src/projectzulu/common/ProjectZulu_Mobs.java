@@ -4,6 +4,7 @@ import java.io.File;
 
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.mobs.MobSounds;
 import projectzulu.common.mobs.entitydefaults.AlligatorDeclaration;
 import projectzulu.common.mobs.entitydefaults.ArmadilloDeclaration;
 import projectzulu.common.mobs.entitydefaults.BearBlackDeclaration;
@@ -59,43 +60,46 @@ import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid = DefaultProps.MobsModId, name = "Project Zulu Mobs", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-
 public class ProjectZulu_Mobs {
-	
 
-	private static int id = 300;
-	private static int eggID = 300;
-	
-	@Instance(DefaultProps.MobsModId)
-	public static ProjectZulu_Mobs modInstance;
-	File modConfigDirectory;
-	
-	@PreInit
-	public void preInit(FMLPreInitializationEvent event){
-		modConfigDirectory = event.getModConfigurationDirectory();
-		declareModuleEntities();
-	}
+    @Instance(DefaultProps.MobsModId)
+    public static ProjectZulu_Mobs modInstance;
 
-	@Init
-	public void load(FMLInitializationEvent event){
-		ProjectZulu_Core.proxy.registerMobSoundEvent();
-	}
-	
-	@PostInit
-	public void load(FMLPostInitializationEvent event){}
-	
-	private void declareModuleEntities(){
-		CustomEntityManager.INSTANCE.addEntity(
-			new ArmadilloDeclaration(), 	new SandwormDeclaration(), 		new LizardDeclaration(), 		new LizardSpitDeclaration(),
-			new PharaohDeclaration(),		new MummyDeclaration(),			new VultureDeclaration(), 		new TreeEntDeclaration(),
-			new MammothDeclaration(), 		new FoxDeclaration(),			new BoarDeclaration(), 			new MimicDeclaration(),
-			new AlligatorDeclaration(), 	new FrogDeclaration(),			new PenguinDeclaration(),		new BeaverDeclaration(),
-			new BearBlackDeclaration(),		new BearBrownDeclaration(),		new BearPolarDeclaration(),		new OstrichDeclaration(),
-			new RhinoDeclaration(),			new RabbitDeclaration(),		new RedFinchDeclaration(),		new GreenFinchDeclaration(),
-			new BlueFinchDeclaration(),		new GorillaDeclaration(),		new GiraffeDeclaration(),		new ElephantDeclaration(),
-			new HorseBeigeDeclaration(),	new HorseBlackDeclaration(),	new HorseBrownDeclaration(),	new HorseDarkBlackDeclaration(),
-			new HorseDarkBrownDeclaration(),new HorseGreyDeclaration(),		new HorseWhiteDeclaration(),	new EagleDeclaration(),
-			new HornbillDeclaration(),		new PelicanDeclaration(),		new MinotaurDeclaration(),		new HauntedArmorDeclaration(),
-			new CentipedeDeclaration(),		new FollowerDeclaration(),		new HorseRandomDeclaration());
-	}
+    static {
+        declareModuleEntities();
+    }
+
+    private static int id = 300;
+    private static int eggID = 300;
+
+    @PreInit
+    public void preInit(FMLPreInitializationEvent event) {
+        MobSounds.registerMobSounds();
+    }
+
+    @Init
+    public void load(FMLInitializationEvent event) {
+        
+    }
+
+    @PostInit
+    public void load(FMLPostInitializationEvent event) {
+    }
+
+    private static void declareModuleEntities() {
+        CustomEntityManager.INSTANCE.addEntity(new ArmadilloDeclaration(), new SandwormDeclaration(),
+                new LizardDeclaration(), new LizardSpitDeclaration(), new PharaohDeclaration(), new MummyDeclaration(),
+                new VultureDeclaration(), new TreeEntDeclaration(), new MammothDeclaration(), new FoxDeclaration(),
+                new BoarDeclaration(), new MimicDeclaration(), new AlligatorDeclaration(), new FrogDeclaration(),
+                new PenguinDeclaration(), new BeaverDeclaration(), new BearBlackDeclaration(),
+                new BearBrownDeclaration(), new BearPolarDeclaration(), new OstrichDeclaration(),
+                new RhinoDeclaration(), new RabbitDeclaration(), new RedFinchDeclaration(),
+                new GreenFinchDeclaration(), new BlueFinchDeclaration(), new GorillaDeclaration(),
+                new GiraffeDeclaration(), new ElephantDeclaration(), new HorseBeigeDeclaration(),
+                new HorseBlackDeclaration(), new HorseBrownDeclaration(), new HorseDarkBlackDeclaration(),
+                new HorseDarkBrownDeclaration(), new HorseGreyDeclaration(), new HorseWhiteDeclaration(),
+                new EagleDeclaration(), new HornbillDeclaration(), new PelicanDeclaration(), new MinotaurDeclaration(),
+                new HauntedArmorDeclaration(), new CentipedeDeclaration(), new FollowerDeclaration(),
+                new HorseRandomDeclaration());
+    }
 }

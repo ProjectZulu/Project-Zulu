@@ -1,6 +1,7 @@
 package projectzulu.common.mobs.entityai;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.MathHelper;
@@ -10,7 +11,7 @@ import projectzulu.common.mobs.entity.EntityStates;
 
 public class EntityAIFollowOwner extends EntityAIBase{
     private EntityGenericAnimal thePet;
-    private EntityLiving theOwner;
+    private EntityLivingBase theOwner;
     World theWorld;
     private float moveSpeed;
     private PathNavigate petPathfinder;
@@ -33,7 +34,7 @@ public class EntityAIFollowOwner extends EntityAIBase{
      * Returns whether the EntityAIBase should begin execution.
      */
     public boolean shouldExecute(){
-        EntityLiving var1 = this.thePet.getOwner();
+        EntityLivingBase var1 = this.thePet.getOwner();
 
         if (var1 == null){
             return false;

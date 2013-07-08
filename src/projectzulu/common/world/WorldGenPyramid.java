@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityList;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.MathHelper;
@@ -13,10 +14,10 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.ChestGenHooks;
-import projectzulu.common.core.DefaultProps;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entity.EntityMimic;
-import cpw.mods.fml.common.Loader;
+import projectzulu.common.world.terrain.PyramidFeature;
 
 public class WorldGenPyramid extends WorldGenerator
 {
@@ -34,7 +35,8 @@ public class WorldGenPyramid extends WorldGenerator
 		this.chanceOutOf = par4;
 	}
 
-	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5){
+	@Override
+    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5){
 		//C is the number of tries to palce desert in the provided chunk
 		for (int c = 0; c < 1; c++) {
 			if (chancePerChunk - par2Random.nextInt(chanceOutOf) >= 0){
@@ -314,26 +316,30 @@ public class WorldGenPyramid extends WorldGenerator
 							if(j == 0 && 20 - classRandom.nextInt(100) >= 0 ){
 								int holdRand = classRandom.nextInt(2);
 
-								if( classRandom.nextInt(5) == 0 ){
-									/* Spawn Chest */
-									TileEntityChest chest = new TileEntityChest();
+                                if (classRandom.nextInt(5) == 0) {
+                                    /* Spawn Chest */
+                                    TileEntityChest chest = new TileEntityChest();
 
-									par1World.setBlock( 
-											(int)allCells[i][k].getLocation(m).xCoord,
-											(int)allCells[i][k].getLocation(m).yCoord+j,
-											(int)allCells[i][k].getLocation(m).zCoord,
-											Block.chest.blockID);
-									par1World.setBlockTileEntity((int)allCells[i][k].getLocation(m).xCoord,
-											(int)allCells[i][k].getLocation(m).yCoord+j,
-											(int)allCells[i][k].getLocation(m).zCoord,
-											chest);
-									for (int slot = 0; slot < chest.getSizeInventory(); slot++)
-									{
-										if( 15 - classRandom.nextInt(100) >= 0 ){
-											chest.setInventorySlotContents(slot, ChestGenHooks.getOneItem(DUNGEON_CHEST, classRandom));
-										}
-									}
-
+                                    par1World.setBlock((int) allCells[i][k].getLocation(m).xCoord,
+                                            (int) allCells[i][k].getLocation(m).yCoord + j,
+                                            (int) allCells[i][k].getLocation(m).zCoord, Block.chest.blockID);
+                                    par1World.setBlockTileEntity((int) allCells[i][k].getLocation(m).xCoord,
+                                            (int) allCells[i][k].getLocation(m).yCoord + j,
+                                            (int) allCells[i][k].getLocation(m).zCoord, chest);
+                                    PyramidFeature terrainFeature = (PyramidFeature) ProjectZulu_Core.featureGenerator
+                                            .getRegisteredStructure(PyramidFeature.PYRAMID);
+                                    int lootAmount = 0;
+                                    for (int slot = 0; slot < chest.getSizeInventory(); slot++) {
+                                        if (terrainFeature.chestLootChance - classRandom.nextInt(100) - 1 >= 0) {
+                                            chest.setInventorySlotContents(slot,
+                                                    ChestGenHooks.getOneItem(DUNGEON_CHEST, classRandom));
+                                            lootAmount++;
+                                            if (terrainFeature.chestMaxLoot > 0
+                                                    && lootAmount >= terrainFeature.chestMaxLoot) {
+                                                break;
+                                            }
+                                        }
+                                    }
 								}else if(!par1World.isRemote){
 									/* Place Air cause we don't want to spawn Inside something*/
 									par1World.setBlock( 
@@ -363,52 +369,54 @@ public class WorldGenPyramid extends WorldGenerator
 						}
 					}
 
-					/*Cell Type 3 Generate Air*/
-					if( allCells[i][k].getLocation(m) != null && allCells[i][k].getCellType() == 3){
-						for (int j = 0; j < floorHeight; j++) {
+                    /* Cell Type 3 Generate Air */
+                    if (allCells[i][k].getLocation(m) != null && allCells[i][k].getCellType() == 3) {
+                        for (int j = 0; j < floorHeight; j++) {
 
-							par1World.setBlock( 
-									(int)allCells[i][k].getLocation(m).xCoord,
-									(int)allCells[i][k].getLocation(m).yCoord+j,
-									(int)allCells[i][k].getLocation(m).zCoord,
-									0);
-						}
-					}
+                            par1World.setBlock((int) allCells[i][k].getLocation(m).xCoord,
+                                    (int) allCells[i][k].getLocation(m).yCoord + j,
+                                    (int) allCells[i][k].getLocation(m).zCoord, 0);
+                        }
+                    }
 
-					/*Cell Type 4 Generate Spawner*/
-					if( allCells[i][k].getLocation(m) != null && allCells[i][k].getCellType() == 4){
-						for (int j = 0; j < floorHeight; j++) {
-							if(j == 0 && m == 0){
+                    /* Cell Type 4 Generate Spawner */
+                    if (allCells[i][k].getLocation(m) != null && allCells[i][k].getCellType() == 4) {
+                        for (int j = 0; j < floorHeight; j++) {
+                            if (j == 0 && m == 0) {
+                                PyramidFeature terrainFeature = (PyramidFeature) ProjectZulu_Core.featureGenerator
+                                        .getRegisteredStructure(PyramidFeature.PYRAMID);
+                                String entityName = terrainFeature.getEntityEntry(classRandom);
+                                if (EntityList.stringToClassMapping.containsKey(entityName)) {
+                                    /* Create Mob Spawner */
+                                    par1World.setBlock((int) allCells[i][k].getLocation(m).xCoord,
+                                            (int) allCells[i][k].getLocation(m).yCoord + j,
+                                            (int) allCells[i][k].getLocation(m).zCoord, Block.mobSpawner.blockID);
+                                    TileEntityMobSpawner var19 = (TileEntityMobSpawner) par1World.getBlockTileEntity(
+                                            (int) allCells[i][k].getLocation(m).xCoord,
+                                            (int) allCells[i][k].getLocation(m).yCoord + j,
+                                            (int) allCells[i][k].getLocation(m).zCoord);
+                                    var19.getSpawnerLogic().setMobID(entityName);
+                                    ProjectZuluLog.info("Spawner with entity name %s @(%s, %s, %s).", entityName,
+                                            (int) allCells[i][k].getLocation(m).xCoord,
+                                            (int) allCells[i][k].getLocation(m).yCoord + j,
+                                            (int) allCells[i][k].getLocation(m).zCoord);
 
-								/* Create Mob Spawner */
-								par1World.setBlock( 
-										(int)allCells[i][k].getLocation(m).xCoord,
-										(int)allCells[i][k].getLocation(m).yCoord+j,
-										(int)allCells[i][k].getLocation(m).zCoord,
-										Block.mobSpawner.blockID);
-								TileEntityMobSpawner var19 = (TileEntityMobSpawner)par1World.getBlockTileEntity(
-										(int)allCells[i][k].getLocation(m).xCoord,
-										(int)allCells[i][k].getLocation(m).yCoord+j,
-										(int)allCells[i][k].getLocation(m).zCoord);
-
-								if (var19 != null){
-									if( Loader.isModLoaded("ProjectZulu|Mobs") ){
-										var19.func_98049_a().setMobID(DefaultProps.CoreModId.concat(".Entity Mummy") );
-									}else{
-										var19.func_98049_a().setMobID( "Zombie" );
-									}
-								}
-							}else{
-								par1World.setBlock( 
-										(int)allCells[i][k].getLocation(m).xCoord,
-										(int)allCells[i][k].getLocation(m).yCoord+j,
-										(int)allCells[i][k].getLocation(m).zCoord,
-										0);
-							}
-						}
-					}
-
-
+                                } else {
+                                    if (!entityName.equalsIgnoreCase("EMPTY")) {
+                                        ProjectZuluLog
+                                                .severe("Entity with name %s does not seem to exist.", entityName);
+                                    }
+                                    par1World.setBlock((int) allCells[i][k].getLocation(m).xCoord,
+                                            (int) allCells[i][k].getLocation(m).yCoord + j,
+                                            (int) allCells[i][k].getLocation(m).zCoord, 0);
+                                }
+                            } else {
+                                par1World.setBlock((int) allCells[i][k].getLocation(m).xCoord,
+                                        (int) allCells[i][k].getLocation(m).yCoord + j,
+                                        (int) allCells[i][k].getLocation(m).zCoord, 0);
+                            }
+                        }
+                    }
 				}
 			}
 		}

@@ -19,8 +19,9 @@ public class CreeperBlossomDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.creeperBlossom = Optional.of(new BlockCreeperBlossom(iD).setUnlocalizedName(DefaultProps.blockKey
-                + ":" + name.toLowerCase()));
+        BlockList.creeperBlossom = Optional.of(new BlockCreeperBlossom(iD).setUnlocalizedName(
+                DefaultProps.blockKey + ":" + name.toLowerCase()).func_111022_d(
+                DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

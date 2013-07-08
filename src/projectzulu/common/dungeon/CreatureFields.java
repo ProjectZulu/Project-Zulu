@@ -3,14 +3,17 @@ package projectzulu.common.dungeon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.ServersideAttributeMap;
 import net.minecraft.nbt.NBTTagCompound;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ObfuscationHelper;
 import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.CharMatcher;
@@ -20,6 +23,7 @@ public class CreatureFields implements DataFields {
     private GuiSaveableTextField creatureNameField;
     private GuiSaveableTextField soundNameField;
     private GuiSaveableTextField weightedChanceField;
+    private GuiSaveableTextField optionalParameter;
 
     private GUIEditNodeTextField selectedTagField;
 
@@ -38,6 +42,8 @@ public class CreatureFields implements DataFields {
     Point screenSize;
     Point backgroundSize;
 
+    public static final ResourceLocation CREATURE_LIST = new ResourceLocation(DefaultProps.dungeonKey, "creaturelistgui.png");
+    
     CreatureFields(Minecraft mc) {
         this.mc = mc;
     }
@@ -53,6 +59,8 @@ public class CreatureFields implements DataFields {
                     backgroundSize, new Point(206, 39 + 42 - 9), new Point(20, 18));
             selectedTagField = new GUIEditNodeTextField(mc.fontRenderer, 60, new Point(screenWidth, screenHeight),
                     backgroundSize, new Point(8, 181), new Point(116, 18));
+            optionalParameter = new GuiSaveableTextField(mc.fontRenderer, 2400, new Point(screenWidth, screenHeight),
+                    backgroundSize, new Point(34, 39 + 42 - 9), new Point(116, 18));
         } else {
             creatureNameField = new GuiSaveableTextField(creatureNameField, mc.fontRenderer, 60, new Point(screenWidth,
                     screenHeight), backgroundSize, new Point(82, 30 - 3), new Point(116, 18));
@@ -62,6 +70,8 @@ public class CreatureFields implements DataFields {
                     screenWidth, screenHeight), backgroundSize, new Point(205, 39 + 42 - 9), new Point(20, 18));
             selectedTagField = new GUIEditNodeTextField(selectedTagField, mc.fontRenderer, 60, new Point(screenWidth,
                     screenHeight), backgroundSize, new Point(8, 181), new Point(116, 18));
+            optionalParameter = new GuiSaveableTextField(optionalParameter, mc.fontRenderer, 2400, new Point(screenWidth, screenHeight),
+                    backgroundSize, new Point(34, 39 + 42 - 9), new Point(116, 18));
         }
 
         searchForEntity = new GuiButton(1, (screenWidth - backgroundSize.getX()) / 2 + 201,
@@ -91,6 +101,7 @@ public class CreatureFields implements DataFields {
             if (spawnEntryData.type.length() > 0) {
                 creatureNameField.setText(spawnEntryData.type);
                 weightedChanceField.setText(Integer.toString(spawnEntryData.itemWeight));
+                optionalParameter.setText(spawnEntryData.optionalParameters);
                 loadedNBT = (NBTTagCompound) spawnEntryData.properties.copy();
                 if (loadedNBT != null) {
                     nbtTree = new NBTTree(loadedNBT);
@@ -110,6 +121,7 @@ public class CreatureFields implements DataFields {
             nbt.setInteger("Weight", Integer.parseInt(weightedChanceField.getText()));
             nbt.setCompoundTag("Properties", nbtTree.toNBTTagCompound());
             nbt.setString("SpawnSound", soundNameField.getText());
+            nbt.setString("OptionalParameter", optionalParameter.getText());
             limitedMobSpawner.getSpawnList().add(new TileEntityLimitedMobSpawnData(limitedMobSpawner, nbt));
         }
     }
@@ -143,9 +155,12 @@ public class CreatureFields implements DataFields {
     }
 
     private void resetNBTList() {
-        Entity desiredEntity = EntityList.createEntityByName(creatureNameField.getText(),
+        EntityLivingBase desiredEntity = (EntityLivingBase) EntityList.createEntityByName(creatureNameField.getText(),
                 Minecraft.getMinecraft().theWorld);
         if (desiredEntity != null) {
+            ObfuscationHelper.setFieldUsingReflection("field_110155_d", EntityLivingBase.class, desiredEntity, true,
+                    new ServersideAttributeMap());
+            ObfuscationHelper.invokeMethod("func_110147_ax", "func_110147_ax", EntityLivingBase.class, desiredEntity);
             loadedNBT = new NBTTagCompound("Properties");
             desiredEntity.writeToNBT(loadedNBT);
             nbtTree = new NBTTree(loadedNBT);
@@ -183,6 +198,8 @@ public class CreatureFields implements DataFields {
                 return true;
             } else if (selectedTagField.textboxKeyTyped(keyChar, keyID)) {
                 return true;
+            } else if (optionalParameter.textboxKeyTyped(keyChar, keyID)) {
+                return true;
             }
         }
         return false;
@@ -195,6 +212,7 @@ public class CreatureFields implements DataFields {
             weightedChanceField.mouseClicked(par1, par2, par3);
             soundNameField.mouseClicked(par1, par2, par3);
             selectedTagField.mouseClicked(par1, par2, par3);
+            optionalParameter.mouseClicked(par1, par2, par3);
 
             if (par3 == 0 && searchForEntity.mousePressed(mc, par1, par2)) {
                 if (spawnerGUI.currentListType == ListType.Creature) {
@@ -260,11 +278,15 @@ public class CreatureFields implements DataFields {
                 (screenSize.getY() - backgroundSize.getY()) / 2 + 48 + 10 - 6, 4210752); // White: 16777215
         mc.fontRenderer.drawString("Weight", (screenSize.getX() - backgroundSize.getX()) / 2 + 168,
                 (screenSize.getY() - backgroundSize.getY()) / 2 + 74, 4210752);
+        mc.fontRenderer.drawString("Tags", (screenSize.getX() - backgroundSize.getX()) / 2 + 6,
+                (screenSize.getY() - backgroundSize.getY()) / 2 + 74, 4210752);
 
         bindTexture(mc);
         drawBackgroundBox(new Point(80, 20), screenSize, backgroundSize, new Point(136, 66), new Point(120, 20));
         drawBackgroundBox(new Point(80, 42), screenSize, backgroundSize, new Point(136, 66), new Point(120, 20));
         drawBackgroundBox(new Point(201, 48 + 25 - 9), screenSize, backgroundSize, new Point(236, 0), new Point(20, 20));
+        drawBackgroundBox(new Point(32, 48 + 25 - 9), screenSize, backgroundSize, new Point(136, 66),
+                new Point(120, 20));
         if (selectedTagField.isEnabled()) {
             drawBackgroundBox(new Point(6, 175), screenSize, backgroundSize, new Point(136, 66), new Point(120, 20));
         } else {
@@ -275,15 +297,12 @@ public class CreatureFields implements DataFields {
         soundNameField.drawTextBox();
         weightedChanceField.drawTextBox();
         selectedTagField.drawTextBox();
-
+        optionalParameter.drawTextBox();
     }
 
     private void bindTexture(Minecraft mc) {
-        /* Setup Required Texture Sheet */
-        this.mc.renderEngine.bindTexture(DefaultProps.dungeonDiretory + "creaturelistgui.png");
-        // int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
+        mc.renderEngine.func_110577_a(CREATURE_LIST);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        // mc.renderEngine.bindTexture(textureID); //TODO: Commented
     }
 
     private void drawBackgroundBox(Point position, Point screenSize, Point backgroundSize, Point imageLocation,

@@ -18,13 +18,14 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
         super(par1World);
         // noClip = true;
         this.setSize(0.5f, 0.5f);
-        this.moveSpeed = 0.22f;
+
+        movementSpeed = 0.22f;
         this.maxFlightHeight = 5;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(2, new EntityAIStayStill(this, EntityStates.posture));
 
         // this.tasks.addTask(2, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
-        this.tasks.addTask(6, new EntityAIFlyingWander(this, this.moveSpeed));
+        this.tasks.addTask(6, new EntityAIFlyingWander(this, movementSpeed));
         // this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));
         // this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking,
         // EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
@@ -60,7 +61,7 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.birdhurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "birdhurt";
     }
 
     /**
@@ -68,7 +69,7 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.bird";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "bird";
     }
 
     /**

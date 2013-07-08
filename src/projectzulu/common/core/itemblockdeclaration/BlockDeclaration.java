@@ -42,8 +42,15 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
         Property property = null;
         if (readOnly) {
             property = config.get(Configuration.CATEGORY_BLOCK, key, (String) null);
-        }
-        if (property != null || !readOnly) {
+            if (property != null && property.getInt() >= 0) {
+                iD = property.getInt();
+                preCreateLoadConfig(config);
+                if (iD > 0 && !isCreated) {
+                    isCreated = createBlock(iD);
+                }
+                postCreateLoadConfig(config);
+            }
+        } else {
             iD = config.getBlock(key, ProjectZulu_Core.getNextDefaultBlockID()).getInt();
             preCreateLoadConfig(config);
             if (iD > 0 && !isCreated) {

@@ -3,7 +3,7 @@ package projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import projectzulu.common.mobs.entity.EntityFollower;
 
@@ -169,7 +169,7 @@ public class ModelFollower extends ModelBase {
     }
 
     @Override
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+    public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
 	LEG11ROT.rotateAngleY = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.4F * par3;
 	LEG21ROT.rotateAngleY = MathHelper.cos(par2 * 0.6662F) * 1.4F * par3;

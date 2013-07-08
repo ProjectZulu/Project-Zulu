@@ -1,11 +1,12 @@
 package projectzulu.common.mobs.entityai;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import projectzulu.common.mobs.entity.EntityGenericTameable;
 
 public class EntityAIOwnerHurtByTarget extends EntityAITarget{
 	EntityGenericTameable theDefendingTameable;
-    EntityLiving theOwnerAttacker;
+    EntityLivingBase theOwnerAttacker;
     
     public EntityAIOwnerHurtByTarget(EntityGenericTameable par1EntityTameable){
         super(par1EntityTameable, 32.0F, false);
@@ -20,7 +21,7 @@ public class EntityAIOwnerHurtByTarget extends EntityAITarget{
         if (!this.theDefendingTameable.isTamed()){
             return false;
         }else{
-            EntityLiving var1 = this.theDefendingTameable.getOwner();
+            EntityLivingBase var1 = this.theDefendingTameable.getOwner();
 
             if (var1 == null){
                 return false;

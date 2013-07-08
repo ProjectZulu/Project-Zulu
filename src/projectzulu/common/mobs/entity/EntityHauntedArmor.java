@@ -3,6 +3,8 @@ package projectzulu.common.mobs.entity;
 import java.util.EnumSet;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingData;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,25 +34,25 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
         super(par1World);
         randomDirection = rand.nextInt(16);
 
-        this.moveSpeed = 0.2f;
-        this.getNavigator().setAvoidsWater(true);
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, this.moveSpeed));
+        movementSpeed = 0.2f;
+        getNavigator().setAvoidsWater(true);
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 1.25f));
 
-        this.tasks.addTask(2, new EntityAIStayStill(this, EntityStates.idle));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
-        // this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed, 10.0F, 2.0F));
+        tasks.addTask(2, new EntityAIStayStill(this, EntityStates.idle));
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false));
+        // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
-        // this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-        // this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Block.tallGrass.blockID, false));
-        // this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
-        this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
+        // tasks.addTask(5, new EntityAIMate(this, moveSpeed));
+        // tasks.addTask(6, new EntityAITempt(this, moveSpeed, Block.tallGrass.blockID, false));
+        // tasks.addTask(7, new EntityAIFollowParent(this, moveSpeed));
+        tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
-        this.targetTasks.addTask(4,
+        targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
+        targetTasks.addTask(4,
                 new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
                         EntityPlayer.class, 16.0F, 0, true));
-        // this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking,
+        // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking,
         // EntityStates.looking), EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
     }
 
@@ -63,7 +65,7 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
 
     public void setPersistenceRequired(boolean persistenceRequired) {
         try {
-            ObfuscationHelper.setCatchableFieldUsingReflection("field_82179_bU", EntityLiving.class, this, true, true);
+            ObfuscationHelper.setCatchableFieldUsingReflection("field_82179_bU", EntityLiving.class, this, true, false, true);
         } catch (NoSuchFieldException e) {
             ObfuscationHelper.setFieldUsingReflection("persistenceRequired", EntityLiving.class, this, true, true);
         }
@@ -89,18 +91,20 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
     }
 
     @Override
-    public void initCreature() {
-        super.initCreature();
+    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
+        EntityLivingData entityLivingData = super.func_110161_a(par1EntityLivingData);
         setRandomArmor(worldObj);
+        return entityLivingData;
     }
 
     @Override
     protected int getAttackStrength(World par1World) {
-        ItemStack var2 = this.getHeldItem();
+        // ItemStack var2 = this.getHeldItem();
         int var3 = 4;
-        if (var2 != null) {
-            var3 += var2.getDamageVsEntity(this);
-        }
+        // TODO: Removed Till Hook added
+        // if (var2 != null) {
+        // var3 += var2.getDamageVsEntity(this);
+        // }
         return var3;
     }
 
@@ -129,6 +133,14 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
             var1 = 20;
         }
         return var1;
+    }
+
+    /**
+     * Get this Entity's EnumCreatureAttribute
+     */
+    @Override
+    public EnumCreatureAttribute getCreatureAttribute() {
+        return EnumCreatureAttribute.UNDEAD;
     }
 
     @Override

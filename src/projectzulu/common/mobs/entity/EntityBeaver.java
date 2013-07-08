@@ -16,77 +16,81 @@ import projectzulu.common.mobs.entityai.EntityAIPanic;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
-public class EntityBeaver extends EntityGenericAnimal implements IAnimals{	
-	
-	public EntityBeaver(World par1World){
-		super(par1World);
-		setSize(0.63f, 0.8f);
-		
-		this.moveSpeed = 0.2f;
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, this.moveSpeed));
+public class EntityBeaver extends EntityGenericAnimal implements IAnimals {
 
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
-//		this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed,	10.0F, 2.0F));
+    public EntityBeaver(World par1World) {
+        super(par1World);
+        setSize(0.63f, 0.8f);
 
-//		this.tasks.addTask(5, new EntityAIMate(this, this.moveSpeed));
-//		this.tasks.addTask(6, new EntityAITempt(this, this.moveSpeed, Item.spiderEye.itemID, false));
-//		this.tasks.addTask(7, new EntityAIFollowParent(this, this.moveSpeed));
-		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
+        movementSpeed = 0.2f;
+        getNavigator().setAvoidsWater(true);
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 1.25f));
 
-		this.targetTasks.addTask(3,	new EntityAIHurtByTarget(this, false, false));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
-//		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
-	}
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false));
+        // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
-	@Override
-	protected int getAttackStrength(World par1World) {
-		switch (par1World.difficultySetting) {
-		case 0:
-			return 2; 
-		case 1:
-			return 2; 
-		case 2:
-			return 3; 
-		case 3:
-			return 5; 
-		default:
-			return 3;
-		}
-	}
+        // tasks.addTask(5, new EntityAIMate(this, moveSpeed));
+        // tasks.addTask(6, new EntityAITempt(this, moveSpeed, Item.spiderEye.itemID, false));
+        // tasks.addTask(7, new EntityAIFollowParent(this, moveSpeed));
+        tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
-	@Override
-	public String getTexture(){
-		this.texture = DefaultProps.mobDiretory + "beaver.png";
-		return super.getTexture();
-	}
-	
-	@Override
-	protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
-	    return super.isValidLocation(world, xCoord, yCoord, zCoord) && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-	}
-	
-	@Override
-	public int getMaxHealth(){ return 10; }
-	
-	/**
-	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-	 */
-	@Override
-	public int getTotalArmorValue(){return 0;}
-	
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound() { return "sounds.beaverliving"; }
+        targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
+        targetTasks.addTask(4,
+                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+                        EntityPlayer.class, 16.0F, 0, true));
+        // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true,
+        // IMob.mobSelector));
+    }
 
-	@Override
-	protected void dropRareDrop(int par1) {
-		if(Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()){
-			entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID,1,6), 1);
-		}
-		super.dropRareDrop(par1);
-	}
+    @Override
+    protected int getAttackStrength(World par1World) {
+        switch (par1World.difficultySetting) {
+        case 0:
+            return 2;
+        case 1:
+            return 2;
+        case 2:
+            return 3;
+        case 3:
+            return 5;
+        default:
+            return 3;
+        }
+    }
+
+    @Override
+    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
+        return super.isValidLocation(world, xCoord, yCoord, zCoord)
+                && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
+
+    @Override
+    public int getMaxHealth() {
+        return 10;
+    }
+
+    /**
+     * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
+     */
+    @Override
+    public int getTotalArmorValue() {
+        return 0;
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "beaverliving";
+    }
+
+    @Override
+    protected void dropRareDrop(int par1) {
+        if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
+            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 6), 1);
+        }
+        super.dropRareDrop(par1);
+    }
 }

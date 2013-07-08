@@ -5,6 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.ProjectZulu_Core;
@@ -19,12 +21,12 @@ import com.google.common.base.Optional;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class CreatureDeclaration implements EntityDeclaration{
 	protected String mobName;
 	protected Class mobClass;
-	protected String modelClass;
-	protected String renderClass;
 	protected EnumCreatureType enumCreatureType;
 	protected boolean shouldExist = true;
 	protected boolean reportSpawningInLog = false;
@@ -44,19 +46,10 @@ public abstract class CreatureDeclaration implements EntityDeclaration{
 		this.enumCreatureType = creatureType;
 		shouldDespawn = enumCreatureType == EnumCreatureType.creature ? false : true;
 	}
-	
-	protected void setModelAndRender(String modelClass, String renderClass){
-		this.modelClass = modelClass;
-		this.renderClass = renderClass;
-	}
-	
+
 	protected void setDropAmount(int minDropNum, int maxDropNum){
 	    this.minDropNum = minDropNum;
 	    this.maxDropNum = maxDropNum;
-	}
-	
-	protected void setModelAndRender(Class modelClass, String renderClass){
-		setModelAndRender(modelClass.getName(), renderClass);
 	}
 	
 	protected void setRegistrationProperties(int trackingRange, int updateFrequency, boolean sendsVelocityUpdates){
@@ -119,35 +112,16 @@ public abstract class CreatureDeclaration implements EntityDeclaration{
 	@Override
 	public void addSpawn() {}
 	
-	@Override
-	public void registerModelAndRender() {
-		try {
-			if(modelClass != null && modelClass.length() > 0){
-				RenderingRegistry.registerEntityRenderingHandler(mobClass, (Render)Class.forName(renderClass).getConstructor(ModelBase.class, Float.TYPE).newInstance(Class.forName(modelClass).newInstance(), 0.5f));
-			}else{
-				RenderingRegistry.registerEntityRenderingHandler(mobClass, (Render)Class.forName(renderClass).getConstructor(Float.TYPE).newInstance(0.5f));
-			}
-		}catch (InstantiationException e){
-			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
-			e.printStackTrace();
-		}catch (IllegalAccessException e){
-			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
-			e.printStackTrace();
-		}catch (IllegalArgumentException e){
-			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
-			e.printStackTrace();
-		}catch (InvocationTargetException e){
-			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
-			e.printStackTrace();
-		}catch (NoSuchMethodException e){
-			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
-			e.printStackTrace();
-		}catch (SecurityException e){
-			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
-			e.printStackTrace();
-		}catch (ClassNotFoundException e){
-			ProjectZuluLog.severe("Error Registering Model and Render of %s due to %s: %s",this.getClass().getSimpleName(), e.getClass().getSimpleName(),e.getMessage());
-			e.printStackTrace();
-		}
-	}
+    @SideOnly(Side.CLIENT)
+	public abstract Render getEntityrender(Class<? extends EntityLivingBase> entityClass);
+	
+    @Override
+    public void registerModelAndRender() {
+        Render render = getEntityrender(mobClass);
+        if (render != null) {
+            RenderingRegistry.registerEntityRenderingHandler(mobClass, render);
+        } else {
+            throw new IllegalStateException("Entity Renderer for " + mobClass.getSimpleName() + " cannot be null");
+        }
+    }
 }

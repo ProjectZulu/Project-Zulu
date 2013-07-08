@@ -11,100 +11,98 @@ import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import projectzulu.common.mobs.entityai.EntityAIWander;
 
-public class EntityPelican extends EntityGenericAnimal{
+public class EntityPelican extends EntityGenericAnimal {
 
-	public EntityPelican(World par1World){
-		super(par1World);
-		this.setSize(1.5f, 1.4f);
-		this.moveSpeed = 0.22f;
-		this.maxFlightHeight = 15;
-		this.getNavigator().setAvoidsWater(true);		
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, this.moveSpeed, false, 2f*2f));
-		this.tasks.addTask(6, new EntityAIFlyingWander(this, this.moveSpeed));
-		this.tasks.addTask(9, new EntityAIWander(this, this.moveSpeed, 120));
+    public EntityPelican(World par1World) {
+        super(par1World);
+        this.setSize(1.5f, 1.4f);
+        movementSpeed = 0.22f;
+        this.maxFlightHeight = 15;
+        this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0f, false, 2f * 2f));
+        this.tasks.addTask(6, new EntityAIFlyingWander(this, movementSpeed));
+        this.tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));		
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
-	}
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));
+        this.targetTasks.addTask(2,
+                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+                        EntityPlayer.class, 16.0F, 0, true));
+    }
 
-	@Override
-	public boolean defaultGrounded(){
-		return false;
-	}
-	
-	/**
-	 * Called when the mob is falling. Calculates and applies fall damage.
-	 */
-	@Override
-    protected void fall(float par1){}
+    @Override
+    public boolean defaultGrounded() {
+        return false;
+    }
 
-	/**
-	 * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
-	 * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
-	 */
-	@Override
-    protected void updateFallState(double par1, boolean par3) {}
+    /**
+     * Called when the mob is falling. Calculates and applies fall damage.
+     */
+    @Override
+    protected void fall(float par1) {
+    }
 
+    /**
+     * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
+     * and deal fall damage if landing on the ground. Args: distanceFallenThisTick, onGround
+     */
+    @Override
+    protected void updateFallState(double par1, boolean par3) {
+    }
 
-	@Override
-	public String getTexture(){
-		this.texture = DefaultProps.mobDiretory + "pelican.png";
-		return super.getTexture();
-	}
-
-	@Override
+    @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }
 
-	@Override
+    @Override
     public int getMaxHealth() {
-		return 20;
-	}
+        return 20;
+    }
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-    protected String getLivingSound(){
-		return "sounds.pelicanliving";
-	}
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "pelicanliving";
+    }
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-    protected String getHurtSound(){
-		return "sounds.pelicanhurt";
-	}
-	
-	@Override
-	protected void updateAITasks() {
-		
-		/* Handle Landing */
-		if(!isEntityGrounded() && worldObj.isAirBlock((int)this.posX, (int)this.posY-1, (int)this.posZ) && rand.nextInt(200) == 0 && !worldObj.isRemote){
-			this.dataWatcher.updateObject(17, Byte.valueOf((byte)1));
-		}
-		
-		/* Handle Takeoff */
-		if(isEntityGrounded() && rand.nextInt(800) == 0 && !worldObj.isRemote){
-			this.dataWatcher.updateObject(17, Byte.valueOf((byte)0));
-		}
-		/* Take Off If Falling Off Cliff */
-		if(isEntityGrounded() && !worldObj.isRemote
-				&& worldObj.isAirBlock((int)this.posX, (int)this.posY-1, (int)this.posZ)
-				&& worldObj.isAirBlock((int)this.posX, (int)this.posY-2, (int)this.posZ)
-				&& worldObj.isAirBlock((int)this.posX, (int)this.posY-3, (int)this.posZ)){
-			this.dataWatcher.updateObject(17, Byte.valueOf((byte)0));
-		}
-		super.updateAITasks();
-	}
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "pelicanhurt";
+    }
 
-	/**
-	 * Will return how many at most can spawn in a chunk at once.
-	 */
-	@Override
-    public int getMaxSpawnedInChunk(){
-		return 3;
-	}
+    @Override
+    protected void updateAITasks() {
+
+        /* Handle Landing */
+        if (!isEntityGrounded() && worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ)
+                && rand.nextInt(200) == 0 && !worldObj.isRemote) {
+            this.dataWatcher.updateObject(17, Byte.valueOf((byte) 1));
+        }
+
+        /* Handle Takeoff */
+        if (isEntityGrounded() && rand.nextInt(800) == 0 && !worldObj.isRemote) {
+            this.dataWatcher.updateObject(17, Byte.valueOf((byte) 0));
+        }
+        /* Take Off If Falling Off Cliff */
+        if (isEntityGrounded() && !worldObj.isRemote
+                && worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ)
+                && worldObj.isAirBlock((int) this.posX, (int) this.posY - 2, (int) this.posZ)
+                && worldObj.isAirBlock((int) this.posX, (int) this.posY - 3, (int) this.posZ)) {
+            this.dataWatcher.updateObject(17, Byte.valueOf((byte) 0));
+        }
+        super.updateAITasks();
+    }
+
+    /**
+     * Will return how many at most can spawn in a chunk at once.
+     */
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 3;
+    }
 }

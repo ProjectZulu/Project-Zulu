@@ -24,22 +24,20 @@ public class FurArmorDeclaration extends ItemSetDeclaration {
     protected boolean createItem(int iD, int partIndex) {
         switch (partIndex) {
         case 0:
-            ItemList.furArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 0))
-                    .setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+            ItemList.furArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 0,
+                    DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 1:
-            ItemList.furArmorChest = Optional
-                    .of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 1))
-                            .setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+            ItemList.furArmorChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 1,
+                    DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 2:
-            ItemList.furArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 2))
-                    .setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+            ItemList.furArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 2,
+                    DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         case 3:
-            ItemList.furArmorBoots = Optional
-                    .of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 3))
-                            .setUnlocalizedName(DefaultProps.blockKey + ":" + name[partIndex].toLowerCase()));
+            ItemList.furArmorBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 3,
+                    DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
             return true;
         }
         return false;

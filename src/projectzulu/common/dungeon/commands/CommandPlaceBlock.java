@@ -71,8 +71,8 @@ public class CommandPlaceBlock extends CommandBase{
 	}    
     
     @Override
-    public String getCommandUsage(ICommandSender par1ICommandSender){
-        return par1ICommandSender.translateString("commands.spawnentity.usage", new Object[0]);
+    public String getCommandUsage(ICommandSender par1ICommandSender) {
+        return "commands.spawnentity.usage";
     }
     
     /**

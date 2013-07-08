@@ -22,7 +22,8 @@ public class PalmTreePlankDeclaration extends BlockDeclaration {
     @Override
     protected boolean createBlock(int iD) {
         BlockList.palmTreePlank = Optional.of(new BlockPalmTreePlank(iD).setStepSound(Block.soundWoodFootstep)
-                .setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+                .setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase())
+                .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

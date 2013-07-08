@@ -18,8 +18,7 @@ public class CoconutSeedDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem(int iD) {
-        ItemList.coconutSeed = Optional.of(new ItemCoconutSeed(iD, 6, false).setUnlocalizedName(DefaultProps.blockKey
-                + ":" + name.toLowerCase()));
+        ItemList.coconutSeed = Optional.of(new ItemCoconutSeed(iD, 6, false, name));
         return true;
     }
 

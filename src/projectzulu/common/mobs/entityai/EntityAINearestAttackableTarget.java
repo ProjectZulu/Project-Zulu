@@ -8,12 +8,13 @@ import java.util.List;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import projectzulu.common.mobs.entity.EntityGenericCreature;
 import projectzulu.common.mobs.entity.EntityStates;
 
 public class EntityAINearestAttackableTarget extends EntityAITarget{
-	EntityLiving targetEntity;
+	EntityLivingBase targetEntity;
     Class targetClass;
     int targetChance;
     private final IEntitySelector entitySelector;
