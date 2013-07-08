@@ -76,11 +76,6 @@ public class BlockJasper extends Block {
         alterBlockLocations[29] = Vec3.createVectorHelper(0, 2, 0);
     }
 
-    @SideOnly(Side.CLIENT)
-    public String getTextureFile() {
-        return DefaultProps.blockSpriteSheet;
-    }
-
     @Override
     public int quantityDropped(Random random) {
         return 1;
@@ -190,7 +185,8 @@ public class BlockJasper extends Block {
                 && CustomEntityList.MUMMYPHARAOH.modData.isPresent()) {
 
             if (!MinecraftServer.getServer().isDedicatedServer()) {
-                Minecraft.getMinecraft().theWorld.playRecord("streaming.summonwhispers", par2, par3, par4);
+                Minecraft.getMinecraft().theWorld.playRecord(DefaultProps.coreDiretory + ":misc.summonwhispers", par2,
+                        par3, par4);
             }
 
             // if( !MinecraftServer.getServer().isDedicatedServer() ){

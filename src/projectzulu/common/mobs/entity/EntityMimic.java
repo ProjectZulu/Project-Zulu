@@ -59,14 +59,11 @@ public class EntityMimic extends EntityGenericAnimal implements IMob {
         return 6;
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
     @Override
-    protected String getLivingSound() {
-        return null;
+    protected String getHurtSound() {
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "mimicliving";
     }
-
+    
     @Override
     public void onLivingUpdate() {
         if (shouldHover == true) {

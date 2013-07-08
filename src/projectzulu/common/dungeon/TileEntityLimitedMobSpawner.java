@@ -291,7 +291,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
                                         .createPacketManager();
                                 packetManager.setPacketData(xCoord, yCoord, zCoord, spawnerTags.spawnSound);
                                 PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 64, worldObj
-                                        .getWorldInfo().getDimension(), packetManager.createPacket());
+                                        .provider.dimensionId, packetManager.createPacket());
                             }
                             if (var11 != null) {
                                 var11.spawnExplosionParticle();

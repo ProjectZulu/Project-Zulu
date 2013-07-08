@@ -112,7 +112,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.mammothliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "mammothliving";
     }
 
     @Override

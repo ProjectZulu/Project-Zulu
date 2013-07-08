@@ -82,7 +82,7 @@ public class EntityBoar extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.boarliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "boarliving";
     }
 
     /**
@@ -90,7 +90,7 @@ public class EntityBoar extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.boarliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "boarliving";
     }
 
     @Override

@@ -83,7 +83,7 @@ public class EntityBeaver extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.beaverliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "beaverliving";
     }
 
     @Override

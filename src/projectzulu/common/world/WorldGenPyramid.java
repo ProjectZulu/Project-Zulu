@@ -395,7 +395,7 @@ public class WorldGenPyramid extends WorldGenerator
                                             (int) allCells[i][k].getLocation(m).xCoord,
                                             (int) allCells[i][k].getLocation(m).yCoord + j,
                                             (int) allCells[i][k].getLocation(m).zCoord);
-                                    var19.func_98049_a().setMobID(entityName);
+                                    var19.getSpawnerLogic().setMobID(entityName);
                                     ProjectZuluLog.info("Spawner with entity name %s @(%s, %s, %s).", entityName,
                                             (int) allCells[i][k].getLocation(m).xCoord,
                                             (int) allCells[i][k].getLocation(m).yCoord + j,

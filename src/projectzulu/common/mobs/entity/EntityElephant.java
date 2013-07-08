@@ -93,14 +93,14 @@ public class EntityElephant extends EntityGenericAnimal {
 	 */
 	@Override
 	protected String getLivingSound(){
-		return "sounds.elephantlivingsound";
+		return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "elephantlivingsound";
 	}
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	@Override
 	protected String getHurtSound(){
-		return "sounds.elephanthurtsound";
+		return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "elephanthurtsound";
 	}
 
     @Override

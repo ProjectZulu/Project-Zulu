@@ -243,7 +243,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
     @Override
-    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
         return par1 == 3 ? PotionIngredients.isPotionIngredient(par2ItemStack)
                 : par2ItemStack.getItem() instanceof ItemPotion || par2ItemStack.itemID == Item.glassBottle.itemID;
     }
@@ -278,7 +278,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
      */
     @Override
     public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
-        return this.isStackValidForSlot(par1, par2ItemStack);
+        return this.isItemValidForSlot(par1, par2ItemStack);
     }
 
     /**

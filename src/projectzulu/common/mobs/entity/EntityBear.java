@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAIMate;
@@ -45,7 +46,7 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals {
 
     @Override
     protected String getHurtSound() {
-        return "sounds.bearliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "bearliving";
     }
 
     @Override

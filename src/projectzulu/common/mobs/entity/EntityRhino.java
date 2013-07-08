@@ -94,7 +94,7 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.rhinolivingsound";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "rhinolivingsound";
     }
 
     /**
@@ -102,7 +102,7 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.rhinohurtsound";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "rhinohurtsound";
     }
 
     @Override

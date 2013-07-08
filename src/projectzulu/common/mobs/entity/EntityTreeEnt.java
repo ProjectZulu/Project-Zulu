@@ -94,8 +94,8 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals {
      * Returns the sound this mob makes while it's alive.
      */
     @Override
-    protected String getLivingSound() {
-        return "sounds.treeentliving";
+    protected String getHurtSound() {
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "treeentliving";
     }
 
     @Override

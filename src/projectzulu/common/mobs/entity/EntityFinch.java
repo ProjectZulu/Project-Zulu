@@ -61,7 +61,7 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.birdhurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "birdhurt";
     }
 
     /**
@@ -69,7 +69,7 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.bird";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "bird";
     }
 
     /**

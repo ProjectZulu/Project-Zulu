@@ -22,19 +22,12 @@ public class BlockTestBlock extends Block
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
-
 	
-	@SideOnly(Side.CLIENT)
-	public String getTextureFile(){
-            return DefaultProps.blockSpriteSheet;
-    }
-
-	public int quantityDropped(Random random){
+	public int quantityDropped(Random random) {
 		return 1;
 	}
 
-	public int idDropped(int i, Random random, int j){
-		
+	public int idDropped(int i, Random random, int j) {
 		return this.blockID;
 	}
 

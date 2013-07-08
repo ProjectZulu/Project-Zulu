@@ -91,7 +91,7 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.ostrichlivingsound";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "ostrichlivingsound";
     }
 
     /**
@@ -99,7 +99,7 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.ostrichhurtsound";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "ostrichhurtsound";
     }
 
     @Override

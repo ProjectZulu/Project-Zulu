@@ -87,7 +87,7 @@ public class EntityPenguin extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.penguinhurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "penguinhurt";
     }
 
     /**
@@ -95,7 +95,7 @@ public class EntityPenguin extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.penguinhurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "penguinhurt";
     }
 
     /**

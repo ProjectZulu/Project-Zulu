@@ -77,7 +77,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.foxhurtsound";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "foxhurtsound";
     }
 
     @Override

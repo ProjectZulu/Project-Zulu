@@ -62,7 +62,7 @@ public class EntityHornBill extends EntityGenericAnimal {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.hornbillliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "hornbillliving";
     }
 
     /**
@@ -70,6 +70,6 @@ public class EntityHornBill extends EntityGenericAnimal {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.hornbillhurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "hornbillhurt";
     }
 }

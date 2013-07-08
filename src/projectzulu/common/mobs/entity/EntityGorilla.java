@@ -97,7 +97,7 @@ public class EntityGorilla extends EntityGenericAnimal {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.gorillahurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "gorillahurt";
     }
 
     @Override

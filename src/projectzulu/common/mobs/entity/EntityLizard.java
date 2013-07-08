@@ -147,7 +147,7 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.lizardhurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "lizardhurt";
     }
 
     /**

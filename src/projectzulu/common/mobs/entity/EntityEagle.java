@@ -63,7 +63,7 @@ public class EntityEagle extends EntityGenericAnimal {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.eagleliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "eagleliving";
     }
 
     /**
@@ -71,7 +71,7 @@ public class EntityEagle extends EntityGenericAnimal {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.eaglehurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "eaglehurt";
     }
 
     @Override

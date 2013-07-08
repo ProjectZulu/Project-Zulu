@@ -98,7 +98,6 @@ public class ProjectZulu_Core {
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
         Minecraft.getMinecraft().func_110434_K();
-        // mc.func_110442_L();
         modConfigDirectoryFile = event.getModConfigurationDirectory();
 
         ProjectZuluLog.configureLogging(modConfigDirectoryFile);
@@ -106,21 +105,12 @@ public class ProjectZulu_Core {
                 DefaultProps.configDirectory + DefaultProps.defaultConfigFile));
         Properties.loadFromConfig(modConfigDirectoryFile);
         zuluConfig.load();
-        enableTestBlock = zuluConfig.get("Developer Debug Variables", "enableTestBlock", enableTestBlock).getBoolean(
-                enableTestBlock);
         enableTemperature = zuluConfig.get("General Controls", "enableTemperature", enableTemperature).getBoolean(
                 enableTemperature);
         zuluConfig.save();
 
         proxy.bossHealthTicker();
-        ProjectZulu_Core.proxy.registerMobSounds();
-
-        if (enableTestBlock) {
-            testBlock = (new BlockTestBlock(testBlockID, 32)).setHardness(1.0f).setResistance(1.0f)
-                    .setUnlocalizedName("testBlock");
-            GameRegistry.registerBlock(testBlock, "testZuluBlock");
-            LanguageRegistry.addName(testBlock, "Test block");
-        }
+        ProjectZulu_Core.proxy.registerAudioLoader();
 
         ProjectZuluLog.info("Load Entity Models and Render");
         ProjectZulu_Core.proxy.registerModelsAndRender();

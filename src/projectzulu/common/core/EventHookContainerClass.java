@@ -224,7 +224,7 @@ public class EventHookContainerClass {
 					Iterator entIterator = listOfTreeEnts.iterator();
 					while(entIterator.hasNext()){
 						Entity entity = (Entity)entIterator.next();
-						if( ((EntityTreeEnt)entity).getAngerLevel() <= 0 && worldObj.rayTraceBlocks(worldObj.getWorldVec3Pool().getVecFromPool(player.posX, player.posY+player.getEyeHeight(), player.posZ),
+						if( ((EntityTreeEnt)entity).getAngerLevel() <= 0 && worldObj.clip(worldObj.getWorldVec3Pool().getVecFromPool(player.posX, player.posY+player.getEyeHeight(), player.posZ),
 								worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY, entity.posZ)) == null  ){
 							
 							if(!worldObj.isRemote){

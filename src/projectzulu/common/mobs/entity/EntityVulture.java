@@ -85,7 +85,7 @@ public class EntityVulture extends EntityGenericAnimal {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.vulturehurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "vulturehurt";
     }
 
     /**
@@ -93,7 +93,7 @@ public class EntityVulture extends EntityGenericAnimal {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.vulturehurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "vulturehurt";
     }
 
     @Override

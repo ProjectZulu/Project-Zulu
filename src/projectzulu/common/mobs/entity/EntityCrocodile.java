@@ -74,7 +74,7 @@ public class EntityCrocodile extends EntityGenericAnimal {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.crocoodileliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "crocoodileliving";
     }
 
     @Override

@@ -64,7 +64,7 @@ public class EntityPelican extends EntityGenericAnimal {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.pelicanliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "pelicanliving";
     }
 
     /**
@@ -72,7 +72,7 @@ public class EntityPelican extends EntityGenericAnimal {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.pelicanhurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "pelicanhurt";
     }
 
     @Override

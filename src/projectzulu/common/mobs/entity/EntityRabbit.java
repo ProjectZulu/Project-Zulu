@@ -84,7 +84,7 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.rabbithurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "rabbithurt";
     }
 
     /**
@@ -92,7 +92,7 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getDeathSound() {
-        return "sounds.rabbitdead";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "rabbitdead";
     }
 
     @Override

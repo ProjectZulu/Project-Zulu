@@ -21,10 +21,4 @@ public class ItemCoconutShell extends Item {
     public int getMetadata(int par1) {
         return par1;
     }
-
-    @SideOnly(Side.CLIENT)
-    public String getTextureFile() {
-        return DefaultProps.itemSpriteSheet;
-    }
-
 }

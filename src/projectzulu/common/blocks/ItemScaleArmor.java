@@ -7,10 +7,9 @@ import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemScaleArmor extends ItemArmor
-{
+public class ItemScaleArmor extends ItemArmor {
     /** Holds the 'base' maxDamage that each armorType have. */
-    private static final int[] maxDamageArray = new int[] {11, 16, 15, 13};
+    private static final int[] maxDamageArray = new int[] { 11, 16, 15, 13 };
 
     /**
      * Stores the armor type: 0 is helmet, 1 is plate, 2 is legs and 3 is boots
@@ -29,10 +28,9 @@ public class ItemScaleArmor extends ItemArmor
     /** The EnumArmorMaterial used for this ItemArmor */
     private final EnumArmorMaterial material;
 
-    public ItemScaleArmor(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4)
-    {
-    	super(par1, par2EnumArmorMaterial, par3, par4);
-        //super(par1);
+    public ItemScaleArmor(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
+        super(par1, par2EnumArmorMaterial, par3, par4);
+        // super(par1);
         this.material = par2EnumArmorMaterial;
         this.armorType = par4;
         this.renderIndex = par3;
@@ -42,19 +40,10 @@ public class ItemScaleArmor extends ItemArmor
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
     }
 
-    //Adds Custom Item png for Icons?
-    @SideOnly(Side.CLIENT)
-    public String getTextureFile()
-    {
-    	return DefaultProps.itemSpriteSheet;
-    }
-
-    
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
-    public int getItemEnchantability()
-    {
+    public int getItemEnchantability() {
         return this.material.getEnchantability();
     }
 
@@ -62,8 +51,7 @@ public class ItemScaleArmor extends ItemArmor
      * Returns the 'max damage' factor array for the armor, each piece of armor have a durability factor (that gets
      * multiplied by armor material factor)
      */
-    static int[] getMaxDamageArray()
-    {
+    static int[] getMaxDamageArray() {
         return maxDamageArray;
     }
 }

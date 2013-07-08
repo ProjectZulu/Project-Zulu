@@ -135,7 +135,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.armadilloliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "armadilloliving";
     }
 
     @Override
@@ -174,7 +174,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
                 }
 
                 // Condition 3: Can the player see the target
-                canSee = this.worldObj.rayTraceBlocks(
+                canSee = this.worldObj.clip(
                         worldObj.getWorldVec3Pool().getVecFromPool(tempE.posX, tempE.posY + tempE.getEyeHeight(),
                                 tempE.posZ), worldObj.getWorldVec3Pool()
                                 .getVecFromPool(this.posX, this.posY, this.posZ)) == null;

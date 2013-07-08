@@ -4,6 +4,7 @@ import java.io.File;
 
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.mobs.MobSounds;
 import projectzulu.common.mobs.entitydefaults.AlligatorDeclaration;
 import projectzulu.common.mobs.entitydefaults.ArmadilloDeclaration;
 import projectzulu.common.mobs.entitydefaults.BearBlackDeclaration;
@@ -73,11 +74,12 @@ public class ProjectZulu_Mobs {
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
+        MobSounds.registerMobSounds();
     }
 
     @Init
     public void load(FMLInitializationEvent event) {
-        ProjectZulu_Core.proxy.registerMobSoundEvent();
+        
     }
 
     @PostInit

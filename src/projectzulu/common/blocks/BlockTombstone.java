@@ -33,11 +33,6 @@ public class BlockTombstone extends BlockContainer{
         setStepSound(Block.soundMetalFootstep);
 	}
 	
-	@SideOnly(Side.CLIENT)
-	public String getTextureFile(){
-            return DefaultProps.blockSpriteSheet;
-    }
-	
     /**
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)

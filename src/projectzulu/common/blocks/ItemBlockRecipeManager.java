@@ -80,7 +80,7 @@ public class ItemBlockRecipeManager {
                 new OptionalItemStack("cobbleRed"), new OptionalItemStack("log"));
         shapedOreRecipe(new OptionalItemStack(BlockList.brewingStandTriple), true,
                 new String[] { "GGG", "LNL", "NNN" }, new char[] { 'G', 'L', 'N' }, new OptionalItemStack(Block.glass),
-                new OptionalItemStack(Item.lightStoneDust), new OptionalItemStack(Block.netherBrick));
+                new OptionalItemStack(Item.glowstone), new OptionalItemStack(Block.netherBrick));
         
 		/* Misc Generic Craftables */
 		if(ItemList.genericCraftingItems.isPresent()){
@@ -89,7 +89,7 @@ public class ItemBlockRecipeManager {
 		}
         addRecipe(new OptionalItemStack(ItemList.genericCraftingItems, 1, ItemGenerics.Properties.ShinyBauble.meta()),
                 new String[] { " G ", "GNG", " G " }, new char[] { 'G', 'N' }, new OptionalItemStack(
-                        Item.lightStoneDust), new OptionalItemStack(Item.netherStalkSeeds));
+                        Item.glowstone), new OptionalItemStack(Item.netherStalkSeeds));
 		addShapelessRecipe(new OptionalItemStack(ItemList.genericCraftingItems,2,ItemGenerics.Properties.Salt.meta()),
 				new OptionalItemStack(Item.gunpowder));
 		addRecipe(new OptionalItemStack(BlockList.spike), new String[]{"   ","   ","TTT"}, 'T',

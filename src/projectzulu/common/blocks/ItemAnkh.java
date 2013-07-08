@@ -27,12 +27,7 @@ public class ItemAnkh extends Item {
         setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase());
         func_111206_d(DefaultProps.blockKey + ":" + name.toLowerCase());
     }
-
-    @SideOnly(Side.CLIENT)
-    public String getTextureFile() {
-        return DefaultProps.itemSpriteSheet;
-    }
-
+    
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 

@@ -98,7 +98,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.MummyShortRoar";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "mummyshortroar";
     }
 
     /**

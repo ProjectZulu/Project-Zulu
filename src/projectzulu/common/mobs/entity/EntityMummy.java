@@ -17,6 +17,7 @@ import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
 import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import projectzulu.common.mobs.entityai.EntityAIWander;
+import projectzulu.common.mobs.entitydefaults.MummyDeclaration;
 
 public class EntityMummy extends EntityGenericAnimal implements IMob {
 
@@ -89,6 +90,13 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
         return 16;
     }
 
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    protected String getHurtSound() {
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "mummyroar";
+    }
+    
     /**
      * Returns the Y offset from the entity's position for any entity riding this one.
      */

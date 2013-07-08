@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIControlledByPlayer;
 import projectzulu.common.mobs.entityai.EntityAIFollowParent;
@@ -82,7 +83,7 @@ public class EntityHorseBase extends EntityGenericAnimal {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.horse";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "horse";
     }
 
     /**
@@ -90,7 +91,7 @@ public class EntityHorseBase extends EntityGenericAnimal {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.horsehurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "horsehurt";
     }
 
     @Override

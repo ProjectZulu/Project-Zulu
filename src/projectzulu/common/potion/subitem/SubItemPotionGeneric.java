@@ -114,7 +114,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     protected TYPE getIngredientType(ItemStack ingredient, ItemStack brewingStack) {
         if (ingredient.itemID == Item.redstone.itemID) {
             return TYPE.POWER;
-        } else if (ingredient.itemID == Item.lightStoneDust.itemID) {
+        } else if (ingredient.itemID == Item.glowstone.itemID) {
             return TYPE.DURATION;
         } else if (ItemList.genericCraftingItems.isPresent()
                 && ingredient.itemID == ItemList.genericCraftingItems.get().itemID

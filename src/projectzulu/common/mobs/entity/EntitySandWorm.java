@@ -7,6 +7,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsTarget;
@@ -111,7 +112,7 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob {
      */
     @Override
     protected String getHurtSound() {
-        return null;
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "sandwormroar";
     }
 
     /**

@@ -9,7 +9,7 @@ import net.minecraftforge.common.Configuration;
 public class ProjectZuluLog {
 
     private static Logger myLog;
-    private static boolean isSetup;
+    public static boolean isSetup;
 
     public enum LogType {
         SPAWNING, DEBUG;

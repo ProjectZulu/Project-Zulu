@@ -85,7 +85,7 @@ public class EntityFrog extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getLivingSound() {
-        return "sounds.frogliving";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "frogliving";
     }
 
     /**
@@ -93,7 +93,7 @@ public class EntityFrog extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected String getHurtSound() {
-        return "sounds.froghurt";
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "froghurt";
     }
 
     @Override
