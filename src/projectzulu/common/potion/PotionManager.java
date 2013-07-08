@@ -171,8 +171,13 @@ public enum PotionManager {
                 Class<? extends Potion> componentType = (Class<? extends Potion>) a.getClass().getComponentType();
                 Potion[] newArray = (Potion[]) Array.newInstance(componentType, newSize);
                 System.arraycopy(a, 0, newArray, 0, length);
-                ObfuscationHelper.setFieldUsingReflection("potionTypes", Potion.class, Potion[].class, false, true,
-                        newArray);
+                try {
+                    ObfuscationHelper.setCatchableFieldUsingReflection("field_76425_a", Potion.class, Potion[].class,
+                            false, true, newArray);
+                } catch (NoSuchFieldException e) {
+                    ObfuscationHelper.setFieldUsingReflection("potionTypes", Potion.class, Potion[].class, false, true,
+                            newArray);
+                }
             }
         }
     }

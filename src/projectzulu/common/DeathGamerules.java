@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Random;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -148,10 +149,10 @@ public class DeathGamerules {
             player.captureDrops = false;
             int recentlyHit;
             try {
-                recentlyHit = ObfuscationHelper.getCatchableFieldFromReflection("field_70718_bc", EntityLiving.class,
+                recentlyHit = ObfuscationHelper.getCatchableFieldFromReflection("field_70718_bc", EntityLivingBase.class,
                         player, Integer.class);
             } catch (NoSuchFieldException e) {
-                recentlyHit = ObfuscationHelper.getFieldFromReflection("recentlyHit", EntityLiving.class, player,
+                recentlyHit = ObfuscationHelper.getFieldFromReflection("recentlyHit", EntityLivingBase.class, player,
                         Integer.class);
             }
             PlayerDropsEvent dropEvent = new PlayerDropsEvent(player, event.source, player.capturedDrops,

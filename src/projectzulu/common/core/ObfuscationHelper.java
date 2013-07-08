@@ -248,24 +248,34 @@ public class ObfuscationHelper {
      * @return
      * @throws NoSuchFieldException 
      */
-    public static <T> void setCatchableFieldUsingReflection(String fieldName, Class<?> containingClass, Object containterInstance, boolean isPrivate, T value) throws NoSuchFieldException{
+    public static <T> void setCatchableFieldUsingReflection(String fieldName, Class<?> containingClass,
+            Object containterInstance, boolean isPrivate, boolean isFinal, T value) throws NoSuchFieldException {
         try {
             Field desiredField = containingClass.getDeclaredField(fieldName);
             if (isPrivate) {
                 desiredField.setAccessible(true);
             }
+            if (isFinal || isPrivate) {
+                Field modifiersField = Field.class.getDeclaredField("modifiers");
+                modifiersField.setAccessible(true);
+                modifiersField.set(desiredField, desiredField.getModifiers() & ~Modifier.FINAL);
+            }
             desiredField.set(containterInstance, value);
-        }catch (IllegalArgumentException e) {
-            ProjectZuluLog.severe("Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
+        } catch (IllegalArgumentException e) {
+            ProjectZuluLog.severe(
+                    "Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
             e.printStackTrace();
-        }catch (IllegalAccessException e) {
-            ProjectZuluLog.severe("Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
+        } catch (IllegalAccessException e) {
+            ProjectZuluLog.severe(
+                    "Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
             e.printStackTrace();
-        }catch (SecurityException e) {
-            ProjectZuluLog.severe("Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
+        } catch (SecurityException e) {
+            ProjectZuluLog.severe(
+                    "Obfuscation needs to be updated to access the %s. Please notify modmaker Immediately.", fieldName);
             e.printStackTrace();
         }
-    }   
+    }
+    
     
 	public static Class<?> getDeclaredClass(String className, Class<?> containingClass){
 		for (Class<?> declaredClass : containingClass.getDeclaredClasses()) {

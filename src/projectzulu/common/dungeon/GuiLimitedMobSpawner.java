@@ -140,12 +140,12 @@ public class GuiLimitedMobSpawner extends GuiScreen {
                  * joined.srg --> d
                  */
                 HashMap soundHash;
-                if (ObfuscationHelper.isUnObfuscated(SoundPool.class.getDeclaredFields().clone(),
-                        "nameToSoundPoolEntriesMapping")) {
+                try {
+                    soundHash = ObfuscationHelper.getCatchableFieldFromReflection("field_77461_d", soundPool,
+                            HashMap.class);
+                } catch (NoSuchFieldException e) {
                     soundHash = ObfuscationHelper.getFieldFromReflection("nameToSoundPoolEntriesMapping", soundPool,
                             HashMap.class);
-                } else {
-                    soundHash = ObfuscationHelper.getFieldFromReflection("d", soundPool, HashMap.class);
                 }
                 if (soundHash != null) {
                     Iterator stringSoundIterator = soundHash.keySet().iterator();
