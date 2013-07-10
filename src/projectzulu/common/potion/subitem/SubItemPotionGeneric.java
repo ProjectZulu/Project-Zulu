@@ -16,7 +16,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ItemGenerics.Properties;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.potion.EntityPZPotion;
 import projectzulu.common.potion.PotionParser;
 
@@ -57,7 +56,6 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
 
     @Override
     public final ItemStack getPotionResult(ItemStack ingredient, ItemStack brewingStack) {
-        ProjectZuluLog.info("Ingredient Type is %s", getIngredientType(ingredient, brewingStack).toString());
         switch (getIngredientType(ingredient, brewingStack)) {
         case POWER: {
             int power = PotionParser.readPower(brewingStack.getItemDamage());

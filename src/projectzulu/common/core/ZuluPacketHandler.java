@@ -55,10 +55,10 @@ public class ZuluPacketHandler implements IPacketHandler{
 						/* Look For TileEntity, then Give it Text */
 						if(worldObj.getBlockTileEntity(tileLocationX, tileLocationY, tileLocationZ) instanceof TileEntityTombstone){
 							TileEntityTombstone tile = (TileEntityTombstone)worldObj.getBlockTileEntity(tileLocationX, tileLocationY, tileLocationZ);
-							tile.signText[0] = data.readUTF();
-							tile.signText[1] = data.readUTF();
-							tile.signText[2] = data.readUTF();
-							tile.signText[3] = data.readUTF();
+							int linesOfText = data.readInt();
+                            for (int i = 0; i < linesOfText; i++) {
+                                tile.signText[i] = data.readUTF();
+                            }
 						}
 						break;
 					}

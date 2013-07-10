@@ -42,6 +42,7 @@ import projectzulu.common.blocks.itemblockdeclarations.QuickSandDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.RedClothArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.ScaleArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.ScaleItemDeclaration;
+import projectzulu.common.blocks.itemblockdeclarations.ScrapMeatDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.SpikesDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.StructurePlacerDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.TombstoneDeclaration;
@@ -154,7 +155,8 @@ public class ProjectZulu_Blocks {
         ItemBlockManager.INSTANCE.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(),
                 new WaterDropletDeclaration(), new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(),
                 new CoconutShellDeclaration(), new ScaleItemDeclaration(), new FurPeltDeclaration(),
-                new GenericCraftingItemsDeclaration(), new StructurePlacerDeclaration(), new CoconutItem());
+                new GenericCraftingItemsDeclaration(), new StructurePlacerDeclaration(), new CoconutItem(),
+                new ScrapMeatDeclaration());
 
         ItemBlockManager.INSTANCE.addItemBlock(
                 new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),
