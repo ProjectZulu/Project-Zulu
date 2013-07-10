@@ -154,23 +154,26 @@ public class EventHookContainerClass {
 //				}
 //			}
 //		}
-		
-		if( (Loader.isModLoaded(DefaultProps.MobsModId) && Properties.tombstoneOnDeath 
-				&& event.entity instanceof EntityPlayer && BlockList.tombstone.isPresent() )){
-			EntityPlayer player = (EntityPlayer)event.entity;
-			World worldObj = player.worldObj;
-			
-			/* Check if Location is Valid for Tombstone */
-			if(worldObj.isAirBlock((int)player.posX, (int)player.posY, (int)player.posZ)){
-				/* Place a Tombstone */
-				worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, BlockList.tombstone.get().blockID);
-				TileEntity tileEntity = worldObj.getBlockTileEntity((int)player.posX, (int)player.posY, (int)player.posZ);
-				if(tileEntity != null && tileEntity instanceof TileEntityTombstone ){
-					((TileEntityTombstone)tileEntity).setSignString(event.source.getDeathMessage((EntityPlayer)event.entity));
-				}
-			}
-		}
-	}
+
+        if ((Loader.isModLoaded(DefaultProps.MobsModId) && Properties.tombstoneOnDeath
+                && event.entity instanceof EntityPlayer && BlockList.tombstone.isPresent())) {
+            EntityPlayer player = (EntityPlayer) event.entity;
+            World worldObj = player.worldObj;
+
+            /* Check if Location is Valid for Tombstone */
+            if (worldObj.isAirBlock((int) player.posX, (int) player.posY, (int) player.posZ)) {
+                /* Place a Tombstone */
+                worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ,
+                        BlockList.tombstone.get().blockID);
+                TileEntity tileEntity = worldObj.getBlockTileEntity((int) player.posX, (int) player.posY,
+                        (int) player.posZ);
+                if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
+                    ((TileEntityTombstone) tileEntity).setSignString(event.source
+                            .getDeathMessage((EntityPlayer) event.entity));
+                }
+            }
+        }
+    }
 
 	
 	/* Armor Effect Only Occurs When Block/Item Package is Installed*/
