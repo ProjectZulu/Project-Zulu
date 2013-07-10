@@ -62,7 +62,7 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
         float var12 = 0.016666668F * 0.8f * var10;
         float xOffset = 0.0f;
 	    float zOffset = 0.15f;
-	    float yOffset = -0.33f;
+	    float yOffset = -0.32f;
         GL11.glTranslatef(0.0F + xOffset, 0.5F * var10 + yOffset, 0.07F * var10 + zOffset);
         GL11.glScalef(var12, -var12, var12);
         GL11.glNormal3f(0.0F, 0.0F, -1.0F * var12);

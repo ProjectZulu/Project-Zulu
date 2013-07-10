@@ -100,15 +100,13 @@ public class TileEntityTombstone extends TileEntity {
 
             /* Add Words until Line is full */
             for (int i = startWord; i < words.length; i++) {
-                String currentWord = words[i].length() > maxcharPerLine ? words[i].substring(0, maxcharPerLine - 2)
-                        .concat(".") : words[i];
+                String currentWord = getFilteredWord(words[i]);
                 if (curCharPerLine + 1 + currentWord.length() <= maxcharPerLine) {
                     curCharPerLine += 1 + currentWord.length();
                 } else {
-                    signText[currentLine] = words[startWord];
+                    signText[currentLine] = getFilteredWord(words[startWord]);
                     for (int j = startWord + 1; j < i; j++) {
-                        String nextWord = words[j].length() > maxcharPerLine ? words[j]
-                                .substring(0, maxcharPerLine - 2).concat(".") : words[j];
+                        String nextWord = getFilteredWord(words[j]);
                         signText[currentLine] = signText[currentLine].concat(" ").concat(nextWord);
                     }
                     startWord = i;
@@ -122,12 +120,19 @@ public class TileEntityTombstone extends TileEntity {
                 if (i + 1 >= words.length) {
                     signText[currentLine] = words[startWord];
                     for (int j = startWord + 1; j <= i; j++) {
-                        signText[currentLine] = signText[currentLine].concat(" ").concat(words[j]);
+                        signText[currentLine] = signText[currentLine].concat(" ").concat(getFilteredWord(words[j]));
                     }
                     startWord = i + 1;
                     break;
                 }
             }
         }
+    }
+    
+    /**
+     * Handlers filtering word if it is invalid in some way, such as truncating a word that is too long.
+     */
+    private String getFilteredWord(String word) {
+        return word.length() > maxcharPerLine ? word.substring(0, maxcharPerLine - 2).concat(".") : word;
     }
 }
