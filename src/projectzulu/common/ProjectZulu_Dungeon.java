@@ -1,28 +1,16 @@
 package projectzulu.common;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import net.minecraftforge.common.MinecraftForge;
-import projectzulu.common.blocks.itemblockdeclarations.AloeVeraDeclaration;
-import projectzulu.common.blocks.itemblockdeclarations.JasperDeclaration;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemBlockManager;
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.dungeon.commands.CommandPlaceBlock;
 import projectzulu.common.dungeon.commands.CommandPlaySound;
 import projectzulu.common.dungeon.commands.CommandSpawnEntity;
 import projectzulu.common.dungeon.commands.CommandStreamSound;
 import projectzulu.common.dungeon.itemblockdeclaration.LimitedMobSpawnerDeclaration;
-import projectzulu.common.mobs.MobSounds;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -40,17 +28,17 @@ public class ProjectZulu_Dungeon {
         declareModuleItemBlocks();
     }
 
-    @PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new DeathGamerules().loadConfiguration(event.getModConfigurationDirectory()));
     }
 
-    @Init
+    @EventHandler
     public void load(FMLInitializationEvent event) {
 
     }
 
-    @ServerStarting
+    @EventHandler
     public void serverStart(FMLServerStartingEvent event) {
         /* Add Custom Commands */
         event.registerServerCommand(new CommandPlaySound());
