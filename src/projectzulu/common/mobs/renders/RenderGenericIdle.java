@@ -1,8 +1,8 @@
 package projectzulu.common.mobs.renders;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 import projectzulu.common.mobs.entity.EntityGenericAnimal;
 import projectzulu.common.mobs.entity.EntityStates;
 

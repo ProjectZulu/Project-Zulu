@@ -3,17 +3,15 @@ package projectzulu.common.mobs.renders;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.BossHealthDisplayTicker;
 import projectzulu.common.mobs.entity.EntityMummyPharaoh;
 import projectzulu.common.mobs.models.ModelMummyPharaoh;

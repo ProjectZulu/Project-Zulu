@@ -1,10 +1,9 @@
 package projectzulu.common.mobs.renders;
 
-import projectzulu.common.mobs.entity.EntityGenericAnimal;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import projectzulu.common.mobs.entity.EntityGenericAnimal;
 
 public class RenderGenericHorse extends RenderGenericLiving {
     

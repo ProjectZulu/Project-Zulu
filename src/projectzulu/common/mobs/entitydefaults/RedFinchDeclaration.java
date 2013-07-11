@@ -1,12 +1,10 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
@@ -15,8 +13,9 @@ import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityRedFinch;
 import projectzulu.common.mobs.models.ModelFinch;
-import projectzulu.common.mobs.models.ModelMummyPharaoh;
 import projectzulu.common.mobs.renders.RenderGenericLiving;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class RedFinchDeclaration extends SpawnableDeclaration {
 

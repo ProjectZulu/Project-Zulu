@@ -1,10 +1,8 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
@@ -13,11 +11,10 @@ import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.EggableDeclaration;
 import projectzulu.common.mobs.entity.EntityMimic;
-import projectzulu.common.mobs.models.ModelMammoth;
 import projectzulu.common.mobs.models.ModelMimic;
-import projectzulu.common.mobs.renders.RenderGenericLiving;
-import projectzulu.common.mobs.renders.RenderMammoth;
 import projectzulu.common.mobs.renders.RenderMimic;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class MimicDeclaration extends EggableDeclaration {
 

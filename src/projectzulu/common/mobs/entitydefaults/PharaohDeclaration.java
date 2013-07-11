@@ -1,10 +1,10 @@
 package projectzulu.common.mobs.entitydefaults;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.CustomMobData;
@@ -14,7 +14,6 @@ import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.entitydeclaration.CreatureDeclaration;
 import projectzulu.common.mobs.entity.EntityMummyPharaoh;
 import projectzulu.common.mobs.models.ModelMummyPharaoh;
-import projectzulu.common.mobs.renders.RenderGenericLiving;
 import projectzulu.common.mobs.renders.RenderMummyPharaoh;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
