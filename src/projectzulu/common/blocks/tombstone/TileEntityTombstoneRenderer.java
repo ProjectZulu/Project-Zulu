@@ -1,9 +1,12 @@
 package projectzulu.common.blocks.tombstone;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
@@ -19,7 +22,6 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
 {
     /** The ModelSign instance used by the TileEntityTombstoneRenderer */
     private ModelTombstone modelSign = new ModelTombstone();
-
     public static final ResourceLocation TOMBSTONE = new ResourceLocation(DefaultProps.blockKey, "Tombstone.png");
     
     public void renderTileEntityTombstoneAt(TileEntityTombstone par1TileEntityTombstone, double par2, double par4, double par6, float par8){
@@ -33,6 +35,8 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
             meta = par1TileEntityTombstone.getBlockMetadata();
             rotation = par1TileEntityTombstone.getBlockMetadata()*360/8;
         }
+        
+       
         
         this.func_110628_a(TOMBSTONE);
         
@@ -82,10 +86,54 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
         GL11.glDepthMask(true);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glPopMatrix();
+
+        if (par1TileEntityTombstone.getEntityOrb() != null) {
+            GL11.glPushMatrix();
+            long time = par1TileEntityTombstone.worldObj.getWorldTime();
+            float orbOrbitRadius = 0.3f;
+            float periodScale = 6.0f;
+            GL11.glTranslatef((float) par2 + 0.5f, (float) (par4 + 1.1f + 0.05f * Math.cos(time / 20f)),
+                    (float) par6 + 0.5F);
+            for (int orb = 1; orb <= 3; orb++) {
+                float xTrans = getOrbitTransformationX(time, orb, 3, orbOrbitRadius, periodScale)
+                        - getOrbitTransformationX(time, orb - 1, 3, orbOrbitRadius, periodScale);
+                float zTrans = getOrbitTransformationZ(time, orb, 3, orbOrbitRadius, periodScale)
+                        - getOrbitTransformationZ(time, orb - 1, 3, orbOrbitRadius, periodScale);
+                GL11.glTranslatef(xTrans, 0.0F, zTrans);
+                RenderManager.instance.renderEntityWithPosYaw(par1TileEntityTombstone.getEntityOrb(), 0.0D, 0.0D, 0.0D,
+                        0.0F, par8);
+            }
+            GL11.glPopMatrix();
+        }
     }
     
     public String reverse(String s) {
         return new StringBuffer(s).reverse().toString();
+    }
+    
+    /**
+     * 
+     * @param time
+     * @param orb Current Orb being Rendered. Index 1.
+     * @param maxOrbs Maximum Orbs in a single orbit. Used to calculate offset within orbit.
+     * @param orbitRadius Radius of Orb orbit
+     * @param orbitPeriod Scaling factor that effects period of orbit.
+     * @return
+     */
+    private float getOrbitTransformationX(float time, int orb, int maxOrbs, float orbitRadius, float orbitPeriod) {
+        if (orb <= 0) {
+            return 0f;
+        } else {
+            return orbitRadius * (float) Math.cos(time / orbitPeriod + orb * Math.PI * 2 / maxOrbs);
+        }
+    }
+    
+    private float getOrbitTransformationZ(float time, int orb, int maxOrbs, float orbitRadius, float orbitPeriod) {
+        if (orb <= 0) {
+            return 0;
+        } else {
+            return orbitRadius * (float) Math.sin(time / orbitPeriod + orb * Math.PI * 2 / maxOrbs);
+        }
     }
     
     @Override

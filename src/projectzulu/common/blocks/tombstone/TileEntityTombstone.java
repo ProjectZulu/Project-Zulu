@@ -1,6 +1,16 @@
 package projectzulu.common.blocks.tombstone;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import projectzulu.common.core.ProjectZuluLog;
+
+import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
@@ -9,6 +19,46 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityTombstone extends TileEntity {
+    
+    /* List of Items this Tombstone will Empty Upon Right-Clicking */
+    private ArrayList<ItemStack> deathItems = new ArrayList<ItemStack>();
+    public int experience = 0;
+    private EntityXPOrb xpOrb = null;
+
+    public EntityXPOrb getEntityOrb() {
+        if (deathItems.size() > 0 || experience > 0) {
+            if (xpOrb == null) {
+                xpOrb = new EntityXPOrb(worldObj, xCoord, yCoord, zCoord, worldObj.rand.nextInt(5) + 1);
+            }
+            return xpOrb;
+        }
+        return null;
+    }
+    
+    public boolean addDrop(ItemStack itemDrop) {
+        return deathItems.add(itemDrop);
+    }
+
+    public boolean hasDrops() {
+        return !deathItems.isEmpty() || experience > 0;
+    }
+
+    /* Give items in Tombstone to Player */
+    public void giveItemsToPlayer(EntityPlayer player) {
+        player.addExperience(experience);
+        experience = 0;
+        
+        Iterator<ItemStack> iterator = deathItems.iterator();
+        boolean itemAdded = true;
+        while (iterator.hasNext() && itemAdded) {
+            ItemStack deathItem = iterator.next();
+            itemAdded = player.inventory.addItemStackToInventory(deathItem);
+            if(itemAdded){
+                iterator.remove();
+            }
+        }
+    }
+    
     /** An array of four strings storing the lines of text on the sign. */
     public String[] signText;
     public final int maxLines = 7;
@@ -27,31 +77,49 @@ public class TileEntityTombstone extends TileEntity {
             signText[i] = "";
         }
     }
-
+    
     /**
      * Writes a tile entity to NBT.
      */
     @Override
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
-        super.writeToNBT(par1NBTTagCompound);
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+
         for (int i = 0; i < signText.length; i++) {
             if (signText[i].length() > 0) {
-                par1NBTTagCompound.setString("Text" + (i + 1), this.signText[i]);
+                tagCompound.setString("Text" + (i + 1), this.signText[i]);
             }
         }
+        NBTTagList itemsTag = new NBTTagList();
+        for (ItemStack itemStack : deathItems) {
+            NBTTagCompound tag = new NBTTagCompound();
+            itemStack.writeToNBT(tag);
+            itemsTag.appendTag(tag);
+        }
+        tagCompound.setTag("DeathItems", itemsTag);
     }
 
     /**
      * Reads a tile entity from NBT.
      */
     @Override
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+    public void readFromNBT(NBTTagCompound tagCompound) {
         this.isEditable = false;
-        super.readFromNBT(par1NBTTagCompound);
+        super.readFromNBT(tagCompound);
         for (int i = 0; i < signText.length; ++i) {
-            this.signText[i] = par1NBTTagCompound.getString("Text" + (i + 1));
+            this.signText[i] = tagCompound.getString("Text" + (i + 1));
             if (this.signText[i].length() > maxcharPerLine) {
                 this.signText[i] = this.signText[i].substring(0, maxcharPerLine);
+            }
+        }
+        if (tagCompound.hasKey("DeathItems")) {
+            NBTTagList itemsTag = (NBTTagList) tagCompound.getTag("DeathItems");
+            deathItems = new ArrayList<ItemStack>();
+            for (int i = 0; i < itemsTag.tagCount(); i++) {
+                ItemStack itemStack = ItemStack.loadItemStackFromNBT((NBTTagCompound) itemsTag.tagAt(i));
+                if (itemStack != null) {
+                    deathItems.add(itemStack);
+                }
             }
         }
     }
@@ -70,14 +138,7 @@ public class TileEntityTombstone extends TileEntity {
     @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
         NBTTagCompound tag = packet.customParam1;
-        for (int i = 0; i < signText.length; ++i) {
-            if (tag.hasKey("Text".concat(Integer.toString((i + 1))))) {
-                signText[i] = tag.getString("Text".concat(Integer.toString((i + 1))));
-                if (signText[i].length() > maxcharPerLine) {
-                    signText[i] = signText[i].substring(0, maxcharPerLine);
-                }
-            }
-        }
+        readFromNBT(tag);
     }
 
     public boolean isEditable() {
