@@ -1,18 +1,17 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.entitydeclaration.CreatureDeclaration;
 import projectzulu.common.mobs.entity.EntityFollower;
-import projectzulu.common.mobs.models.ModelElephant;
 import projectzulu.common.mobs.models.ModelFollower;
 import projectzulu.common.mobs.renders.RenderGenericLiving;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class FollowerDeclaration extends CreatureDeclaration {
 

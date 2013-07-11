@@ -1,9 +1,8 @@
 package projectzulu.common.mobs.renders;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entity.EntityGenericRideable;
