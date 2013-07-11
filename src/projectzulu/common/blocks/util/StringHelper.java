@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.blocks.util;
 
 import com.google.common.base.CharMatcher;
 

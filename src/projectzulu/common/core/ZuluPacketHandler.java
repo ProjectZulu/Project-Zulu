@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
-import projectzulu.common.blocks.TileEntityTombstone;
+import projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import projectzulu.common.mobs.entity.EntityGenericTameable;
 import projectzulu.common.temperature.TemperatureTicker;
 import cpw.mods.fml.common.network.IPacketHandler;

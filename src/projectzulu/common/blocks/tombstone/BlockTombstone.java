@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.blocks.tombstone;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -99,17 +99,23 @@ public class BlockTombstone extends BlockContainer{
 		super.onBlockPlacedBy(par1World, par2, par3, par4, livingBase, par6ItemStack);
 	}
 	
-	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3,
-			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
-		if(par5EntityPlayer instanceof EntityPlayer && par5EntityPlayer.inventory.getCurrentItem() != null
-				&& isValidItemForEditing( par5EntityPlayer.inventory.getCurrentItem().getItem().itemID ) ){
-			par5EntityPlayer.openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
-			return true;
-		}
-		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
-	}
+    @Override
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer,
+            int par6, float par7, float par8, float par9) {
+        if (par5EntityPlayer instanceof EntityPlayer) {
+            if (par5EntityPlayer.inventory.getCurrentItem() == null) {
+                TileEntity tileEntity = par1World.getBlockTileEntity(par2, par3, par4);
+                if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
+                    ((TileEntityTombstone) tileEntity).giveItemsToPlayer(par5EntityPlayer);
+                }
+                return true;
+            } else if (isValidItemForEditing(par5EntityPlayer.inventory.getCurrentItem().getItem().itemID)) {
+                par5EntityPlayer.openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
+                return true;
+            }
+        }
+        return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
+    }
 	
 	private boolean isValidItemForEditing(int itemID){		
 		if(itemID == Item.pickaxeWood.itemID || itemID == Item.pickaxeStone.itemID || itemID == Item.pickaxeGold.itemID 

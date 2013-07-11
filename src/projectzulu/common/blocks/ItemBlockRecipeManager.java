@@ -14,6 +14,7 @@ import projectzulu.common.Properties;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ItemGenerics;
+import projectzulu.common.core.OptionalItemStack;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
