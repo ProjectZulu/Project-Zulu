@@ -1,12 +1,10 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
@@ -16,10 +14,10 @@ import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityTreeEnt;
-import projectzulu.common.mobs.models.ModelSandWorm;
 import projectzulu.common.mobs.models.ModelTreeEnt;
-import projectzulu.common.mobs.renders.RenderGenericIdle;
 import projectzulu.common.mobs.renders.RenderSnow;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TreeEntDeclaration extends SpawnableDeclaration {
 

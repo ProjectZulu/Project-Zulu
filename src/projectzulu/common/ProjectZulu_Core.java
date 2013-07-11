@@ -21,10 +21,8 @@ import projectzulu.common.core.ZuluGuiHandler;
 import projectzulu.common.core.ZuluPacketHandler;
 import projectzulu.common.core.terrain.FeatureGenerator;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -32,7 +30,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /*Useful OpenSource reference to Look at: ExtrabiomesXL, Gaurdsman*/
 @Mod(modid = DefaultProps.CoreModId, name = "Project Zulu Core", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DesiredBefore)
@@ -95,7 +92,7 @@ public class ProjectZulu_Core {
     @SidedProxy(clientSide = "projectzulu.common.ClientProxyProjectZulu", serverSide = "projectzulu.common.CommonProxyProjectZulu")
     public static CommonProxyProjectZulu proxy;
 
-    @PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Minecraft.getMinecraft().func_110434_K();
         modConfigDirectoryFile = event.getModConfigurationDirectory();
@@ -128,12 +125,12 @@ public class ProjectZulu_Core {
         CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
     }
 
-    @Init
+    @EventHandler
     public void load(FMLInitializationEvent event) {
         NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
     }
 
-    @PostInit
+    @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         BiomeDictionary.registerAllBiomes();
 

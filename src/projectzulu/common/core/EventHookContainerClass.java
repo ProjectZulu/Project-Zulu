@@ -154,7 +154,7 @@ public class EventHookContainerClass {
 //				}
 //			}
 //		}
-		
+
         if ((Loader.isModLoaded(DefaultProps.MobsModId) && Properties.tombstoneOnDeath
                 && event.entity instanceof EntityPlayer && BlockList.tombstone.isPresent())) {
             EntityPlayer player = (EntityPlayer) event.entity;

@@ -43,6 +43,7 @@ import projectzulu.common.blocks.itemblockdeclarations.QuickSandDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.RedClothArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.ScaleArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.ScaleItemDeclaration;
+import projectzulu.common.blocks.itemblockdeclarations.ScrapMeatDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.SpikesDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.StructurePlacerDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.TombstoneDeclaration;
@@ -65,10 +66,8 @@ import projectzulu.common.potion.PZExtraPotionDeclaration;
 import projectzulu.common.potion.PZVanillaPotionDeclaration;
 import projectzulu.common.potion.PotionManager;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -89,7 +88,7 @@ public class ProjectZulu_Blocks {
         declareModuleTerrainFeatures();
     }
 
-    @PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Configuration zuluConfig = new Configuration(new File(event.getModConfigurationDirectory(),
                 DefaultProps.configDirectory + DefaultProps.defaultConfigFile));
@@ -100,12 +99,12 @@ public class ProjectZulu_Blocks {
         zuluConfig.save();
     }
 
-    @Init
+    @EventHandler
     public void load(FMLInitializationEvent event) {
 
     }
 
-    @PostInit
+    @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         ItemBlockRecipeManager.setupBlockModuleRecipies();
 

@@ -1,7 +1,5 @@
 package projectzulu.common;
 
-import java.io.File;
-
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.MobSounds;
@@ -49,10 +47,8 @@ import projectzulu.common.mobs.entitydefaults.SandwormDeclaration;
 import projectzulu.common.mobs.entitydefaults.TreeEntDeclaration;
 import projectzulu.common.mobs.entitydefaults.VultureDeclaration;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -72,17 +68,17 @@ public class ProjectZulu_Mobs {
     private static int id = 300;
     private static int eggID = 300;
 
-    @PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MobSounds.registerMobSounds();
     }
 
-    @Init
+    @EventHandler
     public void load(FMLInitializationEvent event) {
         
     }
 
-    @PostInit
+    @EventHandler
     public void load(FMLPostInitializationEvent event) {
     }
 

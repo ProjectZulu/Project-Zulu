@@ -6,10 +6,8 @@ import projectzulu.common.world.terrain.LabyrinthFeature;
 import projectzulu.common.world.terrain.OasisFeature;
 import projectzulu.common.world.terrain.PyramidFeature;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -27,16 +25,16 @@ public class ProjectZulu_World {
                 new OasisFeature(), new PyramidFeature());
     }
 
-    @PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 
     }
 
-    @Init
+    @EventHandler
     public void load(FMLInitializationEvent event) {
     }
 
-    @PostInit
+    @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
     }
 }

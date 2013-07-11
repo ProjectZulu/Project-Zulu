@@ -3,13 +3,12 @@ package projectzulu.common.mobs.renders;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entity.EntityLizardSpit;
 
 

@@ -3,9 +3,9 @@ package projectzulu.common.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -59,10 +59,10 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
         GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F); // Var11 is getMetaData Rotation
         
         FontRenderer var17 = this.getFontRenderer();
-        float var12 = 0.016666668F * var10;
+        float var12 = 0.016666668F * 0.8f * var10;
         float xOffset = 0.0f;
-	    float zOffset = 0.18f;
-	    float yOffset = -0.35f;
+	    float zOffset = 0.15f;
+	    float yOffset = -0.32f;
         GL11.glTranslatef(0.0F + xOffset, 0.5F * var10 + yOffset, 0.07F * var10 + zOffset);
         GL11.glScalef(var12, -var12, var12);
         GL11.glNormal3f(0.0F, 0.0F, -1.0F * var12);
@@ -71,11 +71,10 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
 
         for (int var14 = 0; var14 < par1TileEntityTombstone.signText.length; ++var14){
             String var15 = par1TileEntityTombstone.signText[var14];
-            if (var14 == par1TileEntityTombstone.lineBeingEdited){
+            if (var14 == par1TileEntityTombstone.lineBeingEdited) {
                 var15 = "> " + var15 + " <";
                 var17.drawString(var15, -var17.getStringWidth(var15) / 2, var14 * 10 - par1TileEntityTombstone.signText.length * 5, var13);
-            }
-            else{
+            } else {
                 var17.drawString(var15, -var17.getStringWidth(var15) / 2, var14 * 10 - par1TileEntityTombstone.signText.length * 5, var13);
             }
         }
@@ -88,6 +87,7 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
         return new StringBuffer(s).reverse().toString();
     }
     
+    @Override
     public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8){
         this.renderTileEntityTombstoneAt((TileEntityTombstone)par1TileEntity, par2, par4, par6, par8);
     }
