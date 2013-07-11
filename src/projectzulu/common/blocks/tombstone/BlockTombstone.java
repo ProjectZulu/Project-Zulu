@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.blocks.tombstone;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

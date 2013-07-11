@@ -23,7 +23,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import projectzulu.common.Properties;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
-import projectzulu.common.blocks.TileEntityTombstone;
+import projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import projectzulu.common.mobs.entity.EntityTreeEnt;
 import cpw.mods.fml.common.Loader;
 

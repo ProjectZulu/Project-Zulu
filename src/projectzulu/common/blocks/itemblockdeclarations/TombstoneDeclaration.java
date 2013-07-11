@@ -7,9 +7,9 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.blocks.BlockTombstone;
-import projectzulu.common.blocks.TileEntityTombstone;
-import projectzulu.common.blocks.TileEntityTombstoneRenderer;
+import projectzulu.common.blocks.tombstone.BlockTombstone;
+import projectzulu.common.blocks.tombstone.TileEntityTombstone;
+import projectzulu.common.blocks.tombstone.TileEntityTombstoneRenderer;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 

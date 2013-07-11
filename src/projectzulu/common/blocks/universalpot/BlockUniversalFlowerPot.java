@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.blocks.universalpot;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

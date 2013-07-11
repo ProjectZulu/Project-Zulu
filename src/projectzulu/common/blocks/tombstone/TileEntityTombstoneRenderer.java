@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.blocks.tombstone;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.common.blocks.ModelTombstone;
 import projectzulu.common.core.DefaultProps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -11,7 +11,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import projectzulu.common.api.CustomMobData;
-import projectzulu.common.blocks.StringHelper;
+import projectzulu.common.blocks.util.StringHelper;
 import projectzulu.common.core.entitydeclaration.SpawnEntry;
 
 import com.google.common.base.Optional;

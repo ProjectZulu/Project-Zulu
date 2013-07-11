@@ -4,11 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.Properties;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.blocks.BlockUniversalFlowerPot;
 import projectzulu.common.blocks.ItemUniversalFlowerPot;
-import projectzulu.common.blocks.RenderUniversalFlowerPot;
-import projectzulu.common.blocks.TileEntityUniversalFlowerPot;
-import projectzulu.common.blocks.TileEntityUniversalFlowerPotRenderer;
+import projectzulu.common.blocks.universalpot.BlockUniversalFlowerPot;
+import projectzulu.common.blocks.universalpot.RenderUniversalFlowerPot;
+import projectzulu.common.blocks.universalpot.TileEntityUniversalFlowerPot;
+import projectzulu.common.blocks.universalpot.TileEntityUniversalFlowerPotRenderer;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 

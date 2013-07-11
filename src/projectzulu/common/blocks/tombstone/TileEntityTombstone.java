@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.blocks.tombstone;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;

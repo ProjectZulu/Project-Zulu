@@ -1,4 +1,4 @@
-package projectzulu.common.blocks;
+package projectzulu.common.blocks.tombstone;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
