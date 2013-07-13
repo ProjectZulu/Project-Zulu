@@ -1,6 +1,5 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Configuration;
@@ -13,6 +12,7 @@ import projectzulu.common.core.entitydeclaration.EggableDeclaration;
 import projectzulu.common.mobs.entity.EntityMimic;
 import projectzulu.common.mobs.models.ModelMimic;
 import projectzulu.common.mobs.renders.RenderMimic;
+import projectzulu.common.mobs.renders.RenderWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -36,7 +36,7 @@ public class MimicDeclaration extends EggableDeclaration {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+    public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderMimic(new ModelMimic(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "mimicchest.png"));
     }
 }

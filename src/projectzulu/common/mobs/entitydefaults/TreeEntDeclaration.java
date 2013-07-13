@@ -1,7 +1,6 @@
 package projectzulu.common.mobs.entitydefaults;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
@@ -16,6 +15,7 @@ import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityTreeEnt;
 import projectzulu.common.mobs.models.ModelTreeEnt;
 import projectzulu.common.mobs.renders.RenderSnow;
+import projectzulu.common.mobs.renders.RenderWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -50,7 +50,7 @@ public class TreeEntDeclaration extends SpawnableDeclaration {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+    public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderSnow(new ModelTreeEnt(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "treeent.png"),
                 new ResourceLocation(DefaultProps.mobKey, "treeent_snow.png"));
     }

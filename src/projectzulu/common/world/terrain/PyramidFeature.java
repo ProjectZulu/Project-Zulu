@@ -47,8 +47,10 @@ public class PyramidFeature extends BiomeFeature {
         chestLootChance = 15;
         chestMaxLoot = -1;
         if (Loader.isModLoaded(DefaultProps.MobsModId)) {
-            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
-                    CustomEntityList.MUMMY.modData.get().mobName), 4));
+            if(CustomEntityList.MUMMY.modData.isPresent()){
+                entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
+                        CustomEntityList.MUMMY.modData.get().mobName), 4));
+            }
         } else {
             entityEntries.add(new EntityEntry("Zombie", 4));
         }

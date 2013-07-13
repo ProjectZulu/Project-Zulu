@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL12;
 import projectzulu.common.mobs.entity.EntityLizardSpit;
 
 
-public class RenderLizardSpit extends Render
+public class RenderLizardSpit extends Render implements RenderWrapper
 {
     private float field_77002_a;
 
@@ -64,5 +64,10 @@ public class RenderLizardSpit extends Render
     @Override
     protected ResourceLocation func_110775_a(Entity entity) {
         return TextureMap.field_110576_c;
+    }
+
+    @Override
+    public Render getRender() {
+        return this;
     }
 }
