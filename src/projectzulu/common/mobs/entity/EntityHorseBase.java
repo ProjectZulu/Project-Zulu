@@ -27,7 +27,6 @@ public class EntityHorseBase extends EntityGenericAnimal {
         super(par1World);
         setSize(1.5f, 2.0f);
 
-        movementSpeed = 0.3f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
 
@@ -48,6 +47,16 @@ public class EntityHorseBase extends EntityGenericAnimal {
     }
 
     @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
+    }
+    
+    @Override
     public boolean isRideable() {
         return true;
     }
@@ -66,11 +75,6 @@ public class EntityHorseBase extends EntityGenericAnimal {
         default:
             return super.getAttackStrength(par1World);
         }
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
     }
 
     @Override

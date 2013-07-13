@@ -34,7 +34,6 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     /* Fixed Variables */
     public int maxAnimTime = 20;
     public boolean forceDespawn = false;
-    protected float movementSpeed = 0.3f;
 
     public EntityGenericAnimal(World par1World) {
         super(par1World);
@@ -53,8 +52,8 @@ public class EntityGenericAnimal extends EntityGenericTameable {
         this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(getBaseSpeed());
     }
 
-    public float getBaseSpeed() {
-        return movementSpeed;
+    public double getBaseSpeed() {
+        return 0.3f;
     }
 
     public int getMaxHealth() {

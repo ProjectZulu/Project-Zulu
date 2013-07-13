@@ -29,7 +29,6 @@ public class EntityGorilla extends EntityGenericAnimal {
         super(par1World);
         setSize(1.7f, 1.5f);
 
-        movementSpeed = 0.3f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -50,6 +49,16 @@ public class EntityGorilla extends EntityGenericAnimal {
                         EntityPlayer.class, 16.0F, 0, true));
         // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true,
         // IMob.mobSelector));
+    }
+
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
     }
 
     @Override
@@ -77,11 +86,6 @@ public class EntityGorilla extends EntityGenericAnimal {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
     }
 
     /**

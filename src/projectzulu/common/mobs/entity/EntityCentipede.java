@@ -16,7 +16,6 @@ public class EntityCentipede extends EntityMaster implements IMob {
 
     public EntityCentipede(World par1World) {
         super(par1World);
-        movementSpeed = 0.25f;
         setSize(0.65f, 0.5f);
 
         tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false, 2.5f * 2.5f));
@@ -38,6 +37,11 @@ public class EntityCentipede extends EntityMaster implements IMob {
     @Override
     public int getMaxHealth() {
         return 20;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.25f;
     }
 
     /**

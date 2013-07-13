@@ -15,11 +15,10 @@ public class EntityHornBill extends EntityGenericAnimal {
     public EntityHornBill(World par1World) {
         super(par1World);
         setSize(0.8f, 1.2f);
-        movementSpeed = 0.22f;
         maxFlightHeight = 20;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0f, false));
-        tasks.addTask(6, new EntityAIFlyingWander(this, movementSpeed));
+        tasks.addTask(6, new EntityAIFlyingWander(this, (float)getBaseSpeed()));
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));
         targetTasks.addTask(2,
@@ -27,6 +26,16 @@ public class EntityHornBill extends EntityGenericAnimal {
                         EntityPlayer.class, 16.0F, 0, true));
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.22f;
+    }
+    
     @Override
     public boolean defaultGrounded() {
         return false;
@@ -50,11 +59,6 @@ public class EntityHornBill extends EntityGenericAnimal {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
     }
 
     /**

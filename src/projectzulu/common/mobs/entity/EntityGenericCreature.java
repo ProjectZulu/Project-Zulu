@@ -1,15 +1,14 @@
 package projectzulu.common.mobs.entity;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeInstance;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.api.CustomEntityList;
+import projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
 
 public abstract class EntityGenericCreature extends EntityAerial
 {
@@ -23,6 +22,8 @@ public abstract class EntityGenericCreature extends EntityAerial
     
     private float maximumHomeDistance = -1.0F;
     private ChunkCoordinates homePosition = new ChunkCoordinates(0, 0, 0);
+    private boolean field_110180_bt;
+    private EntityAIBase field_110178_bs = new EntityAIMoveTowardsRestriction(this, 1.0f);
 
     /**
      * returns true if a creature has attacked recently only used for creepers and skeletons
@@ -64,6 +65,56 @@ public abstract class EntityGenericCreature extends EntityAerial
     	fleeingTick = Math.max(fleeingTick-1, 0);
     	angerLevel = Math.max(angerLevel-1, 0);
 	}
+	
+    protected void func_110159_bB() {
+        super.func_110159_bB();
+
+        if (this.func_110167_bD() && this.func_110166_bE() != null && this.func_110166_bE().worldObj == this.worldObj) {
+            Entity entity = this.func_110166_bE();
+            this.setHomeArea((int) entity.posX, (int) entity.posY, (int) entity.posZ, 5);
+            float f = this.getDistanceToEntity(entity);
+
+            if (this instanceof EntityGenericTameable && ((EntityGenericTameable) this).isSitting()) {
+                if (f > 10.0F) {
+                    this.func_110160_i(true, true);
+                }
+
+                return;
+            }
+
+            if (!this.field_110180_bt) {
+                this.tasks.addTask(2, this.field_110178_bs);
+                this.getNavigator().setAvoidsWater(false);
+                this.field_110180_bt = true;
+            }
+
+            this.func_142017_o(f);
+
+            if (f > 4.0F) {
+                this.getNavigator().tryMoveToEntityLiving(entity, 1.0D);
+            }
+
+            if (f > 6.0F) {
+                double d0 = (entity.posX - this.posX) / (double) f;
+                double d1 = (entity.posY - this.posY) / (double) f;
+                double d2 = (entity.posZ - this.posZ) / (double) f;
+                this.motionX += d0 * Math.abs(d0) * 0.4D;
+                this.motionY += d1 * Math.abs(d1) * 0.4D;
+                this.motionZ += d2 * Math.abs(d2) * 0.4D;
+            }
+
+            if (f > 10.0F) {
+                this.func_110160_i(true, true);
+            }
+        } else if (!this.func_110167_bD() && this.field_110180_bt) {
+            this.field_110180_bt = false;
+            this.tasks.removeTask(this.field_110178_bs);
+            this.getNavigator().setAvoidsWater(true);
+            this.detachHome();
+        }
+    }
+
+    protected void func_142017_o(float par1) {}
 	
 	@Override
 	public int getMaxSpawnedInChunk() {

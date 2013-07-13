@@ -3,16 +3,16 @@ package projectzulu.common.mobs.entityai;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
-import projectzulu.common.mobs.entity.EntityGenericAnimal;
+import projectzulu.common.mobs.entity.EntityGenericCreature;
 
 public class EntityAIMoveTowardsRestriction extends EntityAIBase {
-    private EntityGenericAnimal theEntity;
+    private EntityGenericCreature theEntity;
     private double movePosX;
     private double movePosY;
     private double movePosZ;
     private float movementSpeed;
 
-    public EntityAIMoveTowardsRestriction(EntityGenericAnimal par1EntityCreature, float par2)
+    public EntityAIMoveTowardsRestriction(EntityGenericCreature par1EntityCreature, float par2)
     {
         this.theEntity = par1EntityCreature;
         this.movementSpeed = par2;

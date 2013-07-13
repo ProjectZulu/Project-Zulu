@@ -2,7 +2,6 @@ package projectzulu.common.mobs.entity;
 
 import java.util.EnumSet;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -31,7 +30,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
     public EntityLizard(World par1World) {
         super(par1World);
         setSize(0.9f, 0.5f);
-        movementSpeed = 0.4f;
 
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
@@ -51,6 +49,16 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
                         EntityPlayer.class, 16.0F, 0, true));
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.4f;
+    }
+    
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
@@ -77,11 +85,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
             }
             return var4 <= this.rand.nextInt(8);
         }
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
     }
 
     /**

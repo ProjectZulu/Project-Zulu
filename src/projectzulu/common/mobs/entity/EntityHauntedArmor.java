@@ -34,7 +34,6 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
         super(par1World);
         randomDirection = rand.nextInt(16);
 
-        movementSpeed = 0.2f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -61,6 +60,16 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
         setLocationAndAngles(parx, pary, parz, 1, 1);
         setPosition(parx, pary, parz);
         this.shouldHover = shouldHover;
+    }
+    
+    @Override
+    public int getMaxHealth() {
+        return 25;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.2f;
     }
 
     public void setPersistenceRequired(boolean persistenceRequired) {
@@ -106,11 +115,6 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
         // var3 += var2.getDamageVsEntity(this);
         // }
         return var3;
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 25;
     }
 
     @Override

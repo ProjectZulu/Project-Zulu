@@ -16,7 +16,6 @@ public class EntityEagle extends EntityGenericAnimal {
     public EntityEagle(World par1World) {
         super(par1World);
         this.setSize(1.0f, 1.4f);
-        this.movementSpeed = 0.22f;
         this.maxFlightHeight = 30;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0f, false));
@@ -26,6 +25,16 @@ public class EntityEagle extends EntityGenericAnimal {
         this.targetTasks.addTask(2,
                 new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
                         EntityPlayer.class, 16.0F, 0, true));
+    }
+    
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.22f;
     }
 
     @Override
@@ -51,11 +60,6 @@ public class EntityEagle extends EntityGenericAnimal {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
     }
 
     /**

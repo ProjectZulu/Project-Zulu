@@ -41,7 +41,6 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
     public EntityMammoth(World par1World) {
         super(par1World);
         setSize(4.5f, 5.4f);
-        movementSpeed = 0.3f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -66,6 +65,16 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
         // EntityStates.looking), EntityLiving.class, 16.0F, 0, false, false, IMob.mobSelector));
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 30;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
+    }
+    
     @Override
     protected void func_110147_ax() {
         super.func_110147_ax();
@@ -95,11 +104,6 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 30;
     }
 
     @Override

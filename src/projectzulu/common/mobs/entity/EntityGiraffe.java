@@ -28,7 +28,6 @@ public class EntityGiraffe extends EntityGenericAnimal {
         super(par1World);
         setSize(2.3f, 4.0f);
 
-        movementSpeed = 0.3f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -50,6 +49,16 @@ public class EntityGiraffe extends EntityGenericAnimal {
 
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
+    }
+    
     @Override
     protected void func_110147_ax() {
         super.func_110147_ax();
@@ -75,11 +84,6 @@ public class EntityGiraffe extends EntityGenericAnimal {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
     }
 
     /**

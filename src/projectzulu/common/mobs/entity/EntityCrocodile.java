@@ -24,10 +24,8 @@ public class EntityCrocodile extends EntityGenericAnimal {
 
     public EntityCrocodile(World par1World) {
         super(par1World);
-        this.myEntitySize = EnumEntitySize.SIZE_6;
         setSize(1.7f, 0.9f);
 
-        movementSpeed = 0.25f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISmoothSwimming(this, true));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -47,7 +45,12 @@ public class EntityCrocodile extends EntityGenericAnimal {
         // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true,
         // IMob.mobSelector));
     }
-
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.25f;
+    }
+    
     @Override
     protected int getAttackStrength(World par1World) {
         switch (par1World.difficultySetting) {
