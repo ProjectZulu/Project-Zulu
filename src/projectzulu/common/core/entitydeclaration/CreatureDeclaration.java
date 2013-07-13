@@ -1,11 +1,8 @@
 package projectzulu.common.core.entitydeclaration;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.Configuration;
@@ -15,6 +12,7 @@ import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
+import projectzulu.common.mobs.renders.RenderWrapper;
 
 import com.google.common.base.Optional;
 
@@ -113,13 +111,14 @@ public abstract class CreatureDeclaration implements EntityDeclaration{
 	public void addSpawn() {}
 	
     @SideOnly(Side.CLIENT)
-	public abstract Render getEntityrender(Class<? extends EntityLivingBase> entityClass);
+    public abstract RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass);
 	
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerModelAndRender() {
-        Render render = getEntityrender(mobClass);
-        if (render != null) {
-            RenderingRegistry.registerEntityRenderingHandler(mobClass, render);
+        RenderWrapper wrapper = getEntityrender(mobClass);
+        if (wrapper != null && wrapper.getRender() != null) {
+            RenderingRegistry.registerEntityRenderingHandler(mobClass, wrapper.getRender());
         } else {
             throw new IllegalStateException("Entity Renderer for " + mobClass.getSimpleName() + " cannot be null");
         }

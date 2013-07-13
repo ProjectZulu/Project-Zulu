@@ -94,7 +94,6 @@ public class ProjectZulu_Core {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        Minecraft.getMinecraft().func_110434_K();
         modConfigDirectoryFile = event.getModConfigurationDirectory();
 
         ProjectZuluLog.configureLogging(modConfigDirectoryFile);

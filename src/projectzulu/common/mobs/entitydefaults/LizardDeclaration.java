@@ -1,6 +1,5 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +14,7 @@ import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityLizard;
 import projectzulu.common.mobs.models.ModelLizard;
 import projectzulu.common.mobs.renders.RenderGenericLiving;
+import projectzulu.common.mobs.renders.RenderWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -46,7 +46,7 @@ public class LizardDeclaration extends SpawnableDeclaration {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+    public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelLizard(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "lizard.png"));
     }
 }

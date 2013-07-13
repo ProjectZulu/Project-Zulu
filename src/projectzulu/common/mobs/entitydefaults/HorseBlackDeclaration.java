@@ -1,6 +1,5 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
@@ -17,6 +16,7 @@ import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityHorseBlack;
 import projectzulu.common.mobs.models.ModelHorse;
 import projectzulu.common.mobs.renders.RenderGenericHorse;
+import projectzulu.common.mobs.renders.RenderWrapper;
 
 import com.google.common.base.Optional;
 
@@ -60,7 +60,7 @@ public class HorseBlackDeclaration extends SpawnableDeclaration {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+    public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericHorse(new ModelHorse(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "Horse/horse_black.png"), new ResourceLocation(DefaultProps.mobKey, "Horse/horse_black_saddled.png"));
     }

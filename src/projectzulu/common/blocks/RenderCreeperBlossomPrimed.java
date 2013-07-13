@@ -9,11 +9,12 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.api.BlockList;
+import projectzulu.common.mobs.renders.RenderWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderCreeperBlossomPrimed extends Render {
+public class RenderCreeperBlossomPrimed extends Render implements RenderWrapper {
 
     private RenderBlocks blockRenderer = new RenderBlocks();
 
@@ -80,5 +81,10 @@ public class RenderCreeperBlossomPrimed extends Render {
     @Override
     protected ResourceLocation func_110775_a(Entity entity) {
         return TextureMap.field_110575_b;
+    }
+
+    @Override
+    public Render getRender() {
+        return this;
     }
 }

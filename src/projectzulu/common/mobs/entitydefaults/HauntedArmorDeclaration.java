@@ -1,6 +1,5 @@
 package projectzulu.common.mobs.entitydefaults;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.Configuration;
@@ -12,6 +11,7 @@ import projectzulu.common.core.entitydeclaration.EggableDeclaration;
 import projectzulu.common.mobs.entity.EntityHauntedArmor;
 import projectzulu.common.mobs.models.ModelHauntedArmor;
 import projectzulu.common.mobs.renders.RenderHauntedArmor;
+import projectzulu.common.mobs.renders.RenderWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -35,7 +35,7 @@ public class HauntedArmorDeclaration extends EggableDeclaration {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public RenderLiving getEntityrender(Class<? extends EntityLivingBase> entityClass) {
+    public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderHauntedArmor(new ModelHauntedArmor(), 0.5f);
     }
 }
