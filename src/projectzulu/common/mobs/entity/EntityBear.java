@@ -24,7 +24,6 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals {
     public EntityBear(World par1World) {
         super(par1World);
 
-        movementSpeed = 0.3f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -43,7 +42,12 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals {
                 new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
                         EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
     }
-
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
+    }
+    
     @Override
     protected String getHurtSound() {
         return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "bearliving";

@@ -61,7 +61,6 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 
     public EntityArmadillo(World par1World) {
         super(par1World);
-        movementSpeed = 0.3f;
         boundingBox.setBounds(-0.05, -0.05, -0.15, 0.05, 1.8, 0.15);
 
         getNavigator().setAvoidsWater(true);
@@ -88,6 +87,16 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 12;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
+    }
+
     /**
      * Set Entity Attack Strength This is overriden by each Entity if deviations from default are desired
      **/
@@ -111,11 +120,6 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return super.isValidLocation(world, xCoord, yCoord, zCoord)
                 && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 12;
     }
 
     /**

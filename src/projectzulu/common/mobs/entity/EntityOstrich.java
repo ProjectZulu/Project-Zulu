@@ -26,7 +26,6 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
         super(par1World);
         setSize(1.0f, 2.0f);
 
-        movementSpeed = 0.25f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -45,6 +44,16 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
                         EntityPlayer.class, 16.0F, 0, true));
         // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true,
         // IMob.mobSelector));
+    }
+    
+    @Override
+    public int getMaxHealth() {
+        return 15;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.25f;
     }
 
     @Override
@@ -71,11 +80,6 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 15;
     }
 
     /**

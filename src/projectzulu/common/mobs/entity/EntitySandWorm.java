@@ -19,8 +19,6 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob {
     public EntitySandWorm(World par1World) {
         super(par1World);
         setSize(1.5f, 1.0f);
-
-        movementSpeed = 0.22f;
         getNavigator().setAvoidsWater(false);
         tasks.addTask(2, new EntityAIStayStill(this, EntityStates.idle));
 
@@ -38,6 +36,16 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob {
                         EntityVillager.class, 16.0F, 0, true));
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.22f;
+    }
+    
     /** As if 1.4.2 Represents what was Attack Strength in 1.3.2 */
     @Override
     public int getAttackStrength(World world) {
@@ -58,11 +66,6 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
     }
 
     @Override

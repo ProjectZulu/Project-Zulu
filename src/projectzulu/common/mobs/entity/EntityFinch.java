@@ -19,16 +19,25 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
         // noClip = true;
         this.setSize(0.5f, 0.5f);
 
-        movementSpeed = 0.22f;
         this.maxFlightHeight = 5;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(2, new EntityAIStayStill(this, EntityStates.posture));
 
         // this.tasks.addTask(2, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
-        this.tasks.addTask(6, new EntityAIFlyingWander(this, movementSpeed));
+        this.tasks.addTask(6, new EntityAIFlyingWander(this, (float)getBaseSpeed()));
         // this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));
         // this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking,
         // EntityStates.looking), EntityPlayer.class, 16.0F, 0, true));
+    }
+    
+    @Override
+    public int getMaxHealth() {
+        return 8;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.22f;
     }
 
     @Override
@@ -49,11 +58,6 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
      */
     @Override
     protected void updateFallState(double par1, boolean par3) {
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 8;
     }
 
     /**

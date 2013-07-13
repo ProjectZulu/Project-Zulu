@@ -25,7 +25,6 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
     public EntityRhino(World par1World) {
         super(par1World);
         setSize(2.0f, 2.0f);
-        movementSpeed = 0.2f;
 
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
@@ -47,6 +46,16 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
         // IMob.mobSelector));
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.2f;
+    }
+    
     /**
      * Set Entity Attack Strength This is overriden by each Entity if deviations from default are desired
      */
@@ -74,11 +83,6 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
     @Override
     public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
         return true;
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
     }
 
     /**

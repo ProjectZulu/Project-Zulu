@@ -16,11 +16,10 @@ public class EntityPelican extends EntityGenericAnimal {
     public EntityPelican(World par1World) {
         super(par1World);
         this.setSize(1.5f, 1.4f);
-        movementSpeed = 0.22f;
         this.maxFlightHeight = 15;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0f, false, 2f * 2f));
-        this.tasks.addTask(6, new EntityAIFlyingWander(this, movementSpeed));
+        this.tasks.addTask(6, new EntityAIFlyingWander(this, (float)getBaseSpeed()));
         this.tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));
@@ -29,6 +28,16 @@ public class EntityPelican extends EntityGenericAnimal {
                         EntityPlayer.class, 16.0F, 0, true));
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.22f;
+    }
+    
     @Override
     public boolean defaultGrounded() {
         return false;
@@ -52,11 +61,6 @@ public class EntityPelican extends EntityGenericAnimal {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
     }
 
     /**

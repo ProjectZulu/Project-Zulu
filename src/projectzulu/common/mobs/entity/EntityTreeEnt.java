@@ -28,7 +28,6 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals {
         super(par1World);
         setSize(1.7f, 3.0f);
 
-        movementSpeed = 0.3f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -48,6 +47,16 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals {
         targetTasks.addTask(4,
                 new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
                         EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
+    }
+
+    @Override
+    public int getMaxHealth() {
+        return 20;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
     }
 
     @Override
@@ -75,11 +84,6 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 30;
     }
 
     /**

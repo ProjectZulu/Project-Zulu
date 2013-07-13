@@ -33,7 +33,6 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob {
         setSize(1.0f, 2.4f);
         experienceValue = 7;
 
-        movementSpeed = 0.25f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -56,6 +55,16 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob {
     }
 
     @Override
+    public int getMaxHealth() {
+        return 30;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.25f;
+    }
+    
+    @Override
     protected int getAttackStrength(World par1World) {
         if (par1World == null) {
             return 4;
@@ -73,12 +82,6 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob {
             return 4;
         }
     }
-
-    @Override
-    public int getMaxHealth() {
-        return 30;
-    }
-
     /**
      * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
      */

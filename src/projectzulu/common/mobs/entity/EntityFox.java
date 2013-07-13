@@ -33,7 +33,6 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
         super(par1World);
         setSize(0.6f, 1.0f);
 
-        movementSpeed = 0.3f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -65,6 +64,11 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
     @Override
     public int getMaxHealth() {
         return 12;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
     }
 
     @Override

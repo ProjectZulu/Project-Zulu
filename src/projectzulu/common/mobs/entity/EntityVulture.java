@@ -51,15 +51,14 @@ public class EntityVulture extends EntityGenericAnimal {
     public EntityVulture(World par1World) {
         super(par1World);
         setSize(1.0f, 1.4f);
-        movementSpeed = 0.18f;
 
         maxFlightHeight = 20;
         getNavigator().setAvoidsWater(true);
 
-        tasks.addTask(2, new EntityAIVultureFollow(this, movementSpeed, false).setValidStates(EnumSet
+        tasks.addTask(2, new EntityAIVultureFollow(this, (float)getBaseSpeed(), false).setValidStates(EnumSet
                 .of(EntityStates.following)));
-        tasks.addTask(3, new EntityAIAttackOnCollide(this, movementSpeed, false));
-        tasks.addTask(6, new EntityAIFlyingWander(this, movementSpeed));
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, (float)getBaseSpeed(), false));
+        tasks.addTask(6, new EntityAIFlyingWander(this, (float)getBaseSpeed()));
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));
         targetTasks.addTask(
@@ -68,6 +67,16 @@ public class EntityVulture extends EntityGenericAnimal {
                         EntityStates.following), EntityPlayer.class, 16.0F, 0, true));
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 14;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.18f;
+    }
+    
     @Override
     public boolean defaultGrounded() {
         return false;
@@ -99,11 +108,6 @@ public class EntityVulture extends EntityGenericAnimal {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 14;
     }
 
     @Override

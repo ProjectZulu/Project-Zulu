@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entity;
 import java.util.EnumSet;
 
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -17,14 +18,12 @@ import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
 import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import projectzulu.common.mobs.entityai.EntityAIWander;
-import projectzulu.common.mobs.entitydefaults.MummyDeclaration;
 
 public class EntityMummy extends EntityGenericAnimal implements IMob {
 
     public EntityMummy(World par1World) {
         super(par1World);
         setSize(0.6F, 1.8F);
-        movementSpeed = 0.25F;
 
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
@@ -49,6 +48,16 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
         setPosition(parx, pary, parz);
     }
 
+    @Override
+    public int getMaxHealth() {
+        return 16;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.25f;
+    }
+    
     @Override
     protected void entityInit() {
         super.entityInit();
@@ -85,18 +94,13 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
         super.updateAITick();
     }
 
-    @Override
-    public int getMaxHealth() {
-        return 16;
-    }
-
     /**
      * Returns the sound this mob makes when it is hurt.
      */
     protected String getHurtSound() {
         return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "mummyroar";
     }
-    
+
     /**
      * Returns the Y offset from the entity's position for any entity riding this one.
      */

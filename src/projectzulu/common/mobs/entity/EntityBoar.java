@@ -25,7 +25,6 @@ public class EntityBoar extends EntityGenericAnimal implements IAnimals {
         super(par1World);
         setSize(1.2f, 0.9f);
 
-        movementSpeed = 0.3f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -47,6 +46,16 @@ public class EntityBoar extends EntityGenericAnimal implements IAnimals {
     }
 
     @Override
+    public int getMaxHealth() {
+        return 15;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
+    }
+
+    @Override
     protected int getAttackStrength(World par1World) {
         switch (par1World.difficultySetting) {
         case 0:
@@ -65,11 +74,6 @@ public class EntityBoar extends EntityGenericAnimal implements IAnimals {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 15;
     }
 
     @Override

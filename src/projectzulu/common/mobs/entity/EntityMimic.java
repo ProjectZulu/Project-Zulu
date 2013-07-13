@@ -27,7 +27,6 @@ public class EntityMimic extends EntityGenericAnimal implements IMob {
     public EntityMimic(World par1World) {
         super(par1World);
         setSize(1.0f, 1.5f);
-        movementSpeed = 0.4f;
         getNavigator().setAvoidsWater(true);
 
         tasks.addTask(0, new EntityAISwimming(this));
@@ -48,10 +47,15 @@ public class EntityMimic extends EntityGenericAnimal implements IMob {
         setPosition(parx, pary, parz);
         this.shouldHover = shouldHover;
     }
-
+    
     @Override
     public int getMaxHealth() {
         return 20;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.4f;
     }
 
     @Override

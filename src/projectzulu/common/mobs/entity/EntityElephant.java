@@ -30,7 +30,6 @@ public class EntityElephant extends EntityGenericAnimal {
         super(par1World);
         setSize(4.0f, 5.4f);
 
-        movementSpeed = 0.3f;
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
@@ -52,7 +51,17 @@ public class EntityElephant extends EntityGenericAnimal {
         // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true,
         // IMob.mobSelector));
     }
-	
+
+    @Override
+    public int getMaxHealth() {
+        return 30;
+    }
+    
+    @Override
+    public double getBaseSpeed() {
+        return 0.3f;
+    }
+    
     @Override
     protected void func_110147_ax() {
         super.func_110147_ax();
@@ -80,8 +89,6 @@ public class EntityElephant extends EntityGenericAnimal {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }
 	
-	@Override
-	public int getMaxHealth(){return 30;}
 	/**
 	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
 	 */

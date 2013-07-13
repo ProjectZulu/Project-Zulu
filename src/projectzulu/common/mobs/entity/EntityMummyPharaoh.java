@@ -45,7 +45,6 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
     public EntityMummyPharaoh(World par1World) {
         super(par1World);
         setSize(0.6F, 1.8F);
-        movementSpeed = 0.35f;
 
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
@@ -68,6 +67,16 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
     }
 
     @Override
+    public int getMaxHealth() {
+        return 200;
+    }
+
+    @Override
+    public double getBaseSpeed() {
+        return 0.35f;
+    }
+    
+    @Override
     public ItemStack getHeldItem() {
         return defaultHeldItem;
     }
@@ -86,11 +95,6 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
         default:
             return 2;
         }
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 200;
     }
 
     /**
