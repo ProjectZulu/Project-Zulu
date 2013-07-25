@@ -219,9 +219,9 @@ public class ItemBlockRecipeManager {
 		addRecipe(new OptionalItemStack(ItemList.cactusArmorLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
 		addRecipe(new OptionalItemStack(ItemList.cactusArmorBoots), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
 		
-		addRecipe(new OptionalItemStack(ItemList.furArmorHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(Block.cactus));
-		addRecipe(new OptionalItemStack(ItemList.furArmorChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
-		addRecipe(new OptionalItemStack(ItemList.furArmorLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(Block.cactus) );
+		addRecipe(new OptionalItemStack(ItemList.furArmorHead), new String[]{"XXX","X X","   "}, new char[]{'X'}, new OptionalItemStack(ItemList.furPelt));
+		addRecipe(new OptionalItemStack(ItemList.furArmorChest), new String[]{"X X","XXX","XXX"}, new char[]{'X'},new OptionalItemStack(ItemList.furPelt) );
+		addRecipe(new OptionalItemStack(ItemList.furArmorLeg), new String[]{"XXX","X X","X X"}, new char[]{'X'},new OptionalItemStack(ItemList.furPelt) );
 		addRecipe(new OptionalItemStack(ItemList.furArmorBoots), new String[]{"   ","X X","X X"}, new char[]{'X'},new OptionalItemStack(ItemList.furPelt) );
 	}
 
