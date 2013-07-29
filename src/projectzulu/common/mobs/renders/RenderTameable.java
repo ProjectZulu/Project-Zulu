@@ -21,6 +21,8 @@ public class RenderTameable extends RenderGenericLiving {
     
     protected float zLevel = 0.1F;
 
+    public final static ResourceLocation TAMING_GUI = new ResourceLocation(DefaultProps.coreKey, "gui/guielements.png");
+    
     public RenderTameable(ModelBase modelBase, float shadowSize, ResourceLocation textureLocation) {
         super(modelBase, shadowSize, textureLocation);
     }
@@ -80,8 +82,7 @@ public class RenderTameable extends RenderGenericLiving {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, Properties.namePlateOpacity);
 
             /* Draw Background */
-            ResourceLocation textureLocation = new ResourceLocation(DefaultProps.coreDiretory + "gui/guielements.png");
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.func_110581_b(textureLocation).func_110552_b());
+            Minecraft.getMinecraft().renderEngine.func_110577_a(TAMING_GUI);
             int iconXCoord = 0;
             int iconYCoord = 0;
             iconXCoord = 16;
