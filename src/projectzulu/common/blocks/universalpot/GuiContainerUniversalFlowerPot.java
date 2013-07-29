@@ -10,8 +10,7 @@ import org.lwjgl.opengl.GL11;
 import projectzulu.common.core.DefaultProps;
 
 public class GuiContainerUniversalFlowerPot extends GuiContainer {
-    public final static ResourceLocation FLOWERPOT_GUI = new ResourceLocation(DefaultProps.coreDiretory
-            + "gui/FlowerPotGUI.png");
+    public final static ResourceLocation FLOWERPOT_GUI = new ResourceLocation(DefaultProps.coreKey, "gui/FlowerPotGUI.png");
 
     public GuiContainerUniversalFlowerPot(InventoryPlayer inventoryPlayer, TileEntityUniversalFlowerPot tileEntity) {
         super(new ContainerUniversalFlowerPot(inventoryPlayer, tileEntity));
@@ -26,7 +25,7 @@ public class GuiContainerUniversalFlowerPot extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.func_110581_b(FLOWERPOT_GUI).func_110552_b();
+        this.mc.renderEngine.func_110577_a(FLOWERPOT_GUI);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);

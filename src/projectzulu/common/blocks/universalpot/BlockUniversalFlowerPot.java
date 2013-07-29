@@ -2,14 +2,11 @@ package projectzulu.common.blocks.universalpot;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.GuiID;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockUniversalFlowerPot extends BlockContainer {
 
@@ -24,13 +21,6 @@ public class BlockUniversalFlowerPot extends BlockContainer {
         setHardness(0.0F);
         setStepSound(soundPowderFootstep);
         this.renderID = renderID;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("flowerPot");
-
     }
 
     /**
@@ -80,7 +70,6 @@ public class BlockUniversalFlowerPot extends BlockContainer {
         if (tileEntity == null || player.isSneaking()) {
             return false;
         }
-        // opens gui, to be implemented later
         player.openGui(ProjectZulu_Core.modInstance, GuiID.FlowerPot.getID(), world, x, y, z);
         return true;
     }
