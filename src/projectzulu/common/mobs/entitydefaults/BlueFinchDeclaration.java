@@ -9,6 +9,7 @@ import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityBlueFinch;
 import projectzulu.common.mobs.models.ModelFinch;
@@ -45,6 +46,7 @@ public class BlueFinchDeclaration extends SpawnableDeclaration {
     @Override
     public void outputDataToList(Configuration config, CustomMobData customMobData) {
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Item.feather, 0, 8);
+        customMobData.entityProperties = new EntityProperties(8f, 0.0f, 0.22f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

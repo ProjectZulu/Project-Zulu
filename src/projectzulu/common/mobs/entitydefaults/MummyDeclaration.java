@@ -7,6 +7,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityMummy;
 import projectzulu.common.mobs.models.ModelMummy;
@@ -32,6 +33,7 @@ public class MummyDeclaration extends SpawnableDeclaration {
 
     @Override
     public void outputDataToList(Configuration config, CustomMobData customMobData) {
+        customMobData.entityProperties = new EntityProperties(16f, 3.0f, 0.25f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

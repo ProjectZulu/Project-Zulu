@@ -68,14 +68,6 @@ public class EntityGenericAnimal extends EntityGenericTameable {
         }
     }
 
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-
-    public int getMaxHealth() {
-        return 20;
-    }
-
     @Override
     protected void entityInit() {
         super.entityInit();
@@ -250,25 +242,6 @@ public class EntityGenericAnimal extends EntityGenericTameable {
      */
     protected boolean shouldPanic() {
         return !(worldObj.rand.nextFloat() * 100 >= flightChance);
-    }
-
-    /**
-     * Set Entity Attack Strength This is overriden by each Entity if deviations from default are desired
-     **/
-    @Deprecated
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 3;
-        case 1:
-            return 4;
-        case 2:
-            return 5;
-        case 3:
-            return 6;
-        default:
-            return 3;
-        }
     }
 
     @Override

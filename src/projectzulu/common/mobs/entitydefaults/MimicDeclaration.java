@@ -9,6 +9,7 @@ import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.EggableDeclaration;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.mobs.entity.EntityMimic;
 import projectzulu.common.mobs.models.ModelMimic;
 import projectzulu.common.mobs.renders.RenderMimic;
@@ -31,6 +32,7 @@ public class MimicDeclaration extends EggableDeclaration {
     public void outputDataToList(Configuration config, CustomMobData customMobData) {
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Ectoplasm.meta(), 5);
+        customMobData.entityProperties = new EntityProperties(20f, 4.0f, 0.4f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

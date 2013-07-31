@@ -44,11 +44,6 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals {
     }
     
     @Override
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-    
-    @Override
     protected String getHurtSound() {
         return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "bearliving";
     }

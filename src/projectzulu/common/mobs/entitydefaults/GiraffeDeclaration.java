@@ -11,6 +11,7 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityGiraffe;
 import projectzulu.common.mobs.models.ModelGiraffe;
@@ -43,6 +44,8 @@ public class GiraffeDeclaration extends SpawnableDeclaration {
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.LargeHeart.meta(), 4);
         ConfigHelper.userItemConfigRangeToMobData(config, "MOB CONTROLS." + mobName, customMobData);
+        customMobData.entityProperties = new EntityProperties(20f, 5.0f, 0.3f, 0.0f, 0.5f, 32.0f).createFromConfig(
+                config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

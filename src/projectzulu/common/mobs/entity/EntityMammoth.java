@@ -65,40 +65,8 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
         // EntityStates.looking), EntityLiving.class, 16.0F, 0, false, false, IMob.mobSelector));
     }
 
-    @Override
-    public int getMaxHealth() {
-        return 30;
-    }
-
-    @Override
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-    
-    @Override
-    protected void func_110147_ax() {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111128_a(0.50);
-    }
-
     public float getAttackDistance() {
         return isChild() ? 3.0f : 6.0f;
-    }
-
-    @Override
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 5;
-        case 1:
-            return 6;
-        case 2:
-            return 8;
-        case 3:
-            return 9;
-        default:
-            return 5;
-        }
     }
 
     @Override

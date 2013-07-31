@@ -45,32 +45,6 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
     }
 
     @Override
-    public int getMaxHealth() {
-        return 10;
-    }
-
-    @Override
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-    
-    @Override
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 1;
-        case 1:
-            return 1;
-        case 2:
-            return 2;
-        case 3:
-            return 3;
-        default:
-            return 2;
-        }
-    }
-
-    @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }

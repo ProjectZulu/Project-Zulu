@@ -16,30 +16,6 @@ public class EntityPolarBear extends EntityBear {
     }
 
     /**
-     * Set Entity Attack Strength This is overriden by each Entity if deviations from default are desired
-     **/
-    @Override
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 3;
-        case 1:
-            return 5;
-        case 2:
-            return 6;
-        case 3:
-            return 7;
-        default:
-            return 3;
-        }
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 25;
-    }
-
-    /**
      * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
      */
     @Override

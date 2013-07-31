@@ -50,16 +50,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
     }
 
     @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.4f;
-    }
-    
-    @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }
@@ -171,6 +161,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase entitylivingbase, float f) {
-        
+
     }
 }

@@ -8,7 +8,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class EntityMaster extends EntityGenericAnimal {
+public abstract class EntityMaster extends EntityGenericAnimal {
 
     List<EntityFollower> followerList = new ArrayList();
     int numberOfFollowers = 9;
@@ -28,22 +28,6 @@ public class EntityMaster extends EntityGenericAnimal {
         distancePerIncrement = width / distanceIncrements;
         while (followerList.size() < numberOfFollowers) {
             followerList.add(null);
-        }
-    }
-
-    @Override
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 3;
-        case 1:
-            return 4;
-        case 2:
-            return 5;
-        case 3:
-            return 6;
-        default:
-            return 3;
         }
     }
 

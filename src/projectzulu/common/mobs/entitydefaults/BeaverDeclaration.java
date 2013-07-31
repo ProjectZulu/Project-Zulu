@@ -10,6 +10,7 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityBeaver;
 import projectzulu.common.mobs.models.ModelBeaver;
@@ -52,6 +53,7 @@ public class BeaverDeclaration extends SpawnableDeclaration {
                 ItemList.genericCraftingItems, ItemGenerics.Properties.BlackLichen.meta(), 4);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.SmallHeart.meta(), 4);
+        customMobData.entityProperties = new EntityProperties(10f, 2.0f, 0.2f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

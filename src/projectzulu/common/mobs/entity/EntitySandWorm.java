@@ -37,33 +37,6 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob {
     }
 
     @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-
-    @Override
-    public double getBaseSpeed() {
-        return 0.22f;
-    }
-    
-    /** As if 1.4.2 Represents what was Attack Strength in 1.3.2 */
-    @Override
-    public int getAttackStrength(World world) {
-        switch (world.difficultySetting) {
-        case 0:
-            return 3;
-        case 1:
-            return 3;
-        case 2:
-            return 4;
-        case 3:
-            return 6;
-        default:
-            return 3;
-        }
-    }
-
-    @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }

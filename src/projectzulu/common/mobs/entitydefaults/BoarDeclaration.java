@@ -11,6 +11,7 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityBoar;
 import projectzulu.common.mobs.models.ModelBoar;
@@ -45,6 +46,7 @@ public class BoarDeclaration extends SpawnableDeclaration {
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Tusk.meta(), 10);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.SmallHeart.meta(), 5);
+        customMobData.entityProperties = new EntityProperties(15f, 3.0f, 0.3f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

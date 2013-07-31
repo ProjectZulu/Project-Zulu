@@ -11,6 +11,7 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.entitydeclaration.CreatureDeclaration;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.mobs.entity.EntityMummyPharaoh;
 import projectzulu.common.mobs.models.ModelMummyPharaoh;
 import projectzulu.common.mobs.renders.RenderMummyPharaoh;
@@ -31,6 +32,7 @@ public class PharaohDeclaration extends CreatureDeclaration {
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Item.ingotIron, 0, 40);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, BlockList.jasper, 0, 10);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, ItemList.ankh, 0, 10);
+        customMobData.entityProperties = new EntityProperties(200f, 3.0f, 0.35f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

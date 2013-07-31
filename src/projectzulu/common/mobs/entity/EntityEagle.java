@@ -2,9 +2,11 @@ package projectzulu.common.mobs.entity;
 
 import java.util.EnumSet;
 
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFlyingWander;
@@ -16,25 +18,23 @@ public class EntityEagle extends EntityGenericAnimal {
     public EntityEagle(World par1World) {
         super(par1World);
         this.setSize(1.0f, 1.4f);
+
+        float moveSpeed = 0.22f;
+        CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+        if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
+            // TODO: Switch to this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111126_e()???
+            moveSpeed = entityEntry.modData.get().entityProperties.moveSpeed;
+        }
+
         this.maxFlightHeight = 30;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0f, false));
-        this.tasks.addTask(6, new EntityAIFlyingWander(this, 0.25f));
+        this.tasks.addTask(6, new EntityAIFlyingWander(this, moveSpeed));
 
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));
         this.targetTasks.addTask(2,
                 new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
                         EntityPlayer.class, 16.0F, 0, true));
-    }
-    
-    @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.22f;
     }
 
     @Override
