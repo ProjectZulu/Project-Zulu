@@ -4,15 +4,17 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
@@ -34,6 +36,8 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     /* Fixed Variables */
     public int maxAnimTime = 20;
     public boolean forceDespawn = false;
+    /* Chance Entity will Flee when attacked */
+    private float flightChance = 0;
 
     public EntityGenericAnimal(World par1World) {
         super(par1World);
@@ -48,16 +52,20 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     @Override
     protected void func_110147_ax() {
         super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(getMaxHealth());
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(getBaseSpeed());
-    }
-
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-
-    public int getMaxHealth() {
-        return 20;
+        CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+        if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(
+                    entityEntry.modData.get().entityProperties.maxHealth);
+            this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(
+                    entityEntry.modData.get().entityProperties.moveSpeed);
+            this.func_110148_a(SharedMonsterAttributes.field_111265_b).func_111128_a(
+                    entityEntry.modData.get().entityProperties.followRange);
+            this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111128_a(
+                    entityEntry.modData.get().entityProperties.knockbackResistance);
+            this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(
+                    entityEntry.modData.get().entityProperties.attackDamage);
+            flightChance = entityEntry.modData.get().entityProperties.flightChance;
+        }
     }
 
     @Override
@@ -141,10 +149,10 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity par1Entity) {
-        if (par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY) {
+    public boolean attackEntityAsMob(Entity targetEntity) {
+        if (targetEntity.boundingBox.maxY > this.boundingBox.minY
+                && targetEntity.boundingBox.minY < this.boundingBox.maxY) {
             animTime = maxAnimTime;
-
             if (!worldObj.isRemote) {
                 PacketManagerAnimTime packetAnimTime = (PacketManagerAnimTime) PacketIDs.animTime.createPacketManager();
                 packetAnimTime.setPacketData(entityId, animTime);
@@ -152,16 +160,37 @@ public class EntityGenericAnimal extends EntityGenericTameable {
                         packetAnimTime.createPacket());
             }
 
-            int var2 = getAttackStrength(par1Entity.worldObj);
-            if (this.isPotionActive(Potion.damageBoost)) {
-                var2 += 3 << this.getActivePotionEffect(Potion.damageBoost).getAmplifier();
-            }
-            if (this.isPotionActive(Potion.weakness)) {
-                var2 -= 2 << this.getActivePotionEffect(Potion.weakness).getAmplifier();
+            float damage = (float) this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
+            int knockbackScale = 0;
+
+            if (targetEntity instanceof EntityLivingBase) {
+                damage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) targetEntity);
+                knockbackScale += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) targetEntity);
             }
 
-            par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
-            return super.attackEntityAsMob(par1Entity);
+            boolean attackedSucceded = targetEntity.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
+
+            if (attackedSucceded) {
+                if (knockbackScale > 0) {
+                    targetEntity.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F)
+                            * (float) knockbackScale * 0.5F), 0.1D,
+                            (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F)
+                                    * (float) knockbackScale * 0.5F));
+                    this.motionX *= 0.6D;
+                    this.motionZ *= 0.6D;
+                }
+
+                int fireScale = EnchantmentHelper.getFireAspectModifier(this);
+
+                if (fireScale > 0) {
+                    targetEntity.setFire(fireScale * 4);
+                }
+
+                if (targetEntity instanceof EntityLivingBase) {
+                    EnchantmentThorns.func_92096_a(this, (EntityLivingBase) targetEntity, this.rand);
+                }
+            }
+            return attackedSucceded && super.attackEntityAsMob(targetEntity);
         }
         return false;
     }
@@ -212,25 +241,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
      * Function that determines if the Fight/Flight reaction of the animal on attack
      */
     protected boolean shouldPanic() {
-        return false;
-    }
-
-    /**
-     * Set Entity Attack Strength This is overriden by each Entity if deviations from default are desired
-     **/
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 3;
-        case 1:
-            return 4;
-        case 2:
-            return 5;
-        case 3:
-            return 6;
-        default:
-            return 3;
-        }
+        return !(worldObj.rand.nextFloat() * 100 >= flightChance);
     }
 
     @Override

@@ -34,16 +34,6 @@ public class EntityCentipede extends EntityMaster implements IMob {
         // EntityStates.looking), EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
     }
 
-    @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.25f;
-    }
-
     /**
      * Checks to make sure the light is not too bright where the mob is spawning
      */

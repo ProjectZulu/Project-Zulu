@@ -47,16 +47,6 @@ public class EntityMimic extends EntityGenericAnimal implements IMob {
         setPosition(parx, pary, parz);
         this.shouldHover = shouldHover;
     }
-    
-    @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-
-    @Override
-    public double getBaseSpeed() {
-        return 0.4f;
-    }
 
     @Override
     public int getTotalArmorValue() {
@@ -67,7 +57,7 @@ public class EntityMimic extends EntityGenericAnimal implements IMob {
     protected String getHurtSound() {
         return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "mimicliving";
     }
-    
+
     @Override
     public void onLivingUpdate() {
         if (shouldHover == true) {

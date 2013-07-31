@@ -18,11 +18,11 @@ import projectzulu.common.mobs.entity.EntityGenericTameable;
 import projectzulu.common.mobs.entity.EntityStates;
 
 public class RenderTameable extends RenderGenericLiving {
-    
+
     protected float zLevel = 0.1F;
 
     public final static ResourceLocation TAMING_GUI = new ResourceLocation(DefaultProps.coreKey, "gui/guielements.png");
-    
+
     public RenderTameable(ModelBase modelBase, float shadowSize, ResourceLocation textureLocation) {
         super(modelBase, shadowSize, textureLocation);
     }
@@ -130,7 +130,7 @@ public class RenderTameable extends RenderGenericLiving {
             }
 
             /* Draw Health Background */
-            int maxHealth = tameableEntity.getMaxHealth();
+            int maxHealth = (int) tameableEntity.func_110138_aP(); // MaxHealth
             zLevel = 0.2f;
             int screenLocationX = -18 - 7;
             int screenLocationY = 11;

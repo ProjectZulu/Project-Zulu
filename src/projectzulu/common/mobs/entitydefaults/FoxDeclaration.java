@@ -11,6 +11,7 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import projectzulu.common.mobs.entity.EntityFox;
 import projectzulu.common.mobs.models.ModelFox;
@@ -56,6 +57,7 @@ public class FoxDeclaration extends SpawnableDeclaration {
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, ItemList.scrapMeat, 0, 15);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.SmallHeart.meta(), 4);
+        customMobData.entityProperties = new EntityProperties(12f, 2.0f, 0.3f, 100f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

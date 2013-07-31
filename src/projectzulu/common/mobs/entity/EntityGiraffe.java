@@ -50,38 +50,6 @@ public class EntityGiraffe extends EntityGenericAnimal {
     }
 
     @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-
-    @Override
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-    
-    @Override
-    protected void func_110147_ax() {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111128_a(0.50);
-    }
-
-    @Override
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 4;
-        case 1:
-            return 5;
-        case 2:
-            return 6;
-        case 3:
-            return 7;
-        default:
-            return 3;
-        }
-    }
-
-    @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }

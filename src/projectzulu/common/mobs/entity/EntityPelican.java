@@ -2,8 +2,10 @@ package projectzulu.common.mobs.entity;
 
 import java.util.EnumSet;
 
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIFlyingWander;
@@ -16,10 +18,18 @@ public class EntityPelican extends EntityGenericAnimal {
     public EntityPelican(World par1World) {
         super(par1World);
         this.setSize(1.5f, 1.4f);
+
+        float moveSpeed = 0.22f;
+        CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+        if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
+            // TODO: Switch to this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111126_e()???
+            moveSpeed = entityEntry.modData.get().entityProperties.moveSpeed;
+        }
+
         this.maxFlightHeight = 15;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0f, false, 2f * 2f));
-        this.tasks.addTask(6, new EntityAIFlyingWander(this, (float)getBaseSpeed()));
+        this.tasks.addTask(6, new EntityAIFlyingWander(this, moveSpeed));
         this.tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));
@@ -28,16 +38,6 @@ public class EntityPelican extends EntityGenericAnimal {
                         EntityPlayer.class, 16.0F, 0, true));
     }
 
-    @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-
-    @Override
-    public double getBaseSpeed() {
-        return 0.22f;
-    }
-    
     @Override
     public boolean defaultGrounded() {
         return false;

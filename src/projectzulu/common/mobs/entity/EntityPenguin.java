@@ -48,32 +48,6 @@ public class EntityPenguin extends EntityGenericAnimal implements IAnimals {
     }
 
     @Override
-    public int getMaxHealth() {
-        return 15;
-    }
-
-    @Override
-    public double getBaseSpeed() {
-        return 0.25f;
-    }
-    
-    @Override
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 3;
-        case 1:
-            return 3;
-        case 2:
-            return 4;
-        case 3:
-            return 6;
-        default:
-            return 3;
-        }
-    }
-
-    @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }

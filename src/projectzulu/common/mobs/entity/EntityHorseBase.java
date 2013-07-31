@@ -47,34 +47,8 @@ public class EntityHorseBase extends EntityGenericAnimal {
     }
 
     @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-
-    @Override
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-    
-    @Override
     public boolean isRideable() {
         return true;
-    }
-
-    @Override
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 0;
-        case 1:
-            return 3;
-        case 2:
-            return 4;
-        case 3:
-            return 5;
-        default:
-            return super.getAttackStrength(par1World);
-        }
     }
 
     @Override

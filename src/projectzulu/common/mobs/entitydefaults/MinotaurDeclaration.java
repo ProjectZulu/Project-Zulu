@@ -10,6 +10,7 @@ import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.EggableDeclaration;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.mobs.entity.EntityMinotaur;
 import projectzulu.common.mobs.models.ModelMinotaur;
 import projectzulu.common.mobs.renders.RenderGenericLiving;
@@ -36,6 +37,7 @@ public class MinotaurDeclaration extends EggableDeclaration {
                 ItemList.genericCraftingItems, ItemGenerics.Properties.LargeHeart.meta(), 4);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Ectoplasm.meta(), 4);
+        customMobData.entityProperties = new EntityProperties(30f, 3.0f, 0.25f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

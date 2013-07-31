@@ -3,7 +3,6 @@ package projectzulu.common.mobs.entity;
 import java.util.EnumSet;
 
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -48,16 +47,6 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
         setPosition(parx, pary, parz);
     }
 
-    @Override
-    public int getMaxHealth() {
-        return 16;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.25f;
-    }
-    
     @Override
     protected void entityInit() {
         super.entityInit();
