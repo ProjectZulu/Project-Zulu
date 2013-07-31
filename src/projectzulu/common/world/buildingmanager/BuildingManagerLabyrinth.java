@@ -82,7 +82,7 @@ public class BuildingManagerLabyrinth extends BuildingManager{
 					(int)cellList[xIndex][zIndex].getLocation(cellIndex).yCoord,
 					(int)cellList[xIndex][zIndex].getLocation(cellIndex).zCoord);
 
-			for (CellType cellType : cellSubType){
+			for (CellType cellType : cellSubType) {
 
 				switch (cellType){
 				case NorthWall:

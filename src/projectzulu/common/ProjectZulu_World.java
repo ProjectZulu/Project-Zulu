@@ -1,6 +1,9 @@
 package projectzulu.common;
 
+import projectzulu.common.blocks.itemblockdeclarations.StructurePlacerDeclaration;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ItemBlockManager;
+import projectzulu.common.world.terrain.CathedralFeature;
 import projectzulu.common.world.terrain.CemetaryFeature;
 import projectzulu.common.world.terrain.LabyrinthFeature;
 import projectzulu.common.world.terrain.OasisFeature;
@@ -20,9 +23,16 @@ public class ProjectZulu_World {
     @Instance(DefaultProps.WorldModId)
     public static ProjectZulu_World modInstance;
 
+    public ProjectZulu_World() {
+        ItemBlockManager.INSTANCE.addItemBlock(new StructurePlacerDeclaration());
+    }
+
     static {
-        ProjectZulu_Core.featureGenerator.registerStructure(new CemetaryFeature(), new LabyrinthFeature(),
-                new OasisFeature(), new PyramidFeature());
+        ProjectZulu_Core.featureGenerator.registerStructure(new PyramidFeature(), new LabyrinthFeature(),
+                new CemetaryFeature(), new OasisFeature());
+
+        // ProjectZulu_Core.featureGenerator.registerStructure(new CemetaryFeature(), new LabyrinthFeature(),
+        // new OasisFeature(), new PyramidFeature(), new CathedralFeature());
     }
 
     @EventHandler

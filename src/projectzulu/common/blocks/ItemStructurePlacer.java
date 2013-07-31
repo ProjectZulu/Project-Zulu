@@ -10,21 +10,22 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.terrain.TerrainFeature;
+import projectzulu.common.core.terrain.TerrainFeature.FeatureDirection;
+import projectzulu.common.world.terrain.CathedralFeature;
 import projectzulu.common.world.terrain.CemetaryFeature;
 import projectzulu.common.world.terrain.LabyrinthFeature;
 import projectzulu.common.world.terrain.OasisFeature;
 import projectzulu.common.world.terrain.PyramidFeature;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemStructurePlacer extends Item {
 
-    String[] structureName = new String[] { "Oasis", "Pyramid", "Labyrinth", "Cemetary" };
+    String[] structureName = new String[] { "Oasis", "Pyramid", "Labyrinth", "Cemetary", "Cathedral" };
 
     public ItemStructurePlacer(int par1) {
         super(par1);
@@ -35,21 +36,17 @@ public class ItemStructurePlacer extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        itemIcon = par1IconRegister.registerIcon(Item.paper.getUnlocalizedName().substring(5)); // Substring removes
-                                                                                                // "item."
+        itemIcon = par1IconRegister.registerIcon(Item.paper.getUnlocalizedName().substring(5)); // removes "item."
     }
 
     @Override
     public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4) {
-        if (!Loader.isModLoaded(DefaultProps.WorldModId)) {
-            return;
-        }
-
         if (!par2World.isRemote) {
             int buildingID = par1ItemStack.getItemDamage();
             int Xcoord = (int) par3EntityPlayer.posX;
             int Zcoord = (int) par3EntityPlayer.posZ;
             int Ycoord = ((int) par3EntityPlayer.posY) - 1;
+
             switch (buildingID) {
             case 0: {
                 /* Oasis Generation */
@@ -57,7 +54,7 @@ public class ItemStructurePlacer extends Item {
                         .getRegisteredStructure(OasisFeature.OASIS);
                 if (terrainFeature != null) {
                     terrainFeature.generateFeature(par2World, Xcoord / 16, Zcoord / 16, new ChunkCoordinates(Xcoord,
-                            Ycoord + 1, Zcoord), par2World.rand);
+                            Ycoord + 1, Zcoord), par2World.rand, calculateFeatureDirection(par3EntityPlayer));
                 }
                 break;
             }
@@ -67,7 +64,7 @@ public class ItemStructurePlacer extends Item {
                         .getRegisteredStructure(PyramidFeature.PYRAMID);
                 if (terrainFeature != null) {
                     terrainFeature.generateFeature(par2World, Xcoord / 16, Zcoord / 16, new ChunkCoordinates(Xcoord,
-                            Ycoord + 1, Zcoord), par2World.rand);
+                            Ycoord + 1, Zcoord), par2World.rand, calculateFeatureDirection(par3EntityPlayer));
                 }
                 break;
             }
@@ -77,19 +74,30 @@ public class ItemStructurePlacer extends Item {
                         .getRegisteredStructure(LabyrinthFeature.LABYRINTH);
                 if (terrainFeature != null) {
                     terrainFeature.generateFeature(par2World, Xcoord / 16, Zcoord / 16, new ChunkCoordinates(Xcoord,
-                            Ycoord + 1, Zcoord), par2World.rand);
+                            Ycoord + 1, Zcoord), par2World.rand, calculateFeatureDirection(par3EntityPlayer));
                 }
                 break;
             }
-            case 3:
+            case 3: {
                 /* Cemetary Generation */
                 TerrainFeature terrainFeature = ProjectZulu_Core.featureGenerator
                         .getRegisteredStructure(CemetaryFeature.CEMETARY);
                 if (terrainFeature != null) {
                     terrainFeature.generateFeature(par2World, Xcoord / 16, Zcoord / 16, new ChunkCoordinates(Xcoord,
-                            Ycoord + 1, Zcoord), par2World.rand);
+                            Ycoord + 1, Zcoord), par2World.rand, calculateFeatureDirection(par3EntityPlayer));
                 }
                 break;
+            }
+            case 4: {
+                /* Cathedral Generation */
+                TerrainFeature terrainFeature = ProjectZulu_Core.featureGenerator
+                        .getRegisteredStructure(CathedralFeature.CATHEDRAL);
+                if (terrainFeature != null) {
+                    terrainFeature.generateFeature(par2World, Xcoord / 16, Zcoord / 16, new ChunkCoordinates(Xcoord,
+                            Ycoord + 1, Zcoord), par2World.rand, calculateFeatureDirection(par3EntityPlayer));
+                }
+                break;
+            }
             default:
                 break;
             }
@@ -99,6 +107,24 @@ public class ItemStructurePlacer extends Item {
             par1ItemStack.stackSize--;
         }
 
+    }
+
+    private FeatureDirection calculateFeatureDirection(EntityPlayer player) {
+        if (player.isSneaking()) {
+            return FeatureDirection.CENTERED;
+        } else {
+            int direction = MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+            if (direction == 0) {
+                return FeatureDirection.SOUTH;
+            } else if (direction == 1) {
+                return FeatureDirection.WEST;
+            } else if (direction == 2) {
+                return FeatureDirection.NORTH;
+            } else if (direction == 3) {
+                return FeatureDirection.EAST;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     @Override

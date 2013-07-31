@@ -153,7 +153,7 @@ public class ProjectZulu_Blocks {
         ItemBlockManager.INSTANCE.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(),
                 new WaterDropletDeclaration(), new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(),
                 new CoconutShellDeclaration(), new ScaleItemDeclaration(), new FurPeltDeclaration(),
-                new GenericCraftingItemsDeclaration(), new StructurePlacerDeclaration(), new CoconutItem(),
+                new GenericCraftingItemsDeclaration(), new CoconutItem(),
                 new ScrapMeatDeclaration());
 
         ItemBlockManager.INSTANCE.addItemBlock(

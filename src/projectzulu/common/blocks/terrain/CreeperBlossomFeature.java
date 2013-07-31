@@ -34,7 +34,8 @@ public class CreeperBlossomFeature extends BiomeFeature {
     @Override
     protected void loadSettings(FeatureConfiguration config) {
         super.loadSettings(config);
-        density = config.get("Feature." + getFeatureSize() + "." + getFeatureName() + ".General", "Density", density).getInt(density);
+        density = config.get("Feature." + getFeatureSize() + "." + getFeatureName() + ".General", "Density", density)
+                .getInt(density);
     }
 
     @Override
@@ -76,7 +77,8 @@ public class CreeperBlossomFeature extends BiomeFeature {
     }
 
     @Override
-    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
+    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random,
+            FeatureDirection direction) {
         world.setBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ,
                 BlockList.creeperBlossom.get().blockID);
     }

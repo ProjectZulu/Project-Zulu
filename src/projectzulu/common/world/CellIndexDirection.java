@@ -17,8 +17,12 @@ public enum CellIndexDirection{
 	SouthWall,
 	WestWall,
 	EastWall;
+
+    public boolean isCorner() {
+        return this == NorthWestCorner || this == NorthEastCorner || this == SouthWestCorner || this == SouthEastCorner;
+    }
 	
-	public CellIndexDirection randomCardinalDirection(Random random){
+	public static CellIndexDirection randomCardinalDirection(Random random){
 		switch (random.nextInt(4)) {
 		case 0:
 			return NorthMiddle;
