@@ -19,8 +19,7 @@ import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
 import projectzulu.common.core.terrain.BiomeFeature;
 import projectzulu.common.core.terrain.FeatureConfiguration;
-import projectzulu.common.world.MazeGenerator;
-import projectzulu.common.world.buildingmanager.BuildingManagerLabyrinth;
+import projectzulu.common.world2.buildingmanager.BuildingManagerLabyrinth;
 import cpw.mods.fml.common.Loader;
 
 public class LabyrinthFeature extends BiomeFeature {
@@ -149,8 +148,9 @@ public class LabyrinthFeature extends BiomeFeature {
     }
 
     @Override
-    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
-        new MazeGenerator(new BuildingManagerLabyrinth(world), 1, 4, 3, 24, 1, 1).generate(world, random,
-                genBlockCoords.posX, genBlockCoords.posY - (11), genBlockCoords.posZ);
+    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random,
+            FeatureDirection direction) {
+        new BuildingManagerLabyrinth(world, new ChunkCoordinates(genBlockCoords.posX, genBlockCoords.posY - 16,
+                genBlockCoords.posZ), direction).generate();
     }
 }

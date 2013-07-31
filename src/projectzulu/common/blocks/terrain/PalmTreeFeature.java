@@ -76,7 +76,7 @@ public class PalmTreeFeature extends BiomeFeature {
     }
 
     @Override
-    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
+    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random, FeatureDirection direction) {
         world.setBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ,
                 BlockList.palmTreeSapling.get().blockID);
     }

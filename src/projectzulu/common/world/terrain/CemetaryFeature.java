@@ -11,8 +11,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
 import projectzulu.common.core.terrain.BiomeFeature;
-import projectzulu.common.world.MazeGenerator;
-import projectzulu.common.world.buildingmanager.BuildingManagerCemetary;
+import projectzulu.common.world2.buildingmanager.BuildingManagerCemetary;
 
 public class CemetaryFeature extends BiomeFeature {
     public static final String CEMETARY = "Cemetary";
@@ -72,8 +71,9 @@ public class CemetaryFeature extends BiomeFeature {
     }
 
     @Override
-    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
-        (new MazeGenerator(new BuildingManagerCemetary(world), 1, 4, 3, 11, 1, 1)).generate(world, world.rand,
-                genBlockCoords.posX, genBlockCoords.posY - 1, genBlockCoords.posZ);
+    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random,
+            FeatureDirection direction) {
+        new BuildingManagerCemetary(world, new ChunkCoordinates(genBlockCoords.posX, genBlockCoords.posY - 1,
+                genBlockCoords.posZ), direction).generate();
     }
 }
