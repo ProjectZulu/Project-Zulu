@@ -54,6 +54,8 @@ public class EntityGenericAnimal extends EntityGenericTameable {
         super.func_110147_ax();
         CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
         if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
+            this.func_110140_aT().func_111150_b(SharedMonsterAttributes.field_111264_e);
+            
             this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(
                     entityEntry.modData.get().entityProperties.maxHealth);
             this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(
