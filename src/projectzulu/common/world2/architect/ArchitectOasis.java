@@ -5,6 +5,7 @@ import java.awt.Point;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
+import projectzulu.common.world2.CellHelper;
 import projectzulu.common.world2.MazeCell;
 import projectzulu.common.world2.blueprint.BPSetGenericCardinal;
 import projectzulu.common.world2.blueprint.BPSetGenericCarved;
@@ -19,7 +20,6 @@ import projectzulu.common.world2.blueprints.oasis.BPOasisGrass;
 import projectzulu.common.world2.blueprints.oasis.BPOasisPool;
 import projectzulu.common.world2.blueprints.oasis.BPOasisSandCorner;
 import projectzulu.common.world2.blueprints.oasis.BPOasisTreeGrass;
-import projectzulu.common.world2.blueprints.oasis.CellHelper;
 
 public class ArchitectOasis extends ArchitectBase {
     BlueprintSetStockpile edgeStockpile;

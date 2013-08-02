@@ -9,6 +9,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
+import projectzulu.common.world2.CellHelper;
 import projectzulu.common.world2.blueprint.Blueprint;
 
 public abstract class BPOasisEdge implements Blueprint {

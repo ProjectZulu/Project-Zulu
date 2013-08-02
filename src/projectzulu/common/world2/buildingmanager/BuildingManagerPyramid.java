@@ -33,7 +33,7 @@ public class BuildingManagerPyramid extends BuildingManagerBase {
         int cellSize = 2;
         int cellHeight = 2 * cellSize;
         int floors = (xCells > zCells ? xCells : zCells) / cellHeight + 1;
-        startingPos = calcDirectionTranslation(direction, startingPos, xCells * cellSize, zCells * cellSize, cellHeight);
+        startingPos = calcTranslatedPosition(direction, startingPos, xCells * cellSize, zCells * cellSize, cellHeight);
 
         Point numCells = new Point(xCells, zCells);
 

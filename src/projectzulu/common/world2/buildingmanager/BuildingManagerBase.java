@@ -30,7 +30,7 @@ public abstract class BuildingManagerBase implements BuildingManager {
         construct();
     }
 
-    protected ChunkCoordinates calcDirectionTranslation(FeatureDirection direction, ChunkCoordinates startingPos,
+    protected ChunkCoordinates calcTranslatedPosition(FeatureDirection direction, ChunkCoordinates startingPos,
             int xWidth, int zWidth, int height) {
         if (direction == null) {
             direction = FeatureDirection.CENTERED;
