@@ -45,7 +45,7 @@ public class OstrichDeclaration extends SpawnableDeclaration {
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Talon.meta(), 4);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.SmallHeart.meta(), 4);
-        customMobData.entityProperties = new EntityProperties(15f, 3.0f, 0.5f).createFromConfig(config, mobName);
+        customMobData.entityProperties = new EntityProperties(15f, 3.0f, 0.8f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 
