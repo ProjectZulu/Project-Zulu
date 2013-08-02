@@ -87,6 +87,10 @@ public class BPCathedralEastTower implements Blueprint {
             }
         }
 
+        if (piecePos.posY % cellSize == 5 && (piecePos.posZ < 1 || piecePos.posX < 1)) {
+            return new BlockWithMeta(Block.stoneBrick.blockID);
+        }
+        
         /* Tower Rooms */
         if (piecePos.posX > 2 && piecePos.posZ > 2) {
             if (piecePos.posY % (stairSegmentHeight * 2) == 3) {
