@@ -3,8 +3,7 @@ package projectzulu.common.potion;
 import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
@@ -23,8 +22,8 @@ public class EntityPZPotion extends EntityPotion {
         super(par1World);
     }
 
-    public EntityPZPotion(World world, EntityPlayer player, ItemStack itemStack) {
-        super(world, player, itemStack);
+    public EntityPZPotion(World world, EntityLivingBase living, ItemStack itemStack) {
+        super(world, living, itemStack);
         potionStack = itemStack;
     }
 
@@ -41,17 +40,20 @@ public class EntityPZPotion extends EntityPotion {
     @Override
     protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
         if (!this.worldObj.isRemote && potionStack.getItem() != null && potionStack.getItem() instanceof ItemPotion) {
+            @SuppressWarnings("unchecked")
             List<PotionEffect> effectList = ((ItemPotion) potionStack.getItem()).getEffects(potionStack);
 
             if (effectList != null && !effectList.isEmpty()) {
                 AxisAlignedBB axisalignedbb = this.boundingBox.expand(4.0D, 2.0D, 4.0D);
-                List<EntityLiving> entityList = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, axisalignedbb);
+                @SuppressWarnings("unchecked")
+                List<EntityLivingBase> entityList = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class,
+                        axisalignedbb);
 
                 if (entityList != null && !entityList.isEmpty()) {
-                    Iterator<EntityLiving> iterator = entityList.iterator();
+                    Iterator<EntityLivingBase> iterator = entityList.iterator();
 
                     while (iterator.hasNext()) {
-                        EntityLiving entityliving = iterator.next();
+                        EntityLivingBase entityliving = iterator.next();
                         double squareDistance = this.getDistanceSqToEntity(entityliving);
 
                         if (squareDistance < 16.0D) {
