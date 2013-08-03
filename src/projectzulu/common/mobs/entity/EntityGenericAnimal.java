@@ -37,7 +37,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     public int maxAnimTime = 20;
     public boolean forceDespawn = false;
     /* Chance Entity will Flee when attacked */
-    private float flightChance = 0;
+    private float flightChance;
 
     public EntityGenericAnimal(World par1World) {
         super(par1World);
