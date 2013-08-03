@@ -4,11 +4,13 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.mobs.entity.EntityLizardSpit;
 
 
@@ -30,11 +32,12 @@ public class RenderLizardSpit extends Render implements RenderWrapper
         float var10 = this.field_77002_a;
         GL11.glScalef(var10 / 1.0F, var10 / 1.0F, var10 / 1.0F);
         byte var11 = 9;
+        Icon icon = ItemGenerics.Properties.LizardSpit.getIcon();
         Tessellator var12 = Tessellator.instance;
-        float var13 = (float)(var11 % 16 * 16 + 0) / 256.0F;
-        float var14 = (float)(var11 % 16 * 16 + 16) / 256.0F;
-        float var15 = (float)(var11 / 16 * 16 + 0) / 256.0F;
-        float var16 = (float)(var11 / 16 * 16 + 16) / 256.0F;
+        float var13 = icon.getMinU();
+        float var14 = icon.getMaxU();
+        float var15 = icon.getMinV();
+        float var16 = icon.getMaxV();
         float var17 = 1.0F;
         float var18 = 0.5F;
         float var19 = 0.25F;
