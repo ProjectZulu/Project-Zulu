@@ -21,9 +21,8 @@ public class PalmTreeSapling extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.palmTreeSapling = Optional.of(new BlockPalmTreeSapling(iD).setUnlocalizedName(
-                DefaultProps.blockKey + ":" + name.toLowerCase()).func_111022_d(
-                DefaultProps.blockKey + ":" + name.toLowerCase()));
+        BlockList.palmTreeSapling = Optional.of(new BlockPalmTreeSapling(iD).setUnlocalizedName(name.toLowerCase())
+                .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 
@@ -31,9 +30,7 @@ public class PalmTreeSapling extends BlockDeclaration {
     protected void registerBlock() {
         Block block = BlockList.palmTreeSapling.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
-        LanguageRegistry.addName(block, "Palm Tree Sapling");
         OreDictionary.registerOre("sapling", new ItemStack(block));
         OreDictionary.registerOre("saplingPalm", new ItemStack(block));
     }
-
 }

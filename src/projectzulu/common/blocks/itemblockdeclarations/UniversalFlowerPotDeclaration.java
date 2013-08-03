@@ -17,7 +17,6 @@ import com.google.common.base.Optional;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -53,7 +52,6 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
         if (!Properties.replaceFlowerPot) {
             Block block = BlockList.universalFlowerPot.get();
             GameRegistry.registerBlock(block, name.toLowerCase());
-            LanguageRegistry.addName(block, "Universal Flower Pot");
             new ItemUniversalFlowerPot(block.blockID - 256, block);
         }
         GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");

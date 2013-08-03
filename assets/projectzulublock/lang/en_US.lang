@@ -1,0 +1,52 @@
+tile.aloevera.base_1.name=Aloe Vera Plant
+tile.tumbleweed.name=Tumbleweed
+tile.jasper.name=Block of Jasper
+tile.palmtreelog.name=Palm Tree Log
+tile.palmtreeplank.name=Palm Tree Plank
+tile.palmtreeslab.name=Palm Tree Single Slab
+tile.palmtreedoubleslab.name=Palm Tree Double Slab
+tile.palmtreestairs.name=Palm Tree Stairs
+tile.palmtreeleaves.name=Palm Tree Leaves
+tile.palmtreesapling.name=Palm Tree Sapling
+tile.quickSand.name=QuickSand
+tile.nightbloom.name=NightBloom
+tile.creeperblossom.name=Creeper Blossom
+tile.spikes.name=Ivory Spikes
+tile.woodcampfire.name=Wood Campfire
+tile.stonecampfire.name=Stone Campfire
+tile.litcampfire.name=Lit Wood Campfire
+tile.litstonecampfire.name=Lit Stone Campfire
+tile.brewingsingle.name=Traditional Brewing Stand
+tile.brewingtriple.name=Nether Brewing Stand
+
+item.tile.uniFlowerPot.name=Universal Flower Pot
+
+
+tile.mobskulls.redfinch.name=Red Finch Head
+tile.mobskulls.crocodile.name=Alligator Head
+tile.mobskulls.armadillo.name=Armadillo Head
+tile.mobskulls.blackbear.name=Blackbear Head
+tile.mobskulls.brownbear.name=Brownbear Head
+tile.mobskulls.polarbear.name=Polarbear Head
+tile.mobskulls.beaver.name=Beaver Head
+tile.mobskulls.boar.name=Boar Head
+tile.mobskulls.giraffe.name=Giraffe Head
+tile.mobskulls.gorilla.name=Gorilla Head
+tile.mobskulls.lizard.name=Lizard Head
+tile.mobskulls.mammoth.name=Mammoth Head
+tile.mobskulls.ostrich.name=Ostrich Head
+tile.mobskulls.penguin.name=Penguin Head
+tile.mobskulls.rhino.name=Rhino Head
+tile.mobskulls.treeent.name=Treeent Head
+tile.mobskulls.vulture.name=Vulture Head
+tile.mobskulls.elephant.name=Elephant Head
+
+tile.watereddirt.base_1.name=Watered Dirt
+tile.watereddirt.soil_1.name=Damp Soil
+tile.watereddirt.soil_2.name=Moist Soil
+tile.watereddirt.soil_3.name=Saturated Soil
+tile.watereddirt.soil_4.name=Drenched Soil
+tile.watereddirt.sand_1.name=Damp Sand
+tile.watereddirt.sand_2.name=Moist Sand
+tile.watereddirt.sand_3.name=Saturated Sand 
+tile.watereddirt.sand_4.name=Drenched Soaked Sand

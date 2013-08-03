@@ -11,7 +11,6 @@ import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class PalmTreeStairsDeclaration extends BlockDeclaration {
 
@@ -23,7 +22,8 @@ public class PalmTreeStairsDeclaration extends BlockDeclaration {
     protected boolean createBlock(int iD) {
         if (BlockList.palmTreePlank.isPresent()) {
             BlockList.palmTreeStairs = Optional.of(new BlockZuluStairs(iD, BlockList.palmTreePlank.get(), 0)
-                    .setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+                    .setUnlocalizedName(name.toLowerCase()).func_111022_d(
+                            DefaultProps.blockKey + ":" + name.toLowerCase()));
             return true;
         }
         return false;
@@ -34,7 +34,6 @@ public class PalmTreeStairsDeclaration extends BlockDeclaration {
         if (BlockList.palmTreeStairs.isPresent()) {
             Block block = BlockList.palmTreeStairs.get();
             GameRegistry.registerBlock(block, name.toLowerCase());
-            LanguageRegistry.addName(block, "Palm Tree Stairs");
             OreDictionary.registerOre("stairsWood", new ItemStack(block));
             OreDictionary.registerOre("stairsPalm", new ItemStack(block));
         }
