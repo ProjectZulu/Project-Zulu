@@ -11,7 +11,6 @@ import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class PalmTreePlankDeclaration extends BlockDeclaration {
 

@@ -27,7 +27,7 @@ public interface ItemBlockDeclaration {
     /**
      * Registers the Created Block with the Environment
      * 
-     * i.e GameRegistry and LanguageRegistry
+     * i.e GameRegistry
      */
     public abstract void register(Side side);
 }

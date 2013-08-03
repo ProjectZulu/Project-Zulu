@@ -9,7 +9,6 @@ import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class QuickSandDeclaration extends BlockDeclaration {
 
@@ -28,6 +27,5 @@ public class QuickSandDeclaration extends BlockDeclaration {
     protected void registerBlock() {
         Block block = BlockList.quickSand.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
-        LanguageRegistry.addName(block, "QuickSand");
     }
 }
