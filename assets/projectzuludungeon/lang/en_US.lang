@@ -1,0 +1,7 @@
+tile.limitedmobspawner.name=Limited Mob Spawner
+
+commands.playsound.usage=/playsound [targetPlayer] [fileName] <range> <x> <y> <z>
+commands.streamsound.usage=/streamsound [targetPlayer] [fileName] <range> <x> <y> <z>
+commands.spawnentity.usage=/spawnentity [targetPlayer] [entityName] <yaw> <pitch> <x> <y> <z>
+commands.placeblock.usage=/placeblock [targetPlayer] [blockID] <meta> <x> <y> <z>
+commands.placeblock.noblock=/placeblock blockID does not exist
