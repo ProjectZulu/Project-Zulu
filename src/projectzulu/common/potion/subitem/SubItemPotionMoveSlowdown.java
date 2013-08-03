@@ -7,7 +7,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionMoveSlowdown extends SubItemPotionGeneric {
 
     public SubItemPotionMoveSlowdown(int itemID, int subID) {
-        super(itemID, subID, "Slowdown");
+        super(itemID, subID, "potion.moveSlowdown");
         setSubItemBounds(4, 4, 4, 0);
         setEffectScale(20 * 10, 20 * 5, 6, 10, 1);
     }

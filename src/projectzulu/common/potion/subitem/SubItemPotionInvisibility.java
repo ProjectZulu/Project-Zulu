@@ -7,7 +7,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionInvisibility extends SubItemPotionGeneric {
 
     public SubItemPotionInvisibility(int itemID, int subID) {
-        super(itemID, subID, "Invisibility");
+        super(itemID, subID, "potion.invisibility");
         setSubItemBounds(4, 4, 1, 0);
         setEffectScale(20 * 10, 20 * 5, 16, 10, 1);
     }

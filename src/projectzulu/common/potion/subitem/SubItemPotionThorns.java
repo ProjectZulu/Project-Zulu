@@ -13,7 +13,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionThorns extends SubItemPotionGeneric {
 
     public SubItemPotionThorns(int itemID, int subID) {
-        super(itemID, subID, "Thorns");
+        super(itemID, subID, "potion.thorn");
         setSubItemBounds(4, 4, 4, 0);
         setEffectScale(20 * 20, 20 * 5, 6, 10, 2);
     }

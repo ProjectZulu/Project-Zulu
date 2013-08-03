@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemAloeVeraSeeds extends Item {
 
@@ -17,12 +15,12 @@ public class ItemAloeVeraSeeds extends Item {
      */
     private int blockType;
 
-    public ItemAloeVeraSeeds(int itemID, int turnIntoID, String name) {
+    public ItemAloeVeraSeeds(int itemID, int turnIntoID, String unlocalizedName) {
         super(itemID);
         blockType = turnIntoID;
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        setUnlocalizedName(name);
-        func_111206_d(name);
+        setUnlocalizedName(unlocalizedName);
+        func_111206_d(DefaultProps.blockKey + ":" + unlocalizedName);
     }
 
     @Override

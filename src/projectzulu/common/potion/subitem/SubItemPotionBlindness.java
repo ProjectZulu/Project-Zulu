@@ -7,7 +7,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionBlindness extends SubItemPotionGeneric {
 
     public SubItemPotionBlindness(int itemID, int subID) {
-        super(itemID, subID, "Blindness");
+        super(itemID, subID, "potion.blindness");
         setSubItemBounds(4, 4, 1, 0);
         setEffectScale(20 * 13, 20 * 5, 2, 10, 1);
     }

@@ -4,12 +4,9 @@ import net.minecraft.item.Item;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.ItemZuluArmor;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.itemblockdeclaration.ItemSetDeclaration;
 
 import com.google.common.base.Optional;
-
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ScaleArmorDeclaration extends ItemSetDeclaration {
 
@@ -22,22 +19,20 @@ public class ScaleArmorDeclaration extends ItemSetDeclaration {
 
     @Override
     protected boolean createItem(int iD, int partIndex) {
+        Item item = new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, partIndex, name[partIndex].toLowerCase());
+
         switch (partIndex) {
         case 0:
-            ItemList.scaleArmorHead = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex,
-                    0, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
+            ItemList.scaleArmorHead = Optional.of(item);
             return true;
         case 1:
-            ItemList.scaleArmorChest = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex,
-                    1, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
+            ItemList.scaleArmorChest = Optional.of(item);
             return true;
         case 2:
-            ItemList.scaleArmorLeg = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, 2,
-                    DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
+            ItemList.scaleArmorLeg = Optional.of(item);
             return true;
         case 3:
-            ItemList.scaleArmorBoots = Optional.of((new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex,
-                    3, DefaultProps.blockKey + ":" + name[partIndex].toLowerCase())));
+            ItemList.scaleArmorBoots = Optional.of(item);
             return true;
         }
         return false;
@@ -45,26 +40,5 @@ public class ScaleArmorDeclaration extends ItemSetDeclaration {
 
     @Override
     protected void registerItem(int partIndex) {
-        switch (partIndex) {
-        case 0: {
-            Item item = ItemList.scaleArmorHead.get();
-            LanguageRegistry.addName(item, "Scale Helmet");
-            break;
-        }
-        case 1: {
-            Item item = ItemList.scaleArmorChest.get();
-            LanguageRegistry.addName(item, "Scale Chestplate");
-            break;
-        }
-        case 2: {
-            Item item = ItemList.scaleArmorLeg.get();
-            LanguageRegistry.addName(item, "Scale Leggings");
-        }
-
-        case 3: {
-            Item item = ItemList.scaleArmorBoots.get();
-            LanguageRegistry.addName(item, "Scale Boots");
-        }
-        }
     }
 }

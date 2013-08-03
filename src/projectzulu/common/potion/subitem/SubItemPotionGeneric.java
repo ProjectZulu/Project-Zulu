@@ -168,7 +168,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
         }
 
         /* Add Potion Name */
-        nameBuilder = nameBuilder + baseName + " Potion";
+        nameBuilder = nameBuilder + StatCollector.translateToLocal(baseName).trim() + " Potion";
 
         /* Check for Postfix */
         if (power > 0 && duration > 0) {

@@ -96,7 +96,7 @@ public class ItemGenerics extends Item implements IngredientProperty {
     public String getUnlocalizedName(ItemStack itemStack) {
         for (final Properties property : Properties.values()) {
             if (property.meta == itemStack.getItemDamage()) {
-                return property.displayName;
+                return "item.".concat(property.displayName.toLowerCase().replaceAll("\\s", ""));
             }
         }
         return "";
