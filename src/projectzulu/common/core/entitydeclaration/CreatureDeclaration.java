@@ -17,7 +17,6 @@ import com.google.common.base.Optional;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -78,8 +77,6 @@ public abstract class CreatureDeclaration implements EntityDeclaration {
     public void registerEntity() {
         EntityRegistry.registerModEntity(mobClass, mobName, ProjectZulu_Core.getNextDefaultEntityID(),
                 ProjectZulu_Core.modInstance, trackingRange, updateFrequency, true);
-        LanguageRegistry.instance().addStringLocalization(
-                "entity.".concat(DefaultProps.CoreModId).concat(".").concat(mobName).concat(".name"), "en_US", mobName);
     }
 
     @Override
