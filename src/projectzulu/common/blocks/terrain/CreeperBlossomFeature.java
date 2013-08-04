@@ -51,8 +51,8 @@ public class CreeperBlossomFeature extends BiomeFeature {
 
         ChunkCoordinates[] coordinates = new ChunkCoordinates[density];
         for (int i = 0; i < density; i++) {
-            int xCoord = chunkX + random.nextInt(16);
-            int zCoord = chunkZ + random.nextInt(16);
+            int xCoord = chunkX * 16 + random.nextInt(16);
+            int zCoord = chunkZ * 16 + random.nextInt(16);
             coordinates[i] = new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
         }
         return coordinates;
