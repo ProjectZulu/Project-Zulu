@@ -17,7 +17,7 @@ public class BPOasisGrass implements Blueprint {
     BlockWithMeta sand = new BlockWithMeta(Block.sand.blockID);
     BlockWithMeta grass = new BlockWithMeta(Block.grass.blockID);
     BlockWithMeta air = new BlockWithMeta(0);
-    List<BlockWithMeta> flowers = new ArrayList<>();
+    List<BlockWithMeta> flowers = new ArrayList<BlockWithMeta>();
 
     public BPOasisGrass() {
         flowers.add(new BlockWithMeta(Block.plantRed.blockID, 0, 1));
