@@ -18,7 +18,7 @@ public abstract class BPOasisEdge implements Blueprint {
     BlockWithMeta grass = new BlockWithMeta(Block.grass.blockID);
     BlockWithMeta air = new BlockWithMeta(0);
     
-    List<BlockWithMeta> flowers = new ArrayList<>();
+    List<BlockWithMeta> flowers = new ArrayList<BlockWithMeta>();
     boolean inverted;
 
     public BPOasisEdge(boolean inverted) {

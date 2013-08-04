@@ -3,13 +3,11 @@ package projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.mobs.entity.EntityArmadillo;
 import projectzulu.common.mobs.entity.EntityStates;
 
@@ -250,7 +248,6 @@ public class ModelArmadillo extends ModelBase {
             leg3.rotationPointZ = var5.eleg3.translateZ(-0.5f * animSpeed, -4f, 4f);
             leg4.rotationPointZ = var5.eleg4.translateZ(-0.5f * animSpeed, -4f, 4f);
         } else if (var5.getEntityState() != EntityStates.inCover && var5.isCharging() == false) {
-            ProjectZuluLog.info("Is Running?");
             float animSpeed = 2.0f;
             /* Make Complete Body Circle */
             WHOLE.rotateAngleX = var5.eWHOLE.rotateX(-0.09f * animSpeed, 0f, (float) ((390 + 360) * Math.PI / 180f));
