@@ -131,8 +131,6 @@ public class DeathGamerules {
             boolean dropHotbar = gameRules.getGameRuleBooleanValue("dropHotbar");
             boolean dropArmor = gameRules.getGameRuleBooleanValue("dropArmor");
             boolean dropXP = gameRules.getGameRuleBooleanValue("dropXP");
-            dropHotbar = true;
-            dropXP = true;
 
             EntityPlayer player = (EntityPlayer) event.entity;
             player.captureDrops = true;
