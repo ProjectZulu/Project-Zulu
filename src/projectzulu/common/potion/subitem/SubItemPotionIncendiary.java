@@ -8,7 +8,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionIncendiary extends SubItemPotionGeneric {
 
     public SubItemPotionIncendiary(int itemID, int subID) {
-        super(itemID, subID, "Incendiary");
+        super(itemID, subID, "potion.incendiary");
         setSubItemBounds(1, 1, 4, 2);
 //        setEffectScale(20 * 5, 20 * 5, 20 * 10, 20 * 1, 2);
         setEffectScale(0, 0, 0, 0, 2);

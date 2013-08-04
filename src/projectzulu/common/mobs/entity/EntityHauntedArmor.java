@@ -61,20 +61,11 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
         setPosition(parx, pary, parz);
         this.shouldHover = shouldHover;
     }
-    
-    @Override
-    public int getMaxHealth() {
-        return 25;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.2f;
-    }
 
     public void setPersistenceRequired(boolean persistenceRequired) {
         try {
-            ObfuscationHelper.setCatchableFieldUsingReflection("field_82179_bU", EntityLiving.class, this, true, false, true);
+            ObfuscationHelper.setCatchableFieldUsingReflection("field_82179_bU", EntityLiving.class, this, true, false,
+                    true);
         } catch (NoSuchFieldException e) {
             ObfuscationHelper.setFieldUsingReflection("persistenceRequired", EntityLiving.class, this, true, true);
         }
@@ -104,17 +95,6 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
         EntityLivingData entityLivingData = super.func_110161_a(par1EntityLivingData);
         setRandomArmor(worldObj);
         return entityLivingData;
-    }
-
-    @Override
-    protected int getAttackStrength(World par1World) {
-        // ItemStack var2 = this.getHeldItem();
-        int var3 = 4;
-        // TODO: Removed Till Hook added
-        // if (var2 != null) {
-        // var3 += var2.getDamageVsEntity(this);
-        // }
-        return var3;
     }
 
     @Override

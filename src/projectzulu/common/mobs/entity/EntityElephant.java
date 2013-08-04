@@ -23,8 +23,8 @@ import projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
 public class EntityElephant extends EntityGenericAnimal {
-	
-	private float ridingRotation = 0;
+
+    private float ridingRotation = 0;
 
     public EntityElephant(World par1World) {
         super(par1World);
@@ -51,64 +51,35 @@ public class EntityElephant extends EntityGenericAnimal {
         // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true,
         // IMob.mobSelector));
     }
-
-    @Override
-    public int getMaxHealth() {
-        return 30;
-    }
     
     @Override
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-    
-    @Override
-    protected void func_110147_ax() {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111128_a(0.50);
-    }
-    
-	@Override
-	protected int getAttackStrength(World par1World) {
-		switch (par1World.difficultySetting) {
-		case 0:
-			return 5; 
-		case 1:
-			return 6; 
-		case 2:
-			return 8; 
-		case 3:
-			return 9; 
-		default:
-			return 5;
-		}
-	}
-	
-	@Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }
-	
-	/**
-	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-	 */
-	@Override
-	public int getTotalArmorValue(){return 6;}
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-	protected String getLivingSound(){
-		return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "elephantlivingsound";
-	}
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound(){
-		return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "elephanthurtsound";
-	}
+    /**
+     * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
+     */
+    @Override
+    public int getTotalArmorValue() {
+        return 6;
+    }
+
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "elephantlivingsound";
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return DefaultProps.coreKey + ":" + DefaultProps.entitySounds + "elephanthurtsound";
+    }
 
     @Override
     public void knockBack(Entity par1Entity, float par2, double par3, double par5) {
@@ -129,21 +100,21 @@ public class EntityElephant extends EntityGenericAnimal {
         }
     }
 
-	@Override
-	public boolean isValidBreedingItem(ItemStack itemStack) {
-		if(itemStack != null && itemStack.getItem().itemID == Block.leaves.blockID){
-			return true;
-		}else{
-			return super.isValidBreedingItem(itemStack);
-		}
-	}
+    @Override
+    public boolean isValidBreedingItem(ItemStack itemStack) {
+        if (itemStack != null && itemStack.getItem().itemID == Block.leaves.blockID) {
+            return true;
+        } else {
+            return super.isValidBreedingItem(itemStack);
+        }
+    }
 
-	@Override
-	protected void dropRareDrop(int par1) {
-		if(Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()){
-			entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID,1,17), 1);
-		}
-		super.dropRareDrop(par1);
-	}
+    @Override
+    protected void dropRareDrop(int par1) {
+        if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
+            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 17), 1);
+        }
+        super.dropRareDrop(par1);
+    }
 
 }

@@ -36,18 +36,18 @@ public class BlockAloeVera extends BlockFlower {
     public Icon getIcon(int par1, int par2) {
     	return blockIcons[par2];
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister){
+    public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcons = new Icon[imageSuffix.length];
-        for (int i = 0; i < this.blockIcons.length; ++i){
-            this.blockIcons[i] = par1IconRegister.registerIcon(getUnlocalizedName().substring(5)+imageSuffix[i]);
-            if(this.blockIcons[i] == null){
+        for (int i = 0; i < this.blockIcons.length; ++i) {
+            this.blockIcons[i] = par1IconRegister.registerIcon(func_111023_E() + imageSuffix[i]);
+            if (this.blockIcons[i] == null) {
             }
         }
     }
-    
+
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4,
 			Random par5Random) {
@@ -132,7 +132,7 @@ public class BlockAloeVera extends BlockFlower {
 			}
 		}
 		super.updateTick(par1World, par2, par3, par4, par5Random);
-		par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 1); //225/2
+		par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 225/2);
 	}
 
 	private Vec3 findSuitableBlockLoc(World par1World, int par2, int par3, int par4){

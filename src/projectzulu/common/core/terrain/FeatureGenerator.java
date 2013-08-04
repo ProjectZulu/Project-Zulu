@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import projectzulu.common.core.terrain.TerrainFeature.FeatureDirection;
 import projectzulu.common.core.terrain.TerrainFeature.Size;
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -45,7 +46,7 @@ public class FeatureGenerator implements IWorldGenerator {
                 boolean generated = false;
                 for (ChunkCoordinates genWorldCoords : coords) {
                     if (terrainFeature.canGenerateHere(world, chunkX, chunkZ, genWorldCoords, random)) {
-                        terrainFeature.generateFeature(world, chunkX, chunkZ, genWorldCoords, random);
+                        terrainFeature.generateFeature(world, chunkX, chunkZ, genWorldCoords, random, FeatureDirection.CENTERED);
                         generated = true;
                     }
                 }

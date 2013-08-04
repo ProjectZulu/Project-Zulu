@@ -53,35 +53,7 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob {
         // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking,
         // EntityStates.looking), EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
     }
-
-    @Override
-    public int getMaxHealth() {
-        return 30;
-    }
     
-    @Override
-    public double getBaseSpeed() {
-        return 0.25f;
-    }
-    
-    @Override
-    protected int getAttackStrength(World par1World) {
-        if (par1World == null) {
-            return 4;
-        }
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 3;
-        case 1:
-            return 3;
-        case 2:
-            return 4;
-        case 3:
-            return 6;
-        default:
-            return 4;
-        }
-    }
     /**
      * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
      */

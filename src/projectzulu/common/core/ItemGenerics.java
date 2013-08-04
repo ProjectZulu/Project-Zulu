@@ -16,7 +16,7 @@ public class ItemGenerics extends Item implements IngredientProperty {
 
     public enum Properties {
         /* Generic Items */
-        PoisonDroplet("Poison Droplet", 0), Tusk("Tusk", 1), RawFiber("Raw Fiber", 2),
+        PoisonDroplet("Poison Droplet", 0), Tusk("Tusk", 1), RawFiber("Raw Fiber", 2), LizardSpit("lizardspit", 39),
 
         /* Potion Effect Ingredients */
         BlackLichen("Black Lichen", 20), Pulp("Pulp", 21), Salt("Salt", 22), PlantStalk("Plant Stalk", 26),
@@ -96,7 +96,7 @@ public class ItemGenerics extends Item implements IngredientProperty {
     public String getUnlocalizedName(ItemStack itemStack) {
         for (final Properties property : Properties.values()) {
             if (property.meta == itemStack.getItemDamage()) {
-                return property.displayName;
+                return "item.".concat(property.displayName.toLowerCase().replaceAll("\\s", ""));
             }
         }
         return "";

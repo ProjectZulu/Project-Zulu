@@ -15,12 +15,25 @@ public interface TerrainFeature {
     enum Size {
         /* Feature is larger than a single chunk */
         LARGE,
-        /* Is appriximately the size of a chunk */
+        /* Is approximately the size of a chunk */
         MEDIUM,
         /* Size is less than a chunk, but more than a block */
         SMALL,
         /* Spans a single or a couple blocks */
         TINY
+    }
+
+    public enum FeatureDirection {
+        /* Structure should be centered on Current Block */
+        CENTERED,
+        /* Structure should be centered along X but generate along -Z axis away from this block */
+        NORTH,
+        /* Structure should be centered along X but generate along +Z axis away from this block */
+        SOUTH,
+        /* Structure should be centered along Z but generate along -X axis away from this block */
+        WEST,
+        /* Structure should be centered along Z but generate along +X axis away from this block */
+        EAST;
     }
 
     public abstract String getFeatureName();
@@ -60,5 +73,5 @@ public interface TerrainFeature {
             Random random);
 
     public abstract void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords,
-            Random random);
+            Random random, FeatureDirection direction);
 }

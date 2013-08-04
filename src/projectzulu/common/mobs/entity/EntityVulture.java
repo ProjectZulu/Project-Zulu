@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -52,29 +53,26 @@ public class EntityVulture extends EntityGenericAnimal {
         super(par1World);
         setSize(1.0f, 1.4f);
 
+        float moveSpeed = 0.18f;
+        CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+        if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
+            // TODO: Switch to this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111126_e()???
+            moveSpeed = entityEntry.modData.get().entityProperties.moveSpeed;
+        }
+
         maxFlightHeight = 20;
         getNavigator().setAvoidsWater(true);
 
-        tasks.addTask(2, new EntityAIVultureFollow(this, (float)getBaseSpeed(), false).setValidStates(EnumSet
-                .of(EntityStates.following)));
-        tasks.addTask(3, new EntityAIAttackOnCollide(this, (float)getBaseSpeed(), false));
-        tasks.addTask(6, new EntityAIFlyingWander(this, (float)getBaseSpeed()));
+        tasks.addTask(2,
+                new EntityAIVultureFollow(this, moveSpeed, false).setValidStates(EnumSet.of(EntityStates.following)));
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, moveSpeed, false));
+        tasks.addTask(6, new EntityAIFlyingWander(this, moveSpeed));
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, false));
         targetTasks.addTask(
                 2,
                 new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking,
                         EntityStates.following), EntityPlayer.class, 16.0F, 0, true));
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 14;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.18f;
     }
     
     @Override

@@ -62,16 +62,6 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
     }
 
     @Override
-    public int getMaxHealth() {
-        return 12;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-
-    @Override
     public int getTotalArmorValue() {
         return 2;
     }
@@ -155,7 +145,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
         if (isTamed()) {
             return false;
         } else {
-            return true;
+            return super.shouldPanic();
         }
     }
 }

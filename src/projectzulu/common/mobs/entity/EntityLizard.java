@@ -48,16 +48,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
                 new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
                         EntityPlayer.class, 16.0F, 0, true));
     }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.4f;
-    }
     
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
@@ -171,6 +161,6 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
 
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase entitylivingbase, float f) {
-        
+
     }
 }

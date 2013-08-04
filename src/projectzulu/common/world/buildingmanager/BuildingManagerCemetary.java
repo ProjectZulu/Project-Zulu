@@ -15,7 +15,7 @@ import projectzulu.common.world.architects.Architect;
 import projectzulu.common.world.architects.ArchitectCemetary;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
 
-public class BuildingManagerCemetary extends BuildingManager{
+public class BuildingManagerCemetary extends BuildingManager {
 	
 	public BuildingManagerCemetary(World world){
 		super(world);

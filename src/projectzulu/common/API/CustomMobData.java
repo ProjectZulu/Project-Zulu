@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import projectzulu.common.core.entitydeclaration.EntityProperties;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
@@ -20,6 +22,7 @@ public class CustomMobData {
     public int maxSpawnInChunk = 4;
     public EnumCreatureType creatureType;
     public EnumCreatureType spawnType;
+    public EntityProperties entityProperties;
 
     public int minDropNum = 0;
     public int maxDropNum = 0;

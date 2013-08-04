@@ -9,7 +9,6 @@ import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class JasperDeclaration extends BlockDeclaration {
 
@@ -19,8 +18,7 @@ public class JasperDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.jasper = Optional.of((new BlockJasper(iD)).setUnlocalizedName(
-                DefaultProps.blockKey + ":" + name.toLowerCase()).func_111022_d(
+        BlockList.jasper = Optional.of((new BlockJasper(iD)).setUnlocalizedName(name.toLowerCase()).func_111022_d(
                 DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
@@ -29,6 +27,5 @@ public class JasperDeclaration extends BlockDeclaration {
     protected void registerBlock() {
         Block block = BlockList.jasper.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
-        LanguageRegistry.addName(block, "Jasper Block");
     }
 }

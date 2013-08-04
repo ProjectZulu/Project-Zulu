@@ -63,14 +63,6 @@ public abstract class BlockBrewingStandBase extends BlockContainer {
         return false;
     }
 
-//    /**
-//     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-//     */
-//    @Override
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
-
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what,
             float these, float are) {

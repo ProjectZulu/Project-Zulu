@@ -9,7 +9,6 @@ import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class TumbleweedDeclaration extends BlockDeclaration {
 
@@ -19,9 +18,8 @@ public class TumbleweedDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.tumbleweed = Optional.of((new BlockTumbleweed(iD)).setUnlocalizedName(
-                DefaultProps.blockKey + ":" + name.toLowerCase()).func_111022_d(
-                DefaultProps.blockKey + ":" + name.toLowerCase()));
+        BlockList.tumbleweed = Optional.of((new BlockTumbleweed(iD)).setUnlocalizedName(name.toLowerCase())
+                .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 
@@ -29,6 +27,5 @@ public class TumbleweedDeclaration extends BlockDeclaration {
     protected void registerBlock() {
         Block block = BlockList.tumbleweed.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
-        LanguageRegistry.addName(block, "Tumbleweed");
     }
 }

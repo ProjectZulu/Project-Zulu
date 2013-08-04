@@ -19,23 +19,22 @@ import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
 import projectzulu.common.core.terrain.BiomeFeature;
 import projectzulu.common.core.terrain.FeatureConfiguration;
-import projectzulu.common.world.WorldGenPyramid;
-import cpw.mods.fml.common.Loader;
+import projectzulu.common.world2.buildingmanager.BuildingManagerPyramid;
 
 public class PyramidFeature extends BiomeFeature {
     public static final String PYRAMID = "Pyramid";
-    
+
     private List<EntityEntry> entityEntries = new ArrayList<EntityEntry>();
     public int chestLootChance;
     public int chestMaxLoot;
-    
+
     public String getEntityEntry(Random rand) {
         if (entityEntries.isEmpty()) {
             return "EMPTY";
         }
         return ((EntityEntry) WeightedRandom.getRandomItem(rand, entityEntries)).entityname;
     }
-    
+
     public PyramidFeature() {
         super(PYRAMID, Size.LARGE);
     }
@@ -46,12 +45,11 @@ public class PyramidFeature extends BiomeFeature {
         chunksPerSpawn = 100;
         chestLootChance = 15;
         chestMaxLoot = -1;
-        if (Loader.isModLoaded(DefaultProps.MobsModId)) {
-            if(CustomEntityList.MUMMY.modData.isPresent()){
+        if (CustomEntityList.MUMMY.modData.isPresent()) {
                 entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
                         CustomEntityList.MUMMY.modData.get().mobName), 4));
-            }
-        } else {
+        }
+        if (entityEntries.isEmpty()) {
             entityEntries.add(new EntityEntry("Zombie", 4));
         }
     }
@@ -107,7 +105,7 @@ public class PyramidFeature extends BiomeFeature {
             }
         }
     }
-    
+
     @Override
     public ChunkCoordinates[] getGenerationCoordinates(World world, int chunkX, int chunkZ) {
         Random random = new Random(world.getSeed());
@@ -115,8 +113,8 @@ public class PyramidFeature extends BiomeFeature {
         long randomFactor2 = random.nextLong() / 2L * 2L + 1L;
         random.setSeed(chunkX * 16 * randomFactor1 + chunkZ * 16 * randomFactor2 ^ world.getSeed());
 
-        int xCoord = chunkX + random.nextInt(16);
-        int zCoord = chunkZ + random.nextInt(16);
+        int xCoord = chunkX * 16 + random.nextInt(16);
+        int zCoord = chunkZ * 16 + random.nextInt(16);
         return new ChunkCoordinates[] { new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord),
                 zCoord) };
     }
@@ -139,8 +137,9 @@ public class PyramidFeature extends BiomeFeature {
     }
 
     @Override
-    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
-        (new WorldGenPyramid(1, 1)).generate(world, random, genBlockCoords.posX, genBlockCoords.posY,
-                genBlockCoords.posZ);
+    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random,
+            FeatureDirection direction) {
+        new BuildingManagerPyramid(world, new ChunkCoordinates(genBlockCoords.posX, genBlockCoords.posY - 1,
+                genBlockCoords.posZ), direction).generate();
     }
 }

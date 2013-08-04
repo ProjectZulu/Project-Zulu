@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -47,38 +46,6 @@ public class EntityTreeEnt extends EntityGenericAnimal implements IAnimals {
         targetTasks.addTask(4,
                 new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
                         EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
-    }
-
-    @Override
-    public int getMaxHealth() {
-        return 20;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.3f;
-    }
-
-    @Override
-    protected void func_110147_ax() {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111128_a(0.50);
-    }
-
-    @Override
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 3;
-        case 1:
-            return 3;
-        case 2:
-            return 4;
-        case 3:
-            return 6;
-        default:
-            return 3;
-        }
     }
 
     @Override

@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 
 public class MobSpawnerWithMeta extends BlockWithMeta{
 	
-	TileEntityMobSpawner tileEntityMobSpawner;
 	String mobName;
 	public MobSpawnerWithMeta(String mobName) {
 		super(Block.mobSpawner.blockID);

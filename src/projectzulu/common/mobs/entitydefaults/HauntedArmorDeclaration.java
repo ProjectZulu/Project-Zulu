@@ -8,6 +8,7 @@ import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.core.entitydeclaration.EggableDeclaration;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 import projectzulu.common.mobs.entity.EntityHauntedArmor;
 import projectzulu.common.mobs.models.ModelHauntedArmor;
 import projectzulu.common.mobs.renders.RenderHauntedArmor;
@@ -30,6 +31,7 @@ public class HauntedArmorDeclaration extends EggableDeclaration {
     public void outputDataToList(Configuration config, CustomMobData customMobData) {
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Ectoplasm.meta(), 4);
+        customMobData.entityProperties = new EntityProperties(25f, 4.0f, 0.2f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

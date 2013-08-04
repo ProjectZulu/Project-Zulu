@@ -19,8 +19,7 @@ import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
 import projectzulu.common.core.terrain.BiomeFeature;
 import projectzulu.common.core.terrain.FeatureConfiguration;
-import projectzulu.common.world.MazeGenerator;
-import projectzulu.common.world.buildingmanager.BuildingManagerLabyrinth;
+import projectzulu.common.world2.buildingmanager.BuildingManagerLabyrinth;
 import cpw.mods.fml.common.Loader;
 
 public class LabyrinthFeature extends BiomeFeature {
@@ -129,8 +128,8 @@ public class LabyrinthFeature extends BiomeFeature {
         long randomFactor2 = random.nextLong() / 2L * 2L + 1L;
         random.setSeed(chunkX * 16 * randomFactor1 + chunkZ * 16 * randomFactor2 ^ world.getSeed());
 
-        int xCoord = chunkX + random.nextInt(16);
-        int zCoord = chunkZ + random.nextInt(16);
+        int xCoord = chunkX * 16 + random.nextInt(16);
+        int zCoord = chunkZ * 16 + random.nextInt(16);
         return new ChunkCoordinates[] { new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord),
                 zCoord) };
     }
@@ -153,8 +152,9 @@ public class LabyrinthFeature extends BiomeFeature {
     }
 
     @Override
-    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
-        new MazeGenerator(new BuildingManagerLabyrinth(world), 1, 4, 3, 24, 1, 1).generate(world, random,
-                genBlockCoords.posX, genBlockCoords.posY - (11), genBlockCoords.posZ);
+    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random,
+            FeatureDirection direction) {
+        new BuildingManagerLabyrinth(world, new ChunkCoordinates(genBlockCoords.posX, genBlockCoords.posY - 16,
+                genBlockCoords.posZ), direction).generate();
     }
 }

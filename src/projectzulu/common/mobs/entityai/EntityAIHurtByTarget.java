@@ -28,7 +28,7 @@ public class EntityAIHurtByTarget extends EntityAITarget {
      * Returns whether the EntityAIBase should begin execution.
      */
     public boolean shouldExecute() {
-    	return this.isSuitableTarget(this.taskOwner.getAITarget(), true);
+    	return this.isSuitableTarget(this.taskOwner.getAITarget(), false);
     	
     }
 

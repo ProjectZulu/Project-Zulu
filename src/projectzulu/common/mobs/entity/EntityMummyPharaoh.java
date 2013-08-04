@@ -65,16 +65,6 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
         setPosition(parx, pary, parz);
         yOffset = 0.0f;
     }
-
-    @Override
-    public int getMaxHealth() {
-        return 200;
-    }
-
-    @Override
-    public double getBaseSpeed() {
-        return 0.35f;
-    }
     
     @Override
     public ItemStack getHeldItem() {

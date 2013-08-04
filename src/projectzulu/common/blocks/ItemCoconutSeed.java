@@ -19,8 +19,8 @@ public class ItemCoconutSeed extends Item {
         setMaxDamage(5);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         bFull3D = par3bool;
-        setUnlocalizedName(DefaultProps.blockKey + ":" + baseName.toLowerCase());
-        func_111206_d(DefaultProps.blockKey + ":" + baseName.toLowerCase());
+        setUnlocalizedName(baseName);
+        func_111206_d(DefaultProps.blockKey + ":" + baseName);
     }
 
     @Override

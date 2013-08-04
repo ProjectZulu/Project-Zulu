@@ -65,5 +65,4 @@ public class BlueprintLabyrinthHiddenWall extends Blueprint{
 
 		return new BlockWithMeta(0);
 	}
-
 }

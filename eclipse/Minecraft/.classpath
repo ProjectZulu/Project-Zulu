@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="GIT_SRC"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="jars/libraries/org/ow2/asm/asm-all/4.1/asm-all-4.1.jar"/>
 	<classpathentry kind="lib" path="jars/libraries/lzma/lzma/0.0.1/lzma-0.0.1.jar"/>
 	<classpathentry kind="lib" path="jars/libraries/net/sf/jopt-simple/jopt-simple/4.5/jopt-simple-4.5.jar"/>
 	<classpathentry kind="lib" path="jars/libraries/argo/argo/2.25_fixed/argo-2.25_fixed.jar"/>
@@ -44,5 +43,6 @@
 	<classpathentry kind="lib" path="jars/libraries/org/scala-lang/scala-compiler/2.10.2/scala-compiler-2.10.2.jar"/>
 	<classpathentry kind="lib" path="jars/libraries/org/scala-lang/scala-library/2.10.2/scala-library-2.10.2.jar"/>
 	<classpathentry kind="lib" path="jars/versions/1.6.2/1.6.2.jar"/>
+	<classpathentry kind="lib" path="jars/libraries/org/ow2/asm/asm-debug-all/4.1/asm-debug-all-4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

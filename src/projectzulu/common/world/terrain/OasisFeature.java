@@ -12,7 +12,7 @@ import projectzulu.common.api.BlockList;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
 import projectzulu.common.core.terrain.BiomeFeature;
-import projectzulu.common.world.WorldGenOasis;
+import projectzulu.common.world2.buildingmanager.BuildingManagerOasis;
 
 public class OasisFeature extends BiomeFeature {
     public static final String OASIS = "Oasis";
@@ -39,12 +39,12 @@ public class OasisFeature extends BiomeFeature {
         long randomFactor2 = random.nextLong() / 2L * 2L + 1L;
         random.setSeed(chunkX * 16 * randomFactor1 + chunkZ * 16 * randomFactor2 ^ world.getSeed());
 
-        int xCoord = chunkX + random.nextInt(16);
-        int zCoord = chunkZ + random.nextInt(16);
+        int xCoord = chunkX * 16 + random.nextInt(16);
+        int zCoord = chunkZ * 16 + random.nextInt(16);
         return new ChunkCoordinates[] { new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord),
                 zCoord) };
     }
-    
+
     @Override
     public boolean canGenerateHere(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
         if (super.canGenerateHere(world, chunkX, chunkZ, genBlockCoords, random)) {
@@ -68,8 +68,9 @@ public class OasisFeature extends BiomeFeature {
     }
 
     @Override
-    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
-        (new WorldGenOasis())
-                .generate(world, random, genBlockCoords.posX, genBlockCoords.posY - 1, genBlockCoords.posZ);
+    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random,
+            FeatureDirection direction) {
+        new BuildingManagerOasis(world, direction, new ChunkCoordinates(genBlockCoords.posX, genBlockCoords.posY - 3,
+                genBlockCoords.posZ), 6, 8, 3).generate();
     }
 }

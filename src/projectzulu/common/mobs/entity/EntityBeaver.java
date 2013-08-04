@@ -41,32 +41,6 @@ public class EntityBeaver extends EntityGenericAnimal implements IAnimals {
         // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true,
         // IMob.mobSelector));
     }
-    
-    @Override
-    public int getMaxHealth() {
-        return 10;
-    }
-    
-    @Override
-    public double getBaseSpeed() {
-        return 0.2f;
-    }
-
-    @Override
-    protected int getAttackStrength(World par1World) {
-        switch (par1World.difficultySetting) {
-        case 0:
-            return 2;
-        case 1:
-            return 2;
-        case 2:
-            return 3;
-        case 3:
-            return 5;
-        default:
-            return 3;
-        }
-    }
 
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {

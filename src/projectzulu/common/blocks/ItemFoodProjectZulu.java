@@ -8,11 +8,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemFoodProjectZulu extends ItemFood
-{
+public class ItemFoodProjectZulu extends ItemFood {
     /** Number of ticks to run while 'EnumAction'ing until result. */
     public final int itemUseDuration;
 
@@ -49,12 +46,12 @@ public class ItemFoodProjectZulu extends ItemFood
         isWolfsFavoriteMeat = par4;
         saturationModifier = par3;
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase());
+        setUnlocalizedName(name);
         func_111206_d(DefaultProps.blockKey + ":" + name.toLowerCase());
     }
 
     @Override
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer){
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         --par1ItemStack.stackSize;
         par3EntityPlayer.getFoodStats().addStats(this);
         par2World.playSoundAtEntity(par3EntityPlayer, "random.burp", 0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
@@ -62,11 +59,10 @@ public class ItemFoodProjectZulu extends ItemFood
         return par1ItemStack;
     }
 
-    protected void func_77849_c(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
-        if (!par2World.isRemote && this.potionId > 0 && par2World.rand.nextFloat() < this.potionEffectProbability)
-        {
-            par3EntityPlayer.addPotionEffect(new PotionEffect(this.potionId, this.potionDuration * 20, this.potionAmplifier));
+    protected void func_77849_c(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+        if (!par2World.isRemote && this.potionId > 0 && par2World.rand.nextFloat() < this.potionEffectProbability) {
+            par3EntityPlayer.addPotionEffect(new PotionEffect(this.potionId, this.potionDuration * 20,
+                    this.potionAmplifier));
         }
     }
 
@@ -74,8 +70,7 @@ public class ItemFoodProjectZulu extends ItemFood
      * How long it takes to use or consume an item
      */
     @Override
-    public int getMaxItemUseDuration(ItemStack par1ItemStack)
-    {
+    public int getMaxItemUseDuration(ItemStack par1ItemStack) {
         return 32;
     }
 
@@ -83,8 +78,7 @@ public class ItemFoodProjectZulu extends ItemFood
      * returns the action that specifies what animation to play when the items is being used
      */
     @Override
-    public EnumAction getItemUseAction(ItemStack par1ItemStack)
-    {
+    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
         return EnumAction.eat;
     }
 
@@ -92,10 +86,8 @@ public class ItemFoodProjectZulu extends ItemFood
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
     @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
-        if (par3EntityPlayer.canEat(this.alwaysEdible))
-        {
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+        if (par3EntityPlayer.canEat(this.alwaysEdible)) {
             par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         }
 
@@ -103,8 +95,7 @@ public class ItemFoodProjectZulu extends ItemFood
     }
 
     @Override
-    public int getHealAmount()
-    {
+    public int getHealAmount() {
         return this.healAmount;
     }
 
@@ -112,8 +103,7 @@ public class ItemFoodProjectZulu extends ItemFood
      * gets the saturationModifier of the ItemFood
      */
     @Override
-    public float getSaturationModifier()
-    {
+    public float getSaturationModifier() {
         return this.saturationModifier;
     }
 
@@ -121,8 +111,7 @@ public class ItemFoodProjectZulu extends ItemFood
      * Whether wolves like this food (true for raw and cooked porkchop).
      */
     @Override
-    public boolean isWolfsFavoriteMeat()
-    {
+    public boolean isWolfsFavoriteMeat() {
         return this.isWolfsFavoriteMeat;
     }
 
@@ -131,8 +120,7 @@ public class ItemFoodProjectZulu extends ItemFood
      * float probability of effect happening
      */
     @Override
-    public ItemFoodProjectZulu setPotionEffect(int par1, int par2, int par3, float par4)
-    {
+    public ItemFoodProjectZulu setPotionEffect(int par1, int par2, int par3, float par4) {
         this.potionId = par1;
         this.potionDuration = par2;
         this.potionAmplifier = par3;
@@ -144,8 +132,7 @@ public class ItemFoodProjectZulu extends ItemFood
      * Set the field 'alwaysEdible' to true, and make the food edible even if the player don't need to eat.
      */
     @Override
-    public ItemFoodProjectZulu setAlwaysEdible()
-    {
+    public ItemFoodProjectZulu setAlwaysEdible() {
         this.alwaysEdible = true;
         return this;
     }

@@ -3,8 +3,11 @@ package projectzulu.common.mobs.entity;
 import java.util.Iterator;
 import java.util.List;
 
+import projectzulu.common.core.ProjectZuluLog;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
@@ -24,7 +27,7 @@ public class EntityLizardSpit extends Entity
     private int zTile = -1;
     private int inTile = 0;
     private boolean inGround = false;
-    public EntityLiving shootingEntity;
+    public EntityLivingBase shootingEntity;
     private int ticksAlive;
     private int ticksInAir = 0;
     public double accelerationX;
@@ -43,6 +46,7 @@ public class EntityLizardSpit extends Entity
      * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
      * length * 64 * renderDistanceWeight Args: distance
      */
+    @Override
     public boolean isInRangeToRenderDist(double par1)
     {
         double var3 = this.boundingBox.getAverageEdgeLength() * 4.0D;
@@ -62,7 +66,7 @@ public class EntityLizardSpit extends Entity
         this.accelerationZ = par12 / var14 * 0.1D;
     }
 
-    public EntityLizardSpit(World par1World, EntityLiving par2EntityLiving, double par3, double par5, double par7)
+    public EntityLizardSpit(World par1World, EntityLivingBase par2EntityLiving, double par3, double par5, double par7)
     {
         super(par1World);
         this.shootingEntity = par2EntityLiving;
@@ -83,6 +87,7 @@ public class EntityLizardSpit extends Entity
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate()
     {
         if (!this.worldObj.isRemote && (this.shootingEntity != null && this.shootingEntity.isDead || !this.worldObj.blockExists((int)this.posX, (int)this.posY, (int)this.posZ)))
@@ -232,9 +237,9 @@ public class EntityLizardSpit extends Entity
             {
                 //par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.shootingEntity), 6);
                 
-                if(par1MovingObjectPosition.entityHit instanceof EntityLiving){
-                	((EntityLiving)par1MovingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 40, 1));
-                	((EntityLiving)par1MovingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 2));
+                if(par1MovingObjectPosition.entityHit instanceof EntityLivingBase){
+                	((EntityLivingBase)par1MovingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 40, 1));
+                	((EntityLivingBase)par1MovingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 2));
                 }
             }
 
@@ -246,6 +251,7 @@ public class EntityLizardSpit extends Entity
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         par1NBTTagCompound.setShort("xTile", (short)this.xTile);
@@ -259,6 +265,7 @@ public class EntityLizardSpit extends Entity
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         this.xTile = par1NBTTagCompound.getShort("xTile");
@@ -283,11 +290,12 @@ public class EntityLizardSpit extends Entity
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
+    @Override
     public boolean canBeCollidedWith()
     {
         return true;
     }
-
+    @Override
     public float getCollisionBorderSize()
     {
         return 1.0F;
@@ -296,7 +304,8 @@ public class EntityLizardSpit extends Entity
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    @Override
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         this.setBeenAttacked();
 
@@ -314,9 +323,9 @@ public class EntityLizardSpit extends Entity
                 this.accelerationZ = this.motionZ * 0.1D;
             }
 
-            if (par1DamageSource.getEntity() instanceof EntityLiving)
+            if (par1DamageSource.getEntity() instanceof EntityLivingBase)
             {
-                this.shootingEntity = (EntityLiving)par1DamageSource.getEntity();
+                this.shootingEntity = (EntityLivingBase)par1DamageSource.getEntity();
             }
 
             return true;
@@ -326,7 +335,7 @@ public class EntityLizardSpit extends Entity
             return false;
         }
     }
-
+    @Override
     public float getShadowSize()
     {
         return 0.0F;
@@ -335,11 +344,13 @@ public class EntityLizardSpit extends Entity
     /**
      * Gets how bright this entity is.
      */
+    @Override
     public float getBrightness(float par1)
     {
         return 1.0F;
     }
-
+    
+    @Override
     public int getBrightnessForRender(float par1)
     {
         return 15728880;

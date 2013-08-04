@@ -18,7 +18,7 @@ public class SubItemPotionBubbling extends SubItemPotion {
     PotionRecipies recipies = new PotionRecipies();
 
     public SubItemPotionBubbling(int itemID, int subID) {
-        super(itemID, subID, "Bubbling");
+        super(itemID, subID, "potion.shining");
     }
 
     @Override

@@ -4,11 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.Properties;
 import projectzulu.common.api.BlockList;
-import projectzulu.common.blocks.BlockUniversalFlowerPot;
 import projectzulu.common.blocks.ItemUniversalFlowerPot;
-import projectzulu.common.blocks.RenderUniversalFlowerPot;
-import projectzulu.common.blocks.TileEntityUniversalFlowerPot;
-import projectzulu.common.blocks.TileEntityUniversalFlowerPotRenderer;
+import projectzulu.common.blocks.universalpot.BlockUniversalFlowerPot;
+import projectzulu.common.blocks.universalpot.RenderUniversalFlowerPot;
+import projectzulu.common.blocks.universalpot.TileEntityUniversalFlowerPot;
+import projectzulu.common.blocks.universalpot.TileEntityUniversalFlowerPotRenderer;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 
@@ -17,7 +17,6 @@ import com.google.common.base.Optional;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -53,7 +52,6 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
         if (!Properties.replaceFlowerPot) {
             Block block = BlockList.universalFlowerPot.get();
             GameRegistry.registerBlock(block, name.toLowerCase());
-            LanguageRegistry.addName(block, "Universal Flower Pot");
             new ItemUniversalFlowerPot(block.blockID - 256, block);
         }
         GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");

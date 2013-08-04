@@ -11,7 +11,6 @@ import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class PalmTreeLeavesDeclaration extends BlockDeclaration {
 
@@ -21,8 +20,8 @@ public class PalmTreeLeavesDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.palmTreeLeaves = Optional.of((new BlockPalmTreeLeaves(iD)).setUnlocalizedName(DefaultProps.blockKey
-                + ":" + name.toLowerCase()));
+        BlockList.palmTreeLeaves = Optional.of((new BlockPalmTreeLeaves(iD)).setUnlocalizedName(name.toLowerCase())
+                .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 
@@ -30,7 +29,6 @@ public class PalmTreeLeavesDeclaration extends BlockDeclaration {
     protected void registerBlock() {
         Block block = BlockList.palmTreeLeaves.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
-        LanguageRegistry.addName(block, "Palm Tree Leaves");
         OreDictionary.registerOre("leaves", new ItemStack(block));
         OreDictionary.registerOre("leavesPalm", new ItemStack(block));
     }

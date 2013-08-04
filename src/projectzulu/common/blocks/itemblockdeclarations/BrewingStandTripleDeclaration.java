@@ -16,7 +16,6 @@ import com.google.common.base.Optional;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,7 +36,7 @@ public class BrewingStandTripleDeclaration extends BlockDeclaration {
     @Override
     protected boolean createBlock(int iD) {
         BlockList.brewingStandTriple = Optional.of(new BlockBrewingStandTriple(iD, renderID).setUnlocalizedName(
-                DefaultProps.blockKey + ":brewingtriple").func_111022_d(DefaultProps.blockKey + ":brewingtriple"));
+                "brewingtriple").func_111022_d(DefaultProps.blockKey + ":brewingtriple"));
         return true;
     }
 
@@ -45,7 +44,6 @@ public class BrewingStandTripleDeclaration extends BlockDeclaration {
     protected void registerBlock() {
         Block block = BlockList.brewingStandTriple.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
-        LanguageRegistry.addName(block, "Brewing Stand Triple");
         GameRegistry.registerTileEntity(TileEntityBrewingTriple.class, "TileEntityBrewingTriple");
     }
 

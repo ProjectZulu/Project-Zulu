@@ -1,14 +1,19 @@
 package projectzulu.common;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-import net.minecraft.entity.EntityLiving;
+import com.google.common.base.Optional;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,8 +22,11 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import projectzulu.common.api.BlockList;
+import projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ObfuscationHelper;
+import projectzulu.common.core.ProjectZuluLog;
 
 public class DeathGamerules {
     int maxDropXP = 100;
@@ -39,10 +47,20 @@ public class DeathGamerules {
     int inventoryMaxDrop = 0;
     int hotbarMaxDrop = 0;
 
+    boolean tombstoneOnDeath = true;
+    boolean tombstoneAbsorbDrops = true;
+
+    
     public DeathGamerules loadConfiguration(File modConfigDirectory) {
         Configuration config = new Configuration(new File(modConfigDirectory, DefaultProps.configDirectory
                 + DefaultProps.defaultConfigFile));
         config.load();
+        tombstoneOnDeath = config.get("General Controls", "Drop Tombstone On Death", tombstoneOnDeath).getBoolean(
+                tombstoneOnDeath);
+        tombstoneAbsorbDrops = config.get("General Controls", "Tombstone Absorb Drops", tombstoneAbsorbDrops)
+                .getBoolean(tombstoneAbsorbDrops);
+
+        
         String category = "General Controls.gamerule_settings";
         maxDropXP = config.get(category + ".Experience", "maxDropXP", 100,
                 "Maximum XP dropped on Death. The rest is lost. 100 is vanilla default").getInt(100);
@@ -113,44 +131,67 @@ public class DeathGamerules {
             boolean dropHotbar = gameRules.getGameRuleBooleanValue("dropHotbar");
             boolean dropArmor = gameRules.getGameRuleBooleanValue("dropArmor");
             boolean dropXP = gameRules.getGameRuleBooleanValue("dropXP");
+            dropHotbar = true;
+            dropXP = true;
 
-            EntityPlayerMP player = (EntityPlayerMP) event.entity;
+            EntityPlayer player = (EntityPlayer) event.entity;
             player.captureDrops = true;
             player.capturedDrops.clear();
 
+            /* Get items/XP to drop and clear them from Player */
+            int xpDropped = 0;
             if (dropXP) {
                 if (!player.worldObj.isRemote) {
-                    int i = player.experienceLevel * 7;
-                    i = i > 100 ? 100 : i;
-                    while (i > 0) {
-                        int j = EntityXPOrb.getXPSplit(i);
-                        i -= j;
-                        player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY,
-                                player.posZ, j));
-                    }
+                    xpDropped = player.experienceLevel * 7;
+                    xpDropped = xpDropped > maxDropXP ? maxDropXP : xpDropped;
                     player.experienceLevel = 0;
                     player.experienceTotal = 0;
                     player.experience = 0;
                 }
             }
 
+            List<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
             if (dropArmor) {
-                dropArmor(player);
+                itemsToDrop.addAll(dropArmor(player));
             }
 
             if (dropInventory) {
-                dropInventory(player);
+                itemsToDrop.addAll(dropInventory(player));
             }
 
             if (dropHotbar) {
-                dropHotbar(player);
+                itemsToDrop.addAll(dropHotbar(player));
+            }
+
+            TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player) : null;
+            if (tombstone != null) {
+                tombstone.setSignString(event.source.getDeathMessage((EntityPlayer) event.entity).toString());
+            }
+
+            /* Handler actually Dropping Items or Placing them in Tombstone */
+            if (tombstoneAbsorbDrops && tombstone != null) {
+                for (ItemStack itemDrop : itemsToDrop) {
+                    tombstone.addDrop(itemDrop);
+                }
+                tombstone.experience = xpDropped;
+            } else {
+                for (ItemStack itemDrop : itemsToDrop) {
+                    player.inventory.player.dropPlayerItemWithRandomChoice(itemDrop, true);
+                }
+                while (xpDropped > 0) {
+                    int j = EntityXPOrb.getXPSplit(xpDropped);
+                    xpDropped -= j;
+                    player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY,
+                            player.posZ, j));
+                }
             }
 
             player.captureDrops = false;
+
             int recentlyHit;
             try {
-                recentlyHit = ObfuscationHelper.getCatchableFieldFromReflection("field_70718_bc", EntityLivingBase.class,
-                        player, Integer.class);
+                recentlyHit = ObfuscationHelper.getCatchableFieldFromReflection("field_70718_bc",
+                        EntityLivingBase.class, player, Integer.class);
             } catch (NoSuchFieldException e) {
                 recentlyHit = ObfuscationHelper.getFieldFromReflection("recentlyHit", EntityLivingBase.class, player,
                         Integer.class);
@@ -165,12 +206,29 @@ public class DeathGamerules {
         }
     }
 
-    private void dropArmor(EntityPlayerMP player) {
+    private TileEntityTombstone placeTombstone(EntityPlayer player) {
+        if (player.worldObj.isAirBlock((int) player.posX, (int) player.posY, (int) player.posZ)) {
+            /* Place a Tombstone */
+            player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ,
+                    BlockList.tombstone.get().blockID);
+            TileEntity tileEntity = player.worldObj.getBlockTileEntity((int) player.posX, (int) player.posY,
+                    (int) player.posZ);
+            if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
+                return (TileEntityTombstone) tileEntity;
+            }
+        }
+        return null;
+    }
+
+    private List<ItemStack> dropArmor(EntityPlayer player) {
+        List<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
+
         /* Array to determine the order the inventory array is processed. */
         int[] placeArray = new int[player.inventory.armorInventory.length];
         for (int i = 0; i < placeArray.length; i++) {
             placeArray[i] = i;
         }
+
         shuffleArray(placeArray, player.worldObj.rand);
         int countDrops = 0;
         for (int i = 0; i < placeArray.length; ++i) {
@@ -194,16 +252,19 @@ public class DeathGamerules {
 
                 if (shouldDrop) {
                     if (!itemDestroyed) {
-                        player.inventory.player.dropPlayerItemWithRandomChoice(itemStack, true);
+                        itemsToDrop.add(itemStack);
                     }
                     player.inventory.armorInventory[slot] = null;
                     countDrops++;
                 }
             }
         }
+        return itemsToDrop;
     }
 
-    private void dropInventory(EntityPlayerMP player) {
+    private List<ItemStack> dropInventory(EntityPlayer player) {
+        List<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
+
         if (player.inventory.mainInventory.length > 8) {
             /* Array to determine the order the inventory array is processed. */
             int[] placeArray = new int[player.inventory.mainInventory.length - 9];
@@ -235,7 +296,7 @@ public class DeathGamerules {
 
                     if (shouldDrop) {
                         if (!itemDestroyed) {
-                            player.inventory.player.dropPlayerItemWithRandomChoice(itemStack, true);
+                            itemsToDrop.add(itemStack);
                         }
                         player.inventory.mainInventory[slot] = null;
                         countDrops++;
@@ -243,9 +304,12 @@ public class DeathGamerules {
                 }
             }
         }
+        return itemsToDrop;
     }
 
-    public void dropHotbar(EntityPlayerMP player) {
+    private List<ItemStack> dropHotbar(EntityPlayer player) {
+        List<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
+
         int inventorySize = player.inventory.mainInventory.length > 9 ? 9 : player.inventory.mainInventory.length;
         /* Array to determine the order the inventory array is processed. */
         int[] placeArray = new int[inventorySize];
@@ -277,13 +341,14 @@ public class DeathGamerules {
 
                 if (shouldDrop) {
                     if (!itemDestroyed) {
-                        player.inventory.player.dropPlayerItemWithRandomChoice(itemStack, true);
+                        itemsToDrop.add(itemStack);
                     }
                     player.inventory.mainInventory[slot] = null;
                     countDrops++;
                 }
             }
         }
+        return itemsToDrop;
     }
 
     private void shuffleArray(int[] array, Random random) {
