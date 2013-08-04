@@ -30,7 +30,7 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIPanic(this, 1.25f));
 
-        tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.4f, false));
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.2f, false));
         // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
         tasks.addTask(5, new EntityAIMate(this, 1.0f));
