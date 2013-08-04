@@ -34,7 +34,8 @@ public class NightBloomFeature extends BiomeFeature {
     @Override
     protected void loadSettings(FeatureConfiguration config) {
         super.loadSettings(config);
-        density = config.get("Feature." + getFeatureSize() + "." + getFeatureName() + ".General", "Density", density).getInt(density);
+        density = config.get("Feature." + getFeatureSize() + "." + getFeatureName() + ".General", "Density", density)
+                .getInt(density);
     }
 
     @Override
@@ -51,8 +52,8 @@ public class NightBloomFeature extends BiomeFeature {
 
         ChunkCoordinates[] coordinates = new ChunkCoordinates[density];
         for (int i = 0; i < density; i++) {
-            int xCoord = chunkX + random.nextInt(16);
-            int zCoord = chunkZ + random.nextInt(16);
+            int xCoord = chunkX * 16 + random.nextInt(16);
+            int zCoord = chunkZ * 16 + random.nextInt(16);
             coordinates[i] = new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
         }
         return coordinates;
@@ -78,7 +79,8 @@ public class NightBloomFeature extends BiomeFeature {
     }
 
     @Override
-    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random, FeatureDirection direction) {
+    public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random,
+            FeatureDirection direction) {
         world.setBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ,
                 BlockList.nightBloom.get().blockID);
     }
