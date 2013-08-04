@@ -9,6 +9,7 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import projectzulu.common.potion.PotionParser;
 
@@ -25,11 +26,11 @@ public abstract class SubItemPotion {
     }
 
     public String getDisplayName(ItemStack itemStack) {
-        return baseName;
+        return StatCollector.translateToLocal(baseName).trim() + " Potion";
     }
 
     public abstract void register();
-    
+
     public abstract boolean hasPotionEffects(ItemStack itemStack);
 
     /**

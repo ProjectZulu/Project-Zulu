@@ -11,7 +11,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionFireResistance extends SubItemPotionGeneric {
 
     public SubItemPotionFireResistance(int itemID, int subID) {
-        super(itemID, subID, "Fire Resistance");
+        super(itemID, subID, "potion.fireResistance");
         setSubItemBounds(4, 4, 1, 0);
         setEffectScale(20 * 20, 20 * 5, 6, 10, 1);
     }

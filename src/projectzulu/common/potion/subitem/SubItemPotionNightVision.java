@@ -13,7 +13,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionNightVision extends SubItemPotionGeneric {
 
     public SubItemPotionNightVision(int itemID, int subID) {
-        super(itemID, subID, "Night Vision");
+        super(itemID, subID, "potion.nightVision");
         setSubItemBounds(4, 4, 1, 0);
         setEffectScale(20 * 13, 20 * 5, 14, 10, 1);
     }

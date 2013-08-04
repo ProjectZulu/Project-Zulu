@@ -13,7 +13,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionCleansing extends SubItemPotionGeneric {
 
     public SubItemPotionCleansing(int itemID, int subID) {
-        super(itemID, subID, "Cleansing");
+        super(itemID, subID, "potion.cleansing");
         setSubItemBounds(4, 4, 4, 0);
         setEffectScale(20 * 20, 20 * 5, 6, 10, 2);
     }

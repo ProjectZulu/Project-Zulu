@@ -11,7 +11,6 @@ import projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class PalmTreePlankDeclaration extends BlockDeclaration {
 
@@ -21,9 +20,10 @@ public class PalmTreePlankDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.palmTreePlank = Optional.of(new BlockPalmTreePlank(iD).setStepSound(Block.soundWoodFootstep)
-                .setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase())
-                .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
+        BlockList.palmTreePlank = Optional
+                .of(new BlockPalmTreePlank(iD).setStepSound(Block.soundWoodFootstep)
+                        .setUnlocalizedName(name.toLowerCase())
+                        .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 
@@ -31,7 +31,6 @@ public class PalmTreePlankDeclaration extends BlockDeclaration {
     protected void registerBlock() {
         Block block = BlockList.palmTreePlank.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
-        LanguageRegistry.addName(block, "Palm Tree Plank");
         OreDictionary.registerOre("plankWood", new ItemStack(block));
     }
 }

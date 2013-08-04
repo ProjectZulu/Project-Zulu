@@ -35,7 +35,6 @@ public class SelectedFewRandomizer extends Randomizer {
         for (int index : indexes) {
             int i = (int) (index / cells[0].length);
             int k = index % cells[0].length;
-            ProjectZuluLog.info("Blah i,k (%s,%s)", i, k);
             if (random.nextInt(100) <= selectionChance
                     && (allowTouching || ArchitectBase.isTouchingAmount(cells, new Point(i, k), 0, 0, true, 1))) {
                 cells[i][k].rawState = 1;

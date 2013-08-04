@@ -2,7 +2,6 @@ package projectzulu.common.blocks;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -20,23 +19,17 @@ import projectzulu.common.world.terrain.CemetaryFeature;
 import projectzulu.common.world.terrain.LabyrinthFeature;
 import projectzulu.common.world.terrain.OasisFeature;
 import projectzulu.common.world.terrain.PyramidFeature;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemStructurePlacer extends Item {
 
     String[] structureName = new String[] { "Oasis", "Pyramid", "Labyrinth", "Cemetary", "Cathedral" };
 
-    public ItemStructurePlacer(int par1) {
+    public ItemStructurePlacer(int par1, String baseName) {
         super(par1);
         setHasSubtypes(true);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
-        itemIcon = par1IconRegister.registerIcon(Item.paper.getUnlocalizedName().substring(5)); // removes "item."
+        setUnlocalizedName(baseName);
+        func_111206_d("paper");
     }
 
     @Override
@@ -154,7 +147,8 @@ public class ItemStructurePlacer extends Item {
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
         try {
-            return structureName[itemstack.getItemDamage()];
+            return super.getUnlocalizedName().concat(".")
+                    .concat(structureName[itemstack.getItemDamage()].toLowerCase());
         } catch (Exception e) {
             return "";
         }
@@ -166,5 +160,4 @@ public class ItemStructurePlacer extends Item {
             par3List.add(new ItemStack(par1, 1, i));
         }
     }
-
 }

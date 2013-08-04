@@ -13,7 +13,6 @@ import com.google.common.base.Optional;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class SpikesDeclaration extends BlockDeclaration {
 
@@ -32,8 +31,8 @@ public class SpikesDeclaration extends BlockDeclaration {
     @Override
     protected boolean createBlock(int iD) {
         BlockList.spike = Optional.of(new BlockSpikes(iD, renderID).setHardness(0.5F)
-                .setStepSound(Block.soundMetalFootstep)
-                .setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+                .setStepSound(Block.soundMetalFootstep).setUnlocalizedName(name.toLowerCase())
+                .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 
@@ -41,7 +40,6 @@ public class SpikesDeclaration extends BlockDeclaration {
     protected void registerBlock() {
         Block block = BlockList.spike.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
-        LanguageRegistry.addName(block, "Ivory Spikes");
     }
 
     @Override

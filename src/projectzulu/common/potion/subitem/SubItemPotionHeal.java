@@ -12,7 +12,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionHeal extends SubItemPotionGeneric {
 
     public SubItemPotionHeal(int itemID, int subID) {
-        super(itemID, subID, "Healing");
+        super(itemID, subID, "potion.heal2");
         setSubItemBounds(4, 1, 4, 0);
         setEffectScale(20 * 10, 20 * 5, 16, 10, 2);
     }

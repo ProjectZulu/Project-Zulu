@@ -18,8 +18,6 @@ import projectzulu.common.potion.effects.PotionZulu;
 
 import com.google.common.base.Optional;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-
 public enum PotionManager {
     bubbling(21) {
         @Override
@@ -30,8 +28,6 @@ public enum PotionManager {
 
         @Override
         protected void registerPotion() {
-            LanguageRegistry.instance().addStringLocalization("potion.shining.postfix", "Shining Potion");
-            LanguageRegistry.instance().addStringLocalization("potion.shining", "Shiny!");
         }
     },
     incendiary(22) {
@@ -43,8 +39,6 @@ public enum PotionManager {
 
         @Override
         protected void registerPotion() {
-            LanguageRegistry.instance().addStringLocalization("potion.incendiary.postfix", "Incendiary Potion");
-            LanguageRegistry.instance().addStringLocalization("potion.incendiary", "Incendiary");
         }
     },
     slowfall(23) {
@@ -56,8 +50,6 @@ public enum PotionManager {
 
         @Override
         protected void registerPotion() {
-            LanguageRegistry.instance().addStringLocalization("potion.slowfall.postfix", "Slowfall Potion");
-            LanguageRegistry.instance().addStringLocalization("potion.slowfall", "Slowfall");
         }
     },
     cleansing(24) {
@@ -69,8 +61,6 @@ public enum PotionManager {
 
         @Override
         protected void registerPotion() {
-            LanguageRegistry.instance().addStringLocalization("potion.cleansing.postfix", "Cleansing Potion");
-            LanguageRegistry.instance().addStringLocalization("potion.cleansing", "Cleansing");
         }
     },
     curse(25) {
@@ -82,8 +72,6 @@ public enum PotionManager {
 
         @Override
         protected void registerPotion() {
-            LanguageRegistry.instance().addStringLocalization("potion.curse.postfix", "Cursed Potion");
-            LanguageRegistry.instance().addStringLocalization("potion.curse", "Curse");
         }
     },
     thorn(26) {
@@ -95,8 +83,6 @@ public enum PotionManager {
 
         @Override
         protected void registerPotion() {
-            LanguageRegistry.instance().addStringLocalization("potion.thorn.postfix", "Thorn Potion");
-            LanguageRegistry.instance().addStringLocalization("potion.thorn", "Thorn");
         }
     },
     heal2(27) {
@@ -107,8 +93,6 @@ public enum PotionManager {
 
         @Override
         protected void registerPotion() {
-            LanguageRegistry.instance().addStringLocalization("potion.heal2.postfix", "Heal Potion");
-            LanguageRegistry.instance().addStringLocalization("potion.heal2", "Heal");
         }
     },
     harm2(28) {
@@ -119,8 +103,6 @@ public enum PotionManager {
 
         @Override
         protected void registerPotion() {
-            LanguageRegistry.instance().addStringLocalization("potion.harm2.postfix", "Harm Potion");
-            LanguageRegistry.instance().addStringLocalization("potion.harm2", "Harm");
         }
     };
 

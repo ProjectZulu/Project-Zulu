@@ -7,7 +7,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionWaterBreathing extends SubItemPotionGeneric {
 
     public SubItemPotionWaterBreathing(int itemID, int subID) {
-        super(itemID, subID, "Water Breathing");
+        super(itemID, subID, "potion.waterBreathing");
         setSubItemBounds(4, 4, 1, 0);
         setEffectScale(20 * 20, 20 * 5, 14, 10, 1);
     }

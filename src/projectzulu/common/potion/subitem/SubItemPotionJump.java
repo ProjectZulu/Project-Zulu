@@ -11,7 +11,7 @@ import com.google.common.base.Optional;
 public class SubItemPotionJump extends SubItemPotionGeneric {
 
     public SubItemPotionJump(int itemID, int subID) {
-        super(itemID, subID, "Jump");
+        super(itemID, subID, "potion.jump");
         setSubItemBounds(4, 4, 4, 0);
         setEffectScale(20 * 20, 20 * 5, 14, 10, 2);
     }
