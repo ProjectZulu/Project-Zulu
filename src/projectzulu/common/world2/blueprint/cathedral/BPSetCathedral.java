@@ -18,6 +18,7 @@ public class BPSetCathedral implements BlueprintSet {
     Blueprint entrance = new BPCathedralEntrance();
     Blueprint west_tower = new BPCathedralWestTower();
     Blueprint east_tower = new BPCathedralEastTower();
+    Blueprint hallwayEnd = new BPCathedralHallwayEnd();
 
     @Override
     public boolean isApplicable(MazeCell[][] cells, Point buildCoords, Random random) {
@@ -35,7 +36,7 @@ public class BPSetCathedral implements BlueprintSet {
         applyBlueprintToCell(cells, buildCoords.x + 3, buildCoords.y + 3, dome.getIdentifier(),
                 CellIndexDirection.SouthEastCorner);
 
-        applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 4, hallway.getIdentifier(), //hallway
+        applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 4, hallway.getIdentifier(),
                 CellIndexDirection.WestWall);
         applyBlueprintToCell(cells, buildCoords.x + 3, buildCoords.y + 4, hallway.getIdentifier(),
                 CellIndexDirection.EastWall);
@@ -43,18 +44,18 @@ public class BPSetCathedral implements BlueprintSet {
                 CellIndexDirection.WestWall);
         applyBlueprintToCell(cells, buildCoords.x + 3, buildCoords.y + 1, hallway.getIdentifier(),
                 CellIndexDirection.EastWall);
-        applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 0, hallway.getIdentifier(),
-                CellIndexDirection.WestWall);
-        applyBlueprintToCell(cells, buildCoords.x + 3, buildCoords.y + 0, hallway.getIdentifier(),
-                CellIndexDirection.EastWall);
 
-        applyBlueprintToCell(cells, buildCoords.x + 1, buildCoords.y + 2, hallway.getIdentifier(),
+        applyBlueprintToCell(cells, buildCoords.x + 1, buildCoords.y + 3, hallwayEnd.getIdentifier(),
+                CellIndexDirection.NorthWestCorner);
+        applyBlueprintToCell(cells, buildCoords.x + 1, buildCoords.y + 2, hallwayEnd.getIdentifier(),
                 CellIndexDirection.NorthWall);
-        applyBlueprintToCell(cells, buildCoords.x + 1, buildCoords.y + 3, hallway.getIdentifier(),
-                CellIndexDirection.SouthWall);
-        applyBlueprintToCell(cells, buildCoords.x + 4, buildCoords.y + 2, hallway.getIdentifier(),
-                CellIndexDirection.NorthWall);
-        applyBlueprintToCell(cells, buildCoords.x + 4, buildCoords.y + 3, hallway.getIdentifier(),
+        applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 0, hallwayEnd.getIdentifier(),//
+                CellIndexDirection.NorthEastCorner);
+        applyBlueprintToCell(cells, buildCoords.x + 3, buildCoords.y + 0, hallwayEnd.getIdentifier(),//
+                CellIndexDirection.EastWall);
+        applyBlueprintToCell(cells, buildCoords.x + 4, buildCoords.y + 2, hallwayEnd.getIdentifier(),
+                CellIndexDirection.SouthEastCorner);
+        applyBlueprintToCell(cells, buildCoords.x + 4, buildCoords.y + 3, hallwayEnd.getIdentifier(),
                 CellIndexDirection.SouthWall);
 
         applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 5, entrance.getIdentifier(),//entrance
@@ -108,13 +109,15 @@ public class BPSetCathedral implements BlueprintSet {
                 return dome.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
             } else if (childBuildingID.equals(hallway.getIdentifier())) {
                 return hallway.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
+            } else if (childBuildingID.equals(hallwayEnd.getIdentifier())) {
+                return hallwayEnd.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
             } else if (childBuildingID.equals(entrance.getIdentifier())) {
                 return entrance.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
             } else if (childBuildingID.equals(west_tower.getIdentifier())) {
                 return west_tower.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
             } else if (childBuildingID.equals(east_tower.getIdentifier())) {
                 return east_tower.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
-            }
+            }  
         }
         return null;
     }

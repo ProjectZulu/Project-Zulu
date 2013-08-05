@@ -10,13 +10,41 @@ import projectzulu.common.world2.BoundaryPair;
 import projectzulu.common.world2.CellHelper;
 import projectzulu.common.world2.blueprint.Blueprint;
 
-public class BPCathedralHallway implements Blueprint {
+public class BPCathedralHallwayEnd implements Blueprint {
 
     @Override
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
-        return getWallBlock(CellHelper.rotateCellTo(piecePos, cellSize, cellIndexDirection), cellSize, cellHeight,
+        piecePos = applyMirror(piecePos, cellSize, cellIndexDirection);
+        piecePos = applyRotation(piecePos, cellSize, cellIndexDirection);
+        return getWallBlock(CellHelper.rotateCellTo(piecePos, cellSize, CellIndexDirection.NorthWall), cellSize, cellHeight,
                 random, cellIndexDirection);
+    }
+
+    private ChunkCoordinates applyMirror(ChunkCoordinates piecePos, int cellSize, CellIndexDirection cellIndexDirection) {
+        if (cellIndexDirection == CellIndexDirection.NorthWestCorner
+                || cellIndexDirection == CellIndexDirection.NorthEastCorner
+                || cellIndexDirection == CellIndexDirection.SouthEastCorner
+                || cellIndexDirection == CellIndexDirection.SouthWestCorner) {
+            piecePos = CellHelper.mirrorCellTo(piecePos, cellSize, CellIndexDirection.SouthWestCorner);
+        }
+        return piecePos;
+    }
+
+    private ChunkCoordinates applyRotation(ChunkCoordinates piecePos, int cellSize,
+            CellIndexDirection cellIndexDirection) {
+        if (cellIndexDirection == CellIndexDirection.NorthWestCorner) {
+            piecePos = CellHelper.rotateCellTo(piecePos, cellSize, CellIndexDirection.NorthWall);
+        } else if (cellIndexDirection == CellIndexDirection.NorthEastCorner) {
+            piecePos = CellHelper.rotateCellTo(piecePos, cellSize, CellIndexDirection.WestWall);
+        } else if (cellIndexDirection == CellIndexDirection.SouthEastCorner) {
+            piecePos = CellHelper.rotateCellTo(piecePos, cellSize, CellIndexDirection.SouthWall);
+        } else if (cellIndexDirection == CellIndexDirection.SouthWestCorner) {
+            piecePos = CellHelper.rotateCellTo(piecePos, cellSize, CellIndexDirection.EastWall);
+        } else {
+            piecePos = CellHelper.rotateCellTo(piecePos, cellSize, cellIndexDirection);
+        }
+        return piecePos;
     }
 
     public BlockWithMeta getWallBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
@@ -37,7 +65,7 @@ public class BPCathedralHallway implements Blueprint {
             }
         }
 
-        if (piecePos.posZ == cellSize * 4 / 10) {
+        if (piecePos.posX != 0 && piecePos.posZ == cellSize * 4 / 10) {
             return new BlockWithMeta(Block.stoneBrick.blockID, 0);
         }
 
@@ -55,7 +83,11 @@ public class BPCathedralHallway implements Blueprint {
             }
         }
         
-        if (piecePos.posZ > cellSize * 4 / 10 && piecePos.posY == 0) {
+        if (piecePos.posX == 1 && piecePos.posZ > cellSize * 4 / 10) {
+            return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+        }
+        
+        if (piecePos.posX > 0 && piecePos.posZ > cellSize * 4 / 10 && piecePos.posY == 0) {
             if(piecePos.posZ == cellSize * 4 / 10 + 1) { 
                 return new BlockWithMeta(Block.cobblestone.blockID);
             } else {
@@ -68,12 +100,16 @@ public class BPCathedralHallway implements Blueprint {
     private int getStairMeta(CellIndexDirection cellIndexDirection) {
         switch (cellIndexDirection) {
         case WestWall:
+        case NorthEastCorner:
             return 0;
         case EastWall:
+        case SouthWestCorner:
             return 1;
         case SouthWall:
+        case NorthWestCorner:
             return 3;
         case NorthWall:
+        case SouthEastCorner:
         default:
             return 2;
         }
@@ -81,7 +117,7 @@ public class BPCathedralHallway implements Blueprint {
 
     @Override
     public String getIdentifier() {
-        return "BPCathedralHallway";
+        return "BPCathedralHallwayEnd";
     }
 
     @Override
