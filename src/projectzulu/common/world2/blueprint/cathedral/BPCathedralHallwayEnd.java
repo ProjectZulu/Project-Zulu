@@ -17,8 +17,8 @@ public class BPCathedralHallwayEnd implements Blueprint {
             CellIndexDirection cellIndexDirection) {
         piecePos = applyMirror(piecePos, cellSize, cellIndexDirection);
         piecePos = applyRotation(piecePos, cellSize, cellIndexDirection);
-        return getWallBlock(CellHelper.rotateCellTo(piecePos, cellSize, CellIndexDirection.NorthWall), cellSize, cellHeight,
-                random, cellIndexDirection);
+        return getWallBlock(CellHelper.rotateCellTo(piecePos, cellSize, CellIndexDirection.NorthWall), cellSize,
+                cellHeight, random, cellIndexDirection);
     }
 
     private ChunkCoordinates applyMirror(ChunkCoordinates piecePos, int cellSize, CellIndexDirection cellIndexDirection) {
@@ -81,17 +81,40 @@ public class BPCathedralHallwayEnd implements Blueprint {
                     return new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
                 }
             }
+
+            /* Arches */
+            int topAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 0, 1,
+                    BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
+            int botAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 1, 1,
+                    BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
+            if ((topAarchSlope == 0 || botAarchSlope == 0) && piecePos.posX % 3 == 1
+                    && piecePos.posZ > cellSize * 4 / 10) {
+                if (piecePos.posX > 1) {
+                    return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection,
+                            topAarchSlope == 0 ? true : false));
+                }
+            }
         }
-        
+
+        /* Outer Wall */
         if (piecePos.posX == 1 && piecePos.posZ > cellSize * 4 / 10) {
             return new BlockWithMeta(Block.stoneBrick.blockID, 0);
         }
-        
-        if (piecePos.posX > 0 && piecePos.posZ > cellSize * 4 / 10 && piecePos.posY == 0) {
-            if(piecePos.posZ == cellSize * 4 / 10 + 1) { 
+
+        if (piecePos.posY == 0 && piecePos.posX > 0 && piecePos.posZ > cellSize * 4 / 10) {
+            if (piecePos.posZ == cellSize * 4 / 10 + 1) {
                 return new BlockWithMeta(Block.cobblestone.blockID);
             } else {
                 return new BlockWithMeta(Block.stoneBrick.blockID);
+            }
+        }
+
+        /* Pews */
+        if (piecePos.posY == 1 && piecePos.posX > 1 && piecePos.posX % 2 == 0) {
+            if (piecePos.posZ == cellSize * 4 / 10 + 2) {
+                return new BlockWithMeta(Block.stairsWoodOak.blockID, getPewStairMeta(cellIndexDirection));
+            } else if (piecePos.posZ > cellSize * 4 / 10 + 2) {
+                return new BlockWithMeta(Block.woodSingleSlab.blockID);
             }
         }
         return new BlockWithMeta(0);
@@ -112,6 +135,44 @@ public class BPCathedralHallwayEnd implements Blueprint {
         case SouthEastCorner:
         default:
             return 2;
+        }
+    }
+
+    private int getArchStairMeta(CellIndexDirection cellIndexDirection, boolean top) {
+        switch (cellIndexDirection) {
+        case NorthWall:
+        case SouthEastCorner:
+            return top ? 2 : 7;
+        case SouthWall:
+        case NorthWestCorner:
+            return top ? 3 : 6;
+        case WestWall:
+        case NorthEastCorner:
+            return top ? 0 : 5;
+        case EastWall:
+        case SouthWestCorner:
+            return top ? 1 : 4;
+        default:
+            return 0;
+        }
+    }
+
+    private int getPewStairMeta(CellIndexDirection cellIndexDirection) {
+        switch (cellIndexDirection) {
+        case NorthWall:
+        case SouthEastCorner:
+            return 3;
+        case SouthWall:
+        case NorthWestCorner:
+            return 2;
+        case WestWall:
+        case NorthEastCorner:
+            return 1;
+        case EastWall:
+        case SouthWestCorner:
+            return 0;
+        default:
+            return 0;
         }
     }
 

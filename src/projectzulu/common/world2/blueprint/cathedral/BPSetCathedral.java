@@ -15,10 +15,11 @@ public class BPSetCathedral implements BlueprintSet {
 
     Blueprint dome = new BPCathedralDome();
     Blueprint hallway = new BPCathedralHallway();
+    Blueprint hallwayEnd = new BPCathedralHallwayEnd();
+    Blueprint hallwayEnt = new BPCathedralHallwayEntrance();
     Blueprint entrance = new BPCathedralEntrance();
     Blueprint west_tower = new BPCathedralWestTower();
     Blueprint east_tower = new BPCathedralEastTower();
-    Blueprint hallwayEnd = new BPCathedralHallwayEnd();
 
     @Override
     public boolean isApplicable(MazeCell[][] cells, Point buildCoords, Random random) {
@@ -36,9 +37,9 @@ public class BPSetCathedral implements BlueprintSet {
         applyBlueprintToCell(cells, buildCoords.x + 3, buildCoords.y + 3, dome.getIdentifier(),
                 CellIndexDirection.SouthEastCorner);
 
-        applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 4, hallway.getIdentifier(),
+        applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 4, hallwayEnt.getIdentifier(),
                 CellIndexDirection.WestWall);
-        applyBlueprintToCell(cells, buildCoords.x + 3, buildCoords.y + 4, hallway.getIdentifier(),
+        applyBlueprintToCell(cells, buildCoords.x + 3, buildCoords.y + 4, hallwayEnt.getIdentifier(),
                 CellIndexDirection.EastWall);
         applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 1, hallway.getIdentifier(),
                 CellIndexDirection.WestWall);
@@ -58,7 +59,7 @@ public class BPSetCathedral implements BlueprintSet {
         applyBlueprintToCell(cells, buildCoords.x + 4, buildCoords.y + 3, hallwayEnd.getIdentifier(),
                 CellIndexDirection.SouthWall);
 
-        applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 5, entrance.getIdentifier(),//entrance
+        applyBlueprintToCell(cells, buildCoords.x + 2, buildCoords.y + 5, entrance.getIdentifier(),// entrance
                 CellIndexDirection.NorthWestCorner);
         applyBlueprintToCell(cells, buildCoords.x + 3, buildCoords.y + 5, entrance.getIdentifier(),
                 CellIndexDirection.NorthEastCorner);
@@ -111,13 +112,15 @@ public class BPSetCathedral implements BlueprintSet {
                 return hallway.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
             } else if (childBuildingID.equals(hallwayEnd.getIdentifier())) {
                 return hallwayEnd.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
+            } else if (childBuildingID.equals(hallwayEnt.getIdentifier())) {
+                return hallwayEnt.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
             } else if (childBuildingID.equals(entrance.getIdentifier())) {
                 return entrance.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
             } else if (childBuildingID.equals(west_tower.getIdentifier())) {
                 return west_tower.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
             } else if (childBuildingID.equals(east_tower.getIdentifier())) {
                 return east_tower.getBlockFromBlueprint(piecePos, cellSize, cellHeight, random, cellIndexDirection);
-            }  
+            }
         }
         return null;
     }

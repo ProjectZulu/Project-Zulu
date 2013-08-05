@@ -42,8 +42,17 @@ public class BPCathedralEntrance implements Blueprint {
         if (cellIndexDirection == CellIndexDirection.SouthWestCorner
                 || cellIndexDirection == CellIndexDirection.SouthEastCorner) {
             /* 'Front' Wall */
-            if (piecePos.posX > 2 && piecePos.posZ == 1) {
-                return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+            if (piecePos.posZ == 1 && piecePos.posX > 2) {
+                /* Front Wall Door */
+                if (piecePos.posX == cellSize - 1 && piecePos.posY > 0 && piecePos.posY < 4) {
+                    return new BlockWithMeta(0);
+                } else {
+                    return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+                }
+            }
+            /* Air In Front of Doorway */
+            if (piecePos.posZ == 0 && piecePos.posX > 2 && piecePos.posY < 4) {
+                return new BlockWithMeta(0);
             }
         }
 
@@ -64,8 +73,20 @@ public class BPCathedralEntrance implements Blueprint {
                 } else {
                     return new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
                 }
-            } else if (piecePos.posZ > 1 && slope > 0 && slope <= 2) {
+            }
+            if (piecePos.posZ > 1 && slope > 0 && slope <= 2) {
                 return new BlockWithMeta(0);
+            }
+
+            /* Arches */
+            int topAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posX + 0, 1,
+                    BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
+            int botAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posX + 1, 1,
+                    BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
+            if ((topAarchSlope == 0 || botAarchSlope == 0) && piecePos.posZ % 3 == 1
+                    && piecePos.posX > cellSize * 4 / 10) {
+                return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection,
+                        topAarchSlope == 0 ? true : false));
             }
         }
 
@@ -74,8 +95,17 @@ public class BPCathedralEntrance implements Blueprint {
             return new BlockWithMeta(Block.stoneBrick.blockID, 0);
         }
 
+        /* Red Carpet */
+        if (piecePos.posY == 1 && (piecePos.posX == cellSize - 1 || piecePos.posZ == cellSize - 1)) {
+            return new BlockWithMeta(Block.field_111031_cC.blockID, 14);
+        }
+
         /* Floors */
         if (piecePos.posY == 0) {
+            if (piecePos.posX == cellSize * 4 / 10 + 1 && (piecePos.posZ <= 3 || piecePos.posY >= 5)) {
+                return new BlockWithMeta(Block.cobblestone.blockID, 0);
+            }
+
             /* Floor of Entrance */
             if (piecePos.posX > cellSize * 4 / 10) {
                 return new BlockWithMeta(Block.stoneBrick.blockID, 0);
@@ -96,6 +126,19 @@ public class BPCathedralEntrance implements Blueprint {
         case NorthEastCorner:
         case SouthEastCorner:
             return 1;
+        default:
+            return 0;
+        }
+    }
+
+    public int getArchStairMeta(CellIndexDirection cellIndexDirection, boolean top) {
+        switch (cellIndexDirection) {
+        case NorthWestCorner:
+        case SouthWestCorner:
+            return top ? 0 : 5;
+        case NorthEastCorner:
+        case SouthEastCorner:
+            return top ? 1 : 4;
         default:
             return 0;
         }

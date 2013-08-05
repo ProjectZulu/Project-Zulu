@@ -10,7 +10,7 @@ import projectzulu.common.world2.BoundaryPair;
 import projectzulu.common.world2.CellHelper;
 import projectzulu.common.world2.blueprint.Blueprint;
 
-public class BPCathedralHallway implements Blueprint {
+public class BPCathedralHallwayEntrance implements Blueprint {
 
     @Override
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
@@ -88,12 +88,16 @@ public class BPCathedralHallway implements Blueprint {
             }
         }
 
+        /* Red Carpet */
+        if (piecePos.posY == 1 && piecePos.posZ == cellSize - 1) {
+            return new BlockWithMeta(Block.field_111031_cC.blockID, 14);
+        }
+
         /* Pews */
-        if (piecePos.posY == 1 && piecePos.posX % 2 == 1) {
-            if (piecePos.posZ == cellSize * 4 / 10 + 2) {
-                return new BlockWithMeta(Block.stairsWoodOak.blockID, getPewStairMeta(cellIndexDirection));
-            } else if (piecePos.posZ > cellSize * 4 / 10 + 2) {
-                return new BlockWithMeta(Block.woodSingleSlab.blockID);
+        if (piecePos.posY == 1 && piecePos.posX % 2 == 0) {
+            if (piecePos.posZ == cellSize * 4 / 10 + 1 || piecePos.posZ == cellSize - 2) {
+                return new BlockWithMeta(Block.stairsWoodOak.blockID, getPewStairMeta(cellIndexDirection,
+                        piecePos.posZ == cellSize - 2));
             }
         }
 
@@ -127,17 +131,20 @@ public class BPCathedralHallway implements Blueprint {
             return top ? 0 : 5;
         case EastWall:
             return top ? 1 : 4;
+        case SouthWall:
+            return 2;
+        case NorthWall:
         default:
             return 2;
         }
     }
 
-    private int getPewStairMeta(CellIndexDirection cellIndexDirection) {
+    private int getPewStairMeta(CellIndexDirection cellIndexDirection, boolean onRight) {
         switch (cellIndexDirection) {
         case WestWall:
-            return 1;
+            return onRight ? 0 : 1;
         case EastWall:
-            return 0;
+            return onRight ? 1 : 0;
         default:
             return 0;
         }
@@ -145,7 +152,7 @@ public class BPCathedralHallway implements Blueprint {
 
     @Override
     public String getIdentifier() {
-        return "BPCathedralHallway";
+        return "BPCathedralHallwayEntrance";
     }
 
     @Override

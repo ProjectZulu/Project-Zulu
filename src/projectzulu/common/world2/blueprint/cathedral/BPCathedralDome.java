@@ -34,7 +34,6 @@ public class BPCathedralDome implements Blueprint {
     private BlockWithMeta getDomeBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
         int diagonalIndex = piecePos.posZ + piecePos.posX;
-        int invertDiagonalIndex = piecePos.posZ + cellSize - piecePos.posX - 1;
         int domeFloor = cellHeight - (cellSize + 1);
 
         if (piecePos.posY > domeFloor) {
@@ -82,19 +81,28 @@ public class BPCathedralDome implements Blueprint {
             } else if (piecePos.posY == 2) {
                 if (cellIndexDirection == CellIndexDirection.SouthEastCorner) {
                     if (piecePos.posZ >= cellSize - 3 && piecePos.posX == cellSize - 2) {
-                        return new BlockWithMeta(Block.blockGold.blockID);
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, 1);
                     } else if (piecePos.posZ == cellSize - 3 && piecePos.posX > cellSize - 2) {
-                        return new BlockWithMeta(Block.blockGold.blockID);
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, 3);
                     }
                 } else if (cellIndexDirection == CellIndexDirection.SouthWestCorner) {
                     if (piecePos.posX >= cellSize - 3 && piecePos.posZ == cellSize - 2) {
-                        return new BlockWithMeta(Block.blockGold.blockID);
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, 0);
                     } else if (piecePos.posX == cellSize - 3 && piecePos.posZ > cellSize - 2) {
-                        return new BlockWithMeta(Block.blockGold.blockID);
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, 3);
                     }
                 }
-
                 return new BlockWithMeta(Block.stoneSingleSlab.blockID, 5);
+            } else if (piecePos.posY == 3) {
+                if (cellIndexDirection == CellIndexDirection.SouthEastCorner) {
+                    if (piecePos.posZ == cellSize - 2 && piecePos.posX > cellSize - 2) {
+                        return new BlockWithMeta(Block.stoneSingleSlab.blockID, 5);
+                    }
+                } else if (cellIndexDirection == CellIndexDirection.SouthWestCorner) {
+                    if (piecePos.posX == cellSize - 2 && piecePos.posZ > cellSize - 2) {
+                        return new BlockWithMeta(Block.stoneSingleSlab.blockID, 5);
+                    }
+                }
             }
         }
 
@@ -102,7 +110,7 @@ public class BPCathedralDome implements Blueprint {
             if (diagonalIndex == 4 + 2 && piecePos.posZ == cellSize - 1
                     && cellIndexDirection == CellIndexDirection.NorthEastCorner || diagonalIndex == 4 + 2
                     && piecePos.posX == cellSize - 1 && cellIndexDirection == CellIndexDirection.NorthWestCorner) {
-                return new BlockWithMeta(Block.blockGold.blockID);
+                return new BlockWithMeta(Block.stairsStoneBrick.blockID, 2);
             } else if (diagonalIndex > 4) {
                 return new BlockWithMeta(Block.field_111031_cC.blockID, 14);
             }
