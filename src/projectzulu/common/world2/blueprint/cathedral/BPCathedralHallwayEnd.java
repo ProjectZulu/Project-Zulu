@@ -49,6 +49,7 @@ public class BPCathedralHallwayEnd implements Blueprint {
 
     public BlockWithMeta getWallBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
+        /* Ceiling */
         if (piecePos.posY > cellHeight - cellSize) {
             int slope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ - 3, 1,
                     BoundaryPair.createPair(0, cellSize * 2 - 8), cellHeight - cellSize / 3);
@@ -65,34 +66,48 @@ public class BPCathedralHallwayEnd implements Blueprint {
             }
         }
 
-        if (piecePos.posX != 0 && piecePos.posZ == cellSize * 4 / 10) {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+        /* Outer Wall */
+        if (piecePos.posX != 0 && piecePos.posZ == 2) {
+            return new BlockWithMeta(Block.stoneBrick.blockID);
         }
 
-        if (piecePos.posY > cellHeight - 2 * cellSize) {
-            int slope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ - 3, 1,
-                    BoundaryPair.createPair(1, cellSize * 2 - 8), cellHeight - cellSize);
-            int slopeBelow = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ - 2, 1,
-                    BoundaryPair.createPair(1, cellSize * 2 - 8), cellHeight - cellSize);
-            if (slope == 0) {
-                if (slope != slopeBelow) {
-                    return new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(cellIndexDirection));
-                } else {
-                    return new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
-                }
+        /* Mid Ceiling-Floor */
+        int slope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ - 3, 1,
+                BoundaryPair.createPair(1, cellSize * 2 - 8), cellHeight - cellSize);
+        int slopeBelow = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ - 2, 1,
+                BoundaryPair.createPair(1, cellSize * 2 - 8), cellHeight - cellSize);
+        if (slope == 0) {
+            if (slope != slopeBelow) {
+                return new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(cellIndexDirection));
+            } else {
+                return new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
+            }
+        }
+
+        /* Upper Room */
+        if (slope > 0 && piecePos.posX > 1 && piecePos.posZ > 2) {
+            if (piecePos.posX == cellSize - 1 && piecePos.posZ == 3) {
+                return new BlockWithMeta(Block.stoneBrick.blockID);
             }
 
-            /* Arches */
-            int topAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 0, 1,
-                    BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
-            int botAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 1, 1,
-                    BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
-            if ((topAarchSlope == 0 || botAarchSlope == 0) && piecePos.posX % 3 == 1
-                    && piecePos.posZ > cellSize * 4 / 10) {
-                if (piecePos.posX > 1) {
-                    return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection,
-                            topAarchSlope == 0 ? true : false));
-                }
+            if (piecePos.posZ == cellSize - 1 && piecePos.posX == 3 && slope == 1) {
+                return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection, false));
+            }
+
+            if (slope < 4 && (piecePos.posX == 2 || piecePos.posZ == 3)) {
+                return new BlockWithMeta(Block.bookShelf.blockID);
+            }
+        }
+
+        /* Arches */
+        int topAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 0, 1,
+                BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
+        int botAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 1, 1,
+                BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
+        if ((topAarchSlope == 0 || botAarchSlope == 0) && piecePos.posX % 3 == 1 && piecePos.posZ > cellSize * 4 / 10) {
+            if (piecePos.posX > 1) {
+                return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection,
+                        topAarchSlope == 0 ? true : false));
             }
         }
 
@@ -101,6 +116,7 @@ public class BPCathedralHallwayEnd implements Blueprint {
             return new BlockWithMeta(Block.stoneBrick.blockID, 0);
         }
 
+        /* Bottom Floor */
         if (piecePos.posY == 0 && piecePos.posX > 0 && piecePos.posZ > cellSize * 4 / 10) {
             if (piecePos.posZ == cellSize * 4 / 10 + 1) {
                 return new BlockWithMeta(Block.cobblestone.blockID);

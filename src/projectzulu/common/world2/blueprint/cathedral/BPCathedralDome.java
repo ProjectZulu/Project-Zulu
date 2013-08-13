@@ -57,10 +57,10 @@ public class BPCathedralDome implements Blueprint {
         if (piecePos.posY == domeFloor && diagonalIndex > 2 && diagonalIndex < cellSize * 2 - 3) {
             return new BlockWithMeta(Block.stoneBrick.blockID);
         } else if (piecePos.posY == domeFloor + 1 && diagonalIndex == cellSize * 2 - 4) {
-            return new BlockWithMeta(Block.fence.blockID);
+            return new BlockWithMeta(Block.fenceIron.blockID);
         } else if (piecePos.posY == domeFloor + 1 && diagonalIndex == cellSize * 2 - 5 && piecePos.posX != cellSize - 1
                 && piecePos.posZ != cellSize - 1) {
-            return new BlockWithMeta(Block.fence.blockID);
+            return new BlockWithMeta(Block.fenceIron.blockID);
         }
 
         if (diagonalIndex == 2) {
