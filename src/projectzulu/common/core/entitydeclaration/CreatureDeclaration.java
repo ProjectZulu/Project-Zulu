@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class CreatureDeclaration implements EntityDeclaration {
-    protected String mobName;
+    public final String mobName;
     protected Class mobClass;
     protected EnumCreatureType enumCreatureType;
     protected boolean shouldExist = true;
@@ -41,6 +41,11 @@ public abstract class CreatureDeclaration implements EntityDeclaration {
         this.mobClass = mobClass;
         this.enumCreatureType = creatureType;
         shouldDespawn = enumCreatureType == EnumCreatureType.creature ? false : true;
+    }
+    
+    @Override
+    public String getIdentifier() {
+        return mobName;
     }
 
     protected void setDropAmount(int minDropNum, int maxDropNum) {
