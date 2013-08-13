@@ -2,10 +2,11 @@ package projectzulu.common.core;
 
 import java.io.File;
 import java.util.ArrayList;
-
-import projectzulu.common.core.entitydeclaration.EntityDeclaration;
+import java.util.Collections;
+import java.util.Comparator;
 
 import net.minecraftforge.common.Configuration;
+import projectzulu.common.core.entitydeclaration.EntityDeclaration;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -15,11 +16,17 @@ public enum CustomEntityManager {
 	
 	private CustomEntityManager(){}
 	
-	public void addEntity(EntityDeclaration... entity){
-		for (EntityDeclaration entityDeclaration : entity) {
-			entities.add(entityDeclaration);
-		}
-	}
+    public void addEntity(EntityDeclaration... entity) {
+        for (EntityDeclaration entityDeclaration : entity) {
+            entities.add(entityDeclaration);
+        }
+
+        Collections.sort(entities, new Comparator<EntityDeclaration>() {
+            public int compare(EntityDeclaration declaration1, EntityDeclaration declaration2) {
+                return declaration1.getIdentifier().compareTo(declaration1.getIdentifier());
+            }
+        });
+    }
 	
 	public void loadCreaturesFromConfig(File configDirectory){
 		Configuration config = new Configuration(  new File(configDirectory, DefaultProps.configDirectory + DefaultProps.mobBiomeSpawnConfigFile) );
