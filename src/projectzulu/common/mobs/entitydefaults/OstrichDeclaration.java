@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class OstrichDeclaration extends SpawnableDeclaration {
 
     public OstrichDeclaration() {
-        super("Ostrich", EntityOstrich.class, EnumCreatureType.creature);
+        super("Ostrich", 19, EntityOstrich.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

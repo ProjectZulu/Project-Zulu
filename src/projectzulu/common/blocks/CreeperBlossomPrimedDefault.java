@@ -11,7 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class CreeperBlossomPrimedDefault extends CreatureDeclaration {
 
 	public CreeperBlossomPrimedDefault() {
-		super("CreeperBlossomPrimed", EntityCreeperBlossomPrimed.class, null);
+		super("CreeperBlossomPrimed", 43, EntityCreeperBlossomPrimed.class, null);
 		setRegistrationProperties(128, 3, true);
 	}
 	

@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GorillaDeclaration extends SpawnableDeclaration {
 
     public GorillaDeclaration() {
-        super("Gorilla", EntityGorilla.class, EnumCreatureType.creature);
+        super("Gorilla", 25, EntityGorilla.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 1);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 3);

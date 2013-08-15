@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class HorseWhiteDeclaration extends SpawnableDeclaration {
 
     public HorseWhiteDeclaration() {
-        super("Horse White", EntityHorseWhite.class, EnumCreatureType.creature);
+        super("Horse White", 34, EntityHorseWhite.class, EnumCreatureType.creature);
         setSpawnProperties(5, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
 

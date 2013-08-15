@@ -20,12 +20,6 @@ public enum CustomEntityManager {
         for (EntityDeclaration entityDeclaration : entity) {
             entities.add(entityDeclaration);
         }
-
-        Collections.sort(entities, new Comparator<EntityDeclaration>() {
-            public int compare(EntityDeclaration declaration1, EntityDeclaration declaration2) {
-                return declaration1.getIdentifier().compareTo(declaration1.getIdentifier());
-            }
-        });
     }
 	
 	public void loadCreaturesFromConfig(File configDirectory){

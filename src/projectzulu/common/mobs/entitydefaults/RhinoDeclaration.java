@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RhinoDeclaration extends SpawnableDeclaration {
 
     public RhinoDeclaration() {
-        super("Rhino", EntityRhino.class, EnumCreatureType.creature);
+        super("Rhino", 20, EntityRhino.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 3);

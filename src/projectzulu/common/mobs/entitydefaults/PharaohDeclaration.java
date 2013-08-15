@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class PharaohDeclaration extends CreatureDeclaration {
 
     public PharaohDeclaration() {
-        super("Mummy Pharaoh", EntityMummyPharaoh.class, EnumCreatureType.monster);
+        super("Mummy Pharaoh", 4, EntityMummyPharaoh.class, EnumCreatureType.monster);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 3);
     }

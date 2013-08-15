@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class AlligatorDeclaration extends SpawnableDeclaration{
 	
 	public AlligatorDeclaration(){
-		super("Alligator", EntityCrocodile.class, EnumCreatureType.creature);		
+		super("Alligator", 12, EntityCrocodile.class, EnumCreatureType.creature);		
 		setSpawnProperties(10, 100, 1, 2);
 		setRegistrationProperties(128, 3, true);
 		setDropAmount(0, 3);

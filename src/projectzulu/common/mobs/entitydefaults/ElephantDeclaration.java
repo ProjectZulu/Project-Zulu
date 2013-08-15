@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ElephantDeclaration extends SpawnableDeclaration {
 
     public ElephantDeclaration() {
-        super("Elephant", EntityElephant.class, EnumCreatureType.creature);
+        super("Elephant", 27, EntityElephant.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 4);

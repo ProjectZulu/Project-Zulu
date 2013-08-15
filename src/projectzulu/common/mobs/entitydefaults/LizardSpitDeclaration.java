@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class LizardSpitDeclaration extends CreatureDeclaration {
 
 	public LizardSpitDeclaration() {
-		super("Lizard Spit", EntityLizardSpit.class, null);
+		super("Lizard Spit", 3, EntityLizardSpit.class, null);
 		setRegistrationProperties(128, 3, true);
 	}
 	

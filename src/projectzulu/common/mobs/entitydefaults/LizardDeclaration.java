@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class LizardDeclaration extends SpawnableDeclaration {
     public LizardDeclaration() {
-        super("Lizard", EntityLizard.class, EnumCreatureType.monster);
+        super("Lizard", 2, EntityLizard.class, EnumCreatureType.monster);
         setSpawnProperties(10, 100, 1, 1);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

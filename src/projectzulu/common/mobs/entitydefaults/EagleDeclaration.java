@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EagleDeclaration extends SpawnableDeclaration {
 
     public EagleDeclaration() {
-        super("Eagle", EntityEagle.class, EnumCreatureType.ambient);
+        super("Eagle", 35, EntityEagle.class, EnumCreatureType.ambient);
         setSpawnProperties(5, 5, 1, 1);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

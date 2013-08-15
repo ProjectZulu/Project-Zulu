@@ -22,6 +22,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class CreatureDeclaration implements EntityDeclaration {
     public final String mobName;
+    public final int entityID;
+
     protected Class mobClass;
     protected EnumCreatureType enumCreatureType;
     protected boolean shouldExist = true;
@@ -36,13 +38,14 @@ public abstract class CreatureDeclaration implements EntityDeclaration {
     protected int minDropNum = 0;
     protected int maxDropNum = 0;
 
-    protected CreatureDeclaration(String mobName, Class mobClass, EnumCreatureType creatureType) {
+    protected CreatureDeclaration(String mobName, int entityID, Class mobClass, EnumCreatureType creatureType) {
         this.mobName = mobName;
+        this.entityID = entityID;
         this.mobClass = mobClass;
         this.enumCreatureType = creatureType;
         shouldDespawn = enumCreatureType == EnumCreatureType.creature ? false : true;
     }
-    
+
     @Override
     public String getIdentifier() {
         return mobName;
@@ -80,8 +83,8 @@ public abstract class CreatureDeclaration implements EntityDeclaration {
 
     @Override
     public void registerEntity() {
-        EntityRegistry.registerModEntity(mobClass, mobName, ProjectZulu_Core.getNextDefaultEntityID(),
-                ProjectZulu_Core.modInstance, trackingRange, updateFrequency, true);
+        EntityRegistry.registerModEntity(mobClass, mobName, entityID, ProjectZulu_Core.modInstance, trackingRange,
+                updateFrequency, true);
     }
 
     @Override

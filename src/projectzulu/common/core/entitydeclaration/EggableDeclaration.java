@@ -13,8 +13,8 @@ public abstract class EggableDeclaration extends CreatureDeclaration {
     protected int eggColor1;
     protected int eggColor2;
 
-    protected EggableDeclaration(String mobName, Class mobClass, EnumCreatureType creatureType) {
-        super(mobName, mobClass, creatureType);
+    protected EggableDeclaration(String mobName, int entityID, Class mobClass, EnumCreatureType creatureType) {
+        super(mobName, entityID, mobClass, creatureType);
     }
 
     @Override

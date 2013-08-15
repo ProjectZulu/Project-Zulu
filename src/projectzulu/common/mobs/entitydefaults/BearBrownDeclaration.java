@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BearBrownDeclaration extends SpawnableDeclaration {
 
     public BearBrownDeclaration() {
-        super("Brown Bear", EntityBrownBear.class, EnumCreatureType.creature);
+        super("Brown Bear", 17, EntityBrownBear.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);
