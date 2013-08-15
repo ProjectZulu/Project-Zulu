@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class PenguinDeclaration extends SpawnableDeclaration {
 
     public PenguinDeclaration() {
-        super("Penguin", EntityPenguin.class, EnumCreatureType.creature);
+        super("Penguin", 14, EntityPenguin.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 3);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

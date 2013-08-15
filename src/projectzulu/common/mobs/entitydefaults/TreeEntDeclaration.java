@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TreeEntDeclaration extends SpawnableDeclaration {
 
     public TreeEntDeclaration() {
-        super("TreeEnt", EntityTreeEnt.class, EnumCreatureType.creature);
+        super("TreeEnt", 7, EntityTreeEnt.class, EnumCreatureType.creature);
         setSpawnProperties(1, 7, 1, 1);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

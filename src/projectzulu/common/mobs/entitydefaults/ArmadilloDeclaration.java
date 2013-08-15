@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ArmadilloDeclaration extends SpawnableDeclaration {
 
     public ArmadilloDeclaration() {
-        super("Armadillo", EntityArmadillo.class, EnumCreatureType.creature);
+        super("Armadillo", 0, EntityArmadillo.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 2, 4);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

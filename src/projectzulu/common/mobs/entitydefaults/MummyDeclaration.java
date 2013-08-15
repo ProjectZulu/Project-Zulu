@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class MummyDeclaration extends SpawnableDeclaration {
 
     public MummyDeclaration() {
-        super("Mummy", EntityMummy.class, EnumCreatureType.monster);
+        super("Mummy", 5, EntityMummy.class, EnumCreatureType.monster);
         setSpawnProperties(5, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

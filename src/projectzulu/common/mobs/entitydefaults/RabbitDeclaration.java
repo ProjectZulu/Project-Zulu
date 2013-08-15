@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RabbitDeclaration extends SpawnableDeclaration {
 
     public RabbitDeclaration() {
-        super("Rabbit", EntityRabbit.class, EnumCreatureType.creature);
+        super("Rabbit", 21, EntityRabbit.class, EnumCreatureType.creature);
         setSpawnProperties(15, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 1);

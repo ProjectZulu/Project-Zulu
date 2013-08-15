@@ -22,8 +22,8 @@ public abstract class SpawnableDeclaration extends EggableDeclaration {
     protected ArrayList<String> defaultBiomesToSpawn = new ArrayList<String>();
     ArrayList<SpawnEntry> biomesToSpawn = new ArrayList<SpawnEntry>();
 
-    protected SpawnableDeclaration(String mobName, Class mobClass, EnumCreatureType creatureType) {
-        super(mobName, mobClass, creatureType);
+    protected SpawnableDeclaration(String mobName, int entityID, Class mobClass, EnumCreatureType creatureType) {
+        super(mobName, entityID, mobClass, creatureType);
         spawnType = creatureType;
     }
 

@@ -26,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class SandwormDeclaration extends SpawnableDeclaration {
 
     public SandwormDeclaration() {
-        super("SandWorm", EntitySandWorm.class, EnumCreatureType.monster);
+        super("SandWorm", 1, EntitySandWorm.class, EnumCreatureType.monster);
         setSpawnProperties(1, 100, 1, 1);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

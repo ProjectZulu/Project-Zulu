@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class CentipedeDeclaration extends SpawnableDeclaration {
 
     public CentipedeDeclaration() {
-        super("Centipede", EntityCentipede.class, EnumCreatureType.monster);
+        super("Centipede", 40, EntityCentipede.class, EnumCreatureType.monster);
         setSpawnProperties(1, 35, 1, 1);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

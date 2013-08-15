@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class HorseRandomDeclaration extends SpawnableDeclaration {
 
     public HorseRandomDeclaration() {
-        super("HorseRandom", EntityHorseRandom.class, EnumCreatureType.creature);
+        super("HorseRandom", 42, EntityHorseRandom.class, EnumCreatureType.creature);
         setSpawnProperties(5, 100, 3, 4);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 3);

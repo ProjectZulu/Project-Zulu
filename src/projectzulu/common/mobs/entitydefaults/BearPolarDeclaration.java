@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BearPolarDeclaration extends SpawnableDeclaration {
 
     public BearPolarDeclaration() {
-        super("Polar Bear", EntityPolarBear.class, EnumCreatureType.creature);
+        super("Polar Bear", 18, EntityPolarBear.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

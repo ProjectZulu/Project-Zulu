@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class HorseDarkBlackDeclaration extends SpawnableDeclaration {
 
     public HorseDarkBlackDeclaration() {
-        super("Horse Dark Black", EntityHorseDarkBlack.class, EnumCreatureType.creature);
+        super("Horse Dark Black", 31, EntityHorseDarkBlack.class, EnumCreatureType.creature);
         setSpawnProperties(5, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 3);

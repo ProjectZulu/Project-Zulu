@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class HauntedArmorDeclaration extends EggableDeclaration {
 
     public HauntedArmorDeclaration() {
-        super("Haunted Armor", EntityHauntedArmor.class, EnumCreatureType.monster);
+        super("Haunted Armor", 39, EntityHauntedArmor.class, EnumCreatureType.monster);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);
 

@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BoarDeclaration extends SpawnableDeclaration {
 
     public BoarDeclaration() {
-        super("Boar", EntityBoar.class, EnumCreatureType.creature);
+        super("Boar", 10, EntityBoar.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 3);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

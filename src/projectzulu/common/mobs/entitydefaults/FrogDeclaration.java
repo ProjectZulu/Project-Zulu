@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class FrogDeclaration extends SpawnableDeclaration {
 
     public FrogDeclaration() {
-        super("Frog", EntityFrog.class, EnumCreatureType.creature);
+        super("Frog", 13, EntityFrog.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 3);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 1);

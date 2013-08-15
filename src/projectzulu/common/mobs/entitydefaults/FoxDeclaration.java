@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class FoxDeclaration extends SpawnableDeclaration {
 
     public FoxDeclaration() {
-        super("Fox", EntityFox.class, EnumCreatureType.creature);
+        super("Fox", 9, EntityFox.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 3);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

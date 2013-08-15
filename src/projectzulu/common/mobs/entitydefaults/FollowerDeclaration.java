@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class FollowerDeclaration extends CreatureDeclaration {
 
     public FollowerDeclaration() {
-        super("Follower", EntityFollower.class, null);
+        super("Follower", 41, EntityFollower.class, null);
         setRegistrationProperties(128, 3, true);
     }
 

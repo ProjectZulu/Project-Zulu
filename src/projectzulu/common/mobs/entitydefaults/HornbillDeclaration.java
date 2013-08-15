@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class HornbillDeclaration extends SpawnableDeclaration {
 
     public HornbillDeclaration() {
-        super("Horn Bill", EntityHornBill.class, EnumCreatureType.ambient);
+        super("Horn Bill", 36, EntityHornBill.class, EnumCreatureType.ambient);
         setSpawnProperties(10, 25, 1, 1);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

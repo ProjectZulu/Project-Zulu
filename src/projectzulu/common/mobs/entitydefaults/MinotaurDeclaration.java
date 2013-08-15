@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class MinotaurDeclaration extends EggableDeclaration {
 
     public MinotaurDeclaration() {
-        super("Minotaur", EntityMinotaur.class, EnumCreatureType.monster);
+        super("Minotaur", 38, EntityMinotaur.class, EnumCreatureType.monster);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);
 

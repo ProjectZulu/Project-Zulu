@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BeaverDeclaration extends SpawnableDeclaration {
 
     public BeaverDeclaration() {
-        super("Beaver", EntityBeaver.class, EnumCreatureType.creature);
+        super("Beaver", 15, EntityBeaver.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

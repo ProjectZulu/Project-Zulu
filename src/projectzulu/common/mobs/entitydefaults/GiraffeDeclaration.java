@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GiraffeDeclaration extends SpawnableDeclaration {
 
     public GiraffeDeclaration() {
-        super("Giraffe", EntityGiraffe.class, EnumCreatureType.creature);
+        super("Giraffe", 26, EntityGiraffe.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 3);

@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class PelicanDeclaration extends SpawnableDeclaration {
 
     public PelicanDeclaration() {
-        super("Pelican", EntityPelican.class, EnumCreatureType.ambient);
+        super("Pelican", 37, EntityPelican.class, EnumCreatureType.ambient);
         setSpawnProperties(7, 5, 1, 1);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class VultureDeclaration extends SpawnableDeclaration {
 
     public VultureDeclaration() {
-        super("Vulture", EntityVulture.class, EnumCreatureType.monster);
+        super("Vulture", 6, EntityVulture.class, EnumCreatureType.monster);
         setSpawnProperties(2, 5, 1, 3);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);

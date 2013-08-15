@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlueFinchDeclaration extends SpawnableDeclaration {
 
     public BlueFinchDeclaration() {
-        super("Blue Finch", EntityBlueFinch.class, EnumCreatureType.ambient);
+        super("Blue Finch", 24, EntityBlueFinch.class, EnumCreatureType.ambient);
         setSpawnProperties(10, 5, 1, 1);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 1);

@@ -20,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class MammothDeclaration extends SpawnableDeclaration {
 
     public MammothDeclaration() {
-        super("Mammoth", EntityMammoth.class, EnumCreatureType.creature);
+        super("Mammoth", 8, EntityMammoth.class, EnumCreatureType.creature);
         setSpawnProperties(1, 7, 1, 3);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 4);

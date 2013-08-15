@@ -20,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class MimicDeclaration extends EggableDeclaration {
 
     public MimicDeclaration() {
-        super("Mimic", EntityMimic.class, null);
+        super("Mimic", 11, EntityMimic.class, null);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 1);
 
