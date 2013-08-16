@@ -76,13 +76,17 @@ public abstract class SpawnableDeclaration extends EggableDeclaration{
 		}
 		
 		for (int i = 0; i < biomesToSpawn.size(); i++){
-		    if(useGlobalSpawn){
-                EntityRegistry.addSpawn(mobClass, spawnRate, minInChunk, maxInChunk, spawnType,
-                        biomesToSpawn.get(i).biome);
-		    }else{
-	            EntityRegistry.addSpawn(mobClass, biomesToSpawn.get(i).spawnRate, biomesToSpawn.get(i).minInChunk,
-	                    biomesToSpawn.get(i).maxInChunk, spawnType, biomesToSpawn.get(i).biome);
-		    }
+            if (useGlobalSpawn) {
+                if (spawnRate > 0) {
+                    EntityRegistry.addSpawn(mobClass, spawnRate, minInChunk, maxInChunk, spawnType,
+                            biomesToSpawn.get(i).biome);
+                }
+            } else {
+                if (biomesToSpawn.get(i).spawnRate > 0) {
+                    EntityRegistry.addSpawn(mobClass, biomesToSpawn.get(i).spawnRate, biomesToSpawn.get(i).minInChunk,
+                            biomesToSpawn.get(i).maxInChunk, spawnType, biomesToSpawn.get(i).biome);
+                }
+            }
 			if(reportSpawningInLog){
                 ProjectZuluLog.info("Registering %s to biome %s at rates of %s,%s,%s", mobClass.getSimpleName(),
                         biomesToSpawn.get(i).biome.biomeName, biomesToSpawn.get(i).spawnRate,
