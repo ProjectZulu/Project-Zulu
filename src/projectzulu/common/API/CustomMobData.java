@@ -9,6 +9,7 @@ import java.util.Random;
 import projectzulu.common.core.entitydeclaration.EntityProperties;
 
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.WeightedRandomItem;
@@ -48,7 +49,10 @@ public class CustomMobData {
 
     public ItemStack getLootItem(Random rand) {
         if (lootItems != null && !lootItems.isEmpty()) {
-            return ((WeightedItemStack) WeightedRandom.getRandomItem(rand, lootItems)).itemStack.copy();
+            ItemStack stack = ((WeightedItemStack) WeightedRandom.getRandomItem(rand, lootItems)).itemStack;
+            if (Item.itemsList[stack.itemID] != null) {
+                return stack.copy();
+            }
         }
         return null;
     }
@@ -57,7 +61,10 @@ public class CustomMobData {
         final int numberOfItems = minDropNum + rand.nextInt(1 + maxDropNum - minDropNum + extraDrops);
         List<ItemStack> items = new ArrayList<ItemStack>(numberOfItems);
         for (int i = 0; i < numberOfItems; i++) {
-            items.add(getLootItem(rand));
+            ItemStack stack = getLootItem(rand);
+            if (stack != null) {
+                items.add(stack);
+            }
         }
         return items;
     }

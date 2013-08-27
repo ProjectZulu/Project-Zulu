@@ -116,7 +116,7 @@ public class ConfigHelper {
 				}
 				
 				for (int curID = minItemID; curID <= maxItemID; curID++){
-					if(Item.itemsList[curID] != null && weight > 0){
+					if(curID >= 0 || curID < Item.itemsList.length && weight > 0){
 						ItemStack itemStack = new ItemStack(curID, quantity, meta);
 						customMobData.addLootToMob(itemStack, weight);
 					}
