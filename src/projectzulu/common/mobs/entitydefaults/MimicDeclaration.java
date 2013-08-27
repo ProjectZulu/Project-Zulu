@@ -23,6 +23,7 @@ public class MimicDeclaration extends EggableDeclaration {
         super("Mimic", 11, EntityMimic.class, null);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 1);
+        shouldDespawn = false;
 
         eggColor1 = (171 << 16) + (121 << 8) + 45;
         eggColor2 = (143 << 16) + (105 << 8) + 29;
