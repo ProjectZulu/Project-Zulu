@@ -20,7 +20,7 @@ public class HauntedArmorWithMeta extends BlockWithMeta {
 			
 			/* Spawn Mimic */
 			EntityHauntedArmor mob = new EntityHauntedArmor(world, position.posX+0.5, position.posY, position.posZ+0.5, true);
-			mob.func_110161_a(null);
+			mob.onSpawnWithEgg(null);
 			mob.setPersistenceRequired(true);
 			world.spawnEntityInWorld(mob);
 		}

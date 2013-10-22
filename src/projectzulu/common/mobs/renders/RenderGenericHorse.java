@@ -16,7 +16,7 @@ public class RenderGenericHorse extends RenderGenericLiving {
     }
 
     @Override
-    protected ResourceLocation func_110775_a(Entity entity) {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         if (entity instanceof EntityGenericAnimal) {
             EntityGenericAnimal animal = (EntityGenericAnimal) entity;
             if (animal.getSaddled()) {

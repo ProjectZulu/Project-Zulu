@@ -17,7 +17,7 @@ public class RenderGenericIdle extends RenderGenericLiving {
     }
 
     @Override
-    protected ResourceLocation func_110775_a(Entity entity) {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         if (((EntityGenericAnimal) entity).getEntityState() == EntityStates.idle) {
             return idleTexture;
         } else {

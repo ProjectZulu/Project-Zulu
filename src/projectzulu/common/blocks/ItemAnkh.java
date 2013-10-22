@@ -23,12 +23,12 @@ public class ItemAnkh extends Item {
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         bFull3D = true;
         setUnlocalizedName(name.toLowerCase());
-        func_111206_d(DefaultProps.blockKey + ":" + name.toLowerCase());
+        setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase());
     }
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
-        if (player.func_110143_aJ() > 1f) {
+        if (player.getHealth() > 1f) {
             shootFireball(world, player);
             if (!player.capabilities.isCreativeMode) {
                 player.heal(-1);

@@ -41,7 +41,7 @@ public class CommandPlaceBlock extends CommandBase{
 			int targetY = 0;
 			int targetZ = 0;
 			int blockMeta = 0;
-			EntityPlayerMP targetPlayer = func_82359_c(commandSender, stringArgs[0]);
+			EntityPlayerMP targetPlayer = getPlayer(commandSender, stringArgs[0]);
 			if(targetPlayer == null){
 				throw new PlayerNotFoundException();
 			}

@@ -36,7 +36,7 @@ public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRende
 			if(itemToRender != null && Item.itemsList[itemToRender.itemID] instanceof ItemBlock && Block.blocksList[itemToRender.itemID].getRenderType() != -1){
 				Block blockToRender = Block.blocksList[itemToRender.itemID];
 				int meta = itemStackToRender.getItemDamage() > 16 ? 16 : itemStackToRender.getItemDamage() < 0 ? 0 : itemStackToRender.getItemDamage();
-		        this.func_110628_a(TextureMap.field_110575_b);
+		        this.bindTexture(TextureMap.locationBlocksTexture);
 		        GL11.glPushMatrix();
 		        float scaleBlock = (float) (0.29f / (blockToRender.getBlockBoundsMaxX() - blockToRender.getBlockBoundsMinX()));
 		        float scaleY = (float) (scaleBlock * (blockToRender.getBlockBoundsMaxY() - blockToRender.getBlockBoundsMinY()));
@@ -58,7 +58,7 @@ public class TileEntityUniversalFlowerPotRenderer extends TileEntitySpecialRende
 				
 		        float scaleItem = 0.6f;
 		        GL11.glPushMatrix();
-                this.func_110628_a(TextureMap.field_110575_b);
+                this.bindTexture(TextureMap.locationBlocksTexture);
 		        GL11.glTranslatef((float)xRenderCoord + 0.5f, (float)(yRenderCoord + 0.3), (float)zRenderCoord + 0.5f);
 		        GL11.glScalef(scaleItem, scaleItem, scaleItem);
 				itemRenderer.doRenderItem(entityItemToRender, 0, 0, 0, 0, 0);

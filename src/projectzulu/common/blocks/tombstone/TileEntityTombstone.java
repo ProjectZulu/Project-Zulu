@@ -137,7 +137,7 @@ public class TileEntityTombstone extends TileEntity {
 
     @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-        NBTTagCompound tag = packet.customParam1;
+        NBTTagCompound tag = packet.data;
         readFromNBT(tag);
     }
 

@@ -111,7 +111,7 @@ public class ModelHauntedArmor extends ModelBase {
             itemStack = var5.func_130225_q(2) != null ? var5.func_130225_q(2) : new ItemStack(Item.plateGold);
             
             resource = RenderBiped.getArmorResource(par1Entity, itemStack, 2, null);
-            Minecraft.getMinecraft().renderEngine.func_110577_a(resource);
+            Minecraft.getMinecraft().renderEngine.bindTexture(resource);
             scale = par7 * 0.85f;
             this.bipedRightLeg2.render(scale);
             this.bipedLeftLeg2.render(scale);
@@ -120,7 +120,7 @@ public class ModelHauntedArmor extends ModelBase {
             textureLocation = "/armor/iron_1.png";
             itemStack = var5.func_130225_q(1) != null ? var5.func_130225_q(2) : new ItemStack(Item.legsGold);
             resource = RenderBiped.getArmorResource(par1Entity, itemStack, 1, null);
-            Minecraft.getMinecraft().renderEngine.func_110577_a(resource);
+            Minecraft.getMinecraft().renderEngine.bindTexture(resource);
             this.bipedHead.render(par7);
             this.bipedBody.render(par7);
             this.bipedRightArm.render(par7);

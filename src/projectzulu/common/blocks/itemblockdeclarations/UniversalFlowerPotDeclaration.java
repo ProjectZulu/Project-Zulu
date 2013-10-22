@@ -39,10 +39,10 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
         if (Properties.replaceFlowerPot) {
             Block.blocksList[Block.flowerPot.blockID] = null;
             BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(Block.flowerPot.blockID, renderID)
-                    .setUnlocalizedName("flowerPot").func_111022_d("flower_pot"));
+                    .setUnlocalizedName("flowerPot").setTextureName("flower_pot"));
         } else {
             BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(iD, renderID).setUnlocalizedName(
-                    "uniFlowerPot").func_111022_d("flower_pot"));
+                    "uniFlowerPot").setTextureName("flower_pot"));
         }
         return true;
     }

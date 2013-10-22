@@ -25,7 +25,7 @@ public class PotionZulu extends Potion {
     @SideOnly(Side.CLIENT)
     public int getStatusIconIndex() {
         Minecraft mc = Minecraft.getMinecraft();
-        mc.renderEngine.func_110577_a(getTextureFile());
+        mc.renderEngine.bindTexture(getTextureFile());
         return super.getStatusIconIndex();
     }
 

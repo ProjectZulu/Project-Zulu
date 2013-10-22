@@ -100,7 +100,7 @@ public class EventHookContainerClass {
 				}
 				
 				if(cactusDamage > 0){
-					attackingEntity.attackEntityFrom(DamageSource.causeMobDamage(hurtEntity), MathHelper.ceiling_double_int(cactusDamage));
+					attackingEntity.attackEntityFrom(DamageSource.causeThornsDamage(hurtEntity), MathHelper.ceiling_double_int(cactusDamage));
 				}
 				
 			}

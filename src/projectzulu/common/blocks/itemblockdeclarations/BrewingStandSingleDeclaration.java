@@ -36,7 +36,7 @@ public class BrewingStandSingleDeclaration extends BlockDeclaration {
     @Override
     protected boolean createBlock(int iD) {
         BlockList.brewingStandSingle = Optional.of(new BlockBrewingStandSingle(iD, renderID).setUnlocalizedName(
-                "brewingsingle").func_111022_d(DefaultProps.blockKey + ":brewingsingle"));
+                "brewingsingle").setTextureName(DefaultProps.blockKey + ":brewingsingle"));
         return true;
     }
 

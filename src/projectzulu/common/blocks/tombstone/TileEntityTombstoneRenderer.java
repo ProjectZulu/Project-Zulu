@@ -38,7 +38,7 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer
         
        
         
-        this.func_110628_a(TOMBSTONE);
+        this.bindTexture(TOMBSTONE);
         
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);

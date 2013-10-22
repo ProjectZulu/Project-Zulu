@@ -10,6 +10,6 @@ public class ItemUniversalFlowerPot extends ItemReed {
         super(par1, block);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setUnlocalizedName(block.getUnlocalizedName());
-        func_111206_d("flower_pot");
+        setTextureName("flower_pot");
     }
 }

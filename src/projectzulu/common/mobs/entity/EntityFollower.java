@@ -59,10 +59,10 @@ public class EntityFollower extends EntityLiving {
     }
 
     @Override
-    protected void func_110147_ax() {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20);
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0);
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0);
     }
 
     @Override
@@ -217,7 +217,7 @@ public class EntityFollower extends EntityLiving {
             this.motionZ *= (double) var3;
         }
 
-        this.prevLimbYaw = this.limbYaw;
+        this.prevLimbSwingAmount = this.limbSwingAmount;
         double var10 = this.posX - this.prevPosX;
         double var9 = this.posZ - this.prevPosZ;
         float var7 = MathHelper.sqrt_double(var10 * var10 + var9 * var9) * 4.0F;
@@ -226,8 +226,8 @@ public class EntityFollower extends EntityLiving {
             var7 = 1.0F;
         }
 
-        this.limbYaw += (var7 - this.limbYaw) * 0.4F;
-        this.limbSwing += this.limbYaw;
+        this.limbSwingAmount += (var7 - this.limbSwingAmount) * 0.4F;
+        this.limbSwing += this.limbSwingAmount;
     }
 
     private float wrapAngleTo360(float angle) {

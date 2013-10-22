@@ -342,7 +342,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
 
     @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-        NBTTagCompound tagCompound = packet.customParam1;
+        NBTTagCompound tagCompound = packet.data;
         this.readFromNBT(tagCompound);
     }
 }

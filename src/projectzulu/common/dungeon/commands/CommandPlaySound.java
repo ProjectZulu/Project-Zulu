@@ -48,7 +48,7 @@ public class CommandPlaySound extends CommandBase{
 			int soundTargetY = 0;
 			int soundTargetZ = 0;
 			
-			EntityPlayerMP targetPlayer = func_82359_c(commandSender, stringArgs[0]);
+			EntityPlayerMP targetPlayer = getPlayer(commandSender, stringArgs[0]);
 			if(targetPlayer == null){
 				throw new PlayerNotFoundException();
 			}

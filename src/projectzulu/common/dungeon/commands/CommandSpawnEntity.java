@@ -47,7 +47,7 @@ public class CommandSpawnEntity extends CommandBase{
 			float rotYaw = 0;
 			float rotPitch = 0;
 
-			EntityPlayerMP targetPlayer = func_82359_c(commandSender, stringArgs[0]);
+			EntityPlayerMP targetPlayer = getPlayer(commandSender, stringArgs[0]);
 			if(targetPlayer == null){
 				throw new PlayerNotFoundException();
 			}

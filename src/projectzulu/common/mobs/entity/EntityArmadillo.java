@@ -28,7 +28,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 
     public static final UUID field_110179_h = UUID.fromString("E199AD22-BA8B-4C53-8A13-1182D5C69D3A");
     public static final AttributeModifier CHARGING_BONUS = (new AttributeModifier(field_110179_h,
-            "Fleeing speed bonus", -0.3D, 2)).func_111168_a(false);
+            "Fleeing speed bonus", -0.3D, 2)).setSaved(false);
 
     /* Model Assist Variables, Legacy: Code should be Reworked without them */
     public EntityModelRotation eWHOLE = new EntityModelRotation();

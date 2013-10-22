@@ -24,7 +24,7 @@ public class PalmTreeDoubleSlab extends BlockDeclaration {
     protected boolean createBlock(int iD) {
         if (BlockList.palmTreePlank.isPresent()) {
             BlockList.palmTreeDoubleSlab = Optional.of((new BlockZuluSlab(iD, true, BlockList.palmTreePlank.get()))
-                    .setUnlocalizedName(name.toLowerCase()).func_111022_d(
+                    .setUnlocalizedName(name.toLowerCase()).setTextureName(
                             DefaultProps.blockKey + ":" + name.toLowerCase()));
             return true;
         }

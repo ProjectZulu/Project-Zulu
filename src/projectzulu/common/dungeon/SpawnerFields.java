@@ -248,7 +248,7 @@ public class SpawnerFields implements DataFields {
                     (screenSize.getY() - backgroundSize.getY()) / 2 + 26 + 17 * 6, 4210752);
 
             /* Draw TextBox Background Objects */
-            mc.renderEngine.func_110577_a(CREATURE_GUI);
+            mc.renderEngine.bindTexture(CREATURE_GUI);
             // int textureID = mc.renderEngine.getTexture(DefaultProps.dungeonDiretory+"creaturelistgui.png");
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             // mc.renderEngine.bindTexture(textureID); //TODO: Commented

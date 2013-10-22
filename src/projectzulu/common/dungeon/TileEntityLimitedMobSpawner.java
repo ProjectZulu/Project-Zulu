@@ -326,7 +326,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
     public void writeNBTTagsTo(Entity par1Entity) {
         if (this.spawnerTags != null) {
             NBTTagCompound var2 = new NBTTagCompound();
-            par1Entity.addEntityID(var2);
+            par1Entity.writeToNBTOptional(var2);
             Iterator var3 = this.spawnerTags.properties.getTags().iterator();
 
             while (var3.hasNext()) {
@@ -357,7 +357,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
             }
         } else if (par1Entity instanceof EntityLiving && par1Entity.worldObj != null) {
             EntityLivingData livingData = null;
-//            livingData = ((EntityLiving) par1Entity).func_110161_a(livingData);
+//            livingData = ((EntityLiving) par1Entity).onSpawnWithEgg(livingData);
         }
     }
 
@@ -522,7 +522,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
     @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
         super.onDataPacket(net, pkt);
-        NBTTagCompound tag = pkt.customParam1;
+        NBTTagCompound tag = pkt.data;
         readFromNBT(tag);
 
     }

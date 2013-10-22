@@ -56,7 +56,7 @@ public class EntityVulture extends EntityGenericAnimal {
         float moveSpeed = 0.18f;
         CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
         if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
-            // TODO: Switch to this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111126_e()???
+            // TODO: Switch to this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue()???
             moveSpeed = entityEntry.modData.get().entityProperties.moveSpeed;
         }
 
@@ -148,8 +148,8 @@ public class EntityVulture extends EntityGenericAnimal {
                         }
                     }
                 }
-                if (((EntityLivingBase) targetedEntity).func_110143_aJ() < maxTargetHealthToAttack
-                        && ((EntityLivingBase) targetedEntity).func_110143_aJ() < nearbyVultures * 4) {
+                if (((EntityLivingBase) targetedEntity).getHealth() < maxTargetHealthToAttack
+                        && ((EntityLivingBase) targetedEntity).getHealth() < nearbyVultures * 4) {
                     setAngerLevel(400);
                 }
             }

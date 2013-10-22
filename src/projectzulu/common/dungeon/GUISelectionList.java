@@ -67,7 +67,7 @@ public class GUISelectionList extends GuiScrollingList {
 
     @Override
     protected void drawBackground() {
-        parent.getMinecraft().renderEngine.func_110577_a(CREATURE_GUI);
+        parent.getMinecraft().renderEngine.bindTexture(CREATURE_GUI);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int xCoord = (parent.width - parent.backgroundSize.getX()) / 2 + 230; // 277
         int yCoord = (parent.height - parent.backgroundSize.getY()) / 2;
@@ -109,7 +109,7 @@ public class GUISelectionList extends GuiScrollingList {
 
     private void drawScrollOverlay(int leftOffset, int topHeight, int botHeight, int alphaBottom, int alphaTop) {
         Tessellator var5 = Tessellator.instance;
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, parent.getMinecraft().renderEngine.func_110581_b(getBackgroundTexture()).func_110552_b());
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, parent.getMinecraft().renderEngine.getTexture(getBackgroundTexture()).getGlTextureId());
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         float imageSize = 32.0F;
         var5.startDrawingQuads();

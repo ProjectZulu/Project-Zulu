@@ -91,8 +91,8 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
     }
 
     @Override
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
-        EntityLivingData entityLivingData = super.func_110161_a(par1EntityLivingData);
+    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData) {
+        EntityLivingData entityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
         setRandomArmor(worldObj);
         return entityLivingData;
     }

@@ -54,7 +54,7 @@ public class TileEntityMobHeads extends TileEntity{
     @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData packet)
     {
-    	NBTTagCompound tag = packet.customParam1;
+    	NBTTagCompound tag = packet.data;
     	skullType = tag.getByte("SkullType");
     	rotation = tag.getByte("Rot");
     }

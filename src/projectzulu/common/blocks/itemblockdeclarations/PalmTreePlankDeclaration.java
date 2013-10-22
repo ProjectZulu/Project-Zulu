@@ -23,7 +23,7 @@ public class PalmTreePlankDeclaration extends BlockDeclaration {
         BlockList.palmTreePlank = Optional
                 .of(new BlockPalmTreePlank(iD).setStepSound(Block.soundWoodFootstep)
                         .setUnlocalizedName(name.toLowerCase())
-                        .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
+                        .setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

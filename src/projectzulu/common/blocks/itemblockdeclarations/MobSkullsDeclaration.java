@@ -24,7 +24,7 @@ public class MobSkullsDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.mobHeads = Optional.of(new BlockMobHeads(iD).setUnlocalizedName(name.toLowerCase()).func_111022_d(
+        BlockList.mobHeads = Optional.of(new BlockMobHeads(iD).setUnlocalizedName(name.toLowerCase()).setTextureName(
                 DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }

@@ -69,14 +69,14 @@ public abstract class EntityGenericCreature extends EntityAerial
     protected void func_110159_bB() {
         super.func_110159_bB();
 
-        if (this.func_110167_bD() && this.func_110166_bE() != null && this.func_110166_bE().worldObj == this.worldObj) {
-            Entity entity = this.func_110166_bE();
+        if (this.getLeashed() && this.getLeashedToEntity() != null && this.getLeashedToEntity().worldObj == this.worldObj) {
+            Entity entity = this.getLeashedToEntity();
             this.setHomeArea((int) entity.posX, (int) entity.posY, (int) entity.posZ, 5);
             float f = this.getDistanceToEntity(entity);
 
             if (this instanceof EntityGenericTameable && ((EntityGenericTameable) this).isSitting()) {
                 if (f > 10.0F) {
-                    this.func_110160_i(true, true);
+                    this.clearLeashed(true, true);
                 }
 
                 return;
@@ -104,9 +104,9 @@ public abstract class EntityGenericCreature extends EntityAerial
             }
 
             if (f > 10.0F) {
-                this.func_110160_i(true, true);
+                this.clearLeashed(true, true);
             }
-        } else if (!this.func_110167_bD() && this.field_110180_bt) {
+        } else if (!this.getLeashed() && this.field_110180_bt) {
             this.field_110180_bt = false;
             this.tasks.removeTask(this.field_110178_bs);
             this.getNavigator().setAvoidsWater(true);

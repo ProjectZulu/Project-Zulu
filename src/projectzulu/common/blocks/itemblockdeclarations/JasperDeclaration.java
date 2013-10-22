@@ -18,7 +18,7 @@ public class JasperDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.jasper = Optional.of((new BlockJasper(iD)).setUnlocalizedName(name.toLowerCase()).func_111022_d(
+        BlockList.jasper = Optional.of((new BlockJasper(iD)).setUnlocalizedName(name.toLowerCase()).setTextureName(
                 DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
