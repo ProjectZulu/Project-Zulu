@@ -216,7 +216,7 @@ public abstract class GuiScrollingList {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_FOG);
         Tessellator var18 = Tessellator.instance;
-        client.renderEngine.func_110577_a(getBackgroundTexture());
+        client.renderEngine.bindTexture(getBackgroundTexture());
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         float var17 = 32.0F;
         var18.startDrawingQuads();
@@ -349,7 +349,7 @@ public abstract class GuiScrollingList {
 
     private void overlayBackground(int p_22239_1_, int p_22239_2_, int p_22239_3_, int p_22239_4_) {
         Tessellator var5 = Tessellator.instance;
-        client.renderEngine.func_110577_a(getBackgroundTexture());
+        client.renderEngine.bindTexture(getBackgroundTexture());
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         float var6 = 32.0F;
         int leftOffset = 300;

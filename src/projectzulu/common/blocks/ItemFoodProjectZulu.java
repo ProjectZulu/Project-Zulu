@@ -47,7 +47,7 @@ public class ItemFoodProjectZulu extends ItemFood {
         saturationModifier = par3;
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setUnlocalizedName(name);
-        func_111206_d(DefaultProps.blockKey + ":" + name.toLowerCase());
+        setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase());
     }
 
     @Override

@@ -39,9 +39,9 @@ public class GuiBrewingStandSingle extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         if (brewingStand.getSizeInventory() - 1 < 3) {
-            this.mc.renderEngine.func_110577_a(brewing1);
+            this.mc.renderEngine.bindTexture(brewing1);
         } else {
-            this.mc.renderEngine.func_110577_a(brewing3);
+            this.mc.renderEngine.bindTexture(brewing3);
         }
 
         int k = (this.width - this.xSize) / 2;

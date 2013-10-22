@@ -22,7 +22,7 @@ public class EntityEagle extends EntityGenericAnimal {
         float moveSpeed = 0.22f;
         CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
         if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
-            // TODO: Switch to this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111126_e()???
+            // TODO: Switch to this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue()???
             moveSpeed = entityEntry.modData.get().entityProperties.moveSpeed;
         }
 

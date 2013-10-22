@@ -22,7 +22,7 @@ public class PalmTreeStairsDeclaration extends BlockDeclaration {
     protected boolean createBlock(int iD) {
         if (BlockList.palmTreePlank.isPresent()) {
             BlockList.palmTreeStairs = Optional.of(new BlockZuluStairs(iD, BlockList.palmTreePlank.get(), 0)
-                    .setUnlocalizedName(name.toLowerCase()).func_111022_d(
+                    .setUnlocalizedName(name.toLowerCase()).setTextureName(
                             DefaultProps.blockKey + ":" + name.toLowerCase()));
             return true;
         }

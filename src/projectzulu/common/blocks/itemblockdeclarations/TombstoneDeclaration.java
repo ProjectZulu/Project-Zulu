@@ -29,7 +29,7 @@ public class TombstoneDeclaration extends BlockDeclaration {
     @Override
     protected boolean createBlock(int iD) {
         BlockList.tombstone = Optional.of(new BlockTombstone(iD, TileEntityTombstone.class).setUnlocalizedName(
-                name.toLowerCase()).func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
+                name.toLowerCase()).setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

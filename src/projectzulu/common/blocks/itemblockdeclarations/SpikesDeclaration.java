@@ -32,7 +32,7 @@ public class SpikesDeclaration extends BlockDeclaration {
     protected boolean createBlock(int iD) {
         BlockList.spike = Optional.of(new BlockSpikes(iD, renderID).setHardness(0.5F)
                 .setStepSound(Block.soundMetalFootstep).setUnlocalizedName(name.toLowerCase())
-                .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
+                .setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

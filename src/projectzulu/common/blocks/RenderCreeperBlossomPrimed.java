@@ -48,7 +48,7 @@ public class RenderCreeperBlossomPrimed extends Render implements RenderWrapper 
             GL11.glScalef(var11, var11, var11);
         }
         var10 = (1.0F - ((float) par1EntityTNTPrimed.fuse - par9 + 1.0F) / 100.0F) * 0.8F;
-        this.func_110777_b(par1EntityTNTPrimed);
+        this.bindEntityTexture(par1EntityTNTPrimed);
         this.blockRenderer
                 .renderBlockAsItem(BlockList.creeperBlossom.get(), 2, par1EntityTNTPrimed.getBrightness(par9));
         if (par1EntityTNTPrimed.fuse / 5 % 2 == 0) {
@@ -79,8 +79,8 @@ public class RenderCreeperBlossomPrimed extends Render implements RenderWrapper 
     }
 
     @Override
-    protected ResourceLocation func_110775_a(Entity entity) {
-        return TextureMap.field_110575_b;
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return TextureMap.locationBlocksTexture;
     }
 
     @Override

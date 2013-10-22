@@ -33,7 +33,7 @@ public class ItemPZPotion extends ItemPotion {
         setCreativeTab(ProjectZulu_Core.projectZuluPotionTab);
         setMaxStackSize(3);
         setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase());
-        func_111206_d(DefaultProps.blockKey + ":" + name.toLowerCase());
+        setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase());
     }
 
     /**

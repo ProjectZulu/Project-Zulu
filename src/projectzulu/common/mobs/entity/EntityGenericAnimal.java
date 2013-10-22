@@ -50,21 +50,21 @@ public class EntityGenericAnimal extends EntityGenericTameable {
      * See {@link#EntityDragon} which sets health to 200
      */
     @Override
-    protected void func_110147_ax() {
-        super.func_110147_ax();
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
         CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
         if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
-            this.func_110140_aT().func_111150_b(SharedMonsterAttributes.field_111264_e);
+            this.getAttributeMap().func_111150_b(SharedMonsterAttributes.attackDamage);
             
-            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(
                     entityEntry.modData.get().entityProperties.maxHealth);
-            this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(
                     entityEntry.modData.get().entityProperties.moveSpeed);
-            this.func_110148_a(SharedMonsterAttributes.field_111265_b).func_111128_a(
+            this.getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(
                     entityEntry.modData.get().entityProperties.followRange);
-            this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111128_a(
+            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(
                     entityEntry.modData.get().entityProperties.knockbackResistance);
-            this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(
                     entityEntry.modData.get().entityProperties.attackDamage);
             flightChance = entityEntry.modData.get().entityProperties.flightChance;
         }
@@ -162,7 +162,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
                         packetAnimTime.createPacket());
             }
 
-            float damage = (float) this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
+            float damage = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
             int knockbackScale = 0;
 
             if (targetEntity instanceof EntityLivingBase) {

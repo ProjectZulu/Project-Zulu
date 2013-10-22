@@ -19,7 +19,7 @@ public class NightBloomDeclaration extends BlockDeclaration {
     @Override
     protected boolean createBlock(int iD) {
         BlockList.nightBloom = Optional.of(new BlockNightBloom(iD).setUnlocalizedName(name.toLowerCase())
-                .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
+                .setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

@@ -20,7 +20,7 @@ public class RenderMammoth extends RenderGenericLiving {
     }
 
     @Override
-    protected ResourceLocation func_110775_a(Entity entity) {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         if (((EntityGenericRideable) entity).getSaddled()) {
             if (entity.worldObj.getBiomeGenForCoords((int) entity.posX, (int) entity.posZ) == BiomeGenBase.taiga
                     || entity.worldObj.getBiomeGenForCoords((int) entity.posX, (int) entity.posZ) == BiomeGenBase.taigaHills) {

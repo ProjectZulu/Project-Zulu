@@ -29,7 +29,7 @@ public class ItemStructurePlacer extends Item {
         setHasSubtypes(true);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setUnlocalizedName(baseName);
-        func_111206_d("paper");
+        setTextureName("paper");
     }
 
     @Override

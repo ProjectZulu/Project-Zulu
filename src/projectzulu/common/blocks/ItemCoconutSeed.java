@@ -20,7 +20,7 @@ public class ItemCoconutSeed extends Item {
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         bFull3D = par3bool;
         setUnlocalizedName(baseName);
-        func_111206_d(DefaultProps.blockKey + ":" + baseName);
+        setTextureName(DefaultProps.blockKey + ":" + baseName);
     }
 
     @Override

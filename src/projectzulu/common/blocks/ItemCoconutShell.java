@@ -13,7 +13,7 @@ public class ItemCoconutShell extends Item {
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         bFull3D = full3D;
         setUnlocalizedName(name.toLowerCase());
-        func_111206_d(DefaultProps.blockKey + ":" + name.toLowerCase());
+        setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase());
     }
 
     public int getMetadata(int par1) {

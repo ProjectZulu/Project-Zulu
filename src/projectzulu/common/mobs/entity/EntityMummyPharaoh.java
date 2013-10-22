@@ -110,7 +110,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
         switch (stage) {
         case 1:
             /* Stage One Update: If Condition Valid Change Stage */
-            if (func_110143_aJ() < 0.9 * func_110138_aP()) {
+            if (getHealth() < 0.9 * getMaxHealth()) {
                 teleportTo(startingPosition.xCoord, startingPosition.yCoord + 2, startingPosition.zCoord);
                 stage++;
             }
@@ -124,7 +124,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
             }
 
             /* Stage Two Update: If Condition Valid Change Stage */
-            if (func_110143_aJ() < 0.7 * func_110138_aP()) {
+            if (getHealth() < 0.7 * getMaxHealth()) {
                 teleportTo(startingPosition.xCoord, startingPosition.yCoord + 2, startingPosition.zCoord);
                 stage++;
             }
@@ -137,7 +137,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
             }
 
             /* Stage Three Update: If Condition Valid Change Stage */
-            if (func_110143_aJ() < 0.45 * func_110138_aP()) {
+            if (getHealth() < 0.45 * getMaxHealth()) {
                 teleportTo(startingPosition.xCoord, startingPosition.yCoord + 2, startingPosition.zCoord);
                 stage++;
             }

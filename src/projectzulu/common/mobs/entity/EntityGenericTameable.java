@@ -215,7 +215,7 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     				if(var2.getItem().itemID == Item.paper.itemID){
     					par1EntityPlayer.openGui(ProjectZulu_Core.modInstance, 2, par1EntityPlayer.worldObj, entityId, 0, 0);
     					return true;
-    				}else if( getHealingValueIfValid(var2) > 0 && func_110143_aJ() < func_110138_aP() ){
+    				}else if( getHealingValueIfValid(var2) > 0 && getHealth() < getMaxHealth() ){
     					 if (!par1EntityPlayer.capabilities.isCreativeMode) {
                              --var2.stackSize;
                          }
@@ -264,7 +264,7 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     				this.setTamed(true);
     				this.setAttackTarget((EntityLiving)null);
     				setSitting(true);
-                    this.setEntityHealth(func_110138_aP());
+                    this.setHealth(getMaxHealth());
     				this.setOwner(par1EntityPlayer.username);
     				setUsername(getEntityName());
     				tameEffectSuccess = true;

@@ -89,7 +89,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
 
     @Override
     public void knockBack(Entity par1Entity, float par2, double par3, double par5) {
-        if (this.rand.nextDouble() >= this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111126_e()) {
+        if (this.rand.nextDouble() >= this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue()) {
             this.isAirBorne = true;
             float var7 = MathHelper.sqrt_double(par3 * par3 + par5 * par5);
             float var8 = 0.4F;

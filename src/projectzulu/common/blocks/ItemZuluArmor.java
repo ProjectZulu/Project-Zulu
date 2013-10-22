@@ -43,7 +43,7 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor {
         this.maxStackSize = 1;
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setUnlocalizedName(name);
-        func_111206_d(DefaultProps.blockKey + ":" + name);
+        setTextureName(DefaultProps.blockKey + ":" + name);
     }
 
     /**

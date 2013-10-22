@@ -49,7 +49,7 @@ public class TileEntityUniversalFlowerPot extends TileEntity implements IInvento
     @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData packet)
     {
-    	NBTTagCompound tagCompound = packet.customParam1;
+    	NBTTagCompound tagCompound = packet.data;
     	
     	NBTTagList tagList = tagCompound.getTagList("Inventory");
 		for (int i = 0; i < tagList.tagCount(); i++) {

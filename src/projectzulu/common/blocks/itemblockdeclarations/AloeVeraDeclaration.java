@@ -19,7 +19,7 @@ public class AloeVeraDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock(int iD) {
-        BlockList.aloeVera = Optional.of((new BlockAloeVera(iD)).setUnlocalizedName(name.toLowerCase()).func_111022_d(
+        BlockList.aloeVera = Optional.of((new BlockAloeVera(iD)).setUnlocalizedName(name.toLowerCase()).setTextureName(
                 DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }

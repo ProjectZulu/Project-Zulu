@@ -74,7 +74,7 @@ public class BlockMobHeads extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         for (Head head : Head.values()) {
-            head.icon = par1IconRegister.registerIcon(func_111023_E() + "_" + head.toString().toLowerCase());
+            head.icon = par1IconRegister.registerIcon(getTextureName() + "_" + head.toString().toLowerCase());
         }
     }
 

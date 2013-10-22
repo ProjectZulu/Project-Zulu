@@ -42,7 +42,7 @@ public class BlockAloeVera extends BlockFlower {
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcons = new Icon[imageSuffix.length];
         for (int i = 0; i < this.blockIcons.length; ++i) {
-            this.blockIcons[i] = par1IconRegister.registerIcon(func_111023_E() + imageSuffix[i]);
+            this.blockIcons[i] = par1IconRegister.registerIcon(getTextureName() + imageSuffix[i]);
             if (this.blockIcons[i] == null) {
             }
         }

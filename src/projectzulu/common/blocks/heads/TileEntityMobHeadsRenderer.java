@@ -148,7 +148,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
                 break;
             }
         }
-        func_110628_a(mobhead.resourceLocation);
+        bindTexture(mobhead.resourceLocation);
 
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);

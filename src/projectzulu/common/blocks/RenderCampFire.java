@@ -33,7 +33,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
         float scaleItem = 1.5f;
         GL11.glPushMatrix();
 
-        Minecraft.getMinecraft().renderEngine.func_110577_a(TextureMap.field_110575_b);
+        Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
         GL11.glRotatef((float) (90f * Math.PI / 180f), 1, 0, 0);
         GL11.glScalef(scaleItem, scaleItem, scaleItem);
         itemRenderer.doRenderItem(entityItemToRender, 0, 0, 0, 0, 0);

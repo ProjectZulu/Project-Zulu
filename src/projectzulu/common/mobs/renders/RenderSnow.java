@@ -16,7 +16,7 @@ public class RenderSnow extends RenderGenericLiving {
     }
 
     @Override
-    protected ResourceLocation func_110775_a(Entity entity) {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         if (BiomeDictionary.isBiomeOfType(entity.worldObj.getBiomeGenForCoords((int) entity.posX, (int) entity.posZ),
                 Type.FROZEN)) {
             return snowTexture;

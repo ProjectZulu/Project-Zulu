@@ -82,7 +82,7 @@ public class RenderTameable extends RenderGenericLiving {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, Properties.namePlateOpacity);
 
             /* Draw Background */
-            Minecraft.getMinecraft().renderEngine.func_110577_a(TAMING_GUI);
+            Minecraft.getMinecraft().renderEngine.bindTexture(TAMING_GUI);
             int iconXCoord = 0;
             int iconYCoord = 0;
             iconXCoord = 16;
@@ -130,7 +130,7 @@ public class RenderTameable extends RenderGenericLiving {
             }
 
             /* Draw Health Background */
-            int maxHealth = (int) tameableEntity.func_110138_aP(); // MaxHealth
+            int maxHealth = (int) tameableEntity.getMaxHealth(); // MaxHealth
             zLevel = 0.2f;
             int screenLocationX = -18 - 7;
             int screenLocationY = 11;
@@ -149,7 +149,7 @@ public class RenderTameable extends RenderGenericLiving {
             }
 
             /* Draw Health Icon(s) */
-            int curHealth = MathHelper.ceiling_float_int(tameableEntity.func_110143_aJ());
+            int curHealth = MathHelper.ceiling_float_int(tameableEntity.getHealth());
             zLevel = 0.1f;
             screenLocationX = -18 - 3;
             screenLocationY = 11;

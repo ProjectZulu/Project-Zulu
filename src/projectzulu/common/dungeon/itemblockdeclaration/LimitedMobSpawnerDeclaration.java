@@ -24,7 +24,7 @@ public class LimitedMobSpawnerDeclaration extends BlockDeclaration {
     protected boolean createBlock(int iD) {
         BlockList.limitedMobSpawner = Optional.of(new BlockLimitedMobSpawner(iD).setHardness(0.5F)
                 .setStepSound(Block.soundMetalFootstep).setUnlocalizedName(name.toLowerCase())
-                .func_111022_d("mob_spawner"));
+                .setTextureName("mob_spawner"));
         return true;
     }
 

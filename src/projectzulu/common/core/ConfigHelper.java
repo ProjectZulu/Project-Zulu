@@ -85,9 +85,9 @@ public class ConfigHelper {
 	}
 	
 	private static void configItemStackToMobData(Configuration config, String category, CustomMobData customMobData, ItemStack itemStack, int weightChance){
-		int stackSize = config.get(category,"Item "+itemStack.getItemName()+" Quantity:", 1).getInt();
+		int stackSize = config.get(category,"Item "+itemStack.getUnlocalizedName()+" Quantity:", 1).getInt();
 		itemStack.stackSize = stackSize;
-		int weight = config.get(category, "Item "+itemStack.getItemName()+" Weight:", weightChance).getInt();
+		int weight = config.get(category, "Item "+itemStack.getUnlocalizedName()+" Weight:", weightChance).getInt();
 		if(weight > 0){
 			customMobData.addLootToMob(itemStack, weight);
 		}

@@ -143,7 +143,7 @@ public class ModelMimic extends ModelBase {
         LEG3TOPROT.render(f5);
 
         GL11.glBindTexture(GL11.GL_TEXTURE_2D,
-                ModLoader.getMinecraftInstance().renderEngine.func_110581_b(RenderMimic.normalChest).func_110552_b());
+                ModLoader.getMinecraftInstance().renderEngine.getTexture(RenderMimic.normalChest).getGlTextureId());
         botchest.render(f5);
         BOTTEETHROT.render(f5);
         TOPCHESTROT.render(f5);

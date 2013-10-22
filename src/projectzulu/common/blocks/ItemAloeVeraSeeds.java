@@ -20,7 +20,7 @@ public class ItemAloeVeraSeeds extends Item {
         blockType = turnIntoID;
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setUnlocalizedName(unlocalizedName);
-        func_111206_d(DefaultProps.blockKey + ":" + unlocalizedName);
+        setTextureName(DefaultProps.blockKey + ":" + unlocalizedName);
     }
 
     @Override

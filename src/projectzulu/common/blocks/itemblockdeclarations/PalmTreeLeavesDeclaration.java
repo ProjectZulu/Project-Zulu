@@ -21,7 +21,7 @@ public class PalmTreeLeavesDeclaration extends BlockDeclaration {
     @Override
     protected boolean createBlock(int iD) {
         BlockList.palmTreeLeaves = Optional.of((new BlockPalmTreeLeaves(iD)).setUnlocalizedName(name.toLowerCase())
-                .func_111022_d(DefaultProps.blockKey + ":" + name.toLowerCase()));
+                .setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

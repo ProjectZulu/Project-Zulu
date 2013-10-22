@@ -160,7 +160,7 @@ public class CreatureFields implements DataFields {
         if (desiredEntity != null) {
             ObfuscationHelper.setFieldUsingReflection("field_110155_d", EntityLivingBase.class, desiredEntity, true,
                     new ServersideAttributeMap());
-            ObfuscationHelper.invokeMethod("func_110147_ax", "func_110147_ax", EntityLivingBase.class, desiredEntity);
+            ObfuscationHelper.invokeMethod("applyEntityAttributes", "applyEntityAttributes", EntityLivingBase.class, desiredEntity);
             loadedNBT = new NBTTagCompound("Properties");
             desiredEntity.writeToNBT(loadedNBT);
             nbtTree = new NBTTree(loadedNBT);
@@ -301,7 +301,7 @@ public class CreatureFields implements DataFields {
     }
 
     private void bindTexture(Minecraft mc) {
-        mc.renderEngine.func_110577_a(CREATURE_LIST);
+        mc.renderEngine.bindTexture(CREATURE_LIST);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 

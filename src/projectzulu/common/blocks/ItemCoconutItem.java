@@ -14,6 +14,6 @@ public class ItemCoconutItem extends Item {
         bFull3D = full3D;
         setHasSubtypes(true);
         setUnlocalizedName(name);
-        func_111206_d(DefaultProps.blockKey + ":" + name);
+        setTextureName(DefaultProps.blockKey + ":" + name);
     }
 }
