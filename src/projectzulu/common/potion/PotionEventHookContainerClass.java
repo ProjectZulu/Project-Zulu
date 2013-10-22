@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -73,9 +72,10 @@ public class PotionEventHookContainerClass {
         if (thornsEffect != null) {
             EntityLivingBase hurtEntity = event.entityLiving;
             Entity attackingEntity = event.source.getSourceOfDamage();
-            if (hurtEntity != null && attackingEntity != null) {
-                attackingEntity.attackEntityFrom(DamageSource.causeMobDamage(hurtEntity),
-                        event.ammount * (thornsEffect.getAmplifier() + 1) / 5);
+            if (hurtEntity != null && attackingEntity != null && event.source.getDamageType() != null
+                    && !event.source.getDamageType().equals("thorns")) {
+                attackingEntity.attackEntityFrom(DamageSource.causeThornsDamage(hurtEntity), event.ammount
+                        * (thornsEffect.getAmplifier() + 1) / 5);
             }
         }
     }
