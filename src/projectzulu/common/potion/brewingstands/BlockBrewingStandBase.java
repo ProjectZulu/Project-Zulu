@@ -26,6 +26,7 @@ public abstract class BlockBrewingStandBase extends BlockContainer {
         super(blockID, Material.iron);
         this.renderID = renderID;
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
+        setHardness(0.5F);
     }
 
     /**
