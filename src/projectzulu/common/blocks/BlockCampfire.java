@@ -7,6 +7,7 @@ import static net.minecraftforge.common.ForgeDirection.SOUTH;
 import static net.minecraftforge.common.ForgeDirection.UP;
 import static net.minecraftforge.common.ForgeDirection.WEST;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -182,6 +183,7 @@ public class BlockCampfire extends Block implements ITempBlock {
 
     @SideOnly(Side.CLIENT)
     @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
         for (Type type : Type.values()) {
             par3List.add(new ItemStack(this, 1, type.meta));
@@ -372,5 +374,12 @@ public class BlockCampfire extends Block implements ITempBlock {
         } else {
             return false;
         }
+    }
+    
+    @Override
+    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        ret.add(new ItemStack(this, 1, metadata));
+        return ret;
     }
 }
