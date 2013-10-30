@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.base.Optional;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -14,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,7 +25,6 @@ import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ObfuscationHelper;
-import projectzulu.common.core.ProjectZuluLog;
 
 public class DeathGamerules {
     int maxDropXP = 100;
@@ -49,8 +47,8 @@ public class DeathGamerules {
 
     boolean tombstoneOnDeath = true;
     boolean tombstoneAbsorbDrops = true;
+    boolean doDropEvent = true;
 
-    
     public DeathGamerules loadConfiguration(File modConfigDirectory) {
         Configuration config = new Configuration(new File(modConfigDirectory, DefaultProps.configDirectory
                 + DefaultProps.defaultConfigFile));
@@ -59,8 +57,8 @@ public class DeathGamerules {
                 tombstoneOnDeath);
         tombstoneAbsorbDrops = config.get("General Controls", "Tombstone Absorb Drops", tombstoneAbsorbDrops)
                 .getBoolean(tombstoneAbsorbDrops);
+        doDropEvent = config.get("General Controls", "doDropEvent", doDropEvent).getBoolean(doDropEvent);
 
-        
         String category = "General Controls.gamerule_settings";
         maxDropXP = config.get(category + ".Experience", "maxDropXP", 100,
                 "Maximum XP dropped on Death. The rest is lost. 100 is vanilla default").getInt(100);
@@ -133,6 +131,16 @@ public class DeathGamerules {
             boolean dropXP = gameRules.getGameRuleBooleanValue("dropXP");
 
             EntityPlayer player = (EntityPlayer) event.entity;
+
+            TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player) : null;
+            if (tombstone != null) {
+                tombstone.setSignString(event.source.getDeathMessage((EntityPlayer) event.entity).toString());
+            }
+
+            if (!dropInventory && !dropHotbar && !dropArmor && !dropXP) {
+                return;
+            }
+
             player.captureDrops = true;
             player.capturedDrops.clear();
 
@@ -161,47 +169,52 @@ public class DeathGamerules {
                 itemsToDrop.addAll(dropHotbar(player));
             }
 
-            TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player) : null;
-            if (tombstone != null) {
-                tombstone.setSignString(event.source.getDeathMessage((EntityPlayer) event.entity).toString());
+            dropItems(player, itemsToDrop);
+            boolean isCancelled = false;
+            if (doDropEvent) {
+                PlayerDropsEvent dropEvent = createPlayerDropEvent(player, event.source, player.capturedDrops);
+                isCancelled = MinecraftForge.EVENT_BUS.post(dropEvent);
             }
-
-            /* Handler actually Dropping Items or Placing them in Tombstone */
-            if (tombstoneAbsorbDrops && tombstone != null) {
-                for (ItemStack itemDrop : itemsToDrop) {
-                    tombstone.addDrop(itemDrop);
-                }
-                tombstone.experience = xpDropped;
-            } else {
-                for (ItemStack itemDrop : itemsToDrop) {
-                    player.inventory.player.dropPlayerItemWithRandomChoice(itemDrop, true);
-                }
-                while (xpDropped > 0) {
-                    int j = EntityXPOrb.getXPSplit(xpDropped);
-                    xpDropped -= j;
-                    player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY,
-                            player.posZ, j));
-                }
-            }
-
             player.captureDrops = false;
-
-            int recentlyHit;
-            try {
-                recentlyHit = ObfuscationHelper.getCatchableFieldFromReflection("field_70718_bc",
-                        EntityLivingBase.class, player, Integer.class);
-            } catch (NoSuchFieldException e) {
-                recentlyHit = ObfuscationHelper.getFieldFromReflection("recentlyHit", EntityLivingBase.class, player,
-                        Integer.class);
-            }
-            PlayerDropsEvent dropEvent = new PlayerDropsEvent(player, event.source, player.capturedDrops,
-                    recentlyHit > 0);
-            if (!MinecraftForge.EVENT_BUS.post(dropEvent)) {
-                for (EntityItem item : player.capturedDrops) {
-                    player.joinEntityItemWithWorld(item);
+            if (!isCancelled) {
+                /* Handler actually Dropping Items or Placing them in Tombstone */
+                if (tombstoneAbsorbDrops && tombstone != null) {
+                    for (EntityItem entityItem : player.capturedDrops) {
+                        tombstone.addDrop(entityItem.getEntityItem());
+                    }
+                    tombstone.experience = xpDropped;
+                } else {
+                    while (xpDropped > 0) {
+                        int j = EntityXPOrb.getXPSplit(xpDropped);
+                        xpDropped -= j;
+                        player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY,
+                                player.posZ, j));
+                    }
+                    for (EntityItem item : player.capturedDrops) {
+                        player.joinEntityItemWithWorld(item);
+                    }
                 }
             }
         }
+    }
+
+    private void dropItems(EntityPlayer player, List<ItemStack> drops) {
+        for (ItemStack itemDrop : drops) {
+            player.inventory.player.dropPlayerItemWithRandomChoice(itemDrop, true);
+        }
+    }
+
+    private PlayerDropsEvent createPlayerDropEvent(EntityPlayer player, DamageSource damageSource,
+            ArrayList<EntityItem> drops) {
+        int recentlyHit;
+        try {
+            recentlyHit = ObfuscationHelper.getCatchableFieldFromReflection("field_70718_bc", EntityLivingBase.class,
+                    player, Integer.class);
+        } catch (NoSuchFieldException e) {
+            recentlyHit = ObfuscationHelper.getFieldFromReflection("recentlyHit", EntityLivingBase.class, player,
+                    Integer.class);
+        }
+        return new PlayerDropsEvent(player, damageSource, player.capturedDrops, recentlyHit > 0);
     }
 
     private TileEntityTombstone placeTombstone(EntityPlayer player) {
