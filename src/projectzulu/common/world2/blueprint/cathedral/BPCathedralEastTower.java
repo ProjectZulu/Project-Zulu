@@ -34,6 +34,7 @@ public class BPCathedralEastTower implements Blueprint {
     public BlockWithMeta getTowerBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
         BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
+        BlockWithMeta carvedStone = new BlockWithMeta(98, 3);
 
         int diagonalIndex = piecePos.posZ + piecePos.posX;
         int stairSegmentHeight = 2;
@@ -41,7 +42,7 @@ public class BPCathedralEastTower implements Blueprint {
         /* Tower Bell */
         if (piecePos.posY > cellHeight - 6 && piecePos.posX > cellSize - 3 && piecePos.posZ > cellSize - 3) {
             if (piecePos.posY == cellHeight - 2 && piecePos.posX == cellSize - 1 && piecePos.posZ == cellSize - 1) {
-                return new BlockWithMeta(Block.stoneBrick.blockID);
+                return carvedStone;
             }
 
             if (piecePos.posY < cellHeight - 2) {
@@ -50,9 +51,9 @@ public class BPCathedralEastTower implements Blueprint {
                 }
 
                 if (piecePos.posY == cellHeight - 5) {
-                    return new BlockWithMeta(Block.stoneBrick.blockID);
+                    return carvedStone;
                 } else if (piecePos.posX == cellSize - 1 || piecePos.posZ == cellSize - 1) {
-                    return new BlockWithMeta(Block.stoneBrick.blockID);
+                    return carvedStone;
                 }
             }
         }
@@ -67,7 +68,7 @@ public class BPCathedralEastTower implements Blueprint {
                 return new BlockWithMeta(0);
             }
         }
-        
+
         if (piecePos.posX == 0 && piecePos.posZ == 0) {
             return new BlockWithMeta(0);
         }
