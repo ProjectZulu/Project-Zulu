@@ -1,6 +1,5 @@
 package projectzulu.common.world2.blueprint;
 
-import java.awt.Point;
 import java.util.Random;
 
 import net.minecraft.util.ChunkCoordinates;
@@ -23,12 +22,12 @@ public interface Blueprint {
     public abstract BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight,
             Random random, CellIndexDirection cellIndexDirection);
 
-    public abstract int getWeight();
-
     /**
      * Used to Search Architect list for a specific Building Type
      * 
      * Type insensitive. Should be unique.
      */
     public abstract String getIdentifier();
+
+    public abstract int getWeight();
 }

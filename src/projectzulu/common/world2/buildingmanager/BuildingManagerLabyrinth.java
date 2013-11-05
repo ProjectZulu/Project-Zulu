@@ -34,7 +34,7 @@ public class BuildingManagerLabyrinth extends BuildingManagerBase {
         int stairCellSize = cellSize + 2;
         int stairCellHeight = stairCellSize * 2;
 
-        startingPos = calcDirectionTranslation(direction, startingPos, xCells * cellSize, zCells * cellSize
+        startingPos = calcTranslatedPosition(direction, startingPos, xCells * cellSize, zCells * cellSize
                 + stairZCells * stairCellSize, cellHeight);
 
         stairs = new MazeCell[1][stairZCells];
@@ -53,23 +53,6 @@ public class BuildingManagerLabyrinth extends BuildingManagerBase {
                         * i, startingPos.posY, startingPos.posZ + stairCellSize * stairs[0].length + cellSize * j));
             }
         }
-
-        // labyrinth = new MazeCell[xCells][zCells];
-        // for (int i = 0; i < labyrinth.length; i++) {
-        // for (int j = 0; j < labyrinth[0].length; j++) {
-        // labyrinth[i][j] = new MazeCell(cellSize, cellHeight, new ChunkCoordinates(startingPos.posX + cellSize
-        // * i, startingPos.posY, startingPos.posZ + cellSize * j));
-        // }
-        // }
-        //
-        // stairs = new MazeCell[1][stairZCells];
-        // for (int i = 0; i < stairs.length; i++) {
-        // for (int j = 0; j < stairs[0].length; j++) {
-        // stairs[i][j] = new MazeCell(stairCellSize, stairCellHeight, new ChunkCoordinates(startingPos.posX - 1
-        // + stairCellSize * i + cellSize * xCells / 2, startingPos.posY + 1 + stairCellSize * j,
-        // startingPos.posZ - stairCellSize * (j + 1)));
-        // }
-        // }
     }
 
     @Override

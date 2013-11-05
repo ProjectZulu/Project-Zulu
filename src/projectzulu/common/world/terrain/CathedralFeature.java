@@ -13,6 +13,7 @@ import projectzulu.common.core.terrain.BiomeFeature;
 import projectzulu.common.core.terrain.TerrainFeature.FeatureDirection;
 import projectzulu.common.world.MazeGenerator;
 import projectzulu.common.world.buildingmanager.BuildingManagerCemetary;
+import projectzulu.common.world2.buildingmanager.BuildingManagerCathedral;
 
 public class CathedralFeature extends BiomeFeature {
     public static final String CATHEDRAL = "Cathedral";
@@ -67,7 +68,6 @@ public class CathedralFeature extends BiomeFeature {
     @Override
     public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random,
             FeatureDirection direction) {
-        (new MazeGenerator(new BuildingManagerCemetary(world), 1, 4, 3, 11, 1, 1)).generate(world, world.rand,
-                genBlockCoords.posX, genBlockCoords.posY - 1, genBlockCoords.posZ);
+        new BuildingManagerCathedral(world, genBlockCoords, direction).generate();
     }
 }
