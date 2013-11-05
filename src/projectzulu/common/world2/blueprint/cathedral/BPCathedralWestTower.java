@@ -33,12 +33,10 @@ public class BPCathedralWestTower implements Blueprint {
 
     public BlockWithMeta getTowerBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
+        BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
+
         int diagonalIndex = piecePos.posZ + piecePos.posX;
         int stairSegmentHeight = 2;
-
-        if (piecePos.posX == 0 && piecePos.posZ == 0) {
-            return new BlockWithMeta(0);
-        }
 
         /* Tower Bell */
         if (piecePos.posY > cellHeight - 6 && piecePos.posX > cellSize - 3 && piecePos.posZ > cellSize - 3) {
@@ -64,11 +62,15 @@ public class BPCathedralWestTower implements Blueprint {
             int slope = CellHelper.getSlopeIndex(piecePos, cellSize - diagonalIndex - 1, 1,
                     BoundaryPair.createPair(1, (cellSize) * 2), cellHeight);
             if (slope == 0) {
-                return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+                return woodenPlank;
             } else if (slope > 0) {
                 return new BlockWithMeta(0);
             }
         }
+        
+        if (piecePos.posX == 0 && piecePos.posZ == 0) {
+            return new BlockWithMeta(0);
+        }   
 
         /* Create Outside Walls */
         if (piecePos.posX == 0 || piecePos.posZ == 0) {

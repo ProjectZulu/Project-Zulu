@@ -37,6 +37,8 @@ public class BPCathedralHallway implements Blueprint {
 
     public BlockWithMeta getWallBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
+        BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
+        BlockWithMeta woodenStair = new BlockWithMeta(134);
 
         /* Ceiling Top */
         if (piecePos.posY > cellHeight - cellSize) {
@@ -46,9 +48,9 @@ public class BPCathedralHallway implements Blueprint {
                     BoundaryPair.createPair(0, cellSize * 2 - 8), cellHeight - cellSize / 3);
             if (slope == 0) {
                 if (slope != slopeBelow) {
-                    return new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(cellIndexDirection));
+                    return new BlockWithMeta(woodenStair.blockID, getStairMeta(cellIndexDirection));
                 } else {
-                    return new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
+                    return woodenPlank;//new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
                 }
             } else if (slope > 0) {
                 return new BlockWithMeta(0);
@@ -67,7 +69,7 @@ public class BPCathedralHallway implements Blueprint {
                 BoundaryPair.createPair(1, cellSize * 2 - 8), cellHeight - cellSize);
         if (slope == 0) {
             if (slope != slopeBelow) {
-                return new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(cellIndexDirection));
+                return new BlockWithMeta(woodenStair.blockID, getStairMeta(cellIndexDirection));
             } else {
                 return new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
             }
@@ -80,7 +82,7 @@ public class BPCathedralHallway implements Blueprint {
             }
 
             if (piecePos.posZ == cellSize - 1 && piecePos.posX % 3 == 2 && slope == 1) {
-                return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection, false));
+                return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, false));
             }
 
             if (slope < 4 && piecePos.posZ == 3) {
@@ -92,13 +94,13 @@ public class BPCathedralHallway implements Blueprint {
         int topAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 0, 1,
                 BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
         if (topAarchSlope == 0 && piecePos.posX % 3 == 1) {
-            return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection, true));
+            return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, true));
         }
 
         int botAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 1, 1,
                 BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
         if (botAarchSlope == 0 && piecePos.posX % 3 == 1) {
-            return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection, false));
+            return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, false));
         }
 
         /* Pews */

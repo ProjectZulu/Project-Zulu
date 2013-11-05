@@ -1,5 +1,7 @@
 package projectzulu.common.world2.blueprint.cathedral;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -11,6 +13,15 @@ import projectzulu.common.world2.CellHelper;
 import projectzulu.common.world2.blueprint.Blueprint;
 
 public class BPCathedralDome implements Blueprint {
+    List<BlockWithMeta> wallBlocks = new ArrayList<BlockWithMeta>(3);
+//    return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
+
+    public BPCathedralDome() {
+        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 5));
+        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 1, 10));
+        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 0, 100));
+        wallBlocks.add(new BlockWithMeta(0, 0, 1));
+    }
 
     @Override
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
@@ -35,12 +46,12 @@ public class BPCathedralDome implements Blueprint {
             CellIndexDirection cellIndexDirection) {
         int diagonalIndex = piecePos.posZ + piecePos.posX;
         int domeFloor = cellHeight - (cellSize + 1);
-
+        BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
         if (piecePos.posY > domeFloor) {
             int slope = CellHelper.getSlopeIndex(piecePos, 2 * cellSize - diagonalIndex - 1, 2,
                     BoundaryPair.createPair(cellSize - 4, cellSize * 2), cellHeight);
             if (slope == 0) {
-                return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+                return woodenPlank;
             } else if (slope > 0) {
                 return new BlockWithMeta(0);
             }
@@ -112,7 +123,7 @@ public class BPCathedralDome implements Blueprint {
                     && piecePos.posX == cellSize - 1 && cellIndexDirection == CellIndexDirection.NorthWestCorner) {
                 return new BlockWithMeta(Block.stairsStoneBrick.blockID, 2);
             } else if (diagonalIndex > 4) {
-                return new BlockWithMeta(Block.field_111031_cC.blockID, 14);
+                return new BlockWithMeta(Block.carpet.blockID, 14);
             }
         }
         return new BlockWithMeta(0);

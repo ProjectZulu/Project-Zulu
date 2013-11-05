@@ -37,6 +37,9 @@ public class BPCathedralHallwayEntrance implements Blueprint {
 
     public BlockWithMeta getWallBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
+        BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
+        BlockWithMeta woodenStair = new BlockWithMeta(134);
+        BlockWithMeta gold = new BlockWithMeta(41);
 
         /* Ceiling Top */
         if (piecePos.posY > cellHeight - cellSize) {
@@ -46,9 +49,9 @@ public class BPCathedralHallwayEntrance implements Blueprint {
                     BoundaryPair.createPair(0, cellSize * 2 - 8), cellHeight - cellSize / 3);
             if (slope == 0) {
                 if (slope != slopeBelow) {
-                    return new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(cellIndexDirection));
+                    return new BlockWithMeta(woodenStair.blockID, getStairMeta(cellIndexDirection));
                 } else {
-                    return new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
+                    return woodenPlank;
                 }
             } else if (slope > 0) {
                 return new BlockWithMeta(0);
@@ -68,7 +71,7 @@ public class BPCathedralHallwayEntrance implements Blueprint {
                     BoundaryPair.createPair(1, cellSize * 2 - 8), cellHeight - cellSize);
             if (slope == 0) {
                 if (slope != slopeBelow) {
-                    return new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(cellIndexDirection));
+                    return new BlockWithMeta(woodenStair.blockID, getStairMeta(cellIndexDirection));
                 } else {
                     return new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
                 }
@@ -78,19 +81,19 @@ public class BPCathedralHallwayEntrance implements Blueprint {
             int topAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 0, 1,
                     BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
             if (topAarchSlope == 0 && piecePos.posX % 3 == 1) {
-                return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection, true));
+                return new BlockWithMeta(woodenStair.blockID/*Block.stairsStoneBrick.blockID*/, getArchStairMeta(cellIndexDirection, true));
             }
 
             int botAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 1, 1,
                     BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
             if (botAarchSlope == 0 && piecePos.posX % 3 == 1) {
-                return new BlockWithMeta(Block.stairsStoneBrick.blockID, getArchStairMeta(cellIndexDirection, false));
+                return new BlockWithMeta(woodenStair.blockID/*Block.stairsStoneBrick.blockID*/, getArchStairMeta(cellIndexDirection, false));
             }
         }
 
         /* Red Carpet */
         if (piecePos.posY == 1 && piecePos.posZ == cellSize - 1) {
-            return new BlockWithMeta(Block.field_111031_cC.blockID, 14);
+            return new BlockWithMeta(Block.carpet.blockID, 14);
         }
 
         /* Pews */
