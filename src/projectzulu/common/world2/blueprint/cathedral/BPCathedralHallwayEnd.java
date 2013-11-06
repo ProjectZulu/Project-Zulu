@@ -54,7 +54,6 @@ public class BPCathedralHallwayEnd implements Blueprint {
             CellIndexDirection cellIndexDirection) {
         BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
         BlockWithMeta woodenStair = new BlockWithMeta(134);
-        BlockWithMeta gold = new BlockWithMeta(41);
 
         List<BlockWithMeta> wallBlocks = new ArrayList<BlockWithMeta>(3);
         wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 8)); // Cracked

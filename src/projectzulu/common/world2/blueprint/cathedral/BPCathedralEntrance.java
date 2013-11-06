@@ -26,11 +26,12 @@ public class BPCathedralEntrance implements Blueprint {
             CellIndexDirection cellIndexDirection) {
         BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
         BlockWithMeta woodenStair = new BlockWithMeta(134);
+
         List<BlockWithMeta> wallBlocks = new ArrayList<BlockWithMeta>(3);
         wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 8)); // Cracked
         wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 1, 8)); // Mossy
         wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 0, 100)); // Regular
-        
+
         /* Ceiling Building "Roof Floor" */
         if (piecePos.posY > cellHeight - cellSize) {
             int slope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posX - 3, 1,
@@ -59,6 +60,31 @@ public class BPCathedralEntrance implements Blueprint {
                     return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                 }
             }
+
+            int slope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posX - 3, 1,
+                    BoundaryPair.createPair(1, cellSize * 2 - 7), cellHeight - cellSize);
+            if (slope < 0 && piecePos.posZ == 0) {
+                if (piecePos.posX == cellSize * 4 / 10) {
+                    if (piecePos.posY % 2 == 0) {
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID,
+                                cellIndexDirection == CellIndexDirection.SouthWestCorner ? 0 : 1);
+                    } else {
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID,
+                                cellIndexDirection == CellIndexDirection.SouthWestCorner ? 4 : 5);
+                    }
+                } else if (piecePos.posX == cellSize * 4 / 10 + 1) {
+                    if (piecePos.posY % 2 == 0) {
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID,
+                                cellIndexDirection == CellIndexDirection.SouthWestCorner ? 1 : 0);
+                    } else {
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID,
+                                cellIndexDirection == CellIndexDirection.SouthWestCorner ? 5 : 4);
+                    }
+                } else if (piecePos.posX > cellSize * 4 / 10 && piecePos.posY == 0) {
+                    return new BlockWithMeta(Block.stairsStoneBrick.blockID, 3);
+                }
+            }
+
             /* Air In Front of Doorway */
             if (piecePos.posZ == 0 && piecePos.posX > 2 && piecePos.posY < 4) {
                 return new BlockWithMeta(0);
@@ -92,6 +118,7 @@ public class BPCathedralEntrance implements Blueprint {
                     }
                 }
             }
+
             if (piecePos.posZ > 1 && slope > 0 && slope <= 2) {
                 return new BlockWithMeta(0);
             }
@@ -108,10 +135,14 @@ public class BPCathedralEntrance implements Blueprint {
 
             }
         }
-
         /* Outer Walls */
         if (piecePos.posX == cellSize * 4 / 10 && (piecePos.posZ <= 3 || piecePos.posY >= 5)) {
-            return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
+            // Exclude Door side of wall
+            if (piecePos.posZ >= 1
+                    || (cellIndexDirection != CellIndexDirection.SouthWestCorner && cellIndexDirection != CellIndexDirection.SouthEastCorner)) {
+                return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
+            } else {
+            }
         }
 
         /* Red Carpet */
@@ -158,6 +189,25 @@ public class BPCathedralEntrance implements Blueprint {
         case NorthEastCorner:
         case SouthEastCorner:
             return top ? 1 : 4;
+        default:
+            return 0;
+        }
+    }
+
+    public int getDoorPillarStairMeta(CellIndexDirection cellIndexDirection, boolean top, boolean left) {
+        switch (cellIndexDirection) {
+        case SouthWestCorner:
+            if (top) {
+                return left ? 0 : 5;
+            } else {
+                return left ? 4 : 5;
+            }
+        case SouthEastCorner:
+            if (top) {
+                return left ? 0 : 5;
+            } else {
+                return left ? 0 : 5;
+            }
         default:
             return 0;
         }
