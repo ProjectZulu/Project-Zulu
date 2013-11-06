@@ -14,7 +14,7 @@ import projectzulu.common.world2.CellHelper;
 import projectzulu.common.world2.blueprint.Blueprint;
 
 public class BPCathedralEastTower implements Blueprint {
-    
+
     @Override
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
@@ -88,23 +88,28 @@ public class BPCathedralEastTower implements Blueprint {
             }
 
             if (piecePos.posX == 0) {
-                int slot = piecePos.posY % 4 == 0 ? 0 : 1;
                 if (cellIndexDirection == CellIndexDirection.NorthWestCorner && piecePos.posY > 0
                         && piecePos.posY <= 10) {
                     if (piecePos.posY % 5 == 0 || piecePos.posZ <= 1) {
-//                        ;
                         return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                     }
                 } else if (piecePos.posY == 0 || piecePos.posY == 1) {
                     return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
-                } else if (piecePos.posZ == 2 || piecePos.posZ == cellSize - 1 || piecePos.posZ % 2 == slot) {
+                } else if (piecePos.posZ == 2 || piecePos.posZ == 3) {
                     return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
+                } else if (piecePos.posZ > 3 || piecePos.posZ == cellSize - 2) {
+                    if (piecePos.posZ == cellSize - 1) {
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, getWindowMeta(cellIndexDirection,
+                                true, true, piecePos.posY % 4));
+                    } else {
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, getWindowMeta(cellIndexDirection,
+                                true, false, piecePos.posY % 4));
+                    }
                 }
                 return new BlockWithMeta(0);
             }
 
             if (piecePos.posZ == 0) {
-                int slot = piecePos.posY % 4 == 0 ? 0 : 1;
                 if (cellIndexDirection == CellIndexDirection.SouthWestCorner && piecePos.posY > 0
                         && piecePos.posY <= 10) {
                     if (piecePos.posY % 5 == 0 || piecePos.posX <= 1) {
@@ -112,8 +117,16 @@ public class BPCathedralEastTower implements Blueprint {
                     }
                 } else if (piecePos.posY == 0 || piecePos.posY == 1) {
                     return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
-                } else if (piecePos.posX == 2 || piecePos.posX == cellSize - 1 || piecePos.posX % 2 == slot) {
+                } else if (piecePos.posX == 2 || piecePos.posX == 3) {
                     return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
+                } else if (piecePos.posX > 3 || piecePos.posX == cellSize - 2) {
+                    if (piecePos.posX == cellSize - 1) {
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, getWindowMeta(cellIndexDirection,
+                                false, true, piecePos.posY % 4));
+                    } else {
+                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, getWindowMeta(cellIndexDirection,
+                                false, false, piecePos.posY % 4));
+                    }
                 }
                 return new BlockWithMeta(0);
             }
@@ -248,6 +261,54 @@ public class BPCathedralEastTower implements Blueprint {
             return high ? 3 : 0;
         case SouthWestCorner:
             return high ? 0 : 2;
+        }
+    }
+
+    private int getWindowMeta(CellIndexDirection cellIndexDirection, boolean otherWall, boolean edge, int height) {
+        if (otherWall) {
+            switch (cellIndexDirection) {
+            case NorthWestCorner:
+            default:
+                return getWindowMeta(CellIndexDirection.NorthEastCorner, edge, height);
+            case NorthEastCorner:
+                return getWindowMeta(CellIndexDirection.SouthEastCorner, edge, height);
+            case SouthEastCorner:
+                return getWindowMeta(CellIndexDirection.SouthWestCorner, edge, height);
+            case SouthWestCorner:
+                return getWindowMeta(CellIndexDirection.NorthWestCorner, edge, height);
+            }
+        } else {
+            return getWindowMeta(cellIndexDirection, edge, height);
+        }
+    }
+
+    private int getWindowMeta(CellIndexDirection cellIndexDirection, boolean edge, int height) {
+        switch (cellIndexDirection) {
+        case NorthWestCorner:
+        default:
+            if (edge) {
+                return height == 0 ? 5 : height == 1 ? 4 : height == 2 ? 0 : 1;
+            } else {
+                return height % 2 == 0 ? 1 : 5;
+            }
+        case NorthEastCorner:
+            if (edge) {
+                return height == 0 ? 7 : height == 1 ? 6 : height == 2 ? 2 : 3;
+            } else {
+                return height % 2 == 0 ? 3 : 7;
+            }
+        case SouthEastCorner:
+            if (edge) {
+                return height == 0 ? 4 : height == 1 ? 5 : height == 2 ? 1 : 0;
+            } else {
+                return height % 2 == 0 ? 0 : 4;
+            }
+        case SouthWestCorner:
+            if (edge) {
+                return height == 0 ? 6 : height == 1 ? 7 : height == 2 ? 3 : 2;
+            } else {
+                return height % 2 == 0 ? 2 : 6;
+            }
         }
     }
 
