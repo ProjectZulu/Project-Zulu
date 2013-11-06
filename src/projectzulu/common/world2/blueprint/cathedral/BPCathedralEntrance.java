@@ -1,9 +1,12 @@
 package projectzulu.common.world2.blueprint.cathedral;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.WeightedRandom;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
 import projectzulu.common.world2.BoundaryPair;
@@ -23,7 +26,11 @@ public class BPCathedralEntrance implements Blueprint {
             CellIndexDirection cellIndexDirection) {
         BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
         BlockWithMeta woodenStair = new BlockWithMeta(134);
-
+        List<BlockWithMeta> wallBlocks = new ArrayList<BlockWithMeta>(3);
+        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 8)); // Cracked
+        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 1, 8)); // Mossy
+        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 0, 100)); // Regular
+        
         /* Ceiling Building "Roof Floor" */
         if (piecePos.posY > cellHeight - cellSize) {
             int slope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posX - 3, 1,
@@ -49,7 +56,7 @@ public class BPCathedralEntrance implements Blueprint {
                 if (piecePos.posX == cellSize - 1 && piecePos.posY > 0 && piecePos.posY < 4) {
                     return new BlockWithMeta(0);
                 } else {
-                    return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+                    return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                 }
             }
             /* Air In Front of Doorway */
@@ -59,7 +66,7 @@ public class BPCathedralEntrance implements Blueprint {
         }
 
         if (piecePos.posX <= 2 && piecePos.posZ == 1) {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+            return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
         }
 
         /* Mid Building "Roof Floor" */
@@ -81,7 +88,7 @@ public class BPCathedralEntrance implements Blueprint {
                             && (cellIndexDirection == CellIndexDirection.SouthWestCorner || cellIndexDirection == CellIndexDirection.SouthEastCorner)) {
                         return woodenPlank;
                     } else {
-                        return new BlockWithMeta(Block.stoneBrick.blockID, 5, getStairMeta(cellIndexDirection));
+                        return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                     }
                 }
             }
@@ -104,7 +111,7 @@ public class BPCathedralEntrance implements Blueprint {
 
         /* Outer Walls */
         if (piecePos.posX == cellSize * 4 / 10 && (piecePos.posZ <= 3 || piecePos.posY >= 5)) {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+            return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
         }
 
         /* Red Carpet */
@@ -120,11 +127,11 @@ public class BPCathedralEntrance implements Blueprint {
 
             /* Floor of Entrance */
             if (piecePos.posX > cellSize * 4 / 10) {
-                return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+                return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
             /* Floor Connecting To tower */
             if (piecePos.posZ > 0) {
-                return new BlockWithMeta(Block.stoneBrick.blockID);
+                return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
         }
         return new BlockWithMeta(0);

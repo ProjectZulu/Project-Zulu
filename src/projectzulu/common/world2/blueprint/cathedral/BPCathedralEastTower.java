@@ -1,9 +1,12 @@
 package projectzulu.common.world2.blueprint.cathedral;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.WeightedRandom;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
 import projectzulu.common.world2.BoundaryPair;
@@ -11,7 +14,7 @@ import projectzulu.common.world2.CellHelper;
 import projectzulu.common.world2.blueprint.Blueprint;
 
 public class BPCathedralEastTower implements Blueprint {
-
+    
     @Override
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
@@ -35,6 +38,11 @@ public class BPCathedralEastTower implements Blueprint {
             CellIndexDirection cellIndexDirection) {
         BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
         BlockWithMeta carvedStone = new BlockWithMeta(98, 3);
+
+        List<BlockWithMeta> wallBlocks = new ArrayList<BlockWithMeta>(3);
+        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 8)); // Cracked
+        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 1, 8)); // Mossy
+        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 0, 100)); // Regular
 
         int diagonalIndex = piecePos.posZ + piecePos.posX;
         int stairSegmentHeight = 2;
@@ -76,7 +84,7 @@ public class BPCathedralEastTower implements Blueprint {
         /* Create Outside Walls */
         if (piecePos.posX == 0 || piecePos.posZ == 0) {
             if (piecePos.posX == 1 || piecePos.posZ == 1) {
-                return new BlockWithMeta(Block.stoneBrick.blockID);
+                return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
 
             if (piecePos.posX == 0) {
@@ -84,12 +92,13 @@ public class BPCathedralEastTower implements Blueprint {
                 if (cellIndexDirection == CellIndexDirection.NorthWestCorner && piecePos.posY > 0
                         && piecePos.posY <= 10) {
                     if (piecePos.posY % 5 == 0 || piecePos.posZ <= 1) {
-                        return new BlockWithMeta(Block.stoneBrick.blockID);
+//                        ;
+                        return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                     }
                 } else if (piecePos.posY == 0 || piecePos.posY == 1) {
-                    return new BlockWithMeta(Block.stoneBrick.blockID);
+                    return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                 } else if (piecePos.posZ == 2 || piecePos.posZ == cellSize - 1 || piecePos.posZ % 2 == slot) {
-                    return new BlockWithMeta(Block.stoneBrick.blockID);
+                    return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                 }
                 return new BlockWithMeta(0);
             }
@@ -99,12 +108,12 @@ public class BPCathedralEastTower implements Blueprint {
                 if (cellIndexDirection == CellIndexDirection.SouthWestCorner && piecePos.posY > 0
                         && piecePos.posY <= 10) {
                     if (piecePos.posY % 5 == 0 || piecePos.posX <= 1) {
-                        return new BlockWithMeta(Block.stoneBrick.blockID);
+                        return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                     }
                 } else if (piecePos.posY == 0 || piecePos.posY == 1) {
-                    return new BlockWithMeta(Block.stoneBrick.blockID);
+                    return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                 } else if (piecePos.posX == 2 || piecePos.posX == cellSize - 1 || piecePos.posX % 2 == slot) {
-                    return new BlockWithMeta(Block.stoneBrick.blockID);
+                    return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                 }
                 return new BlockWithMeta(0);
             }
@@ -119,7 +128,7 @@ public class BPCathedralEastTower implements Blueprint {
                     BoundaryPair.createPair(1, stairSegmentHeight), getStairSegmentTop(piecePos, cellIndexDirection));
             if (slope == 0) {
                 return slope != slopeBelow ? new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(
-                        cellIndexDirection, false)) : new BlockWithMeta(Block.stoneBrick.blockID);
+                        cellIndexDirection, false)) : (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
         } else if (0 < piecePos.posX && piecePos.posX < 3) {
             int slope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ - 1, 1,
@@ -130,20 +139,20 @@ public class BPCathedralEastTower implements Blueprint {
                     getStairSegmentTop(piecePos, cellIndexDirection));
             if (slope == 0) {
                 return slope != slopeBelow ? new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(
-                        cellIndexDirection, true)) : new BlockWithMeta(Block.stoneBrick.blockID);
+                        cellIndexDirection, true)) : (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
         }
 
         /* Tower-MidCathEntrance Floor */
         if (piecePos.posY % cellSize == 5 && (piecePos.posZ < 1 || piecePos.posX < 1)) {
-            return new BlockWithMeta(Block.stoneBrick.blockID);
+            return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
         }
 
         /* Tower Rooms */
         if (isRoomForRoom(piecePos, cellSize, cellHeight) && piecePos.posX > 2 && piecePos.posZ > 2
                 && piecePos.posY > 0) {
             if (piecePos.posY % (stairSegmentHeight * 2) == 3) {
-                return new BlockWithMeta(Block.stoneBrick.blockID);
+                return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
 
             /* Ensure the Door doesn't generate into the floor */
@@ -167,7 +176,7 @@ public class BPCathedralEastTower implements Blueprint {
 
             /* Room Walls */
             if (piecePos.posX == 3 || piecePos.posZ == 3) {
-                return new BlockWithMeta(Block.stoneBrick.blockID);
+                return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
 
             /* Room Contents: Bed */
@@ -193,7 +202,7 @@ public class BPCathedralEastTower implements Blueprint {
 
         /* Tower Floor */
         if (piecePos.posY == 0) {
-            return new BlockWithMeta(Block.stoneBrick.blockID);
+            return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
         }
 
         return new BlockWithMeta(0);

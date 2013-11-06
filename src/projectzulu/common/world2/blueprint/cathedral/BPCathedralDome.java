@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.WeightedRandom;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
 import projectzulu.common.world2.BoundaryPair;
@@ -14,13 +15,11 @@ import projectzulu.common.world2.blueprint.Blueprint;
 
 public class BPCathedralDome implements Blueprint {
     List<BlockWithMeta> wallBlocks = new ArrayList<BlockWithMeta>(3);
-//    return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
 
     public BPCathedralDome() {
         wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 5));
         wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 1, 10));
         wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 0, 100));
-        wallBlocks.add(new BlockWithMeta(0, 0, 1));
     }
 
     @Override
@@ -57,16 +56,16 @@ public class BPCathedralDome implements Blueprint {
             }
 
             if (piecePos.posX == 0) {
-                return piecePos.posZ % 2 == 0 ? new BlockWithMeta(Block.stoneBrick.blockID, 0) : new BlockWithMeta(0);
+                return piecePos.posZ % 2 == 0 ? (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks) : new BlockWithMeta(0);
             }
 
             if (piecePos.posZ == 0) {
-                return piecePos.posX % 2 == 0 ? new BlockWithMeta(Block.stoneBrick.blockID, 0) : new BlockWithMeta(0);
+                return piecePos.posX % 2 == 0 ? (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks) : new BlockWithMeta(0);
             }
         }
 
         if (piecePos.posY == domeFloor && diagonalIndex > 2 && diagonalIndex < cellSize * 2 - 3) {
-            return new BlockWithMeta(Block.stoneBrick.blockID);
+            return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
         } else if (piecePos.posY == domeFloor + 1 && diagonalIndex == cellSize * 2 - 4) {
             return new BlockWithMeta(Block.fenceIron.blockID);
         } else if (piecePos.posY == domeFloor + 1 && diagonalIndex == cellSize * 2 - 5 && piecePos.posX != cellSize - 1
@@ -75,20 +74,20 @@ public class BPCathedralDome implements Blueprint {
         }
 
         if (diagonalIndex == 2) {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+            return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
         }
 
         if (piecePos.posY == 0 && diagonalIndex > 2) {
             if (diagonalIndex == 3) {
                 return new BlockWithMeta(Block.cobblestone.blockID);
             } else {
-                return new BlockWithMeta(Block.stoneBrick.blockID);
+                return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
         }
 
         if (diagonalIndex > 6) {
             if (piecePos.posY == 1) {
-                return new BlockWithMeta(Block.stoneBrick.blockID);
+                return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             } else if (piecePos.posY == 2) {
                 if (cellIndexDirection == CellIndexDirection.SouthEastCorner) {
                     if (piecePos.posZ >= cellSize - 3 && piecePos.posX == cellSize - 2) {
