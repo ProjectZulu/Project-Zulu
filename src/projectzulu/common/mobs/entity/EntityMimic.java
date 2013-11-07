@@ -87,14 +87,6 @@ public class EntityMimic extends EntityGenericAnimal implements IMob {
         }
     }
 
-    /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
-    @Override
-    protected boolean canDespawn() {
-        return false;
-    }
-
     // Called when player interacts with mob, eg get milk, saddle
     @Override
     public boolean interact(EntityPlayer par1EntityPlayer) {
