@@ -18,6 +18,7 @@ tile.litcampfire.name=Lit Wood Campfire
 tile.litstonecampfire.name=Lit Stone Campfire
 tile.brewingsingle.name=Traditional Brewing Stand
 tile.brewingtriple.name=Nether Brewing Stand
+tile.tombstone.name=Tombstone
 
 tile.mobskulls.redfinch.name=Red Finch Head
 tile.mobskulls.crocodile.name=Alligator Head
