@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -231,6 +232,8 @@ public class DeathGamerules {
             TileEntity tileEntity = player.worldObj.getBlockTileEntity(chunkCoordinate.get().posX,
                     chunkCoordinate.get().posY, chunkCoordinate.get().posZ);
             if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
+                ProjectZuluLog.debug(Level.INFO, "Tombstone placed at [%s, %s, %s]", chunkCoordinate.get().posX,
+                        chunkCoordinate.get().posY, chunkCoordinate.get().posZ);
                 return (TileEntityTombstone) tileEntity;
             }
         }
