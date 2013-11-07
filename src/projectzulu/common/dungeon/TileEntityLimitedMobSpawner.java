@@ -31,7 +31,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityLimitedMobSpawner extends TileEntity {
     /** The stored delay before a new spawn. */
     public int delay = -1;
-    private int ticksExisted = 0;
 
     private NBTTagCompound debugSavedSetup = new NBTTagCompound();
 
@@ -290,8 +289,8 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
                                 PacketManagerPlaySound packetManager = (PacketManagerPlaySound) PacketIDs.playSound
                                         .createPacketManager();
                                 packetManager.setPacketData(xCoord, yCoord, zCoord, spawnerTags.spawnSound);
-                                PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 64, worldObj
-                                        .provider.dimensionId, packetManager.createPacket());
+                                PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 64,
+                                        worldObj.provider.dimensionId, packetManager.createPacket());
                             }
                             if (var11 != null) {
                                 var11.spawnExplosionParticle();
@@ -357,7 +356,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
             }
         } else if (par1Entity instanceof EntityLiving && par1Entity.worldObj != null) {
             EntityLivingData livingData = null;
-//            livingData = ((EntityLiving) par1Entity).onSpawnWithEgg(livingData);
+            // livingData = ((EntityLiving) par1Entity).onSpawnWithEgg(livingData);
         }
     }
 
@@ -400,7 +399,15 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
             NBTTagList var2 = par1NBTTagCompound.getTagList("SpawnPotentials");
 
             for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
-                this.spawnList.add(new TileEntityLimitedMobSpawnData(this, (NBTTagCompound) var2.tagAt(var3)));
+                TileEntityLimitedMobSpawnData spawnData = new TileEntityLimitedMobSpawnData(this,
+                        (NBTTagCompound) var2.tagAt(var3));
+                if (EntityList.classToStringMapping.containsKey(spawnData.type)) {
+                    this.spawnList.add(spawnData);
+                } else {
+                    ProjectZuluLog
+                            .severe("Failed to load Limited Spawner entity %s at (%s, %s, %s). Entity does not appear to be declared.",
+                                    spawnData.type, xCoord, yCoord, zCoord);
+                }
             }
         } else {
             this.spawnList = null;
@@ -408,6 +415,12 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
         if (par1NBTTagCompound.hasKey("SpawnData")) {
             this.spawnerTags = new TileEntityLimitedMobSpawnData(this, par1NBTTagCompound.getCompoundTag("SpawnData"),
                     this.mobID, "", "");
+            if (!EntityList.classToStringMapping.containsKey(spawnerTags.type)) {
+                ProjectZuluLog
+                        .severe("Failed to load Limited Spawner entity %s at (%s, %s, %s). Entity does not appear to be declared.",
+                                spawnerTags.type, xCoord, yCoord, zCoord);
+            }
+            spawnerTags = null;
         } else {
             this.spawnerTags = null;
         }
