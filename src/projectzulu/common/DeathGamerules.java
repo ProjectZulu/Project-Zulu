@@ -25,6 +25,7 @@ import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ObfuscationHelper;
+import projectzulu.common.core.ProjectZuluLog;
 
 public class DeathGamerules {
     int maxDropXP = 100;
@@ -119,6 +120,7 @@ public class DeathGamerules {
         if (!gameRule.hasRule(gameruleName)) {
             gameRule.addGameRule(gameruleName, value);
         }
+        ProjectZuluLog.info("Gamerule %s is set to %s", gameruleName, gameRule.getGameRuleBooleanValue(gameruleName));
     }
 
     @ForgeSubscribe
