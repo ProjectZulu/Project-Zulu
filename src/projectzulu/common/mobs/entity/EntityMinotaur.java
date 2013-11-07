@@ -7,7 +7,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
@@ -62,6 +61,16 @@ public class EntityMinotaur extends EntityGenericAnimal implements IMob {
         return 6;
     }
 
+    @Override
+    protected String getLivingSound() {
+        return "mob.cow.say";
+    }
+
+    @Override
+    public int getTalkInterval() {
+        return 160;
+    }
+    
     @Override
     protected void playStepSound(int par1, int par2, int par3, int par4) {
         this.worldObj.playSoundAtEntity(this, "mob.cow.step", 0.15F, 1.0F);
