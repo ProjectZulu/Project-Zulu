@@ -86,7 +86,6 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer {
         if (par1TileEntityTombstone.getEntityOrb() != null) {
             GL11.glPushMatrix();
             long time = par1TileEntityTombstone.worldObj.getWorldInfo().getWorldTotalTime();
-            ProjectZuluLog.info("Time %s", time);
             float orbOrbitRadius = 0.3f;
             float periodScale = 6.0f;
             GL11.glTranslatef((float) par2 + 0.5f, (float) (par4 + 1.1f + 0.05f * Math.cos(time / 20f)),
