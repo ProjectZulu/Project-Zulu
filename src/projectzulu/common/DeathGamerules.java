@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.Configuration;
@@ -26,6 +27,8 @@ import projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ObfuscationHelper;
 import projectzulu.common.core.ProjectZuluLog;
+
+import com.google.common.base.Optional;
 
 public class DeathGamerules {
     int maxDropXP = 100;
@@ -220,17 +223,61 @@ public class DeathGamerules {
     }
 
     private TileEntityTombstone placeTombstone(EntityPlayer player) {
-        if (player.worldObj.isAirBlock((int) player.posX, (int) player.posY, (int) player.posZ)) {
+        Optional<ChunkCoordinates> chunkCoordinate = findValidTombstoneLocation(player);
+        if (chunkCoordinate.isPresent()) {
             /* Place a Tombstone */
-            player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ,
-                    BlockList.tombstone.get().blockID);
-            TileEntity tileEntity = player.worldObj.getBlockTileEntity((int) player.posX, (int) player.posY,
-                    (int) player.posZ);
+            player.worldObj.setBlock(chunkCoordinate.get().posX, chunkCoordinate.get().posY,
+                    chunkCoordinate.get().posZ, BlockList.tombstone.get().blockID);
+            TileEntity tileEntity = player.worldObj.getBlockTileEntity(chunkCoordinate.get().posX,
+                    chunkCoordinate.get().posY, chunkCoordinate.get().posZ);
             if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
                 return (TileEntityTombstone) tileEntity;
             }
         }
         return null;
+    }
+
+    private Optional<ChunkCoordinates> findValidTombstoneLocation(EntityPlayer player) {
+        final int maxRadius = 100;
+        for (int radius = 0; radius < maxRadius; radius++) {
+            for (int xOffset = 0; xOffset < radius + 1; xOffset++) {
+                for (int zOffset = 0; zOffset < radius; zOffset++) {
+                    final int yIncremenet = 5;
+                    int upperYOffset = yIncremenet;
+                    int lowerYOffset = 0;
+                    final int maxYOffset = 30;
+                    while (upperYOffset <= maxYOffset) {
+                        for (int yOffset = lowerYOffset; yOffset < upperYOffset; yOffset++) {
+                            ChunkCoordinates chunkCoordinates = new ChunkCoordinates((int) (player.posX + xOffset),
+                                    (int) (player.posY + yOffset), (int) (player.posZ + zOffset));
+                            if (isLocationValid(player, chunkCoordinates.posX, chunkCoordinates.posY,
+                                    chunkCoordinates.posZ)) {
+                                return Optional.of(chunkCoordinates);
+                            }
+                        }
+
+                        for (int yOffset = -lowerYOffset; yOffset > -upperYOffset; yOffset--) {
+                            ChunkCoordinates chunkCoordinates = new ChunkCoordinates((int) (player.posX + xOffset),
+                                    (int) (player.posY + yOffset), (int) (player.posZ + zOffset));
+                            if (isLocationValid(player, chunkCoordinates.posX, chunkCoordinates.posY,
+                                    chunkCoordinates.posZ)) {
+                                return Optional.of(chunkCoordinates);
+                            }
+                        }
+                        lowerYOffset = upperYOffset;
+                        upperYOffset += yIncremenet;
+                    }
+                }
+            }
+        }
+        return Optional.absent();
+    }
+
+    private boolean isLocationValid(EntityPlayer player, int posX, int posY, int posZ) {
+        if (player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.isBlockOpaqueCube(posX, posY - 1, posZ)) {
+            return true;
+        }
+        return false;
     }
 
     private List<ItemStack> dropArmor(EntityPlayer player) {
