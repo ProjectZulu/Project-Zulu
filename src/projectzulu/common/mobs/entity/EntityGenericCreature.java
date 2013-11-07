@@ -10,66 +10,103 @@ import net.minecraft.world.World;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
 
-public abstract class EntityGenericCreature extends EntityAerial
-{
+public abstract class EntityGenericCreature extends EntityAerial {
     private PathEntity pathToEntity;
-	public boolean hasPath(){ return this.pathToEntity != null; }
-    
+
+    public boolean hasPath() {
+        return this.pathToEntity != null;
+    }
+
     /** The Entity this EntityCreature is set to attack. */
     protected Entity entityToAttack;
-    public Entity getEntityToAttack(){ return this.entityToAttack; }
-    public void setTarget(Entity par1Entity){ this.entityToAttack = par1Entity; }
-    
+
+    public Entity getEntityToAttack() {
+        return this.entityToAttack;
+    }
+
+    public void setTarget(Entity par1Entity) {
+        this.entityToAttack = par1Entity;
+    }
+
     private float maximumHomeDistance = -1.0F;
     private ChunkCoordinates homePosition = new ChunkCoordinates(0, 0, 0);
     private boolean field_110180_bt;
+    // Cooldown instituted on the entity when it attempts to find a path but fails.
+    private int leashPathCooldown = 0;
     private EntityAIBase field_110178_bs = new EntityAIMoveTowardsRestriction(this, 1.0f);
 
     /**
      * returns true if a creature has attacked recently only used for creepers and skeletons
      */
     /* Do I need this? */
-//    protected boolean hasAttacked = false;
+    // protected boolean hasAttacked = false;
 
     /** Used to make a creature speed up and wander away when hit. */
     protected int fleeingTick = 0;
-	public int getFleeTick() { return fleeingTick; }	
-	public void setFleeTick(int fleeingTick) {	this.fleeingTick = fleeingTick; }
 
-	/* Entity State Variables */
+    public int getFleeTick() {
+        return fleeingTick;
+    }
+
+    public void setFleeTick(int fleeingTick) {
+        this.fleeingTick = fleeingTick;
+    }
+
+    /* Entity State Variables */
     protected int animTime = 0;
-    public int getAnimTime(){ return animTime;  }
-    public void setAnimTime(int animTime){	this.animTime = animTime;   }
-    
-	protected int angerLevel = 0;
-	public int getAngerLevel() { return angerLevel; }	
-	public void setAngerLevel(int angerLevel) {	this.angerLevel = angerLevel; }
 
-	
-    protected EntityStates entityState = EntityStates.idle;   
-    public EntityStates getEntityState(){ return entityState; }
-    
-    public EntityGenericCreature(World par1World){
+    public int getAnimTime() {
+        return animTime;
+    }
+
+    public void setAnimTime(int animTime) {
+        this.animTime = animTime;
+    }
+
+    protected int angerLevel = 0;
+
+    public int getAngerLevel() {
+        return angerLevel;
+    }
+
+    public void setAngerLevel(int angerLevel) {
+        this.angerLevel = angerLevel;
+    }
+
+    protected EntityStates entityState = EntityStates.idle;
+
+    public EntityStates getEntityState() {
+        return entityState;
+    }
+
+    public EntityGenericCreature(World par1World) {
         super(par1World);
     }
-        
-	@Override
-	protected boolean isAIEnabled() {
-		return true;
-	}
-	
-	@Override
-	protected void updateAITasks() {
-		super.updateAITasks();
-    	attackTime = Math.max(attackTime-1, 0);
-    	fleeingTick = Math.max(fleeingTick-1, 0);
-    	angerLevel = Math.max(angerLevel-1, 0);
-	}
-	
+
+    @Override
+    protected boolean isAIEnabled() {
+        return true;
+    }
+
+    @Override
+    protected void updateAITasks() {
+        super.updateAITasks();
+        attackTime = Math.max(attackTime - 1, 0);
+        fleeingTick = Math.max(fleeingTick - 1, 0);
+        angerLevel = Math.max(angerLevel - 1, 0);
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        leashPathCooldown = Math.max(leashPathCooldown - 1, 0);
+    }
+
     protected void func_110159_bB() {
         super.func_110159_bB();
 
-        if (this.getLeashed() && this.getLeashedToEntity() != null && this.getLeashedToEntity().worldObj == this.worldObj) {
+        if (this.getLeashed() && this.getLeashedToEntity() != null
+                && this.getLeashedToEntity().worldObj == this.worldObj) {
             Entity entity = this.getLeashedToEntity();
             this.setHomeArea((int) entity.posX, (int) entity.posY, (int) entity.posZ, 5);
             float f = this.getDistanceToEntity(entity);
@@ -89,9 +126,11 @@ public abstract class EntityGenericCreature extends EntityAerial
             }
 
             this.func_142017_o(f);
-
-            if (f > 4.0F) {
-                this.getNavigator().tryMoveToEntityLiving(entity, 1.0D);
+            if (leashPathCooldown == 0 && f > 4.0F) {
+                boolean foundPath = this.getNavigator().tryMoveToEntityLiving(entity, 1.0D);
+                if (!foundPath) {
+                    leashPathCooldown = 20;
+                }
             }
 
             if (f > 6.0F) {
@@ -114,18 +153,19 @@ public abstract class EntityGenericCreature extends EntityAerial
         }
     }
 
-    protected void func_142017_o(float par1) {}
-	
-	@Override
-	public int getMaxSpawnedInChunk() {
-		CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
-    	if(entityEntry != null){
-    		return entityEntry.modData.get().maxSpawnInChunk;
-    	}else{
-    		return super.getMaxSpawnedInChunk();
-    	}
-	}
-	
+    protected void func_142017_o(float par1) {
+    }
+
+    @Override
+    public int getMaxSpawnedInChunk() {
+        CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+        if (entityEntry != null) {
+            return entityEntry.modData.get().maxSpawnInChunk;
+        } else {
+            return super.getMaxSpawnedInChunk();
+        }
+    }
+
     /**
      * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
      * Args: x, y, z
@@ -133,7 +173,7 @@ public abstract class EntityGenericCreature extends EntityAerial
     public float getBlockPathWeight(int par1, int par2, int par3) {
         return 0.0F;
     }
-    
+
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
