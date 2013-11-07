@@ -1,10 +1,13 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
@@ -28,13 +31,9 @@ public class AlligatorDeclaration extends SpawnableDeclaration{
 		setRegistrationProperties(128, 3, true);
 		setDropAmount(0, 3);
 		
-		eggColor1 = (32 << 16) + (39 << 8) + 33;
-		eggColor2 = (52 << 16) + (65 << 8) + 54;
-		defaultBiomesToSpawn.add(BiomeGenBase.swampland.biomeName);	
-		defaultBiomesToSpawn.add(BiomeGenBase.river.biomeName);
-		defaultBiomesToSpawn.add("Green Swamplands"); 	
-		defaultBiomesToSpawn.add("Marsh");
-	}
+        eggColor1 = (32 << 16) + (39 << 8) + 33;
+        eggColor2 = (52 << 16) + (65 << 8) + 54;
+    }
 	
 	@Override
 	public void outputDataToList(Configuration config, CustomMobData customMobData) {
@@ -51,5 +50,16 @@ public class AlligatorDeclaration extends SpawnableDeclaration{
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelCrocodile(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "crocodile.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.swampland.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.river.biomeName);
+        defaultBiomesToSpawn.add("Green Swamplands");
+        defaultBiomesToSpawn.add("Marsh");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.SWAMP));
+        return defaultBiomesToSpawn;
     }
 }

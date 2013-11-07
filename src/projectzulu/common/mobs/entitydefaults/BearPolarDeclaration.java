@@ -1,11 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -30,12 +33,6 @@ public class BearPolarDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (255 << 16) + (255 << 8) + 255;
         eggColor2 = (201 << 16) + (201 << 8) + 201;
-        defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName);
-        defaultBiomesToSpawn.add("Ice Wasteland");
-        defaultBiomesToSpawn.add("Glacier");
-
     }
 
     @Override
@@ -56,5 +53,17 @@ public class BearPolarDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelPolarBear(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "bearpolar.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.taiga.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.taigaHills.biomeName);
+        defaultBiomesToSpawn.add("Ice Wasteland");
+        defaultBiomesToSpawn.add("Glacier");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.FROZEN));
+        return defaultBiomesToSpawn;
     }
 }

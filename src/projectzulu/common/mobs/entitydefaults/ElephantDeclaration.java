@@ -1,10 +1,13 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -29,9 +32,6 @@ public class ElephantDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (88 << 16) + (67 << 8) + 50;
         eggColor2 = (190 << 16) + (165 << 8) + 145;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName);
-        defaultBiomesToSpawn.add("Savanna");
     }
 
     @Override
@@ -50,5 +50,18 @@ public class ElephantDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelElephant(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "elephant.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName);
+        defaultBiomesToSpawn.add("Savanna");
+
+        HashSet<String> nonFrozenForest = new HashSet<String>();
+        nonFrozenForest.addAll(typeToArray(Type.PLAINS));
+        nonFrozenForest.removeAll(typeToArray(Type.FROZEN));
+        defaultBiomesToSpawn.addAll(nonFrozenForest);
+        return defaultBiomesToSpawn;
     }
 }

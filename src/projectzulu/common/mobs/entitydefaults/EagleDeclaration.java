@@ -1,11 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -30,8 +33,6 @@ public class EagleDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (224 << 16) + (224 << 8) + 224;
         eggColor2 = (28 << 16) + (21 << 8) + 17;
-        defaultBiomesToSpawn.add(BiomeGenBase.extremeHills.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.extremeHillsEdge.biomeName);
     }
 
     @Override
@@ -50,5 +51,14 @@ public class EagleDeclaration extends SpawnableDeclaration {
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelEagle(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "eagle.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.extremeHills.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.extremeHillsEdge.biomeName);
+        defaultBiomesToSpawn.addAll(typeToArray(Type.MOUNTAIN));
+        return defaultBiomesToSpawn;
     }
 }

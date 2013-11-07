@@ -1,9 +1,11 @@
 package projectzulu.common.core.entitydeclaration;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.ConfigHelper;
@@ -19,8 +21,7 @@ public abstract class SpawnableDeclaration extends EggableDeclaration {
     protected int maxInChunk;
     protected EnumCreatureType spawnType;
 
-    protected ArrayList<String> defaultBiomesToSpawn = new ArrayList<String>();
-    ArrayList<SpawnEntry> biomesToSpawn = new ArrayList<SpawnEntry>();
+    private ArrayList<SpawnEntry> biomesToSpawn = new ArrayList<SpawnEntry>();
 
     protected SpawnableDeclaration(String mobName, int entityID, Class mobClass, EnumCreatureType creatureType) {
         super(mobName, entityID, mobClass, creatureType);
@@ -54,18 +55,22 @@ public abstract class SpawnableDeclaration extends EggableDeclaration {
 
     @Override
     public void loadBiomesFromConfig(Configuration config) {
+        HashSet<String> defaultBiomesToSpawn = getDefaultBiomesToSpawn();
         for (int i = 0; i < BiomeGenBase.biomeList.length; i++) {
             if (BiomeGenBase.biomeList[i] == null) {
                 continue;
             }
+
+            boolean defaultShouldSpawn = defaultBiomesToSpawn.contains(BiomeGenBase.biomeList[i].biomeName);
             SpawnEntry spawnEntry = ConfigHelper.configGetSpawnEntry(config, "Mob Spawn Biome Controls." + mobName,
-                    BiomeGenBase.biomeList[i], defaultBiomesToSpawn.contains(BiomeGenBase.biomeList[i].biomeName),
-                    spawnRate, minInChunk, maxInChunk);
+                    BiomeGenBase.biomeList[i], defaultShouldSpawn, spawnRate, minInChunk, maxInChunk);
             if (spawnEntry != null) {
                 biomesToSpawn.add(spawnEntry);
             }
         }
     }
+
+    public abstract HashSet<String> getDefaultBiomesToSpawn();
 
     /*
      * Create loadCustomMobData() method which calls outputData to List. loadCustom contains calls that are the same for
@@ -102,5 +107,14 @@ public abstract class SpawnableDeclaration extends EggableDeclaration {
                         biomesToSpawn.get(i).minInChunk, biomesToSpawn.get(i).maxInChunk);
             }
         }
+    }
+
+    protected HashSet<String> typeToArray(BiomeDictionary.Type type) {
+        BiomeGenBase[] biomes = BiomeDictionary.getBiomesForType(type);
+        HashSet<String> names = new HashSet<String>(15);
+        for (BiomeGenBase biome : biomes) {
+            names.add(biome.biomeName);
+        }
+        return names;
     }
 }

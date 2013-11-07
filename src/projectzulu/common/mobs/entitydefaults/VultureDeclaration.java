@@ -1,11 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -30,11 +33,6 @@ public class VultureDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (78 << 16) + (72 << 8) + 56;
         eggColor2 = (120 << 16) + (110 << 8) + 86;
-        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
-        defaultBiomesToSpawn.add("Mountainous Desert");
-        defaultBiomesToSpawn.add("Mountain Ridge");
-        defaultBiomesToSpawn.add("Wasteland");
     }
 
     @Override
@@ -57,5 +55,22 @@ public class VultureDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelVulture(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "vulture.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
+        defaultBiomesToSpawn.add("Mountainous Desert");
+        defaultBiomesToSpawn.add("Mountain Ridge");
+        defaultBiomesToSpawn.add("Wasteland");
+
+        HashSet<String> nonFrozenForest = new HashSet<String>();
+        nonFrozenForest.addAll(typeToArray(Type.DESERT));
+        nonFrozenForest.addAll(typeToArray(Type.WASTELAND));
+        nonFrozenForest.removeAll(typeToArray(Type.FROZEN));
+        defaultBiomesToSpawn.addAll(nonFrozenForest);
+        return defaultBiomesToSpawn;
     }
 }

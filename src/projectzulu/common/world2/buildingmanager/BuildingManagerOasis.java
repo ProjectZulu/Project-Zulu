@@ -23,7 +23,7 @@ public class BuildingManagerOasis extends BuildingManagerBase {
         int cellHeight = 4;
         randomizer = new EdgeRandomizer(world, 2);
         architect = new ArchitectOasis(world);
-        startingPos = calcDirectionTranslation(direction, startingPos, xCells * cellSize, zCells * cellSize, cellHeight);
+        startingPos = calcTranslatedPosition(direction, startingPos, xCells * cellSize, zCells * cellSize, cellHeight);
 
         oasis = new MazeCell[xCells][zCells];
         for (int i = 0; i < oasis.length; i++) {

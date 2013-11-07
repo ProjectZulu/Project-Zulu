@@ -30,7 +30,7 @@ public class BuildingManagerCemetary extends BuildingManagerBase {
         int zCells = 6;
         int cellSize = 3;
         int cellHeight = 5;
-        startingPos = calcDirectionTranslation(direction, startingPos, xCells * cellSize, zCells * cellSize, cellHeight);
+        startingPos = calcTranslatedPosition(direction, startingPos, xCells * cellSize, zCells * cellSize, cellHeight);
         
         cemetary = new MazeCell[xCells][zCells];
         for (int i = 0; i < cemetary.length; i++) {

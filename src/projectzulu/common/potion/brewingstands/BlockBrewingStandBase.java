@@ -27,6 +27,7 @@ public abstract class BlockBrewingStandBase extends BlockContainer {
         this.renderID = renderID;
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHardness(0.5F);
+        setBlockBoundsForItemRender();
     }
 
     /**
@@ -45,7 +46,7 @@ public abstract class BlockBrewingStandBase extends BlockContainer {
      */
     @Override
     public void setBlockBoundsForItemRender() {
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
+        this.setBlockBounds(0.25f, 0.0f, 0.25f, 0.75f, 0.60f, 0.75f);
     }
 
     /**
