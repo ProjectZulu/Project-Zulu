@@ -1,11 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -30,9 +33,6 @@ public class GiraffeDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (239 << 16) + (228 << 8) + 109;
         eggColor2 = (91 << 16) + (87 << 8) + 41;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName);
-        defaultBiomesToSpawn.add("Savanna");
     }
 
     @Override
@@ -54,5 +54,18 @@ public class GiraffeDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelGiraffe(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "giraffe.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName);
+        defaultBiomesToSpawn.add("Savanna");
+
+        HashSet<String> nonFrozenForest = new HashSet<String>();
+        nonFrozenForest.addAll(typeToArray(Type.PLAINS));
+        nonFrozenForest.removeAll(typeToArray(Type.FROZEN));
+        defaultBiomesToSpawn.addAll(nonFrozenForest);
+        return defaultBiomesToSpawn;
     }
 }

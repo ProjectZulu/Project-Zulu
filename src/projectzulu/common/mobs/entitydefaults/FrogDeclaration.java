@@ -1,10 +1,13 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -29,9 +32,6 @@ public class FrogDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (95 << 16) + (186 << 8) + 50;
         eggColor2 = (105 << 16) + (203 << 8) + 67;
-        defaultBiomesToSpawn.add(BiomeGenBase.swampland.biomeName);
-        defaultBiomesToSpawn.add("Green Swamplands");
-        defaultBiomesToSpawn.add("Marsh");
     }
 
     @Override
@@ -49,5 +49,15 @@ public class FrogDeclaration extends SpawnableDeclaration {
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelFrog(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "frog.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.swampland.biomeName);
+        defaultBiomesToSpawn.add("Green Swamplands");
+        defaultBiomesToSpawn.add("Marsh");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.SWAMP));
+        return defaultBiomesToSpawn;
     }
 }

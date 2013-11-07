@@ -1,10 +1,13 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -28,10 +31,6 @@ public class LizardDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (114 << 16) + (102 << 8) + 74;
         eggColor2 = (181 << 16) + (171 << 8) + 146;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
-        defaultBiomesToSpawn.add("Mountainous Desert");
     }
 
     @Override
@@ -50,5 +49,15 @@ public class LizardDeclaration extends SpawnableDeclaration {
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelLizard(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "lizard.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
+        defaultBiomesToSpawn.add("Mountainous Desert");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.DESERT));
+        return defaultBiomesToSpawn;
     }
 }

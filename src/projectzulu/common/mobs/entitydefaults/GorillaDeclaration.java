@@ -1,11 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -30,11 +33,6 @@ public class GorillaDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (25 << 16) + (25 << 8) + 25;
         eggColor2 = (93 << 16) + (93 << 8) + 93;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.jungle.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.jungleHills.biomeName);
-        defaultBiomesToSpawn.add("Mini Jungle");
-        defaultBiomesToSpawn.add("Extreme Jungle");
     }
 
     @Override
@@ -54,5 +52,16 @@ public class GorillaDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelGorilla(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "gorilla.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.jungle.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.jungleHills.biomeName);
+        defaultBiomesToSpawn.add("Mini Jungle");
+        defaultBiomesToSpawn.add("Extreme Jungle");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.JUNGLE));
+        return defaultBiomesToSpawn;
     }
 }

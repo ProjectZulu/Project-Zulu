@@ -1,10 +1,13 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
@@ -33,10 +36,6 @@ public class SandwormDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (24 << 16) + (0 << 8) + 8;
         eggColor2 = (49 << 16) + (16 << 8) + 8;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
-        defaultBiomesToSpawn.add("Mountainous Desert");
     }
 
     @Override
@@ -55,5 +54,15 @@ public class SandwormDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericIdle(new ModelSandWorm(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "sandworm.png"), new ResourceLocation(DefaultProps.mobKey, "sandworm_hidden.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
+        defaultBiomesToSpawn.add("Mountainous Desert");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.DESERT));
+        return defaultBiomesToSpawn;
     }
 }

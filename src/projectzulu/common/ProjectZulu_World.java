@@ -29,10 +29,7 @@ public class ProjectZulu_World {
 
     static {
         ProjectZulu_Core.featureGenerator.registerStructure(new PyramidFeature(), new LabyrinthFeature(),
-                new CemetaryFeature(), new OasisFeature());
-
-        // ProjectZulu_Core.featureGenerator.registerStructure(new CemetaryFeature(), new LabyrinthFeature(),
-        // new OasisFeature(), new PyramidFeature(), new CathedralFeature());
+                new CemetaryFeature(), new OasisFeature(), new CathedralFeature());
     }
 
     @EventHandler

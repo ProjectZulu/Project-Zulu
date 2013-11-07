@@ -1,11 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -30,10 +33,6 @@ public class PenguinDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (22 << 16) + (16 << 8) + 13;
         eggColor2 = (235 << 16) + (235 << 8) + 235;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName);
-        defaultBiomesToSpawn.add("Ice Wasteland");
-        defaultBiomesToSpawn.add("Glacier");
     }
 
     @Override
@@ -51,5 +50,15 @@ public class PenguinDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelPenguin(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "penguin.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName);
+        defaultBiomesToSpawn.add("Ice Wasteland");
+        defaultBiomesToSpawn.add("Glacier");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.FROZEN));
+        return defaultBiomesToSpawn;
     }
 }

@@ -1,9 +1,12 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
@@ -29,12 +32,6 @@ public class ArmadilloDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (116 << 16) + (64 << 8) + 33;
         eggColor2 = (60 << 16) + (51 << 8) + 10;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
-        defaultBiomesToSpawn.add("Mountainous Desert");
-        defaultBiomesToSpawn.add("Savanna");
-        defaultBiomesToSpawn.add("Mountain Ridge");
     }
 
     @Override
@@ -52,5 +49,17 @@ public class ArmadilloDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelArmadillo(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "armadillo.png"));
+    }
+    
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
+        defaultBiomesToSpawn.add("Mountainous Desert");
+        defaultBiomesToSpawn.add("Savanna");
+        defaultBiomesToSpawn.add("Mountain Ridge");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.DESERT));
+        return defaultBiomesToSpawn;
     }
 }
