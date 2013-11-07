@@ -10,9 +10,6 @@ import net.minecraft.world.World;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.TerrainFeatureHelper;
 import projectzulu.common.core.terrain.BiomeFeature;
-import projectzulu.common.core.terrain.TerrainFeature.FeatureDirection;
-import projectzulu.common.world.MazeGenerator;
-import projectzulu.common.world.buildingmanager.BuildingManagerCemetary;
 import projectzulu.common.world2.buildingmanager.BuildingManagerCathedral;
 
 public class CathedralFeature extends BiomeFeature {

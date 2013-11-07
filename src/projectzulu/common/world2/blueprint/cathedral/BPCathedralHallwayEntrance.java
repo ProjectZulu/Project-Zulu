@@ -42,7 +42,7 @@ public class BPCathedralHallwayEntrance implements Blueprint {
             CellIndexDirection cellIndexDirection) {
         BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
         BlockWithMeta woodenStair = new BlockWithMeta(134);
-        
+
         List<BlockWithMeta> wallBlocks = new ArrayList<BlockWithMeta>(3);
         wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 8)); // Cracked
         wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 1, 8)); // Mossy
@@ -88,13 +88,17 @@ public class BPCathedralHallwayEntrance implements Blueprint {
             int topAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 0, 1,
                     BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
             if (topAarchSlope == 0 && piecePos.posX % 3 == 1) {
-                return new BlockWithMeta(woodenStair.blockID/*Block.stairsStoneBrick.blockID*/, getArchStairMeta(cellIndexDirection, true));
+                if (piecePos.posZ > cellSize * 4 / 10) {
+                    return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, true));
+                }
             }
 
             int botAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 1, 1,
                     BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
             if (botAarchSlope == 0 && piecePos.posX % 3 == 1) {
-                return new BlockWithMeta(woodenStair.blockID/*Block.stairsStoneBrick.blockID*/, getArchStairMeta(cellIndexDirection, false));
+                if (piecePos.posZ > cellSize * 4 / 10) {
+                    return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, false));
+                }
             }
         }
 

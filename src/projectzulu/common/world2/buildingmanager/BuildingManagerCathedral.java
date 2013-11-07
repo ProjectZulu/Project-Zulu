@@ -25,8 +25,8 @@ public class BuildingManagerCathedral extends BuildingManagerBase {
         architect = new ArchitectCathedral(world);
         randomizer = new WalledMazeRandomizer(world);
 
-        int xCells = 15;
-        int zCells = 15;
+        int xCells = 7;
+        int zCells = 7;
         int cellSize = 6;
         int cellHeight = 15;
 

@@ -91,7 +91,7 @@ public class BPCathedralHallwayEnd implements Blueprint {
             if (slope != slopeBelow) {
                 return new BlockWithMeta(woodenStair.blockID, getStairMeta(cellIndexDirection));
             } else {
-                //Outide Wall Has Different 'floor'
+                // Outide Wall Has Different 'floor'
                 if (piecePos.posX < 1) {
                     return woodenPlank;
                 } else {

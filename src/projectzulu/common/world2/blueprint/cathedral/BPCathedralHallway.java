@@ -103,13 +103,19 @@ public class BPCathedralHallway implements Blueprint {
         int topAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 0, 1,
                 BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
         if (topAarchSlope == 0 && piecePos.posX % 3 == 1) {
-            return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, true));
+            // only inside cathedral wall
+            if (piecePos.posZ > cellSize * 4 / 10) {
+                return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, true));
+            }
         }
 
         int botAarchSlope = CellHelper.getSlopeIndex(piecePos, cellSize - piecePos.posZ + 1, 1,
                 BoundaryPair.createPair(1, cellSize * 2), cellHeight - cellSize);
         if (botAarchSlope == 0 && piecePos.posX % 3 == 1) {
-            return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, false));
+            // only inside cathedral wall
+            if (piecePos.posZ > cellSize * 4 / 10) {
+                return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, false));
+            }
         }
 
         /* Pews */
