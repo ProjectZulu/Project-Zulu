@@ -1,9 +1,12 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -27,11 +30,6 @@ public class MammothDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (20 << 16) + (12 << 8) + 0;
         eggColor2 = (69 << 16) + (42 << 8) + 0;
-        defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.taigaHills.biomeName);
-        defaultBiomesToSpawn.add("Tundra");
-        defaultBiomesToSpawn.add("Ice Wasteland");
-        defaultBiomesToSpawn.add("Glacier");
     }
 
     @Override
@@ -51,5 +49,17 @@ public class MammothDeclaration extends SpawnableDeclaration {
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderMammoth(new ModelMammoth(), 0.5f);
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.icePlains.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.taigaHills.biomeName);
+        defaultBiomesToSpawn.add("Tundra");
+        defaultBiomesToSpawn.add("Ice Wasteland");
+        defaultBiomesToSpawn.add("Glacier");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.FROZEN));
+        return defaultBiomesToSpawn;
     }
 }

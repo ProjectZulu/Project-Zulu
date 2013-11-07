@@ -1,11 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -30,24 +33,6 @@ public class FoxDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (204 << 16) + (132 << 8) + 22;
         eggColor2 = (224 << 16) + (224 << 8) + 224;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.taiga.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.taigaHills.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName);
-        defaultBiomesToSpawn.add("Birch Forest");
-        defaultBiomesToSpawn.add("Forested Island");
-        defaultBiomesToSpawn.add("Forested Hills");
-        defaultBiomesToSpawn.add("Green Hills");
-        defaultBiomesToSpawn.add("Mountain Taiga");
-        defaultBiomesToSpawn.add("Pine Forest");
-        defaultBiomesToSpawn.add("Rainforest");
-        defaultBiomesToSpawn.add("Redwood Forest");
-        defaultBiomesToSpawn.add("Lush Redwoods");
-        defaultBiomesToSpawn.add("Snow Forest");
-        defaultBiomesToSpawn.add("Snowy Rainforest");
-        defaultBiomesToSpawn.add("Temperate Rainforest");
-        defaultBiomesToSpawn.add("Woodlands");
     }
 
     @Override
@@ -65,5 +50,29 @@ public class FoxDeclaration extends SpawnableDeclaration {
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderTameable(new ModelFox(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "fox.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.taiga.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.taigaHills.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName);
+        defaultBiomesToSpawn.add("Birch Forest");
+        defaultBiomesToSpawn.add("Forested Island");
+        defaultBiomesToSpawn.add("Forested Hills");
+        defaultBiomesToSpawn.add("Green Hills");
+        defaultBiomesToSpawn.add("Mountain Taiga");
+        defaultBiomesToSpawn.add("Pine Forest");
+        defaultBiomesToSpawn.add("Rainforest");
+        defaultBiomesToSpawn.add("Redwood Forest");
+        defaultBiomesToSpawn.add("Lush Redwoods");
+        defaultBiomesToSpawn.add("Snow Forest");
+        defaultBiomesToSpawn.add("Snowy Rainforest");
+        defaultBiomesToSpawn.add("Temperate Rainforest");
+        defaultBiomesToSpawn.add("Woodlands");
+        defaultBiomesToSpawn.addAll(typeToArray(Type.FOREST));
+        return defaultBiomesToSpawn;
     }
 }

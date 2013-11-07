@@ -1,11 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -30,13 +33,6 @@ public class TreeEntDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (17 << 16) + (6 << 8) + 3;
         eggColor2 = (83 << 16) + (56 << 8) + 29;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.taiga.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.taigaHills.biomeName);
-        defaultBiomesToSpawn.add("Alpine");
-        defaultBiomesToSpawn.add("Mountain Taiga");
-        defaultBiomesToSpawn.add("Snow Forest");
-        defaultBiomesToSpawn.add("Snowy Rainforest");
     }
 
     @Override
@@ -56,5 +52,22 @@ public class TreeEntDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderSnow(new ModelTreeEnt(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "treeent.png"),
                 new ResourceLocation(DefaultProps.mobKey, "treeent_snow.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.taiga.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.taigaHills.biomeName);
+        defaultBiomesToSpawn.add("Alpine");
+        defaultBiomesToSpawn.add("Mountain Taiga");
+        defaultBiomesToSpawn.add("Snow Forest");
+        defaultBiomesToSpawn.add("Snowy Rainforest");
+
+        HashSet<String> nonFrozenForest = new HashSet<String>();
+        defaultBiomesToSpawn.addAll(typeToArray(Type.FOREST));
+        nonFrozenForest.retainAll(typeToArray(Type.FROZEN));
+        defaultBiomesToSpawn.addAll(nonFrozenForest);
+        return defaultBiomesToSpawn;
     }
 }

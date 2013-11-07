@@ -1,10 +1,13 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.entitydeclaration.EntityProperties;
@@ -26,9 +29,6 @@ public class MummyDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (255 << 16) + (255 << 8) + 255;
         eggColor2 = (255 << 16) + (255 << 8) + 255;
-
-        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
     }
 
     @Override
@@ -41,5 +41,14 @@ public class MummyDeclaration extends SpawnableDeclaration {
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelMummy(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "mummy.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
+        defaultBiomesToSpawn.addAll(typeToArray(Type.DESERT));
+        return defaultBiomesToSpawn;
     }
 }

@@ -1,11 +1,14 @@
 package projectzulu.common.mobs.entitydefaults;
 
+import java.util.HashSet;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -30,8 +33,6 @@ public class PelicanDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (214 << 16) + (214 << 8) + 214;
         eggColor2 = (168 << 16) + (62 << 8) + 10;
-        defaultBiomesToSpawn.add(BiomeGenBase.river.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.beach.biomeName);
     }
 
     @Override
@@ -51,5 +52,14 @@ public class PelicanDeclaration extends SpawnableDeclaration {
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericLiving(new ModelPelican(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "pelican.png"));
+    }
+
+    @Override
+    public HashSet<String> getDefaultBiomesToSpawn() {
+        HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.river.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.beach.biomeName);
+        defaultBiomesToSpawn.addAll(typeToArray(Type.BEACH));
+        return defaultBiomesToSpawn;
     }
 }
