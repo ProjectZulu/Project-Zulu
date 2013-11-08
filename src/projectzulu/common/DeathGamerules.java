@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.GameRules;
@@ -245,9 +246,14 @@ public class DeathGamerules {
                     chunkCoordinate.get().posZ, BlockList.tombstone.get().blockID);
             TileEntity tileEntity = player.worldObj.getBlockTileEntity(chunkCoordinate.get().posX,
                     chunkCoordinate.get().posY, chunkCoordinate.get().posZ);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Tombstone summoned to mark the 'passing' of ").append(player.username).append(" at [");
+            sb.append(chunkCoordinate.get().posX).append(", ");
+            sb.append(chunkCoordinate.get().posY).append(", ");
+            sb.append(chunkCoordinate.get().posZ).append("]");
+            player.sendChatToPlayer(new ChatMessageComponent().addText(sb.toString()));
             if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
-                ProjectZuluLog.debug(Level.INFO, "Tombstone placed at [%s, %s, %s]", chunkCoordinate.get().posX,
-                        chunkCoordinate.get().posY, chunkCoordinate.get().posZ);
+                ProjectZuluLog.debug(Level.INFO, sb.toString());
                 return (TileEntityTombstone) tileEntity;
             }
         }
