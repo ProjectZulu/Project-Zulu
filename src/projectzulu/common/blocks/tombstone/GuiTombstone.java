@@ -12,6 +12,7 @@ import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.common.core.PacketIDs;
 import projectzulu.common.core.ProjectZuluLog;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
@@ -62,7 +63,7 @@ public class GuiTombstone extends GuiScreen {
 
         /* Write PacketID into Packet */
         try {
-            data.writeInt(2);
+            data.writeInt(PacketIDs.tileEntityText.index);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,7 +114,6 @@ public class GuiTombstone extends GuiScreen {
      */
     @Override
     protected void keyTyped(char keyChar, int keyID) {
-        ProjectZuluLog.info("XXX %s %s", editLine, entitySign.signText.length);
         if (keyID == Keyboard.KEY_UP) {
             editLine = editLine - 1 >= 0 ? editLine - 1 : entitySign.signText.length - 1;
         }
