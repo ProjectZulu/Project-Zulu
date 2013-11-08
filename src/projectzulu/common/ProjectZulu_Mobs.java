@@ -17,6 +17,7 @@ import projectzulu.common.mobs.entitydefaults.ElephantDeclaration;
 import projectzulu.common.mobs.entitydefaults.FollowerDeclaration;
 import projectzulu.common.mobs.entitydefaults.FoxDeclaration;
 import projectzulu.common.mobs.entitydefaults.FrogDeclaration;
+import projectzulu.common.mobs.entitydefaults.GargoyleDeclaration;
 import projectzulu.common.mobs.entitydefaults.GiraffeDeclaration;
 import projectzulu.common.mobs.entitydefaults.GorillaDeclaration;
 import projectzulu.common.mobs.entitydefaults.GreenFinchDeclaration;
@@ -96,6 +97,6 @@ public class ProjectZulu_Mobs {
                 new HorseDarkBrownDeclaration(), new HorseGreyDeclaration(), new HorseWhiteDeclaration(),
                 new EagleDeclaration(), new HornbillDeclaration(), new PelicanDeclaration(), new MinotaurDeclaration(),
                 new HauntedArmorDeclaration(), new CentipedeDeclaration(), new FollowerDeclaration(),
-                new HorseRandomDeclaration());
+                new HorseRandomDeclaration(), new GargoyleDeclaration());
     }
 }
