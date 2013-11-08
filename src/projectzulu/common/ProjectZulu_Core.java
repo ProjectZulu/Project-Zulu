@@ -3,7 +3,6 @@ package projectzulu.common;
 import java.io.File;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraftforge.common.BiomeDictionary;

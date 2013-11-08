@@ -54,6 +54,11 @@ public class DeathGamerules {
     boolean tombstoneAbsorbDrops = true;
     boolean doDropEvent = true;
 
+    boolean dropArmorDefault = false;
+    boolean dropInventoryDefault = false;
+    boolean dropHotbarDefault = false;
+    boolean dropXPDefault = false;
+
     public DeathGamerules loadConfiguration(File modConfigDirectory) {
         Configuration config = new Configuration(new File(modConfigDirectory, DefaultProps.configDirectory
                 + DefaultProps.defaultConfigFile));
@@ -67,6 +72,15 @@ public class DeathGamerules {
         String category = "General Controls.gamerule_settings";
         maxDropXP = config.get(category + ".Experience", "maxDropXP", 100,
                 "Maximum XP dropped on Death. The rest is lost. 100 is vanilla default").getInt(100);
+
+        dropArmorDefault = config.get(category + ".Armor", "isEnabledDefault", false,
+                "The Default settings for the dropArmor gamerule").getBoolean(false);
+        dropInventoryDefault = config.get(category + ".Inventory", "isEnabledDefault", false,
+                "The Default settings for the dropInventory gamerule").getBoolean(false);
+        dropHotbarDefault = config.get(category + ".Hotbar", "isEnabledDefault", false,
+                "The Default settings for the dropHotbar gamerule").getBoolean(false);
+        dropXPDefault = config.get(category + ".Experience", "isEnabledDefault", false,
+                "The Default settings for the dropXP gamerule").getBoolean(false);
 
         armorDeathDamage = handlePropMinMax(config.get(category + ".Armor", "armorDeathDamage", 0,
                 "Percentage of Max durability dealth on Death to armor slot items"), 0, 0, 100);
@@ -114,15 +128,15 @@ public class DeathGamerules {
     @ForgeSubscribe
     public void worldLoad(WorldEvent.Load event) {
         GameRules gameRule = event.world.getGameRules();
-        createGameruleIfAbsent(gameRule, "dropInventory", "false");
-        createGameruleIfAbsent(gameRule, "dropHotbar", "false");
-        createGameruleIfAbsent(gameRule, "dropArmor", "false");
-        createGameruleIfAbsent(gameRule, "dropXP", "false");
+        createGameruleIfAbsent(gameRule, "dropInventory", dropInventoryDefault);
+        createGameruleIfAbsent(gameRule, "dropHotbar", dropHotbarDefault);
+        createGameruleIfAbsent(gameRule, "dropArmor", dropArmorDefault);
+        createGameruleIfAbsent(gameRule, "dropXP", dropXPDefault);
     }
 
-    private void createGameruleIfAbsent(GameRules gameRule, String gameruleName, String value) {
+    private void createGameruleIfAbsent(GameRules gameRule, String gameruleName, boolean value) {
         if (!gameRule.hasRule(gameruleName)) {
-            gameRule.addGameRule(gameruleName, value);
+            gameRule.addGameRule(gameruleName, Boolean.toString(value));
         }
         ProjectZuluLog.info("Gamerule %s is set to %s", gameruleName, gameRule.getGameRuleBooleanValue(gameruleName));
     }
