@@ -1,14 +1,11 @@
 package projectzulu.common.mobs.models;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.MathHelper;
-
-import org.lwjgl.opengl.GL11;
-
 import projectzulu.common.core.ModelHelper;
 import projectzulu.common.mobs.entity.EntityGenericAnimal;
 import projectzulu.common.mobs.entity.EntityStates;
@@ -141,9 +138,7 @@ public class ModelMimic extends ModelBase {
         LEG2TOPROT.render(f5);
         LEG4TOPROT.render(f5);
         LEG3TOPROT.render(f5);
-
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D,
-                ModLoader.getMinecraftInstance().renderEngine.getTexture(RenderMimic.normalChest).getGlTextureId());
+        Minecraft.getMinecraft().renderEngine.bindTexture(RenderMimic.normalChest);
         botchest.render(f5);
         BOTTEETHROT.render(f5);
         TOPCHESTROT.render(f5);
