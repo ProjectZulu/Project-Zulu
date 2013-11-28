@@ -374,7 +374,7 @@ public class DeathGamerules {
                     boolean itemDestroyed = itemStack.isItemStackDamageable()
                             && itemStack.getItemDamage() > itemStack.getMaxDamage();
                     if (itemDestroyed) {
-                        player.inventory.armorInventory[slot] = null;
+                        player.inventory.mainInventory[slot] = null;
                     }
 
                     if (shouldDrop) {
@@ -419,7 +419,7 @@ public class DeathGamerules {
                 boolean itemDestroyed = itemStack.isItemStackDamageable()
                         && itemStack.getItemDamage() > itemStack.getMaxDamage();
                 if (itemDestroyed) {
-                    player.inventory.armorInventory[slot] = null;
+                    player.inventory.mainInventory[slot] = null;
                 }
 
                 if (shouldDrop) {

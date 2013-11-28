@@ -3,11 +3,8 @@ package projectzulu.common.blocks.tombstone;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import projectzulu.common.core.ProjectZuluLog;
-
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -19,7 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityTombstone extends TileEntity {
-    
+
     /* List of Items this Tombstone will Empty Upon Right-Clicking */
     private ArrayList<ItemStack> deathItems = new ArrayList<ItemStack>();
     public int experience = 0;
@@ -34,7 +31,7 @@ public class TileEntityTombstone extends TileEntity {
         }
         return null;
     }
-    
+
     public boolean addDrop(ItemStack itemDrop) {
         return deathItems.add(itemDrop);
     }
@@ -47,18 +44,18 @@ public class TileEntityTombstone extends TileEntity {
     public void giveItemsToPlayer(EntityPlayer player) {
         player.addExperience(experience);
         experience = 0;
-        
+
         Iterator<ItemStack> iterator = deathItems.iterator();
         boolean itemAdded = true;
         while (iterator.hasNext() && itemAdded) {
             ItemStack deathItem = iterator.next();
             itemAdded = player.inventory.addItemStackToInventory(deathItem);
-            if(itemAdded){
+            if (itemAdded) {
                 iterator.remove();
             }
         }
     }
-    
+
     /** An array of four strings storing the lines of text on the sign. */
     public String[] signText;
     public final int maxLines = 7;
@@ -77,7 +74,7 @@ public class TileEntityTombstone extends TileEntity {
             signText[i] = "";
         }
     }
-    
+
     /**
      * Writes a tile entity to NBT.
      */
@@ -157,39 +154,33 @@ public class TileEntityTombstone extends TileEntity {
         String[] words = inputString.split(" ");
         int startWord = 0;
         for (int currentLine = 0; currentLine < signText.length; currentLine++) {
-            int curCharPerLine = 0;
-
+            StringBuilder currentLineText = new StringBuilder(maxcharPerLine);
             /* Add Words until Line is full */
             for (int i = startWord; i < words.length; i++) {
                 String currentWord = getFilteredWord(words[i]);
-                if (curCharPerLine + 1 + currentWord.length() <= maxcharPerLine) {
-                    curCharPerLine += 1 + currentWord.length();
-                } else {
-                    signText[currentLine] = getFilteredWord(words[startWord]);
-                    for (int j = startWord + 1; j < i; j++) {
-                        String nextWord = getFilteredWord(words[j]);
-                        signText[currentLine] = signText[currentLine].concat(" ").concat(nextWord);
-                    }
-                    startWord = i;
-                    break;
-                }
 
-                /**
-                 * If There are no More Words, write the last few words to Sign Note The absence of Size Check, signText
-                 * truncates itself elsewhere so we don't worry about it here
-                 */
-                if (i + 1 >= words.length) {
-                    signText[currentLine] = words[startWord];
-                    for (int j = startWord + 1; j <= i; j++) {
-                        signText[currentLine] = signText[currentLine].concat(" ").concat(getFilteredWord(words[j]));
+                if (currentLineText.length() + (currentLineText.length() != 0 ? 1 : 0) + currentWord.length() <= maxcharPerLine) {
+                    if (currentLineText.length() != 0) {
+                        currentLineText.append(" ");
                     }
-                    startWord = i + 1;
+                    currentLineText.append(currentWord);
+                    /* If This is the last line, we want to write the text */
+                    if (i + 1 >= words.length) {
+                        signText[currentLine] = getFilteredWord(currentLineText.toString());
+                        currentLineText = new StringBuilder(maxcharPerLine);
+                        startWord = i + 1;
+                        break;
+                    }
+                } else {
+                    signText[currentLine] = getFilteredWord(currentLineText.toString());
+                    currentLineText = new StringBuilder(maxcharPerLine);
+                    startWord = i;
                     break;
                 }
             }
         }
     }
-    
+
     /**
      * Handlers filtering word if it is invalid in some way, such as truncating a word that is too long.
      */
