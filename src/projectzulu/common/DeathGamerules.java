@@ -205,6 +205,9 @@ public class DeathGamerules {
                     }
                     tombstone.experience = xpDropped;
                 } else {
+                    if (tombstoneAbsorbDrops) {
+                        ProjectZuluLog.warning("Tombstone could not be placed so items dropping normally.");
+                    }
                     while (xpDropped > 0) {
                         int j = EntityXPOrb.getXPSplit(xpDropped);
                         xpDropped -= j;
@@ -215,6 +218,9 @@ public class DeathGamerules {
                         player.joinEntityItemWithWorld(item);
                     }
                 }
+            } else {
+                ProjectZuluLog.warning("Player drop event was cancelled, so items will not be dropped per convention."
+                        + "Results may not desireable, consider disabling 'doDropEvent' in the config.");
             }
         }
     }
@@ -257,6 +263,8 @@ public class DeathGamerules {
                 return (TileEntityTombstone) tileEntity;
             }
         }
+        ProjectZuluLog.warning("Failed to find location to place tombstone at player location {X:%s, Y:%s, Z:%s}",
+                player.posX, player.posY, player.posZ);
         return null;
     }
 
