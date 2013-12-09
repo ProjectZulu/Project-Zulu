@@ -32,8 +32,11 @@ import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class DeathGamerules {
     int maxDropXP = 100;
+    int percKeptXp = 0;
 
     int armorDeathDamage = 0;
     int inventoryDeathDamage = 0;
@@ -55,15 +58,25 @@ public class DeathGamerules {
     boolean tombstoneAbsorbDrops = true;
     boolean doDropEvent = true;
 
+    boolean keepInventoryDefault = false;
     boolean dropArmorDefault = false;
     boolean dropInventoryDefault = false;
     boolean dropHotbarDefault = false;
     boolean dropXPDefault = false;
+    private ExperienceRedistributor redistributor;
+    private ItemBlacklist itemBlacklist;
+
+    public DeathGamerules() {
+        redistributor = new ExperienceRedistributor();
+        GameRegistry.registerPlayerTracker(redistributor);
+    }
 
     public DeathGamerules loadConfiguration(File modConfigDirectory) {
+        itemBlacklist = new ItemBlacklist();
         Configuration config = new Configuration(new File(modConfigDirectory, DefaultProps.configDirectory
                 + DefaultProps.defaultConfigFile));
         config.load();
+        itemBlacklist.loadFromConfig(config);
         tombstoneOnDeath = config.get("General Controls", "Drop Tombstone On Death", tombstoneOnDeath).getBoolean(
                 tombstoneOnDeath);
         tombstoneAbsorbDrops = config.get("General Controls", "Tombstone Absorb Drops", tombstoneAbsorbDrops)
@@ -73,7 +86,15 @@ public class DeathGamerules {
         String category = "General Controls.gamerule_settings";
         maxDropXP = config.get(category + ".Experience", "maxDropXP", 100,
                 "Maximum XP dropped on Death. The rest is lost. 100 is vanilla default").getInt(100);
-
+        keepInventoryDefault = config.get(category, "keepInventoryDefault", false,
+                "The Default settings for the keepInventory gamerule").getBoolean(false);
+        Property keptXpProperty = config.get(category + ".Experience", "maxDropXP", 0,
+                "Percentage of XP (minus dropped amount) kept with the player on respawn.");
+        percKeptXp = keptXpProperty.getInt();
+        if (percKeptXp < 0 || percKeptXp > 100) {
+            percKeptXp = percKeptXp < 0 ? 0 : percKeptXp > 100 ? 100 : percKeptXp;
+            keptXpProperty.set(percKeptXp);
+        }
         dropArmorDefault = config.get(category + ".Armor", "isEnabledDefault", false,
                 "The Default settings for the dropArmor gamerule").getBoolean(false);
         dropInventoryDefault = config.get(category + ".Inventory", "isEnabledDefault", false,
@@ -129,17 +150,23 @@ public class DeathGamerules {
     @ForgeSubscribe
     public void worldLoad(WorldEvent.Load event) {
         GameRules gameRule = event.world.getGameRules();
+        if (createGameruleIfAbsent(gameRule, "pzKeepInventory", keepInventoryDefault)) {
+            gameRule.setOrCreateGameRule("keepInventory", Boolean.toString(keepInventoryDefault));
+        }
         createGameruleIfAbsent(gameRule, "dropInventory", dropInventoryDefault);
         createGameruleIfAbsent(gameRule, "dropHotbar", dropHotbarDefault);
         createGameruleIfAbsent(gameRule, "dropArmor", dropArmorDefault);
         createGameruleIfAbsent(gameRule, "dropXP", dropXPDefault);
     }
 
-    private void createGameruleIfAbsent(GameRules gameRule, String gameruleName, boolean value) {
+    private boolean createGameruleIfAbsent(GameRules gameRule, String gameruleName, boolean value) {
+        boolean added = false;
         if (!gameRule.hasRule(gameruleName)) {
             gameRule.addGameRule(gameruleName, Boolean.toString(value));
+            added = true;
         }
         ProjectZuluLog.info("Gamerule %s is set to %s", gameruleName, gameRule.getGameRuleBooleanValue(gameruleName));
+        return added;
     }
 
     @ForgeSubscribe
@@ -169,8 +196,10 @@ public class DeathGamerules {
             int xpDropped = 0;
             if (dropXP) {
                 if (!player.worldObj.isRemote) {
-                    xpDropped = player.experienceLevel * 7;
+                    xpDropped = player.experienceTotal;
                     xpDropped = xpDropped > maxDropXP ? maxDropXP : xpDropped;
+                    int keptXp = (player.experienceTotal - xpDropped) * percKeptXp / 100;
+                    redistributor.addExpereince(player, keptXp >= 0 ? keptXp : 0);
                     player.experienceLevel = 0;
                     player.experienceTotal = 0;
                     player.experience = 0;
@@ -270,38 +299,78 @@ public class DeathGamerules {
 
     private Optional<ChunkCoordinates> findValidTombstoneLocation(EntityPlayer player) {
         final int maxRadius = 100;
+        /** Search an increasing square box (only check edge) for a valid location */
         for (int radius = 0; radius < maxRadius; radius++) {
-            for (int xOffset = 0; xOffset < radius + 1; xOffset++) {
-                for (int zOffset = 0; zOffset < radius; zOffset++) {
-                    final int yIncremenet = 5;
-                    int upperYOffset = yIncremenet;
-                    int lowerYOffset = 0;
-                    final int maxYOffset = 30;
-                    while (upperYOffset <= maxYOffset) {
-                        for (int yOffset = lowerYOffset; yOffset < upperYOffset; yOffset++) {
-                            ChunkCoordinates chunkCoordinates = new ChunkCoordinates((int) (player.posX + xOffset),
-                                    (int) (player.posY + yOffset), (int) (player.posZ + zOffset));
-                            if (isLocationValid(player, chunkCoordinates.posX, chunkCoordinates.posY,
-                                    chunkCoordinates.posZ)) {
-                                return Optional.of(chunkCoordinates);
-                            }
-                        }
-
-                        for (int yOffset = -lowerYOffset; yOffset > -upperYOffset; yOffset--) {
-                            ChunkCoordinates chunkCoordinates = new ChunkCoordinates((int) (player.posX + xOffset),
-                                    (int) (player.posY + yOffset), (int) (player.posZ + zOffset));
-                            if (isLocationValid(player, chunkCoordinates.posX, chunkCoordinates.posY,
-                                    chunkCoordinates.posZ)) {
-                                return Optional.of(chunkCoordinates);
-                            }
-                        }
-                        lowerYOffset = upperYOffset;
-                        upperYOffset += yIncremenet;
+            List<ChunkCoordinates> validLocations = new ArrayList<ChunkCoordinates>();
+            validLocations.addAll(searchXPlaneAt(-radius, radius, player));
+            validLocations.addAll(searchXPlaneAt(radius, radius, player));
+            validLocations.addAll(searchZPlaneAt(-radius, radius, player));
+            validLocations.addAll(searchZPlaneAt(radius, radius, player));
+            validLocations.addAll(searchYPlaneAt(-radius, radius, player));
+            validLocations.addAll(searchYPlaneAt(radius, radius, player));
+            ChunkCoordinates closestPoint = null;
+            float bestDistance = 0;
+            for (ChunkCoordinates chunkCoordinates : validLocations) {
+                if (closestPoint != null) {
+                    float distance = chunkCoordinates.getDistanceSquared((int) player.posX, (int) player.posY,
+                            (int) player.posZ);
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        closestPoint = chunkCoordinates;
                     }
+                } else {
+                    closestPoint = chunkCoordinates;
+                    bestDistance = closestPoint.getDistanceSquared((int) player.posX, (int) player.posY,
+                            (int) player.posZ);
                 }
+            }
+            if (closestPoint != null) {
+                return Optional.of(closestPoint);
             }
         }
         return Optional.absent();
+    }
+
+    private List<ChunkCoordinates> searchXPlaneAt(int xOffset, int radius, EntityPlayer player) {
+        List<ChunkCoordinates> matches = new ArrayList<ChunkCoordinates>();
+        for (int zOffset = -radius; zOffset <= radius; zOffset++) {
+            for (int yOffset = -radius; yOffset <= radius; yOffset++) {
+                ChunkCoordinates chunkCoordinates = new ChunkCoordinates((int) (player.posX + xOffset),
+                        (int) (player.posY + yOffset), (int) (player.posZ + zOffset));
+                if (isLocationValid(player, chunkCoordinates.posX, chunkCoordinates.posY, chunkCoordinates.posZ)) {
+                    matches.add(chunkCoordinates);
+                }
+            }
+        }
+        return matches;
+    }
+
+    private List<ChunkCoordinates> searchZPlaneAt(int zOffset, int radius, EntityPlayer player) {
+        List<ChunkCoordinates> matches = new ArrayList<ChunkCoordinates>();
+        for (int xOffset = -radius; xOffset <= radius; xOffset++) {
+            for (int yOffset = -radius; yOffset <= radius; yOffset++) {
+                ChunkCoordinates chunkCoordinates = new ChunkCoordinates((int) (player.posX + xOffset),
+                        (int) (player.posY + yOffset), (int) (player.posZ + zOffset));
+                if (isLocationValid(player, chunkCoordinates.posX, chunkCoordinates.posY, chunkCoordinates.posZ)) {
+                    matches.add(chunkCoordinates);
+                }
+            }
+        }
+        return matches;
+    }
+
+    private List<ChunkCoordinates> searchYPlaneAt(int yOffset, int radius, EntityPlayer player) {
+        List<ChunkCoordinates> matches = new ArrayList<ChunkCoordinates>();
+        for (int xOffset = -radius; xOffset <= radius; xOffset++) {
+            for (int zOffset = -radius; zOffset <= radius; zOffset++) {
+                ChunkCoordinates chunkCoordinates = new ChunkCoordinates((int) (player.posX + xOffset),
+                        (int) (player.posY + yOffset), (int) (player.posZ + zOffset));
+                if (isLocationValid(player, chunkCoordinates.posX, chunkCoordinates.posY, chunkCoordinates.posZ)) {
+                    matches.add(chunkCoordinates);
+                }
+            }
+        }
+        return matches;
     }
 
     private boolean isLocationValid(EntityPlayer player, int posX, int posY, int posZ) {
@@ -325,30 +394,31 @@ public class DeathGamerules {
         for (int i = 0; i < placeArray.length; ++i) {
             int slot = placeArray[i];
             ItemStack itemStack = player.inventory.armorInventory[slot];
-
-            if (itemStack != null) {
-                boolean shouldDrop = false;
-                if ((armorMaxDrop == 0 || countDrops < armorMaxDrop)
-                        && (armorDropChance - player.worldObj.rand.nextInt(100) >= 1)) {
-                    shouldDrop = true;
-                }
-                int percentDamage = shouldDrop ? armorDeathDamage + armorDropDamage : armorDeathDamage;
-                percentDamage = percentDamage > 100 ? 100 : percentDamage;
-                itemStack.attemptDamageItem(itemStack.getMaxDamage() * percentDamage / 100, player.worldObj.rand);
-                boolean itemDestroyed = itemStack.isItemStackDamageable()
-                        && itemStack.getItemDamage() > itemStack.getMaxDamage();
-                if (itemDestroyed) {
-                    player.inventory.armorInventory[slot] = null;
-                }
-
-                if (shouldDrop) {
-                    if (!itemDestroyed) {
-                        itemsToDrop.add(itemStack);
-                    }
-                    player.inventory.armorInventory[slot] = null;
-                    countDrops++;
-                }
+            if (itemStack == null || itemBlacklist.isItemBlacklisted(itemStack)) {
+                continue;
             }
+            boolean shouldDrop = false;
+            if ((armorMaxDrop == 0 || countDrops < armorMaxDrop)
+                    && (armorDropChance - player.worldObj.rand.nextInt(100) >= 1)) {
+                shouldDrop = true;
+            }
+            int percentDamage = shouldDrop ? armorDeathDamage + armorDropDamage : armorDeathDamage;
+            percentDamage = percentDamage > 100 ? 100 : percentDamage;
+            itemStack.attemptDamageItem(itemStack.getMaxDamage() * percentDamage / 100, player.worldObj.rand);
+            boolean itemDestroyed = itemStack.isItemStackDamageable()
+                    && itemStack.getItemDamage() > itemStack.getMaxDamage();
+            if (itemDestroyed) {
+                player.inventory.armorInventory[slot] = null;
+            }
+
+            if (shouldDrop) {
+                if (!itemDestroyed) {
+                    itemsToDrop.add(itemStack);
+                }
+                player.inventory.armorInventory[slot] = null;
+                countDrops++;
+            }
+
         }
         return itemsToDrop;
     }
@@ -368,31 +438,32 @@ public class DeathGamerules {
             for (int i = 0; i < placeArray.length; ++i) {
                 int slot = placeArray[i];
                 ItemStack itemStack = player.inventory.mainInventory[slot];
-
-                if (itemStack != null) {
-                    boolean shouldDrop = false;
-                    if ((inventoryMaxDrop == 0 || countDrops < inventoryMaxDrop)
-                            && inventoryDropChance - player.worldObj.rand.nextInt(100) >= 1) {
-                        shouldDrop = true;
-                    }
-                    int percentDamage = shouldDrop ? inventoryDeathDamage + inventoryDropDamage : inventoryDeathDamage;
-                    percentDamage = percentDamage > 100 ? 100 : percentDamage;
-                    itemStack.attemptDamageItem(itemStack.getMaxDamage() * percentDamage / 100, player.worldObj.rand);
-
-                    boolean itemDestroyed = itemStack.isItemStackDamageable()
-                            && itemStack.getItemDamage() > itemStack.getMaxDamage();
-                    if (itemDestroyed) {
-                        player.inventory.mainInventory[slot] = null;
-                    }
-
-                    if (shouldDrop) {
-                        if (!itemDestroyed) {
-                            itemsToDrop.add(itemStack);
-                        }
-                        player.inventory.mainInventory[slot] = null;
-                        countDrops++;
-                    }
+                if (itemStack == null || itemBlacklist.isItemBlacklisted(itemStack)) {
+                    continue;
                 }
+                boolean shouldDrop = false;
+                if ((inventoryMaxDrop == 0 || countDrops < inventoryMaxDrop)
+                        && inventoryDropChance - player.worldObj.rand.nextInt(100) >= 1) {
+                    shouldDrop = true;
+                }
+                int percentDamage = shouldDrop ? inventoryDeathDamage + inventoryDropDamage : inventoryDeathDamage;
+                percentDamage = percentDamage > 100 ? 100 : percentDamage;
+                itemStack.attemptDamageItem(itemStack.getMaxDamage() * percentDamage / 100, player.worldObj.rand);
+
+                boolean itemDestroyed = itemStack.isItemStackDamageable()
+                        && itemStack.getItemDamage() > itemStack.getMaxDamage();
+                if (itemDestroyed) {
+                    player.inventory.mainInventory[slot] = null;
+                }
+
+                if (shouldDrop) {
+                    if (!itemDestroyed) {
+                        itemsToDrop.add(itemStack);
+                    }
+                    player.inventory.mainInventory[slot] = null;
+                    countDrops++;
+                }
+
             }
         }
         return itemsToDrop;
@@ -413,31 +484,32 @@ public class DeathGamerules {
         for (int i = 0; i < placeArray.length; ++i) {
             int slot = placeArray[i];
             ItemStack itemStack = player.inventory.mainInventory[slot];
-
-            if (itemStack != null) {
-                boolean shouldDrop = false;
-                if ((hotbarMaxDrop == 0 || countDrops < hotbarMaxDrop)
-                        && hotbarDropChance - player.worldObj.rand.nextInt(100) >= 1) {
-                    shouldDrop = true;
-                }
-                int percentDamage = shouldDrop ? hotbarDeathDamage + hotbarDropDamage : hotbarDeathDamage;
-                percentDamage = percentDamage > 100 ? 100 : percentDamage;
-                itemStack.attemptDamageItem(itemStack.getMaxDamage() * percentDamage / 100, player.worldObj.rand);
-
-                boolean itemDestroyed = itemStack.isItemStackDamageable()
-                        && itemStack.getItemDamage() > itemStack.getMaxDamage();
-                if (itemDestroyed) {
-                    player.inventory.mainInventory[slot] = null;
-                }
-
-                if (shouldDrop) {
-                    if (!itemDestroyed) {
-                        itemsToDrop.add(itemStack);
-                    }
-                    player.inventory.mainInventory[slot] = null;
-                    countDrops++;
-                }
+            if (itemStack == null || itemBlacklist.isItemBlacklisted(itemStack)) {
+                continue;
             }
+            boolean shouldDrop = false;
+            if ((hotbarMaxDrop == 0 || countDrops < hotbarMaxDrop)
+                    && hotbarDropChance - player.worldObj.rand.nextInt(100) >= 1) {
+                shouldDrop = true;
+            }
+            int percentDamage = shouldDrop ? hotbarDeathDamage + hotbarDropDamage : hotbarDeathDamage;
+            percentDamage = percentDamage > 100 ? 100 : percentDamage;
+            itemStack.attemptDamageItem(itemStack.getMaxDamage() * percentDamage / 100, player.worldObj.rand);
+
+            boolean itemDestroyed = itemStack.isItemStackDamageable()
+                    && itemStack.getItemDamage() > itemStack.getMaxDamage();
+            if (itemDestroyed) {
+                player.inventory.mainInventory[slot] = null;
+            }
+
+            if (shouldDrop) {
+                if (!itemDestroyed) {
+                    itemsToDrop.add(itemStack);
+                }
+                player.inventory.mainInventory[slot] = null;
+                countDrops++;
+            }
+
         }
         return itemsToDrop;
     }

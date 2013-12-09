@@ -2,6 +2,7 @@ package projectzulu.common.blocks.tombstone;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,14 +17,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityTombstone extends TileEntity {
-
     /* List of Items this Tombstone will Empty Upon Right-Clicking */
     private ArrayList<ItemStack> deathItems = new ArrayList<ItemStack>();
     public int experience = 0;
     private EntityXPOrb xpOrb = null;
 
     public EntityXPOrb getEntityOrb() {
-        if (deathItems.size() > 0 || experience > 0) {
+        if (hasDrops()) {
             if (xpOrb == null) {
                 xpOrb = new EntityXPOrb(worldObj, xCoord, yCoord, zCoord, worldObj.rand.nextInt(5) + 1);
             }
@@ -45,13 +45,13 @@ public class TileEntityTombstone extends TileEntity {
         player.addExperience(experience);
         experience = 0;
 
-        Iterator<ItemStack> iterator = deathItems.iterator();
+        Iterator<ItemStack> unSortIterator = deathItems.iterator();
         boolean itemAdded = true;
-        while (iterator.hasNext() && itemAdded) {
-            ItemStack deathItem = iterator.next();
+        while (unSortIterator.hasNext() && itemAdded) {
+            ItemStack deathItem = unSortIterator.next();
             itemAdded = player.inventory.addItemStackToInventory(deathItem);
             if (itemAdded) {
-                iterator.remove();
+                unSortIterator.remove();
             }
         }
     }
@@ -87,13 +87,17 @@ public class TileEntityTombstone extends TileEntity {
                 tagCompound.setString("Text" + (i + 1), this.signText[i]);
             }
         }
+        addItemsToCompound(tagCompound, "DeathItems", deathItems);
+    }
+
+    private void addItemsToCompound(NBTTagCompound tileCompound, String itemTagName, List<ItemStack> items) {
         NBTTagList itemsTag = new NBTTagList();
-        for (ItemStack itemStack : deathItems) {
+        for (ItemStack itemStack : items) {
             NBTTagCompound tag = new NBTTagCompound();
             itemStack.writeToNBT(tag);
             itemsTag.appendTag(tag);
         }
-        tagCompound.setTag("DeathItems", itemsTag);
+        tileCompound.setTag(itemTagName, itemsTag);
     }
 
     /**
@@ -109,16 +113,21 @@ public class TileEntityTombstone extends TileEntity {
                 this.signText[i] = this.signText[i].substring(0, maxcharPerLine);
             }
         }
-        if (tagCompound.hasKey("DeathItems")) {
-            NBTTagList itemsTag = (NBTTagList) tagCompound.getTag("DeathItems");
-            deathItems = new ArrayList<ItemStack>();
+        deathItems = readItemsFromCompound(tagCompound, "DeathItems");
+    }
+
+    public ArrayList<ItemStack> readItemsFromCompound(NBTTagCompound tileCompound, String itemTagName) {
+        ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+        if (tileCompound.hasKey(itemTagName)) {
+            NBTTagList itemsTag = (NBTTagList) tileCompound.getTag(itemTagName);
             for (int i = 0; i < itemsTag.tagCount(); i++) {
                 ItemStack itemStack = ItemStack.loadItemStackFromNBT((NBTTagCompound) itemsTag.tagAt(i));
                 if (itemStack != null) {
-                    deathItems.add(itemStack);
+                    items.add(itemStack);
                 }
             }
         }
+        return items;
     }
 
     /**
@@ -129,7 +138,6 @@ public class TileEntityTombstone extends TileEntity {
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 4, var1);
-
     }
 
     @Override
@@ -186,5 +194,10 @@ public class TileEntityTombstone extends TileEntity {
      */
     private String getFilteredWord(String word) {
         return word.length() > maxcharPerLine ? word.substring(0, maxcharPerLine - 2).concat(".") : word;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public double getMaxRenderDistanceSquared() {
+        return 16384.0D;
     }
 }
