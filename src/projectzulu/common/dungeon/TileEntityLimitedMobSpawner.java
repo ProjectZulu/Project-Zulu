@@ -401,7 +401,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
             for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
                 TileEntityLimitedMobSpawnData spawnData = new TileEntityLimitedMobSpawnData(this,
                         (NBTTagCompound) var2.tagAt(var3));
-                if (EntityList.classToStringMapping.containsKey(spawnData.type)) {
+                if (EntityList.stringToClassMapping.containsKey(spawnData.type)) {
                     this.spawnList.add(spawnData);
                 } else {
                     ProjectZuluLog

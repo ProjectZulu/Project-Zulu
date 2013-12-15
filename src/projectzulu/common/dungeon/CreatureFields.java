@@ -158,9 +158,15 @@ public class CreatureFields implements DataFields {
         EntityLivingBase desiredEntity = (EntityLivingBase) EntityList.createEntityByName(creatureNameField.getText(),
                 Minecraft.getMinecraft().theWorld);
         if (desiredEntity != null) {
-            ObfuscationHelper.setFieldUsingReflection("field_110155_d", EntityLivingBase.class, desiredEntity, true,
-                    new ServersideAttributeMap());
-            ObfuscationHelper.invokeMethod("applyEntityAttributes", "applyEntityAttributes", EntityLivingBase.class, desiredEntity);
+            try {
+                ObfuscationHelper.setCatchableFieldUsingReflection("field_110155_d", EntityLivingBase.class,
+                        desiredEntity, true, new ServersideAttributeMap());
+            } catch (Exception e) {
+                ObfuscationHelper.setFieldUsingReflection("attributeMap", EntityLivingBase.class, desiredEntity, true,
+                        new ServersideAttributeMap());
+            }
+            ObfuscationHelper.invokeMethod("applyEntityAttributes", "func_110147_ax", EntityLivingBase.class,
+                    desiredEntity);
             loadedNBT = new NBTTagCompound("Properties");
             desiredEntity.writeToNBT(loadedNBT);
             nbtTree = new NBTTree(loadedNBT);
