@@ -2,6 +2,8 @@ package projectzulu.common;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import projectzulu.common.core.ProjectZuluLog;
+
 import cpw.mods.fml.common.IPlayerTracker;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,13 +19,24 @@ public class ExperienceRedistributor implements IPlayerTracker {
     public void onPlayerRespawn(EntityPlayer player) {
         Integer experience = entityIdToExperience.remove(player.entityId);
         if (experience != null) {
+            ProjectZuluLog.info("Removing Experience [%s] and adding [%s]", player.experienceTotal, experience);
+            player.experienceLevel = 0;
+            player.experienceTotal = 0;
+            player.experience = 0;
             player.addExperience(experience);
         }
     }
 
     @Override
     public void onPlayerLogout(EntityPlayer player) {
-        entityIdToExperience.remove(player.entityId);
+        Integer experience = entityIdToExperience.remove(player.entityId);
+        if (experience != null) {
+            ProjectZuluLog.info("Removing Experience (%s) and adding (%s)", player.experienceTotal, experience);
+            player.experienceLevel = 0;
+            player.experienceTotal = 0;
+            player.experience = 0;
+            player.addExperience(experience);
+        }
     }
 
     @Override

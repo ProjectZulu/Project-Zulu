@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import projectzulu.common.core.ProjectZuluLog;
+
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -87,6 +89,7 @@ public class TileEntityTombstone extends TileEntity {
                 tagCompound.setString("Text" + (i + 1), this.signText[i]);
             }
         }
+        tagCompound.setInteger("Experience", experience);
         addItemsToCompound(tagCompound, "DeathItems", deathItems);
     }
 
@@ -113,6 +116,7 @@ public class TileEntityTombstone extends TileEntity {
                 this.signText[i] = this.signText[i].substring(0, maxcharPerLine);
             }
         }
+        experience = tagCompound.hasKey("Experience") ? tagCompound.getInteger("Experience") : 0;
         deathItems = readItemsFromCompound(tagCompound, "DeathItems");
     }
 

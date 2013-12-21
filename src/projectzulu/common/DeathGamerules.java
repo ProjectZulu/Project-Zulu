@@ -84,11 +84,13 @@ public class DeathGamerules {
         doDropEvent = config.get("General Controls", "doDropEvent", doDropEvent).getBoolean(doDropEvent);
 
         String category = "General Controls.gamerule_settings";
-        maxDropXP = config.get(category + ".Experience", "maxDropXP", 100,
-                "Maximum XP dropped on Death. The rest is lost. 100 is vanilla default").getInt(100);
+        maxDropXP = config
+                .get(category + ".Experience", "maxDropXP", 100,
+                        "Maximum amount XP dropped on Death. The rest is lost if not kept via percKeptXp. 100 is vanilla default")
+                .getInt(100);
         keepInventoryDefault = config.get(category, "keepInventoryDefault", false,
                 "The Default settings for the keepInventory gamerule").getBoolean(false);
-        Property keptXpProperty = config.get(category + ".Experience", "maxDropXP", 0,
+        Property keptXpProperty = config.get(category + ".Experience", "percKeptXp", 0,
                 "Percentage of XP (minus dropped amount) kept with the player on respawn.");
         percKeptXp = keptXpProperty.getInt();
         if (percKeptXp < 0 || percKeptXp > 100) {
