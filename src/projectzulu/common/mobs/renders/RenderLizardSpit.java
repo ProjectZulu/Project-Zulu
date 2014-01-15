@@ -4,12 +4,14 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ItemGenerics;
 import projectzulu.common.mobs.entity.EntityLizardSpit;
 
@@ -22,7 +24,13 @@ public class RenderLizardSpit extends Render implements RenderWrapper {
 
     public void doRenderLizardSpit(EntityLizardSpit par1EntityLizardSpit, double par2, double par4, double par6,
             float par8, float par9) {
-        Icon icon = ItemGenerics.Properties.LizardSpit.getIcon();
+
+        Icon icon;
+        if (ItemList.genericCraftingItems.isPresent()) {
+            icon = ItemGenerics.Properties.LizardSpit.getIcon();
+        } else {
+            icon = Item.fireballCharge.getIconFromDamage(0);
+        }
         if (icon != null) { // Icon only null if ItemGenerics is disabled, TODO more elegant solution
             GL11.glPushMatrix();
             this.bindEntityTexture(par1EntityLizardSpit);
