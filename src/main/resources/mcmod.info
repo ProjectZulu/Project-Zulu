@@ -1,0 +1,16 @@
+[
+{
+  "modid": "projectzulu|core",
+  "name": "Project Zulu",
+  "description": "Providing unique blocks, mobs, and structures",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Crudedragos"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
