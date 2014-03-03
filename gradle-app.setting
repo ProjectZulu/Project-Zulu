@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+  <setting name="task-tab"> 
+    <setting name="show-description" value="true"/> 
+  </setting>  
+  <setting name="favorites-tab">
+    <setting name="favorites">
+      <setting name="favorite">
+        <setting name="full-command-line" value=":setupDecompWorkspace --refresh-dependencies"/>
+        <setting name="display-name" value=":setupDecompWorkspace --refresh-dependencies"/>
+        <setting name="show-output" value="false"/>
+      </setting>
+      <setting name="favorite">
+        <setting name="full-command-line" value=":eclipse"/>
+        <setting name="display-name" value=":eclipse"/>
+        <setting name="show-output" value="false"/>
+      </setting>
+      <setting name="favorite">
+        <setting name="full-command-line" value=":build"/>
+        <setting name="display-name" value=":build"/>
+        <setting name="show-output" value="false"/>
+      </setting>
+    </setting>
+  </setting>  
+  <setting name="command_line-tab"/>  
+  <setting name="setup-tab"> 
+    <setting name="setup"> 
+      <setting name="custom-gradle-executor"/>  
+      <setting name="current-directory" value="E:\Minecraft Modding\projects\mc17\projectzulu"/>  
+      <setting name="log-level" value="LIFECYCLE"/> 
+    </setting> 
+  </setting>  
+  <setting name="main_panel"> 
+    <setting name="current-tab" value="Favorites"/> 
+  </setting>  
+  <setting name="Application_window-id"> 
+    <setting name="window_x" value="101"/>  
+    <setting name="window_y" value="53"/>  
+    <setting name="window_width" value="800"/>  
+    <setting name="window_height" value="780"/>  
+    <setting name="extended-state" value="0"/> 
+  </setting> 
+</root>
