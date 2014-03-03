@@ -18,8 +18,9 @@ public class ScaleArmorDeclaration extends ItemSetDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD, int partIndex) {
-        Item item = new ItemZuluArmor(iD, ProjectZulu_Core.scaleMaterial, renderIndex, partIndex, name[partIndex].toLowerCase());
+    protected boolean createItem(int partIndex) {
+        Item item = new ItemZuluArmor(ProjectZulu_Core.scaleMaterial, renderIndex, partIndex,
+                name[partIndex].toLowerCase());
 
         switch (partIndex) {
         case 0:

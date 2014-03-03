@@ -45,7 +45,7 @@ public class BPCathedralEntrance implements Blueprint {
                     return woodenPlank;
                 }
             } else if (slope > 0) {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
 
@@ -55,7 +55,7 @@ public class BPCathedralEntrance implements Blueprint {
             if (piecePos.posZ == 1 && piecePos.posX > 2) {
                 /* Front Wall Door */
                 if (piecePos.posX == cellSize - 1 && piecePos.posY > 0 && piecePos.posY < 4) {
-                    return new BlockWithMeta(0);
+                    return new BlockWithMeta("air");
                 } else {
                     return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                 }
@@ -87,7 +87,7 @@ public class BPCathedralEntrance implements Blueprint {
 
             /* Air In Front of Doorway */
             if (piecePos.posZ == 0 && piecePos.posX > 2 && piecePos.posY < 4) {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
 
@@ -120,7 +120,7 @@ public class BPCathedralEntrance implements Blueprint {
             }
 
             if (piecePos.posZ > 1 && slope > 0 && slope <= 2) {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
 
             /* Arches */
@@ -165,7 +165,7 @@ public class BPCathedralEntrance implements Blueprint {
                 return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     private int getStairMeta(CellIndexDirection cellIndexDirection) {

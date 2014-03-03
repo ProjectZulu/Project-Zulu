@@ -67,16 +67,19 @@ public class BuildingManagerCemetary extends BuildingManagerBase {
         }
     }
 
-    @Override
-    protected void handleBlockPlacement(BlockWithMeta blockWithMeta, ChunkCoordinates position, Random random) {
-        if (blockWithMeta.blockID == 0
-                && world.getBlockId(position.posX, position.posY, position.posZ) == Block.snow.blockID) {
-            return;
-        }
-        if (world.getBlockMaterial(position.posX, position.posY, position.posZ).equals(Material.wood)
-                || world.getBlockMaterial(position.posX, position.posY, position.posZ).equals(Material.leaves)) {
-            return;
-        }
-        super.handleBlockPlacement(blockWithMeta, position, random);
-    }
+	@Override
+	protected void handleBlockPlacement(BlockWithMeta blockWithMeta,
+			ChunkCoordinates position, Random random) {
+		Block blockAt = world.getBlock(position.posX, position.posY,
+				position.posZ);
+		if (blockWithMeta.blockID.equals("air")
+				&& blockAt.equals(Block.getBlockFromName("snow"))) {
+			return;
+		}
+		if (blockAt.getMaterial().equals(Material.wood)
+				|| blockAt.getMaterial().equals(Material.leaves)) {
+			return;
+		}
+		super.handleBlockPlacement(blockWithMeta, position, random);
+	}
 }

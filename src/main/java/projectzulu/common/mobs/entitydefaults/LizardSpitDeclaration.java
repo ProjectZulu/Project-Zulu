@@ -1,7 +1,7 @@
 package projectzulu.common.mobs.entitydefaults;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.entitydeclaration.CreatureDeclaration;
 import projectzulu.common.mobs.entity.EntityLizardSpit;

@@ -1,7 +1,7 @@
 package projectzulu.common.core.itemblockdeclaration;
 
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import projectzulu.common.ProjectZulu_Core;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,7 +10,7 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
 
     private int registerPass;
     public final String name;
-    private int iD = -1;
+    private boolean isEnabled = true;
     private boolean isCreated = false;
 
     public BlockDeclaration(String name) {
@@ -34,29 +34,14 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
 
     @Override
     public final void createWithConfig(Configuration config, boolean readOnly) {
-        /* ID Not -1 indicates ItemBlock is already loaded */
-        if (iD != -1) {
-            return;
-        }
-        String key = name + " ID";
-        Property property = null;
-        if (readOnly) {
-            property = config.get(Configuration.CATEGORY_BLOCK, key, (String) null);
-            if (property != null && property.getInt() >= 0) {
-                iD = property.getInt();
+        if (!readOnly) {
+            Property property = config.get("block", name + " isEnabled", isEnabled);
+            isEnabled = property.getBoolean(isEnabled);
+            if (isEnabled) {
                 preCreateLoadConfig(config);
-                if (iD > 0 && !isCreated) {
-                    isCreated = createBlock(iD);
-                }
+                isCreated = createBlock();
                 postCreateLoadConfig(config);
             }
-        } else {
-            iD = config.getBlock(key, ProjectZulu_Core.getNextDefaultBlockID()).getInt();
-            preCreateLoadConfig(config);
-            if (iD > 0 && !isCreated) {
-                isCreated = createBlock(iD);
-            }
-            postCreateLoadConfig(config);
         }
     }
 
@@ -68,7 +53,7 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
 
     }
 
-    protected abstract boolean createBlock(int iD);
+    protected abstract boolean createBlock();
 
     @Override
     public final void register(Side side) {
@@ -84,6 +69,6 @@ public abstract class BlockDeclaration implements ItemBlockDeclaration {
 
     @SideOnly(Side.CLIENT)
     protected void clientRegisterBlock() {
-        
+
     }
 }

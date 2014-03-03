@@ -1,7 +1,7 @@
 package projectzulu.common.core.itemblockdeclaration;
 
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import projectzulu.common.ProjectZulu_Core;
 import cpw.mods.fml.relauncher.Side;
 
@@ -9,7 +9,7 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
 
     private int registerPass;
     public final String name;
-    private int iD = -1;
+    private boolean isEnabled = true;
     private boolean isCreated = false;
 
     public ItemDeclaration(String name) {
@@ -33,22 +33,14 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
 
     @Override
     public void createWithConfig(Configuration config, boolean readOnly) {
-        if (iD != -1) {
-            return;
-        }
-
-        String key = name + " ID";
-        Property property = null;
-        if (readOnly) {
-            property = config.get(Configuration.CATEGORY_ITEM, key, (String) null);
-        }
-        if (property != null || !readOnly) {
-            iD = config.getItem(key, ProjectZulu_Core.getNextDefaultItemID()).getInt();
-            preCreateLoadConfig(config);
-            if (iD > 0 && !isCreated) {
-                isCreated = createItem(iD);
+        if (!readOnly) {
+            Property property = config.get("item", name + " isEnabled", isEnabled);
+            isEnabled = property.getBoolean(isEnabled);
+            if (isEnabled) {
+                preCreateLoadConfig(config);
+                isCreated = createItem();
+                postCreateLoadConfig(config);
             }
-            postCreateLoadConfig(config);
         }
     }
 
@@ -60,7 +52,7 @@ public abstract class ItemDeclaration implements ItemBlockDeclaration {
 
     }
 
-    protected abstract boolean createItem(int iD);
+    protected abstract boolean createItem();
 
     @Override
     public final void register(Side side) {

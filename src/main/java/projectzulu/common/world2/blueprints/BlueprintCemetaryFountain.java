@@ -14,7 +14,7 @@ public class BlueprintCemetaryFountain implements Blueprint {
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
         if (piecePos.posY == 0) {
-            return new BlockWithMeta(Block.grass.blockID);
+            return new BlockWithMeta("grass");
         }
 
         if (piecePos.posY == 1) {
@@ -88,10 +88,10 @@ public class BlueprintCemetaryFountain implements Blueprint {
                     && piecePos.posZ != cellSize - 1) {
                 return new BlockWithMeta(Block.stoneSingleSlab.blockID, 5);
             } else {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     @Override

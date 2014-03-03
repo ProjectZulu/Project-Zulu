@@ -61,7 +61,7 @@ public class BPCathedralHallway implements Blueprint {
                     return woodenPlank;
                 }
             } else if (slope > 0) {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
 
@@ -134,7 +134,7 @@ public class BPCathedralHallway implements Blueprint {
                 return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     private int getStairMeta(CellIndexDirection cellIndexDirection) {

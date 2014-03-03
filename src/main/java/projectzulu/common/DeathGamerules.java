@@ -281,7 +281,7 @@ public class DeathGamerules {
             /* Place a Tombstone */
             player.worldObj.setBlock(chunkCoordinate.get().posX, chunkCoordinate.get().posY,
                     chunkCoordinate.get().posZ, BlockList.tombstone.get().blockID);
-            TileEntity tileEntity = player.worldObj.getBlockTileEntity(chunkCoordinate.get().posX,
+            TileEntity tileEntity = player.worldObj.getTileEntity(chunkCoordinate.get().posX,
                     chunkCoordinate.get().posY, chunkCoordinate.get().posZ);
             StringBuilder sb = new StringBuilder();
             sb.append("Tombstone summoned to mark the 'passing' of ").append(player.username).append(" at [");

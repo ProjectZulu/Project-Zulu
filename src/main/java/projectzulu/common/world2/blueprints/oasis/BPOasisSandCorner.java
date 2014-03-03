@@ -10,8 +10,8 @@ import projectzulu.common.world2.blueprint.Blueprint;
 
 public class BPOasisSandCorner implements Blueprint {
 
-    BlockWithMeta sandstone = new BlockWithMeta(Block.sandStone.blockID);
-    BlockWithMeta sand = new BlockWithMeta(Block.sand.blockID);
+    BlockWithMeta sandstone = new BlockWithMeta("sandstone");
+    BlockWithMeta sand = new BlockWithMeta("sand");
 
     @Override
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,

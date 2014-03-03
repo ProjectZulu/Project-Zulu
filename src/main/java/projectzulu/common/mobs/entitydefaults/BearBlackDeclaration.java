@@ -4,11 +4,11 @@ import java.util.HashSet;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -32,12 +32,12 @@ public class BearBlackDeclaration extends SpawnableDeclaration {
         setDropAmount(0, 2);
 
         eggColor1 = (0 << 16) + (0 << 8) + 0;
-        eggColor2 = (23 << 16) + (17 << 8) + 17;        
+        eggColor2 = (23 << 16) + (17 << 8) + 17;
     }
 
     @Override
     public void outputDataToList(Configuration config, CustomMobData customMobData) {
-        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Item.beefRaw, 0, 10);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Items.beef, 0, 10);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, ItemList.furPelt, 0, 8);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, ItemList.scrapMeat, 0, 10);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,

@@ -6,13 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import projectzulu.common.core.entitydeclaration.EntityProperties;
-
+import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
-import net.minecraft.util.WeightedRandomItem;
+import projectzulu.common.core.entitydeclaration.EntityProperties;
 
 public class CustomMobData {
     public String mobName = "";
@@ -30,12 +29,16 @@ public class CustomMobData {
 
     private List<WeightedItemStack> lootItems = new ArrayList<WeightedItemStack>();
 
-    public static class WeightedItemStack extends WeightedRandomItem {
-        public final ItemStack itemStack;
+    public static class WeightedItemStack extends WeightedRandom.Item {
+        public final String itemID;
+        public final int itemDamage;
+        public final int stackSize;
 
-        public WeightedItemStack(ItemStack itemStack, int weight) {
+        public WeightedItemStack(String itemID, int itemDamage, int stackSize, int weight) {
             super(weight);
-            this.itemStack = itemStack;
+            this.itemID = itemID;
+            this.itemDamage = itemDamage;
+            this.stackSize = stackSize;
         }
     }
 
@@ -44,14 +47,20 @@ public class CustomMobData {
     }
 
     public void addLootToMob(ItemStack itemStack, int weight) {
-        lootItems.add(new WeightedItemStack(itemStack, weight));
+        lootItems.add(new WeightedItemStack(Item.itemRegistry.getNameForObject(itemStack.getItem()), itemStack
+                .getItemDamage(), itemStack.stackSize, weight));
+    }
+
+    public void addLootToMob(String itemID, int itemDamage, int stackSize, int weight) {
+        lootItems.add(new WeightedItemStack(itemID, itemDamage, stackSize, weight));
     }
 
     public ItemStack getLootItem(Random rand) {
         if (lootItems != null && !lootItems.isEmpty()) {
-            ItemStack stack = ((WeightedItemStack) WeightedRandom.getRandomItem(rand, lootItems)).itemStack;
-            if (Item.itemsList[stack.itemID] != null) {
-                return stack.copy();
+            WeightedItemStack stack = ((WeightedItemStack) WeightedRandom.getRandomItem(rand, lootItems));
+            Item item = (Item) Item.itemRegistry.getObject(stack.itemID);
+            if (item != null) {
+                return new ItemStack(item, stack.stackSize, stack.itemDamage);
             }
         }
         return null;

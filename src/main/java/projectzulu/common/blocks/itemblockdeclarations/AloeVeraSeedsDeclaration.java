@@ -14,10 +14,9 @@ public class AloeVeraSeedsDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
+    protected boolean createItem() {
         if (BlockList.aloeVera.isPresent()) {
-            ItemList.aloeVeraSeeds = Optional.of(new ItemAloeVeraSeeds(iD, BlockList.aloeVera.get().blockID, name
-                    .toLowerCase()));
+            ItemList.aloeVeraSeeds = Optional.of(new ItemAloeVeraSeeds(BlockList.aloeVera.get(), name.toLowerCase()));
             return true;
         }
         return false;

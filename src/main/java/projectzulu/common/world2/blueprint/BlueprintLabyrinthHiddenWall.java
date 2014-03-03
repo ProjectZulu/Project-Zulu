@@ -42,14 +42,14 @@ public class BlueprintLabyrinthHiddenWall implements Blueprint {
                 return new ChestWithMeta(Block.chest.blockID, 0, new TileEntityChest(), feature.chestLootChance,
                         feature.chestMaxLoot);
             } else {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
 
         if (piecePos.posX == 0 || piecePos.posX == cellSize - 1 || piecePos.posZ == 0 || piecePos.posZ == cellSize - 1) {
             return new BlockWithMeta(Block.stoneBrick.blockID, 2);
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     @Override

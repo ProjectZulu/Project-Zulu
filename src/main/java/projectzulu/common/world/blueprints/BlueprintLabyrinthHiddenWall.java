@@ -23,7 +23,7 @@ public class BlueprintLabyrinthHiddenWall extends Blueprint{
 		switch ( cellIndexDirection.calcDirection(cellIndex, cellSize) ) {
 		/* Inner area is filled with air*/
 		case Inner:
-			return new BlockWithMeta(0);
+			return new BlockWithMeta("air");
 
 		/* Inner middle is Chest */
 		case Middle:
@@ -63,6 +63,6 @@ public class BlueprintLabyrinthHiddenWall extends Blueprint{
 			return new BlockWithMeta(Block.stoneBrick.blockID, 2);
 		}
 
-		return new BlockWithMeta(0);
+		return new BlockWithMeta("air");
 	}
 }

@@ -16,8 +16,8 @@ public class ItemAnkh extends Item {
      * @param i
      * @param name Name to use as base for Unlocalized name
      */
-    public ItemAnkh(int i, String name) {
-        super(i);
+    public ItemAnkh(String name) {
+        super();
         maxStackSize = 1;
         setMaxDamage(200);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);

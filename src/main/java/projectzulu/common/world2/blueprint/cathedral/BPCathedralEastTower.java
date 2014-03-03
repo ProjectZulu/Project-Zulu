@@ -73,12 +73,12 @@ public class BPCathedralEastTower implements Blueprint {
             if (slope == 0) {
                 return woodenPlank;
             } else if (slope > 0) {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
 
         if (piecePos.posX == 0 && piecePos.posZ == 0) {
-            return new BlockWithMeta(0);
+            return new BlockWithMeta("air");
         }
 
         /* Create Outside Walls */
@@ -106,7 +106,7 @@ public class BPCathedralEastTower implements Blueprint {
                                 true, false, piecePos.posY % 4));
                     }
                 }
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
 
             if (piecePos.posZ == 0) {
@@ -128,7 +128,7 @@ public class BPCathedralEastTower implements Blueprint {
                                 false, false, piecePos.posY % 4));
                     }
                 }
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
 
@@ -218,7 +218,7 @@ public class BPCathedralEastTower implements Blueprint {
             return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
         }
 
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     private boolean isRoomForRoom(ChunkCoordinates piecePos, int cellSize, int cellHeight) {

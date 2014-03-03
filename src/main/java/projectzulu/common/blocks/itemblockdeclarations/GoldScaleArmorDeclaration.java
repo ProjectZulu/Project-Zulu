@@ -18,8 +18,8 @@ public class GoldScaleArmorDeclaration extends ItemSetDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD, int partIndex) {
-        Item item = new ItemZuluArmor(iD, ProjectZulu_Core.goldScaleMaterial, renderIndex, partIndex,
+    protected boolean createItem(int partIndex) {
+        Item item = new ItemZuluArmor(ProjectZulu_Core.goldScaleMaterial, renderIndex, partIndex,
                 name[partIndex].toLowerCase());
 
         switch (partIndex) {

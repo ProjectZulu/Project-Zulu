@@ -6,13 +6,14 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -41,7 +42,7 @@ public class BlockMobHeads extends BlockContainer {
             return displayName;
         }
 
-        private Icon icon;
+        private IIcon icon;
 
         private Head(int meta, String displayName) {
             this.meta = meta;
@@ -57,22 +58,22 @@ public class BlockMobHeads extends BlockContainer {
         }
     }
 
-    public BlockMobHeads(int par1) {
-        super(par1, Material.circuits);
+    public BlockMobHeads() {
+        super(Material.circuits);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHardness(1.0F);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundTypeStone);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         return Head.getByMeta(par2).icon;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         for (Head head : Head.values()) {
             head.icon = par1IconRegister.registerIcon(getTextureName() + "_" + head.toString().toLowerCase());
         }
@@ -80,9 +81,9 @@ public class BlockMobHeads extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item item, CreativeTabs tabs, List items) {
         for (Head head : Head.values()) {
-            par3List.add(new ItemStack(this, 1, head.meta));
+            items.add(new ItemStack(this, 1, head.meta));
         }
     }
 
@@ -163,11 +164,11 @@ public class BlockMobHeads extends BlockContainer {
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
     @Override
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
+    public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6) {
         if (!par1World.isRemote) {
             if ((par6 & 8) == 0) {
-                this.dropBlockAsItem_do(par1World, par2, par3, par4,
-                        new ItemStack(this.blockID, 1, this.getDamageValue(par1World, par2, par3, par4)));
+                this.dropBlockAsItem(par1World, par2, par3, par4,
+                        new ItemStack(this, 1, this.getDamageValue(par1World, par2, par3, par4)));
             }
             super.breakBlock(par1World, par2, par3, par4, par5, par6);
         }
@@ -184,9 +185,8 @@ public class BlockMobHeads extends BlockContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1) {
+    public TileEntity createNewTileEntity(World var1, int var2) {
         return new TileEntityMobHeads();
-
     }
 
     /**
@@ -194,7 +194,7 @@ public class BlockMobHeads extends BlockContainer {
      */
     @Override
     public int getDamageValue(World par1World, int par2, int par3, int par4) {
-        TileEntity var5 = par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntity var5 = par1World.getTileEntity(par2, par3, par4);
         return var5 != null && var5 instanceof TileEntityMobHeads ? ((TileEntityMobHeads) var5).getSkullType() : super
                 .getDamageValue(par1World, par2, par3, par4);
     }

@@ -2,6 +2,7 @@ package projectzulu.common.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -13,10 +14,10 @@ public class ItemAloeVeraSeeds extends Item {
     /**
      * The ItemID of block this seed turns into (wheat or pumpkin stems for instance)
      */
-    private int blockType;
+    private Block blockType;
 
-    public ItemAloeVeraSeeds(int itemID, int turnIntoID, String unlocalizedName) {
-        super(itemID);
+    public ItemAloeVeraSeeds(Block turnIntoID, String unlocalizedName) {
+        super();
         blockType = turnIntoID;
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setUnlocalizedName(unlocalizedName);
@@ -24,18 +25,18 @@ public class ItemAloeVeraSeeds extends Item {
     }
 
     @Override
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4,
-            int par5, int par6, int par7, float par8, float par9, float par10) {
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int xCoord, int yCoord, int zCoord,
+            int par7, float par8, float par9, float par10) {
         if (par7 != 1) {
             return false;
-        } else if (par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack)
-                && par2EntityPlayer.canPlayerEdit(par4, par5 + 1, par6, par7, par1ItemStack)) {
-            int var11 = par3World.getBlockId(par4, par5, par6);
+        } else if (player.canPlayerEdit(xCoord, yCoord, zCoord, par7, itemStack)
+                && player.canPlayerEdit(xCoord, yCoord + 1, zCoord, par7, itemStack)) {
+            Block block = world.getBlock(xCoord, yCoord, zCoord);
 
-            if ((var11 == Block.dirt.blockID || var11 == Block.sand.blockID || var11 == Block.grass.blockID)
-                    && par3World.isAirBlock(par4, par5 + 1, par6)) {
-                par3World.setBlock(par4, par5 + 1, par6, this.blockType);
-                --par1ItemStack.stackSize;
+            if ((block == Blocks.dirt || block == Blocks.sand || block == Blocks.grass)
+                    && world.isAirBlock(xCoord, yCoord + 1, zCoord)) {
+                world.setBlock(xCoord, yCoord + 1, zCoord, this.blockType);
+                --itemStack.stackSize;
                 return true;
             } else {
                 return false;

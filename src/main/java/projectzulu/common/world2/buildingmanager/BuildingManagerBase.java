@@ -2,6 +2,7 @@ package projectzulu.common.world2.buildingmanager;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
@@ -93,11 +94,11 @@ public abstract class BuildingManagerBase implements BuildingManager {
          * Check if There is a Tile At This Block, if so, remove it This Doesn't Seem to Work, So Block Is only placed
          * if there is not TileEntity so as to prevent crash
          */
-        TileEntity tileEntity = world.getBlockTileEntity(position.posX, position.posY, position.posZ);
+        TileEntity tileEntity = world.getTileEntity(position.posX, position.posY, position.posZ);
         if (tileEntity != null) {
             tileEntity.invalidate();
-            world.removeBlockTileEntity(position.posX, position.posY, position.posZ);
-            world.setBlock(position.posX, position.posY, position.posZ, 0);
+            world.removeTileEntity(position.posX, position.posY, position.posZ);
+            world.setBlock(position.posX, position.posY, position.posZ, Block.getBlockFromName("air"));
         } else {
             /* Check Block to See How Block wants to be Placed */
             blockWithMeta.placeBlock(world, position, random);

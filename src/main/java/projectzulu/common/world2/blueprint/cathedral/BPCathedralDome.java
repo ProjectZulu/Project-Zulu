@@ -38,7 +38,7 @@ public class BPCathedralDome implements Blueprint {
             return getDomeBlock(CellHelper.rotateCellTo(piecePos, cellSize, CellIndexDirection.SouthWall), cellSize,
                     cellHeight, random, cellIndexDirection);
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     private BlockWithMeta getDomeBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
@@ -52,15 +52,15 @@ public class BPCathedralDome implements Blueprint {
             if (slope == 0) {
                 return woodenPlank;
             } else if (slope > 0) {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
 
             if (piecePos.posX == 0) {
-                return piecePos.posZ % 2 == 0 ? (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks) : new BlockWithMeta(0);
+                return piecePos.posZ % 2 == 0 ? (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks) : new BlockWithMeta("air");
             }
 
             if (piecePos.posZ == 0) {
-                return piecePos.posX % 2 == 0 ? (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks) : new BlockWithMeta(0);
+                return piecePos.posX % 2 == 0 ? (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks) : new BlockWithMeta("air");
             }
         }
 
@@ -125,7 +125,7 @@ public class BPCathedralDome implements Blueprint {
                 return new BlockWithMeta(Block.carpet.blockID, 14);
             }
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     @Override

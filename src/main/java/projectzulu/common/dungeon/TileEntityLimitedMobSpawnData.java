@@ -1,10 +1,10 @@
 package projectzulu.common.dungeon;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.WeightedRandomItem;
+import net.minecraft.util.WeightedRandom;
 import projectzulu.common.dungeon.spawner.tag.settings.OptionalSettingsSpawning;
 
-public class TileEntityLimitedMobSpawnData extends WeightedRandomItem {
+public class TileEntityLimitedMobSpawnData extends WeightedRandom.Item {
     public final NBTTagCompound properties;
     public final String type;
     public final String spawnSound;

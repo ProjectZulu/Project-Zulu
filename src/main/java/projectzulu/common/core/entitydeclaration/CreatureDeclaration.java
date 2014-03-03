@@ -4,7 +4,7 @@ import java.io.File;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.CustomEntityList;
 import projectzulu.common.api.CustomMobData;

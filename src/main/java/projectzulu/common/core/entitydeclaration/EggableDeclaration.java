@@ -1,12 +1,11 @@
 package projectzulu.common.core.entitydeclaration;
 
-import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.CustomMobData;
-import projectzulu.common.core.ProjectZuluLog;
 
 public abstract class EggableDeclaration extends CreatureDeclaration {
 

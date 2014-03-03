@@ -4,11 +4,11 @@ import java.io.File;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.EnumHelper;
 import projectzulu.common.core.CreativePZGeneralTab;
 import projectzulu.common.core.CreativePZPotionTab;
 import projectzulu.common.core.CustomEntityManager;
@@ -26,7 +26,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -71,17 +70,17 @@ public class ProjectZulu_Core {
     public static Block testBlock;
 
     /* Material Declarations */
-    public static final EnumArmorMaterial desertClothMaterial = EnumHelper.addArmorMaterial("Desert Cloth Material", 2,
+    public static final ArmorMaterial desertClothMaterial = EnumHelper.addArmorMaterial("Desert Cloth Material", 2,
             new int[] { 1, 2, 1, 1 }, 15);
-    public static final EnumArmorMaterial scaleMaterial = EnumHelper.addArmorMaterial("Scale Material", 5, new int[] {
+    public static final ArmorMaterial scaleMaterial = EnumHelper.addArmorMaterial("Scale Material", 5, new int[] {
             1, 3, 2, 1 }, 15);
-    public static final EnumArmorMaterial furMaterial = EnumHelper.addArmorMaterial("Fur Material", 3, new int[] { 1,
+    public static final ArmorMaterial furMaterial = EnumHelper.addArmorMaterial("Fur Material", 3, new int[] { 1,
             3, 2, 1 }, 13);
-    public static final EnumArmorMaterial goldScaleMaterial = EnumHelper.addArmorMaterial("Gold Scale Material", 7,
+    public static final ArmorMaterial goldScaleMaterial = EnumHelper.addArmorMaterial("Gold Scale Material", 7,
             new int[] { 2, 5, 3, 1 }, 25);
-    public static final EnumArmorMaterial ironScaleMaterial = EnumHelper.addArmorMaterial("Iron Scale Material", 15,
+    public static final ArmorMaterial ironScaleMaterial = EnumHelper.addArmorMaterial("Iron Scale Material", 15,
             new int[] { 2, 6, 5, 2 }, 9);
-    public static final EnumArmorMaterial diamondScaleMaterial = EnumHelper.addArmorMaterial("Diamond Scale Material",
+    public static final ArmorMaterial diamondScaleMaterial = EnumHelper.addArmorMaterial("Diamond Scale Material",
             33, new int[] { 3, 8, 6, 3 }, 10);
 
     public static File modConfigDirectoryFile;
@@ -125,7 +124,7 @@ public class ProjectZulu_Core {
 
     @EventHandler
     public void load(FMLInitializationEvent event) {
-        NetworkRegistry.instance().registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
     }
 
     @EventHandler
@@ -142,6 +141,6 @@ public class ProjectZulu_Core {
 
         ProjectZuluLog.info("Initializing TerrainFeatures");
         featureGenerator.initialize(modConfigDirectoryFile);
-        GameRegistry.registerWorldGenerator(featureGenerator);
+        GameRegistry.registerWorldGenerator(featureGenerator, 1);
     }
 }

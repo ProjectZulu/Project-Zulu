@@ -1,7 +1,7 @@
 package projectzulu.common.core.itemblockdeclaration;
 
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import projectzulu.common.ProjectZulu_Core;
 import cpw.mods.fml.relauncher.Side;
 
@@ -9,7 +9,7 @@ public abstract class ItemSetDeclaration implements ItemBlockDeclaration {
 
     private int registerPass;
     public final String[] name;
-    private int[] iD;
+    private boolean[] isEnabled;
     private boolean[] isCreated;
 
     public ItemSetDeclaration(String[] name) {
@@ -20,10 +20,10 @@ public abstract class ItemSetDeclaration implements ItemBlockDeclaration {
         this.registerPass = registerPass;
         this.name = name;
 
-        iD = new int[name.length];
+        isEnabled = new boolean[name.length];
         isCreated = new boolean[name.length];
         for (int i = 0; i < name.length; i++) {
-            iD[i] = -1;
+            isEnabled[i] = true;
             isCreated[i] = false;
         }
     }
@@ -40,23 +40,15 @@ public abstract class ItemSetDeclaration implements ItemBlockDeclaration {
 
     @Override
     public final void createWithConfig(Configuration config, boolean readOnly) {
-        for (int i = 0; i < name.length; i++) {
-            if (iD[i] != -1) {
-                continue;
-            }
-
-            String key = name[i] + " ID";
-            Property property = null;
-            if (readOnly) {
-                property = config.get(Configuration.CATEGORY_ITEM, key, (String) null);
-            }
-            if (property != null || !readOnly) {
-                iD[i] = config.getItem(key, ProjectZulu_Core.getNextDefaultItemID()).getInt();
-                preCreateLoadConfig(config);
-                if (iD[i] > 0 && !isCreated[i]) {
-                    isCreated[i] = createItem(iD[i], i);
+        if (!readOnly) {
+            for (int i = 0; i < name.length; i++) {
+                Property property = config.get("item", name[i] + " isEnabled", isEnabled);
+                isEnabled[i] = property.getBoolean(isEnabled[i]);
+                if (isEnabled[i]) {
+                    preCreateLoadConfig(config);
+                    isCreated[i] = createItem(i);
+                    postCreateLoadConfig(config);
                 }
-                postCreateLoadConfig(config);
             }
         }
     }
@@ -69,7 +61,7 @@ public abstract class ItemSetDeclaration implements ItemBlockDeclaration {
 
     }
 
-    protected abstract boolean createItem(int iD, int partIndex);
+    protected abstract boolean createItem(int partIndex);
 
     @Override
     public final void register(Side side) {

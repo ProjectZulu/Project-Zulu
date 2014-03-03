@@ -128,7 +128,7 @@ public class BlueprintCemeteryTomb2 extends Blueprint{
 				}
 			}
 		}
-		return new BlockWithMeta(0);
+		return new BlockWithMeta("air");
 	}
 	
 	@Override

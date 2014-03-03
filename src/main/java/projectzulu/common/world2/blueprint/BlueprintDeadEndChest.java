@@ -31,7 +31,7 @@ public class BlueprintDeadEndChest implements Blueprint {
             }
         }
 
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     @Override

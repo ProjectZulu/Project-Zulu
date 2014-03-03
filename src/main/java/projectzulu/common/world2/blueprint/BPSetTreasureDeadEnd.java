@@ -20,7 +20,7 @@ public class BPSetTreasureDeadEnd implements BlueprintSet, Blueprint {
     BlockWithMeta floorblock;
 
     public BPSetTreasureDeadEnd() {
-        floorblock = new BlockWithMeta(Block.sandStone.blockID);
+        floorblock = new BlockWithMeta("sandstone");
     }
 
     @Override
@@ -67,6 +67,6 @@ public class BPSetTreasureDeadEnd implements BlueprintSet, Blueprint {
                 return new MimicWithMeta();
             }
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 }

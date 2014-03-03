@@ -17,7 +17,7 @@ public class BlueprintLabyrinthCobweb implements Blueprint {
         } else if ((piecePos.posY == 1 || piecePos.posY == cellHeight - 2) && 10 - random.nextInt(100) >= 0) {
             return new BlockWithMeta(Block.web.blockID, 0);
         } else {
-            return new BlockWithMeta(0);
+            return new BlockWithMeta("air");
         }
     }
 

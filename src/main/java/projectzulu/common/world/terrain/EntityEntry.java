@@ -1,8 +1,8 @@
 package projectzulu.common.world.terrain;
 
-import net.minecraft.util.WeightedRandomItem;
+import net.minecraft.util.WeightedRandom;
 
-public class EntityEntry extends WeightedRandomItem {
+public class EntityEntry extends WeightedRandom.Item {
 
     public final String entityname;
 

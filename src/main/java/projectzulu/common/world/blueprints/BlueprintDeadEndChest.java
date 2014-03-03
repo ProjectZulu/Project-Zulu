@@ -27,7 +27,7 @@ public class BlueprintDeadEndChest extends Blueprint{
 			return new MimicWithMeta();
 		}
 		
-		return new BlockWithMeta(0);
+		return new BlockWithMeta("air");
 	}
 	
 	

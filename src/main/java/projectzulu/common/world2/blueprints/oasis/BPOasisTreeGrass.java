@@ -14,17 +14,17 @@ import projectzulu.common.world2.blueprint.Blueprint;
 
 public class BPOasisTreeGrass implements Blueprint {
 
-    BlockWithMeta sand = new BlockWithMeta(Block.sand.blockID);
-    BlockWithMeta grass = new BlockWithMeta(Block.grass.blockID);
-    BlockWithMeta sandstone = new BlockWithMeta(Block.sandStone.blockID);
-    BlockWithMeta air = new BlockWithMeta(0);
+    BlockWithMeta sand = new BlockWithMeta("sand");
+    BlockWithMeta grass = new BlockWithMeta("grass");
+    BlockWithMeta sandstone = new BlockWithMeta("sandstone");
+    BlockWithMeta air = new BlockWithMeta("air");
     List<BlockWithMeta> flowers = new ArrayList<BlockWithMeta>();
 
     public BPOasisTreeGrass() {
-        flowers.add(new BlockWithMeta(Block.plantRed.blockID, 0, 1));
-        flowers.add(new BlockWithMeta(Block.plantYellow.blockID, 0, 1));
-        flowers.add(new BlockWithMeta(Block.tallGrass.blockID, 1, 20));
-        flowers.add(new BlockWithMeta(0, 0, 4));
+        flowers.add(new BlockWithMeta("red_flower", 0, 1));
+        flowers.add(new BlockWithMeta("yellow_flower", 0, 1));
+        flowers.add(new BlockWithMeta("tallgrass", 1, 20));
+        flowers.add(new BlockWithMeta("air", 0, 4));
     }
 
     @Override

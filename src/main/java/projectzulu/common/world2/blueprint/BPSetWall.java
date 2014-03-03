@@ -18,10 +18,10 @@ public class BPSetWall implements BlueprintSet, Blueprint {
     final List<BlockWithMeta> blocks = new ArrayList<BlockWithMeta>();
 
     public BPSetWall() {
-        blocks.add(new BlockWithMeta(Block.sandStone.blockID, 0, 5));
-        blocks.add(new BlockWithMeta(Block.sandStone.blockID, 1, 5));
-        blocks.add(new BlockWithMeta(Block.sandStone.blockID, 2, 5));
-        blocks.add(new BlockWithMeta(Block.sandStone.blockID, 3, 5));
+        blocks.add(new BlockWithMeta("sandstone", 0, 5));
+        blocks.add(new BlockWithMeta("sandstone", 1, 5));
+        blocks.add(new BlockWithMeta("sandstone", 2, 5));
+        blocks.add(new BlockWithMeta("sandstone", 3, 5));
     }
 
     @Override

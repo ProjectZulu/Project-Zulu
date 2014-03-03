@@ -6,7 +6,7 @@ import java.util.HashSet;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.ProjectZuluLog;
@@ -56,14 +56,14 @@ public abstract class SpawnableDeclaration extends EggableDeclaration {
     @Override
     public void loadBiomesFromConfig(Configuration config) {
         HashSet<String> defaultBiomesToSpawn = getDefaultBiomesToSpawn();
-        for (int i = 0; i < BiomeGenBase.biomeList.length; i++) {
-            if (BiomeGenBase.biomeList[i] == null) {
+        for (int i = 0; i < BiomeGenBase.getBiomeGenArray().length; i++) {
+            if (BiomeGenBase.getBiomeGenArray()[i] == null) {
                 continue;
             }
 
-            boolean defaultShouldSpawn = defaultBiomesToSpawn.contains(BiomeGenBase.biomeList[i].biomeName);
+            boolean defaultShouldSpawn = defaultBiomesToSpawn.contains(BiomeGenBase.getBiomeGenArray()[i].biomeName);
             SpawnEntry spawnEntry = ConfigHelper.configGetSpawnEntry(config, "Mob Spawn Biome Controls." + mobName,
-                    BiomeGenBase.biomeList[i], defaultShouldSpawn, spawnRate, minInChunk, maxInChunk);
+                    BiomeGenBase.getBiomeGenArray()[i], defaultShouldSpawn, spawnRate, minInChunk, maxInChunk);
             if (spawnEntry != null) {
                 biomesToSpawn.add(spawnEntry);
             }

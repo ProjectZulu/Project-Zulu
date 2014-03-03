@@ -2,7 +2,7 @@ package projectzulu.common.mobs.entitydefaults;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.entitydeclaration.CreatureDeclaration;

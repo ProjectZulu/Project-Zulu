@@ -19,26 +19,26 @@ public class BlueprintScatteredTombstonesAndFlowers extends Blueprint{
 			
 			if( (xIndex % 2 == 0 && zIndex % 2 == 0) || (xIndex % 2 == 1 && zIndex % 2 == 1) ){
 				if( 20 - random.nextInt(100) >= 0 && ((cellIndex % 2*cellSize) == cellSize ||  (cellIndex % 2*cellSize) == 2*cellSize-1 ) ){
-					return BlockList.tombstone.isPresent() ? new BlockWithMeta(BlockList.tombstone.get().blockID) : new BlockWithMeta(0);
+					return BlockList.tombstone.isPresent() ? new BlockWithMeta(BlockList.tombstone.get().blockID) : new BlockWithMeta("air");
 				}
 			}
 			
 			
 			else{
 				if( 20 - random.nextInt(100) >= 0 && (cellIndex % 2*cellSize) == 0 ||  (cellIndex % 2*cellSize) == cellSize-1 ){
-					return BlockList.tombstone.isPresent() ? new BlockWithMeta(BlockList.tombstone.get().blockID) : new BlockWithMeta(0);
+					return BlockList.tombstone.isPresent() ? new BlockWithMeta(BlockList.tombstone.get().blockID) : new BlockWithMeta("air");
 				}else if(5 - random.nextInt(100) >= 0){
-					return new BlockWithMeta(Block.plantRed.blockID,0);
+					return new BlockWithMeta("red_flower",0);
 				}else if(5 - random.nextInt(100) >= 0){
-					return new BlockWithMeta(Block.plantYellow.blockID,0);
+					return new BlockWithMeta("yellow_flower",0);
 				}else if(40 - random.nextInt(100) >= 0){
-					return new BlockWithMeta(Block.tallGrass.blockID,1);
+					return new BlockWithMeta("tallgrass",1);
 				}
-				return new BlockWithMeta(0);
+				return new BlockWithMeta("air");
 			}
 		}
 		
-		return new BlockWithMeta(0);
+		return new BlockWithMeta("air");
 		
 	}
 

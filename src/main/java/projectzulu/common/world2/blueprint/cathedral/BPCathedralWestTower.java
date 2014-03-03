@@ -21,7 +21,7 @@ public class BPCathedralWestTower implements Blueprint {
     // wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 5));
     // wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 1, 10));
     // wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 0, 100));
-    // // wallBlocks.add(new BlockWithMeta(0, 0, 1));
+    // // wallBlocks.add(new BlockWithMeta("air", 0, 1));
     // }
 
     @Override
@@ -81,12 +81,12 @@ public class BPCathedralWestTower implements Blueprint {
             if (slope == 0) {
                 return woodenPlank;
             } else if (slope > 0) {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
 
         if (piecePos.posX == 0 && piecePos.posZ == 0) {
-            return new BlockWithMeta(0);
+            return new BlockWithMeta("air");
         }
 
         /* Create Outside Walls */
@@ -114,7 +114,7 @@ public class BPCathedralWestTower implements Blueprint {
                                 true, false, piecePos.posY % 4));
                     }
                 }
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
 
             if (piecePos.posZ == 0) {
@@ -137,7 +137,7 @@ public class BPCathedralWestTower implements Blueprint {
                                 false, false, piecePos.posY % 4));
                     }
                 }
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
 
             }
         }
@@ -228,7 +228,7 @@ public class BPCathedralWestTower implements Blueprint {
             return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
         }
 
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     private boolean isRoomForRoom(ChunkCoordinates piecePos, int cellSize, int cellHeight) {

@@ -15,8 +15,8 @@ public class BPSetHallway implements BlueprintSet, Blueprint {
     BlockWithMeta floorblock;
 
     public BPSetHallway() {
-        floorblock = new BlockWithMeta(Block.sandStone.blockID);
-        block = new BlockWithMeta(0);
+        floorblock = new BlockWithMeta("sandstone");
+        block = new BlockWithMeta("air");
     }
 
     @Override

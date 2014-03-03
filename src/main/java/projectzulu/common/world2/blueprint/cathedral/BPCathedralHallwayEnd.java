@@ -73,7 +73,7 @@ public class BPCathedralHallwayEnd implements Blueprint {
                     return woodenPlank;
                 }
             } else if (slope > 0) {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
 
@@ -149,7 +149,7 @@ public class BPCathedralHallwayEnd implements Blueprint {
                 return new BlockWithMeta(Block.woodSingleSlab.blockID);
             }
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     private int getStairMeta(CellIndexDirection cellIndexDirection) {

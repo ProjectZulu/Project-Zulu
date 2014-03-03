@@ -13,8 +13,8 @@ public class AnkhDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemList.ankh = Optional.of(new ItemAnkh(iD, name));
+    protected boolean createItem() {
+        ItemList.ankh = Optional.of(new ItemAnkh(name));
         return true;
     }
 

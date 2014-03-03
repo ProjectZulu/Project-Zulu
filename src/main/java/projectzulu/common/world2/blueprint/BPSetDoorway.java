@@ -141,43 +141,43 @@ public class BPSetDoorway implements BlueprintSet, Blueprint {
             CellIndexDirection cellIndexDirection, Random random, String buildingID) {
         if (cellIndexDirection == CellIndexDirection.SouthWall) {
             if (piecePos.posY == 0) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             } else if (piecePos.posZ == cellSize - 1) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             } else if (piecePos.posY == cellHeight - 1) {
                 return new BlockWithMeta(Block.stairsSandStone.blockID, 6);
             } else {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         } else if (cellIndexDirection == CellIndexDirection.NorthWall) {
             if (piecePos.posY == 0) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             } else if (piecePos.posZ == 0) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             } else if (piecePos.posY == cellHeight - 1) {
                 return new BlockWithMeta(Block.stairsSandStone.blockID, 7);
             } else {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         } else if (cellIndexDirection == CellIndexDirection.WestWall) {
             if (piecePos.posY == 0) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             } else if (piecePos.posX == cellSize - 1) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             } else if (piecePos.posY == cellHeight - 1) {
                 return new BlockWithMeta(Block.stairsSandStone.blockID, 4);
             } else {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         } else if (cellIndexDirection == CellIndexDirection.EastWall) {
             if (piecePos.posY == 0) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             } else if (piecePos.posX == 0) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             } else if (piecePos.posY == cellHeight - 1) {
                 return new BlockWithMeta(Block.stairsSandStone.blockID, 5);
             } else {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
         return new BlockWithMeta(Block.blockGold.blockID);

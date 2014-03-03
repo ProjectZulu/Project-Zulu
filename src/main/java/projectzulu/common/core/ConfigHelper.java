@@ -8,8 +8,8 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.blocks.util.StringHelper;
 import projectzulu.common.core.entitydeclaration.SpawnEntry;
@@ -104,23 +104,8 @@ public class ConfigHelper {
 				int weight = StringHelper.parseInteger(entryParts[2], "0123456789");
 				int quantity = StringHelper.parseInteger(entryParts[3], "0123456789");
 				
-				int minItemID;
-				int maxItemID;
-				String[] itemRangeParts = entryParts[0].split("-");
-				if(itemRangeParts.length == 1){
-					minItemID = StringHelper.parseInteger(itemRangeParts[0], "0123456789");
-					maxItemID = minItemID;
-				}else{
-					minItemID = StringHelper.parseInteger(itemRangeParts[0], "0123456789");
-					maxItemID = StringHelper.parseInteger(itemRangeParts[1], "0123456789");
-				}
-				
-				for (int curID = minItemID; curID <= maxItemID; curID++){
-					if(curID >= 0 || curID < Item.itemsList.length && weight > 0){
-						ItemStack itemStack = new ItemStack(curID, quantity, meta);
-						customMobData.addLootToMob(itemStack, weight);
-					}
-				}
+                String itemId = entryParts[0] != null ? entryParts[0].trim() : "";
+                customMobData.addLootToMob(itemId, meta, quantity, weight);
 			}
 		}
 	}

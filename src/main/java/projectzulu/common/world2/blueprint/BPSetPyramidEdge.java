@@ -127,9 +127,9 @@ public class BPSetPyramidEdge implements BlueprintSet {
                 }
 
                 if (piecePos.posY > posZ + index * cellSize || piecePos.posY > posX + index * cellSize) {
-                    return new BlockWithMeta(0);
+                    return new BlockWithMeta("air");
                 } else if (piecePos.posY == posZ + index * cellSize || piecePos.posY == posX + index * cellSize) {
-                    return new BlockWithMeta(Block.sandStone.blockID);
+                    return new BlockWithMeta("sandstone");
                 }
             } else {
                 int pos = -1;
@@ -153,13 +153,13 @@ public class BPSetPyramidEdge implements BlueprintSet {
 
                 if (pos > -1) {
                     if (piecePos.posY > pos + index * cellSize) {
-                        return new BlockWithMeta(0);
+                        return new BlockWithMeta("air");
                     } else if (piecePos.posY == pos + index * cellSize) {
-                        return new BlockWithMeta(Block.sandStone.blockID);
+                        return new BlockWithMeta("sandstone");
                     }
                 }
             }
-            return new BlockWithMeta(Block.sandStone.blockID);
+            return new BlockWithMeta("sandstone");
         }
 
         @Override
@@ -192,9 +192,9 @@ public class BPSetPyramidEdge implements BlueprintSet {
                 }
 
                 if (piecePos.posY > posZ + index * cellSize || piecePos.posY > posX + index * cellSize) {
-                    return new BlockWithMeta(0);
+                    return new BlockWithMeta("air");
                 } else if (piecePos.posY == posZ + index * cellSize || piecePos.posY == posX + index * cellSize) {
-                    return new BlockWithMeta(Block.sandStone.blockID);
+                    return new BlockWithMeta("sandstone");
                 }
             } else {
                 int pos = -1;
@@ -218,13 +218,13 @@ public class BPSetPyramidEdge implements BlueprintSet {
 
                 if (pos > -1) {
                     if (piecePos.posY > pos + index * cellSize) {
-                        return new BlockWithMeta(0);
+                        return new BlockWithMeta("air");
                     } else if (piecePos.posY == pos + index * cellSize) {
-                        return new BlockWithMeta(Block.sandStone.blockID);
+                        return new BlockWithMeta("sandstone");
                     }
                 }
             }
-            return new BlockWithMeta(Block.sandStone.blockID);
+            return new BlockWithMeta("sandstone");
         }
 
         @Override

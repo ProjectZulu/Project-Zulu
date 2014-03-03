@@ -19,7 +19,7 @@ public class BPSetHallwaySpawner implements BlueprintSet, Blueprint {
     BlockWithMeta floorblock;
 
     public BPSetHallwaySpawner() {
-        floorblock = new BlockWithMeta(Block.sandStone.blockID);
+        floorblock = new BlockWithMeta("sandstone");
     }
 
     @Override
@@ -64,9 +64,9 @@ public class BPSetHallwaySpawner implements BlueprintSet, Blueprint {
                 if (!entityName.equalsIgnoreCase("EMPTY")) {
                     ProjectZuluLog.severe("Entity with name %s does not seem to exist.", entityName);
                 }
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 }

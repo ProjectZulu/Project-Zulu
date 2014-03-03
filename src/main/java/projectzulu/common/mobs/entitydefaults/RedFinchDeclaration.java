@@ -4,11 +4,11 @@ import java.util.HashSet;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.core.ConfigHelper;
 import projectzulu.common.core.DefaultProps;
@@ -35,7 +35,7 @@ public class RedFinchDeclaration extends SpawnableDeclaration {
 
     @Override
     public void outputDataToList(Configuration config, CustomMobData customMobData) {
-        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Item.feather, 0, 8);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Items.feather, 0, 8);
         customMobData.entityProperties = new EntityProperties(8f, 0.0f, 0.22f).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }

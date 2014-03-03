@@ -1,6 +1,5 @@
 package projectzulu.common.blocks.heads;
 
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -12,63 +11,67 @@ import org.lwjgl.opengl.GL11;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.mobs.models.ModelFinch;
 
-public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
-	enum HeadRender{				
-		Finch_Red(0, new ModelFinch(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.5F, 0.74F),
-			new Position(0.5F,  1.5F, 0.26F), new Position(0.74F, 1.5F, 0.5F), new Position(0.26F, 1.5F, 0.5F) }),
-		Crocodile(1, new ModelCrocodileHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75F, 0.55F),
-			new Position(0.5F,  1.75F, 0.4F), new Position(0.55F, 1.75F, 0.5F), new Position(0.45F, 1.75F, 0.5F) }),
-		Armadillo(2, new ModelArmadilloHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75F, 0.80F),
-			new Position(0.5F,  1.75F, 0.20F), new Position(0.80F, 1.75F, 0.5F), new Position(0.20F, 1.75F, 0.5F) }),
-		BearBlack(3, new ModelBearHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75F, 0.85F),
-			new Position(0.5F,  1.75F, 0.15F), new Position(0.85F, 1.75F, 0.5F), new Position(0.15F, 1.75F, 0.5F)}),
-		BearBrown(4, new ModelBearHead(), 0.08F, new Position[]{ 
-			new Position(0.26F, 2.0F, 0.5F), new Position(0.5F,  1.90f, 0.5F), new Position(0.5F,  2.1F, 0.85F),
-			new Position(0.5F,  2.1F, 0.15F), new Position(0.85F, 2.1F, 0.5F), new Position(0.15f, 2.1F, 0.5F)}),
-		BearPolar(5, new ModelBearHead(), 0.1F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  2.4F, 0.5F), new Position(0.5F,  2.5F, 0.80F),
-			new Position(0.5F,  2.5F, 0.20f), new Position(0.80f, 2.5F, 0.5F), new Position(0.20f, 2.5F, 0.5F)}),
-		Beaver(6, new ModelBeaverHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75F, 0.85f),
-			new Position(0.5F,  1.75F, 0.15F), new Position(0.85f, 1.75F, 0.5F), new Position(0.15f, 1.75F, 0.5F)}),
-		Boar(7, new ModelBoarHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75F, 0.70f),
-			new Position(0.5F,  1.75F, 0.30f), new Position(0.70f, 1.75F, 0.5F), new Position(0.30f, 1.75F, 0.5F)}),
-		Giraffe(8, new ModelGiraffeHead(), 0.035F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F, 0.85F, 0.5F), new Position(0.5F, 1.15F, 1.00f),
-			new Position(0.5F, 1.15F, 0.00f), new Position(1.00F, 1.15F, 0.5F), new Position(0.00F, 1.15F, 0.5F)}),
-		Gorilla(9, new ModelGorillaHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75F, 0.80f),
-			new Position(0.5F,  1.75F, 0.20f), new Position(0.80f, 1.75F, 0.5F), new Position(0.20f, 1.75F, 0.5F)}),
-		Lizard(10, new ModelLizardHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75F, 0.80f),
-			new Position(0.5F,  1.75F, 0.20f), new Position(0.80f, 1.75F, 0.5F), new Position(0.20f, 1.75F, 0.5F)}),
-		Mammoth(11, new ModelMammothHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.40F, 0.5F), new Position(0.5F,  1.56F, 0.70f),
-			new Position(0.5F,  1.56F, 0.30f), new Position(0.70f, 1.56F, 0.5F), new Position(0.30f, 1.56F, 0.5F)}),
-		Ostrich(12, new ModelOstrichHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75F, 1.2F),
-			new Position(0.5F,  1.75F, -0.1F), new Position(1.15F, 1.75F, 0.5F), new Position(-0.15F, 1.75F, 0.5F)}),
-		Penguin(13, new ModelPenguinHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.85F, 0.75f),
-			new Position(0.5F,  1.85F, 0.25f), new Position(0.75f, 1.85F, 0.5F), new Position(0.25f, 1.85F, 0.5F)}),
-		Rhino(14, new ModelRhinoHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75F, 0.60F),
-			new Position(0.5F,  1.75F, 0.4F), new Position(0.60f, 1.75F, 0.5F), new Position(0.40f, 1.75F, 0.5F)}),
-		TreeEnt(15, new ModelTreeEntHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.5F, 0.5F), new Position(0.5F,  1.75f, 0.55F),
-			new Position(0.5F,  1.75F, 0.4F), new Position(0.55F, 1.75F, 0.5F), new Position(0.45F, 1.75F, 0.5F)}),
-		Vulture(16, new ModelVultureHead(), 0.0625F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  1.55F, 0.5F), new Position(0.5F,  2.10F, 0.95F),
-			new Position(0.5F,  2.10F, 0.05F), new Position(0.95F, 2.10F, 0.5F), new Position(0.05F, 2.10F, 0.5F)}),
-		Elephant(17, new ModelElephantHead(), 0.0505F, new Position[]{ 
-			new Position(0.26F, 1.5F, 0.5F), new Position(0.5F,  0.9F, 0.5F), new Position(0.5F,  0.9F, 0.59F),
-			new Position(0.5F,  0.9F, 0.41F), new Position(0.59F, 0.9F, 0.5F), new Position(0.41F, 0.9F, 0.5F)});
-		
+public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer {
+    enum HeadRender {
+        Finch_Red(0, new ModelFinch(), 0.0625F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.5F, 0.74F), new Position(0.5F, 1.5F, 0.26F),
+                new Position(0.74F, 1.5F, 0.5F), new Position(0.26F, 1.5F, 0.5F) }), Crocodile(1,
+                new ModelCrocodileHead(), 0.0625F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                        new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.75F, 0.55F),
+                        new Position(0.5F, 1.75F, 0.4F), new Position(0.55F, 1.75F, 0.5F),
+                        new Position(0.45F, 1.75F, 0.5F) }), Armadillo(2, new ModelArmadilloHead(), 0.0625F,
+                new Position[] { new Position(0.26F, 1.5F, 0.5F), new Position(0.5F, 1.5F, 0.5F),
+                        new Position(0.5F, 1.75F, 0.80F), new Position(0.5F, 1.75F, 0.20F),
+                        new Position(0.80F, 1.75F, 0.5F), new Position(0.20F, 1.75F, 0.5F) }), BearBlack(3,
+                new ModelBearHead(), 0.0625F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                        new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.75F, 0.85F),
+                        new Position(0.5F, 1.75F, 0.15F), new Position(0.85F, 1.75F, 0.5F),
+                        new Position(0.15F, 1.75F, 0.5F) }), BearBrown(4, new ModelBearHead(), 0.08F, new Position[] {
+                new Position(0.26F, 2.0F, 0.5F), new Position(0.5F, 1.90f, 0.5F), new Position(0.5F, 2.1F, 0.85F),
+                new Position(0.5F, 2.1F, 0.15F), new Position(0.85F, 2.1F, 0.5F), new Position(0.15f, 2.1F, 0.5F) }), BearPolar(
+                5, new ModelBearHead(), 0.1F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                        new Position(0.5F, 2.4F, 0.5F), new Position(0.5F, 2.5F, 0.80F),
+                        new Position(0.5F, 2.5F, 0.20f), new Position(0.80f, 2.5F, 0.5F),
+                        new Position(0.20f, 2.5F, 0.5F) }), Beaver(6, new ModelBeaverHead(), 0.0625F, new Position[] {
+                new Position(0.26F, 1.5F, 0.5F), new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.75F, 0.85f),
+                new Position(0.5F, 1.75F, 0.15F), new Position(0.85f, 1.75F, 0.5F), new Position(0.15f, 1.75F, 0.5F) }), Boar(
+                7, new ModelBoarHead(), 0.0625F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                        new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.75F, 0.70f),
+                        new Position(0.5F, 1.75F, 0.30f), new Position(0.70f, 1.75F, 0.5F),
+                        new Position(0.30f, 1.75F, 0.5F) }), Giraffe(8, new ModelGiraffeHead(), 0.035F, new Position[] {
+                new Position(0.26F, 1.5F, 0.5F), new Position(0.5F, 0.85F, 0.5F), new Position(0.5F, 1.15F, 1.00f),
+                new Position(0.5F, 1.15F, 0.00f), new Position(1.00F, 1.15F, 0.5F), new Position(0.00F, 1.15F, 0.5F) }), Gorilla(
+                9, new ModelGorillaHead(), 0.0625F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                        new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.75F, 0.80f),
+                        new Position(0.5F, 1.75F, 0.20f), new Position(0.80f, 1.75F, 0.5F),
+                        new Position(0.20f, 1.75F, 0.5F) }), Lizard(10, new ModelLizardHead(), 0.0625F, new Position[] {
+                new Position(0.26F, 1.5F, 0.5F), new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.75F, 0.80f),
+                new Position(0.5F, 1.75F, 0.20f), new Position(0.80f, 1.75F, 0.5F), new Position(0.20f, 1.75F, 0.5F) }), Mammoth(
+                11, new ModelMammothHead(), 0.0625F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                        new Position(0.5F, 1.40F, 0.5F), new Position(0.5F, 1.56F, 0.70f),
+                        new Position(0.5F, 1.56F, 0.30f), new Position(0.70f, 1.56F, 0.5F),
+                        new Position(0.30f, 1.56F, 0.5F) }), Ostrich(12, new ModelOstrichHead(), 0.0625F,
+                new Position[] { new Position(0.26F, 1.5F, 0.5F), new Position(0.5F, 1.5F, 0.5F),
+                        new Position(0.5F, 1.75F, 1.2F), new Position(0.5F, 1.75F, -0.1F),
+                        new Position(1.15F, 1.75F, 0.5F), new Position(-0.15F, 1.75F, 0.5F) }), Penguin(13,
+                new ModelPenguinHead(), 0.0625F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                        new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.85F, 0.75f),
+                        new Position(0.5F, 1.85F, 0.25f), new Position(0.75f, 1.85F, 0.5F),
+                        new Position(0.25f, 1.85F, 0.5F) }), Rhino(14, new ModelRhinoHead(), 0.0625F, new Position[] {
+                new Position(0.26F, 1.5F, 0.5F), new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.75F, 0.60F),
+                new Position(0.5F, 1.75F, 0.4F), new Position(0.60f, 1.75F, 0.5F), new Position(0.40f, 1.75F, 0.5F) }), TreeEnt(
+                15, new ModelTreeEntHead(), 0.0625F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                        new Position(0.5F, 1.5F, 0.5F), new Position(0.5F, 1.75f, 0.55F),
+                        new Position(0.5F, 1.75F, 0.4F), new Position(0.55F, 1.75F, 0.5F),
+                        new Position(0.45F, 1.75F, 0.5F) }), Vulture(16, new ModelVultureHead(), 0.0625F,
+                new Position[] { new Position(0.26F, 1.5F, 0.5F), new Position(0.5F, 1.55F, 0.5F),
+                        new Position(0.5F, 2.10F, 0.95F), new Position(0.5F, 2.10F, 0.05F),
+                        new Position(0.95F, 2.10F, 0.5F), new Position(0.05F, 2.10F, 0.5F) }), Elephant(17,
+                new ModelElephantHead(), 0.0505F, new Position[] { new Position(0.26F, 1.5F, 0.5F),
+                        new Position(0.5F, 0.9F, 0.5F), new Position(0.5F, 0.9F, 0.59F),
+                        new Position(0.5F, 0.9F, 0.41F), new Position(0.59F, 0.9F, 0.5F),
+                        new Position(0.41F, 0.9F, 0.5F) });
+
         private final ModelBase model;
         private final int iD;
         private final float scale;
@@ -126,8 +129,8 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer{
 
         /* Get Meta */
         int meta = 0;
-        if (tile.worldObj != null) {
-            meta = (tile.worldObj.getBlockMetadata(tile.xCoord, tile.yCoord, tile.zCoord) & 7);
+        if (tile.getWorldObj() != null) {
+            meta = (tile.getWorldObj().getBlockMetadata(tile.xCoord, tile.yCoord, tile.zCoord) & 7);
         }
         /* Get And Set Attributes Specific to Skull Type */
         int skullType = tile.getSkullType();

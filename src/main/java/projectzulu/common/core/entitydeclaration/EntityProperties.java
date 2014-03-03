@@ -1,6 +1,6 @@
 package projectzulu.common.core.entitydeclaration;
 
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 
 public class EntityProperties {
     public final float maxHealth;

@@ -29,7 +29,7 @@ public class BlueprintLabyrinthStair implements Blueprint {
             if (piecePos.posX == 0 || piecePos.posX == cellSize - 1) {
                 return new BlockWithMeta(Block.stoneBrick.blockID, 0);
             } else {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             }
         } else {
             return null;

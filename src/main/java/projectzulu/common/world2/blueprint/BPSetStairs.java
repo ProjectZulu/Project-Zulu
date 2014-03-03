@@ -14,7 +14,7 @@ public class BPSetStairs implements BlueprintSet, Blueprint {
     BlockWithMeta floorblock;
 
     public BPSetStairs() {
-        floorblock = new BlockWithMeta(Block.sandStone.blockID);
+        floorblock = new BlockWithMeta("sandstone");
     }
 
     @Override
@@ -91,26 +91,26 @@ public class BPSetStairs implements BlueprintSet, Blueprint {
             return getTopStairBlock(piecePos, cellSize, cellHeight, cellIndexDirection, random,
                     Integer.parseInt(subIndex[1]));
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     public BlockWithMeta getBottomStairBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight,
             CellIndexDirection cellIndexDirection, Random random, int index) {
         index = index - 1;
         if (piecePos.posY == 0) {
-            return new BlockWithMeta(Block.sandStone.blockID);
+            return new BlockWithMeta("sandstone");
         }
 
         if (piecePos.posX == 0) {
             if (piecePos.posY > (piecePos.posZ + 1) + index * cellSize) {
-                return new BlockWithMeta(0);
+                return new BlockWithMeta("air");
             } else if (piecePos.posY == (piecePos.posZ + 1) + index * cellSize) {
                 return new BlockWithMeta(Block.stairsSandStone.blockID, 2);
             } else {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             }
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     public BlockWithMeta getTopStairBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight,
@@ -119,14 +119,14 @@ public class BPSetStairs implements BlueprintSet, Blueprint {
         index = index + (cellSize - cellHeight - 2);
         if (piecePos.posY == 0) {
             if (piecePos.posX != 0) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             } else if (requiresStairs && piecePos.posY == (piecePos.posZ + 1) + index) {
                 return new BlockWithMeta(Block.stairsSandStone.blockID, 2);
             } else if (requiresStairs && piecePos.posY < (piecePos.posZ + 1) + index) {
-                return new BlockWithMeta(Block.sandStone.blockID);
+                return new BlockWithMeta("sandstone");
             }
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     @Override

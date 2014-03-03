@@ -14,20 +14,20 @@ import projectzulu.common.world2.blueprint.Blueprint;
 
 public abstract class BPOasisEdge implements Blueprint {
 
-    BlockWithMeta sandstone = new BlockWithMeta(Block.sandStone.blockID);
-    BlockWithMeta sand = new BlockWithMeta(Block.sand.blockID);
-    BlockWithMeta grass = new BlockWithMeta(Block.grass.blockID);
-    BlockWithMeta air = new BlockWithMeta(0);
+    BlockWithMeta sandstone = new BlockWithMeta("sandstone");
+    BlockWithMeta sand = new BlockWithMeta("sand");
+    BlockWithMeta grass = new BlockWithMeta("grass");
+    BlockWithMeta air = new BlockWithMeta("air");
     
     List<BlockWithMeta> flowers = new ArrayList<BlockWithMeta>();
     boolean inverted;
 
     public BPOasisEdge(boolean inverted) {
         this.inverted = inverted;
-        flowers.add(new BlockWithMeta(Block.plantRed.blockID, 0, 1));
-        flowers.add(new BlockWithMeta(Block.plantYellow.blockID, 0, 1));
-        flowers.add(new BlockWithMeta(Block.tallGrass.blockID, 1, 10));
-        flowers.add(new BlockWithMeta(0, 0, 6));
+        flowers.add(new BlockWithMeta("red_flower", 0, 1));
+        flowers.add(new BlockWithMeta("yellow_flower", 0, 1));
+        flowers.add(new BlockWithMeta("tallgrass", 1, 10));
+        flowers.add(new BlockWithMeta("air", 0, 6));
     }
 
     @Override

@@ -4,11 +4,11 @@ import java.util.HashSet;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -37,7 +37,8 @@ public class HorseDarkBlackDeclaration extends SpawnableDeclaration {
 
     @Override
     public void outputDataToList(Configuration config, CustomMobData customMobData) {
-        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Item.beefRaw, 0, 10);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
+                Items.beef, 0, 10);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, ItemList.scrapMeat, 0, 10);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.LargeHeart.meta(), 4);
@@ -52,7 +53,7 @@ public class HorseDarkBlackDeclaration extends SpawnableDeclaration {
                 "Horse/horse_dark_black.png"), new ResourceLocation(DefaultProps.mobKey,
                 "Horse/horse_dark_black_saddled.png"));
     }
-    
+
     @Override
     public HashSet<String> getDefaultBiomesToSpawn() {
         HashSet<String> defaultBiomesToSpawn = new HashSet<String>();

@@ -3,14 +3,11 @@ package projectzulu.common.blocks;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.temperature.ITempArmor;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemZuluArmor extends ItemArmor implements ITempArmor {
     /** Holds the 'base' maxDamage that each armorType have. */
@@ -31,15 +28,15 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor {
     public final int renderIndex;
 
     /** The EnumArmorMaterial used for this ItemArmor */
-    private final EnumArmorMaterial material;
+    private final ArmorMaterial material;
 
-    public ItemZuluArmor(int par1, EnumArmorMaterial par2EnumArmorMaterial, int renderIndex, int armorType, String name) {
-        super(par1, par2EnumArmorMaterial, renderIndex, armorType);
-        this.material = par2EnumArmorMaterial;
+    public ItemZuluArmor(ArmorMaterial armorMat, int renderIndex, int armorType, String name) {
+        super(armorMat, renderIndex, armorType);
+        this.material = armorMat;
         this.armorType = armorType;
         this.renderIndex = renderIndex;
-        this.damageReduceAmount = par2EnumArmorMaterial.getDamageReductionAmount(armorType);
-        this.setMaxDamage(par2EnumArmorMaterial.getDurability(armorType));
+        this.damageReduceAmount = armorMat.getDamageReductionAmount(armorType);
+        this.setMaxDamage(armorMat.getDurability(armorType));
         this.maxStackSize = 1;
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setUnlocalizedName(name);
@@ -100,7 +97,7 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor {
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
         return DefaultProps.blockKey + ":armor_sets/" + RenderBiped.bipedArmorFilenamePrefix[renderIndex] + "_"
                 + (armorType == 2 ? 2 : 1) + ".png";
     }

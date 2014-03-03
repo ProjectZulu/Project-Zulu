@@ -2,13 +2,13 @@ package projectzulu.common.mobs.entitydefaults;
 
 import java.util.HashSet;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -37,7 +37,7 @@ public class TreeEntDeclaration extends SpawnableDeclaration {
 
     @Override
     public void outputDataToList(Configuration config, CustomMobData customMobData) {
-        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Block.wood, 1, 8);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Blocks.log, 1, 8);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Bark.meta(), 4);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,

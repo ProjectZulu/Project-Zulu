@@ -7,7 +7,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
-import net.minecraft.util.WeightedRandomItem;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
 import projectzulu.common.world2.blueprint.Blueprint;
@@ -18,13 +17,13 @@ public class BlueprintCemetaryEdge implements Blueprint {
     List<BlockWithMeta> flowerBlocks = new ArrayList<BlockWithMeta>(3);
 
     public BlueprintCemetaryEdge() {
-        wallBlocks.add(new BlockWithMeta(Block.cobblestoneWall.blockID, 1, 2));
-        wallBlocks.add(new BlockWithMeta(Block.cobblestoneWall.blockID, 0, 3));
-        wallBlocks.add(new BlockWithMeta(0, 0, 3));
-        flowerBlocks.add(new BlockWithMeta(Block.plantRed.blockID, 0, 1));
-        flowerBlocks.add(new BlockWithMeta(Block.plantYellow.blockID, 0, 1));
-        flowerBlocks.add(new BlockWithMeta(Block.tallGrass.blockID, 1, 10));
-        flowerBlocks.add(new BlockWithMeta(0, 0, 8));
+        wallBlocks.add(new BlockWithMeta("cobblestone_wall", 1, 2));
+        wallBlocks.add(new BlockWithMeta("cobblestone_wall", 0, 3));
+        wallBlocks.add(new BlockWithMeta("cobblestone_wall", 0, 3));
+        flowerBlocks.add(new BlockWithMeta("red_flower", 0, 1));
+        flowerBlocks.add(new BlockWithMeta("yellow_flower", 0, 1));
+        flowerBlocks.add(new BlockWithMeta("tallgrass", 1, 10));
+        flowerBlocks.add(new BlockWithMeta("air", 0, 8));
     }
 
     @Override
@@ -32,7 +31,7 @@ public class BlueprintCemetaryEdge implements Blueprint {
             CellIndexDirection cellIndexDirection) {
 
         if (piecePos.posY == 0) {
-            return new BlockWithMeta(Block.grass.blockID);
+            return new BlockWithMeta("grass");
         } else if (piecePos.posY == 1) {
             /* North Facing Fence */
             if (cellIndexDirection == CellIndexDirection.NorthWall
@@ -71,7 +70,7 @@ public class BlueprintCemetaryEdge implements Blueprint {
             }
             return (BlockWithMeta) WeightedRandom.getRandomItem(random, flowerBlocks);
         }
-        return new BlockWithMeta(0);
+        return new BlockWithMeta("air");
     }
 
     @Override

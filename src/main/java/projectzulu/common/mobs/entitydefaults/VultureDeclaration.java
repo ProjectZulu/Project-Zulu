@@ -4,11 +4,11 @@ import java.util.HashSet;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.CustomMobData;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.core.ConfigHelper;
@@ -40,8 +40,8 @@ public class VultureDeclaration extends SpawnableDeclaration {
         customMobData.customData.put("maxTargetHealth",
                 config.get("MOB CONTROLS." + mobName, "Max Target Health To Attack", 20).getInt(20));
 
-        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Item.feather, 0, 8);
-        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Item.chickenRaw, 0, 10);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Items.feather, 0, 8);
+        ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, Items.chicken, 0, 10);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.SmallHeart.meta(), 4);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,

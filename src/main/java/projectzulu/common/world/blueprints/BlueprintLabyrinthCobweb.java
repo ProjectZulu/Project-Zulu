@@ -17,7 +17,7 @@ public class BlueprintLabyrinthCobweb extends Blueprint{
 		if( (curHeight == 0 || curHeight == maxHeight - 1) && 10 - random.nextInt(100) >= 0 ){
 			return new BlockWithMeta(Block.web.blockID, 0);
 		}else{
-			return new BlockWithMeta(0);
+			return new BlockWithMeta("air");
 		}
 	}
 

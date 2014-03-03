@@ -18,7 +18,7 @@ public class BlueprintLabyrinthRandomWall extends Blueprint{
 		}else if(10 - random.nextInt(100) >= 0){
 			return new BlockWithMeta(Block.stoneBrick.blockID, 1);
 		}else if (5 - random.nextInt(100) >= 0){
-			return new BlockWithMeta(0);
+			return new BlockWithMeta("air");
 		}else{
 			return new BlockWithMeta(Block.stoneBrick.blockID, 0);
 		}

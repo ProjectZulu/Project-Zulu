@@ -35,7 +35,7 @@ public class BlueprintCemetaryFountain extends Blueprint{
 			case NorthWestCorner:
 			case Inner:
 			case Middle:
-				return new BlockWithMeta(0);
+				return new BlockWithMeta("air");
 			default:
 				return new BlockWithMeta(Block.stoneBrick.blockID, 0);
 			}
@@ -55,7 +55,7 @@ public class BlueprintCemetaryFountain extends Blueprint{
 			case WestMiddle:
 				return new BlockWithMeta(Block.stoneBrick.blockID, 0);
 			default:
-				return new BlockWithMeta(0);
+				return new BlockWithMeta("air");
 			}
 		}
 		if(curHeight == maxHeight - 1){
@@ -64,13 +64,13 @@ public class BlueprintCemetaryFountain extends Blueprint{
 			case Middle:
 				return new BlockWithMeta(Block.stoneSingleSlab.blockID, 5);
 			default:
-				return new BlockWithMeta(0);
+				return new BlockWithMeta("air");
 
 			}
 
 		}
 		
 	
-	return new BlockWithMeta(0);
+	return new BlockWithMeta("air");
 	}
 }
