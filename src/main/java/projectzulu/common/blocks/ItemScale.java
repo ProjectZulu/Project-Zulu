@@ -6,8 +6,8 @@ import projectzulu.common.core.DefaultProps;
 
 public class ItemScale extends Item {
 
-    public ItemScale(int iD, boolean full3D, String name) {
-        super(iD);
+    public ItemScale(boolean full3D, String name) {
+        super();
         maxStackSize = 64;
         setMaxDamage(5);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);

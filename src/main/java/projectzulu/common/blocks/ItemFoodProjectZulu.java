@@ -39,8 +39,8 @@ public class ItemFoodProjectZulu extends ItemFood {
     /** probably of the set potion effect occurring */
     private float potionEffectProbability;
 
-    public ItemFoodProjectZulu(int par1, int par2, float par3, boolean par4, String name) {
-        super(par1, par2, par3, par4);
+    public ItemFoodProjectZulu(int par2, float par3, boolean par4, String name) {
+        super(par2, par3, par4);
         itemUseDuration = 32;
         healAmount = par2;
         isWolfsFavoriteMeat = par4;
@@ -53,7 +53,7 @@ public class ItemFoodProjectZulu extends ItemFood {
     @Override
     public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         --par1ItemStack.stackSize;
-        par3EntityPlayer.getFoodStats().addStats(this);
+        par3EntityPlayer.getFoodStats().func_151686_a(this, par1ItemStack);
         par2World.playSoundAtEntity(par3EntityPlayer, "random.burp", 0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
         this.func_77849_c(par1ItemStack, par2World, par3EntityPlayer);
         return par1ItemStack;
@@ -95,7 +95,7 @@ public class ItemFoodProjectZulu extends ItemFood {
     }
 
     @Override
-    public int getHealAmount() {
+    public int func_150905_g(ItemStack stack) {
         return this.healAmount;
     }
 
@@ -103,7 +103,7 @@ public class ItemFoodProjectZulu extends ItemFood {
      * gets the saturationModifier of the ItemFood
      */
     @Override
-    public float getSaturationModifier() {
+    public float func_150906_h(ItemStack stack) {
         return this.saturationModifier;
     }
 

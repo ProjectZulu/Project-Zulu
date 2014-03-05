@@ -2,6 +2,7 @@ package projectzulu.common.potion.brewingstands;
 
 import java.util.HashMap;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -20,14 +21,14 @@ public class PotionIngredients {
         }
     }
 
-    private static HashMap<Integer, IngredientProperty> ingredientProperties = new HashMap<Integer, IngredientProperty>();
+    private static HashMap<Item, IngredientProperty> ingredientProperties = new HashMap<Item, IngredientProperty>();
 
     static {
-        addIngredientProperties(Item.feather.itemID, new OverrideIngredient());
+        addIngredientProperties(Items.feather, new OverrideIngredient());
     }
 
-    public static void addIngredientProperties(int itemID, IngredientProperty ingredientProperty) {
-        ingredientProperties.put(itemID, ingredientProperty);
+    public static void addIngredientProperties(Item item, IngredientProperty ingredientProperty) {
+        ingredientProperties.put(item, ingredientProperty);
     }
 
     public static boolean isPotionIngredient(ItemStack ingredient) {
@@ -35,11 +36,11 @@ public class PotionIngredients {
             return false;
         }
 
-        IngredientProperty property = ingredientProperties.get(ingredient.getItem().itemID);
+        IngredientProperty property = ingredientProperties.get(ingredient.getItem());
         if (property != null) {
             return property.isIngredient(ingredient);
         } else {
-            return ingredient != null ? Item.itemsList[ingredient.itemID].isPotionIngredient(ingredient) : false;
+            return ingredient != null ? ingredient.getItem().isPotionIngredient(ingredient) : false;
         }
     }
 }

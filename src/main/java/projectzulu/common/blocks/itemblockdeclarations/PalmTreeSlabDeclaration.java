@@ -1,7 +1,7 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHalfSlab;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import projectzulu.common.api.BlockList;
@@ -21,11 +21,10 @@ public class PalmTreeSlabDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
+    protected boolean createBlock() {
         if (BlockList.palmTreePlank.isPresent()) {
-            BlockList.palmTreeSlab = Optional.of((new BlockZuluSlab(iD, false, BlockList.palmTreePlank.get()))
-                    .setUnlocalizedName(name.toLowerCase()).setTextureName(
-                            DefaultProps.blockKey + ":" + name.toLowerCase()));
+            BlockList.palmTreeSlab = Optional.of((new BlockZuluSlab(BlockList.palmTreePlank.get())).setBlockName(
+                    name.toLowerCase()).setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
             return true;
         }
         return false;
@@ -35,8 +34,8 @@ public class PalmTreeSlabDeclaration extends BlockDeclaration {
     protected void registerBlock() {
         if (BlockList.palmTreeDoubleSlab.isPresent() && BlockList.palmTreeSlab.isPresent()) {
             Block block = BlockList.palmTreeSlab.get();
-            ItemZuluSlab.initialise((BlockHalfSlab) BlockList.palmTreeSlab.get(),
-                    (BlockHalfSlab) BlockList.palmTreeDoubleSlab.get());
+            ItemZuluSlab.initialise((BlockSlab) BlockList.palmTreeSlab.get(),
+                    (BlockSlab) BlockList.palmTreeDoubleSlab.get());
             GameRegistry.registerBlock(block, ItemZuluSlab.class, name.toLowerCase());
             OreDictionary.registerOre("slabWood", new ItemStack(block));
             OreDictionary.registerOre("slabPalm", new ItemStack(block));

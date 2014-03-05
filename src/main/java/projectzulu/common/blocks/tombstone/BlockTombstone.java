@@ -3,9 +3,9 @@ package projectzulu.common.blocks.tombstone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -13,16 +13,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.core.DefaultProps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTombstone extends BlockContainer {
 
     private Class signEntityClass;
 
-    public BlockTombstone(int par1, Class par2Class) {
-        super(par1, Material.rock);
+    public BlockTombstone(Class par2Class) {
+        super(Material.rock);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         signEntityClass = par2Class;
 
@@ -30,7 +27,7 @@ public class BlockTombstone extends BlockContainer {
         float var5 = 1.0F;
         setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var5, 0.5F + var4);
         setHardness(0.5F);
-        setStepSound(Block.soundMetalFootstep);
+        setStepSound(Block.soundTypeMetal);
     }
 
     /**
@@ -76,7 +73,7 @@ public class BlockTombstone extends BlockContainer {
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World par1World) {
+    public TileEntity createNewTileEntity(World par1World, int metadata) {
         try {
             return (TileEntity) this.signEntityClass.newInstance();
         } catch (Exception var3) {
@@ -103,12 +100,12 @@ public class BlockTombstone extends BlockContainer {
             int par6, float par7, float par8, float par9) {
         if (par5EntityPlayer instanceof EntityPlayer) {
             if (par5EntityPlayer.inventory.getCurrentItem() == null) {
-                TileEntity tileEntity = par1World.getBlockTileEntity(par2, par3, par4);
+                TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
                 if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
                     ((TileEntityTombstone) tileEntity).giveItemsToPlayer(par5EntityPlayer);
                 }
                 return true;
-            } else if (isValidItemForEditing(par5EntityPlayer.inventory.getCurrentItem().getItem().itemID)) {
+            } else if (isValidItemForEditing(par5EntityPlayer.inventory.getCurrentItem().getItem())) {
                 par5EntityPlayer.openGui(ProjectZulu_Core.modInstance, 0, par1World, par2, par3, par4);
                 return true;
             }
@@ -116,10 +113,9 @@ public class BlockTombstone extends BlockContainer {
         return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
     }
 
-    private boolean isValidItemForEditing(int itemID) {
-        if (itemID == Item.pickaxeWood.itemID || itemID == Item.pickaxeStone.itemID
-                || itemID == Item.pickaxeGold.itemID || itemID == Item.pickaxeIron.itemID
-                || itemID == Item.pickaxeDiamond.itemID) {
+    private boolean isValidItemForEditing(Item itemID) {
+        if (itemID == Items.wooden_pickaxe || itemID == Items.stone_pickaxe || itemID == Items.golden_pickaxe
+                || itemID == Items.iron_pickaxe || itemID == Items.diamond_pickaxe) {
             return true;
         }
         return false;

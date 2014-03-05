@@ -4,12 +4,12 @@ import java.util.List;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
@@ -20,10 +20,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public abstract class BlockBrewingStandBase extends BlockContainer {
 
     public final int renderID;
-    public Icon potionIcon;
+    public IIcon potionIcon;
 
-    public BlockBrewingStandBase(int blockID, int renderID) {
-        super(blockID, Material.iron);
+    public BlockBrewingStandBase(int renderID) {
+        super(Material.iron);
         this.renderID = renderID;
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHardness(0.5F);
@@ -58,7 +58,7 @@ public abstract class BlockBrewingStandBase extends BlockContainer {
     }
 
     @Override
-    public abstract TileEntity createNewTileEntity(World world);
+    public abstract TileEntity createNewTileEntity(World world, int var2);
 
     @Override
     public boolean isOpaqueCube() {
@@ -68,7 +68,7 @@ public abstract class BlockBrewingStandBase extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what,
             float these, float are) {
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity == null || player.isSneaking()) {
             return super.onBlockActivated(world, x, y, z, player, idk, what, these, are);
         }
@@ -79,8 +79,8 @@ public abstract class BlockBrewingStandBase extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         potionIcon = par1IconRegister.registerIcon(DefaultProps.blockKey + ":" + "potion");
-        super.registerIcons(par1IconRegister);
+        super.registerBlockIcons(par1IconRegister);
     }
 }

@@ -2,11 +2,11 @@ package projectzulu.common.core;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.potion.brewingstands.PotionIngredients.IngredientProperty;
 import cpw.mods.fml.relauncher.Side;
@@ -19,13 +19,13 @@ public class ItemGenerics extends Item implements IngredientProperty {
         PoisonDroplet("Poison Droplet", 0), Tusk("Tusk", 1), RawFiber("Raw Fiber", 2), LizardSpit("lizardspit", 39),
 
         /* Potion Effect Ingredients */
-        BlackLichen("Black Lichen", 20), Pulp("Pulp", 21), Salt("Salt", 22), PlantStalk("Plant Stalk", 26),
-        Antennae("Antennae", 23, true), ShinyBauble("Shiny Bauble", 24, true), Talon("Talon", 25, true),
-        Bark("Bark", 27, true), SmallHeart("Small Heart", 28, true), LargeHeart("Large Heart", 29, true),
-        Gill("Gill", 30, true), Ectoplasm("Ectoplasm", 31), FrogLegs("Frog Legs", 32, true),
-        RabbitsFoot("Rabbits Feet", 33, true), PricklyPowder("Prickly Powder", 34, true),
-        PowderSlush("Powder Slush", 35, true), GlowingGoo("Glowing Goo", 36, true),
-        SmallUnhealthyHeart("Small Unhealthy Heart", 37, true), LargeUnhealthyHeart("Large Unhealthy Heart", 38, true);
+        BlackLichen("Black Lichen", 20), Pulp("Pulp", 21), Salt("Salt", 22), PlantStalk("Plant Stalk", 26), Antennae(
+                "Antennae", 23, true), ShinyBauble("Shiny Bauble", 24, true), Talon("Talon", 25, true), Bark("Bark",
+                27, true), SmallHeart("Small Heart", 28, true), LargeHeart("Large Heart", 29, true), Gill("Gill", 30,
+                true), Ectoplasm("Ectoplasm", 31), FrogLegs("Frog Legs", 32, true), RabbitsFoot("Rabbits Feet", 33,
+                true), PricklyPowder("Prickly Powder", 34, true), PowderSlush("Powder Slush", 35, true), GlowingGoo(
+                "Glowing Goo", 36, true), SmallUnhealthyHeart("Small Unhealthy Heart", 37, true), LargeUnhealthyHeart(
+                "Large Unhealthy Heart", 38, true);
 
         public final String displayName;
         public final boolean isIngredient;
@@ -36,7 +36,7 @@ public class ItemGenerics extends Item implements IngredientProperty {
         }
 
         @SideOnly(Side.CLIENT)
-        private Icon icon;
+        private IIcon icon;
 
         Properties(String name, int meta, boolean isIngredient) {
             this.displayName = name;
@@ -48,11 +48,11 @@ public class ItemGenerics extends Item implements IngredientProperty {
             this(name, iconIndex, false);
         }
 
-        public void setIcon(Icon icon) {
+        public void setIcon(IIcon icon) {
             this.icon = icon;
         }
 
-        public Icon getIcon() {
+        public IIcon getIcon() {
             return icon;
         }
 
@@ -66,21 +66,21 @@ public class ItemGenerics extends Item implements IngredientProperty {
         }
     }
 
-    public ItemGenerics(int par1, int par2) {
-        super(par1);
+    public ItemGenerics(int par2) {
+        super();
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHasSubtypes(true);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(int par1) {
+    public IIcon getIconFromDamage(int par1) {
         return Properties.getPropertyByMeta(par1).getIcon();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
         for (Properties type : Properties.values()) {
             type.setIcon(par1IconRegister.registerIcon(DefaultProps.blockKey + ":" + type.toString().toLowerCase()));
         }
@@ -104,9 +104,9 @@ public class ItemGenerics extends Item implements IngredientProperty {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void getSubItems(int itemID, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List) {
         for (final Properties property : Properties.values()) {
-            par3List.add(new ItemStack(itemID, 1, property.meta));
+            par3List.add(new ItemStack(item, 1, property.meta));
         }
     }
 }

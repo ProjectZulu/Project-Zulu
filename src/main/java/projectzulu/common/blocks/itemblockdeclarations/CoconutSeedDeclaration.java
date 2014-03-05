@@ -13,8 +13,8 @@ public class CoconutSeedDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemList.coconutSeed = Optional.of(new ItemCoconutSeed(iD, 6, false, name.toLowerCase()));
+    protected boolean createItem() {
+        ItemList.coconutSeed = Optional.of(new ItemCoconutSeed(6, false, name.toLowerCase()));
         return true;
     }
 

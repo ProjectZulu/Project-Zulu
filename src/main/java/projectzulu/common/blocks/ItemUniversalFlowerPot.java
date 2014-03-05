@@ -6,8 +6,8 @@ import projectzulu.common.ProjectZulu_Core;
 
 public class ItemUniversalFlowerPot extends ItemReed {
 
-    public ItemUniversalFlowerPot(int par1, Block block) {
-        super(par1, block);
+    public ItemUniversalFlowerPot(Block block) {
+        super(block);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setUnlocalizedName(block.getUnlocalizedName());
         setTextureName("flower_pot");

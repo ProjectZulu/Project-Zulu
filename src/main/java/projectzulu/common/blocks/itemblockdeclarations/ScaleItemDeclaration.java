@@ -13,8 +13,8 @@ public class ScaleItemDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemList.scaleItem = Optional.of(new ItemScale(iD, false, name.toLowerCase()));
+    protected boolean createItem() {
+        ItemList.scaleItem = Optional.of(new ItemScale(false, name.toLowerCase()));
         return true;
     }
 

@@ -19,11 +19,10 @@ public class PalmTreeStairsDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
+    protected boolean createBlock() {
         if (BlockList.palmTreePlank.isPresent()) {
-            BlockList.palmTreeStairs = Optional.of(new BlockZuluStairs(iD, BlockList.palmTreePlank.get(), 0)
-                    .setUnlocalizedName(name.toLowerCase()).setTextureName(
-                            DefaultProps.blockKey + ":" + name.toLowerCase()));
+            BlockList.palmTreeStairs = Optional.of(new BlockZuluStairs(BlockList.palmTreePlank.get(), 0).setBlockName(
+                    name.toLowerCase()).setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
             return true;
         }
         return false;

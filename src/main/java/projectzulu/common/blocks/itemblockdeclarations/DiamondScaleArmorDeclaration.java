@@ -18,10 +18,10 @@ public class DiamondScaleArmorDeclaration extends ItemSetDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD, int partIndex) {
-        Item item = new ItemZuluArmor(iD, ProjectZulu_Core.diamondScaleMaterial, renderIndex, partIndex,
+    protected boolean createItem(int partIndex) {
+        Item item = new ItemZuluArmor(ProjectZulu_Core.diamondScaleMaterial, renderIndex, partIndex,
                 name[partIndex].toLowerCase());
-        
+
         switch (partIndex) {
         case 0:
             ItemList.diamondScaleArmorHead = Optional.of(item);

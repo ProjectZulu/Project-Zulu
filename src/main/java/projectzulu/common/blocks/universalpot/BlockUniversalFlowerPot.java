@@ -1,5 +1,6 @@
 package projectzulu.common.blocks.universalpot;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,14 +13,14 @@ public class BlockUniversalFlowerPot extends BlockContainer {
 
     public final int renderID;
 
-    public BlockUniversalFlowerPot(int par1, int renderID) {
-        super(par1, Material.wood);
+    public BlockUniversalFlowerPot(int renderID) {
+        super(Material.wood);
         this.setBlockBoundsForItemRender();
         float var1 = 0.375F;
         float var2 = var1 / 2.0F;
         this.setBlockBounds(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, var1, 0.5F + var2);
         setHardness(0.0F);
-        setStepSound(soundPowderFootstep);
+        setStepSound(Block.soundTypeStone);
         this.renderID = renderID;
     }
 
@@ -59,23 +60,18 @@ public class BlockUniversalFlowerPot extends BlockContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1) {
+    public TileEntity createNewTileEntity(World var1, int var2) {
         return new TileEntityUniversalFlowerPot();
     }
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what,
             float these, float are) {
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity == null || player.isSneaking()) {
             return false;
         }
         player.openGui(ProjectZulu_Core.modInstance, GuiID.FlowerPot.getID(), world, x, y, z);
         return true;
-    }
-
-    @Override
-    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-        super.breakBlock(world, x, y, z, par5, par6);
     }
 }

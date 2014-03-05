@@ -1,7 +1,7 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.spike.BlockSpikes;
 import projectzulu.common.blocks.spike.RenderSpike;
@@ -29,10 +29,11 @@ public class SpikesDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
-        BlockList.spike = Optional.of(new BlockSpikes(iD, renderID).setHardness(0.5F)
-                .setStepSound(Block.soundMetalFootstep).setUnlocalizedName(name.toLowerCase())
-                .setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    protected boolean createBlock() {
+        BlockList.spike = Optional
+                .of(new BlockSpikes(renderID).setHardness(0.5F).setStepSound(Block.soundTypeMetal)
+                        .setBlockName(name.toLowerCase())
+                        .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

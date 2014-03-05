@@ -1,7 +1,7 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.BlockCampfire;
 import projectzulu.common.blocks.ItemCampFire;
@@ -30,9 +30,9 @@ public class CampfireDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
-        BlockList.campfire = Optional.of(new BlockCampfire(iD, renderID).setUnlocalizedName(name.toLowerCase())
-                .setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    protected boolean createBlock() {
+        BlockList.campfire = Optional.of(new BlockCampfire(renderID).setBlockName(name.toLowerCase())
+                .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

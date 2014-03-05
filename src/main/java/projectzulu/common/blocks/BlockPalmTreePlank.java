@@ -2,13 +2,14 @@ package projectzulu.common.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import projectzulu.common.ProjectZulu_Core;
 
 public class BlockPalmTreePlank extends Block {
 
-    public BlockPalmTreePlank(int par1) {
-        super(par1, Material.wood);
-        Block.setBurnProperties(this.blockID, 5, 20);
+    public BlockPalmTreePlank() {
+        super(Material.wood);
+        Blocks.fire.setFireInfo(this, 5, 20);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHardness(2.0F);
         setResistance(5.0F);

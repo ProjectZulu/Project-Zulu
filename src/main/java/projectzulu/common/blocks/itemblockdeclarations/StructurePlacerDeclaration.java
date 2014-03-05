@@ -13,8 +13,8 @@ public class StructurePlacerDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemList.structurePlacer = Optional.of(new ItemStructurePlacer(iD, name.toLowerCase()));
+    protected boolean createItem() {
+        ItemList.structurePlacer = Optional.of(new ItemStructurePlacer(name.toLowerCase()));
         return true;
     }
 

@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -23,8 +24,8 @@ public class BlockJasper extends Block {
 
     Vec3[] alterBlockLocations = new Vec3[30];
 
-    public BlockJasper(int par1) {
-        super(par1, Material.rock);
+    public BlockJasper() {
+        super(Material.rock);
         setTickRandomly(true);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHardness(1.0f);
@@ -81,12 +82,6 @@ public class BlockJasper extends Block {
         return 1;
     }
 
-    @Override
-    public int idDropped(int i, Random random, int j) {
-
-        return this.blockID;
-    }
-
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
@@ -117,9 +112,8 @@ public class BlockJasper extends Block {
         blocksToCheck[12] = Vec3.createVectorHelper(par2 - 4, par3, par4);
 
         for (int i = 0; i < blocksToCheck.length; i++) {
-
-            if (par1World.getBlockId((int) blocksToCheck[i].xCoord, (int) blocksToCheck[i].yCoord,
-                    (int) blocksToCheck[i].zCoord) == Block.torchWood.blockID) {
+            if (par1World.getBlock((int) blocksToCheck[i].xCoord, (int) blocksToCheck[i].yCoord,
+                    (int) blocksToCheck[i].zCoord) == Blocks.torch) {
                 countValidTorches += 1;
             }
         }
@@ -136,8 +130,8 @@ public class BlockJasper extends Block {
 
         for (int i = 0; i < blocksToCheck.length; i++) {
 
-            if (par1World.getBlockId((int) blocksToCheck[i].xCoord, (int) blocksToCheck[i].yCoord,
-                    (int) blocksToCheck[i].zCoord) == Block.torchWood.blockID) {
+            if (par1World.getBlock((int) blocksToCheck[i].xCoord, (int) blocksToCheck[i].yCoord,
+                    (int) blocksToCheck[i].zCoord) == Blocks.torch) {
                 countValidTorches += 1;
             }
         }
@@ -154,8 +148,8 @@ public class BlockJasper extends Block {
 
         for (int i = 0; i < blocksToCheck.length; i++) {
 
-            if (par1World.getBlockId((int) blocksToCheck[i].xCoord, (int) blocksToCheck[i].yCoord,
-                    (int) blocksToCheck[i].zCoord) == Block.torchWood.blockID) {
+            if (par1World.getBlock((int) blocksToCheck[i].xCoord, (int) blocksToCheck[i].yCoord,
+                    (int) blocksToCheck[i].zCoord) == Blocks.torch) {
                 countValidTorches += 1;
             }
         }
@@ -172,8 +166,8 @@ public class BlockJasper extends Block {
 
         for (int i = 0; i < blocksToCheck.length; i++) {
 
-            if (par1World.getBlockId((int) blocksToCheck[i].xCoord, (int) blocksToCheck[i].yCoord,
-                    (int) blocksToCheck[i].zCoord) == Block.torchWood.blockID) {
+            if (par1World.getBlock((int) blocksToCheck[i].xCoord, (int) blocksToCheck[i].yCoord,
+                    (int) blocksToCheck[i].zCoord) == Blocks.torch) {
                 countValidTorches += 1;
             }
         }
@@ -196,13 +190,13 @@ public class BlockJasper extends Block {
             // }
             // Play Summon Sound
             // Set Time to Night
-            par1World.scheduleBlockUpdate(par2, par3, par4, blockID, 1);
+            par1World.scheduleBlockUpdate(par2, par3, par4, this, 1);
             counter++;
             prepareToSummonBoss = true;
         } else {
             this.dropBlockAsItem(par1World, par2, par3, par4, 0, 0);
-            par1World.setBlock(par2, par3, par4, 0, 0, 0);
-            par1World.setBlock(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, Blocks.air, 0, 0);
+            par1World.setBlock(par2, par3, par4, Blocks.air);
         }
     }
 
@@ -215,7 +209,7 @@ public class BlockJasper extends Block {
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 
         if (prepareToSummonBoss == false) {
-            par1World.setBlock(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, Blocks.air);
         }
 
         if (MathHelper.floor_double(counter / 20) >= 5 && MathHelper.floor_double(counter / 20) < 35) {
@@ -223,7 +217,7 @@ public class BlockJasper extends Block {
         }
 
         if (counter < 40 * 20 && par1World != null) {
-            par1World.scheduleBlockUpdate(par2, par3, par4, blockID, 1);
+            par1World.scheduleBlockUpdate(par2, par3, par4, this, 1);
             counter++;
         } else {
             if (!MinecraftServer.getServer().isDedicatedServer()) {
@@ -233,7 +227,7 @@ public class BlockJasper extends Block {
 
             EntityMummyPharaoh var17 = new EntityMummyPharaoh(par1World, par2, par3 + 3, par4);
             par1World.spawnEntityInWorld(var17);
-            par1World.setBlock(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, Blocks.air);
         }
     }
 
@@ -241,7 +235,7 @@ public class BlockJasper extends Block {
         int alterX = MathHelper.floor_double(alterBlockLocations[iterator].xCoord);
         int alterY = MathHelper.floor_double(alterBlockLocations[iterator].yCoord);
         int alterZ = MathHelper.floor_double(alterBlockLocations[iterator].zCoord);
-        par1World.setBlock(alterX + par2, alterY + par3, alterZ + par4, Block.sandStone.blockID);
+        par1World.setBlock(alterX + par2, alterY + par3, alterZ + par4, Blocks.sandstone);
     }
 
     // /**

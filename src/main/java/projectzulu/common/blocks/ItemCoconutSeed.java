@@ -13,8 +13,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCoconutSeed extends Item {
 
-    public ItemCoconutSeed(int par1, int par2, boolean par3bool, String baseName) {
-        super(par1);
+    public ItemCoconutSeed(int par2, boolean par3bool, String baseName) {
+        super();
         maxStackSize = 12;
         setMaxDamage(5);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
@@ -32,10 +32,10 @@ public class ItemCoconutSeed extends Item {
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4,
             int par5, int par6, int par7, float par8, float par9, float par10) {
 
-        int var11 = par3World.getBlockId(par4, par5, par6);
+        Block var11 = par3World.getBlock(par4, par5, par6);
         int var12 = par3World.getBlockMetadata(par4, par5, par6);
 
-        if (BlockList.palmTreeLog.isPresent() && var11 == BlockList.palmTreeLog.get().blockID
+        if (BlockList.palmTreeLog.isPresent() && var11 == BlockList.palmTreeLog.get()
                 && !par3World.isAirBlock(par4, par5, par6)) {
             if (par7 == 0) {
                 return false;
@@ -63,9 +63,9 @@ public class ItemCoconutSeed extends Item {
 
             if (par3World.isAirBlock(par4, par5, par6) && BlockList.coconut.isPresent()) {
 
-                int var13 = Block.blocksList[BlockList.coconut.get().blockID].onBlockPlaced(par3World, par4, par5,
-                        par6, par7, par8, par9, par10, 0);
-                par3World.setBlock(par4, par5, par6, BlockList.coconut.get().blockID, var13, 3);
+                int var13 = BlockList.coconut.get().onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10,
+                        0);
+                par3World.setBlock(par4, par5, par6, BlockList.coconut.get(), var13, 3);
 
                 if (!par2EntityPlayer.capabilities.isCreativeMode) {
                     --par1ItemStack.stackSize;

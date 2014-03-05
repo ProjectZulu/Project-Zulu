@@ -1,29 +1,24 @@
 package projectzulu.common.blocks;
 
-import static net.minecraftforge.common.ForgeDirection.DOWN;
-import static net.minecraftforge.common.ForgeDirection.EAST;
-import static net.minecraftforge.common.ForgeDirection.NORTH;
-import static net.minecraftforge.common.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.ForgeDirection.UP;
-import static net.minecraftforge.common.ForgeDirection.WEST;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.temperature.ITempBlock;
 import cpw.mods.fml.relauncher.Side;
@@ -31,12 +26,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCampfire extends Block implements ITempBlock {
     public enum Type {
-        Wood(0, "Wood Campfire"), Stone(1, "Stone Campfire"), WoodFire(2, "Lit Campfire"), StoneFire(3, "Lit Stone Campfire");
+        Wood(0, "Wood Campfire"), Stone(1, "Stone Campfire"), WoodFire(2, "Lit Campfire"), StoneFire(3,
+                "Lit Stone Campfire");
 
         private int meta;
         private final String displayName;
         @SideOnly(Side.CLIENT)
-        private Icon icon;
+        private IIcon icon;
 
         Type(int meta, String displayName) {
             this.meta = meta;
@@ -51,11 +47,11 @@ public class BlockCampfire extends Block implements ITempBlock {
             return displayName;
         }
 
-        public void setIcon(Icon icon) {
+        public void setIcon(IIcon icon) {
             this.icon = icon;
         }
 
-        public Icon getIcon() {
+        public IIcon getIcon() {
             return icon;
         }
 
@@ -71,25 +67,25 @@ public class BlockCampfire extends Block implements ITempBlock {
 
     public final int renderID;
 
-    public BlockCampfire(int par1, int renderID) {
-        super(par1, Material.wood);
+    public BlockCampfire(int renderID) {
+        super(Material.wood);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setTickRandomly(true);
         setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.35f, 1.0f);
         setHardness(0.5F);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundTypeStone);
         this.renderID = renderID;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         return BlockCampfire.Type.getTypeByMeta(par2).getIcon();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         for (Type type : Type.values()) {
             type.setIcon(par1IconRegister.registerIcon(getTextureName() + "_" + type.toString().toLowerCase()));
         }
@@ -98,9 +94,9 @@ public class BlockCampfire extends Block implements ITempBlock {
     @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         if (par1World.getBlockMetadata(par2, par3, par4) > 1) {
-            this.setLightValue(1.0f);
+            this.setLightLevel(1.0f);
         } else {
-            this.setLightValue(0);
+            this.setLightLevel(0);
         }
         super.onBlockAdded(par1World, par2, par3, par4);
     }
@@ -138,19 +134,19 @@ public class BlockCampfire extends Block implements ITempBlock {
 
             if (meta > 1) {
                 if (canBlockCatchFire(par1World, par2, par3 + 1, par4, ForgeDirection.UP)) {
-                    par1World.setBlock(par2, par3 + 1, par4, Block.fire.blockID);
+                    par1World.setBlock(par2, par3 + 1, par4, Blocks.fire);
                 }
             }
 
             if (meta == 2) {
                 if (canBlockCatchFire(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH)) {
-                    par1World.setBlock(par2, par3, par4 + 1, Block.fire.blockID);
+                    par1World.setBlock(par2, par3, par4 + 1, Blocks.fire);
                 } else if (canBlockCatchFire(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH)) {
-                    par1World.setBlock(par2, par3, par4 - 1, Block.fire.blockID);
+                    par1World.setBlock(par2, par3, par4 - 1, Blocks.fire);
                 } else if (canBlockCatchFire(par1World, par2 + 1, par3, par4, ForgeDirection.WEST)) {
-                    par1World.setBlock(par2 + 1, par3, par4, Block.fire.blockID);
+                    par1World.setBlock(par2 + 1, par3, par4, Blocks.fire);
                 } else if (canBlockCatchFire(par1World, par2 - 1, par3, par4, ForgeDirection.EAST)) {
-                    par1World.setBlock(par2 - 1, par3, par4, Block.fire.blockID);
+                    par1World.setBlock(par2 - 1, par3, par4, Blocks.fire);
                 }
             }
 
@@ -184,7 +180,7 @@ public class BlockCampfire extends Block implements ITempBlock {
     @SideOnly(Side.CLIENT)
     @Override
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
         for (Type type : Type.values()) {
             par3List.add(new ItemStack(this, 1, type.meta));
         }
@@ -198,7 +194,7 @@ public class BlockCampfire extends Block implements ITempBlock {
         if (par5EntityPlayer.getCurrentEquippedItem() != null) {
             /* If Fire is not Lit and Coal is in Hand, Light Fire */
             if (par1World.getBlockMetadata(par2, par3, par4) < 2
-                    && (par5EntityPlayer.getCurrentEquippedItem().getItem().itemID == (Item.coal.itemID))) {
+                    && (par5EntityPlayer.getCurrentEquippedItem().getItem() == Items.coal)) {
                 if (!par5EntityPlayer.capabilities.isCreativeMode) {
                     par5EntityPlayer.getCurrentEquippedItem().stackSize -= 1;
                 }
@@ -209,11 +205,11 @@ public class BlockCampfire extends Block implements ITempBlock {
 
             /* If Fire is Lit and Water is in Hand, Put out Fire */
             if (par1World.getBlockMetadata(par2, par3, par4) > 1
-                    && par5EntityPlayer.getCurrentEquippedItem().getItem().itemID == (Item.bucketWater.itemID)) {
+                    && par5EntityPlayer.getCurrentEquippedItem().getItem() == Items.water_bucket) {
 
                 if (!par5EntityPlayer.capabilities.isCreativeMode) {
                     par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem,
-                            new ItemStack(Item.bucketEmpty));
+                            new ItemStack(Items.bucket));
                 }
                 par1World.setBlockMetadataWithNotify(par2, par3, par4,
                         par1World.getBlockMetadata(par2, par3, par4) - 2, 3);
@@ -237,10 +233,9 @@ public class BlockCampfire extends Block implements ITempBlock {
             float var7;
             float var8;
             float var9;
-
-            if (!par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4)
-                    && !canBlockCatchFire(par1World, par2, par3 - 1, par4, UP)) {
-                if (Block.fire.canBlockCatchFire(par1World, par2 - 1, par3, par4, EAST)) {
+            if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4)
+                    && !canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP)) {
+                if (Blocks.fire.canCatchFire(par1World, par2 - 1, par3, par4, ForgeDirection.UP)) {
                     for (var6 = 0; var6 < 2; ++var6) {
                         var7 = par2 + par5Random.nextFloat() * 0.1F;
                         var8 = par3 + par5Random.nextFloat();
@@ -249,7 +244,7 @@ public class BlockCampfire extends Block implements ITempBlock {
                     }
                 }
 
-                if (canBlockCatchFire(par1World, par2 + 1, par3, par4, WEST)) {
+                if (canBlockCatchFire(par1World, par2 + 1, par3, par4, ForgeDirection.WEST)) {
                     for (var6 = 0; var6 < 2; ++var6) {
                         var7 = par2 + 1 - par5Random.nextFloat() * 0.1F;
                         var8 = par3 + par5Random.nextFloat();
@@ -258,7 +253,7 @@ public class BlockCampfire extends Block implements ITempBlock {
                     }
                 }
 
-                if (canBlockCatchFire(par1World, par2, par3, par4 - 1, SOUTH)) {
+                if (canBlockCatchFire(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH)) {
                     for (var6 = 0; var6 < 2; ++var6) {
                         var7 = par2 + par5Random.nextFloat();
                         var8 = par3 + par5Random.nextFloat();
@@ -267,7 +262,7 @@ public class BlockCampfire extends Block implements ITempBlock {
                     }
                 }
 
-                if (canBlockCatchFire(par1World, par2, par3, par4 + 1, NORTH)) {
+                if (canBlockCatchFire(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH)) {
                     for (var6 = 0; var6 < 2; ++var6) {
                         var7 = par2 + par5Random.nextFloat();
                         var8 = par3 + par5Random.nextFloat();
@@ -276,7 +271,7 @@ public class BlockCampfire extends Block implements ITempBlock {
                     }
                 }
 
-                if (canBlockCatchFire(par1World, par2, par3 + 1, par4, DOWN)) {
+                if (canBlockCatchFire(par1World, par2, par3 + 1, par4, ForgeDirection.DOWN)) {
                     for (var6 = 0; var6 < 2; ++var6) {
                         var7 = par2 + par5Random.nextFloat();
                         var8 = par3 + 1 - par5Random.nextFloat() * 0.1F;
@@ -309,9 +304,9 @@ public class BlockCampfire extends Block implements ITempBlock {
      * @return True if the face can catch fire.
      */
     public boolean canBlockCatchFire(IBlockAccess world, int x, int y, int z, ForgeDirection face) {
-        Block block = Block.blocksList[world.getBlockId(x, y, z)];
+        Block block = world.getBlock(x, y, z);
         if (block != null) {
-            return block.isFlammable(world, x, y, z, world.getBlockMetadata(x, y, z), face);
+            return block.isFlammable(world, x, y, z, face);
         }
         return false;
     }
@@ -329,9 +324,9 @@ public class BlockCampfire extends Block implements ITempBlock {
      */
     public int getChanceToEncourageFire(World world, int x, int y, int z, int oldChance, ForgeDirection face) {
         int newChance = 0;
-        Block block = Block.blocksList[world.getBlockId(x, y, z)];
+        Block block = world.getBlock(x, y, z);
         if (block != null) {
-            newChance = block.getFireSpreadSpeed(world, x, y, z, world.getBlockMetadata(x, y, z), face);
+            newChance = block.getFireSpreadSpeed(world, x, y, z, face);
         }
         return (newChance > oldChance ? newChance : oldChance);
     }
@@ -375,9 +370,9 @@ public class BlockCampfire extends Block implements ITempBlock {
             return false;
         }
     }
-    
+
     @Override
-    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         ret.add(new ItemStack(this, 1, metadata));
         return ret;

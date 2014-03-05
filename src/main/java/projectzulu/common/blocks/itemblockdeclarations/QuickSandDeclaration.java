@@ -17,9 +17,9 @@ public class QuickSandDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
-        BlockList.quickSand = Optional.of(new BlockQuickSand(iD, 112).setUnlocalizedName(name.toLowerCase())
-                .setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    protected boolean createBlock() {
+        BlockList.quickSand = Optional.of(new BlockQuickSand().setBlockName(name.toLowerCase()).setBlockTextureName(
+                DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

@@ -5,12 +5,12 @@ import net.minecraft.world.World;
 
 public class BlockBrewingStandSingle extends BlockBrewingStandBase {
 
-    public BlockBrewingStandSingle(int blockID, int renderID) {
-        super(blockID, renderID);
+    public BlockBrewingStandSingle(int renderID) {
+        super(renderID);
     }
-    
+
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityBrewingSingle();
     }
 }

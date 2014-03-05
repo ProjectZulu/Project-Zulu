@@ -19,9 +19,9 @@ public class PalmTreeLogDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
-        BlockList.palmTreeLog = Optional.of(new BlockPalmTreeLog(iD).setUnlocalizedName(name.toLowerCase())
-                .setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    protected boolean createBlock() {
+        BlockList.palmTreeLog = Optional.of(new BlockPalmTreeLog().setBlockName(name.toLowerCase())
+                .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

@@ -8,11 +8,11 @@ import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 
 public class BlockQuickSand extends Block {
-    public BlockQuickSand(int par1, int par2) {
-        super(par1, Material.sand);
+    public BlockQuickSand() {
+        super(Material.sand);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHardness(1.2F);
-        setStepSound(Block.soundSandFootstep);
+        setStepSound(Block.soundTypeSand);
     }
 
     @Override

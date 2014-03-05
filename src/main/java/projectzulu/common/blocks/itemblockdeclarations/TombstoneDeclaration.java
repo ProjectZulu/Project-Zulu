@@ -3,8 +3,8 @@ package projectzulu.common.blocks.itemblockdeclarations;
 import java.io.File;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.tombstone.BlockTombstone;
@@ -27,9 +27,10 @@ public class TombstoneDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
-        BlockList.tombstone = Optional.of(new BlockTombstone(iD, TileEntityTombstone.class).setUnlocalizedName(
-                name.toLowerCase()).setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    protected boolean createBlock() {
+        BlockList.tombstone = Optional
+                .of(new BlockTombstone(TileEntityTombstone.class).setBlockName(name.toLowerCase()).setBlockTextureName(
+                        DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

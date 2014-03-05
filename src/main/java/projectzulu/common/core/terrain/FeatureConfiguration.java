@@ -2,8 +2,8 @@ package projectzulu.common.core.terrain;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import projectzulu.common.core.DefaultProps;
 
 public class FeatureConfiguration extends Configuration {
@@ -35,7 +35,7 @@ public class FeatureConfiguration extends Configuration {
         return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."
                 + subCategory, propertyName, defaultValue);
     }
-    
+
     public Property getFeatureProperty(TerrainFeature terrainFeature, String subCategory, String propertyName,
             int defaultValue, String comment) {
         return get("Feature." + terrainFeature.getFeatureSize() + "." + terrainFeature.getFeatureName() + "."

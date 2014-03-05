@@ -19,9 +19,9 @@ public class PalmTreeSapling extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
-        BlockList.palmTreeSapling = Optional.of(new BlockPalmTreeSapling(iD).setUnlocalizedName(name.toLowerCase())
-                .setTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    protected boolean createBlock() {
+        BlockList.palmTreeSapling = Optional.of(new BlockPalmTreeSapling().setBlockName(name.toLowerCase())
+                .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }
 

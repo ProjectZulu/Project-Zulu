@@ -13,8 +13,8 @@ public class CoconutMilkFragmentDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemList.coconutMilkFragment = Optional.of(new ItemFoodProjectZulu(iD, 2, 2.4f, false, name.toLowerCase()));
+    protected boolean createItem() {
+        ItemList.coconutMilkFragment = Optional.of(new ItemFoodProjectZulu(2, 2.4f, false, name.toLowerCase()));
         return true;
     }
 

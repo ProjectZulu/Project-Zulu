@@ -17,8 +17,8 @@ public class CoconutDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
-        BlockList.coconut = Optional.of(new BlockCoconut(iD).setUnlocalizedName(name.toLowerCase()).setTextureName(
+    protected boolean createBlock() {
+        BlockList.coconut = Optional.of(new BlockCoconut().setBlockName(name.toLowerCase()).setBlockTextureName(
                 DefaultProps.blockKey + ":" + name.toLowerCase()));
         return true;
     }

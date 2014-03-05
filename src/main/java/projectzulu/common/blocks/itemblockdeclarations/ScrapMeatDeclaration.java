@@ -13,8 +13,8 @@ public class ScrapMeatDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemList.scrapMeat = Optional.of(new ItemFoodProjectZulu(iD, 1, 1.0f, false, name.toLowerCase()));
+    protected boolean createItem() {
+        ItemList.scrapMeat = Optional.of(new ItemFoodProjectZulu(1, 1.0f, false, name.toLowerCase()));
         return true;
     }
 

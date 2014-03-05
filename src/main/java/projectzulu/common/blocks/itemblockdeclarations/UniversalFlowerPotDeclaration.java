@@ -1,7 +1,8 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.common.Configuration;
+import net.minecraft.init.Blocks;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.Properties;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.blocks.ItemUniversalFlowerPot;
@@ -35,25 +36,17 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
-        if (Properties.replaceFlowerPot) {
-            Block.blocksList[Block.flowerPot.blockID] = null;
-            BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(Block.flowerPot.blockID, renderID)
-                    .setUnlocalizedName("flowerPot").setTextureName("flower_pot"));
-        } else {
-            BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(iD, renderID).setUnlocalizedName(
-                    "uniFlowerPot").setTextureName("flower_pot"));
-        }
+    protected boolean createBlock() {
+        BlockList.universalFlowerPot = Optional.of(new BlockUniversalFlowerPot(renderID).setBlockName("uniFlowerPot")
+                .setBlockTextureName("flower_pot"));
         return true;
     }
 
     @Override
     protected void registerBlock() {
-        if (!Properties.replaceFlowerPot) {
-            Block block = BlockList.universalFlowerPot.get();
-            GameRegistry.registerBlock(block, name.toLowerCase());
-            new ItemUniversalFlowerPot(block.blockID - 256, block);
-        }
+        Block block = BlockList.universalFlowerPot.get();
+        GameRegistry.registerBlock(block, name.toLowerCase());
+        new ItemUniversalFlowerPot(block);
         GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");
     }
 

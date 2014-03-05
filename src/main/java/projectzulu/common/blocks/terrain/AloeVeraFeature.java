@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -63,8 +64,8 @@ public class AloeVeraFeature extends BiomeFeature {
     public boolean canGenerateHere(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
         if (super.canGenerateHere(world, chunkX, chunkZ, genBlockCoords, random)) {
             if (world.isAirBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ)) {
-                int iDBelow = world.getBlockId(genBlockCoords.posX, genBlockCoords.posY - 1, genBlockCoords.posZ);
-                if (iDBelow == Block.grass.blockID || iDBelow == Block.dirt.blockID || iDBelow == Block.sand.blockID) {
+                Block iDBelow = world.getBlock(genBlockCoords.posX, genBlockCoords.posY - 1, genBlockCoords.posZ);
+                if (iDBelow == Blocks.grass || iDBelow == Blocks.dirt || iDBelow == Blocks.sand) {
                     if (printToLog) {
                         ProjectZuluLog.info("Generating %s at %s, %s, %s", getFeatureName(), genBlockCoords.posX,
                                 genBlockCoords.posY, genBlockCoords.posZ);
@@ -79,6 +80,6 @@ public class AloeVeraFeature extends BiomeFeature {
     @Override
     public void generateFeature(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random,
             FeatureDirection direction) {
-        world.setBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ, BlockList.aloeVera.get().blockID);
+        world.setBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ, BlockList.aloeVera.get());
     }
 }

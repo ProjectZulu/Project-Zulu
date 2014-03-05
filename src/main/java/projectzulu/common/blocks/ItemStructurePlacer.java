@@ -24,8 +24,8 @@ public class ItemStructurePlacer extends Item {
 
     String[] structureName = new String[] { "Oasis", "Pyramid", "Labyrinth", "Cemetary", "Cathedral" };
 
-    public ItemStructurePlacer(int par1, String baseName) {
-        super(par1);
+    public ItemStructurePlacer(String baseName) {
+        super();
         setHasSubtypes(true);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setUnlocalizedName(baseName);
@@ -155,7 +155,7 @@ public class ItemStructurePlacer extends Item {
     }
 
     @Override
-    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
         for (int i = 0; i < structureName.length; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }

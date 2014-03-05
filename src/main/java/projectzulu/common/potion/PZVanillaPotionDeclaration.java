@@ -31,7 +31,7 @@ public class PZVanillaPotionDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
+    protected boolean createItem() {
         Item item = new ItemPZPotion(iD, name);
         ItemList.vanillaPotions = Optional.of(item);
         int i = 0;

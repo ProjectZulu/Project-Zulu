@@ -7,9 +7,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -28,7 +29,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
     int[] adjacentTreeBlocks;
 
     @SideOnly(Side.CLIENT)
-    private Icon[] icons;
+    private IIcon[] icons;
 
     private int iconIndex;
     private static final int METADATA_BITMASK = 0x3;
@@ -36,12 +37,12 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
     private static final int METADATA_DECAYBIT = 0x8;
     private static final int METADATA_CLEARDECAYBIT = -METADATA_DECAYBIT - 1;
 
-    public BlockPalmTreeLeaves(int par1) {
-        super(par1, Material.leaves, false);
+    public BlockPalmTreeLeaves() {
+        super(Material.leaves, false);
         this.setTickRandomly(true);
         setHardness(0.2F);
         setLightOpacity(1);
-        setStepSound(Block.soundGrassFootstep);
+        setStepSound(Block.soundTypeGrass);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
     }
 
@@ -59,14 +60,14 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         return icons[iconIndex];
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
-        this.icons = new Icon[imageSuffix.length];
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        this.icons = new IIcon[imageSuffix.length];
         for (int i = 0; i < this.icons.length; ++i) {
             this.icons[i] = par1IconRegister.registerIcon(getTextureName() + imageSuffix[i]);
         }
@@ -109,7 +110,8 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
 
         for (int var9 = -1; var9 <= 1; ++var9) {
             for (int var10 = -1; var10 <= 1; ++var10) {
-                int var11 = par1IBlockAccess.getBiomeGenForCoords(par2 + var10, par4 + var9).getBiomeFoliageColor();
+                int var11 = par1IBlockAccess.getBiomeGenForCoords(par2 + var10, par4 + var9).getBiomeFoliageColor(
+                        par2 + var10, par3, par4 + var9);
                 var6 += (var11 & 16711680) >> 16;
                 var7 += (var11 & 65280) >> 8;
                 var8 += var11 & 255;
@@ -122,7 +124,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
      * Notidy Nearby Leaves to Begin Decaying
      */
     @Override
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
+    public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6) {
         byte decayRadius = 1;
         int chunkCheckRadius = decayRadius + 1;
 
@@ -133,10 +135,9 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
                 for (int var10 = -decayRadius; var10 <= decayRadius; ++var10) {
                     for (int var11 = -decayRadius; var11 <= decayRadius; ++var11) {
 
-                        int nearBlockID = par1World.getBlockId(par2 + var9, par3 + var10, par4 + var11);
-                        if (Block.blocksList[nearBlockID] != null) {
-                            Block.blocksList[nearBlockID].beginLeavesDecay(par1World, par2 + var9, par3 + var10, par4
-                                    + var11);
+                        Block nearBlockID = par1World.getBlock(par2 + var9, par3 + var10, par4 + var11);
+                        if (nearBlockID != null) {
+                            nearBlockID.beginLeavesDecay(par1World, par2 + var9, par3 + var10, par4 + var11);
                         }
                     }
                 }
@@ -167,20 +168,15 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
         }
 
         int var12;
-
         if (par1World.checkChunksExist(par2 - rangeCheckChunk, par3 - rangeCheckChunk, par4 - rangeCheckChunk, par2
                 + rangeCheckChunk, par3 + rangeCheckChunk, par4 + rangeCheckChunk)) {
             int var13;
             int var14;
-            int var15;
 
             for (var12 = -rangeWood; var12 <= rangeWood; ++var12) {
                 for (var13 = -rangeWood; var13 <= rangeWood; ++var13) {
                     for (var14 = -rangeWood; var14 <= rangeWood; ++var14) {
-                        var15 = par1World.getBlockId(par2 + var12, par3 + var13, par4 + var14);
-
-                        Block block = Block.blocksList[var15];
-
+                        Block block = par1World.getBlock(par2 + var12, par3 + var13, par4 + var14);
                         if (block != null
                                 && block.canSustainLeaves(par1World, par2 + var12, par3 + var13, par4 + var14)) {
                             this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = 0;
@@ -193,6 +189,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
                 }
             }
 
+            int var15;
             for (var12 = 1; var12 <= 4; ++var12) {
                 for (var13 = -rangeWood; var13 <= rangeWood; ++var13) {
                     for (var14 = -rangeWood; var14 <= rangeWood; ++var14) {
@@ -255,7 +252,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (par1World.canLightningStrikeAt(par2, par3 + 1, par4)
-                && !par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && par5Random.nextInt(15) == 1) {
+                && !World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && par5Random.nextInt(15) == 1) {
             double var6 = par2 + par5Random.nextFloat();
             double var8 = par3 - 0.05D;
             double var10 = par4 + par5Random.nextFloat();
@@ -265,11 +262,11 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
 
     private void removeLeaves(World par1World, int par2, int par3, int par4) {
         this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-        par1World.setBlock(par2, par3, par4, 0);
+        par1World.setBlock(par2, par3, par4, Blocks.air);
     }
 
     @Override
-    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         int chance = world.rand.nextInt(100);
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
@@ -307,17 +304,17 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
      */
     @SideOnly(Side.CLIENT)
     public void setGraphicsLevel(boolean par1) {
-        this.graphicsLevel = par1;
+        this.field_150121_P = par1;
         this.iconIndex = par1 ? 0 : 1;
     }
 
     @Override
-    public boolean isShearable(ItemStack item, World world, int x, int y, int z) {
+    public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
         return true;
     }
 
     @Override
-    public ArrayList<ItemStack> onSheared(ItemStack item, World world, int x, int y, int z, int fortune) {
+    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         ret.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z) & 3));
         return ret;
@@ -329,7 +326,7 @@ public class BlockPalmTreeLeaves extends BlockLeavesBase implements IShearable {
     }
 
     @Override
-    public boolean isLeaves(World world, int x, int y, int z) {
+    public boolean isLeaves(IBlockAccess world, int x, int y, int z) {
         return true;
     }
 }

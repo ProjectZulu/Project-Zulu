@@ -6,8 +6,8 @@ import projectzulu.common.core.DefaultProps;
 
 public class ItemCoconutItem extends Item {
 
-    public ItemCoconutItem(int itemID, boolean full3D, String name) {
-        super(itemID);
+    public ItemCoconutItem(boolean full3D, String name) {
+        super();
         maxStackSize = 1;
         setMaxDamage(5);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);

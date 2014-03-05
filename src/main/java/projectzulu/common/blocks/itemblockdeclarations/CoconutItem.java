@@ -13,8 +13,8 @@ public class CoconutItem extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemList.coconutItem = Optional.of(new ItemCoconutItem(iD, false, name.toLowerCase()));
+    protected boolean createItem() {
+        ItemList.coconutItem = Optional.of(new ItemCoconutItem(false, name.toLowerCase()));
         return true;
     }
 

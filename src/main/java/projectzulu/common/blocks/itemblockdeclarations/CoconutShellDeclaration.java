@@ -13,8 +13,8 @@ public class CoconutShellDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemList.coconutShell = Optional.of(new ItemCoconutShell(iD, false, name.toLowerCase()));
+    protected boolean createItem() {
+        ItemList.coconutShell = Optional.of(new ItemCoconutShell(false, name.toLowerCase()));
         return true;
     }
 

@@ -5,16 +5,13 @@ import java.io.DataOutputStream;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.ChatAllowedCharacters;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.core.PacketIDs;
-import projectzulu.common.core.ProjectZuluLog;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,7 +20,7 @@ public class GuiTombstone extends GuiScreen {
     /**
      * This String is just a local copy of the characters allowed in text rendering of minecraft.
      */
-    private static final String allowedCharacters = ChatAllowedCharacters.allowedCharacters;
+    private static final char[] allowedCharacters = ChatAllowedCharacters.allowedCharacters;
 
     /** The title string that is displayed in the top-center of the screen. */
     protected String screenTitle = "Edit sign message:";
@@ -103,7 +100,7 @@ public class GuiTombstone extends GuiScreen {
     protected void actionPerformed(GuiButton par1GuiButton) {
         if (par1GuiButton.enabled) {
             if (par1GuiButton.id == 0) {
-                entitySign.onInventoryChanged();
+                entitySign.markDirty();
                 mc.displayGuiScreen((GuiScreen) null);
             }
         }
@@ -127,8 +124,7 @@ public class GuiTombstone extends GuiScreen {
                     entitySign.signText[editLine].length() - 1);
         }
 
-        if (allowedCharacters.indexOf(keyChar) >= 0
-                && entitySign.signText[editLine].length() < entitySign.maxcharPerLine) {
+        if (allowedCharacters[keyChar] >= 0 && entitySign.signText[editLine].length() < entitySign.maxcharPerLine) {
             entitySign.signText[editLine] = entitySign.signText[editLine] + keyChar;
         }
     }
@@ -140,7 +136,7 @@ public class GuiTombstone extends GuiScreen {
     public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
-        drawCenteredString(fontRenderer, screenTitle, width / 2, 40, 16777215);
+        drawCenteredString(fontRendererObj, screenTitle, width / 2, 40, 16777215);
         GL11.glPushMatrix();
         GL11.glTranslatef(width / 2, 0.0F, 50.0F);
         float var4 = 93.75F;
@@ -154,7 +150,7 @@ public class GuiTombstone extends GuiScreen {
             entitySign.lineBeingEdited = editLine;
         }
 
-        TileEntityRenderer.instance.renderTileEntityAt(entitySign, -0.5D, -0.75D, -0.5D, -1f);
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(entitySign, -0.5D, -0.75D, -0.5D, -1f);
         entitySign.lineBeingEdited = -1;
         GL11.glPopMatrix();
         super.drawScreen(par1, par2, par3);

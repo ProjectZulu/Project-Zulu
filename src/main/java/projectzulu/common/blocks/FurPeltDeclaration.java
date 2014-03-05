@@ -12,7 +12,7 @@ public class FurPeltDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
+    protected boolean createItem() {
         ItemList.furPelt = Optional.of(new ItemScale(iD, false, name.toLowerCase()));
         return true;
     }

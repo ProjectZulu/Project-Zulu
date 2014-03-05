@@ -1,7 +1,7 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ProjectZuluLog;
@@ -34,9 +34,9 @@ public class BrewingStandSingleDeclaration extends BlockDeclaration {
     }
 
     @Override
-    protected boolean createBlock(int iD) {
-        BlockList.brewingStandSingle = Optional.of(new BlockBrewingStandSingle(iD, renderID).setUnlocalizedName(
-                "brewingsingle").setTextureName(DefaultProps.blockKey + ":brewingsingle"));
+    protected boolean createBlock() {
+        BlockList.brewingStandSingle = Optional.of(new BlockBrewingStandSingle(renderID).setBlockName("brewingsingle")
+                .setBlockTextureName(DefaultProps.blockKey + ":brewingsingle"));
         return true;
     }
 

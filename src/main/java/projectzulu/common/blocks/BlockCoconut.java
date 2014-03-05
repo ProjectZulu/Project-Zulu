@@ -6,10 +6,12 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
@@ -19,12 +21,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCoconut extends BlockCocoa {
-    
-    public BlockCoconut(int par1) {
-        super(par1);
+
+    public BlockCoconut() {
+        super();
         setHardness(0.2F);
         setResistance(5.0F);
-        setStepSound(Block.soundWoodFootstep);
+        setStepSound(Block.soundTypeWood);
     }
 
     /**
@@ -34,7 +36,7 @@ public class BlockCoconut extends BlockCocoa {
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!this.canBlockStay(par1World, par2, par3, par4)) {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlock(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, Blocks.air);
         } else if (par1World.rand.nextInt(5) == 0) {
             int var6 = par1World.getBlockMetadata(par2, par3, par4);
             int var7 = func_72219_c(var6);
@@ -54,11 +56,10 @@ public class BlockCoconut extends BlockCocoa {
         int var5 = getDirection(par1World.getBlockMetadata(par2, par3, par4));
         par2 += Direction.offsetX[var5];
         par4 += Direction.offsetZ[var5];
-        int var6 = par1World.getBlockId(par2, par3, par4);
-        int var7 = par1World.getBlockId(par2, par3 + 1, par4);
-        return (BlockList.palmTreeLog.isPresent() && var6 == BlockList.palmTreeLog.get().blockID && var7 != BlockList.palmTreeLog
-                .get().blockID);
-
+        Block var6 = par1World.getBlock(par2, par3, par4);
+        Block var7 = par1World.getBlock(par2, par3 + 1, par4);
+        return (BlockList.palmTreeLog.isPresent() && var6 == BlockList.palmTreeLog.get() && var7 != BlockList.palmTreeLog
+                .get());
     }
 
     /**
@@ -166,10 +167,10 @@ public class BlockCoconut extends BlockCocoa {
      * their own) Args: x, y, z, neighbor blockID
      */
     @Override
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5) {
         if (!this.canBlockStay(par1World, par2, par3, par4)) {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlock(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, Blocks.air);
         }
     }
 
@@ -183,18 +184,18 @@ public class BlockCoconut extends BlockCocoa {
     @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         if (!par1World.isRemote) {
-            ArrayList<ItemStack> items = getBlockDropped(par1World, par2, par3, par4, par5, par7);
+            ArrayList<ItemStack> items = getDrops(par1World, par2, par3, par4, par5, par7);
 
             for (ItemStack item : items) {
                 if (par1World.rand.nextFloat() <= par6) {
-                    this.dropBlockAsItem_do(par1World, par2, par3, par4, item);
+                    this.dropBlockAsItem(par1World, par2, par3, par4, item);
                 }
             }
         }
     }
 
     @Override
-    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         if (metadata >= 8) {
             if (ItemList.coconutItem.isPresent()) {
@@ -214,12 +215,8 @@ public class BlockCoconut extends BlockCocoa {
     /**
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
      */
-    public int idPicked(World par1World, int par2, int par3, int par4) {
-        if (ItemList.coconutSeed.isPresent()) {
-            return ItemList.coconutSeed.get().itemID;
-        } else {
-            return 0;
-        }
+    public ItemStack getPickBlock(MovingObjectPosition target, World par1World, int par2, int par3, int par4) {
+        return ItemList.coconutSeed.isPresent() ? new ItemStack(ItemList.coconutSeed.get()) : null;
     }
 
     @Override

@@ -17,10 +17,10 @@ public class GenericCraftingItemsDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemGenerics itemGenerics = (ItemGenerics) new ItemGenerics(iD, 10);
+    protected boolean createItem() {
+        ItemGenerics itemGenerics = (ItemGenerics) new ItemGenerics(10);
         ItemList.genericCraftingItems = Optional.of(itemGenerics);
-        PotionIngredients.addIngredientProperties(itemGenerics.itemID, itemGenerics);
+        PotionIngredients.addIngredientProperties(itemGenerics, itemGenerics);
         return true;
     }
 

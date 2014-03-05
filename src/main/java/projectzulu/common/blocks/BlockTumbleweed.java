@@ -12,21 +12,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTumbleweed extends Block {
 
-    public BlockTumbleweed(int par1) {
-        super(par1, Material.plants);
+    public BlockTumbleweed() {
+        super(Material.plants);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHardness(0.7F);
-        setStepSound(Block.soundWoodFootstep);
-    }
-
-    @Override
-    public int quantityDropped(Random random) {
-        return 1;
-    }
-
-    @Override
-    public int idDropped(int i, Random random, int j) {
-        return this.blockID;
+        setStepSound(Block.soundTypeWood);
     }
 
     /**

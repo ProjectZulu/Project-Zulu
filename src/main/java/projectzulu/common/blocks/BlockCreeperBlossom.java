@@ -3,31 +3,22 @@ package projectzulu.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCreeperBlossom extends BlockFlower {
+public class BlockCreeperBlossom extends BlockBush {
 
-    public BlockCreeperBlossom(int par1) {
-        super(par1, Material.tnt);
+    public BlockCreeperBlossom() {
+        super(Material.tnt);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHardness(0.5F);
-        setStepSound(Block.soundGrassFootstep);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
-        return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
+        setStepSound(Block.soundTypeGrass);
     }
 
     /**
@@ -61,14 +52,13 @@ public class BlockCreeperBlossom extends BlockFlower {
                     par4 + 0.5F);
             par1World.spawnEntityInWorld(var6);
             par1World.playSoundAtEntity(var6, "random.fuse", 1.0F, 1.0F);
-            par1World.setBlock(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, Blocks.air);
         }
     }
 
     @Override
-    protected boolean canThisPlantGrowOnThisBlockID(int par1) {
-        return par1 == Block.grass.blockID || par1 == Block.dirt.blockID || par1 == Block.tilledField.blockID
-                || par1 == Block.wood.blockID;
+    protected boolean canPlaceBlockOn(Block block) {
+        return block == Blocks.grass || block == Blocks.dirt || block == Blocks.farmland || block == Blocks.log;
     }
 
     /**

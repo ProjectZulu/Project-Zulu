@@ -13,8 +13,8 @@ public class WaterDropletDeclaration extends ItemDeclaration {
     }
 
     @Override
-    protected boolean createItem(int iD) {
-        ItemList.waterDroplets = Optional.of(new ItemFoodProjectZulu(iD, 1, 0.6f, false, name.toLowerCase()));
+    protected boolean createItem() {
+        ItemList.waterDroplets = Optional.of(new ItemFoodProjectZulu(1, 0.6f, false, name.toLowerCase()));
         return true;
     }
 
