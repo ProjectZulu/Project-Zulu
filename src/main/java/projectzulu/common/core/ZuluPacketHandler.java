@@ -1,18 +1,16 @@
 package projectzulu.common.core;
 
+import ibxm.Player;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 import projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import projectzulu.common.mobs.entity.EntityGenericTameable;
 import projectzulu.common.temperature.TemperatureTicker;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
 
 public class ZuluPacketHandler implements IPacketHandler {
 
@@ -95,9 +93,6 @@ public class ZuluPacketHandler implements IPacketHandler {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
         }
-
     }
-
 }

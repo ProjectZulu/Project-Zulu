@@ -1,5 +1,9 @@
 package projectzulu.common.mobs.packets;
 
+import ibxm.Player;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,58 +11,51 @@ import java.io.IOException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import projectzulu.common.core.PZPacket;
 import projectzulu.common.core.PacketManager;
 import projectzulu.common.mobs.entity.EntityFollower;
 import projectzulu.common.mobs.entity.EntityMaster;
-import cpw.mods.fml.common.network.Player;
 
-public class PacketManagerFollowerMasterData extends PacketManager{
-	
-	int childEntityID;
-	int masterEntityID;
-	int followerIndex;
-	
-	public PacketManagerFollowerMasterData(int packetID) {
-		super(packetID);
-	}
-	
-	public void setPacketData(int childEntityID, int masterEntityID, int followerIndex){
-		this.childEntityID = childEntityID;
-		this.masterEntityID = masterEntityID;
-		this.followerIndex = followerIndex;
-	}
-	
-	@Override
-	protected void writePacketData(DataOutputStream dataStream) throws IOException {
-		dataStream.writeInt(childEntityID);
-		dataStream.writeInt(masterEntityID);
-		dataStream.writeInt(followerIndex);
-	}
+public class PacketManagerFollowerMasterData implements PZPacket {
 
-	@Override
-	public boolean processPacket(DataInputStream dataStream, Player player) {
+    int childEntityID;
+    int masterEntityID;
+    int followerIndex;
 
-		World worldObj = ((EntityPlayer)player).worldObj;
-		try{
-			int packetID = dataStream.readInt();
-			int childEntityID = dataStream.readInt();
-			int masterEntityID = dataStream.readInt();
-			int followerIndex = dataStream.readInt();
+    public void setPacketData(int childEntityID, int masterEntityID, int followerIndex) {
+        this.childEntityID = childEntityID;
+        this.masterEntityID = masterEntityID;
+        this.followerIndex = followerIndex;
+    }
 
-			Entity childEntity = worldObj.getEntityByID(childEntityID);
-			Entity masterEntity = worldObj.getEntityByID(masterEntityID);
-			if(followerIndex == -1 || masterEntityID == -1
-					|| childEntity == null || !(childEntity instanceof EntityFollower) 
-					|| masterEntity == null || !(masterEntity instanceof EntityMaster)){
-				return false;
-			}
-			
-			((EntityFollower) childEntity).linkMasterWithFollower(masterEntityID, followerIndex);
-			
-			return true;
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return false;
-	}
+    @Override
+    public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
+        buffer.writeInt(childEntityID);
+        buffer.writeInt(masterEntityID);
+        buffer.writeInt(followerIndex);
+    }
+
+    @Override
+    public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
+        childEntityID = buffer.readInt();
+        masterEntityID = buffer.readInt();
+        followerIndex = buffer.readInt();
+    }
+
+    @Override
+    public void handleClientSide(EntityPlayer player) {
+        World worldObj = ((EntityPlayer) player).worldObj;
+        Entity childEntity = worldObj.getEntityByID(childEntityID);
+        Entity masterEntity = worldObj.getEntityByID(masterEntityID);
+        if (followerIndex == -1 || masterEntityID == -1 || childEntity == null
+                || !(childEntity instanceof EntityFollower) || masterEntity == null
+                || !(masterEntity instanceof EntityMaster)) {
+            return;
+        }
+        ((EntityFollower) childEntity).linkMasterWithFollower(masterEntityID, followerIndex);
+    }
+
+    @Override
+    public void handleServerSide(EntityPlayer player) {
+    }
 }

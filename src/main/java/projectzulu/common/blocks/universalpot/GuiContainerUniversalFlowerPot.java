@@ -10,7 +10,8 @@ import org.lwjgl.opengl.GL11;
 import projectzulu.common.core.DefaultProps;
 
 public class GuiContainerUniversalFlowerPot extends GuiContainer {
-    public final static ResourceLocation FLOWERPOT_GUI = new ResourceLocation(DefaultProps.coreKey, "gui/FlowerPotGUI.png");
+    public final static ResourceLocation FLOWERPOT_GUI = new ResourceLocation(DefaultProps.coreKey,
+            "gui/FlowerPotGUI.png");
 
     public GuiContainerUniversalFlowerPot(InventoryPlayer inventoryPlayer, TileEntityUniversalFlowerPot tileEntity) {
         super(new ContainerUniversalFlowerPot(inventoryPlayer, tileEntity));
@@ -18,8 +19,8 @@ public class GuiContainerUniversalFlowerPot extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        fontRenderer.drawString("Flower Pot", 8, 6, 4210752);
-        fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+        fontRendererObj.drawString("Flower Pot", 8, 6, 4210752);
+        fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
     }
 
     @Override

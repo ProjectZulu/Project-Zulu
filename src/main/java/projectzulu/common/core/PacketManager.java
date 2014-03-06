@@ -13,7 +13,7 @@ import cpw.mods.fml.common.network.Player;
 /**
  * All Packets Sent Over Channel_Zulu are assumed to be of This Type
  */
-public abstract class PacketManager{
+public abstract class PacketManager {
 	
 	int packetID;
 	String channel = DefaultProps.defaultChannel;
@@ -25,7 +25,7 @@ public abstract class PacketManager{
 	/** Creates Packet with data from writePacketData
 	 * See Individual implementations to ensure that individual packetData has been loaded into the Packet
 	  */
-	public Packet createPacket(){
+	public PZPacket createPacket() {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         DataOutputStream data = new DataOutputStream(bytes);
         

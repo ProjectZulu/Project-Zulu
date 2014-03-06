@@ -526,7 +526,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
      * Overriden in a sign to provide the text.
      */
     @Override
-    public Packet getDescriptionPacket() {
+    public PZPacket getDescriptionPacket() {
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, var1);
@@ -546,7 +546,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
         NBTTagCompound tileEntityData = new NBTTagCompound();
         writeToNBT(tileEntityData);
         mobSpawnerPacketManager.setPacketData(xCoord, yCoord, zCoord, tileEntityData);
-        Packet mobSpawnerPacket = mobSpawnerPacketManager.createPacket();
+        PZPacket mobSpawnerPacket = mobSpawnerPacketManager.createPacket();
         PacketDispatcher.sendPacketToServer(mobSpawnerPacket);
     }
 

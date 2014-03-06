@@ -60,7 +60,7 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) par2 + 0.5F, (float) par4 + 0.5F, (float) par6 + 0.5F);
         GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F); // Var11 is getMetaData Rotation
 
-        FontRenderer var17 = this.getFontRenderer();
+        FontRenderer var17 = this.func_147498_b();
         float var12 = 0.016666668F * 0.8f * var10;
         float xOffset = 0.0f;
         float zOffset = 0.15f;
@@ -88,7 +88,7 @@ public class TileEntityTombstoneRenderer extends TileEntitySpecialRenderer {
 
         if (par1TileEntityTombstone.getEntityOrb() != null) {
             GL11.glPushMatrix();
-            long time = par1TileEntityTombstone.worldObj.getWorldInfo().getWorldTotalTime();
+            long time = par1TileEntityTombstone.getWorldObj().getWorldInfo().getWorldTotalTime();
             float orbOrbitRadius = 0.3f;
             float periodScale = 6.0f;
             GL11.glTranslatef((float) par2 + 0.5f, (float) (par4 + 1.1f + 0.05f * Math.cos(time / 20f)),

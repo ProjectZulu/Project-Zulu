@@ -1,5 +1,8 @@
 package projectzulu.common.dungeon.packets;
 
+import ibxm.Player;
+import io.netty.channel.ChannelHandlerContext;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,58 +11,49 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import projectzulu.common.core.PacketManager;
 import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
-import cpw.mods.fml.common.network.Player;
 
-public class PacketManagerMobSpawner extends PacketManager{
-	int entityIDtoSync;	
-	private int posX;
-	private int posY;
-	private int posZ;
-	
-	private NBTTagCompound customData;
-		
-	public PacketManagerMobSpawner(int packetID) {
-		super(packetID);
-	}
+public class PacketManagerMobSpawner extends PacketDataStream {
+    int entityIDtoSync;
+    private int posX;
+    private int posY;
+    private int posZ;
+    private NBTTagCompound customData;
 
-	public void setPacketData(int xPos, int yPos, int zPos, NBTTagCompound customData ){
-		this.posX = xPos;
-		this.posY = yPos;
-		this.posZ = zPos;
-		this.customData = customData;
-	}
-	
-	@Override
-	protected void writePacketData(DataOutputStream dataStream) throws IOException {
-		dataStream.writeInt(posX);
-		dataStream.writeInt(posY);
-		dataStream.writeInt(posZ);
-		writeNBTTagCompound(customData, dataStream);
-	}
+    public void setPacketData(int xPos, int yPos, int zPos, NBTTagCompound customData) {
+        this.posX = xPos;
+        this.posY = yPos;
+        this.posZ = zPos;
+        this.customData = customData;
+    }
 
-	@Override
-	public boolean processPacket(DataInputStream dataStream, Player player) {
-		World worldObj = ((EntityPlayer)player).worldObj;
-		try{
-			int packetID = dataStream.readInt();
-			this.posX = dataStream.readInt();
-			this.posY = dataStream.readInt();
-			this.posZ = dataStream.readInt();
-			customData = readNBTTagCompound(dataStream);
-			
-			TileEntity tileEntity = worldObj.getBlockTileEntity(posX, posY, posZ);
-			if(tileEntity != null && tileEntity instanceof TileEntityLimitedMobSpawner){
-				tileEntity.readFromNBT(customData);
-				((TileEntityLimitedMobSpawner)tileEntity).forceUpdate();
-			}else{
-				return false;
-			}
-			return true;
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return false;
-	}
+    @Override
+    protected void writeData(ChannelHandlerContext ctx, DataOutputStream buffer) throws IOException {
+        buffer.writeInt(posX);
+        buffer.writeInt(posY);
+        buffer.writeInt(posZ);
+        writeNBTTagCompound(customData, buffer);
+    }
+
+    @Override
+    protected void readData(ChannelHandlerContext ctx, DataInputStream buffer) throws IOException {
+        posX = buffer.readInt();
+        posY = buffer.readInt();
+        posZ = buffer.readInt();
+        customData = readNBTTagCompound(buffer);
+    }
+
+    @Override
+    public void handleClientSide(EntityPlayer player) {
+        World world = player.getEntityWorld();
+        TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
+        if (tileEntity != null && tileEntity instanceof TileEntityLimitedMobSpawner) {
+            tileEntity.readFromNBT(customData);
+            ((TileEntityLimitedMobSpawner) tileEntity).forceUpdate();
+        }
+    }
+
+    @Override
+    public void handleServerSide(EntityPlayer player) {
+    }
 }

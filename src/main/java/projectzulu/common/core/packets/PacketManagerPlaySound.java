@@ -1,51 +1,58 @@
 package projectzulu.common.core.packets;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.channel.ChannelHandlerContext;
+
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import projectzulu.common.core.PacketManager;
-import cpw.mods.fml.common.network.Player;
+import projectzulu.common.dungeon.packets.PacketByteStream;
 
-public class PacketManagerPlaySound extends PacketManager{
-	private int posX;
-	private int posY;
-	private int posZ;
-	
-	private String sound;
-	
-	public PacketManagerPlaySound(int packetID){
-		super(packetID);
-	}
+public class PacketManagerPlaySound extends PacketByteStream {
+    private int posX;
+    private int posY;
+    private int posZ;
+    private String sound;
 
-	public void setPacketData(int xPos, int yPos, int zPos, String sound ){
-		this.posX = xPos;
-		this.posY = yPos;
-		this.posZ = zPos;
-		this.sound = sound;
-	}
-	
-	@Override
-	protected void writePacketData(DataOutputStream dataStream) throws IOException{
-		dataStream.writeInt(posX);
-		dataStream.writeInt(posY);
-		dataStream.writeInt(posZ);
-		dataStream.writeUTF(sound);
-	}
+    public PacketManagerPlaySound setPacketData(int xPos, int yPos, int zPos, String sound) {
+        this.posX = xPos;
+        this.posY = yPos;
+        this.posZ = zPos;
+        this.sound = sound;
+        return this;
+    }
 
-	@Override
-	public boolean processPacket(DataInputStream dataStream, Player player){
-		World worldObj = ((EntityPlayer)player).worldObj;
-		try{
-			int packetID = dataStream.readInt();
-			setPacketData(dataStream.readInt(), dataStream.readInt(), dataStream.readInt(), dataStream.readUTF());
-			worldObj.playSound(posX, posY, posZ, sound, 1.0f, 1.0f, false);
-			return true;
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return false;
-	}
+    @Override
+    protected void writeData(ChannelHandlerContext ctx, ByteBufOutputStream buffer) throws IOException {
+        buffer.writeInt(posX);
+        buffer.writeInt(posY);
+        buffer.writeInt(posZ);
+        buffer.writeInt(sound.length());
+        buffer.writeChars(sound);
+    }
+
+    @Override
+    protected void readData(ChannelHandlerContext ctx, ByteBufInputStream buffer) throws IOException {
+        posX = buffer.readInt();
+        posY = buffer.readInt();
+        posZ = buffer.readInt();
+        int soundLength = buffer.readInt();
+        char[] soundChars = new char[soundLength];
+        for (int i = 0; i < soundChars.length; i++) {
+            soundChars[i] = buffer.readChar();
+        }
+        sound = new String(soundChars);
+    }
+
+    @Override
+    public void handleClientSide(EntityPlayer player) {
+        World worldObj = player.worldObj;
+        worldObj.playSound(posX, posY, posZ, sound, 1.0f, 1.0f, false);
+    }
+
+    @Override
+    public void handleServerSide(EntityPlayer player) {
+    }
 }

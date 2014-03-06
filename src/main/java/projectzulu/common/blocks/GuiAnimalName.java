@@ -1,19 +1,16 @@
 package projectzulu.common.blocks;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.mobs.entity.EntityGenericTameable;
-import cpw.mods.fml.common.network.PacketDispatcher;
+import projectzulu.common.mobs.packets.PacketNameSync;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -61,28 +58,8 @@ public class GuiAnimalName extends GuiScreen {
      */
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        DataOutputStream data = new DataOutputStream(bytes);
-
-        /* Write PacketID into Packet */
-        try {
-            data.writeInt(4);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        /* Write Temperature Into Packet */
-        try {
-            data.writeInt(entityID);
-            data.writeUTF(entityName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.channel = "Channel_Zulu"; // CHANNEL MAX 16 CHARS
-        packet.data = bytes.toByteArray();
-        packet.length = packet.data.length;
-        PacketDispatcher.sendPacketToServer(packet);
+        PacketNameSync packet = new PacketNameSync().setPacketData(entityID, entityName);
+        ProjectZulu_Core.getPipeline().sendToServer(packet);
     }
 
     /**

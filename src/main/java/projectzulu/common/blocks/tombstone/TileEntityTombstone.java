@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import projectzulu.common.core.ProjectZuluLog;
-
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -125,7 +123,7 @@ public class TileEntityTombstone extends TileEntity {
         if (tileCompound.hasKey(itemTagName)) {
             NBTTagList itemsTag = (NBTTagList) tileCompound.getTag(itemTagName);
             for (int i = 0; i < itemsTag.tagCount(); i++) {
-                ItemStack itemStack = ItemStack.loadItemStackFromNBT((NBTTagCompound) itemsTag.tagAt(i));
+                ItemStack itemStack = ItemStack.loadItemStackFromNBT((NBTTagCompound) itemsTag.getCompoundTagAt(i));
                 if (itemStack != null) {
                     items.add(itemStack);
                 }
@@ -141,12 +139,12 @@ public class TileEntityTombstone extends TileEntity {
     public Packet getDescriptionPacket() {
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 4, var1);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 4, var1);
     }
 
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-        NBTTagCompound tag = packet.data;
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        NBTTagCompound tag = pkt.func_148857_g();
         readFromNBT(tag);
     }
 

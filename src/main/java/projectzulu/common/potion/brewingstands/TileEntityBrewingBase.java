@@ -334,7 +334,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
      * Overriden in a sign to provide the text.
      */
     @Override
-    public Packet getDescriptionPacket() {
+    public PZPacket getDescriptionPacket() {
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 4, var1);

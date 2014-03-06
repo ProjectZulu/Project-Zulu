@@ -3,15 +3,20 @@ package projectzulu.common.blocks.tombstone;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.network.play.client.C17PacketCustomPayload;
 import net.minecraft.util.ChatAllowedCharacters;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.PacketIDs;
+import projectzulu.common.mobs.packets.PacketTileText;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -55,33 +60,9 @@ public class GuiTombstone extends GuiScreen {
     @Override
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        DataOutputStream data = new DataOutputStream(bytes);
-
-        /* Write PacketID into Packet */
-        try {
-            data.writeInt(PacketIDs.tileEntityText.index);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        /* Write Temperature Into Packet */
-        try {
-            data.writeInt(entitySign.xCoord);
-            data.writeInt(entitySign.yCoord);
-            data.writeInt(entitySign.zCoord);
-            data.writeInt(entitySign.signText.length);
-            for (int i = 0; i < entitySign.signText.length; i++) {
-                data.writeUTF(entitySign.signText[i]);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.channel = "Channel_Zulu"; // CHANNEL MAX 16 CHARS
-        packet.data = bytes.toByteArray();
-        packet.length = packet.data.length;
-        PacketDispatcher.sendPacketToServer(packet);
+        PacketTileText packet = new PacketTileText().setPacketData(entitySign.xCoord, entitySign.yCoord,
+                entitySign.zCoord, entitySign.signText);
+        ProjectZulu_Core.getPipeline().sendToServer(packet);
         entitySign.setEditable(true);
     }
 

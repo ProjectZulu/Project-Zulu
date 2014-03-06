@@ -15,6 +15,7 @@ import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.EventHookContainerClass;
 import projectzulu.common.core.ItemBlockManager;
+import projectzulu.common.core.PacketPipeline;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.ZuluGuiHandler;
 import projectzulu.common.core.ZuluPacketHandler;
@@ -72,21 +73,27 @@ public class ProjectZulu_Core {
     /* Material Declarations */
     public static final ArmorMaterial desertClothMaterial = EnumHelper.addArmorMaterial("Desert Cloth Material", 2,
             new int[] { 1, 2, 1, 1 }, 15);
-    public static final ArmorMaterial scaleMaterial = EnumHelper.addArmorMaterial("Scale Material", 5, new int[] {
-            1, 3, 2, 1 }, 15);
-    public static final ArmorMaterial furMaterial = EnumHelper.addArmorMaterial("Fur Material", 3, new int[] { 1,
-            3, 2, 1 }, 13);
+    public static final ArmorMaterial scaleMaterial = EnumHelper.addArmorMaterial("Scale Material", 5, new int[] { 1,
+            3, 2, 1 }, 15);
+    public static final ArmorMaterial furMaterial = EnumHelper.addArmorMaterial("Fur Material", 3, new int[] { 1, 3, 2,
+            1 }, 13);
     public static final ArmorMaterial goldScaleMaterial = EnumHelper.addArmorMaterial("Gold Scale Material", 7,
             new int[] { 2, 5, 3, 1 }, 25);
     public static final ArmorMaterial ironScaleMaterial = EnumHelper.addArmorMaterial("Iron Scale Material", 15,
             new int[] { 2, 6, 5, 2 }, 9);
-    public static final ArmorMaterial diamondScaleMaterial = EnumHelper.addArmorMaterial("Diamond Scale Material",
-            33, new int[] { 3, 8, 6, 3 }, 10);
+    public static final ArmorMaterial diamondScaleMaterial = EnumHelper.addArmorMaterial("Diamond Scale Material", 33,
+            new int[] { 3, 8, 6, 3 }, 10);
 
     public static File modConfigDirectoryFile;
 
     public static final FeatureGenerator featureGenerator = new FeatureGenerator();
 
+    private static PacketPipeline packetPipeline;
+
+    public static PacketPipeline getPipeline() {
+        return packetPipeline;
+    }
+    
     @SidedProxy(clientSide = "projectzulu.common.ClientProxyProjectZulu", serverSide = "projectzulu.common.CommonProxyProjectZulu")
     public static CommonProxyProjectZulu proxy;
 
@@ -120,11 +127,13 @@ public class ProjectZulu_Core {
 
         ProjectZuluLog.info("Registering Entites");
         CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
+        packetPipeline = new PacketPipeline("ProjectZulu");
     }
 
     @EventHandler
     public void load(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
+        packetPipeline.initialise(event);
     }
 
     @EventHandler
