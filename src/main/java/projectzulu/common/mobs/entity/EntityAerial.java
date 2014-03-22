@@ -107,7 +107,7 @@ public class EntityAerial extends EntityLiving {
 	public boolean isTargetPositionValid(ChunkCoordinates targetPosition){
 		/* Invalid if Water, is below height = 3 (superflat), and if its null */
 		if (targetPosition != null && (!this.worldObj.isAirBlock(targetPosition.posX, targetPosition.posY, targetPosition.posZ) || targetPosition.posY < 3 
-				|| this.worldObj.getBlockMaterial(targetPosition.posX, targetPosition.posY, targetPosition.posZ).equals(Material.water))){
+				|| this.worldObj.getBlock(targetPosition.posX, targetPosition.posY, targetPosition.posZ).getMaterial().equals(Material.water))){
 //			targetPosition = null;
 			return false;
 		}
@@ -152,11 +152,10 @@ public class EntityAerial extends EntityLiving {
             if (this.onGround)
             {
                 var3 = 0.54600006F;
-                int var4 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-
-                if (var4 > 0)
+                Block block = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
+                if (block != null)
                 {
-                    var3 = Block.blocksList[var4].slipperiness * 0.91F;
+                    var3 = block.slipperiness * 0.91F;
                 }
             }
 
@@ -167,11 +166,10 @@ public class EntityAerial extends EntityLiving {
             if (this.onGround)
             {
                 var3 = 0.54600006F;
-                int var5 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-
-                if (var5 > 0)
+                Block block = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
+                if (block != null)
                 {
-                    var3 = Block.blocksList[var5].slipperiness * 0.91F;
+                    var3 = block.slipperiness * 0.91F;
                 }
             }
 

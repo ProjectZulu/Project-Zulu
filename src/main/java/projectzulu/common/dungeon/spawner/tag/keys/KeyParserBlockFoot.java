@@ -2,8 +2,10 @@ package projectzulu.common.dungeon.spawner.tag.keys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
 import projectzulu.common.dungeon.spawner.tag.OptionalParser;
@@ -44,14 +46,21 @@ public class KeyParserBlockFoot extends KeyParserBase {
     public boolean isValidLocation(World world, EntityLiving entity, int xCoord, int yCoord, int zCoord,
             TypeValuePair typeValuePair, HashMap<String, Object> valueCache) {
         @SuppressWarnings("unchecked")
-        ListMultimap<Integer, Integer> iDMetas = (ListMultimap<Integer, Integer>) typeValuePair.getValue();
-        int blockID = world.getBlockId(xCoord, yCoord - 1, zCoord);
+        ListMultimap<String, Integer> iDMetas = (ListMultimap<String, Integer>) typeValuePair.getValue();
+        Block blockID = world.getBlock(xCoord, yCoord - 1, zCoord);
         int meta = world.getBlockMetadata(xCoord, yCoord - 1, zCoord);
         boolean foundMatch = false;
-        for (Entry<Integer, Integer> iDMetaEntry : iDMetas.entries()) {
-            if (blockID == iDMetaEntry.getKey() && meta == iDMetaEntry.getValue()) {
-                foundMatch = true;
-                break;
+        for (String blockKey : iDMetas.keySet()) {
+            Block searchBlock = Block.getBlockFromName(blockKey);
+            if (searchBlock == null) {
+                continue;
+            }
+            List<Integer> metas = iDMetas.get(blockKey);
+            for (Integer metaValue : metas) {
+                if (blockID == searchBlock && metaValue.equals(meta)) {
+                    foundMatch = true;
+                    break;
+                }
             }
         }
         return foundMatch ? false : true;

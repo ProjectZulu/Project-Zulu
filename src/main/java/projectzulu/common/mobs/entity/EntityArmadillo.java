@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -72,7 +73,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
         // this.tasks.addTask(4, new EntityAIFollowOwner(this, this.moveSpeed, 10.0F, 2.0F));
 
         tasks.addTask(5, new EntityAIMate(this, 1.0f));
-        tasks.addTask(6, new EntityAITempt(this, 1.2f, Item.spiderEye.itemID, false));
+        tasks.addTask(6, new EntityAITempt(this, 1.2f, Items.spider_eye, false));
         tasks.addTask(7, new EntityAIFollowParent(this, 1.1f));
         tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
@@ -137,8 +138,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
             boolean isFacing = false;
             if (tempE != null) {
                 // Condition 1: Check if player is using an item, and if so is it a bow
-                int var1 = Item.bow.itemID;
-
+                
                 // Condition 2: Is the player facing the target. "boolean canSee"
                 double angleEntToPlayer = Math.atan2(posX - tempE.posX, tempE.posZ - posZ) * (180.0 / Math.PI) + 180;
                 double playerRotationYaw = tempE.rotationYaw;
@@ -149,14 +149,14 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
                 }
 
                 // Condition 3: Can the player see the target
-                canSee = this.worldObj.clip(
+                canSee = this.worldObj.rayTraceBlocks(
                         worldObj.getWorldVec3Pool().getVecFromPool(tempE.posX, tempE.posY + tempE.getEyeHeight(),
                                 tempE.posZ), worldObj.getWorldVec3Pool()
                                 .getVecFromPool(this.posX, this.posY, this.posZ)) == null;
             }
             /* If any of the conditions above failed, then Armadillo should not be in Cover */
             if (tempE == null || canSee == false || tempE.isUsingItem() == false || isFacing == false
-                    || tempE.inventory.getCurrentItem().itemID != Item.bow.itemID) {
+                    || tempE.inventory.getCurrentItem().getItem() != Items.bow) {
                 inCoverTimer = Math.max(inCoverTimer - ticksToCheckAbilities, 0);
             } else {
                 /* Reminder: This only occurs when all the above are true. */
@@ -213,7 +213,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 
     @Override
     public boolean isValidBreedingItem(ItemStack itemStack) {
-        if (itemStack != null && itemStack.getItem().itemID == Item.spiderEye.itemID) {
+        if (itemStack != null && itemStack.getItem() == Items.spider_eye) {
             return true;
         } else {
             return super.isValidBreedingItem(itemStack);
@@ -224,7 +224,7 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
     protected void dropRareDrop(int par1) {
         if (Loader.isModLoaded(DefaultProps.BlocksModId)) {
             if (BlockList.mobHeads.isPresent()) {
-                entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 2), 1);
+                entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 2), 1);
             }
         }
         super.dropRareDrop(par1);

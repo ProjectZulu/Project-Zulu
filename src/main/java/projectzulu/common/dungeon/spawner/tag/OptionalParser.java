@@ -3,6 +3,7 @@ package projectzulu.common.dungeon.spawner.tag;
 import java.util.HashMap;
 import java.util.logging.Level;
 
+import net.minecraft.block.Block;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.dungeon.spawner.tag.keys.Key;
 import projectzulu.common.dungeon.spawner.tag.settings.OptionalSettingsBase;
@@ -33,7 +34,7 @@ public class OptionalParser {
             return null;
         }
     }
-    
+
     /**
      * Parses the Light Tag.
      * 
@@ -53,7 +54,7 @@ public class OptionalParser {
             return null;
         }
     }
-    
+
     /**
      * Parses the Block Tag.
      * 
@@ -61,34 +62,25 @@ public class OptionalParser {
      * @param valueCache Cache used by OptionalSettings to hold values
      * @return Returns a ArrayListMultimap mapping BlockID to Meta values
      */
-    public static ListMultimap<Integer, Integer> parseBlock(String[] values) {
-        ListMultimap<Integer, Integer> blockMeta = ArrayListMultimap.create();
+    public static ListMultimap<String, Integer> parseBlock(String[] values) {
+        ListMultimap<String, Integer> blockMeta = ArrayListMultimap.create();
 
         for (int j = 1; j < values.length; j++) {
-            int minID = -1;
-            int maxID = -1;
             int minMeta = 0;
             int maxMeta = 0;
+            /* Parse Scenario: NAME-1>2 ADDS (Block,Meta)(NAME, 1)(NAME, 2) */
             /* Parse Scenario: 2>4-1>2 ADDS (Block,Meta)(2,1)(2,2)(3,1)(3,2)(4,1)(4,2) */
             String[] idMetaParts = values[j].split("-");
+            String blockID = idMetaParts[0];
             for (int k = 0; k < idMetaParts.length; k++) {
-                String[] rangeParts = idMetaParts[k].split(">");
                 if (k == 0) {
-                    for (int l = 0; l < rangeParts.length; l++) {
-                        if (l == 0) {
-                            minID = ParsingHelper.parseFilteredInteger(rangeParts[l], minID, "parseMinBlockID");
-                        } else if (l == 1) {
-                            maxID = ParsingHelper.parseFilteredInteger(rangeParts[l], maxID, "parseMaxBlockID");
-                        } else {
-                            ProjectZuluLog.warning("Block entry %s contains too many > elements.", values[j]);
-                        }
-                    }
                 } else if (k == 1) {
+                    String[] rangeParts = idMetaParts[k].split(">");
                     for (int l = 0; l < rangeParts.length; l++) {
                         if (l == 0) {
-                            minMeta = ParsingHelper.parseFilteredInteger(rangeParts[l], minID, "parseMinMetaID");
+                            minMeta = ParsingHelper.parseFilteredInteger(rangeParts[l], minMeta, "parseMinMetaID");
                         } else if (l == 1) {
-                            maxMeta = ParsingHelper.parseFilteredInteger(rangeParts[l], minID, "parseMaxMetaID");
+                            maxMeta = ParsingHelper.parseFilteredInteger(rangeParts[l], maxMeta, "parseMaxMetaID");
                         } else {
                             ProjectZuluLog.warning("Block entry %s contains too many > elements.", values[j]);
                         }
@@ -99,16 +91,11 @@ public class OptionalParser {
             }
 
             /* Gaurantee Max > Min. Auxillary Purpose: Gaurantees max is not -1 if only min is Set */
-            maxID = minID > maxID ? minID : maxID;
             maxMeta = minMeta > maxMeta ? minMeta : maxMeta;
 
-            for (int id = minID; id <= maxID; id++) {
-                for (int meta = minMeta; meta <= maxMeta; meta++) {
-                    if (id != -1) {
-                        ProjectZuluLog.debug(Level.INFO, "Would be adding (%s,%s)", id, meta);
-                        blockMeta.put(id, meta);
-                    }
-                }
+            for (int meta = minMeta; meta <= maxMeta; meta++) {
+                ProjectZuluLog.debug(Level.INFO, "Would be adding (%s,%s)", blockID, meta);
+                blockMeta.put(blockID, meta);
             }
         }
         return !blockMeta.isEmpty() ? blockMeta : null;
@@ -122,19 +109,19 @@ public class OptionalParser {
      */
     public static void parseBlockRange(String[] values, HashMap<String, Object> valueCache) {
         if (values.length == 4) {
-            valueCache.put(Key.blockRangeX.key,
-                    ParsingHelper.parseFilteredInteger(values[1], OptionalSettingsBase.defaultBlockRange, "blockRangeX"));
-            valueCache.put(Key.blockRangeY.key,
-                    ParsingHelper.parseFilteredInteger(values[2], OptionalSettingsBase.defaultBlockRange, "blockRangeY"));
-            valueCache.put(Key.blockRangeZ.key,
-                    ParsingHelper.parseFilteredInteger(values[3], OptionalSettingsBase.defaultBlockRange, "blockRangeZ"));
+            valueCache.put(Key.blockRangeX.key, ParsingHelper.parseFilteredInteger(values[1],
+                    OptionalSettingsBase.defaultBlockRange, "blockRangeX"));
+            valueCache.put(Key.blockRangeY.key, ParsingHelper.parseFilteredInteger(values[2],
+                    OptionalSettingsBase.defaultBlockRange, "blockRangeY"));
+            valueCache.put(Key.blockRangeZ.key, ParsingHelper.parseFilteredInteger(values[3],
+                    OptionalSettingsBase.defaultBlockRange, "blockRangeZ"));
         } else if (values.length == 2) {
-            valueCache.put(Key.blockRangeX.key,
-                    ParsingHelper.parseFilteredInteger(values[1], OptionalSettingsBase.defaultBlockRange, "blockRangeX"));
-            valueCache.put(Key.blockRangeY.key,
-                    ParsingHelper.parseFilteredInteger(values[1], OptionalSettingsBase.defaultBlockRange, "blockRangeY"));
-            valueCache.put(Key.blockRangeZ.key,
-                    ParsingHelper.parseFilteredInteger(values[1], OptionalSettingsBase.defaultBlockRange, "blockRangeZ"));
+            valueCache.put(Key.blockRangeX.key, ParsingHelper.parseFilteredInteger(values[1],
+                    OptionalSettingsBase.defaultBlockRange, "blockRangeX"));
+            valueCache.put(Key.blockRangeY.key, ParsingHelper.parseFilteredInteger(values[1],
+                    OptionalSettingsBase.defaultBlockRange, "blockRangeY"));
+            valueCache.put(Key.blockRangeZ.key, ParsingHelper.parseFilteredInteger(values[1],
+                    OptionalSettingsBase.defaultBlockRange, "blockRangeZ"));
         } else {
             ProjectZuluLog.severe("Error Parsing deSpawn block search range Parameter. Invalid Argument Length.");
         }
@@ -163,8 +150,7 @@ public class OptionalParser {
      */
     public static void parseSpawnRange(String[] values, HashMap<String, Object> valueCache) {
         if (values.length == 2) {
-            valueCache.put(Key.spawnRange.key,
-                    ParsingHelper.parseFilteredInteger(values[1], 32, Key.spawnRange.key));
+            valueCache.put(Key.spawnRange.key, ParsingHelper.parseFilteredInteger(values[1], 32, Key.spawnRange.key));
         } else {
             ProjectZuluLog.severe("Error Parsing spawnRange parameter. Invalid Argument Length.");
         }

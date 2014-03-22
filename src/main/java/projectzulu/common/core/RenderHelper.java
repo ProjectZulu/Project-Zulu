@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
 public class RenderHelper {
 
@@ -23,7 +23,7 @@ public class RenderHelper {
         }
     }
 
-    public static boolean renderRotated2D(Icon icon, float iconScale, RenderBlocks renderer, double posX, double posY,
+    public static boolean renderRotated2D(IIcon icon, float iconScale, RenderBlocks renderer, double posX, double posY,
             double posZ, double xWidth, double yHeight, double angle) {
 
         angle = angle * Math.PI / 180f;
@@ -55,14 +55,14 @@ public class RenderHelper {
         return true;
     }
 
-    public static boolean renderRotatedRectangle(Icon icon, float iconScale, RenderBlocks renderer, double posX,
+    public static boolean renderRotatedRectangle(IIcon icon, float iconScale, RenderBlocks renderer, double posX,
             double posY, double posZ, double xWidth, double yHeight, double zWidth, double angle) {
         renderRotatedRectangle(icon, iconScale, renderer, posX, posY, posZ, xWidth, yHeight, zWidth, angle,
                 EnumSet.allOf(Surface.class));
         return true;
     }
 
-    public static boolean renderRotatedRectangle(Icon icon, float iconScale, RenderBlocks renderer, double posX,
+    public static boolean renderRotatedRectangle(IIcon icon, float iconScale, RenderBlocks renderer, double posX,
             double posY, double posZ, double xWidth, double yHeight, double zWidth, double angle,
             EnumSet<Surface> sidesToDraw) {
         angle = angle * Math.PI / 180f;

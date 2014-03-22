@@ -1,5 +1,6 @@
 package projectzulu.common.mobs.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.item.ItemStack;
@@ -79,7 +80,7 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4) {
+    protected void func_145780_a(int xCoord, int yCoord, int zCoord, Block stepBlock) {
         this.worldObj.playSoundAtEntity(this, "sounds.birdplop", 1.0F, 1.0F);
     }
 
@@ -108,16 +109,16 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
 
         /* If We are above Solid Ground, have a small Chance at Landing */
         if (this.rand.nextInt(100) == 0
-                && this.worldObj.isBlockNormalCube(MathHelper.floor_double(this.posX), (int) this.posY - 1,
-                        MathHelper.floor_double(this.posZ))) {
+                && this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY - 1,
+                        MathHelper.floor_double(this.posZ)).isNormalCube()) {
             stayStillTimer = 400;
         }
 
         /* If Posing, Check if We should Stay Flee */
         if (getEntityState() == EntityStates.posture) {
             /* If we are not on a Normal Block, Fly Free */
-            if (!this.worldObj.isBlockNormalCube(MathHelper.floor_double(this.posX), (int) this.posY - 1,
-                    MathHelper.floor_double(this.posZ))) {
+            if (!this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY - 1,
+                    MathHelper.floor_double(this.posZ)).isNormalCube()) {
                 stayStillTimer = 0;
             } else {
                 /* Chance to Chance Direction We are Facing ?--Do We Care?--? */
@@ -160,7 +161,7 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
     @Override
     protected void dropRareDrop(int par1) {
         if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
-            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 0), 1);
+            entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 0), 1);
         }
         super.dropRareDrop(par1);
     }

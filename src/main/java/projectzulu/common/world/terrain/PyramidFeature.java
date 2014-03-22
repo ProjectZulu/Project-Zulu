@@ -46,8 +46,8 @@ public class PyramidFeature extends BiomeFeature {
         chestLootChance = 15;
         chestMaxLoot = -1;
         if (CustomEntityList.MUMMY.modData.isPresent()) {
-                entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
-                        CustomEntityList.MUMMY.modData.get().mobName), 4));
+            entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
+                    CustomEntityList.MUMMY.modData.get().mobName), 4));
         }
         if (entityEntries.isEmpty()) {
             entityEntries.add(new EntityEntry("Zombie", 4));
@@ -122,7 +122,7 @@ public class PyramidFeature extends BiomeFeature {
     @Override
     public boolean canGenerateHere(World world, int chunkX, int chunkZ, ChunkCoordinates genBlockCoords, Random random) {
         if (super.canGenerateHere(world, chunkX, chunkZ, genBlockCoords, random)) {
-            if (world.getBlockMaterial(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ) != Material.water) {
+            if (world.getBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ).getMaterial() != Material.water) {
                 if (!TerrainFeatureHelper.doesTerrainFluctuate(world, genBlockCoords.posX, genBlockCoords.posY,
                         genBlockCoords.posZ, 5, 12)) {
                     if (printToLog) {

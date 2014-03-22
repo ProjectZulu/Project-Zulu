@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
-
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
 import projectzulu.common.world2.MazeCell;
@@ -18,10 +17,10 @@ public class BPSetWall implements BlueprintSet, Blueprint {
     final List<BlockWithMeta> blocks = new ArrayList<BlockWithMeta>();
 
     public BPSetWall() {
-        blocks.add(new BlockWithMeta("sandstone", 0, 5));
-        blocks.add(new BlockWithMeta("sandstone", 1, 5));
-        blocks.add(new BlockWithMeta("sandstone", 2, 5));
-        blocks.add(new BlockWithMeta("sandstone", 3, 5));
+        blocks.add(new BlockWithMeta(Blocks.sandstone, 0, 5));
+        blocks.add(new BlockWithMeta(Blocks.sandstone, 1, 5));
+        blocks.add(new BlockWithMeta(Blocks.sandstone, 2, 5));
+        blocks.add(new BlockWithMeta(Blocks.sandstone, 3, 5));
     }
 
     @Override

@@ -2,7 +2,7 @@ package projectzulu.common.world2.blueprint;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.ProjectZulu_Core;
@@ -17,21 +17,21 @@ public class BlueprintDeadEndChest implements Blueprint {
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
         if ((piecePos.posY == 0 || piecePos.posY == cellHeight - 1)) {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+            return new BlockWithMeta(Blocks.stonebrick, 0);
         }
 
         if (piecePos.posY == 1) {
             if (random.nextInt(8) == 0) {
                 LabyrinthFeature feature = (LabyrinthFeature) ProjectZulu_Core.featureGenerator
                         .getRegisteredStructure(LabyrinthFeature.LABYRINTH);
-                return new ChestWithMeta(Block.chest.blockID, 0, new TileEntityChest(), feature.chestLootChance,
+                return new ChestWithMeta(Blocks.chest, 0, new TileEntityChest(), feature.chestLootChance,
                         feature.chestMaxLoot);
             } else if (random.nextInt(8) == 1) {
                 return new MimicWithMeta();
             }
         }
 
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 
     @Override

@@ -8,14 +8,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import projectzulu.common.api.PotionList;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PotionEventHookContainerClass {
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void EntitySelfCleansingPotion(LivingUpdateEvent event) {
         /* If Cleansing is Disabled, do Not Continue. */
         if (!PotionList.cleansing.isPresent()) {
@@ -64,7 +64,7 @@ public class PotionEventHookContainerClass {
         }
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void cactusArmorDamage(LivingHurtEvent event) {
         PotionEffect thornsEffect = PotionList.thorn.isPresent() ? event.entityLiving
                 .getActivePotionEffect(PotionList.thorn.get()) : null;

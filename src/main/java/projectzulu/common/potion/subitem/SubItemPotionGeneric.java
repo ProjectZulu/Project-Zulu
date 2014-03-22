@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -45,8 +46,8 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
         CHEMICAL, POWER, DURATION, TIER, SPLASH, NONE;
     }
 
-    SubItemPotionGeneric(int itemID, int subID, String baseName) {
-        super(itemID, subID, baseName);
+    SubItemPotionGeneric(Item item, int subID, String baseName) {
+        super(item, subID, baseName);
     }
 
     @Override
@@ -65,7 +66,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
                 if (duration > 0) {
                     metaDamage = PotionParser.setDuration(duration - 1, metaDamage);
                 }
-                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setPower(power + 1,
+                return new ItemStack(brewingStack.getItem(), brewingStack.stackSize, PotionParser.setPower(power + 1,
                         metaDamage));
             }
             break;
@@ -78,7 +79,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
                 if (power > 0) {
                     metaDamage = PotionParser.setPower(power - 1, metaDamage);
                 }
-                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setDuration(
+                return new ItemStack(brewingStack.getItem(), brewingStack.stackSize, PotionParser.setDuration(
                         duration + 1, metaDamage));
             }
             break;
@@ -95,7 +96,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
                 if (duration > 0) {
                     metaDamage = PotionParser.setDuration(duration - 1, metaDamage);
                 }
-                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setLevel(level + 1,
+                return new ItemStack(brewingStack.getItem(), brewingStack.stackSize, PotionParser.setLevel(level + 1,
                         metaDamage));
             }
             break;
@@ -105,7 +106,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
         }
         case SPLASH: {
             if (!PotionParser.isSplash(brewingStack.getItemDamage())) {
-                return new ItemStack(brewingStack.itemID, brewingStack.stackSize, PotionParser.setSplash(brewingStack
+                return new ItemStack(brewingStack.getItem(), brewingStack.stackSize, PotionParser.setSplash(brewingStack
                         .getItemDamage()));
             }
             break;
@@ -121,14 +122,14 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     }
 
     protected TYPE getIngredientType(ItemStack ingredient, ItemStack brewingStack) {
-        if (ingredient.itemID == Item.redstone.itemID) {
+        if (ingredient.getItem() == Items.redstone) {
             return TYPE.POWER;
-        } else if (ingredient.itemID == Item.glowstone.itemID) {
+        } else if (ingredient.getItem() == Items.glowstone_dust) {
             return TYPE.DURATION;
-        } else if (ingredient.itemID == Item.gunpowder.itemID) {
+        } else if (ingredient.getItem() == Items.gunpowder) {
             return TYPE.SPLASH;
         } else if (ItemList.genericCraftingItems.isPresent()
-                && ingredient.itemID == ItemList.genericCraftingItems.get().itemID
+                && ingredient.getItem() == ItemList.genericCraftingItems.get()
                 && ingredient.getItemDamage() == Properties.ShinyBauble.meta) {
             return TYPE.TIER;
         }
@@ -212,7 +213,7 @@ public abstract class SubItemPotionGeneric extends SubItemPotion {
     }
     
     @Override
-    public void getSubItems(int itemID, CreativeTabs creativeTab, List<ItemStack> list) {
+    public void getSubItems(Item itemID, CreativeTabs creativeTab, List<ItemStack> list) {
         if (!getPotion().isPresent()) {
             return;
         }

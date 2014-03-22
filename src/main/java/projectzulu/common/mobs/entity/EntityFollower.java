@@ -8,10 +8,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import projectzulu.common.core.DefaultProps;
-import projectzulu.common.core.PacketIDs;
-import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
-import cpw.mods.fml.common.network.PacketDispatcher;
+import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.core.PZPacket;
+import projectzulu.common.mobs.packets.PacketFollowerMasterData;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
 /**
  * Reminder: This is technically a 'Flying' Entity
@@ -61,8 +61,8 @@ public class EntityFollower extends EntityLiving {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0);
     }
 
     @Override
@@ -117,10 +117,8 @@ public class EntityFollower extends EntityLiving {
          * from Child
          */
         if (ticksExisted % 40 == 0 && !worldObj.isRemote && masterEntity != null) {
-            PacketManagerFollowerMasterData packetManager = (PacketManagerFollowerMasterData) PacketIDs.followerMasterData
-                    .createPacketManager();
-            packetManager.setPacketData(entityId, masterEntity.entityId, followerIndex);
-            PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 60, dimension, packetManager.createPacket());
+            PZPacket packet = new PacketFollowerMasterData().setPacketData(getEntityId(), masterEntity.getEntityId(), followerIndex);
+            ProjectZulu_Core.getPipeline().sendToAllAround(packet, new TargetPoint(dimension, posX, posY, posZ, 60));
         }
 
         moveToTargetPosition(0.5f);
@@ -189,11 +187,11 @@ public class EntityFollower extends EntityLiving {
 
             if (this.onGround) {
                 var3 = 0.54600006F;
-                int var4 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX),
+                Block var4 = this.worldObj.getBlock(MathHelper.floor_double(this.posX),
                         MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
 
-                if (var4 > 0) {
-                    var3 = Block.blocksList[var4].slipperiness * 0.91F;
+                if (var4 != null) {
+                    var3 = var4.slipperiness * 0.91F;
                 }
             }
 
@@ -203,11 +201,11 @@ public class EntityFollower extends EntityLiving {
 
             if (this.onGround) {
                 var3 = 0.54600006F;
-                int var5 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX),
+                Block var5 = this.worldObj.getBlock(MathHelper.floor_double(this.posX),
                         MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
 
-                if (var5 > 0) {
-                    var3 = Block.blocksList[var5].slipperiness * 0.91F;
+                if (var5 != null) {
+                    var3 = var5.slipperiness * 0.91F;
                 }
             }
 

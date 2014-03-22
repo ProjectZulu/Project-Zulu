@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
 import projectzulu.common.world.CellIndexDirection;
@@ -13,17 +14,17 @@ import projectzulu.common.world2.blueprint.Blueprint;
 
 public class BPOasisGrass implements Blueprint {
 
-    BlockWithMeta sandstone = new BlockWithMeta("sandstone");
-    BlockWithMeta sand = new BlockWithMeta("sand");
-    BlockWithMeta grass = new BlockWithMeta("grass");
-    BlockWithMeta air = new BlockWithMeta("air");
+    BlockWithMeta sandstone = new BlockWithMeta(Blocks.sandstone);
+    BlockWithMeta sand = new BlockWithMeta(Blocks.sand);
+    BlockWithMeta grass = new BlockWithMeta(Blocks.grass);
+    BlockWithMeta air = new BlockWithMeta(Blocks.air);
     List<BlockWithMeta> flowers = new ArrayList<BlockWithMeta>();
 
     public BPOasisGrass() {
-        flowers.add(new BlockWithMeta("red_flower", 0, 1));
-        flowers.add(new BlockWithMeta("yellow_flower", 0, 1));
-        flowers.add(new BlockWithMeta("tallgrass", 1, 20));
-        flowers.add(new BlockWithMeta("air", 0, 4));
+        flowers.add(new BlockWithMeta(Blocks.red_flower, 0, 1));
+        flowers.add(new BlockWithMeta(Blocks.yellow_flower, 0, 1));
+        flowers.add(new BlockWithMeta(Blocks.tallgrass, 1, 20));
+        flowers.add(new BlockWithMeta(Blocks.air, 0, 4));
     }
 
     @Override

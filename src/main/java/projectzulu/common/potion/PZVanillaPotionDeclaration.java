@@ -32,22 +32,22 @@ public class PZVanillaPotionDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem() {
-        Item item = new ItemPZPotion(iD, name);
+        Item item = new ItemPZPotion(name);
         ItemList.vanillaPotions = Optional.of(item);
         int i = 0;
         List<SubItemPotion> list = new ArrayList<SubItemPotion>();
 
-        addToLists(item.itemID, i++, SubItemPotionList.STRENGTH, list, SubItemPotionDamageBoost.class);
-        addToLists(item.itemID, i++, SubItemPotionList.REGENERATION, list, SubItemPotionRegeneration.class);
-        addToLists(item.itemID, i++, SubItemPotionList.POISON, list, SubItemPotionPoison.class);
-        addToLists(item.itemID, i++, SubItemPotionList.WEAKNESS, list, SubItemPotionWeakness.class);
-        addToLists(item.itemID, i++, SubItemPotionList.MOVE_SPEED, list, SubItemPotionMoveSpeed.class);
-        addToLists(item.itemID, i++, SubItemPotionList.MOVE_SLOW, list, SubItemPotionMoveSlowdown.class);
-        addToLists(item.itemID, i++, SubItemPotionList.FIRE_RESISTANCE, list, SubItemPotionFireResistance.class);
-        addToLists(item.itemID, i++, SubItemPotionList.NIGHT_VISION, list, SubItemPotionNightVision.class);
-        addToLists(item.itemID, i++, SubItemPotionList.INVISIBILITY, list, SubItemPotionInvisibility.class);
-        addToLists(item.itemID, i++, SubItemPotionList.HEAL, list, SubItemPotionHeal.class);
-        addToLists(item.itemID, i++, SubItemPotionList.HARM, list, SubItemPotionHarm.class);
+        addToLists(item, i++, SubItemPotionList.STRENGTH, list, SubItemPotionDamageBoost.class);
+        addToLists(item, i++, SubItemPotionList.REGENERATION, list, SubItemPotionRegeneration.class);
+        addToLists(item, i++, SubItemPotionList.POISON, list, SubItemPotionPoison.class);
+        addToLists(item, i++, SubItemPotionList.WEAKNESS, list, SubItemPotionWeakness.class);
+        addToLists(item, i++, SubItemPotionList.MOVE_SPEED, list, SubItemPotionMoveSpeed.class);
+        addToLists(item, i++, SubItemPotionList.MOVE_SLOW, list, SubItemPotionMoveSlowdown.class);
+        addToLists(item, i++, SubItemPotionList.FIRE_RESISTANCE, list, SubItemPotionFireResistance.class);
+        addToLists(item, i++, SubItemPotionList.NIGHT_VISION, list, SubItemPotionNightVision.class);
+        addToLists(item, i++, SubItemPotionList.INVISIBILITY, list, SubItemPotionInvisibility.class);
+        addToLists(item, i++, SubItemPotionList.HEAL, list, SubItemPotionHeal.class);
+        addToLists(item, i++, SubItemPotionList.HARM, list, SubItemPotionHarm.class);
 
         for (SubItemPotion subItemPotion : list) {
             SubItemPotionRegistry.INSTANCE.addSubPotions(subItemPotion);
@@ -58,17 +58,17 @@ public class PZVanillaPotionDeclaration extends ItemDeclaration {
     @Override
     protected void registerItem() {
         Item item = ItemList.vanillaPotions.get();
-        registerSubPotions(item.itemID);
+        registerSubPotions(item);
     }
 
-    private void registerSubPotions(int itemID) {
+    private void registerSubPotions(Item itemID) {
         Collection<SubItemPotion> potions = SubItemPotionRegistry.INSTANCE.getPotions(itemID);
         for (SubItemPotion subItemPotion : potions) {
             subItemPotion.register();
         }
     }
 
-    private void addToLists(int itemID, int subID, SubItemPotionList entry, List<SubItemPotion> registryList,
+    private void addToLists(Item itemID, int subID, SubItemPotionList entry, List<SubItemPotion> registryList,
             Class<? extends SubItemPotion> potionClass) {
         try {
             SubItemPotion subItemPotion = potionClass.getConstructor(new Class[] { int.class, int.class }).newInstance(

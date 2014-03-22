@@ -2,7 +2,6 @@ package projectzulu.common;
 
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
-import projectzulu.common.mobs.MobSounds;
 import projectzulu.common.mobs.entitydefaults.AlligatorDeclaration;
 import projectzulu.common.mobs.entitydefaults.ArmadilloDeclaration;
 import projectzulu.common.mobs.entitydefaults.BearBlackDeclaration;
@@ -52,10 +51,8 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid = DefaultProps.MobsModId, name = "Project Zulu Mobs", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class ProjectZulu_Mobs {
 
     @Instance(DefaultProps.MobsModId)
@@ -70,12 +67,11 @@ public class ProjectZulu_Mobs {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        MobSounds.registerMobSounds();
     }
 
     @EventHandler
     public void load(FMLInitializationEvent event) {
-        
+
     }
 
     @EventHandler

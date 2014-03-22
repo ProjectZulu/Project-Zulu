@@ -13,10 +13,12 @@ import org.lwjgl.opengl.GL11;
 
 import projectzulu.common.mobs.entity.EntityGenericAnimal;
 import projectzulu.common.mobs.entity.EntityMummyPharaoh;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 
-public class BossHealthDisplayTicker implements ITickHandler {
+public class BossHealthDisplayTicker {
+       
     public static EntityMummyPharaoh targetBoss;
     protected float zLevel = 0.0F;
 
@@ -27,25 +29,13 @@ public class BossHealthDisplayTicker implements ITickHandler {
     public static boolean validTargetPresent(EntityLiving targetBoss) {
         return targetBoss != null && !targetBoss.isDead;
     }
-
-    @Override
-    public EnumSet<TickType> ticks() {
-        return EnumSet.of(TickType.RENDER);
-    }
-
-    @Override
-    public String getLabel() {
-        return null;
-    }
-
-    @Override
-    public void tickStart(EnumSet<TickType> type, Object... tickData) {
-    }
-
-    @Override
-    public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-        if (validTargetPresent(targetBoss) && Minecraft.getMinecraft().thePlayer != null) {
-            renderBossHealthBar(targetBoss, "Pharaoh Health");
+    
+    @SubscribeEvent
+    public void TickEvent(RenderTickEvent event) {
+        if (event.phase == Phase.END) {
+            if (validTargetPresent(targetBoss) && Minecraft.getMinecraft().thePlayer != null) {
+                renderBossHealthBar(targetBoss, "Pharaoh Health");
+            }
         }
     }
 

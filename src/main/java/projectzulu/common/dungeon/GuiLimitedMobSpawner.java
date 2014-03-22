@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SoundPool;
+import net.minecraft.client.audio.SoundRegistry;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.EntityList;
@@ -28,7 +28,9 @@ public class GuiLimitedMobSpawner extends GuiScreen {
     int numberOfFields = 1;
     int currentDataField = 0;
     private List<DataFields> dataFields = new ArrayList<DataFields>();
-    public static final ResourceLocation SPAWNER_GUI = new ResourceLocation(DefaultProps.dungeonKey, "mobspawnergui.png");
+    public static final ResourceLocation SPAWNER_GUI = new ResourceLocation(DefaultProps.dungeonKey,
+            "mobspawnergui.png");
+
     public DataFields getDataField(int index) {
         return dataFields.get(index);
     }
@@ -133,19 +135,22 @@ public class GuiLimitedMobSpawner extends GuiScreen {
             break;
         case Sound:
             if (rootSoundNode.numberOfChildren() == 0) {
-                SoundPool soundPool = mc.sndManager.soundPoolSounds;
-
                 /*
                  * Grab "nameToSoundPoolEntriesMapping" : OBFSC: "m" : nameToSoundPoolEntriesMapping --> fields.csv -->
                  * joined.srg --> d
                  */
                 HashMap soundHash;
                 try {
-                    soundHash = ObfuscationHelper.getCatchableFieldFromReflection("field_77461_d", soundPool,
+                    SoundRegistry registry = ObfuscationHelper.getCatchableFieldFromReflection("field_77461_d", // TODO
+                                                                                                                // GET
+                                                                                                                // MAPPING
+                            mc.getSoundHandler(), SoundRegistry.class);
+                    soundHash = ObfuscationHelper.getCatchableFieldFromReflection("field_148764_a", registry,
                             HashMap.class);
                 } catch (NoSuchFieldException e) {
-                    soundHash = ObfuscationHelper.getFieldFromReflection("nameToSoundPoolEntriesMapping", soundPool,
-                            HashMap.class);
+                    SoundRegistry registry = ObfuscationHelper.getFieldFromReflection("sndRegistry",
+                            mc.getSoundHandler(), SoundRegistry.class);
+                    soundHash = ObfuscationHelper.getFieldFromReflection("field_148764_a", registry, HashMap.class);
                 }
                 if (soundHash != null) {
                     Iterator stringSoundIterator = soundHash.keySet().iterator();
@@ -197,7 +202,7 @@ public class GuiLimitedMobSpawner extends GuiScreen {
             switch (ButtonIDs.getButtonByIndex(button.id)) {
             case CANCEL:
                 /* Close Menu With Saving */
-                this.limitedMobSpawner.onInventoryChanged();
+                this.limitedMobSpawner.markDirty();
                 closeGui();
                 break;
             case FORWARD:
@@ -212,7 +217,7 @@ public class GuiLimitedMobSpawner extends GuiScreen {
                 break;
             case SAVENCLOSE:
                 /* Close Menu With Saving */
-                this.limitedMobSpawner.onInventoryChanged();
+                this.limitedMobSpawner.markDirty();
                 saveGuiToTileEntity();
                 closeGui();
                 break;
@@ -299,7 +304,7 @@ public class GuiLimitedMobSpawner extends GuiScreen {
 
         String titleString = "Edit Mob Spawner Settings " + Integer.toString(currentDataField) + "/"
                 + Integer.toString(dataFields.size() - 1);
-        fontRenderer.drawString(titleString, (width - fontRenderer.getStringWidth(titleString)) / 2,
+        fontRendererObj.drawString(titleString, (width - fontRendererObj.getStringWidth(titleString)) / 2,
                 (height - backgroundSize.getY()) / 2 + 8, 4210752); // White: 16777215
         super.drawScreen(par1, par2, par3);
 

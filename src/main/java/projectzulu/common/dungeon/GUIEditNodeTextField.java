@@ -50,9 +50,11 @@ public class GUIEditNodeTextField extends GuiTextField {
         NBTBase newNBT = selectedNode.createNBTFromString(getText());
         if (newNBT != null) {
             if (selectedNode.getParent() != null) {
-                selectedNode.getParent().replaceChild(selectedNode, new NBTNode(newNBT, selectedNode.getParent()));
+                selectedNode.getParent().replaceChild(selectedNode,
+                        new NBTNode(newNBT, selectedNode.getParent(), selectedNode.getTagName()));
             } else {
-                selectedNode = new NBTNode(newNBT, null);
+                // Properties name is arbitrary, the top compound in entity NBT is/was typically called properties
+                selectedNode = new NBTNode(newNBT, null, "Properties");
             }
             clear();
             return true;

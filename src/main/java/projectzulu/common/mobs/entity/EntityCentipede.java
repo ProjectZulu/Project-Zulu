@@ -22,7 +22,7 @@ public class EntityCentipede extends EntityMaster implements IMob {
         // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
         // tasks.addTask(5, new EntityAIMate(this, moveSpeed));
-        // tasks.addTask(6, new EntityAITempt(this, moveSpeed, Block.tallGrass.blockID, false));
+        // tasks.addTask(6, new EntityAITempt(this, moveSpeed, Blocks.tallgrass, false));
         // tasks.addTask(7, new EntityAIFollowParent(this, moveSpeed));
         tasks.addTask(9, new EntityAIWander(this, 1.0f, 20));
 

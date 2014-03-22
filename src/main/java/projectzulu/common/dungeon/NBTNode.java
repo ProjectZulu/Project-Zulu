@@ -3,6 +3,8 @@ package projectzulu.common.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Optional;
+
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import projectzulu.common.core.ProjectZuluLog;
@@ -10,12 +12,18 @@ import projectzulu.common.core.ProjectZuluLog;
 public class NBTNode {
     private NBTBase data;
     private NBTNode parent;
+    private Optional<String> tagName;
     private List<NBTNode> children;
 
-    public NBTNode(NBTBase data, NBTNode parent) {
+    public NBTNode(NBTBase data, NBTNode parent, String tagName) {
         this.data = data;
         this.parent = parent;
         this.children = NBTHelper.getByID(data.getId()).getChildTags(data, this);
+        this.tagName = tagName != null ? Optional.of(tagName) : Optional.<String> absent();
+    }
+
+    public String getTagName() {
+        return tagName.isPresent() ? tagName.get() : "";
     }
 
     public NBTBase getData() {
@@ -46,8 +54,7 @@ public class NBTNode {
             children.set(index, newChild);
             return true;
         }
-        ProjectZuluLog.warning("Could not find Child %s with Parent %s ", childNode.getData().getName(), getData()
-                .getName());
+        ProjectZuluLog.warning("Could not find Child %s with Parent %s ", childNode.getTagName(), getData());
         return false;
     }
 
@@ -64,8 +71,8 @@ public class NBTNode {
         return numParents;
     }
 
-    public boolean addChild(NBTBase data) {
-        return children.add(new NBTNode(data, this));
+    public boolean addChild(NBTBase data, String tagName) {
+        return children.add(new NBTNode(data, this, tagName));
     }
 
     public boolean removeChild(NBTNode nodeToRemove) {

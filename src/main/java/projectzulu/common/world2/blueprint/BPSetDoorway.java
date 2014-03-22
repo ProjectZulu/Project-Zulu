@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
@@ -141,46 +142,46 @@ public class BPSetDoorway implements BlueprintSet, Blueprint {
             CellIndexDirection cellIndexDirection, Random random, String buildingID) {
         if (cellIndexDirection == CellIndexDirection.SouthWall) {
             if (piecePos.posY == 0) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             } else if (piecePos.posZ == cellSize - 1) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             } else if (piecePos.posY == cellHeight - 1) {
-                return new BlockWithMeta(Block.stairsSandStone.blockID, 6);
+                return new BlockWithMeta(Blocks.sandstone_stairs, 6);
             } else {
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
         } else if (cellIndexDirection == CellIndexDirection.NorthWall) {
             if (piecePos.posY == 0) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             } else if (piecePos.posZ == 0) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             } else if (piecePos.posY == cellHeight - 1) {
-                return new BlockWithMeta(Block.stairsSandStone.blockID, 7);
+                return new BlockWithMeta(Blocks.sandstone_stairs, 7);
             } else {
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
         } else if (cellIndexDirection == CellIndexDirection.WestWall) {
             if (piecePos.posY == 0) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             } else if (piecePos.posX == cellSize - 1) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             } else if (piecePos.posY == cellHeight - 1) {
-                return new BlockWithMeta(Block.stairsSandStone.blockID, 4);
+                return new BlockWithMeta(Blocks.sandstone_stairs, 4);
             } else {
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
         } else if (cellIndexDirection == CellIndexDirection.EastWall) {
             if (piecePos.posY == 0) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             } else if (piecePos.posX == 0) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             } else if (piecePos.posY == cellHeight - 1) {
-                return new BlockWithMeta(Block.stairsSandStone.blockID, 5);
+                return new BlockWithMeta(Blocks.sandstone_stairs, 5);
             } else {
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
         }
-        return new BlockWithMeta(Block.blockGold.blockID);
+        return new BlockWithMeta(Blocks.gold_block);
     }
 
     @Override

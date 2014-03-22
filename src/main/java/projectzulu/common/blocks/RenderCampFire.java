@@ -9,10 +9,12 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -36,7 +38,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
         Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
         GL11.glRotatef((float) (90f * Math.PI / 180f), 1, 0, 0);
         GL11.glScalef(scaleItem, scaleItem, scaleItem);
-        itemRenderer.doRenderItem(entityItemToRender, 0, 0, 0, 0, 0);
+        itemRenderer.doRender(entityItemToRender, 0, 0, 0, 0, 0);
         GL11.glPopMatrix();
     }
 
@@ -169,7 +171,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
     private boolean renderCampireRectangle2Sides(Block par1Block, int index1, int index2, int par2, double par3,
             double par5, double par7, RenderBlocks renderer, double xWidth, double zWidth, double yMax, double angle) {
         Tessellator var9 = Tessellator.instance;
-        Icon var10 = renderer.getBlockIconFromSideAndMetadata(Block.wood, 2, 0);
+        IIcon var10 = renderer.getBlockIconFromSideAndMetadata(Blocks.planks, 2, 0);
         double var13 = var10.getMinU();
         double var15 = var10.getMinU() + (var10.getMaxU() - var10.getMinU()) / 2.01f;
         double var17 = var10.getMinV();
@@ -240,7 +242,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
         var9.addVertexWithUV(point2X, par5 + yMin, point2Z, var13, var19);
         var9.addVertexWithUV(point1X, par5 + yMin, point1Z, var13, var17);
 
-        var10 = renderer.getBlockIconFromSideAndMetadata(Block.wood, 1, 0);
+        var10 = renderer.getBlockIconFromSideAndMetadata(Blocks.planks, 1, 0);
         var13 = var10.getMinU() + (var10.getMaxU() - var10.getMinU()) * 0.99f / 4f;
         var15 = var10.getMinU() + (var10.getMaxU() - var10.getMinU()) * 2.99f / 4f;
         var17 = var10.getMinV() + (var10.getMaxV() - var10.getMinV()) * 0.99f / 4f;
@@ -289,7 +291,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
     private boolean renderCampireRectangle(Block par1Block, int var10, int par2, double par3, double par5, double par7,
             RenderBlocks renderer, double xWidth, double zWidth, double yMax, double angle) {
         Tessellator var9 = Tessellator.instance;
-        Icon icon = renderer.getBlockIconFromSideAndMetadata(Block.cobblestone, 3, 2);
+        IIcon icon = renderer.getBlockIconFromSideAndMetadata(Blocks.cobblestone, 3, 2);
         double var13 = icon.getMinU();
         double var15 = icon.getMinU() + (icon.getMaxU() - icon.getMinU()) / 2.01f;
         double var17 = icon.getMinV();
@@ -395,7 +397,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
         var5.setColorOpaque_F(1.0F, 1.0F, 1.0F);
         var5.setBrightness(par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4));
 
-        Icon icon = renderer.getBlockIconFromSideAndMetadata(Block.fire, 0, 0);
+        IIcon icon = renderer.getBlockIconFromSideAndMetadata(Blocks.fire, 0, 0);
         double var9 = icon.getMinU();
         double var11 = icon.getMaxU();
         double var13 = icon.getMinV();
@@ -410,8 +412,8 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
         double var30;
         double var32;
 
-        if (!blockAccess.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4)
-                && !Block.fire.canBlockCatchFire(blockAccess, par2, par3 - 1, par4, ForgeDirection.UP)) {
+        if (!World.doesBlockHaveSolidTopSurface(blockAccess, par2, par3 - 1, par4)
+                && !Blocks.fire.canCatchFire(blockAccess, par2, par3 - 1, par4, ForgeDirection.UP)) {
             float var36 = 0.2F;
             float var19 = 0.0625F;
 
@@ -429,7 +431,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
                 var9 = var20;
             }
 
-            if (Block.fire.canBlockCatchFire(blockAccess, par2 - 1, par3, par4, ForgeDirection.EAST)) {
+            if (Blocks.fire.canCatchFire(blockAccess, par2 - 1, par3, par4, ForgeDirection.EAST)) {
                 var5.addVertexWithUV(par2 + var36, par3 + var17 + var19, par4 + 1, var11, var13);
                 var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 1, var11, var15);
                 var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 0, var9, var15);
@@ -440,7 +442,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
                 var5.addVertexWithUV(par2 + var36, par3 + var17 + var19, par4 + 1, var11, var13);
             }
 
-            if (Block.fire.canBlockCatchFire(blockAccess, par2 + 1, par3, par4, ForgeDirection.WEST)) {
+            if (Blocks.fire.canCatchFire(blockAccess, par2 + 1, par3, par4, ForgeDirection.WEST)) {
                 var5.addVertexWithUV(par2 + 1 - var36, par3 + var17 + var19, par4 + 0, var9, var13);
                 var5.addVertexWithUV(par2 + 1 - 0, par3 + 0 + var19, par4 + 0, var9, var15);
                 var5.addVertexWithUV(par2 + 1 - 0, par3 + 0 + var19, par4 + 1, var11, var15);
@@ -451,7 +453,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
                 var5.addVertexWithUV(par2 + 1 - var36, par3 + var17 + var19, par4 + 0, var9, var13);
             }
 
-            if (Block.fire.canBlockCatchFire(blockAccess, par2, par3, par4 - 1, ForgeDirection.SOUTH)) {
+            if (Blocks.fire.canCatchFire(blockAccess, par2, par3, par4 - 1, ForgeDirection.SOUTH)) {
                 var5.addVertexWithUV(par2 + 0, par3 + var17 + var19, par4 + var36, var11, var13);
                 var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 0, var11, var15);
                 var5.addVertexWithUV(par2 + 1, par3 + 0 + var19, par4 + 0, var9, var15);
@@ -462,7 +464,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
                 var5.addVertexWithUV(par2 + 0, par3 + var17 + var19, par4 + var36, var11, var13);
             }
 
-            if (Block.fire.canBlockCatchFire(blockAccess, par2, par3, par4 + 1, ForgeDirection.NORTH)) {
+            if (Blocks.fire.canCatchFire(blockAccess, par2, par3, par4 + 1, ForgeDirection.NORTH)) {
                 var5.addVertexWithUV(par2 + 1, par3 + var17 + var19, par4 + 1 - var36, var9, var13);
                 var5.addVertexWithUV(par2 + 1, par3 + 0 + var19, par4 + 1 - 0, var9, var15);
                 var5.addVertexWithUV(par2 + 0, par3 + 0 + var19, par4 + 1 - 0, var11, var15);
@@ -473,7 +475,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
                 var5.addVertexWithUV(par2 + 1, par3 + var17 + var19, par4 + 1 - var36, var9, var13);
             }
 
-            if (Block.fire.canBlockCatchFire(blockAccess, par2, par3 + 1, par4, ForgeDirection.DOWN)) {
+            if (Blocks.fire.canCatchFire(blockAccess, par2, par3 + 1, par4, ForgeDirection.DOWN)) {
                 var20 = par2 + 0.5D + 0.5D; // 1
                 var22 = par2 + 0.5D - 0.5D; // 0
                 var24 = par4 + 0.5D + 0.5D;
@@ -592,7 +594,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelId) {
         return false;
     }
 

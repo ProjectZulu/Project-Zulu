@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
 import projectzulu.common.world.CellIndexDirection;
@@ -40,13 +41,13 @@ public class BPCathedralHallway implements Blueprint {
 
     public BlockWithMeta getWallBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
-        BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
-        BlockWithMeta woodenStair = new BlockWithMeta(134);
+        BlockWithMeta woodenPlank = new BlockWithMeta(Blocks.planks, 1);
+        BlockWithMeta woodenStair = new BlockWithMeta(Blocks.spruce_stairs);
 
         List<BlockWithMeta> wallBlocks = new ArrayList<BlockWithMeta>(3);
-        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 8)); // Cracked
-        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 1, 8)); // Mossy
-        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 0, 100)); // Regular
+        wallBlocks.add(new BlockWithMeta(Blocks.stonebrick, 2, 8)); // Cracked
+        wallBlocks.add(new BlockWithMeta(Blocks.stonebrick, 1, 8)); // Mossy
+        wallBlocks.add(new BlockWithMeta(Blocks.stonebrick, 0, 100)); // Regular
 
         /* Ceiling Top */
         if (piecePos.posY > cellHeight - cellSize) {
@@ -56,12 +57,12 @@ public class BPCathedralHallway implements Blueprint {
                     BoundaryPair.createPair(0, cellSize * 2 - 8), cellHeight - cellSize / 3);
             if (slope == 0) {
                 if (slope != slopeBelow) {
-                    return new BlockWithMeta(woodenStair.blockID, getStairMeta(cellIndexDirection));
+                    return new BlockWithMeta(woodenStair.block, getStairMeta(cellIndexDirection));
                 } else {
                     return woodenPlank;
                 }
             } else if (slope > 0) {
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
         }
 
@@ -78,7 +79,7 @@ public class BPCathedralHallway implements Blueprint {
                 BoundaryPair.createPair(1, cellSize * 2 - 8), cellHeight - cellSize);
         if (slope == 0) {
             if (slope != slopeBelow) {
-                return new BlockWithMeta(woodenStair.blockID, getStairMeta(cellIndexDirection));
+                return new BlockWithMeta(woodenStair.block, getStairMeta(cellIndexDirection));
             } else {
                 return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
@@ -91,11 +92,11 @@ public class BPCathedralHallway implements Blueprint {
             }
 
             if (piecePos.posZ == cellSize - 1 && piecePos.posX % 3 == 2 && slope == 1) {
-                return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, false));
+                return new BlockWithMeta(woodenStair.block, getArchStairMeta(cellIndexDirection, false));
             }
 
             if (slope < 4 && piecePos.posZ == 3) {
-                return new BlockWithMeta(Block.bookShelf.blockID);
+                return new BlockWithMeta(Blocks.bookshelf);
             }
         }
 
@@ -105,7 +106,7 @@ public class BPCathedralHallway implements Blueprint {
         if (topAarchSlope == 0 && piecePos.posX % 3 == 1) {
             // only inside cathedral wall
             if (piecePos.posZ > cellSize * 4 / 10) {
-                return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, true));
+                return new BlockWithMeta(woodenStair.block, getArchStairMeta(cellIndexDirection, true));
             }
         }
 
@@ -114,27 +115,27 @@ public class BPCathedralHallway implements Blueprint {
         if (botAarchSlope == 0 && piecePos.posX % 3 == 1) {
             // only inside cathedral wall
             if (piecePos.posZ > cellSize * 4 / 10) {
-                return new BlockWithMeta(woodenStair.blockID, getArchStairMeta(cellIndexDirection, false));
+                return new BlockWithMeta(woodenStair.block, getArchStairMeta(cellIndexDirection, false));
             }
         }
 
         /* Pews */
         if (piecePos.posY == 1 && piecePos.posX % 2 == 1) {
             if (piecePos.posZ == cellSize * 4 / 10 + 2) {
-                return new BlockWithMeta(Block.stairsWoodOak.blockID, getPewStairMeta(cellIndexDirection));
+                return new BlockWithMeta(Blocks.oak_stairs, getPewStairMeta(cellIndexDirection));
             } else if (piecePos.posZ > cellSize * 4 / 10 + 2) {
-                return new BlockWithMeta(Block.woodSingleSlab.blockID);
+                return new BlockWithMeta(Blocks.wooden_slab);
             }
         }
 
         if (piecePos.posZ > cellSize * 4 / 10 && piecePos.posY == 0) {
             if (piecePos.posZ == cellSize * 4 / 10 + 1) {
-                return new BlockWithMeta(Block.cobblestone.blockID);
+                return new BlockWithMeta(Blocks.cobblestone);
             } else {
                 return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
         }
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 
     private int getStairMeta(CellIndexDirection cellIndexDirection) {

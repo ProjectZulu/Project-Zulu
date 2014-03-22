@@ -1,6 +1,7 @@
 package projectzulu.common.mobs.entity;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,9 +53,9 @@ public abstract class EntityGenericRideable extends EntityGenericBreedable{
      * by a player and the player is holding a carrot-on-a-stick
      */
     @Override
-    public boolean canBeSteered(){
-    	ItemStack var1 = ((EntityPlayer)this.riddenByEntity).getHeldItem();
-    	return var1 != null && var1.itemID == Item.stick.itemID;
+    public boolean canBeSteered() {
+        ItemStack var1 = ((EntityPlayer) this.riddenByEntity).getHeldItem();
+        return var1 != null && var1.getItem().equals(Items.stick);
     }
     
     /**
@@ -63,7 +64,7 @@ public abstract class EntityGenericRideable extends EntityGenericBreedable{
     public boolean shouldIgnorePlayerRot(){
     	if(riddenByEntity != null && riddenByEntity instanceof EntityPlayer){
             ItemStack var1 = ((EntityPlayer)this.riddenByEntity).getHeldItem();
-            return var1 != null && var1.itemID != Item.stick.itemID;
+            return var1 != null && var1.getItem() != Items.stick;
     	}
     	return false;
     }
@@ -90,7 +91,7 @@ public abstract class EntityGenericRideable extends EntityGenericBreedable{
 
     			 /* If Not Saddled: Try to Saddle Entity */
     		 }else if(!getSaddled() && par1EntityPlayer.inventory.getCurrentItem() != null 
-    				 && par1EntityPlayer.inventory.getCurrentItem().itemID == Item.saddle.itemID  ){
+    				 && par1EntityPlayer.inventory.getCurrentItem().getItem() == Items.saddle  ){
     			 setSaddled(true);
     			 return true;
     		 }

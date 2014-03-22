@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -43,7 +44,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
         tasks.addTask(4, new EntityAIFollowOwner(this, 1.0f, 10.0F, 2.0F));
 
         tasks.addTask(5, new EntityAIMate(this, 1.0f));
-        tasks.addTask(6, new EntityAITempt(this, 1.2f, Item.egg.itemID, false));
+        tasks.addTask(6, new EntityAITempt(this, 1.2f, Items.egg, false));
         tasks.addTask(7, new EntityAIFollowParent(this, 1.1f));
         tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
@@ -95,7 +96,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
             return false;
         }
 
-        if (itemStack.itemID == Item.egg.itemID) {
+        if (itemStack.getItem() == Items.egg) {
             return true;
         }
         return super.isValidTamingItem(itemStack);
@@ -103,7 +104,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
 
     @Override
     public boolean isValidBreedingItem(ItemStack itemStack) {
-        if (itemStack != null && itemStack.getItem().itemID == Item.egg.itemID) {
+        if (itemStack != null && itemStack.getItem() == Items.egg) {
             return true;
         } else {
             return false;
@@ -122,14 +123,11 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
     public int getHealingValueIfValid(ItemStack itemStack) {
 
         if (itemStack == null) {
-            System.out.println("Is Null");
             return 0;
         }
 
-        if (itemStack.itemID == Item.egg.itemID) {
-            System.out.println(((ItemFood) Item.melon).getHealAmount());
-
-            return ((ItemFood) Item.melon).getHealAmount();
+        if (itemStack.getItem() == Items.egg) {
+            return ((ItemFood) Items.melon).func_150905_g(itemStack);
         }
 
         return 0;

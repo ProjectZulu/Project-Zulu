@@ -11,20 +11,22 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import projectzulu.common.core.PZPacket;
 import projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
 
-public class PacketManagerMobSpawner extends PacketDataStream {
+public class PacketMobSpawner extends PacketDataStream {
     int entityIDtoSync;
     private int posX;
     private int posY;
     private int posZ;
     private NBTTagCompound customData;
 
-    public void setPacketData(int xPos, int yPos, int zPos, NBTTagCompound customData) {
+    public PacketMobSpawner setPacketData(int xPos, int yPos, int zPos, NBTTagCompound customData) {
         this.posX = xPos;
         this.posY = yPos;
         this.posZ = zPos;
         this.customData = customData;
+        return this;
     }
 
     @Override

@@ -1,10 +1,22 @@
 package projectzulu.common.dungeon.spawner.tag;
 
 import java.util.IllegalFormatException;
+import java.util.List;
 
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagByte;
+import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagDouble;
+import net.minecraft.nbt.NBTTagFloat;
+import net.minecraft.nbt.NBTTagInt;
+import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagLong;
+import net.minecraft.nbt.NBTTagShort;
+import net.minecraft.nbt.NBTTagString;
+import projectzulu.common.core.ObfuscationHelper;
+import projectzulu.common.core.ProjectZuluLog;
 
 public class NBTWriter {
 
@@ -36,12 +48,22 @@ public class NBTWriter {
             public NBTBase process(NBTBase curTag, String tagOperation) {
                 NBTTagList tag = (NBTTagList) curTag;
                 String[] operations = tagOperation.split("/");
-                int listIndex = ParsingHelper.parseFilteredInteger(operations[0], 0, "listIndex|" + curTag.getName());
-                int childtag = ParsingHelper.parseFilteredInteger(operations[1], 0, "childTag|" + curTag.getName());
+                int listIndex = ParsingHelper.parseFilteredInteger(operations[0], 0, "listIndex|" + tagOperation);
+                int childtag = ParsingHelper.parseFilteredInteger(operations[1], 0, "childTag|" + tagOperation);
                 while (tag.tagCount() < listIndex + 1) {
-                    tag.appendTag(NBTBase.newTag((byte) childtag, ""));
+                    String[] values = new String[operations.length - 2];
+                    for (int i = 2; i < values.length; i++) {
+                        values[i - 2] = operations[i];
+                    }
+                    NBTBase child = createChildTag((byte) childtag, values);
+                    tag.appendTag(child);
                 }
-                return tag.tagAt(listIndex);
+                if (childtag == 9 || childtag == 10) {
+                    List tagList = ObfuscationHelper.getFieldFromReflection("tagList", tag, List.class);
+                    return (NBTBase) tagList.get(listIndex);
+                } else {
+                    return tag;
+                }
             }
         },
         TAG_COMPOUND(10) {
@@ -50,68 +72,17 @@ public class NBTWriter {
                 NBTTagCompound tag = (NBTTagCompound) curTag;
                 String[] operations = tagOperation.split("/");
                 try {
-                    int childtag = ParsingHelper.parseFilteredInteger(operations[1], 0, "childTag|" + curTag.getName());
-                    switch (childtag) {
-                    /* Container Tags */
-                    case 9:
-                    case 10:
-                        if (tag.hasKey(operations[0])) {
-                            return tag.getTag(operations[0]);
-                        } else {
-                            NBTBase newTag = NBTBase.newTag((byte) childtag, operations[0]);
-                            tag.setTag(newTag.getName(), newTag);
-                            return newTag;
+                    int childtag = ParsingHelper.parseFilteredInteger(operations[1], 0, "childTag|" + tagOperation);
+                    if (tag.hasKey(operations[0])) {
+                        return tag.getTag(operations[0]);
+                    } else {
+                        String[] values = new String[operations.length - 2];
+                        for (int i = 2; i < values.length; i++) {
+                            values[i - 2] = operations[i];
                         }
-                        /* Value Tags */
-                    case 1:
-                        tag.setByte(
-                                operations[0],
-                                (byte) ParsingHelper.parseFilteredInteger(operations[2].trim(), 0,
-                                        "Byte|" + curTag.getName()));
-                        return tag;
-                    case 2:
-                        tag.setShort(
-                                operations[0],
-                                (short) ParsingHelper.parseFilteredInteger(operations[2].trim(), 0,
-                                        "Short|" + curTag.getName()));
-                        return tag;
-                    case 3:
-                        tag.setInteger(operations[0],
-                                ParsingHelper.parseFilteredInteger(operations[2].trim(), 0, "Int|" + curTag.getName()));
-                        return tag;
-                    case 4:
-                        tag.setLong(operations[0],
-                                ParsingHelper.parseFilteredLong(operations[2].trim(), 0L, "Long|" + curTag.getName()));
-                        return tag;
-                    case 5:
-                        tag.setDouble(operations[0],
-                                ParsingHelper.parseFilteredFloat(operations[2].trim(), 0, "Float|" + curTag.getName()));
-                        return tag;
-                    case 6:
-                        tag.setDouble(operations[0], ParsingHelper.parseFilteredDouble(operations[2].trim(), 0,
-                                "Double|" + curTag.getName()));
-                        return tag;
-                    case 8:
-                        tag.setString(operations[0], operations[2].trim());
-                        return tag;
-                    case 7:
-                        byte[] byteArray = new byte[operations.length - 2];
-                        for (int i = 2; i < operations.length; i++) {
-                            byteArray[i - 2] = (byte) ParsingHelper.parseFilteredInteger(operations[i - 2], 0,
-                                    "ByteArray|" + curTag.getName());
-                        }
-                        tag.setByteArray(operations[0], byteArray);
-                        return tag;
-                    case 11:
-                        int[] intArray = new int[operations.length - 2];
-                        for (int i = 2; i < operations.length; i++) {
-                            intArray[i - 2] = ParsingHelper.parseFilteredInteger(operations[i - 2], 0, "IntArray|"
-                                    + curTag.getName());
-                        }
-                        tag.setIntArray(operations[0], intArray);
-                        return tag;
-                    default:
-                        throw new IllegalArgumentException("Invalid Child ID " + childtag + " in " + tagOperation);
+                        NBTBase child = createChildTag((byte) childtag, values);
+                        tag.setTag(operations[0], child);
+                        return child;
                     }
                 } catch (IndexOutOfBoundsException e) {
                     throw new IndexOutOfBoundsException("Illegal NBT Length when processing " + tagOperation);
@@ -148,5 +119,45 @@ public class NBTWriter {
          * Container tags return the searched for child. Value tags curTag.
          */
         public abstract NBTBase process(NBTBase curTag, String tagOperation);
+    }
+
+    private static NBTBase createChildTag(byte childtag, String... values) {
+        switch (childtag) {
+        /* Container Tags */
+        case 9:
+            return new NBTTagList();
+        case 10:
+            return new NBTTagCompound();
+            /* Value Tags: operations[2] should contain value */
+        case 1:
+            return new NBTTagByte(Byte.parseByte(values[0].trim()));
+        case 2:
+            return new NBTTagShort(Short.parseShort(values[0].trim()));
+        case 3:
+            return new NBTTagInt(Integer.parseInt(values[0].trim()));
+        case 4:
+            return new NBTTagLong(Long.parseLong(values[0].trim()));
+        case 5:
+            return new NBTTagFloat(Float.parseFloat(values[0].trim()));
+        case 6:
+            return new NBTTagDouble(Double.parseDouble(values[0].trim()));
+        case 7:
+            byte[] byteArray = new byte[values.length];
+            for (int i = 2; i < values.length; i++) {
+                byteArray[i - 2] = (byte) ParsingHelper.parseFilteredInteger(values[i], 0, "ByteArray");
+            }
+            return new NBTTagByteArray(byteArray);
+        case 8:
+            return new NBTTagString("");
+        case 11:
+            int[] intArray = new int[values.length - 2];
+            for (int i = 2; i < values.length; i++) {
+                intArray[i - 2] = (int) ParsingHelper.parseFilteredInteger(values[i], 0, "ByteArray");
+            }
+            return new NBTTagIntArray(intArray);
+        default:
+            ProjectZuluLog.severe("Unrecognised childtag tagId %s", childtag);
+            throw new IllegalArgumentException();
+        }
     }
 }

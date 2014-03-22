@@ -102,8 +102,9 @@ public abstract class EntityGenericCreature extends EntityAerial {
         leashPathCooldown = Math.max(leashPathCooldown - 1, 0);
     }
 
-    protected void func_110159_bB() {
-        super.func_110159_bB();
+    @Override
+    protected void updateLeashedState() {
+        super.updateLeashedState();
 
         if (this.getLeashed() && this.getLeashedToEntity() != null
                 && this.getLeashedToEntity().worldObj == this.worldObj) {

@@ -1,5 +1,6 @@
 package projectzulu.common.dungeon;
 
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +19,8 @@ public class GUISelectionList extends GuiScrollingList {
 
     Node currentNode;
     GuiButton previous;
-    public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonKey, "creaturelistgui.png");
+    public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonKey,
+            "creaturelistgui.png");
 
     public GUISelectionList(GuiLimitedMobSpawner parent, Node rootSoundNode, ListType listType, int listWidth,
             Point screenSize, Point backgroundSize) {
@@ -109,7 +111,8 @@ public class GUISelectionList extends GuiScrollingList {
 
     private void drawScrollOverlay(int leftOffset, int topHeight, int botHeight, int alphaBottom, int alphaTop) {
         Tessellator var5 = Tessellator.instance;
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, parent.getMinecraft().renderEngine.getTexture(getBackgroundTexture()).getGlTextureId());
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, parent.getMinecraft().renderEngine.getTexture(getBackgroundTexture())
+                .getGlTextureId());
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         float imageSize = 32.0F;
         var5.startDrawingQuads();
@@ -128,7 +131,8 @@ public class GUISelectionList extends GuiScrollingList {
         if (par3 == 0 && previous.mousePressed(parent.getMinecraft(), par1, par2)) {
             if (currentNode.getParent() != null) {
                 currentNode = currentNode.getParent();
-                parent.getMinecraft().sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                parent.getMinecraft().getSoundHandler()
+                        .playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
             }
         }
     }

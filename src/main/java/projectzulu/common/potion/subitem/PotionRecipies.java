@@ -2,6 +2,7 @@ package projectzulu.common.potion.subitem;
 
 import java.util.HashMap;
 
+import net.minecraft.item.Item;
 import projectzulu.common.api.SubItemPotionList;
 
 public class PotionRecipies {
@@ -11,22 +12,25 @@ public class PotionRecipies {
      */
     private static HashMap<String, SubItemPotion> ingredientToPotionResult = new HashMap<String, SubItemPotion>();
 
-    public void addResultPotion(int itemID, SubItemPotionList resultPotion) {
+    public void addResultPotion(Item item, SubItemPotionList resultPotion) {
         if (resultPotion.isPresent()) {
-            ingredientToPotionResult.put(Integer.toString(itemID) + ".*", resultPotion.get());
+            String name = Item.itemRegistry.getNameForObject(item);
+            ingredientToPotionResult.put(name + ".*", resultPotion.get());
         }
     }
 
-    public void addResultPotion(int itemID, int meta, SubItemPotionList resultPotion) {
+    public void addResultPotion(Item item, int meta, SubItemPotionList resultPotion) {
         if (resultPotion.isPresent()) {
-            ingredientToPotionResult.put(Integer.toString(itemID) + "." + Integer.toString(meta), resultPotion.get());
+            String name = Item.itemRegistry.getNameForObject(item);
+            ingredientToPotionResult.put(name + "." + Integer.toString(meta), resultPotion.get());
         }
     }
 
-    public SubItemPotion getResulingPotion(int itemID, int meta) {
-        SubItemPotion result = ingredientToPotionResult.get(Integer.toString(itemID) + "." + Integer.toString(meta));
+    public SubItemPotion getResulingPotion(Item item, int meta) {
+        String name = Item.itemRegistry.getNameForObject(item);
+        SubItemPotion result = ingredientToPotionResult.get(name + "." + Integer.toString(meta));
         if (result == null) {
-            result = ingredientToPotionResult.get(Integer.toString(itemID) + ".*");
+            result = ingredientToPotionResult.get(name + ".*");
         }
         return result;
     }

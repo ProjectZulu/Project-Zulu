@@ -4,13 +4,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.DefaultProps;
@@ -22,14 +23,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemPZPotion extends ItemPotion {
 
     @SideOnly(Side.CLIENT)
-    private Icon splashIcon;
+    private IIcon splashIcon;
     @SideOnly(Side.CLIENT)
-    private Icon regularIcon;
+    private IIcon regularIcon;
     @SideOnly(Side.CLIENT)
-    private Icon contentIcon;
+    private IIcon contentIcon;
 
-    public ItemPZPotion(int itemID, String name) {
-        super(itemID);
+    public ItemPZPotion(String name) {
+        super();
         setCreativeTab(ProjectZulu_Core.projectZuluPotionTab);
         setMaxStackSize(3);
         setUnlocalizedName(DefaultProps.blockKey + ":" + name.toLowerCase());
@@ -41,7 +42,7 @@ public class ItemPZPotion extends ItemPotion {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(int par1) {
+    public IIcon getIconFromDamage(int par1) {
         return isSplash(par1) ? splashIcon : regularIcon;
     }
 
@@ -50,7 +51,7 @@ public class ItemPZPotion extends ItemPotion {
     /**
      * Gets an icon index based on an item's damage value and the given render pass
      */
-    public Icon getIconFromDamageForRenderPass(int par1, int par2) {
+    public IIcon getIconFromDamageForRenderPass(int par1, int par2) {
         return par2 == 0 ? contentIcon : getIconFromDamage(par1);
     }
 
@@ -62,12 +63,12 @@ public class ItemPZPotion extends ItemPotion {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean isEffectInstant(int damageMeta) {
-        SubItemPotion potion = SubItemPotionRegistry.INSTANCE.getPotion(itemID, PotionParser.readID(damageMeta));
+        SubItemPotion potion = SubItemPotionRegistry.INSTANCE.getPotion(this, PotionParser.readID(damageMeta));
         return potion != null ? potion.isEffectInstant(damageMeta) : false;
     }
 
     @Override
-    public String getItemDisplayName(ItemStack itemStack) {
+    public String getItemStackDisplayName(ItemStack itemStack) {
         SubItemPotion potion = SubItemPotionRegistry.INSTANCE.getPotion(itemStack);
         return potion != null ? potion.getDisplayName(itemStack) : "Unknown Concoction";
     }
@@ -98,7 +99,7 @@ public class ItemPZPotion extends ItemPotion {
 
     @Override
     public List<PotionEffect> getEffects(int damageMeta) {
-        SubItemPotion potion = SubItemPotionRegistry.INSTANCE.getPotion(itemID, PotionParser.readID(damageMeta));
+        SubItemPotion potion = SubItemPotionRegistry.INSTANCE.getPotion(this, PotionParser.readID(damageMeta));
         return potion != null ? potion.getPotionEffects(damageMeta) : Collections.<PotionEffect> emptyList();
     }
 
@@ -120,10 +121,10 @@ public class ItemPZPotion extends ItemPotion {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(int itemID, CreativeTabs creativeTabs, List list) {
-        Collection<SubItemPotion> potion = SubItemPotionRegistry.INSTANCE.getPotions(itemID);
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+        Collection<SubItemPotion> potion = SubItemPotionRegistry.INSTANCE.getPotions(item);
         for (SubItemPotion subItemPotion : potion) {
-            subItemPotion.getSubItems(itemID, creativeTabs, list);
+            subItemPotion.getSubItems(item, creativeTabs, list);
         }
     }
 
@@ -134,7 +135,7 @@ public class ItemPZPotion extends ItemPotion {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister) {
+    public void registerIcons(IIconRegister iconRegister) {
         this.regularIcon = iconRegister.registerIcon("potion_bottle_drinkable");
         this.splashIcon = iconRegister.registerIcon("potion_bottle_splash");
         this.contentIcon = iconRegister.registerIcon("potion_overlay");

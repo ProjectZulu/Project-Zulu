@@ -3,9 +3,6 @@ package projectzulu.common.world2.randomizer;
 import java.awt.Point;
 import java.util.Random;
 
-import net.minecraft.util.MathHelper;
-
-import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.world2.MazeCell;
 import projectzulu.common.world2.architect.ArchitectBase;
 

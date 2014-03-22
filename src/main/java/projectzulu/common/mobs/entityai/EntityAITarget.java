@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.attributes.AttributeInstance;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
@@ -76,7 +76,7 @@ public abstract class EntityAITarget extends EntityAIBase {
     }
 
     protected double getFollowDistance() {
-        AttributeInstance attributeinstance = this.taskOwner.getEntityAttribute(SharedMonsterAttributes.followRange);
+        IAttributeInstance attributeinstance = this.taskOwner.getEntityAttribute(SharedMonsterAttributes.followRange);
         return attributeinstance == null ? 16.0D : attributeinstance.getAttributeValue();
     }
 
@@ -139,7 +139,7 @@ public abstract class EntityAITarget extends EntityAIBase {
                             MathHelper.floor_double(par1EntityLiving.posZ))) {
                 return false;
             } else if (this.taskOwner instanceof EntityCreature
-                    && !((EntityCreature) taskOwner).func_110176_b(MathHelper.floor_double(par1EntityLiving.posX),
+                    && !((EntityCreature) taskOwner).isWithinHomeDistance(MathHelper.floor_double(par1EntityLiving.posX),
                             MathHelper.floor_double(par1EntityLiving.posY),
                             MathHelper.floor_double(par1EntityLiving.posZ))) {
                 return false;

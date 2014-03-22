@@ -28,7 +28,7 @@ public class EntityBrownBear extends EntityBear {
     @Override
     protected void dropRareDrop(int par1) {
         if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
-            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 4), 1);
+            entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 4), 1);
         }
         super.dropRareDrop(par1);
     }

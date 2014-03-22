@@ -3,6 +3,7 @@ package projectzulu.common.world2.blueprints;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.world.CellIndexDirection;
@@ -17,24 +18,24 @@ public class BPScatteredTombstonesAndFlowers implements Blueprint {
             CellIndexDirection cellIndexDirection) {
 
         if (piecePos.posY == 0) {
-            return new BlockWithMeta("grass");
+            return new BlockWithMeta(Blocks.grass);
         } else if (piecePos.posY == 1) {
             if (random.nextInt(90) == 0) {
-                 return new HauntedArmorWithMeta();
+                return new HauntedArmorWithMeta();
             }
 
             if (piecePos.posX % 2 == 1 ^ piecePos.posZ % 2 == 1 && random.nextInt(100) <= 20) {
-                return BlockList.tombstone.isPresent() ? new BlockWithMeta(BlockList.tombstone.get().blockID)
-                        : new BlockWithMeta("air");
+                return BlockList.tombstone.isPresent() ? new BlockWithMeta(BlockList.tombstone.get())
+                        : new BlockWithMeta(Blocks.air);
             } else if (5 - random.nextInt(100) >= 0) {
-                return new BlockWithMeta("red_flower", 0);
+                return new BlockWithMeta(Blocks.red_flower, 0);
             } else if (5 - random.nextInt(100) >= 0) {
-                return new BlockWithMeta("yellow_flower", 0);
+                return new BlockWithMeta(Blocks.yellow_flower, 0);
             } else if (50 - random.nextInt(100) >= 0) {
-                return new BlockWithMeta("tallgrass", 1);
+                return new BlockWithMeta(Blocks.tallgrass, 1);
             }
         }
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 
     @Override

@@ -35,13 +35,14 @@ public abstract class BiomeFeature extends BaseFeature {
     protected void loadSettings(FeatureConfiguration config) {
         super.loadSettings(config);
         Collection<String> defaultBiomesToSpawn = getDefaultBiomeList();
-        for (int i = 0; i < BiomeGenBase.biomeList.length; i++) {
-            if (BiomeGenBase.biomeList[i] == null) {
+        for (int i = 0; i < BiomeGenBase.getBiomeGenArray().length; i++) {
+            if (BiomeGenBase.getBiomeGenArray()[i] == null) {
                 continue;
             }
-            if (config.getFeatureProperty(this, "GeneratingBiomes", getBiomePackageName(BiomeGenBase.biomeList[i]),
-                    defaultBiomesToSpawn.contains(BiomeGenBase.biomeList[i].biomeName)).getBoolean(false)) {
-                biomesToSpawn.add(getBiomePackageName(BiomeGenBase.biomeList[i]));
+            if (config.getFeatureProperty(this, "GeneratingBiomes",
+                    getBiomePackageName(BiomeGenBase.getBiomeGenArray()[i]),
+                    defaultBiomesToSpawn.contains(BiomeGenBase.getBiomeGenArray()[i].biomeName)).getBoolean(false)) {
+                biomesToSpawn.add(getBiomePackageName(BiomeGenBase.getBiomeGenArray()[i]));
             }
         }
     }

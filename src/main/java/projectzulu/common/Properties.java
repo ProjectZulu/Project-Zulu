@@ -2,7 +2,7 @@ package projectzulu.common;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.core.DefaultProps;
 
 public class Properties {

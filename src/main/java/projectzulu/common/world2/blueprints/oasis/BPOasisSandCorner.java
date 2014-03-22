@@ -2,7 +2,7 @@ package projectzulu.common.world2.blueprints.oasis;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
@@ -10,8 +10,8 @@ import projectzulu.common.world2.blueprint.Blueprint;
 
 public class BPOasisSandCorner implements Blueprint {
 
-    BlockWithMeta sandstone = new BlockWithMeta("sandstone");
-    BlockWithMeta sand = new BlockWithMeta("sand");
+    BlockWithMeta sandstone = new BlockWithMeta(Blocks.sandstone);
+    BlockWithMeta sand = new BlockWithMeta(Blocks.sand);
 
     @Override
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,

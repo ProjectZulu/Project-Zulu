@@ -4,7 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -35,21 +37,21 @@ public class RenderHauntedArmor extends RenderGenericLiving {
             hauntedModel.swordhand.postRender(0.0625F);
             float var4;
 
-            if (var3.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[var3.itemID].getRenderType())) {
+            if (var3.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(var3.getItem()).getRenderType())) {
                 var4 = 0.5F;
                 GL11.glTranslatef(0.0F, 0.1875F, -0.3125F);
                 var4 *= 0.75F;
                 GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
                 GL11.glScalef(var4, -var4, var4);
-            } else if (var3.itemID == Item.bow.itemID) {
+            } else if (var3.getItem() == Items.bow) {
                 var4 = 0.625F;
                 GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
                 GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
                 GL11.glScalef(var4, -var4, var4);
                 GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-            } else if (Item.itemsList[var3.itemID].isFull3D()) {
+            } else if (var3.getItem().isFull3D()) {
                 var4 = 0.625F;
                 GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
                 GL11.glScalef(var4, -var4, var4);

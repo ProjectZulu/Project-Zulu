@@ -3,8 +3,8 @@ package projectzulu.common.potion;
 import java.lang.reflect.Array;
 
 import net.minecraft.potion.Potion;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.api.PotionList;
 import projectzulu.common.core.ObfuscationHelper;
 import projectzulu.common.potion.effects.PotionCleansing;

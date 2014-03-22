@@ -37,7 +37,7 @@ public class TileEntityLimitedMobSpawnData extends WeightedRandom.Item {
 
     public NBTTagCompound getNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setCompoundTag("Properties", this.properties);
+        nbt.setTag("Properties", this.properties);
         nbt.setString("Type", this.type);
         nbt.setInteger("Weight", this.itemWeight);
         nbt.setString("SpawnSound", this.spawnSound);

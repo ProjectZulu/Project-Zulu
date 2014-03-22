@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
@@ -67,12 +68,10 @@ public class BuildingManagerCathedral extends BuildingManagerBase {
             }
         }
     }
-    
 
     protected void handleBlockPlacement(BlockWithMeta blockWithMeta, ChunkCoordinates position, Random random) {
         if (blockWithMeta == null || !world.blockExists(position.posX, position.posY, position.posZ)) {
-//            return;
-            blockWithMeta = new BlockWithMeta("air");
+            blockWithMeta = new BlockWithMeta(Blocks.air);
         }
 
         /*

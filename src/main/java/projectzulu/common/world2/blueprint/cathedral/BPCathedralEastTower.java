@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
 import projectzulu.common.world.CellIndexDirection;
@@ -36,13 +37,13 @@ public class BPCathedralEastTower implements Blueprint {
 
     public BlockWithMeta getTowerBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
-        BlockWithMeta woodenPlank = new BlockWithMeta(5, 1);
-        BlockWithMeta carvedStone = new BlockWithMeta(98, 3);
+        BlockWithMeta woodenPlank = new BlockWithMeta(Blocks.planks, 1);
+        BlockWithMeta carvedStone = new BlockWithMeta(Blocks.stonebrick, 3);
 
         List<BlockWithMeta> wallBlocks = new ArrayList<BlockWithMeta>(3);
-        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 2, 8)); // Cracked
-        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 1, 8)); // Mossy
-        wallBlocks.add(new BlockWithMeta(Block.stoneBrick.blockID, 0, 100)); // Regular
+        wallBlocks.add(new BlockWithMeta(Blocks.stonebrick, 2, 8)); // Cracked
+        wallBlocks.add(new BlockWithMeta(Blocks.stonebrick, 1, 8)); // Mossy
+        wallBlocks.add(new BlockWithMeta(Blocks.stonebrick, 0, 100)); // Regular
 
         int diagonalIndex = piecePos.posZ + piecePos.posX;
         int stairSegmentHeight = 2;
@@ -55,7 +56,7 @@ public class BPCathedralEastTower implements Blueprint {
 
             if (piecePos.posY < cellHeight - 2) {
                 if (piecePos.posX == cellSize - 1 && piecePos.posZ == cellSize - 1) {
-                    return new BlockWithMeta(Block.blockIron.blockID);
+                    return new BlockWithMeta(Blocks.iron_block);
                 }
 
                 if (piecePos.posY == cellHeight - 5) {
@@ -73,12 +74,12 @@ public class BPCathedralEastTower implements Blueprint {
             if (slope == 0) {
                 return woodenPlank;
             } else if (slope > 0) {
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
         }
 
         if (piecePos.posX == 0 && piecePos.posZ == 0) {
-            return new BlockWithMeta("air");
+            return new BlockWithMeta(Blocks.air);
         }
 
         /* Create Outside Walls */
@@ -99,14 +100,14 @@ public class BPCathedralEastTower implements Blueprint {
                     return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                 } else if (piecePos.posZ > 3 || piecePos.posZ == cellSize - 2) {
                     if (piecePos.posZ == cellSize - 1) {
-                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, getWindowMeta(cellIndexDirection,
+                        return new BlockWithMeta(Blocks.stone_brick_stairs, getWindowMeta(cellIndexDirection,
                                 true, true, piecePos.posY % 4));
                     } else {
-                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, getWindowMeta(cellIndexDirection,
+                        return new BlockWithMeta(Blocks.stone_brick_stairs, getWindowMeta(cellIndexDirection,
                                 true, false, piecePos.posY % 4));
                     }
                 }
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
 
             if (piecePos.posZ == 0) {
@@ -121,14 +122,14 @@ public class BPCathedralEastTower implements Blueprint {
                     return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
                 } else if (piecePos.posX > 3 || piecePos.posX == cellSize - 2) {
                     if (piecePos.posX == cellSize - 1) {
-                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, getWindowMeta(cellIndexDirection,
+                        return new BlockWithMeta(Blocks.stone_brick_stairs, getWindowMeta(cellIndexDirection,
                                 false, true, piecePos.posY % 4));
                     } else {
-                        return new BlockWithMeta(Block.stairsStoneBrick.blockID, getWindowMeta(cellIndexDirection,
+                        return new BlockWithMeta(Blocks.stone_brick_stairs, getWindowMeta(cellIndexDirection,
                                 false, false, piecePos.posY % 4));
                     }
                 }
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
         }
 
@@ -140,7 +141,7 @@ public class BPCathedralEastTower implements Blueprint {
             int slopeBelow = CellHelper.getSlopeIndex(piecePos, piecePos.posX - 1, 1,
                     BoundaryPair.createPair(1, stairSegmentHeight), getStairSegmentTop(piecePos, cellIndexDirection));
             if (slope == 0) {
-                return slope != slopeBelow ? new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(
+                return slope != slopeBelow ? new BlockWithMeta(Blocks.stone_brick_stairs, getStairMeta(
                         cellIndexDirection, false)) : (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
         } else if (0 < piecePos.posX && piecePos.posX < 3) {
@@ -151,7 +152,7 @@ public class BPCathedralEastTower implements Blueprint {
                     BoundaryPair.createPair(0, stairSegmentHeight - 1),
                     getStairSegmentTop(piecePos, cellIndexDirection));
             if (slope == 0) {
-                return slope != slopeBelow ? new BlockWithMeta(Block.stairsStoneBrick.blockID, getStairMeta(
+                return slope != slopeBelow ? new BlockWithMeta(Blocks.stone_brick_stairs, getStairMeta(
                         cellIndexDirection, true)) : (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
             }
         }
@@ -173,16 +174,16 @@ public class BPCathedralEastTower implements Blueprint {
                 if (cellIndexDirection == CellIndexDirection.NorthEastCorner && piecePos.posX == 3
                         && piecePos.posZ == 4) {
                     if (piecePos.posY % (stairSegmentHeight * 4) == 4) {
-                        return new BlockWithMeta(Block.doorWood.blockID, 1);
+                        return new BlockWithMeta(Blocks.wooden_door, 1);
                     } else if (piecePos.posY % (stairSegmentHeight * 4) == 5) {
-                        return new BlockWithMeta(Block.doorWood.blockID, 9);
+                        return new BlockWithMeta(Blocks.wooden_door, 9);
                     }
                 } else if (cellIndexDirection == CellIndexDirection.SouthWestCorner && piecePos.posX == 3
                         && piecePos.posZ == 4) {
                     if (piecePos.posY % (stairSegmentHeight * 4) == 0) {
-                        return new BlockWithMeta(Block.doorWood.blockID, 3);
+                        return new BlockWithMeta(Blocks.wooden_door, 3);
                     } else if (piecePos.posY % (stairSegmentHeight * 4) == 1) {
-                        return new BlockWithMeta(Block.doorWood.blockID, 11);
+                        return new BlockWithMeta(Blocks.wooden_door, 11);
                     }
                 }
             }
@@ -197,7 +198,7 @@ public class BPCathedralEastTower implements Blueprint {
                 if ((piecePos.posX == 4 || piecePos.posZ == 4)) {
                     if (piecePos.posY % (stairSegmentHeight * 2) == 0
                             || (piecePos.posY % (stairSegmentHeight * 2) == 1 && random.nextInt(3) == 0)) {
-                        return new BlockWithMeta(Block.bookShelf.blockID);
+                        return new BlockWithMeta(Blocks.bookshelf);
                     }
                 }
             }
@@ -206,8 +207,8 @@ public class BPCathedralEastTower implements Blueprint {
             if (cellIndexDirection == CellIndexDirection.NorthWestCorner) {
                 if (piecePos.posY % (stairSegmentHeight * 2) == 0) {
                     if (piecePos.posX == 4 && (piecePos.posZ == 4 || piecePos.posZ == 5)) {
-                        return piecePos.posZ == 5 ? new BlockWithMeta(Block.bed.blockID, 2) : new BlockWithMeta(
-                                Block.bed.blockID, 10);
+                        return piecePos.posZ == 5 ? new BlockWithMeta(Blocks.bed, 2) : new BlockWithMeta(
+                                Blocks.bed, 10);
                     }
                 }
             }
@@ -218,7 +219,7 @@ public class BPCathedralEastTower implements Blueprint {
             return (BlockWithMeta) WeightedRandom.getRandomItem(random, wallBlocks);
         }
 
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 
     private boolean isRoomForRoom(ChunkCoordinates piecePos, int cellSize, int cellHeight) {

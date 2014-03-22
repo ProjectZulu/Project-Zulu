@@ -3,7 +3,7 @@ package projectzulu.common.core;
 import java.io.File;
 import java.util.ArrayList;
 
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.core.itemblockdeclaration.ItemBlockDeclaration;
 import cpw.mods.fml.common.FMLCommonHandler;
 

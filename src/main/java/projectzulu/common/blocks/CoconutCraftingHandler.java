@@ -1,25 +1,24 @@
 package projectzulu.common.blocks;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.api.ItemList;
-import cpw.mods.fml.common.ICraftingHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
-public class CoconutCraftingHandler implements ICraftingHandler {
-    @Override
-    public void onSmelting(EntityPlayer player, ItemStack item) {
-    }
+public class CoconutCraftingHandler {
 
-    @Override
-    public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) {
-
+    @SubscribeEvent
+    public void onCrafting(ItemCraftedEvent event) {
+        ItemStack item = event.crafting;
+        IInventory craftMatrix = event.craftMatrix;
+        // FMLCommonHandler.instance().bus().register(this);
         /*
          * This onCrafting Handle is for Sword and Coconut Recipe 0-1-2 3-4-5 6-7-8
          */
         /* Check if Result is leather */
-        boolean isResultDesired = item.getItem().itemID == ItemList.coconutSeed.get().itemID;
+        boolean isResultDesired = item.getItem() == ItemList.coconutSeed.get();
         if (!isResultDesired)
             return;
 
@@ -32,11 +31,10 @@ public class CoconutCraftingHandler implements ICraftingHandler {
 
         if (shouldBeSword != null
                 && shouldBeCoconut != null
-                && (shouldBeSword.getItem().itemID == Item.swordWood.itemID
-                        || shouldBeSword.getItem().itemID == Item.swordStone.itemID
-                        || shouldBeSword.getItem().itemID == Item.swordIron.itemID
-                        || shouldBeSword.getItem().itemID == Item.swordGold.itemID || shouldBeSword.getItem().itemID == Item.swordDiamond.itemID)
-                && ItemList.coconutItem.isPresent() && shouldBeCoconut.getItem() == ItemList.coconutItem.get()) {
+                && (shouldBeSword.getItem() == Items.wooden_sword || shouldBeSword.getItem() == Items.stone_sword
+                        || shouldBeSword.getItem() == Items.iron_sword || shouldBeSword.getItem() == Items.golden_sword || shouldBeSword
+                        .getItem() == Items.diamond_sword) && ItemList.coconutItem.isPresent()
+                && shouldBeCoconut.getItem() == ItemList.coconutItem.get()) {
             /* Stacksize of placed must not be 1, as the 'recipe' will consume 1 of whatever item is present in matrix */
             /* Increase Sword */
             shouldBeSword.setItemDamage(shouldBeSword.getItemDamage() + 1);

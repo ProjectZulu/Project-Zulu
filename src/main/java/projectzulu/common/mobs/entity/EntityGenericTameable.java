@@ -3,16 +3,18 @@ package projectzulu.common.mobs.entity;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 import projectzulu.common.ProjectZulu_Core;
-import cpw.mods.fml.common.network.PacketDispatcher;
+import projectzulu.common.core.PZPacket;
+import projectzulu.common.core.packets.PacketTameParticle;
 
 /**
  * Contains Breeding Specific Code. Toggled on by returning true from isValidTamingItem() function
@@ -210,10 +212,10 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
         
     	if(isTamed()){
     		/* TODO: Un Tame? */
-    		if (par1EntityPlayer.username.equalsIgnoreCase(this.getOwnerName())){
+    		if (par1EntityPlayer.getCommandSenderName().equalsIgnoreCase(this.getOwnerName())){
     			if(var2 != null){
-    				if(var2.getItem().itemID == Item.paper.itemID || var2.getItem().itemID == Item.nameTag.itemID){
-    					par1EntityPlayer.openGui(ProjectZulu_Core.modInstance, 2, par1EntityPlayer.worldObj, entityId, 0, 0);
+    				if(var2.getItem() == Items.paper || var2.getItem() == Items.name_tag){
+    					par1EntityPlayer.openGui(ProjectZulu_Core.modInstance, 2, par1EntityPlayer.worldObj, getEntityId(), 0, 0);
     					return true;
     				}else if( getHealingValueIfValid(var2) > 0 && getHealth() < getMaxHealth() ){
     					 if (!par1EntityPlayer.capabilities.isCreativeMode) {
@@ -265,8 +267,8 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     				this.setAttackTarget((EntityLiving)null);
     				setSitting(true);
                     this.setHealth(getMaxHealth());
-    				this.setOwner(par1EntityPlayer.username);
-    				setUsername(getEntityName());
+    				this.setOwner(par1EntityPlayer.getCommandSenderName());
+    				setUsername(getDefaultEntityName());
     				tameEffectSuccess = true;
     			}
     			/* Send Tame Effect Packet */
@@ -280,20 +282,18 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     			}
 
     			/* Write Temperature Into Packet */
-    			try {
-    				data.writeInt(entityId);
-    				data.writeBoolean(tameEffectSuccess);
-    			} catch (Exception e) {
-    				e.printStackTrace();
-    			}
-    			Packet250CustomPayload packet = new Packet250CustomPayload();
-    			packet.channel = "Channel_Zulu"; // CHANNEL MAX 16 CHARS
-    			packet.data = bytes.toByteArray();
-    			packet.length = packet.data.length;
-    			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 10, dimension, packet);
-    		}
-			return true;
-    	}
+                try {
+                    data.writeInt(getEntityId());
+                    data.writeBoolean(tameEffectSuccess);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                PZPacket packet = new PacketTameParticle().setPacketData(getEntityId(), tameEffectSuccess);
+                ProjectZulu_Core.getPipeline()
+                        .sendToAllAround(packet, new TargetPoint(dimension, posX, posY, posZ, 10));
+            }
+            return true;
+        }
         
     	if(super.interact(par1EntityPlayer)){
     		return true;
@@ -301,5 +301,9 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
     	
     	return false;
     }
-
+    
+    
+    public String getDefaultEntityName() {
+        return getCommandSenderName();
+    }
 }

@@ -31,9 +31,9 @@ public class EntityHorseWhite extends EntityHorseBase{
 		
 		if(CustomEntityList.HORSEWHITE.modData.get().reportSpawningInLog){
 			if(wasSuccesful){
-				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
+				ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s",getCommandSenderName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}else{
-				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getEntityName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
+				ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",getCommandSenderName(),var1,var2,var3,worldObj.getBiomeGenForCoords(var1, var3));
 			}
 		}
 		return wasSuccesful;

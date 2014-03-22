@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -17,42 +18,42 @@ public class SubItemPotionBubbling extends SubItemPotion {
 
     PotionRecipies recipies = new PotionRecipies();
 
-    public SubItemPotionBubbling(int itemID, int subID) {
-        super(itemID, subID, "potion.shining");
+    public SubItemPotionBubbling(Item item, int subID) {
+        super(item, subID, "potion.shining");
     }
 
     @Override
     public void register() {
-        recipies.addResultPotion(Item.goldenCarrot.itemID, SubItemPotionList.NIGHT_VISION);
-        recipies.addResultPotion(Item.magmaCream.itemID, SubItemPotionList.FIRE_RESISTANCE);
-        recipies.addResultPotion(Item.sugar.itemID, SubItemPotionList.MOVE_SPEED);
-        recipies.addResultPotion(Item.speckledMelon.itemID, SubItemPotionList.HEAL);
-        recipies.addResultPotion(Item.spiderEye.itemID, SubItemPotionList.POISON);
-        recipies.addResultPotion(Item.ghastTear.itemID, SubItemPotionList.REGENERATION);
-        recipies.addResultPotion(Item.fermentedSpiderEye.itemID, SubItemPotionList.WEAKNESS);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.Talon.meta,
+        recipies.addResultPotion(Items.golden_carrot, SubItemPotionList.NIGHT_VISION);
+        recipies.addResultPotion(Items.magma_cream, SubItemPotionList.FIRE_RESISTANCE);
+        recipies.addResultPotion(Items.sugar, SubItemPotionList.MOVE_SPEED);
+        recipies.addResultPotion(Items.speckled_melon, SubItemPotionList.HEAL);
+        recipies.addResultPotion(Items.spider_eye, SubItemPotionList.POISON);
+        recipies.addResultPotion(Items.ghast_tear, SubItemPotionList.REGENERATION);
+        recipies.addResultPotion(Items.fermented_spider_eye, SubItemPotionList.WEAKNESS);
+        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.Talon.meta,
                 SubItemPotionList.STRENGTH);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.LargeHeart.meta,
+        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.LargeHeart.meta,
                 SubItemPotionList.STRENGTH);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.RabbitsFoot.meta,
+        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.RabbitsFoot.meta,
                 SubItemPotionList.JUMP);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.FrogLegs.meta,
+        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.FrogLegs.meta,
                 SubItemPotionList.JUMP);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.SmallHeart.meta,
+        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.SmallHeart.meta,
                 SubItemPotionList.DIG_SPEED);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.PowderSlush.meta,
+        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.PowderSlush.meta,
                 SubItemPotionList.CLEANSING);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.PricklyPowder.meta,
+        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.PricklyPowder.meta,
                 SubItemPotionList.THORNS);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get().itemID, Properties.Gill.meta,
+        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.Gill.meta,
                 SubItemPotionList.WATER_BREATHING);
     }
 
     @Override
     public ItemStack getPotionResult(ItemStack ingredient, ItemStack brewingStack) {
-        SubItemPotion resultingPotion = recipies.getResulingPotion(ingredient.itemID, ingredient.getItemDamage());
+        SubItemPotion resultingPotion = recipies.getResulingPotion(ingredient.getItem(), ingredient.getItemDamage());
         if (resultingPotion != null) {
-            return new ItemStack(resultingPotion.itemID, 1, PotionParser.setID(resultingPotion.subID, 0));
+            return new ItemStack(resultingPotion.item, 1, PotionParser.setID(resultingPotion.subID, 0));
         }
         return null;
     }
@@ -68,7 +69,7 @@ public class SubItemPotionBubbling extends SubItemPotion {
     }
 
     @Override
-    public void getSubItems(int itemID, CreativeTabs creativeTab, List<ItemStack> list) {
+    public void getSubItems(Item itemID, CreativeTabs creativeTab, List<ItemStack> list) {
         list.add(new ItemStack(itemID, 1, subID));
     }
 

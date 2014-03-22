@@ -42,7 +42,8 @@ public class KeyParserLiquid extends KeyParserBase {
                 rangeY = rangeX;
                 rangeZ = rangeX;
             } else {
-                ProjectZuluLog.severe("Error Parsing Range of %s. Invalid Argument Length of %s.", key.key, rangePieces.length);
+                ProjectZuluLog.severe("Error Parsing Range of %s. Invalid Argument Length of %s.", key.key,
+                        rangePieces.length);
             }
 
             if (pieces.length == 3) {
@@ -56,7 +57,8 @@ public class KeyParserLiquid extends KeyParserBase {
                 typeValue = new TypeValuePair(key, new Object[] { isInverted, rangeX, rangeY, rangeZ });
             }
         } else {
-            ProjectZuluLog.severe("Error Parsing %s Block Parameter. Invalid Argument Length of %s.", key.key, pieces.length);
+            ProjectZuluLog.severe("Error Parsing %s Block Parameter. Invalid Argument Length of %s.", key.key,
+                    pieces.length);
             return false;
         }
 
@@ -95,8 +97,9 @@ public class KeyParserLiquid extends KeyParserBase {
             for (int i = -rangeX; i <= rangeX; i++) {
                 for (int k = -rangeZ; k <= rangeZ; k++) {
                     for (int j = -rangeY; j <= rangeY; j++) {
-                        boolean isLiquid = world.getBlockMaterial(xCoord + offsetX + i, yCoord + offsetY + j,
-                                zCoord + offsetZ + k).isLiquid();
+                        boolean isLiquid = world
+                                .getBlock(xCoord + offsetX + i, yCoord + offsetY + j, zCoord + offsetZ + k)
+                                .getMaterial().isLiquid();
                         if (!isInverted && isLiquid || isInverted && !isLiquid) {
                             return false;
                         }

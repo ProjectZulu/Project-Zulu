@@ -1,9 +1,9 @@
 package projectzulu.common.potion.brewingstands;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.AchievementList;
 import projectzulu.common.potion.subitem.SubItemPotionRegistry;
@@ -49,7 +49,7 @@ public class SlotBrewingStandSinglePotion extends Slot {
      */
     public static boolean canHoldPotion(ItemStack itemStack) {
         return itemStack != null
-                && (SubItemPotionRegistry.INSTANCE.isItemPotion(itemStack) || itemStack.itemID == Item.potion.itemID
+                && (SubItemPotionRegistry.INSTANCE.isItemPotion(itemStack) || itemStack.getItem() == Items.potionitem
                         && itemStack.getItemDamage() == 0);
     }
 }

@@ -1,6 +1,7 @@
 package projectzulu.common.dungeon;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -39,8 +40,9 @@ public class SpawnerFields implements DataFields {
     SpawnerFields(GuiLimitedMobSpawner parent) {
         this.parent = parent;
     }
-    
-    public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonKey, "creaturelistgui.png");
+
+    public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonKey,
+            "creaturelistgui.png");
 
     @Override
     public DataFields createFields(Minecraft mc, int screenWidth, int screenHeight, Point backgroundSize) {
@@ -70,8 +72,8 @@ public class SpawnerFields implements DataFields {
                 177, 58 + 17 * 3), new Point(20, 14), spawnOffsetX != null ? spawnOffsetX.getText() : "");
         spawnOffsetZ = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(
                 201, 58 + 17 * 3), new Point(20, 14), spawnOffsetZ != null ? spawnOffsetZ.getText() : "");
-        spawnOffsetY = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize,
-                new Point(201, 58 + 17 * 4), new Point(20, 14), spawnOffsetY != null ? spawnOffsetY.getText() : "");
+        spawnOffsetY = setupTextField(mc.fontRenderer, new Point(screenWidth, screenHeight), backgroundSize, new Point(
+                201, 58 + 17 * 4), new Point(20, 14), spawnOffsetY != null ? spawnOffsetY.getText() : "");
 
         toggleDebug = new GuiButton(1, (screenWidth - backgroundSize.getX()) / 2 + 5,
                 (screenHeight - backgroundSize.getY()) / 2 + 175, 70, 20, "Toggle Debug");
@@ -167,7 +169,7 @@ public class SpawnerFields implements DataFields {
         }
         return false;
     }
-    
+
     @Override
     public void mouseClicked(GuiLimitedMobSpawner spawnerGUI, Minecraft mc, int par1, int par2, int par3) {
         if (isEnabled) {
@@ -192,8 +194,8 @@ public class SpawnerFields implements DataFields {
                     parent.limitedMobSpawner.setDebugMode(tagToSave);
                     parent.limitedMobSpawner.syncToServer();
                 }
-
-                mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                mc.getSoundHandler().playSound(
+                        PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
             }
             if (par3 == 0 && resetDebug.mousePressed(mc, par1, par2)) {
                 if (parent.limitedMobSpawner.isDebugEnabled()) {
@@ -202,7 +204,8 @@ public class SpawnerFields implements DataFields {
                     parent.limitedMobSpawner.syncToServer();
                     parent.loadGuiFromTileEntity();
                 }
-                mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                mc.getSoundHandler().playSound(
+                        PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
             }
         }
     }

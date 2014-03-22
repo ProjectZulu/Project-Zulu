@@ -1,11 +1,7 @@
 package projectzulu.common.blocks;
 
-import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import projectzulu.common.ProjectZulu_Core;
-import projectzulu.common.core.DefaultProps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemScaleArmor extends ItemArmor {
     /** Holds the 'base' maxDamage that each armorType have. */
@@ -26,10 +22,10 @@ public class ItemScaleArmor extends ItemArmor {
     public final int renderIndex;
 
     /** The EnumArmorMaterial used for this ItemArmor */
-    private final EnumArmorMaterial material;
+    private final ArmorMaterial material;
 
-    public ItemScaleArmor(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
-        super(par1, par2EnumArmorMaterial, par3, par4);
+    public ItemScaleArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
+        super(par2EnumArmorMaterial, par3, par4);
         // super(par1);
         this.material = par2EnumArmorMaterial;
         this.armorType = par4;

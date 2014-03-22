@@ -46,9 +46,8 @@ public class GUINBTList extends GuiScrollingList {
 
     @Override
     protected void elementClicked(int clickedIndex, boolean var2) {
-        ProjectZuluLog.info("Clicked on Tag of Type %s with name %s",
-                nodeList.get(clickedIndex).getData().getTagName(nodeList.get(clickedIndex).getData().getId()), nodeList
-                        .get(clickedIndex).getData().getName());
+        ProjectZuluLog.info("Clicked on Tag of Type %s with name %s", nodeList.get(clickedIndex).getData()
+                .func_150283_g(nodeList.get(clickedIndex).getData().getId()), nodeList.get(clickedIndex).getTagName());
         // if(nodeList.get(clickedIndex).getChildren().size() == 0){
         parent.setSelectedCurentNode(nodeList.get(clickedIndex));
         selectedElement = clickedIndex;
@@ -77,7 +76,7 @@ public class GUINBTList extends GuiScrollingList {
         for (int i = 0; i < numParents; i++) {
             filler = filler.concat("   ");
         }
-        String renderString = filler + nodeList.get(listIndex).getData().getName();
+        String renderString = filler + nodeList.get(listIndex).getTagName();
 
         String renderResult = "";
         int countChildren = nodeList.get(listIndex).getChildren().size();
@@ -86,11 +85,14 @@ public class GUINBTList extends GuiScrollingList {
             renderResult = NBTHelper.getByID(nodeList.get(listIndex).getData().getId()).getValue(
                     nodeList.get(listIndex).getData());
         }
-        
+
         int maxResultLength = 13 - parentCount * 2;
-        parent.mc.fontRenderer.drawStringWithShadow(renderString, this.left + 3, var3 + 2, 16777215); // Red: 0xFF2222                                                                  // //Blck: 4210752
-        parent.mc.fontRenderer.drawStringWithShadow(renderResult.length() > maxResultLength ? renderResult.substring(0, maxResultLength)
-                : renderResult, this.left + 140, var3 + 2, 16777215); // Red: 0xFF2222 //Blck: 4210752
+        parent.mc.fontRenderer.drawStringWithShadow(renderString, this.left + 3, var3 + 2, 16777215); // Red: 0xFF2222
+                                                                                                      // // //Blck:
+                                                                                                      // 4210752
+        parent.mc.fontRenderer.drawStringWithShadow(
+                renderResult.length() > maxResultLength ? renderResult.substring(0, maxResultLength) : renderResult,
+                this.left + 140, var3 + 2, 16777215); // Red: 0xFF2222 //Blck: 4210752
     }
 
     public void drawScreen(Point screenSize, Point backgroundSize, int mouseX, int mouseY, float p_22243_3_) {
@@ -108,7 +110,8 @@ public class GUINBTList extends GuiScrollingList {
 
     private void drawScrollOverlay(int leftOffset, int topHeight, int botHeight, int alphaBottom, int alphaTop) {
         Tessellator var5 = Tessellator.instance;
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, parent.mc.renderEngine.getTexture(getBackgroundTexture()).getGlTextureId());
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, parent.mc.renderEngine.getTexture(getBackgroundTexture())
+                .getGlTextureId());
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         float imageSize = 32.0F;
         var5.startDrawingQuads();

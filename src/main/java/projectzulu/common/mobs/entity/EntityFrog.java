@@ -2,10 +2,11 @@ package projectzulu.common.mobs.entity;
 
 import java.util.EnumSet;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import projectzulu.common.core.DefaultProps;
@@ -31,7 +32,7 @@ public class EntityFrog extends EntityGenericAnimal implements IAnimals {
         // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
         tasks.addTask(5, new EntityAIMate(this, 1.0f, true));
-        tasks.addTask(6, new EntityAITempt(this, 1.2f, Item.spiderEye.itemID, false, true));
+        tasks.addTask(6, new EntityAITempt(this, 1.2f, Items.spider_eye, false, true));
 
         tasks.addTask(7, new EntityAIFollowParent(this, 1.1f));
         tasks.addTask(9, new EntityAIWander(this, 1.0f, 40, true));
@@ -81,7 +82,7 @@ public class EntityFrog extends EntityGenericAnimal implements IAnimals {
 
     @Override
     public boolean isValidBreedingItem(ItemStack itemStack) {
-        if (itemStack != null && itemStack.getItem().itemID == Item.spiderEye.itemID) {
+        if (itemStack != null && itemStack.getItem() == Items.spider_eye) {
             return true;
         } else {
             return super.isValidBreedingItem(itemStack);
@@ -97,11 +98,11 @@ public class EntityFrog extends EntityGenericAnimal implements IAnimals {
     public boolean shouldNotifySimilar(EntityPlayer attackingPlayer) {
         return true;
     }
-
+    
     /**
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4) { /* Does Not Play a Step Sound */
+    protected void func_145780_a(int xCoord, int yCoord, int zCoord, Block stepBlock) { /* Does Not Play a Step Sound */
     }
 }

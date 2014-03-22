@@ -2,8 +2,10 @@ package projectzulu.common.dungeon.spawner.tag.keys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
 import projectzulu.common.dungeon.spawner.tag.OptionalParser;
@@ -55,7 +57,7 @@ public class KeyParserBlock extends KeyParserBase {
     private boolean isValidBlock(World world, int xCoord, int yCoord, int zCoord, TypeValuePair typeValuePair,
             HashMap<String, Object> valueCache) {
         @SuppressWarnings("unchecked")
-        ListMultimap<Integer, Integer> iDMetas = (ListMultimap<Integer, Integer>) typeValuePair.getValue();
+        ListMultimap<String, Integer> iDMetas = (ListMultimap<String, Integer>) typeValuePair.getValue();
         Integer xRange = (Integer) valueCache.get(Key.blockRangeX.key);
         Integer yRange = (Integer) valueCache.get(Key.blockRangeY.key);
         Integer zRange = (Integer) valueCache.get(Key.blockRangeZ.key);
@@ -64,14 +66,21 @@ public class KeyParserBlock extends KeyParserBase {
         yRange = yRange == null ? OptionalSettingsBase.defaultBlockRange : yRange;
         zRange = zRange == null ? OptionalSettingsBase.defaultBlockRange : zRange;
 
-        for (int i = -xRange; i <= xRange; i++) {
-            for (int k = -zRange; k <= zRange; k++) {
-                for (int j = -yRange; j <= yRange; j++) {
-                    for (Entry<Integer, Integer> iDMetaEntry : iDMetas.entries()) {
-                        int blockID = world.getBlockId(xCoord + i, yCoord + j, zCoord + k);
-                        int meta = world.getBlockMetadata(xCoord + i, yCoord + j, zCoord + k);
-                        if (blockID == iDMetaEntry.getKey() && meta == iDMetaEntry.getValue()) {
-                            return false;
+        for (String blockKey : iDMetas.keySet()) {
+            Block searchBlock = Block.getBlockFromName(blockKey);
+            if (searchBlock == null) {
+                continue;
+            }
+            List<Integer> metas = iDMetas.get(blockKey);
+            for (Integer metaValue : metas) {
+                for (int i = -xRange; i <= xRange; i++) {
+                    for (int k = -zRange; k <= zRange; k++) {
+                        for (int j = -yRange; j <= yRange; j++) {
+                            Block blockID = world.getBlock(xCoord + i, yCoord + j, zCoord + k);
+                            int meta = world.getBlockMetadata(xCoord + i, yCoord + j, zCoord + k);
+                            if (blockID == searchBlock && metaValue.equals(meta)) {
+                                return false;
+                            }
                         }
                     }
                 }

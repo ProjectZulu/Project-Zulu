@@ -2,6 +2,7 @@ package projectzulu.common.mobs.entity;
 
 import java.util.EnumSet;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -147,14 +148,14 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4) {
+    protected void func_145780_a(int xCoord, int yCoord, int zCoord, Block stepBlock) {
         this.worldObj.playSoundAtEntity(this, "mob.irongolem.walk", 1.0F, 1.0F);
     }
 
     @Override
     protected void dropRareDrop(int par1) {
         if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
-            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 10), 1);
+            entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 10), 1);
         }
         super.dropRareDrop(par1);
     }

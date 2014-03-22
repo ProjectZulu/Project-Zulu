@@ -11,7 +11,8 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -40,7 +41,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
     int shootCooldown = 6 * 20;
     int shootTimer = 30;
     private static final ItemStack defaultHeldItem = ItemList.ankh.isPresent() ? new ItemStack(ItemList.ankh.get())
-            : new ItemStack(Item.swordIron);
+            : new ItemStack(Items.iron_sword);
 
     public EntityMummyPharaoh(World par1World) {
         super(par1World);
@@ -65,7 +66,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
         setPosition(parx, pary, parz);
         yOffset = 0.0f;
     }
-    
+
     @Override
     public ItemStack getHeldItem() {
         return defaultHeldItem;
@@ -232,9 +233,9 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
         // Note this is not final Y height, this is just for ground level
         int desY = this.worldObj.getHeightValue((int) desX, (int) desZ);
         // If the block is not air
-        if (worldObj.getBlockId((int) desX, desY - 2, (int) desZ) != 0) {
-            worldObj.setBlock((int) desX, desY - 0, (int) desZ, 0);
-            worldObj.setBlock((int) desX, desY - 1, (int) desZ, 0);
+        if (worldObj.isAirBlock((int) desX, desY - 2, (int) desZ)) {
+            worldObj.setBlock((int) desX, desY - 0, (int) desZ, Blocks.air);
+            worldObj.setBlock((int) desX, desY - 1, (int) desZ, Blocks.air);
         }
         // This sets where the monster will spawn on Y relative to Ground Level
         desY -= 1;
@@ -328,15 +329,14 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
         int var14 = MathHelper.floor_double(this.posX);
         int var15 = MathHelper.floor_double(this.posY);
         int var16 = MathHelper.floor_double(this.posZ);
-        int var18;
 
         if (this.worldObj.blockExists(var14, var15, var16)) {
             boolean var17 = false;
-
+            Block var18;
             while (!var17 && var15 > 0) {
-                var18 = this.worldObj.getBlockId(var14, var15 - 1, var16);
+                var18 = this.worldObj.getBlock(var14, var15 - 1, var16);
 
-                if (var18 != 0 && Block.blocksList[var18].blockMaterial.blocksMovement()) {
+                if (var18 != null && var18.getMaterial().blocksMovement()) {
                     var17 = true;
                 } else {
                     --this.posY;
@@ -359,7 +359,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
             return false;
         } else {
             short var30 = 128;
-
+            int var18;
             for (var18 = 0; var18 < var30; ++var18) {
                 double var19 = var18 / (var30 - 1.0D);
                 float var21 = (this.rand.nextFloat() - 0.5F) * 0.2F;
@@ -382,7 +382,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4) {
+    protected void func_145780_a(int xCoord, int yCoord, int zCoord, Block stepBlock) {
         this.worldObj.playSoundAtEntity(this, "mob.irongolem.walk", 1.0F, 1.0F);
     }
 

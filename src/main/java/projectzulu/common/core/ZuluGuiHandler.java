@@ -24,13 +24,13 @@ public class ZuluGuiHandler implements IGuiHandler {
         TileEntity tileEntityServer;
         switch (GuiID.getGuiIDByID(guiID)) {
         case FlowerPot:
-            tileEntityServer = world.getBlockTileEntity(x, y, z);
+            tileEntityServer = world.getTileEntity(x, y, z);
             if (tileEntityServer instanceof TileEntityUniversalFlowerPot) {
                 return new ContainerUniversalFlowerPot(player.inventory,
                         (TileEntityUniversalFlowerPot) tileEntityServer);
             }
         case BrewingStand:
-            tileEntityServer = world.getBlockTileEntity(x, y, z);
+            tileEntityServer = world.getTileEntity(x, y, z);
             if (tileEntityServer instanceof TileEntityBrewingBase) {
                 return new ContainerBrewingStandSingle(player.inventory, (TileEntityBrewingBase) tileEntityServer);
             }
@@ -48,13 +48,13 @@ public class ZuluGuiHandler implements IGuiHandler {
         TileEntity tileEntityClient;
         switch (GuiID.getGuiIDByID(guiID)) {
         case Tombstone:
-            tileEntityClient = world.getBlockTileEntity(x, y, z);
+            tileEntityClient = world.getTileEntity(x, y, z);
             if (tileEntityClient instanceof TileEntityTombstone) {
                 return new GuiTombstone((TileEntityTombstone) tileEntityClient);
             }
             break;
         case FlowerPot:
-            tileEntityClient = world.getBlockTileEntity(x, y, z);
+            tileEntityClient = world.getTileEntity(x, y, z);
             if (tileEntityClient instanceof TileEntityUniversalFlowerPot) {
                 return new GuiContainerUniversalFlowerPot(player.inventory,
                         (TileEntityUniversalFlowerPot) tileEntityClient);
@@ -63,12 +63,12 @@ public class ZuluGuiHandler implements IGuiHandler {
         case AnimalName:
             return new GuiAnimalName(world, player, x);
         case MobSpawner:
-            tileEntityClient = world.getBlockTileEntity(x, y, z);
+            tileEntityClient = world.getTileEntity(x, y, z);
             if (tileEntityClient instanceof TileEntityLimitedMobSpawner) {
                 return new GuiLimitedMobSpawner((TileEntityLimitedMobSpawner) tileEntityClient);
             }
         case BrewingStand:
-            tileEntityClient = world.getBlockTileEntity(x, y, z);
+            tileEntityClient = world.getTileEntity(x, y, z);
             if (tileEntityClient instanceof TileEntityBrewingBase) {
                 return new GuiBrewingStandSingle(player.inventory, (TileEntityBrewingBase) tileEntityClient);
             }

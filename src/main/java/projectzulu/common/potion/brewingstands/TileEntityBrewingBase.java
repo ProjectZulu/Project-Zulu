@@ -1,15 +1,16 @@
 package projectzulu.common.potion.brewingstands;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.api.SubItemPotionList;
@@ -30,13 +31,13 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
     private int filledSlots;
 
     /* Ingredient Cache. Used to Check if an Ingredient has been Added or Removed */
-    private int ingredientID;
+    private Item ingredientID;
 
     /**
      * Returns the name of the inventory.
      */
     @Override
-    public String getInvName() {
+    public String getInventoryName() {
         return "container.brewing";
     }
 
@@ -45,7 +46,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
      * language. Otherwise it will be used directly.
      */
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
@@ -67,17 +68,17 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
             --this.brewTime;
             if (this.brewTime == 0) {
                 this.brewPotions();
-                this.onInventoryChanged();
+                this.markDirty();
             } else if (!this.canBrew()) {
                 this.brewTime = 0;
-                this.onInventoryChanged();
-            } else if (this.ingredientID != this.brewingItemStacks[brewingItemStacks.length - 1].itemID) {
+                this.markDirty();
+            } else if (this.ingredientID != this.brewingItemStacks[brewingItemStacks.length - 1].getItem()) {
                 this.brewTime = 0;
-                this.onInventoryChanged();
+                this.markDirty();
             }
         } else if (this.canBrew()) {
             this.brewTime = 400;
-            this.ingredientID = this.brewingItemStacks[brewingItemStacks.length - 1].itemID;
+            this.ingredientID = this.brewingItemStacks[brewingItemStacks.length - 1].getItem();
         }
         super.updateEntity();
     }
@@ -120,18 +121,18 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
                     ItemStack resultPotion = brewingSubPotion != null ? brewingSubPotion.getPotionResult(
                             ingredientStack, brewingItemStacks[i]) : null;
                     if (resultPotion != null) {
-                        brewingItemStacks[i].itemID = resultPotion.itemID;
+                        brewingItemStacks[i].func_150996_a(resultPotion.getItem());
                         brewingItemStacks[i].setItemDamage(resultPotion.getItemDamage());
                     }
                 } else if (isWaterBottleOverride(ingredientStack, brewingItemStacks[i])) {
-                    brewingItemStacks[i].itemID = SubItemPotionList.BUBBLING.get().itemID;
+                    brewingItemStacks[i].func_150996_a(SubItemPotionList.BUBBLING.get().item);
                     brewingItemStacks[i].setItemDamage(SubItemPotionList.BUBBLING.get().subID);
                 }
             }
 
-            if (Item.itemsList[ingredientStack.itemID].hasContainerItem()) {
-                this.brewingItemStacks[brewingItemStacks.length - 1] = Item.itemsList[ingredientStack.itemID]
-                        .getContainerItemStack(brewingItemStacks[brewingItemStacks.length - 1]);
+            if (ingredientStack.getItem().hasContainerItem()) {
+                this.brewingItemStacks[brewingItemStacks.length - 1] = ingredientStack.getItem().getContainerItem(
+                        brewingItemStacks[brewingItemStacks.length - 1]);
             } else {
                 --this.brewingItemStacks[brewingItemStacks.length - 1].stackSize;
 
@@ -154,8 +155,8 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
             return false;
         }
 
-        if (brewingStack.itemID == Item.potion.itemID && brewingStack.getItemDamage() == 0) {
-            if (ingredient.itemID == ItemList.genericCraftingItems.get().itemID
+        if (brewingStack.getItem() == Items.potionitem && brewingStack.getItemDamage() == 0) {
+            if (ingredient.getItem() == ItemList.genericCraftingItems.get()
                     && ingredient.getItemDamage() == Properties.ShinyBauble.meta) {
                 if (SubItemPotionList.BUBBLING.isPresent()) {
                     return true;
@@ -164,7 +165,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
         }
         return false;
     }
-    
+
     /**
      * Returns the stack in slot i
      */
@@ -227,16 +228,16 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
      */
     @Override
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false
                 : par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
 
     @Override
-    public void openChest() {
+    public void openInventory() {
     }
 
     @Override
-    public void closeChest() {
+    public void closeInventory() {
     }
 
     /**
@@ -245,7 +246,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
     @Override
     public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
         return par1 == 3 ? PotionIngredients.isPotionIngredient(par2ItemStack)
-                : par2ItemStack.getItem() instanceof ItemPotion || par2ItemStack.itemID == Item.glassBottle.itemID;
+                : par2ItemStack.getItem() instanceof ItemPotion || par2ItemStack.getItem() == Items.glass_bottle;
     }
 
     @SideOnly(Side.CLIENT)
@@ -272,7 +273,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
     private int[] getIngredientSlotsForSide(int side) {
         return new int[] { brewingItemStacks.length - 1 };
     }
-    
+
     /**
      * Related to Hopper?
      */
@@ -295,11 +296,11 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
     @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
-        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
+        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
         this.brewingItemStacks = new ItemStack[this.getSizeInventory()];
 
         for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
             byte b0 = nbttagcompound1.getByte("Slot");
 
             if (b0 >= 0 && b0 < this.brewingItemStacks.length) {
@@ -334,15 +335,15 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
      * Overriden in a sign to provide the text.
      */
     @Override
-    public PZPacket getDescriptionPacket() {
+    public Packet getDescriptionPacket() {
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 4, var1);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 4, var1);
     }
 
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-        NBTTagCompound tagCompound = packet.data;
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        NBTTagCompound tagCompound = pkt.func_148857_g();
         this.readFromNBT(tagCompound);
     }
 }

@@ -60,13 +60,11 @@ public class KeyParserGround extends KeyParserBase {
         par1 &= 15;
 
         for (par2 &= 15; k > 0; --k) {
-            int l = chunk.getBlockID(par1, k, par2);
+            Block l = chunk.getBlock(par1, k, par2);
 
-            if (l != 0 && Block.blocksList[l].blockMaterial.blocksMovement()
-                    && Block.blocksList[l].blockMaterial != Material.leaves
-                    && Block.blocksList[l].blockMaterial != Material.wood
-                    && Block.blocksList[l].blockMaterial != Material.glass
-                    && !Block.blocksList[l].isBlockFoliage(world, par1, k, par2)) {
+            if (l != null && l.getMaterial().blocksMovement() && l.getMaterial() != Material.leaves
+                    && l.getMaterial() != Material.wood && l.getMaterial() != Material.glass
+                    && !l.isFoliage(world, par1, k, par2)) {
                 return k + 1;
             }
         }

@@ -2,6 +2,7 @@ package projectzulu.common.mobs.entityai;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import projectzulu.common.mobs.entity.EntityGenericCreature;
 
@@ -32,7 +33,7 @@ public class EntityAITempt extends EntityAIBase{
     /**
      * This field saves the ID of the items that can be used to breed entities with this behaviour.
      */
-    private int breedingFood;
+    private Item breedingFood;
 
     /**
      * Whether the entity using this AI will be scared by the tempter's sudden movement.
@@ -40,7 +41,7 @@ public class EntityAITempt extends EntityAIBase{
     private boolean scaredByPlayerMovement;
     private boolean field_75286_m;
 
-    public EntityAITempt(EntityGenericCreature par1EntityCreature, float par2, int par3, boolean par4) {
+    public EntityAITempt(EntityGenericCreature par1EntityCreature, float par2, Item par3, boolean par4) {
         this.temptedEntity = par1EntityCreature;
         this.speed = par2;
         this.breedingFood = par3;
@@ -48,7 +49,7 @@ public class EntityAITempt extends EntityAIBase{
         this.setMutexBits(3);
     }
     
-    public EntityAITempt(EntityGenericCreature par1EntityCreature, float par2, int par3, boolean par4, boolean shouldHop) {
+    public EntityAITempt(EntityGenericCreature par1EntityCreature, float par2, Item par3, boolean par4, boolean shouldHop) {
     	this(par1EntityCreature, par2, par3, par4);
     	this.shouldHop = shouldHop;
     }
@@ -69,7 +70,7 @@ public class EntityAITempt extends EntityAIBase{
             }
             else {
                 ItemStack var1 = this.temptingPlayer.getCurrentEquippedItem();
-                return var1 == null ? false : var1.itemID == this.breedingFood;
+                return var1 == null ? false : breedingFood.equals(var1.getItem());
             }
         }
     }

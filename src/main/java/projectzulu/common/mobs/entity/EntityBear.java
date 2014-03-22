@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -30,7 +31,7 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals {
 
         /* Attack On Collide Declared in SubClass */
         tasks.addTask(5, new EntityAIMate(this, 1.0f));
-        tasks.addTask(6, new EntityAITempt(this, 1.2f, Item.spiderEye.itemID, false));
+        tasks.addTask(6, new EntityAITempt(this, 1.2f, Items.spider_eye, false));
         tasks.addTask(7, new EntityAIFollowParent(this, 1.1f));
         tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
@@ -60,7 +61,7 @@ public class EntityBear extends EntityGenericAnimal implements IAnimals {
     @Override
     public boolean isValidBreedingItem(ItemStack itemStack) {
         if (itemStack != null
-                && (itemStack.itemID == Item.fishRaw.itemID || itemStack.itemID == Item.fishCooked.itemID)) {
+                && (itemStack.getItem() == Items.fish || itemStack.getItem() == Items.cooked_fished)) {
             return true;
         } else {
             return super.isValidBreedingItem(itemStack);

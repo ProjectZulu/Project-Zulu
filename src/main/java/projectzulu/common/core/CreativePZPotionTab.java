@@ -1,6 +1,7 @@
 package projectzulu.common.core;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
@@ -13,14 +14,19 @@ public class CreativePZPotionTab extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getIconItemStack() {
-        return new ItemStack(Item.potion, 1, 3);
+    public Item getTabIconItem() {
+        return Items.potionitem;
     }
-    
-    
+
+    @Override
+    public int func_151243_f() {
+        return 3;
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public String getTranslatedTabLabel() {
         return "Project Zulu Potions";
     }
+
 }

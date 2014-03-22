@@ -2,6 +2,7 @@ package projectzulu.common.potion.subitem;
 
 import java.util.Collection;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import projectzulu.common.core.ProjectZuluLog;
@@ -24,29 +25,29 @@ import com.google.common.collect.Table;
  */
 public enum SubItemPotionRegistry {
     INSTANCE;
-    private Table<Integer, Integer, SubItemPotion> subPotions = HashBasedTable.create(2, 16);
-    private Table<Integer, String, Integer> itemAndNameToSubIDMap = HashBasedTable.create(2, 16);
+    private Table<Item, Integer, SubItemPotion> subPotions = HashBasedTable.create(2, 16);
+    private Table<Item, String, Integer> itemAndNameToSubIDMap = HashBasedTable.create(2, 16);
 
     public void addSubPotions(SubItemPotion... potionSubItems) {
         for (SubItemPotion subItemPotion : potionSubItems) {
-            if (subPotions.row(subItemPotion.itemID).keySet().contains(subItemPotion.subID)) {
-                ProjectZuluLog.info("Potion Conflict: Replacing Potion at %s:%s with %s", subItemPotion.itemID,
+            if (subPotions.row(subItemPotion.item).keySet().contains(subItemPotion.subID)) {
+                ProjectZuluLog.info("Potion Conflict: Replacing Potion at %s:%s with %s", subItemPotion.item,
                         subItemPotion.subID, subItemPotion.baseName);
             }
-            subPotions.put(subItemPotion.itemID, subItemPotion.subID, subItemPotion);
-            itemAndNameToSubIDMap.put(subItemPotion.itemID, subItemPotion.baseName, subItemPotion.subID);
+            subPotions.put(subItemPotion.item, subItemPotion.subID, subItemPotion);
+            itemAndNameToSubIDMap.put(subItemPotion.item, subItemPotion.baseName, subItemPotion.subID);
         }
     }
 
-    public Collection<SubItemPotion> getPotions(int itemID) {
-        return subPotions.row(itemID).values();
-    }
-    
-    public SubItemPotion getPotion(ItemStack itemStack) {
-        return getPotion(itemStack.itemID, PotionParser.readID(itemStack.getItemDamage()));
+    public Collection<SubItemPotion> getPotions(Item item) {
+        return subPotions.row(item).values();
     }
 
-    public SubItemPotion getPotion(int itemID, int subID) {
+    public SubItemPotion getPotion(ItemStack itemStack) {
+        return getPotion(itemStack.getItem(), PotionParser.readID(itemStack.getItemDamage()));
+    }
+
+    public SubItemPotion getPotion(Item itemID, int subID) {
         return subPotions.get(itemID, subID);
     }
 
@@ -56,11 +57,11 @@ public enum SubItemPotionRegistry {
     }
 
     public boolean isItemPotion(ItemStack itemStack) {
-        return itemStack != null ? subPotions.get(itemStack.itemID, PotionParser.readID(itemStack.getItemDamage())) != null
+        return itemStack != null ? subPotions.get(itemStack.getItem(), PotionParser.readID(itemStack.getItemDamage())) != null
                 : false;
     }
 
-    public boolean isItemPotion(int itemID) {
+    public boolean isItemPotion(Item itemID) {
         return !subPotions.row(itemID).isEmpty();
     }
 }

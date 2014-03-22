@@ -39,8 +39,8 @@ public class KeyParserTop extends KeyParserBase {
     public boolean isValidLocation(World world, EntityLiving entity, int xCoord, int yCoord, int zCoord,
             TypeValuePair typeValuePair, HashMap<String, Object> valueCache) {
         boolean isInverted = (Boolean) typeValuePair.getValue();
-        boolean isTopBlock = (world.getBiomeGenForCoords(xCoord, zCoord).topBlock & 255) == world.getBlockId(xCoord,
-                yCoord - 1, zCoord);
+        boolean isTopBlock = world.getBiomeGenForCoords(xCoord, zCoord).topBlock == world.getBlock(xCoord, yCoord - 1,
+                zCoord);
         return isInverted ? isTopBlock : !isTopBlock;
     }
 }

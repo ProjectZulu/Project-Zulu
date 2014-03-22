@@ -2,6 +2,7 @@ package projectzulu.common.mobs.entity;
 
 import java.util.EnumSet;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -103,7 +104,7 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob {
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4) {
+    protected void func_145780_a(int xCoord, int yCoord, int zCoord, Block stepBlock) {
         this.worldObj.playSoundAtEntity(this, "sand", 1.0F, 1.0F);
     }
 }

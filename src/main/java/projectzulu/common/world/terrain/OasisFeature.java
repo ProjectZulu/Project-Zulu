@@ -53,7 +53,7 @@ public class OasisFeature extends BiomeFeature {
                 return false;
             }
 
-            if (world.getBlockMaterial(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ) != Material.water) {
+            if (world.getBlock(genBlockCoords.posX, genBlockCoords.posY, genBlockCoords.posZ).getMaterial() != Material.water) {
                 if (!TerrainFeatureHelper.doesTerrainFluctuate(world, genBlockCoords.posX, genBlockCoords.posY,
                         genBlockCoords.posZ, 3, 6)) {
                     if (printToLog) {

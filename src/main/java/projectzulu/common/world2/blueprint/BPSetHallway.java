@@ -3,7 +3,7 @@ package projectzulu.common.world2.blueprint;
 import java.awt.Point;
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
@@ -15,8 +15,8 @@ public class BPSetHallway implements BlueprintSet, Blueprint {
     BlockWithMeta floorblock;
 
     public BPSetHallway() {
-        floorblock = new BlockWithMeta("sandstone");
-        block = new BlockWithMeta("air");
+        floorblock = new BlockWithMeta(Blocks.sandstone);
+        block = new BlockWithMeta(Blocks.air);
     }
 
     @Override

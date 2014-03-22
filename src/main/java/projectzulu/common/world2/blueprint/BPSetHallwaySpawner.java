@@ -3,8 +3,8 @@ package projectzulu.common.world2.blueprint;
 import java.awt.Point;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.core.ProjectZuluLog;
@@ -19,7 +19,7 @@ public class BPSetHallwaySpawner implements BlueprintSet, Blueprint {
     BlockWithMeta floorblock;
 
     public BPSetHallwaySpawner() {
-        floorblock = new BlockWithMeta("sandstone");
+        floorblock = new BlockWithMeta(Blocks.sandstone);
     }
 
     @Override
@@ -64,9 +64,9 @@ public class BPSetHallwaySpawner implements BlueprintSet, Blueprint {
                 if (!entityName.equalsIgnoreCase("EMPTY")) {
                     ProjectZuluLog.severe("Entity with name %s does not seem to exist.", entityName);
                 }
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
         }
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 }

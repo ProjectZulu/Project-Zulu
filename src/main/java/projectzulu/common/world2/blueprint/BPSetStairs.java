@@ -3,7 +3,7 @@ package projectzulu.common.world2.blueprint;
 import java.awt.Point;
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
@@ -14,7 +14,7 @@ public class BPSetStairs implements BlueprintSet, Blueprint {
     BlockWithMeta floorblock;
 
     public BPSetStairs() {
-        floorblock = new BlockWithMeta("sandstone");
+        floorblock = new BlockWithMeta(Blocks.sandstone);
     }
 
     @Override
@@ -91,26 +91,26 @@ public class BPSetStairs implements BlueprintSet, Blueprint {
             return getTopStairBlock(piecePos, cellSize, cellHeight, cellIndexDirection, random,
                     Integer.parseInt(subIndex[1]));
         }
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 
     public BlockWithMeta getBottomStairBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight,
             CellIndexDirection cellIndexDirection, Random random, int index) {
         index = index - 1;
         if (piecePos.posY == 0) {
-            return new BlockWithMeta("sandstone");
+            return new BlockWithMeta(Blocks.sandstone);
         }
 
         if (piecePos.posX == 0) {
             if (piecePos.posY > (piecePos.posZ + 1) + index * cellSize) {
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             } else if (piecePos.posY == (piecePos.posZ + 1) + index * cellSize) {
-                return new BlockWithMeta(Block.stairsSandStone.blockID, 2);
+                return new BlockWithMeta(Blocks.sandstone_stairs, 2);
             } else {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             }
         }
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 
     public BlockWithMeta getTopStairBlock(ChunkCoordinates piecePos, int cellSize, int cellHeight,
@@ -119,14 +119,14 @@ public class BPSetStairs implements BlueprintSet, Blueprint {
         index = index + (cellSize - cellHeight - 2);
         if (piecePos.posY == 0) {
             if (piecePos.posX != 0) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             } else if (requiresStairs && piecePos.posY == (piecePos.posZ + 1) + index) {
-                return new BlockWithMeta(Block.stairsSandStone.blockID, 2);
+                return new BlockWithMeta(Blocks.sandstone_stairs, 2);
             } else if (requiresStairs && piecePos.posY < (piecePos.posZ + 1) + index) {
-                return new BlockWithMeta("sandstone");
+                return new BlockWithMeta(Blocks.sandstone);
             }
         }
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 
     @Override

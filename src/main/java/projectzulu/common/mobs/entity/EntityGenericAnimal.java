@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,14 +16,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import projectzulu.common.ProjectZulu_Core;
 import projectzulu.common.Properties;
 import projectzulu.common.api.CustomEntityList;
-import projectzulu.common.core.PacketIDs;
+import projectzulu.common.core.PZPacket;
 import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.mobs.packets.PacketManagerAnimTime;
-import cpw.mods.fml.common.network.PacketDispatcher;
+import projectzulu.common.mobs.packets.PacketAnimTime;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
 /**
  * Universal AI Structure for Project Zulu Entities
@@ -54,17 +55,19 @@ public class EntityGenericAnimal extends EntityGenericTameable {
         super.applyEntityAttributes();
         CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
         if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
-            this.getAttributeMap().func_111150_b(SharedMonsterAttributes.attackDamage);
+            // Register Damage Attribute
+            this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
             
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(
+            // Set Base values of attributes
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(
                     entityEntry.modData.get().entityProperties.maxHealth);
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(
                     entityEntry.modData.get().entityProperties.moveSpeed);
-            this.getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(
+            this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(
                     entityEntry.modData.get().entityProperties.followRange);
-            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(
+            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(
                     entityEntry.modData.get().entityProperties.knockbackResistance);
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(
                     entityEntry.modData.get().entityProperties.attackDamage);
             flightChance = entityEntry.modData.get().entityProperties.flightChance;
         }
@@ -96,7 +99,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     }
 
     public void updateAIState() {
-        if (worldObj.difficultySetting == 0 && Properties.despawnInPeaceful && !isTamed()) {
+        if (worldObj.difficultySetting == EnumDifficulty.PEACEFUL && Properties.despawnInPeaceful && !isTamed()) {
             this.setDead();
         }
         /* AI Updates are done Before UpdateTasks such that some states can be manually triggered */
@@ -156,10 +159,9 @@ public class EntityGenericAnimal extends EntityGenericTameable {
                 && targetEntity.boundingBox.minY < this.boundingBox.maxY) {
             animTime = maxAnimTime;
             if (!worldObj.isRemote) {
-                PacketManagerAnimTime packetAnimTime = (PacketManagerAnimTime) PacketIDs.animTime.createPacketManager();
-                packetAnimTime.setPacketData(entityId, animTime);
-                PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 30, this.dimension,
-                        packetAnimTime.createPacket());
+                PZPacket packet = new PacketAnimTime().setPacketData(getEntityId(), animTime);
+                ProjectZulu_Core.getPipeline()
+                        .sendToAllAround(packet, new TargetPoint(dimension, posX, posY, posZ, 30));
             }
 
             float damage = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
@@ -189,8 +191,10 @@ public class EntityGenericAnimal extends EntityGenericTameable {
                 }
 
                 if (targetEntity instanceof EntityLivingBase) {
-                    EnchantmentThorns.func_92096_a(this, (EntityLivingBase) targetEntity, this.rand);
+                    EnchantmentHelper.func_151384_a((EntityLivingBase)targetEntity, this);
                 }
+                EnchantmentHelper.func_151385_b(this, targetEntity);
+
             }
             return attackedSucceded && super.attackEntityAsMob(targetEntity);
         }
@@ -285,11 +289,11 @@ public class EntityGenericAnimal extends EntityGenericTameable {
 
         if (customEntity.modData.get().reportSpawningInLog) {
             if (wasSuccesful) {
-                ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s", getEntityName(), xCoord, yCoord,
+                ProjectZuluLog.info("Successfully spawned %s at X:%s Y:%s Z:%s in %s", getCommandSenderName(), xCoord, yCoord,
                         zCoord, worldObj.getBiomeGenForCoords(xCoord, zCoord));
             } else {
                 ProjectZuluLog.info("Failed to spawn %s at X:%s Y:%s Z:%s in %s, Spawning Location Inhospitable",
-                        getEntityName(), xCoord, yCoord, zCoord, worldObj.getBiomeGenForCoords(xCoord, zCoord));
+                        getCommandSenderName(), xCoord, yCoord, zCoord, worldObj.getBiomeGenForCoords(xCoord, zCoord));
             }
         }
         return wasSuccesful;

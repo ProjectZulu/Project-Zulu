@@ -4,6 +4,7 @@ import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
@@ -15,12 +16,12 @@ public class ChestWithMeta extends BlockWithMeta {
     int maxLoot;
     TileEntityChest tileEntityChest;
 
-    public ChestWithMeta(int blockID, int meta, TileEntityChest tileEntityChest, int lootChance) {
-        this(blockID, meta, tileEntityChest, lootChance, -1);
+    public ChestWithMeta(Block block, int meta, TileEntityChest tileEntityChest, int lootChance) {
+        this(block, meta, tileEntityChest, lootChance, -1);
     }
 
-    public ChestWithMeta(int blockID, int meta, TileEntityChest tileEntityChest, int lootChance, int maxLoot) {
-        super(blockID, meta);
+    public ChestWithMeta(Block block, int meta, TileEntityChest tileEntityChest, int lootChance, int maxLoot) {
+        super(block, meta);
         this.tileEntityChest = tileEntityChest;
         this.lootChance = lootChance;
         this.maxLoot = maxLoot;
@@ -28,8 +29,8 @@ public class ChestWithMeta extends BlockWithMeta {
 
     @Override
     public void placeBlock(World world, ChunkCoordinates position, Random random) {
-        world.setBlock(position.posX, position.posY, position.posZ, blockID, meta, 3);
-        world.setBlockTileEntity(position.posX, position.posY, position.posZ, tileEntityChest);
+        world.setBlock(position.posX, position.posY, position.posZ, block, meta, 3);
+        world.setTileEntity(position.posX, position.posY, position.posZ, tileEntityChest);
         int amountOfLoot = 0;
         for (int slot = 0; slot < tileEntityChest.getSizeInventory(); slot++) {
             if (lootChance - random.nextInt(100) >= 0) {

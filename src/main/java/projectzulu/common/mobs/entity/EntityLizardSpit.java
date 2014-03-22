@@ -1,15 +1,11 @@
 package projectzulu.common.mobs.entity;
 
-import java.util.Iterator;
 import java.util.List;
 
-import projectzulu.common.core.ProjectZuluLog;
-
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -25,7 +21,7 @@ public class EntityLizardSpit extends Entity
     private int xTile = -1;
     private int yTile = -1;
     private int zTile = -1;
-    private int inTile = 0;
+    private Block inTile;
     private boolean inGround = false;
     public EntityLivingBase shootingEntity;
     private int ticksAlive;
@@ -97,13 +93,11 @@ public class EntityLizardSpit extends Entity
         else
         {
             super.onUpdate();
-            //this.setFire(1);
+//            this.setFire(1);
 
             if (this.inGround)
             {
-                int var1 = this.worldObj.getBlockId(this.xTile, this.yTile, this.zTile);
-
-                if (var1 == this.inTile)
+                if (this.worldObj.getBlock(this.xTile, this.yTile, this.zTile) == this.inTile)
                 {
                     ++this.ticksAlive;
 
@@ -122,65 +116,66 @@ public class EntityLizardSpit extends Entity
                 this.ticksAlive = 0;
                 this.ticksInAir = 0;
             }
-            else{
+            else
+            {
                 ++this.ticksInAir;
             }
 
-            Vec3 var15 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-            Vec3 var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-            MovingObjectPosition var3 = this.worldObj.clip(var15, var2);
-            var15 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-            var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            Vec3 vec3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
+            Vec3 vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(vec3, vec31);
+            vec3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
+            vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
-            if (var3 != null){
-                var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord);
+            if (movingobjectposition != null)
+            {
+                vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
             }
 
-            Entity var4 = null;
-            List var5 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
-            double var6 = 0.0D;
-            Iterator var8 = var5.iterator();
+            Entity entity = null;
+            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+            double d0 = 0.0D;
 
-            while (var8.hasNext())
+            for (int i = 0; i < list.size(); ++i)
             {
-                Entity var9 = (Entity)var8.next();
+                Entity entity1 = (Entity)list.get(i);
 
-                if (var9.canBeCollidedWith() && (!var9.isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25))
+                if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25))
                 {
-                    float var10 = 0.3F;
-                    AxisAlignedBB var11 = var9.boundingBox.expand((double)var10, (double)var10, (double)var10);
-                    MovingObjectPosition var12 = var11.calculateIntercept(var15, var2);
+                    float f = 0.3F;
+                    AxisAlignedBB axisalignedbb = entity1.boundingBox.expand((double)f, (double)f, (double)f);
+                    MovingObjectPosition movingobjectposition1 = axisalignedbb.calculateIntercept(vec3, vec31);
 
-                    if (var12 != null)
+                    if (movingobjectposition1 != null)
                     {
-                        double var13 = var15.distanceTo(var12.hitVec);
+                        double d1 = vec3.distanceTo(movingobjectposition1.hitVec);
 
-                        if (var13 < var6 || var6 == 0.0D)
+                        if (d1 < d0 || d0 == 0.0D)
                         {
-                            var4 = var9;
-                            var6 = var13;
+                            entity = entity1;
+                            d0 = d1;
                         }
                     }
                 }
             }
 
-            if (var4 != null)
+            if (entity != null)
             {
-                var3 = new MovingObjectPosition(var4);
+                movingobjectposition = new MovingObjectPosition(entity);
             }
 
-            if (var3 != null)
+            if (movingobjectposition != null)
             {
-                this.onImpact(var3);
+                this.onImpact(movingobjectposition);
             }
 
             this.posX += this.motionX;
             this.posY += this.motionY;
             this.posZ += this.motionZ;
-            float var16 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-            this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
+            float f1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+            this.rotationYaw = (float)(Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) + 90.0F;
 
-            for (this.rotationPitch = (float)(Math.atan2(this.motionY, (double)var16) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+            for (this.rotationPitch = (float)(Math.atan2((double)f1, this.motionY) * 180.0D / Math.PI) - 90.0F; this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
             {
                 ;
             }
@@ -202,25 +197,25 @@ public class EntityLizardSpit extends Entity
 
             this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
             this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
-            float var17 = 0.95F;
+            float f2 = 0.95f;
 
             if (this.isInWater())
             {
-                for (int var19 = 0; var19 < 4; ++var19)
+                for (int j = 0; j < 4; ++j)
                 {
-                    float var18 = 0.25F;
-                    this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)var18, this.posY - this.motionY * (double)var18, this.posZ - this.motionZ * (double)var18, this.motionX, this.motionY, this.motionZ);
+                    float f3 = 0.25F;
+                    this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)f3, this.posY - this.motionY * (double)f3, this.posZ - this.motionZ * (double)f3, this.motionX, this.motionY, this.motionZ);
                 }
 
-                var17 = 0.8F;
+                f2 = 0.8F;
             }
 
             this.motionX += this.accelerationX;
             this.motionY += this.accelerationY;
             this.motionZ += this.accelerationZ;
-            this.motionX *= (double)var17;
-            this.motionY *= (double)var17;
-            this.motionZ *= (double)var17;
+            this.motionX *= (double)f2;
+            this.motionY *= (double)f2;
+            this.motionZ *= (double)f2;
             this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
             this.setPosition(this.posX, this.posY, this.posZ);
         }
@@ -257,7 +252,7 @@ public class EntityLizardSpit extends Entity
         par1NBTTagCompound.setShort("xTile", (short)this.xTile);
         par1NBTTagCompound.setShort("yTile", (short)this.yTile);
         par1NBTTagCompound.setShort("zTile", (short)this.zTile);
-        par1NBTTagCompound.setByte("inTile", (byte)this.inTile);
+        par1NBTTagCompound.setByte("inTile", (byte)Block.getIdFromBlock(this.inTile));
         par1NBTTagCompound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
         par1NBTTagCompound.setTag("direction", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
     }
@@ -271,15 +266,15 @@ public class EntityLizardSpit extends Entity
         this.xTile = par1NBTTagCompound.getShort("xTile");
         this.yTile = par1NBTTagCompound.getShort("yTile");
         this.zTile = par1NBTTagCompound.getShort("zTile");
-        this.inTile = par1NBTTagCompound.getByte("inTile") & 255;
+        this.inTile = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);
         this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
 
         if (par1NBTTagCompound.hasKey("direction"))
         {
-            NBTTagList var2 = par1NBTTagCompound.getTagList("direction");
-            this.motionX = ((NBTTagDouble)var2.tagAt(0)).data;
-            this.motionY = ((NBTTagDouble)var2.tagAt(1)).data;
-            this.motionZ = ((NBTTagDouble)var2.tagAt(2)).data;
+            NBTTagList var2 = par1NBTTagCompound.getTagList("direction", 6);
+            this.motionX = var2.func_150309_d(0);
+            this.motionY = var2.func_150309_d(1);
+            this.motionZ = var2.func_150309_d(2);
         }
         else
         {

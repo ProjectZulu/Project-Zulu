@@ -27,10 +27,10 @@ public class TileEntityBrewingStandRenderer extends TileEntitySpecialRenderer {
         ItemStack ingredientStack = tileEntity.brewingItemStacks[tileEntity.brewingItemStacks.length - 1];
         if (ingredientStack != null) {
             if (ingredientStack.stackSize > 1) {
-                renderItemStack(ingredientStack, itemRenderer, tileEntity.worldObj, xRenderCoord, yRenderCoord + 0.3D,
+                renderItemStack(ingredientStack, itemRenderer, tileEntity.getWorldObj(), xRenderCoord, yRenderCoord + 0.3D,
                         zRenderCoord, (float) (Math.pow(400 - tileEntity.getBrewTime(), 2)) / 20 + 90f, 0.28f);
             } else {
-                renderItemStack(ingredientStack, itemRenderer, tileEntity.worldObj, xRenderCoord, yRenderCoord + 0.3D,
+                renderItemStack(ingredientStack, itemRenderer, tileEntity.getWorldObj(), xRenderCoord, yRenderCoord + 0.3D,
                         zRenderCoord, (float) (Math.pow(400 - tileEntity.getBrewTime(), 2)) / 20 + 90f, 0.4f);
             }
         }
@@ -42,7 +42,7 @@ public class TileEntityBrewingStandRenderer extends TileEntitySpecialRenderer {
             if (stackToRender == null) {
                 continue;
             }
-            renderItemStack(stackToRender, itemRenderer, tileEntity.worldObj, xRenderCoord, yRenderCoord - 0.25D,
+            renderItemStack(stackToRender, itemRenderer, tileEntity.getWorldObj(), xRenderCoord, yRenderCoord - 0.25D,
                     zRenderCoord + zOffsets[i], rotation[i], 0.6f);
         }
     }
@@ -58,7 +58,7 @@ public class TileEntityBrewingStandRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) xRenderCoord + 0.5f, (float) (yRenderCoord + 0.3), (float) zRenderCoord + 0.5f);
         GL11.glScalef(scaleItem, scaleItem, scaleItem);
         GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-        renderer.doRenderItem(entityItemToRender, 0, 0, 0, 0, 0);
+        renderer.doRender(entityItemToRender, 0, 0, 0, 0, 0);
         GL11.glPopMatrix();
     }
 }

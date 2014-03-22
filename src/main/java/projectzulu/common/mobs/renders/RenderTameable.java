@@ -35,11 +35,11 @@ public class RenderTameable extends RenderGenericLiving {
                 renderLivingNamePlate(tameable, tameable.getUsername(), par2, par4, par6, 64);
             }
         }
-        super.doRenderLiving(par1EntityFox, par2, par4, par6, par8, par9);
+        super.doRender(par1EntityFox, par2, par4, par6, par8, par9);
     }
 
     @Override
-    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8,
+    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8,
             float par9) {
         this.renderTameable((EntityGenericAnimal) par1EntityLiving, par2, par4, par6, par8, par9);
     }

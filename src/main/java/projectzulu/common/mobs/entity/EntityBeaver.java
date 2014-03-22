@@ -30,7 +30,7 @@ public class EntityBeaver extends EntityGenericAnimal implements IAnimals {
         // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
         // tasks.addTask(5, new EntityAIMate(this, moveSpeed));
-        // tasks.addTask(6, new EntityAITempt(this, moveSpeed, Item.spiderEye.itemID, false));
+        // tasks.addTask(6, new EntityAITempt(this, moveSpeed, Items.spider_eye, false));
         // tasks.addTask(7, new EntityAIFollowParent(this, moveSpeed));
         tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
@@ -67,7 +67,7 @@ public class EntityBeaver extends EntityGenericAnimal implements IAnimals {
     @Override
     protected void dropRareDrop(int par1) {
         if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
-            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 6), 1);
+            entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 6), 1);
         }
         super.dropRareDrop(par1);
     }

@@ -5,12 +5,13 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
@@ -50,7 +51,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
         tasks.addTask(4, new EntityAIFollowOwner(this, 1.0f, 10.0F, 2.0F));
 
         tasks.addTask(5, new EntityAIMate(this, 1.0f));
-        tasks.addTask(6, new EntityAITempt(this, 1.2f, Block.leaves.blockID, false));
+        tasks.addTask(6, new EntityAITempt(this, 1.2f, Item.getItemFromBlock(Blocks.leaves), false));
         tasks.addTask(7, new EntityAIFollowParent(this, 1.1f));
         tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
@@ -166,7 +167,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
             while (var10.hasNext()) {
                 Entity var4 = (Entity) var10.next();
                 if (var4 instanceof EntityPlayer
-                        && ((EntityPlayer) riddenByEntity).username.equals(((EntityPlayer) var4).username)) {
+                        && ((EntityPlayer) riddenByEntity).getCommandSenderName().equals(((EntityPlayer) var4).getCommandSenderName())) {
 
                 } else {
                     if (var4.getDistanceToEntity(this) < getAttackDistance()) {
@@ -181,7 +182,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
 
     @Override
     public boolean isValidBreedingItem(ItemStack itemStack) {
-        if (itemStack != null && itemStack.getItem().itemID == Block.leaves.blockID) {
+        if (itemStack != null && itemStack.getItem() == Item.getItemFromBlock(Blocks.leaves)) {
             return true;
         } else {
             return super.isValidBreedingItem(itemStack);
@@ -191,7 +192,7 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
     @Override
     protected void dropRareDrop(int par1) {
         if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
-            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 11), 1);
+            entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 11), 1);
         }
         super.dropRareDrop(par1);
     }

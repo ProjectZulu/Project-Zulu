@@ -1,11 +1,12 @@
 package projectzulu.common.potion.subitem;
 
+import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import projectzulu.common.potion.PotionParser;
 
 public abstract class SubItemPotionHalfPower extends SubItemPotionGeneric {
 
-    SubItemPotionHalfPower(int itemID, int subID, String baseName) {
+    SubItemPotionHalfPower(Item itemID, int subID, String baseName) {
         super(itemID, subID, baseName);
     }
 

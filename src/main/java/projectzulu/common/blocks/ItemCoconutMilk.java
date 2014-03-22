@@ -8,8 +8,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCoconutMilk extends Item {
 
-    public ItemCoconutMilk(int par1, int par2, boolean par3bool) {
-        super(par1);
+    public ItemCoconutMilk(int par2, boolean par3bool) {
+        super();
         maxStackSize = 12;
         setMaxDamage(5);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);

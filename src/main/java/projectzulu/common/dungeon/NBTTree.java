@@ -8,16 +8,16 @@ import net.minecraft.nbt.NBTTagCompound;
 public class NBTTree {
     private NBTNode root;
 
-    public NBTTree(NBTBase rootData) {
-        root = new NBTNode(rootData, null);
+    public NBTTree(NBTBase rootData, String rootName) {
+        root = new NBTNode(rootData, null, rootName);
     }
 
     public NBTNode getRootNode() {
         return root;
     }
 
-    public boolean addNode(NBTBase data, NBTNode parent) {
-        return parent.addChild(data);
+    public boolean addNode(NBTBase data, NBTNode parent, String tagName) {
+        return parent.addChild(data, tagName);
     }
 
     public void removeChildNode(NBTNode nodeToRemove, NBTNode parentNode) {

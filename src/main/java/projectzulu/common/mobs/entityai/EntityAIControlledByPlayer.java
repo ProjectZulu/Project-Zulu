@@ -3,6 +3,7 @@ package projectzulu.common.mobs.entityai;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathFinder;
@@ -112,10 +113,10 @@ public class EntityAIControlledByPlayer extends EntityAIBase {
 
         if (this.thisEntity.onGround) {
             var8 = 0.54600006F;
-            int var9 = this.thisEntity.worldObj.getBlockId(MathHelper.floor_float((float)var4), MathHelper.floor_float((float)var5) - 1, MathHelper.floor_float((float)var6));
+            Block var9 = this.thisEntity.worldObj.getBlock(MathHelper.floor_float((float)var4), MathHelper.floor_float((float)var5) - 1, MathHelper.floor_float((float)var6));
 
-            if (var9 > 0) {
-                var8 = Block.blocksList[var9].slipperiness * 0.91F;
+            if (var9 != null) {
+                var8 = var9.slipperiness * 0.91F;
             }
         }
 
@@ -163,11 +164,11 @@ public class EntityAIControlledByPlayer extends EntityAIBase {
         if (!var1.capabilities.isCreativeMode && this.currentSpeed >= this.maxSpeed * 0.5F && this.thisEntity.getRNG().nextFloat() < 0.006F && !this.speedBoosted) {
             ItemStack var20 = var1.getHeldItem();
 
-            if (var20 != null && var20.itemID == Item.carrotOnAStick.itemID) {
+            if (var20 != null && var20.getItem() == Items.carrot_on_a_stick) {
                 var20.damageItem(1, var1);
 
                 if (var20.stackSize == 0) {
-                    var1.inventory.mainInventory[var1.inventory.currentItem] = new ItemStack(Item.fishingRod);
+                    var1.inventory.mainInventory[var1.inventory.currentItem] = new ItemStack(Items.fishing_rod);
                 }
             }
         }

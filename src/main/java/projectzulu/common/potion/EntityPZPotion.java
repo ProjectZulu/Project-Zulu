@@ -116,7 +116,7 @@ public class EntityPZPotion extends EntityPotion {
         super.writeEntityToNBT(par1NBTTagCompound);
 
         if (potionStack != null) {
-            par1NBTTagCompound.setCompoundTag("Potion", potionStack.writeToNBT(new NBTTagCompound()));
+            par1NBTTagCompound.setTag("Potion", potionStack.writeToNBT(new NBTTagCompound()));
         }
     }
 }

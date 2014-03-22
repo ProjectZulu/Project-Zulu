@@ -4,8 +4,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.util.Icon;
+import net.minecraft.init.Items;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -25,11 +25,11 @@ public class RenderLizardSpit extends Render implements RenderWrapper {
     public void doRenderLizardSpit(EntityLizardSpit par1EntityLizardSpit, double par2, double par4, double par6,
             float par8, float par9) {
 
-        Icon icon;
+        IIcon icon;
         if (ItemList.genericCraftingItems.isPresent()) {
             icon = ItemGenerics.Properties.LizardSpit.getIcon();
         } else {
-            icon = Item.fireballCharge.getIconFromDamage(0);
+            icon = Items.fire_charge.getIconFromDamage(0);
         }
         if (icon != null) { // Icon only null if ItemGenerics is disabled, TODO more elegant solution
             GL11.glPushMatrix();

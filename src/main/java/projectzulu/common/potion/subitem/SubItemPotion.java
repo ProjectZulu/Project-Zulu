@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -15,13 +16,13 @@ import projectzulu.common.potion.PotionParser;
 
 public abstract class SubItemPotion {
 
-    public final int itemID;
+    public final Item item;
     public final int subID;
     public final String baseName;
 
-    SubItemPotion(int itemID, int subID, String baseName) {
+    SubItemPotion(Item item, int subID, String baseName) {
         this.subID = subID;
-        this.itemID = itemID;
+        this.item = item;
         this.baseName = baseName;
     }
 
@@ -58,7 +59,7 @@ public abstract class SubItemPotion {
         return getPotionEffects(itemStack.getItemDamage());
     }
 
-    public abstract void getSubItems(int itemID, CreativeTabs creativeTab, List<ItemStack> list);
+    public abstract void getSubItems(Item itemID, CreativeTabs creativeTab, List<ItemStack> list);
 
     public abstract boolean isEffectInstant(int damageMeta);
 
@@ -82,10 +83,10 @@ public abstract class SubItemPotion {
         }
         if (!player.capabilities.isCreativeMode) {
             if (itemStack.stackSize <= 0) {
-                return new ItemStack(Item.glassBottle);
+                return new ItemStack(Items.glass_bottle);
             }
 
-            player.inventory.addItemStackToInventory(new ItemStack(Item.glassBottle));
+            player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
         }
         return itemStack;
     }

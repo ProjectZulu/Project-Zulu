@@ -7,8 +7,9 @@ import net.minecraft.block.BlockBrewingStand;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import projectzulu.common.core.RenderHelper;
 import projectzulu.common.core.RenderHelper.Surface;
@@ -22,7 +23,7 @@ public class RenderBrewingStandSingle implements ISimpleBlockRenderingHandler {
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelId) {
         return false;
     }
 
@@ -57,21 +58,21 @@ public class RenderBrewingStandSingle implements ISimpleBlockRenderingHandler {
         }
         tessellator.setColorOpaque_F(var6 * var8, var6 * var9, var6 * var10);
 
-        TileEntity tileEntity = blockAccess.getBlockTileEntity(posX, posY, posZ);
+        TileEntity tileEntity = blockAccess.getTileEntity(posX, posY, posZ);
         int potionNumber = 1;
         if (tileEntity != null && tileEntity instanceof TileEntityBrewingBase) {
             potionNumber = ((TileEntityBrewingBase) tileEntity).brewingItemStacks.length - 1;
         }
 
-        Icon brewingPlateIcon = ((BlockBrewingStand) Block.brewingStand).getBrewingStandIcon();
-        Icon bowlIcon = renderer.getBlockIconFromSideAndMetadata(Block.glass, 2, 0);
-        Icon bowlRing = renderer.getBlockIconFromSideAndMetadata(Block.cobblestone, 2, 0);
-        Icon legSkin = renderer.getBlockIconFromSideAndMetadata(Block.wood, 2, 0);
-        Icon legBottom = renderer.getBlockIconFromSideAndMetadata(Block.wood, 1, 0);
+        IIcon brewingPlateIcon = ((BlockBrewingStand) Blocks.brewing_stand).getIconBrewingStandBase();
+        IIcon bowlIcon = renderer.getBlockIconFromSideAndMetadata(Blocks.glass, 2, 0);
+        IIcon bowlRing = renderer.getBlockIconFromSideAndMetadata(Blocks.cobblestone, 2, 0);
+        IIcon legSkin = renderer.getBlockIconFromSideAndMetadata(Blocks.log, 2, 0);
+        IIcon legBottom = renderer.getBlockIconFromSideAndMetadata(Blocks.log, 1, 0);
         if (potionNumber > 1) {
-            bowlRing = renderer.getBlockIconFromSideAndMetadata(Block.glowStone, 1, 0);
-            legSkin = renderer.getBlockIconFromSideAndMetadata(Block.netherBrick, 1, 0);
-            legBottom = renderer.getBlockIconFromSideAndMetadata(Block.netherBrick, 1, 0);
+            bowlRing = renderer.getBlockIconFromSideAndMetadata(Blocks.glowstone, 1, 0);
+            legSkin = renderer.getBlockIconFromSideAndMetadata(Blocks.nether_brick, 1, 0);
+            legBottom = renderer.getBlockIconFromSideAndMetadata(Blocks.nether_brick, 1, 0);
         }
 
         /* Brewing Plates and Pipes */

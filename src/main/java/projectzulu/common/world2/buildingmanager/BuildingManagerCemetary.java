@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import projectzulu.common.core.terrain.TerrainFeature.FeatureDirection;
@@ -31,7 +32,7 @@ public class BuildingManagerCemetary extends BuildingManagerBase {
         int cellSize = 3;
         int cellHeight = 5;
         startingPos = calcTranslatedPosition(direction, startingPos, xCells * cellSize, zCells * cellSize, cellHeight);
-        
+
         cemetary = new MazeCell[xCells][zCells];
         for (int i = 0; i < cemetary.length; i++) {
             for (int j = 0; j < cemetary[0].length; j++) {
@@ -67,19 +68,15 @@ public class BuildingManagerCemetary extends BuildingManagerBase {
         }
     }
 
-	@Override
-	protected void handleBlockPlacement(BlockWithMeta blockWithMeta,
-			ChunkCoordinates position, Random random) {
-		Block blockAt = world.getBlock(position.posX, position.posY,
-				position.posZ);
-		if (blockWithMeta.blockID.equals("air")
-				&& blockAt.equals(Block.getBlockFromName("snow"))) {
-			return;
-		}
-		if (blockAt.getMaterial().equals(Material.wood)
-				|| blockAt.getMaterial().equals(Material.leaves)) {
-			return;
-		}
-		super.handleBlockPlacement(blockWithMeta, position, random);
-	}
+    @Override
+    protected void handleBlockPlacement(BlockWithMeta blockWithMeta, ChunkCoordinates position, Random random) {
+        Block blockAt = world.getBlock(position.posX, position.posY, position.posZ);
+        if (blockWithMeta.block.equals(Blocks.air) && blockAt.equals(Block.getBlockFromName("snow"))) {
+            return;
+        }
+        if (blockAt.getMaterial().equals(Material.wood) || blockAt.getMaterial().equals(Material.leaves)) {
+            return;
+        }
+        super.handleBlockPlacement(blockWithMeta, position, random);
+    }
 }

@@ -2,7 +2,7 @@ package projectzulu.common.world2.blueprint;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
@@ -14,15 +14,15 @@ public class BlueprintLabyrinthRandomWall implements Blueprint {
             CellIndexDirection cellIndexDirection) {
 
         if ((piecePos.posY == 0)) {// || piecePos.posY == cellHeight - 1)) {
-         return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+         return new BlockWithMeta(Blocks.stonebrick, 0);
         } else if (10 - random.nextInt(100) >= 0) {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 2);
+            return new BlockWithMeta(Blocks.stonebrick, 2);
         } else if (10 - random.nextInt(100) >= 0) {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 1);
+            return new BlockWithMeta(Blocks.stonebrick, 1);
         } else if (5 - random.nextInt(100) >= 0) {
-            return new BlockWithMeta("air");
+            return new BlockWithMeta(Blocks.air);
         } else {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+            return new BlockWithMeta(Blocks.stonebrick, 0);
         }
     }
 

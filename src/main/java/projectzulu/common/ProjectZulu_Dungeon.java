@@ -14,10 +14,8 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid = DefaultProps.DungeonModId, name = "Project Zulu Dungeon", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class ProjectZulu_Dungeon {
 
     @Instance(DefaultProps.DungeonModId)

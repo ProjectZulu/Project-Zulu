@@ -3,12 +3,12 @@ package projectzulu.common.mobs.entity;
 import java.util.EnumSet;
 
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import projectzulu.common.core.ObfuscationHelper;
@@ -43,7 +43,7 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
         // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
         // tasks.addTask(5, new EntityAIMate(this, moveSpeed));
-        // tasks.addTask(6, new EntityAITempt(this, moveSpeed, Block.tallGrass.blockID, false));
+        // tasks.addTask(6, new EntityAITempt(this, moveSpeed, Blocks.tallgrass, false));
         // tasks.addTask(7, new EntityAIFollowParent(this, moveSpeed));
         tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
@@ -75,24 +75,24 @@ public class EntityHauntedArmor extends EntityGenericAnimal implements IMob {
         int number = world.rand.nextInt(2);
         switch (number) {
         case 0:
-            setCurrentItemOrArmor(0, new ItemStack(Item.swordIron));
-            setCurrentItemOrArmor(1, new ItemStack(Item.helmetIron));
-            setCurrentItemOrArmor(2, new ItemStack(Item.plateIron));
-            setCurrentItemOrArmor(3, new ItemStack(Item.legsIron));
-            setCurrentItemOrArmor(4, new ItemStack(Item.bootsIron));
+            setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
+            setCurrentItemOrArmor(1, new ItemStack(Items.iron_helmet));
+            setCurrentItemOrArmor(2, new ItemStack(Items.iron_chestplate));
+            setCurrentItemOrArmor(3, new ItemStack(Items.iron_leggings));
+            setCurrentItemOrArmor(4, new ItemStack(Items.iron_boots));
             break;
         case 1:
-            setCurrentItemOrArmor(0, new ItemStack(Item.swordGold));
-            setCurrentItemOrArmor(1, new ItemStack(Item.helmetGold));
-            setCurrentItemOrArmor(2, new ItemStack(Item.plateGold));
-            setCurrentItemOrArmor(3, new ItemStack(Item.legsGold));
-            setCurrentItemOrArmor(4, new ItemStack(Item.bootsGold));
+            setCurrentItemOrArmor(0, new ItemStack(Items.golden_sword));
+            setCurrentItemOrArmor(1, new ItemStack(Items.golden_helmet));
+            setCurrentItemOrArmor(2, new ItemStack(Items.golden_chestplate));
+            setCurrentItemOrArmor(3, new ItemStack(Items.golden_leggings));
+            setCurrentItemOrArmor(4, new ItemStack(Items.golden_boots));
         }
     }
 
     @Override
-    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData) {
-        EntityLivingData entityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
+        IEntityLivingData entityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
         setRandomArmor(worldObj);
         return entityLivingData;
     }

@@ -159,7 +159,7 @@ public class EntityVulture extends EntityGenericAnimal {
     @Override
     protected void dropRareDrop(int par1) {
         if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
-            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 16), 1);
+            entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 16), 1);
         }
         super.dropRareDrop(par1);
     }

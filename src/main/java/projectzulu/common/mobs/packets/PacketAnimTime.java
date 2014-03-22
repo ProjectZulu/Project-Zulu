@@ -14,12 +14,12 @@ import net.minecraft.world.World;
 import projectzulu.common.core.PZPacket;
 import projectzulu.common.mobs.entity.EntityGenericCreature;
 
-public class PacketManagerAnimTime implements PZPacket {
+public class PacketAnimTime implements PZPacket {
 
     private int entityIDtoSync;
     private int animTime;
 
-    public PacketManagerAnimTime setPacketData(int entityIDtoSync, int animTime) {
+    public PacketAnimTime setPacketData(int entityIDtoSync, int animTime) {
         this.entityIDtoSync = entityIDtoSync;
         this.animTime = animTime;
         return this;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
 import projectzulu.common.core.ProjectZuluLog;
@@ -75,7 +76,7 @@ public class KeyParserEntities extends KeyParserBase {
             if (entities.isEntityAlive()) {
                 String entityName = "";
                 try {
-                    entityName = entities.getEntityName();
+                    entityName = EntityList.getEntityString(entities);
                 } catch (Exception e) {
                     ProjectZuluLog.severe("Error Accessing Entity Name of %s", entities.getClass().getSimpleName());
                     e.printStackTrace();

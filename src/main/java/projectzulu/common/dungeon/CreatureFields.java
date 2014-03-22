@@ -1,6 +1,7 @@
 package projectzulu.common.dungeon;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.EntityList;
@@ -42,8 +43,9 @@ public class CreatureFields implements DataFields {
     Point screenSize;
     Point backgroundSize;
 
-    public static final ResourceLocation CREATURE_LIST = new ResourceLocation(DefaultProps.dungeonKey, "creaturelistgui.png");
-    
+    public static final ResourceLocation CREATURE_LIST = new ResourceLocation(DefaultProps.dungeonKey,
+            "creaturelistgui.png");
+
     CreatureFields(Minecraft mc) {
         this.mc = mc;
     }
@@ -70,8 +72,8 @@ public class CreatureFields implements DataFields {
                     screenWidth, screenHeight), backgroundSize, new Point(205, 39 + 42 - 9), new Point(20, 18));
             selectedTagField = new GUIEditNodeTextField(selectedTagField, mc.fontRenderer, 60, new Point(screenWidth,
                     screenHeight), backgroundSize, new Point(8, 181), new Point(116, 18));
-            optionalParameter = new GuiSaveableTextField(optionalParameter, mc.fontRenderer, 2400, new Point(screenWidth, screenHeight),
-                    backgroundSize, new Point(34, 39 + 42 - 9), new Point(116, 18));
+            optionalParameter = new GuiSaveableTextField(optionalParameter, mc.fontRenderer, 2400, new Point(
+                    screenWidth, screenHeight), backgroundSize, new Point(34, 39 + 42 - 9), new Point(116, 18));
         }
 
         searchForEntity = new GuiButton(1, (screenWidth - backgroundSize.getX()) / 2 + 201,
@@ -104,7 +106,7 @@ public class CreatureFields implements DataFields {
                 optionalParameter.setText(spawnEntryData.optionalParameters);
                 loadedNBT = (NBTTagCompound) spawnEntryData.properties.copy();
                 if (loadedNBT != null) {
-                    nbtTree = new NBTTree(loadedNBT);
+                    nbtTree = new NBTTree(loadedNBT, "Properties");
                     nbtList = new GUINBTList(this, mc, nbtTree, 214, screenSize, backgroundSize);
                 }
                 soundNameField.setText(spawnEntryData.spawnSound);
@@ -119,7 +121,7 @@ public class CreatureFields implements DataFields {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setString("Type", creatureNameField.getText());
             nbt.setInteger("Weight", Integer.parseInt(weightedChanceField.getText()));
-            nbt.setCompoundTag("Properties", nbtTree.toNBTTagCompound());
+            nbt.setTag("Properties", nbtTree.toNBTTagCompound());
             nbt.setString("SpawnSound", soundNameField.getText());
             nbt.setString("OptionalParameter", optionalParameter.getText());
             limitedMobSpawner.getSpawnList().add(new TileEntityLimitedMobSpawnData(limitedMobSpawner, nbt));
@@ -167,9 +169,9 @@ public class CreatureFields implements DataFields {
             }
             ObfuscationHelper.invokeMethod("applyEntityAttributes", "func_110147_ax", EntityLivingBase.class,
                     desiredEntity);
-            loadedNBT = new NBTTagCompound("Properties");
+            loadedNBT = new NBTTagCompound();
             desiredEntity.writeToNBT(loadedNBT);
-            nbtTree = new NBTTree(loadedNBT);
+            nbtTree = new NBTTree(loadedNBT, "Properties");
             nbtList = new GUINBTList(this, mc, nbtTree, 214, screenSize, backgroundSize);
         }
     }
@@ -226,7 +228,9 @@ public class CreatureFields implements DataFields {
                 } else {
                     spawnerGUI.openList(ListType.Creature);
                 }
-                mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                // Used to random.click, leaving this as note during porting in case gui.button.press is wrong
+                this.mc.getSoundHandler().playSound(
+                        PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 0.8F));
             }
 
             if (par3 == 0 && searchForSound.mousePressed(mc, par1, par2)) {
@@ -235,25 +239,29 @@ public class CreatureFields implements DataFields {
                 } else {
                     spawnerGUI.openList(ListType.Sound);
                 }
-                mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                this.mc.getSoundHandler().playSound(
+                        PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
             }
 
             if (par3 == 0 && resetNBTList.mousePressed(mc, par1, par2)) {
                 resetNBTList();
-                mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                this.mc.getSoundHandler().playSound(
+                        PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
             }
             if (par3 == 0 && saveCurNBT.mousePressed(mc, par1, par2)) {
                 if (selectedTagField.isEnabled() && nbtTree != null) {
                     selectedTagField.saveAndClear(nbtTree);
                     nbtList.recreateNodeList();
                     loadedNBT = nbtTree.toNBTTagCompound();
-                    mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                    this.mc.getSoundHandler().playSound(
+                            PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
                 }
             }
             if (par3 == 0 && discardCurNBT.mousePressed(mc, par1, par2)) {
                 if (selectedTagField.isEnabled()) {
                     selectedTagField.clear();
-                    mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                    this.mc.getSoundHandler().playSound(
+                            PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
                 }
             }
         }

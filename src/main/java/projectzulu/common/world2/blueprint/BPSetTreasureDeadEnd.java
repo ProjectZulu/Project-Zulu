@@ -3,7 +3,7 @@ package projectzulu.common.world2.blueprint;
 import java.awt.Point;
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.ProjectZulu_Core;
@@ -20,7 +20,7 @@ public class BPSetTreasureDeadEnd implements BlueprintSet, Blueprint {
     BlockWithMeta floorblock;
 
     public BPSetTreasureDeadEnd() {
-        floorblock = new BlockWithMeta("sandstone");
+        floorblock = new BlockWithMeta(Blocks.sandstone);
     }
 
     @Override
@@ -60,13 +60,13 @@ public class BPSetTreasureDeadEnd implements BlueprintSet, Blueprint {
             if (random.nextInt(5) == 0) {
                 PyramidFeature terrainFeature = (PyramidFeature) ProjectZulu_Core.featureGenerator
                         .getRegisteredStructure(PyramidFeature.PYRAMID);
-                return new ChestWithMeta(Block.chest.blockID, 0, new TileEntityChest(), terrainFeature.chestLootChance,
+                return new ChestWithMeta(Blocks.chest, 0, new TileEntityChest(), terrainFeature.chestLootChance,
                         terrainFeature.chestMaxLoot);
 
             } else if (random.nextInt(4) == 0) {
                 return new MimicWithMeta();
             }
         }
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 }

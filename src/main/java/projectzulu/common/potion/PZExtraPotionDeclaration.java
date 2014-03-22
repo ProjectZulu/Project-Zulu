@@ -34,22 +34,22 @@ public class PZExtraPotionDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem() {
-        Item item = new ItemPZPotion(iD, name);
+        Item item = new ItemPZPotion(name);
         ItemList.customPotions = Optional.of(item);
         int i = 0;
         List<SubItemPotion> list = new ArrayList<SubItemPotion>();
-        addToLists(item.itemID, i++, SubItemPotionList.BUBBLING, list, SubItemPotionBubbling.class);
-        addToLists(item.itemID, i++, SubItemPotionList.INCENDIARY, list, SubItemPotionIncendiary.class);
-        addToLists(item.itemID, i++, SubItemPotionList.SLOWFALL, list, SubItemPotionSlowfall.class);
-        addToLists(item.itemID, i++, SubItemPotionList.CLEANSING, list, SubItemPotionCleansing.class);
-        addToLists(item.itemID, i++, SubItemPotionList.CURSE, list, SubItemPotionCurse.class);
-        addToLists(item.itemID, i++, SubItemPotionList.THORNS, list, SubItemPotionThorns.class);
-        addToLists(item.itemID, i++, SubItemPotionList.JUMP, list, SubItemPotionJump.class);
-        addToLists(item.itemID, i++, SubItemPotionList.DIG_SPEED, list, SubItemPotionDigspeed.class);
-        addToLists(item.itemID, i++, SubItemPotionList.DIG_SLOW, list, SubItemPotionDigslowdown.class);
-        addToLists(item.itemID, i++, SubItemPotionList.RESISTANCE, list, SubItemPotionResistance.class);
-        addToLists(item.itemID, i++, SubItemPotionList.WATER_BREATHING, list, SubItemPotionWaterBreathing.class);
-        addToLists(item.itemID, i++, SubItemPotionList.BLINDNESS, list, SubItemPotionBlindness.class);
+        addToLists(item, i++, SubItemPotionList.BUBBLING, list, SubItemPotionBubbling.class);
+        addToLists(item, i++, SubItemPotionList.INCENDIARY, list, SubItemPotionIncendiary.class);
+        addToLists(item, i++, SubItemPotionList.SLOWFALL, list, SubItemPotionSlowfall.class);
+        addToLists(item, i++, SubItemPotionList.CLEANSING, list, SubItemPotionCleansing.class);
+        addToLists(item, i++, SubItemPotionList.CURSE, list, SubItemPotionCurse.class);
+        addToLists(item, i++, SubItemPotionList.THORNS, list, SubItemPotionThorns.class);
+        addToLists(item, i++, SubItemPotionList.JUMP, list, SubItemPotionJump.class);
+        addToLists(item, i++, SubItemPotionList.DIG_SPEED, list, SubItemPotionDigspeed.class);
+        addToLists(item, i++, SubItemPotionList.DIG_SLOW, list, SubItemPotionDigslowdown.class);
+        addToLists(item, i++, SubItemPotionList.RESISTANCE, list, SubItemPotionResistance.class);
+        addToLists(item, i++, SubItemPotionList.WATER_BREATHING, list, SubItemPotionWaterBreathing.class);
+        addToLists(item, i++, SubItemPotionList.BLINDNESS, list, SubItemPotionBlindness.class);
         for (SubItemPotion subItemPotion : list) {
             SubItemPotionRegistry.INSTANCE.addSubPotions(subItemPotion);
         }
@@ -61,21 +61,21 @@ public class PZExtraPotionDeclaration extends ItemDeclaration {
     protected void registerItem() {
         Item item = ItemList.customPotions.get();
         ProjectZuluLog.info("register");
-        registerSubPotions(item.itemID);
+        registerSubPotions(item);
     }
 
-    private void registerSubPotions(int itemID) {
+    private void registerSubPotions(Item itemID) {
         Collection<SubItemPotion> potions = SubItemPotionRegistry.INSTANCE.getPotions(itemID);
         for (SubItemPotion subItemPotion : potions) {
             subItemPotion.register();
         }
     }
 
-    private void addToLists(int itemID, int subID, SubItemPotionList entry, List<SubItemPotion> registryList,
+    private void addToLists(Item itemID, int subID, SubItemPotionList entry, List<SubItemPotion> registryList,
             Class<? extends SubItemPotion> potionClass) {
         try {
-            SubItemPotion subItemPotion = potionClass.getConstructor(new Class[] { int.class, int.class }).newInstance(
-                    new Object[] { itemID, subID });
+            SubItemPotion subItemPotion = potionClass.getConstructor(new Class[] { Item.class, int.class })
+                    .newInstance(new Object[] { itemID, subID });
             entry.set(subItemPotion);
             registryList.add(subItemPotion);
         } catch (Exception e) {

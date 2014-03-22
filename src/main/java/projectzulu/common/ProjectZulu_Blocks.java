@@ -3,8 +3,8 @@ package projectzulu.common;
 import java.io.File;
 
 import net.minecraft.world.GameRules;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import projectzulu.common.blocks.CreeperBlossomPrimedDefault;
 import projectzulu.common.blocks.FurPeltDeclaration;
 import projectzulu.common.blocks.ItemBlockRecipeManager;
@@ -44,7 +44,6 @@ import projectzulu.common.blocks.itemblockdeclarations.ScaleArmorDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.ScaleItemDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.ScrapMeatDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.SpikesDeclaration;
-import projectzulu.common.blocks.itemblockdeclarations.StructurePlacerDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.TombstoneDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.TumbleweedDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.UniversalFlowerPotDeclaration;
@@ -67,15 +66,12 @@ import projectzulu.common.potion.PotionManager;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid = DefaultProps.BlocksModId, name = "Project Zulu Block and Items", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class ProjectZulu_Blocks {
 
     @Instance(DefaultProps.BlocksModId)
@@ -122,7 +118,7 @@ public class ProjectZulu_Blocks {
         }
     }
 
-    @ServerStarting
+    @EventHandler
     public void serverStart(FMLServerStartingEvent event) {
         /* Add Custom GameRules */
         GameRules gameRule = event.getServer().worldServerForDimension(0).getGameRules();
@@ -153,8 +149,7 @@ public class ProjectZulu_Blocks {
         ItemBlockManager.INSTANCE.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(),
                 new WaterDropletDeclaration(), new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(),
                 new CoconutShellDeclaration(), new ScaleItemDeclaration(), new FurPeltDeclaration(),
-                new GenericCraftingItemsDeclaration(), new CoconutItem(),
-                new ScrapMeatDeclaration());
+                new GenericCraftingItemsDeclaration(), new CoconutItem(), new ScrapMeatDeclaration());
 
         ItemBlockManager.INSTANCE.addItemBlock(
                 new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),

@@ -17,12 +17,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
-import projectzulu.common.core.packets.PacketManagerPlaySound;
-import projectzulu.common.core.packets.PacketManagerStreamSound;
+import projectzulu.common.core.packets.PacketPlaySound;
+import projectzulu.common.core.packets.PacketStreamSound;
 import projectzulu.common.core.packets.PacketTameParticle;
-import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
-import projectzulu.common.mobs.packets.PacketManagerAnimTime;
-import projectzulu.common.mobs.packets.PacketManagerFollowerMasterData;
+import projectzulu.common.dungeon.packets.PacketMobSpawner;
+import projectzulu.common.mobs.packets.PacketAnimTime;
+import projectzulu.common.mobs.packets.PacketFollowerMasterData;
 import projectzulu.common.mobs.packets.PacketNameSync;
 import projectzulu.common.mobs.packets.PacketTileText;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -90,13 +90,13 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, PZPack
             this.channels = NetworkRegistry.INSTANCE.newChannel(CHANNEL, this);
 
             PacketRegister packetRegister = new PacketRegister(packets);
-            packetRegister.registerPacket(PacketManagerPlaySound.class);
-            packetRegister.registerPacket(PacketManagerStreamSound.class);
+            packetRegister.registerPacket(PacketPlaySound.class);
+            packetRegister.registerPacket(PacketStreamSound.class);
             packetRegister.registerPacket(PacketNameSync.class);
             packetRegister.registerPacket(PacketTileText.class);
-            packetRegister.registerPacket(PacketManagerMobSpawner.class);
-            packetRegister.registerPacket(PacketManagerAnimTime.class);
-            packetRegister.registerPacket(PacketManagerFollowerMasterData.class);
+            packetRegister.registerPacket(PacketMobSpawner.class);
+            packetRegister.registerPacket(PacketAnimTime.class);
+            packetRegister.registerPacket(PacketFollowerMasterData.class);
             packetRegister.registerPacket(PacketTameParticle.class);
 
             // TODO: 1) Add Packets Manually, in which case SORTING is ridiculous

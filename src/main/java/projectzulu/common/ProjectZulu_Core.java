@@ -18,7 +18,6 @@ import projectzulu.common.core.ItemBlockManager;
 import projectzulu.common.core.PacketPipeline;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.ZuluGuiHandler;
-import projectzulu.common.core.ZuluPacketHandler;
 import projectzulu.common.core.terrain.FeatureGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -32,7 +31,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /*Useful OpenSource reference to Look at: ExtrabiomesXL, Gaurdsman*/
 @Mod(modid = DefaultProps.CoreModId, name = "Project Zulu Core", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DesiredBefore)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { "Channel_Zulu" }, packetHandler = ZuluPacketHandler.class)
 public class ProjectZulu_Core {
 
     @Instance(DefaultProps.CoreModId)
@@ -93,7 +91,7 @@ public class ProjectZulu_Core {
     public static PacketPipeline getPipeline() {
         return packetPipeline;
     }
-    
+
     @SidedProxy(clientSide = "projectzulu.common.ClientProxyProjectZulu", serverSide = "projectzulu.common.CommonProxyProjectZulu")
     public static CommonProxyProjectZulu proxy;
 

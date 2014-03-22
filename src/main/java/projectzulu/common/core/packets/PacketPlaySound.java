@@ -10,13 +10,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import projectzulu.common.dungeon.packets.PacketByteStream;
 
-public class PacketManagerPlaySound extends PacketByteStream {
+public class PacketPlaySound extends PacketByteStream {
     private int posX;
     private int posY;
     private int posZ;
     private String sound;
 
-    public PacketManagerPlaySound setPacketData(int xPos, int yPos, int zPos, String sound) {
+    public PacketPlaySound setPacketData(int xPos, int yPos, int zPos, String sound) {
         this.posX = xPos;
         this.posY = yPos;
         this.posZ = zPos;

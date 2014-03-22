@@ -8,23 +8,25 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingData;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.WeightedRandom;
-import projectzulu.common.core.PacketIDs;
+import projectzulu.common.ProjectZulu_Core;
+import projectzulu.common.core.PZPacket;
 import projectzulu.common.core.ProjectZuluLog;
-import projectzulu.common.core.packets.PacketManagerPlaySound;
-import projectzulu.common.dungeon.packets.PacketManagerMobSpawner;
+import projectzulu.common.core.packets.PacketPlaySound;
+import projectzulu.common.dungeon.packets.PacketMobSpawner;
 import projectzulu.common.dungeon.spawner.tag.settings.OptionalSettingsSpawning;
-import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -208,7 +210,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
     @Override
     public void updateEntity() {
         if (maxSpawnableEntities > 0 && spawnedEntities >= maxSpawnableEntities) {
-            worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+            worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
         }
 
         if (this.anyPlayerInRange()) {
@@ -286,11 +288,10 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
                                 spawnedEntities++;
                             }
                             if (spawnerTags != null) {
-                                PacketManagerPlaySound packetManager = (PacketManagerPlaySound) PacketIDs.playSound
-                                        .createPacketManager();
-                                packetManager.setPacketData(xCoord, yCoord, zCoord, spawnerTags.spawnSound);
-                                PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 64,
-                                        worldObj.provider.dimensionId, packetManager.createPacket());
+                                PZPacket packet = new PacketPlaySound().setPacketData(xCoord, yCoord, zCoord,
+                                        spawnerTags.spawnSound);
+                                ProjectZulu_Core.getPipeline().sendToAllAround(packet,
+                                        new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 64));
                             }
                             if (var11 != null) {
                                 var11.spawnExplosionParticle();
@@ -326,11 +327,11 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
         if (this.spawnerTags != null) {
             NBTTagCompound var2 = new NBTTagCompound();
             par1Entity.writeToNBTOptional(var2);
-            Iterator var3 = this.spawnerTags.properties.getTags().iterator();
-
-            while (var3.hasNext()) {
-                NBTBase var4 = (NBTBase) var3.next();
-                var2.setTag(var4.getName(), var4.copy());
+            Iterator keyIterator = spawnerTags.properties.func_150296_c().iterator();
+            while (keyIterator.hasNext()) {
+                String key = (String) keyIterator.next();
+                NBTBase nbt = spawnerTags.properties.getTag(key);
+                var2.setTag(key, nbt.copy());
             }
 
             try {
@@ -344,18 +345,18 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
                     } catch (Exception e2) {
                         ProjectZuluLog
                                 .severe("Exception Occured when Writing DebugNBT to %s. Entity may not work as expected. Recreate NBT on entity can repair.",
-                                        par1Entity.getEntityName());
+                                        EntityList.getEntityString(par1Entity));
                         e2.printStackTrace();
                     }
                 } else {
                     ProjectZuluLog
                             .severe("Exception occured when writing NBT to Entity %s. Entity may not work as expected. Recreate NBT on entity can repair.",
-                                    par1Entity.getEntityName());
+                                    EntityList.getEntityString(par1Entity));
                     e.printStackTrace();
                 }
             }
         } else if (par1Entity instanceof EntityLiving && par1Entity.worldObj != null) {
-            EntityLivingData livingData = null;
+            IEntityLivingData livingData = null;
             // livingData = ((EntityLiving) par1Entity).onSpawnWithEgg(livingData);
         }
     }
@@ -376,7 +377,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
             this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
         }
 
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, 0);
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, 0);
     }
 
     /**
@@ -396,11 +397,11 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
         this.delay = par1NBTTagCompound.getShort("Delay");
         if (par1NBTTagCompound.hasKey("SpawnPotentials")) {
             this.spawnList = new ArrayList<TileEntityLimitedMobSpawnData>();
-            NBTTagList var2 = par1NBTTagCompound.getTagList("SpawnPotentials");
+            NBTTagList var2 = par1NBTTagCompound.getTagList("SpawnPotentials", 10);
 
             for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
                 TileEntityLimitedMobSpawnData spawnData = new TileEntityLimitedMobSpawnData(this,
-                        (NBTTagCompound) var2.tagAt(var3));
+                        var2.getCompoundTagAt(var3));
                 if (EntityList.stringToClassMapping.containsKey(spawnData.type)) {
                     this.spawnList.add(spawnData);
                 } else {
@@ -472,7 +473,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setCompoundTag("DebugSavedSetup", debugSavedSetup);
+        par1NBTTagCompound.setTag("DebugSavedSetup", debugSavedSetup);
         par1NBTTagCompound.setString("EntityId", this.getEntityName());
         par1NBTTagCompound.setShort("Delay", (short) this.delay);
         par1NBTTagCompound.setShort("MinSpawnDelay", (short) this.minSpawnDelay);
@@ -488,7 +489,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
         par1NBTTagCompound.setShort("OffsetZ", (short) this.spawnRangeOffsetZ);
 
         if (this.spawnerTags != null) {
-            par1NBTTagCompound.setCompoundTag("SpawnData", (NBTTagCompound) this.spawnerTags.properties.copy());
+            par1NBTTagCompound.setTag("SpawnData", (NBTTagCompound) this.spawnerTags.properties.copy());
         }
 
         if (this.spawnerTags != null || this.spawnList != null && this.spawnList.size() > 0) {
@@ -526,28 +527,25 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
      * Overriden in a sign to provide the text.
      */
     @Override
-    public PZPacket getDescriptionPacket() {
+    public Packet getDescriptionPacket() {
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, var1);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, var1);
+
     }
 
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
-        NBTTagCompound tag = pkt.data;
+        NBTTagCompound tag = pkt.func_148857_g();
         readFromNBT(tag);
-
     }
 
     public void syncToServer() {
-        PacketManagerMobSpawner mobSpawnerPacketManager = (PacketManagerMobSpawner) PacketIDs.mobSpawner
-                .createPacketManager();
         NBTTagCompound tileEntityData = new NBTTagCompound();
         writeToNBT(tileEntityData);
-        mobSpawnerPacketManager.setPacketData(xCoord, yCoord, zCoord, tileEntityData);
-        PZPacket mobSpawnerPacket = mobSpawnerPacketManager.createPacket();
-        PacketDispatcher.sendPacketToServer(mobSpawnerPacket);
+        PZPacket packet = new PacketMobSpawner().setPacketData(xCoord, yCoord, zCoord, tileEntityData);
+        ProjectZulu_Core.getPipeline().sendToServer(packet);
     }
 
     /**

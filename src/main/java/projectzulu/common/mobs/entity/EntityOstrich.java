@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
@@ -34,7 +34,7 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
         // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
         tasks.addTask(5, new EntityAIMate(this, 1.0f));
-        tasks.addTask(6, new EntityAITempt(this, 1.2f, Item.seeds.itemID, false));
+        tasks.addTask(6, new EntityAITempt(this, 1.2f, Items.wheat_seeds, false));
         tasks.addTask(7, new EntityAIFollowParent(this, 1.1f));
         tasks.addTask(9, new EntityAIWander(this, 1.0f, 120));
 
@@ -82,7 +82,7 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
 
     @Override
     public boolean isValidBreedingItem(ItemStack itemStack) {
-        if (itemStack != null && itemStack.getItem().itemID == Item.seeds.itemID) {
+        if (itemStack != null && itemStack.getItem() == Items.wheat_seeds) {
             return true;
         } else {
             return super.isValidBreedingItem(itemStack);
@@ -92,7 +92,7 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
     @Override
     protected void dropRareDrop(int par1) {
         if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
-            entityDropItem(new ItemStack(BlockList.mobHeads.get().blockID, 1, 12), 1);
+            entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 12), 1);
         }
         super.dropRareDrop(par1);
     }

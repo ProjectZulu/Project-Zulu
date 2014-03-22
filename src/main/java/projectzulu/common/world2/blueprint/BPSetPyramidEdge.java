@@ -3,7 +3,7 @@ package projectzulu.common.world2.blueprint;
 import java.awt.Point;
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.world.CellIndexDirection;
 import projectzulu.common.world.dataobjects.BlockWithMeta;
@@ -127,9 +127,9 @@ public class BPSetPyramidEdge implements BlueprintSet {
                 }
 
                 if (piecePos.posY > posZ + index * cellSize || piecePos.posY > posX + index * cellSize) {
-                    return new BlockWithMeta("air");
+                    return new BlockWithMeta(Blocks.air);
                 } else if (piecePos.posY == posZ + index * cellSize || piecePos.posY == posX + index * cellSize) {
-                    return new BlockWithMeta("sandstone");
+                    return new BlockWithMeta(Blocks.sandstone);
                 }
             } else {
                 int pos = -1;
@@ -153,13 +153,13 @@ public class BPSetPyramidEdge implements BlueprintSet {
 
                 if (pos > -1) {
                     if (piecePos.posY > pos + index * cellSize) {
-                        return new BlockWithMeta("air");
+                        return new BlockWithMeta(Blocks.air);
                     } else if (piecePos.posY == pos + index * cellSize) {
-                        return new BlockWithMeta("sandstone");
+                        return new BlockWithMeta(Blocks.sandstone);
                     }
                 }
             }
-            return new BlockWithMeta("sandstone");
+            return new BlockWithMeta(Blocks.sandstone);
         }
 
         @Override
@@ -192,9 +192,9 @@ public class BPSetPyramidEdge implements BlueprintSet {
                 }
 
                 if (piecePos.posY > posZ + index * cellSize || piecePos.posY > posX + index * cellSize) {
-                    return new BlockWithMeta("air");
+                    return new BlockWithMeta(Blocks.air);
                 } else if (piecePos.posY == posZ + index * cellSize || piecePos.posY == posX + index * cellSize) {
-                    return new BlockWithMeta("sandstone");
+                    return new BlockWithMeta(Blocks.sandstone);
                 }
             } else {
                 int pos = -1;
@@ -218,13 +218,13 @@ public class BPSetPyramidEdge implements BlueprintSet {
 
                 if (pos > -1) {
                     if (piecePos.posY > pos + index * cellSize) {
-                        return new BlockWithMeta("air");
+                        return new BlockWithMeta(Blocks.air);
                     } else if (piecePos.posY == pos + index * cellSize) {
-                        return new BlockWithMeta("sandstone");
+                        return new BlockWithMeta(Blocks.sandstone);
                     }
                 }
             }
-            return new BlockWithMeta("sandstone");
+            return new BlockWithMeta(Blocks.sandstone);
         }
 
         @Override

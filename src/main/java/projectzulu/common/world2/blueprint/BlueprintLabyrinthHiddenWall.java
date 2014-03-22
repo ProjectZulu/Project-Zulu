@@ -2,8 +2,8 @@ package projectzulu.common.world2.blueprint;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChunkCoordinates;
 import projectzulu.common.ProjectZulu_Core;
@@ -20,7 +20,7 @@ public class BlueprintLabyrinthHiddenWall implements Blueprint {
     public BlockWithMeta getBlockFromBlueprint(ChunkCoordinates piecePos, int cellSize, int cellHeight, Random random,
             CellIndexDirection cellIndexDirection) {
         if ((piecePos.posY == 0 || piecePos.posY == cellHeight - 1)) {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 0);
+            return new BlockWithMeta(Blocks.stonebrick, 0);
         }
 
         if (piecePos.posX == cellSize / 2 && piecePos.posZ == cellSize / 2) {
@@ -34,22 +34,22 @@ public class BlueprintLabyrinthHiddenWall implements Blueprint {
                     if (!entityName.equalsIgnoreCase("EMPTY")) {
                         ProjectZuluLog.severe("Entity with name %s does not seem to exist.", entityName);
                     }
-                    return new BlockWithMeta(Block.stoneBrick.blockID, 2);
+                    return new BlockWithMeta(Blocks.stonebrick, 2);
                 }
             } else if (piecePos.posY == 2) {
                 LabyrinthFeature feature = (LabyrinthFeature) ProjectZulu_Core.featureGenerator
                         .getRegisteredStructure(LabyrinthFeature.LABYRINTH);
-                return new ChestWithMeta(Block.chest.blockID, 0, new TileEntityChest(), feature.chestLootChance,
+                return new ChestWithMeta(Blocks.chest, 0, new TileEntityChest(), feature.chestLootChance,
                         feature.chestMaxLoot);
             } else {
-                return new BlockWithMeta("air");
+                return new BlockWithMeta(Blocks.air);
             }
         }
 
         if (piecePos.posX == 0 || piecePos.posX == cellSize - 1 || piecePos.posZ == 0 || piecePos.posZ == cellSize - 1) {
-            return new BlockWithMeta(Block.stoneBrick.blockID, 2);
+            return new BlockWithMeta(Blocks.stonebrick, 2);
         }
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 
     @Override

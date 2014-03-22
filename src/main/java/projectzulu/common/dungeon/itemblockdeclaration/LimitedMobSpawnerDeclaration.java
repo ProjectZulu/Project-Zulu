@@ -23,7 +23,7 @@ public class LimitedMobSpawnerDeclaration extends BlockDeclaration {
     @Override
     protected boolean createBlock() {
         BlockList.limitedMobSpawner = Optional
-                .of(new BlockLimitedMobSpawner(iD).setHardness(0.5F).setStepSound(Block.soundTypeMetal)
+                .of(new BlockLimitedMobSpawner().setHardness(0.5F).setStepSound(Block.soundTypeMetal)
                         .setBlockName(name.toLowerCase()).setBlockTextureName("mob_spawner"));
         return true;
     }

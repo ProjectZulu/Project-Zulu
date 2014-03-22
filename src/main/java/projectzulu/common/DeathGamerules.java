@@ -13,14 +13,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.GameRules;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.Property;
-import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -32,7 +31,8 @@ import projectzulu.common.core.ProjectZuluLog;
 
 import com.google.common.base.Optional;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class DeathGamerules {
     int maxDropXP = 100;
@@ -68,7 +68,7 @@ public class DeathGamerules {
 
     public DeathGamerules() {
         redistributor = new ExperienceRedistributor();
-        GameRegistry.registerPlayerTracker(redistributor);
+        FMLCommonHandler.instance().bus().register(redistributor);
     }
 
     public DeathGamerules loadConfiguration(File modConfigDirectory) {
@@ -149,7 +149,7 @@ public class DeathGamerules {
         return value;
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void worldLoad(WorldEvent.Load event) {
         GameRules gameRule = event.world.getGameRules();
         if (createGameruleIfAbsent(gameRule, "pzKeepInventory", keepInventoryDefault)) {
@@ -171,7 +171,7 @@ public class DeathGamerules {
         return added;
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onPlayerDeath(LivingDeathEvent event) {
         if (event.entity instanceof EntityPlayerMP) {
             GameRules gameRules = event.entity.worldObj.getGameRules();
@@ -184,7 +184,7 @@ public class DeathGamerules {
 
             TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player) : null;
             if (tombstone != null) {
-                tombstone.setSignString(event.source.getDeathMessage((EntityPlayer) event.entity).toString());
+                tombstone.setSignString(event.source.func_151519_b((EntityPlayer) event.entity).toString());
             }
 
             if (!dropInventory && !dropHotbar && !dropArmor && !dropXP) {
@@ -280,15 +280,15 @@ public class DeathGamerules {
         if (chunkCoordinate.isPresent()) {
             /* Place a Tombstone */
             player.worldObj.setBlock(chunkCoordinate.get().posX, chunkCoordinate.get().posY,
-                    chunkCoordinate.get().posZ, BlockList.tombstone.get().blockID);
+                    chunkCoordinate.get().posZ, BlockList.tombstone.get());
             TileEntity tileEntity = player.worldObj.getTileEntity(chunkCoordinate.get().posX,
                     chunkCoordinate.get().posY, chunkCoordinate.get().posZ);
             StringBuilder sb = new StringBuilder();
-            sb.append("Tombstone summoned to mark the 'passing' of ").append(player.username).append(" at [");
+            sb.append("Tombstone summoned to mark the 'passing' of ").append(player.getCommandSenderName()).append(" at [");
             sb.append(chunkCoordinate.get().posX).append(", ");
             sb.append(chunkCoordinate.get().posY).append(", ");
             sb.append(chunkCoordinate.get().posZ).append("]");
-            player.sendChatToPlayer(new ChatMessageComponent().addText(sb.toString()));
+            player.addChatMessage(new ChatComponentText(sb.toString()));
             if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
                 ProjectZuluLog.debug(Level.INFO, sb.toString());
                 return (TileEntityTombstone) tileEntity;
@@ -376,7 +376,7 @@ public class DeathGamerules {
     }
 
     private boolean isLocationValid(EntityPlayer player, int posX, int posY, int posZ) {
-        if (player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.isBlockOpaqueCube(posX, posY - 1, posZ)) {
+        if (player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY - 1, posZ).isOpaqueCube()) {
             return true;
         }
         return false;

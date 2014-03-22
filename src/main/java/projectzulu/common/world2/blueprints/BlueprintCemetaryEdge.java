@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
 import projectzulu.common.world.CellIndexDirection;
@@ -17,13 +18,13 @@ public class BlueprintCemetaryEdge implements Blueprint {
     List<BlockWithMeta> flowerBlocks = new ArrayList<BlockWithMeta>(3);
 
     public BlueprintCemetaryEdge() {
-        wallBlocks.add(new BlockWithMeta("cobblestone_wall", 1, 2));
-        wallBlocks.add(new BlockWithMeta("cobblestone_wall", 0, 3));
-        wallBlocks.add(new BlockWithMeta("cobblestone_wall", 0, 3));
-        flowerBlocks.add(new BlockWithMeta("red_flower", 0, 1));
-        flowerBlocks.add(new BlockWithMeta("yellow_flower", 0, 1));
-        flowerBlocks.add(new BlockWithMeta("tallgrass", 1, 10));
-        flowerBlocks.add(new BlockWithMeta("air", 0, 8));
+        wallBlocks.add(new BlockWithMeta(Blocks.cobblestone_wall, 1, 2));
+        wallBlocks.add(new BlockWithMeta(Blocks.cobblestone_wall, 0, 3));
+        wallBlocks.add(new BlockWithMeta(Blocks.cobblestone_wall, 0, 3));
+        flowerBlocks.add(new BlockWithMeta(Blocks.red_flower, 0, 1));
+        flowerBlocks.add(new BlockWithMeta(Blocks.yellow_flower, 0, 1));
+        flowerBlocks.add(new BlockWithMeta(Blocks.tallgrass, 1, 10));
+        flowerBlocks.add(new BlockWithMeta(Blocks.air, 0, 8));
     }
 
     @Override
@@ -31,7 +32,7 @@ public class BlueprintCemetaryEdge implements Blueprint {
             CellIndexDirection cellIndexDirection) {
 
         if (piecePos.posY == 0) {
-            return new BlockWithMeta("grass");
+            return new BlockWithMeta(Blocks.grass);
         } else if (piecePos.posY == 1) {
             /* North Facing Fence */
             if (cellIndexDirection == CellIndexDirection.NorthWall
@@ -70,7 +71,7 @@ public class BlueprintCemetaryEdge implements Blueprint {
             }
             return (BlockWithMeta) WeightedRandom.getRandomItem(random, flowerBlocks);
         }
-        return new BlockWithMeta("air");
+        return new BlockWithMeta(Blocks.air);
     }
 
     @Override

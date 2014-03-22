@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -34,7 +35,7 @@ public class EntityHorseBase extends EntityGenericAnimal {
 
         tasks.addTask(2, new EntityAIPanic(this, 1.25f));
         tasks.addTask(3, new EntityAIMate(this, 1.0f));
-        tasks.addTask(4, new EntityAITempt(this, 1.2f, Item.appleRed.itemID, false));
+        tasks.addTask(4, new EntityAITempt(this, 1.2f, Items.apple, false));
         tasks.addTask(5, new EntityAIFollowParent(this, 1.1f));
 
         tasks.addTask(6, new EntityAIAttackOnCollide(this, 1.0f, false));
@@ -92,7 +93,7 @@ public class EntityHorseBase extends EntityGenericAnimal {
     @Override
     public boolean isValidBreedingItem(ItemStack itemStack) {
         if (itemStack != null
-                && (itemStack.getItem().itemID == Item.appleRed.itemID || itemStack.getItem().itemID == Item.carrot.itemID)) {
+                && (itemStack.getItem() == Items.apple || itemStack.getItem() == Items.carrot)) {
             return true;
         }
         return false;

@@ -1,5 +1,6 @@
 package projectzulu.common.potion.subitem;
 
+import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import projectzulu.common.api.PotionList;
 
@@ -7,7 +8,7 @@ import com.google.common.base.Optional;
 
 public class SubItemPotionIncendiary extends SubItemPotionGeneric {
 
-    public SubItemPotionIncendiary(int itemID, int subID) {
+    public SubItemPotionIncendiary(Item itemID, int subID) {
         super(itemID, subID, "potion.incendiary");
         setSubItemBounds(1, 1, 4, 2);
 //        setEffectScale(20 * 5, 20 * 5, 20 * 10, 20 * 1, 2);

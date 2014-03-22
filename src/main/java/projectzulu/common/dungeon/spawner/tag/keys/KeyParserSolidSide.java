@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.dungeon.spawner.tag.ParsingHelper;
 import projectzulu.common.dungeon.spawner.tag.TypeValuePair;
@@ -43,7 +43,8 @@ public class KeyParserSolidSide extends KeyParserBase {
                 rangeY = rangeX;
                 rangeZ = rangeX;
             } else {
-                ProjectZuluLog.severe("Error Parsing Range of %s. Invalid Argument Length of %s.", key.key, rangePieces.length);
+                ProjectZuluLog.severe("Error Parsing Range of %s. Invalid Argument Length of %s.", key.key,
+                        rangePieces.length);
             }
 
             if (pieces.length == 4) {
@@ -57,7 +58,8 @@ public class KeyParserSolidSide extends KeyParserBase {
                 typeValue = new TypeValuePair(key, new Object[] { isInverted, side, rangeX, rangeY, rangeZ });
             }
         } else {
-            ProjectZuluLog.severe("Error Parsing %s Block Parameter. Invalid Argument Length of %s.", key.key, pieces.length);
+            ProjectZuluLog.severe("Error Parsing %s Block Parameter. Invalid Argument Length of %s.", key.key,
+                    pieces.length);
             return false;
         }
 
@@ -96,8 +98,9 @@ public class KeyParserSolidSide extends KeyParserBase {
             for (int i = -rangeX; i <= rangeX; i++) {
                 for (int k = -rangeZ; k <= rangeZ; k++) {
                     for (int j = -rangeY; j <= rangeY; j++) {
-                        boolean isSolid = world.isBlockSolidOnSide(xCoord + offsetX + i, yCoord + offsetY + j, zCoord
-                                + offsetZ + k, ForgeDirection.getOrientation(side));
+                        boolean isSolid = world.getBlock(xCoord + offsetX + i, yCoord + offsetY + j,
+                                zCoord + offsetZ + k).isSideSolid(world, xCoord + offsetX + i, yCoord + offsetY + j,
+                                zCoord + offsetZ + k, ForgeDirection.getOrientation(side));
                         if (!isInverted && isSolid || isInverted && !isSolid) {
                             return false;
                         }
