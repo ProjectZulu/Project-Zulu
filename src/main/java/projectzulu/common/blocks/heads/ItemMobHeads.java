@@ -1,6 +1,7 @@
 package projectzulu.common.blocks.heads;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -14,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMobHeads extends ItemBlock {
+
     public ItemMobHeads(Block mobHeads) {
         super(mobHeads);
         this.setCreativeTab(CreativeTabs.tabDecorations);
@@ -111,5 +113,10 @@ public class ItemMobHeads extends ItemBlock {
     public String getUnlocalizedName(ItemStack itemstack) {
         return itemstack.getItem().getUnlocalizedName() + "."
                 + BlockMobHeads.Head.getByMeta(itemstack.getItemDamage()).toString().toLowerCase();
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int par1) {
+        return field_150939_a.getIcon(1, par1);
     }
 }

@@ -1,6 +1,7 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import projectzulu.common.api.BlockList;
@@ -35,6 +36,7 @@ public class PalmTreeStairsDeclaration extends BlockDeclaration {
             GameRegistry.registerBlock(block, name.toLowerCase());
             OreDictionary.registerOre("stairsWood", new ItemStack(block));
             OreDictionary.registerOre("stairsPalm", new ItemStack(block));
+            Blocks.fire.setFireInfo(block, 5, 20);
         }
     }
 }

@@ -57,5 +57,11 @@ public class PacketMobSpawner extends PacketDataStream {
 
     @Override
     public void handleServerSide(EntityPlayer player) {
+        World world = player.getEntityWorld();
+        TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
+        if (tileEntity != null && tileEntity instanceof TileEntityLimitedMobSpawner) {
+            tileEntity.readFromNBT(customData);
+            ((TileEntityLimitedMobSpawner) tileEntity).forceUpdate();
+        }
     }
 }

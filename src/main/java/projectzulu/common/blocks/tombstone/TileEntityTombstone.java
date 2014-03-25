@@ -81,10 +81,9 @@ public class TileEntityTombstone extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
-
         for (int i = 0; i < signText.length; i++) {
             if (signText[i].length() > 0) {
-                tagCompound.setString("Text" + (i + 1), this.signText[i]);
+                tagCompound.setString("Text" + (i + 1), signText[i]);
             }
         }
         tagCompound.setInteger("Experience", experience);

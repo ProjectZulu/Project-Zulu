@@ -29,7 +29,7 @@ public class PacketNameSync extends PacketByteStream {
     protected void writeData(ChannelHandlerContext ctx, ByteBufOutputStream buffer) throws IOException {
         buffer.writeInt(entityIdToBeNamed);
         buffer.writeInt(entityName.length());
-        buffer.writeBytes(entityName);
+        buffer.writeChars(entityName);
     }
 
     @Override

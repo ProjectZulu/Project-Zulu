@@ -9,7 +9,6 @@ public class BlockPalmTreePlank extends Block {
 
     public BlockPalmTreePlank() {
         super(Material.wood);
-        Blocks.fire.setFireInfo(this, 5, 20);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHardness(2.0F);
         setResistance(5.0F);

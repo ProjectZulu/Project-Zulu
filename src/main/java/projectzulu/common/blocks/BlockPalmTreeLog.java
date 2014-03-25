@@ -14,8 +14,6 @@ public class BlockPalmTreeLog extends Block {
     public BlockPalmTreeLog() {
         super(Material.wood);
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-
-        Blocks.fire.setFireInfo(this, 5, 20);
         setHardness(2.0F);
         setStepSound(Block.soundTypeWood);
     }

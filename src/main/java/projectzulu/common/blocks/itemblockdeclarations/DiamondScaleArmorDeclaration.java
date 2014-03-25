@@ -8,6 +8,8 @@ import projectzulu.common.core.itemblockdeclaration.ItemSetDeclaration;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class DiamondScaleArmorDeclaration extends ItemSetDeclaration {
 
     public final int renderIndex;
@@ -41,5 +43,21 @@ public class DiamondScaleArmorDeclaration extends ItemSetDeclaration {
 
     @Override
     protected void registerItem(int partIndex) {
+        Item item = null;
+        switch (partIndex) {
+        case 0:
+            item = ItemList.diamondScaleArmorHead.get();
+            break;
+        case 1:
+            item = ItemList.diamondScaleArmorChest.get();
+            break;
+        case 2:
+            item = ItemList.diamondScaleArmorLeg.get();
+            break;
+        case 3:
+            item = ItemList.diamondScaleArmorBoots.get();
+            break;
+        }
+        GameRegistry.registerItem(item, name[partIndex]);
     }
 }

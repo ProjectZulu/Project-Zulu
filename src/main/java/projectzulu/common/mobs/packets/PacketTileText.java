@@ -34,7 +34,7 @@ public class PacketTileText extends PacketByteStream {
         buffer.writeInt(text.length);
         for (String string : text) {
             buffer.writeInt(string.length());
-            buffer.writeBytes(string);
+            buffer.writeChars(string);
         }
     }
 

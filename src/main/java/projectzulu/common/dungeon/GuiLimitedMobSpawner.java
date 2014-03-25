@@ -19,6 +19,7 @@ import org.lwjgl.util.Point;
 
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ObfuscationHelper;
+import projectzulu.common.core.ProjectZuluLog;
 
 //TODO: Implement Try Write / Read to Test if Saving Would Cause a Crash
 public class GuiLimitedMobSpawner extends GuiScreen {
@@ -141,12 +142,8 @@ public class GuiLimitedMobSpawner extends GuiScreen {
                  */
                 HashMap soundHash;
                 try {
-                    SoundRegistry registry = ObfuscationHelper.getCatchableFieldFromReflection("field_77461_d", // TODO
-                                                                                                                // GET
-                                                                                                                // MAPPING
-                            mc.getSoundHandler(), SoundRegistry.class);
-                    soundHash = ObfuscationHelper.getCatchableFieldFromReflection("field_148764_a", registry,
-                            HashMap.class);
+                    SoundRegistry registry = ObfuscationHelper.getCatchableFieldFromReflection("field_147697_e", mc.getSoundHandler(), SoundRegistry.class);
+                    soundHash = ObfuscationHelper.getCatchableFieldFromReflection("field_148764_a", registry, HashMap.class);
                 } catch (NoSuchFieldException e) {
                     SoundRegistry registry = ObfuscationHelper.getFieldFromReflection("sndRegistry",
                             mc.getSoundHandler(), SoundRegistry.class);
@@ -155,8 +152,8 @@ public class GuiLimitedMobSpawner extends GuiScreen {
                 if (soundHash != null) {
                     Iterator stringSoundIterator = soundHash.keySet().iterator();
                     while (stringSoundIterator.hasNext()) {
-                        String stringKey = (String) stringSoundIterator.next();
-                        rootSoundNode.addChild("root." + stringKey);
+                        ResourceLocation key = (ResourceLocation) stringSoundIterator.next();
+                         rootSoundNode.addChild("root." + key.getResourceDomain() + "." + key.getResourcePath());
                     }
                     rootSoundNode.sortNodeTree();
                 }

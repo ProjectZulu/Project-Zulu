@@ -18,7 +18,7 @@ public class GuiTombstone extends GuiScreen {
     /**
      * This String is just a local copy of the characters allowed in text rendering of minecraft.
      */
-    private static final char[] allowedCharacters = ChatAllowedCharacters.allowedCharacters;
+//    private static final char[] allowedCharacters = ChatAllowedCharacters.allowedCharacters;
 
     /** The title string that is displayed in the top-center of the screen. */
     protected String screenTitle = "Edit sign message:";
@@ -98,7 +98,7 @@ public class GuiTombstone extends GuiScreen {
                     entitySign.signText[editLine].length() - 1);
         }
 
-        if (allowedCharacters[keyChar] >= 0 && entitySign.signText[editLine].length() < entitySign.maxcharPerLine) {
+        if (ChatAllowedCharacters.isAllowedCharacter(keyChar) && entitySign.signText[editLine].length() < entitySign.maxcharPerLine) {
             entitySign.signText[editLine] = entitySign.signText[editLine] + keyChar;
         }
     }

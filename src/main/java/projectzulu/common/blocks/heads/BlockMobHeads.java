@@ -64,7 +64,7 @@ public class BlockMobHeads extends BlockContainer {
         setHardness(1.0F);
         setStepSound(Block.soundTypeStone);
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int par1, int par2) {

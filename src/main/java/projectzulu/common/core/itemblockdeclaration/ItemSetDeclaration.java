@@ -42,7 +42,7 @@ public abstract class ItemSetDeclaration implements ItemBlockDeclaration {
     public final void createWithConfig(Configuration config, boolean readOnly) {
         if (!readOnly) {
             for (int i = 0; i < name.length; i++) {
-                Property property = config.get("item", name[i] + " isEnabled", isEnabled);
+                Property property = config.get("item", name[i] + " isEnabled", isEnabled[i]);
                 isEnabled[i] = property.getBoolean(isEnabled[i]);
                 if (isEnabled[i]) {
                     preCreateLoadConfig(config);

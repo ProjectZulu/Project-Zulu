@@ -24,7 +24,6 @@ public class BlockZuluSlab extends BlockWoodSlab {
         super(false);
         singleSlabID = this;
         this.baseBlock = baseBlock;
-        Blocks.fire.setFireInfo(this, 5, 20);
         setLightOpacity(0);
         setHardness(2.0F);
         setResistance(5.0F);
@@ -37,7 +36,6 @@ public class BlockZuluSlab extends BlockWoodSlab {
         super(true);
         singleSlabID = singleSlab;
         this.baseBlock = baseBlock;
-        Blocks.fire.setFireInfo(this, 5, 20);
         setLightOpacity(0);
         setHardness(2.0F);
         setResistance(5.0F);

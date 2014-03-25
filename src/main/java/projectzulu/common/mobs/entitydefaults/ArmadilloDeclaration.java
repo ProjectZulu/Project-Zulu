@@ -50,7 +50,7 @@ public class ArmadilloDeclaration extends SpawnableDeclaration {
         return new RenderGenericLiving(new ModelArmadillo(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
                 "armadillo.png"));
     }
-    
+
     @Override
     public HashSet<String> getDefaultBiomesToSpawn() {
         HashSet<String> defaultBiomesToSpawn = new HashSet<String>();

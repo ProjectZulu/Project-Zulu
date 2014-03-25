@@ -2,6 +2,7 @@ package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import projectzulu.common.api.BlockList;
@@ -39,6 +40,7 @@ public class PalmTreeSlabDeclaration extends BlockDeclaration {
             GameRegistry.registerBlock(block, ItemZuluSlab.class, name.toLowerCase());
             OreDictionary.registerOre("slabWood", new ItemStack(block));
             OreDictionary.registerOre("slabPalm", new ItemStack(block));
+            Blocks.fire.setFireInfo(block, 5, 20);
         }
     }
 }

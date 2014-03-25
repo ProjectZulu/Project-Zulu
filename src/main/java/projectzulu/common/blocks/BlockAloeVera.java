@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,14 +19,14 @@ import projectzulu.common.api.ItemList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockAloeVera extends BlockFlower {
+public class BlockAloeVera extends BlockBush {
     public static final String[] imageSuffix = new String[] { "_b0", "_b1", "_b2", "_b3", "_t0", "_t1", "_t2", "_t3",
             "_t4" };
     @SideOnly(Side.CLIENT)
     private IIcon[] blockIcons;
 
     public BlockAloeVera() {
-        super(0);
+        super(Material.plants);
         setTickRandomly(true);
         disableStats();
         setHardness(0);

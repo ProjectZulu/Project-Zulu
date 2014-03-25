@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import scala.annotation.meta.param;
+
 public class Node implements Comparable<Node> {
     private Node parent;
     private String name;
@@ -33,7 +35,9 @@ public class Node implements Comparable<Node> {
     }
 
     private String prefixParents(String name) {
-        if (parent != null && !parent.name.equals("root")) {
+        if (parent != null && parent.parent != null && parent.parent.name.equals("root")) {
+            return parent.prefixParents(parent.name + ":" + name);
+        } else if (parent != null && !parent.name.equals("root")) {
             return parent.prefixParents(parent.name + "." + name);
         } else {
             return name;

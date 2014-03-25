@@ -31,7 +31,7 @@ import projectzulu.common.blocks.itemblockdeclarations.IronScaleArmorDeclaration
 import projectzulu.common.blocks.itemblockdeclarations.JasperDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.MobSkullsDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.NightBloomDeclaration;
-import projectzulu.common.blocks.itemblockdeclarations.PalmTreeDoubleSlab;
+import projectzulu.common.blocks.itemblockdeclarations.PalmTreeDoubleSlabDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.PalmTreeLeavesDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.PalmTreeLogDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.PalmTreePlankDeclaration;
@@ -138,8 +138,8 @@ public class ProjectZulu_Blocks {
         ItemBlockManager.INSTANCE.addItemBlock(new PZExtraPotionDeclaration(), new PZVanillaPotionDeclaration());
 
         ItemBlockManager.INSTANCE.addItemBlock(new AloeVeraDeclaration(), new WateredDirtDeclaration(),
-                new TumbleweedDeclaration(), new JasperDeclaration(), new PalmTreeLogDeclaration(),
-                new PalmTreePlankDeclaration(), new PalmTreeSlabDeclaration(), new PalmTreeDoubleSlab(),
+                new TumbleweedDeclaration(), /* new JasperDeclaration(), */new PalmTreeLogDeclaration(),
+                new PalmTreePlankDeclaration(), new PalmTreeSlabDeclaration(), new PalmTreeDoubleSlabDeclaration(),
                 new PalmTreeStairsDeclaration(), new PalmTreeLeavesDeclaration(), new PalmTreeSapling(),
                 new CoconutDeclaration(), new QuickSandDeclaration(), new NightBloomDeclaration(),
                 new CreeperBlossomDeclaration(), new SpikesDeclaration(), new CampfireDeclaration(),

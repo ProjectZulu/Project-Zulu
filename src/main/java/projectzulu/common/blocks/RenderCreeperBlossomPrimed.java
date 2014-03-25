@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -22,9 +23,8 @@ public class RenderCreeperBlossomPrimed extends Render implements RenderWrapper 
         this.shadowSize = shadowSize;
     }
 
-    public void func_76992_a(EntityCreeperBlossomPrimed par1EntityTNTPrimed, double par2, double par4, double par6,
+    public void doRender(EntityCreeperBlossomPrimed par1EntityTNTPrimed, double par2, double par4, double par6,
             float par8, float par9) {
-
         par1EntityTNTPrimed.fuse = 39;
 
         GL11.glPushMatrix();
@@ -74,8 +74,16 @@ public class RenderCreeperBlossomPrimed extends Render implements RenderWrapper 
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
+    @Override
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-        this.func_76992_a((EntityCreeperBlossomPrimed) par1Entity, par2, par4, par6, par8, par9);
+        this.doRender((EntityCreeperBlossomPrimed) par1Entity, par2, par4, par6, par8, par9);
+    }
+    
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     */
+    protected ResourceLocation getEntityTexture(RenderCreeperBlossomPrimed par1EntityTNTPrimed) {
+        return TextureMap.locationBlocksTexture;
     }
 
     @Override

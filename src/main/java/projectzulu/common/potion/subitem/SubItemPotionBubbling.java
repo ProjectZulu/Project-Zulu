@@ -3,6 +3,8 @@ package projectzulu.common.potion.subitem;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Optional;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -31,22 +33,24 @@ public class SubItemPotionBubbling extends SubItemPotion {
         recipies.addResultPotion(Items.spider_eye, SubItemPotionList.POISON);
         recipies.addResultPotion(Items.ghast_tear, SubItemPotionList.REGENERATION);
         recipies.addResultPotion(Items.fermented_spider_eye, SubItemPotionList.WEAKNESS);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.Talon.meta,
-                SubItemPotionList.STRENGTH);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.LargeHeart.meta,
-                SubItemPotionList.STRENGTH);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.RabbitsFoot.meta,
-                SubItemPotionList.JUMP);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.FrogLegs.meta,
-                SubItemPotionList.JUMP);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.SmallHeart.meta,
-                SubItemPotionList.DIG_SPEED);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.PowderSlush.meta,
-                SubItemPotionList.CLEANSING);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.PricklyPowder.meta,
-                SubItemPotionList.THORNS);
-        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.Gill.meta,
-                SubItemPotionList.WATER_BREATHING);
+        if (ItemList.genericCraftingItems.isPresent()) {
+            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.Talon.meta,
+                    SubItemPotionList.STRENGTH);
+            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.LargeHeart.meta,
+                    SubItemPotionList.STRENGTH);
+            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.RabbitsFoot.meta,
+                    SubItemPotionList.JUMP);
+            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.FrogLegs.meta,
+                    SubItemPotionList.JUMP);
+            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.SmallHeart.meta,
+                    SubItemPotionList.DIG_SPEED);
+            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.PowderSlush.meta,
+                    SubItemPotionList.CLEANSING);
+            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.PricklyPowder.meta,
+                    SubItemPotionList.THORNS);
+            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.Gill.meta,
+                    SubItemPotionList.WATER_BREATHING);
+        }
     }
 
     @Override

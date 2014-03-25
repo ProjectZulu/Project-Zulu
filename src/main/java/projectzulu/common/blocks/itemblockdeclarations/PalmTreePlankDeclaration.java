@@ -1,6 +1,7 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import projectzulu.common.api.BlockList;
@@ -31,5 +32,6 @@ public class PalmTreePlankDeclaration extends BlockDeclaration {
         Block block = BlockList.palmTreePlank.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
         OreDictionary.registerOre("plankWood", new ItemStack(block));
+        Blocks.fire.setFireInfo(block, 5, 20);
     }
 }

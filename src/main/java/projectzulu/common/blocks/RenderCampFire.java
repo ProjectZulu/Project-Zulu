@@ -171,7 +171,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
     private boolean renderCampireRectangle2Sides(Block par1Block, int index1, int index2, int par2, double par3,
             double par5, double par7, RenderBlocks renderer, double xWidth, double zWidth, double yMax, double angle) {
         Tessellator var9 = Tessellator.instance;
-        IIcon var10 = renderer.getBlockIconFromSideAndMetadata(Blocks.planks, 2, 0);
+        IIcon var10 = renderer.getBlockIconFromSideAndMetadata(Blocks.log, 2, 0);
         double var13 = var10.getMinU();
         double var15 = var10.getMinU() + (var10.getMaxU() - var10.getMinU()) / 2.01f;
         double var17 = var10.getMinV();
@@ -242,7 +242,7 @@ public class RenderCampFire implements ISimpleBlockRenderingHandler {
         var9.addVertexWithUV(point2X, par5 + yMin, point2Z, var13, var19);
         var9.addVertexWithUV(point1X, par5 + yMin, point1Z, var13, var17);
 
-        var10 = renderer.getBlockIconFromSideAndMetadata(Blocks.planks, 1, 0);
+        var10 = renderer.getBlockIconFromSideAndMetadata(Blocks.log, 1, 0);
         var13 = var10.getMinU() + (var10.getMaxU() - var10.getMinU()) * 0.99f / 4f;
         var15 = var10.getMinU() + (var10.getMaxU() - var10.getMinU()) * 2.99f / 4f;
         var17 = var10.getMinV() + (var10.getMaxV() - var10.getMinV()) * 0.99f / 4f;

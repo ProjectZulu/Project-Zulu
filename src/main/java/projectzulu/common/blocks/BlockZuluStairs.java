@@ -7,7 +7,6 @@ import net.minecraft.init.Blocks;
 public class BlockZuluStairs extends BlockStairs {
     public BlockZuluStairs(Block par2Block, int par3) {
         super(par2Block, par3);
-        Blocks.fire.setFireInfo(this, 5, 20);
         setLightOpacity(0);
     }
 }

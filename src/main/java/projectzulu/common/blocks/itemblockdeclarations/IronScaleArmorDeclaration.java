@@ -8,6 +8,8 @@ import projectzulu.common.core.itemblockdeclaration.ItemSetDeclaration;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class IronScaleArmorDeclaration extends ItemSetDeclaration {
 
     public final int renderIndex;
@@ -41,5 +43,21 @@ public class IronScaleArmorDeclaration extends ItemSetDeclaration {
 
     @Override
     protected void registerItem(int partIndex) {
+        Item item = null;
+        switch (partIndex) {
+        case 0:
+            item = ItemList.ironScaleArmorHead.get();
+            break;
+        case 1:
+            item = ItemList.ironScaleArmorChest.get();
+            break;
+        case 2:
+            item = ItemList.ironScaleArmorLeg.get();
+            break;
+        case 3:
+            item = ItemList.ironScaleArmorBoots.get();
+            break;
+        }
+        GameRegistry.registerItem(item, name[partIndex]);
     }
 }

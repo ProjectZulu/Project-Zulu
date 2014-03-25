@@ -26,6 +26,8 @@ import projectzulu.common.potion.subitem.SubItemPotionWaterBreathing;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class PZExtraPotionDeclaration extends ItemDeclaration {
 
     public PZExtraPotionDeclaration() {
@@ -60,8 +62,8 @@ public class PZExtraPotionDeclaration extends ItemDeclaration {
     @Override
     protected void registerItem() {
         Item item = ItemList.customPotions.get();
-        ProjectZuluLog.info("register");
         registerSubPotions(item);
+        GameRegistry.registerItem(item, name);
     }
 
     private void registerSubPotions(Item itemID) {

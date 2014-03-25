@@ -1,5 +1,5 @@
 {
-  "misc.summonwhispers": { "category": "ambient", "sounds": [{"name": "misc/summonwhispers","stream": true}] }
+  "misc.summonwhispers": { "category": "ambient", "sounds": [{"name": "misc/summonwhispers","stream": true}] },
   "mob.armadillodeath": { "category": "neutral", "sounds": ["mob/armadillodeath"]},
   "mob.armadillohurt": { "category": "neutral", "sounds": ["mob/armadillohurt"]},
   "mob.armadilloliving": { "category": "neutral", "sounds": ["mob/armadilloliving"]},
@@ -13,7 +13,7 @@
   "mob.mammothhurt": { "category": "neutral", "sounds": ["mob/mammothhurt"]},
   "mob.foxhurtsound": { "category": "neutral", "sounds": ["mob/foxhurtsound"]},
   "mob.boarliving": { "category": "neutral", "sounds": ["mob/boarliving1", "mob/boarliving2"]},
-  "mob/mimicliving": { "category": "neutral", "sounds": ["mob/mimicliving"]},
+  "mob.mimicliving": { "category": "neutral", "sounds": ["mob/mimicliving"]},
   "mob.bearliving": { "category": "neutral", "sounds": ["mob/bearliving"]},
   "mob.crocoodileliving": { "category": "neutral", "sounds": ["mob/crocoodileliving"]},
   "mob.froghurt": { "category": "neutral", "sounds": ["mob/froghurt"]},
@@ -40,5 +40,5 @@
   "mob.eaglehurt": { "category": "neutral", "sounds": ["mob/eaglehurt1"]},
   "mob.eagleliving": { "category": "neutral", "sounds": ["mob/eagleliving1", "mob/eagleliving2"]},
   "mob.hornbillhurt": { "category": "neutral", "sounds": ["mob/hornbillhurt1"]},
-  "mob.hornbillliving": { "category": "neutral", "sounds": ["mob/hornbillliving1", "mob/hornbillliving2", "mob/hornbillliving3"]},
+  "mob.hornbillliving": { "category": "neutral", "sounds": ["mob/hornbillliving1", "mob/hornbillliving2", "mob/hornbillliving3"]}
 }

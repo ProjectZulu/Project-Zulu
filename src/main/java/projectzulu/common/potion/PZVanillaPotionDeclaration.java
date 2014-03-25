@@ -24,6 +24,8 @@ import projectzulu.common.potion.subitem.SubItemPotionWeakness;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class PZVanillaPotionDeclaration extends ItemDeclaration {
 
     public PZVanillaPotionDeclaration() {
@@ -59,6 +61,7 @@ public class PZVanillaPotionDeclaration extends ItemDeclaration {
     protected void registerItem() {
         Item item = ItemList.vanillaPotions.get();
         registerSubPotions(item);
+        GameRegistry.registerItem(item, name);
     }
 
     private void registerSubPotions(Item itemID) {
@@ -71,7 +74,7 @@ public class PZVanillaPotionDeclaration extends ItemDeclaration {
     private void addToLists(Item itemID, int subID, SubItemPotionList entry, List<SubItemPotion> registryList,
             Class<? extends SubItemPotion> potionClass) {
         try {
-            SubItemPotion subItemPotion = potionClass.getConstructor(new Class[] { int.class, int.class }).newInstance(
+            SubItemPotion subItemPotion = potionClass.getConstructor(new Class[] { Item.class, int.class }).newInstance(
                     new Object[] { itemID, subID });
             entry.set(subItemPotion);
             registryList.add(subItemPotion);

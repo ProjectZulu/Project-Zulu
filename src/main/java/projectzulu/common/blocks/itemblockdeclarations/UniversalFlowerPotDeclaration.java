@@ -46,7 +46,7 @@ public class UniversalFlowerPotDeclaration extends BlockDeclaration {
     protected void registerBlock() {
         Block block = BlockList.universalFlowerPot.get();
         GameRegistry.registerBlock(block, name.toLowerCase());
-        new ItemUniversalFlowerPot(block);
+        GameRegistry.registerItem(new ItemUniversalFlowerPot(block), name);
         GameRegistry.registerTileEntity(TileEntityUniversalFlowerPot.class, "TileEntityUniversalFlowerPot");
     }
 

@@ -10,6 +10,8 @@ import projectzulu.common.potion.brewingstands.PotionIngredients;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class GenericCraftingItemsDeclaration extends ItemDeclaration {
 
     public GenericCraftingItemsDeclaration() {
@@ -18,7 +20,7 @@ public class GenericCraftingItemsDeclaration extends ItemDeclaration {
 
     @Override
     protected boolean createItem() {
-        ItemGenerics itemGenerics = (ItemGenerics) new ItemGenerics(10);
+        ItemGenerics itemGenerics = (ItemGenerics) new ItemGenerics();
         ItemList.genericCraftingItems = Optional.of(itemGenerics);
         PotionIngredients.addIngredientProperties(itemGenerics, itemGenerics);
         return true;
@@ -28,5 +30,6 @@ public class GenericCraftingItemsDeclaration extends ItemDeclaration {
     protected void registerItem() {
         Item item = ItemList.genericCraftingItems.get();
         OreDictionary.registerOre("foodSalt", new ItemStack(item, 1, ItemGenerics.Properties.Salt.meta()));
+        GameRegistry.registerItem(item, name);
     }
 }

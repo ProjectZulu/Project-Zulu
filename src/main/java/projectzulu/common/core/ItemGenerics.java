@@ -66,7 +66,7 @@ public class ItemGenerics extends Item implements IngredientProperty {
         }
     }
 
-    public ItemGenerics(int par2) {
+    public ItemGenerics() {
         super();
         this.setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setHasSubtypes(true);
