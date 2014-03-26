@@ -1,7 +1,11 @@
 package projectzulu.common;
 
+import java.io.File;
+
 import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
+import projectzulu.common.core.ItemBlockManager;
+import projectzulu.common.core.terrain.FeatureGenerator;
 import projectzulu.common.mobs.entitydefaults.AlligatorDeclaration;
 import projectzulu.common.mobs.entitydefaults.ArmadilloDeclaration;
 import projectzulu.common.mobs.entitydefaults.BearBlackDeclaration;
@@ -51,36 +55,20 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = DefaultProps.MobsModId, name = "Project Zulu Mobs", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
-public class ProjectZulu_Mobs {
+public class ProjectZulu_Mobs extends BaseModule {
 
-    @Instance(DefaultProps.MobsModId)
-    public static ProjectZulu_Mobs modInstance;
-
-    static {
-        declareModuleEntities();
+    @Override
+    public String getIdentifier() {
+        return DefaultProps.MobsModId;
     }
 
-    private static int id = 300;
-    private static int eggID = 300;
-
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-    }
-
-    @EventHandler
-    public void load(FMLInitializationEvent event) {
-
-    }
-
-    @EventHandler
-    public void load(FMLPostInitializationEvent event) {
-    }
-
-    private static void declareModuleEntities() {
-        CustomEntityManager.INSTANCE.addEntity(new ArmadilloDeclaration(), new SandwormDeclaration(),
-                new LizardDeclaration(), new LizardSpitDeclaration(), new PharaohDeclaration(), new MummyDeclaration(),
+    @Override
+    public void registration(CustomEntityManager manager) {
+        manager.addEntity(new ArmadilloDeclaration(), new SandwormDeclaration(), new LizardDeclaration(),
+                new LizardSpitDeclaration(), new PharaohDeclaration(), new MummyDeclaration(),
                 new VultureDeclaration(), new TreeEntDeclaration(), new MammothDeclaration(), new FoxDeclaration(),
                 new BoarDeclaration(), new MimicDeclaration(), new AlligatorDeclaration(), new FrogDeclaration(),
                 new PenguinDeclaration(), new BeaverDeclaration(), new BearBlackDeclaration(),

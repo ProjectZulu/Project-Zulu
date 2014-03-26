@@ -58,6 +58,7 @@ import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemBlockManager;
 import projectzulu.common.core.ProjectZuluLog;
+import projectzulu.common.core.terrain.FeatureGenerator;
 import projectzulu.common.dungeon.PotionEvents;
 import projectzulu.common.potion.EventHandleNullPotions;
 import projectzulu.common.potion.PZExtraPotionDeclaration;
@@ -69,22 +70,59 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = DefaultProps.BlocksModId, name = "Project Zulu Block and Items", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
-public class ProjectZulu_Blocks {
+public class ProjectZulu_Blocks extends BaseModule {
 
-    @Instance(DefaultProps.BlocksModId)
-    public static ProjectZulu_Blocks modInstance;
-
-    static {
-        declareModuleEntities();
-        declareModuleItemBlocks();
-        declareModuleTerrainFeatures();
+    @Override
+    public String getIdentifier() {
+        return DefaultProps.BlocksModId;
     }
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
+    @Override
+    public void registration(ItemBlockManager manager) {
+        manager.addItemBlock(new PZExtraPotionDeclaration(), new PZVanillaPotionDeclaration());
+
+        manager.addItemBlock(new AloeVeraDeclaration(), new WateredDirtDeclaration(), new TumbleweedDeclaration(),
+                new JasperDeclaration(), new PalmTreeLogDeclaration(), new PalmTreePlankDeclaration(),
+                new PalmTreeSlabDeclaration(), new PalmTreeDoubleSlabDeclaration(), new PalmTreeStairsDeclaration(),
+                new PalmTreeLeavesDeclaration(), new PalmTreeSapling(), new CoconutDeclaration(),
+                new QuickSandDeclaration(), new NightBloomDeclaration(), new CreeperBlossomDeclaration(),
+                new SpikesDeclaration(), new CampfireDeclaration(), new MobSkullsDeclaration(),
+                new TombstoneDeclaration(), new UniversalFlowerPotDeclaration(), new BrewingStandSingleDeclaration(),
+                new BrewingStandTripleDeclaration());
+
+        manager.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(), new WaterDropletDeclaration(),
+                new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(), new CoconutShellDeclaration(),
+                new ScaleItemDeclaration(), new FurPeltDeclaration(), new GenericCraftingItemsDeclaration(),
+                new CoconutItem(), new ScrapMeatDeclaration());
+
+        manager.addItemBlock(new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),
+                new GoldScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("goldscale")),
+                new IronScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("ironscale")),
+                new DiamondScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("diamondscale")), new WhiteClothArmor(
+                        ProjectZulu_Core.proxy.addArmor("whitedesertcloth")), new RedClothArmorDeclaration(
+                        ProjectZulu_Core.proxy.addArmor("reddesertcloth")), new GreenClothArmorDeclaration(
+                        ProjectZulu_Core.proxy.addArmor("greendesertcloth")), new BlueClothArmorDeclaration(
+                        ProjectZulu_Core.proxy.addArmor("bluedesertcloth")), new CactusArmorDeclaration(
+                        ProjectZulu_Core.proxy.addArmor("cactusarmor")),
+                new FurArmorDeclaration(ProjectZulu_Core.proxy.addArmor("mammothfur")));
+    }
+
+    @Override
+    public void registration(CustomEntityManager manager) {
+        manager.addEntity(new CreeperBlossomPrimedDefault());
+    }
+
+    @Override
+    public void registration(FeatureGenerator manager) {
+        manager.registerStructure(new AloeVeraFeature(), new CreeperBlossomFeature(), new NightBloomFeature(),
+                new PalmTreeFeature());
+    }
+
+    @Override
+    public void preInit(FMLPreInitializationEvent event, File configDirectory) {
         Configuration zuluConfig = new Configuration(new File(event.getModConfigurationDirectory(),
                 DefaultProps.configDirectory + DefaultProps.defaultConfigFile));
         zuluConfig.load();
@@ -94,13 +132,8 @@ public class ProjectZulu_Blocks {
         zuluConfig.save();
     }
 
-    @EventHandler
-    public void load(FMLInitializationEvent event) {
-
-    }
-
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
+    @Override
+    public void postInit(FMLPostInitializationEvent event, File configDirectory) {
         ItemBlockRecipeManager.setupBlockModuleRecipies();
 
         if (!PotionManager.potionModuleEnabled) {
@@ -118,54 +151,14 @@ public class ProjectZulu_Blocks {
         }
     }
 
-    @EventHandler
-    public void serverStart(FMLServerStartingEvent event) {
+    @Override
+    public void serverStarting(FMLServerStartingEvent event, File configDirectory) {
         /* Add Custom GameRules */
         GameRules gameRule = event.getServer().worldServerForDimension(0).getGameRules();
         /* Add Does Campfire Burn GameRule: Only if not Present */
         String ruleName = "doesCampfireBurn";
-        if (gameRule.hasRule(ruleName)) {
-        } else {
+        if (!gameRule.hasRule(ruleName)) {
             gameRule.addGameRule(ruleName, "false");
         }
-    }
-
-    private static void declareModuleEntities() {
-        CustomEntityManager.INSTANCE.addEntity(new CreeperBlossomPrimedDefault());
-    }
-
-    private static void declareModuleItemBlocks() {
-        ItemBlockManager.INSTANCE.addItemBlock(new PZExtraPotionDeclaration(), new PZVanillaPotionDeclaration());
-
-        ItemBlockManager.INSTANCE.addItemBlock(new AloeVeraDeclaration(), new WateredDirtDeclaration(),
-                new TumbleweedDeclaration(), /* new JasperDeclaration(), */new PalmTreeLogDeclaration(),
-                new PalmTreePlankDeclaration(), new PalmTreeSlabDeclaration(), new PalmTreeDoubleSlabDeclaration(),
-                new PalmTreeStairsDeclaration(), new PalmTreeLeavesDeclaration(), new PalmTreeSapling(),
-                new CoconutDeclaration(), new QuickSandDeclaration(), new NightBloomDeclaration(),
-                new CreeperBlossomDeclaration(), new SpikesDeclaration(), new CampfireDeclaration(),
-                new MobSkullsDeclaration(), new TombstoneDeclaration(), new UniversalFlowerPotDeclaration(),
-                new BrewingStandSingleDeclaration(), new BrewingStandTripleDeclaration());
-
-        ItemBlockManager.INSTANCE.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(),
-                new WaterDropletDeclaration(), new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(),
-                new CoconutShellDeclaration(), new ScaleItemDeclaration(), new FurPeltDeclaration(),
-                new GenericCraftingItemsDeclaration(), new CoconutItem(), new ScrapMeatDeclaration());
-
-        ItemBlockManager.INSTANCE.addItemBlock(
-                new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),
-                new GoldScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("goldscale")),
-                new IronScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("ironscale")),
-                new DiamondScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("diamondscale")), new WhiteClothArmor(
-                        ProjectZulu_Core.proxy.addArmor("whitedesertcloth")), new RedClothArmorDeclaration(
-                        ProjectZulu_Core.proxy.addArmor("reddesertcloth")), new GreenClothArmorDeclaration(
-                        ProjectZulu_Core.proxy.addArmor("greendesertcloth")), new BlueClothArmorDeclaration(
-                        ProjectZulu_Core.proxy.addArmor("bluedesertcloth")), new CactusArmorDeclaration(
-                        ProjectZulu_Core.proxy.addArmor("cactusarmor")),
-                new FurArmorDeclaration(ProjectZulu_Core.proxy.addArmor("mammothfur")));
-    }
-
-    private static void declareModuleTerrainFeatures() {
-        ProjectZulu_Core.featureGenerator.registerStructure(new AloeVeraFeature(), new CreeperBlossomFeature(),
-                new NightBloomFeature(), new PalmTreeFeature());
     }
 }

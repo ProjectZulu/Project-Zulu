@@ -8,10 +8,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ClientProxyProjectZulu extends CommonProxyProjectZulu{ 	
-	@Override
-	public void registerBlockRenders(){
-		RenderingRegistry.registerEntityRenderingHandler(EntityCreeperBlossomPrimed.class, new RenderCreeperBlossomPrimed(0.5f));
-	}
 	
 	@Override
 	public int addArmor(String armor){
@@ -24,13 +20,7 @@ public class ClientProxyProjectZulu extends CommonProxyProjectZulu{
 	}
 	
 	@Override
-	public void registerModelsAndRender(){
+	public void registerModelsAndRender() {
 		CustomEntityManager.INSTANCE.registerModelsAndRender();
-	}
-	
-	@Deprecated
-	@Override
-	public void registerAudioLoader(){
-//        MinecraftForge.EVENT_BUS.register(new AudioLoader());
 	}
 }

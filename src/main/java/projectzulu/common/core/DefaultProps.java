@@ -43,6 +43,7 @@ public class DefaultProps {
     public static final String streamingResourcesDirectory = "streaming/";
     public static final String soundResourcesDirectory = "sound/";
     public static final String defaultConfigFile = "ProjectZuluConfig.cfg";
+    public static final String moduleConfigFile = "ProjectZuluModules.cfg";
     public static final String tempConfigFile = "tempSettingsConfig.cfg";
     public static final String mobBiomeSpawnConfigFile = "ProjectZuluMobBiomeConfig.cfg";
     public static final String structureBiomeConfigFile = "ProjectZuluTerrainFeature.cfg";

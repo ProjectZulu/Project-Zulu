@@ -1,8 +1,12 @@
 package projectzulu.common;
 
+import java.io.File;
+
 import projectzulu.common.blocks.itemblockdeclarations.StructurePlacerDeclaration;
+import projectzulu.common.core.CustomEntityManager;
 import projectzulu.common.core.DefaultProps;
 import projectzulu.common.core.ItemBlockManager;
+import projectzulu.common.core.terrain.FeatureGenerator;
 import projectzulu.common.world.terrain.CathedralFeature;
 import projectzulu.common.world.terrain.CemetaryFeature;
 import projectzulu.common.world.terrain.LabyrinthFeature;
@@ -14,32 +18,24 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = DefaultProps.WorldModId, name = "Project Zulu World", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DEPENDENCY_CORE)
-public class ProjectZulu_World {
+public class ProjectZulu_World extends BaseModule {
 
-    @Instance(DefaultProps.WorldModId)
-    public static ProjectZulu_World modInstance;
-
-    public ProjectZulu_World() {
-        ItemBlockManager.INSTANCE.addItemBlock(new StructurePlacerDeclaration());
+    @Override
+    public String getIdentifier() {
+        return DefaultProps.WorldModId;
     }
 
-    static {
-        ProjectZulu_Core.featureGenerator.registerStructure(new PyramidFeature(), new LabyrinthFeature(),
-                new CemetaryFeature(), new OasisFeature(), new CathedralFeature());
+    @Override
+    public void registration(ItemBlockManager manager) {
+        manager.addItemBlock(new StructurePlacerDeclaration());
     }
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-
-    }
-
-    @EventHandler
-    public void load(FMLInitializationEvent event) {
-    }
-
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
+    @Override
+    public void registration(FeatureGenerator manager) {
+        manager.registerStructure(new PyramidFeature(), new LabyrinthFeature(), new CemetaryFeature(),
+                new OasisFeature(), new CathedralFeature());
     }
 }

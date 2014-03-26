@@ -1,6 +1,10 @@
 package projectzulu.common;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,6 +23,10 @@ import projectzulu.common.core.PacketPipeline;
 import projectzulu.common.core.ProjectZuluLog;
 import projectzulu.common.core.ZuluGuiHandler;
 import projectzulu.common.core.terrain.FeatureGenerator;
+import projectzulu.common.dungeon.commands.CommandPlaceBlock;
+import projectzulu.common.dungeon.commands.CommandPlaySound;
+import projectzulu.common.dungeon.commands.CommandSpawnEntity;
+import projectzulu.common.dungeon.commands.CommandStreamSound;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -26,6 +34,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -36,22 +46,7 @@ public class ProjectZulu_Core {
     @Instance(DefaultProps.CoreModId)
     public static ProjectZulu_Core modInstance;
 
-    private static int defaultEntityID = 0;
-    private static int defaultBlockID = 1200;
-    private static int defaultItemID = 9000;
     private static int defaulteggID = 300;
-
-    public static int getNextDefaultEntityID() {
-        return defaultEntityID++;
-    }
-
-    public static int getNextDefaultBlockID() {
-        return defaultBlockID++;
-    }
-
-    public static int getNextDefaultItemID() {
-        return defaultItemID++;
-    }
 
     public static int getNextDefaultEggID() {
         return defaulteggID++;
@@ -95,11 +90,45 @@ public class ProjectZulu_Core {
     @SidedProxy(clientSide = "projectzulu.common.ClientProxyProjectZulu", serverSide = "projectzulu.common.CommonProxyProjectZulu")
     public static CommonProxyProjectZulu proxy;
 
+    private class ModuleInfo {
+        public Module module;
+        public boolean isEnabled;
+
+        public ModuleInfo(Module module) {
+            this.module = module;
+            isEnabled = true;
+        }
+
+        public String getIdentifier() {
+            return module.getIdentifier();
+        }
+    }
+
+    private List<ModuleInfo> modules = new ArrayList<ProjectZulu_Core.ModuleInfo>();
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         modConfigDirectoryFile = event.getModConfigurationDirectory();
 
         ProjectZuluLog.configureLogging(modConfigDirectoryFile);
+        attemptLoadModule("projectzulu.common.ProjectZulu_Blocks");
+        attemptLoadModule("projectzulu.common.ProjectZulu_Mobs");
+        attemptLoadModule("projectzulu.common.ProjectZulu_Dungeon");
+        attemptLoadModule("projectzulu.common.ProjectZulu_World");
+
+        Configuration moduleConfig = new Configuration(new File(event.getModConfigurationDirectory(),
+                DefaultProps.configDirectory + DefaultProps.moduleConfigFile));
+        moduleConfig.load();
+        for (ModuleInfo moduleInfo : modules) {
+            moduleInfo.isEnabled = moduleConfig.get("isEnabled", moduleInfo.getIdentifier(), true,
+                    "Set to false to disable module.").getBoolean(true);
+            if (moduleInfo.isEnabled) {
+                ProjectZuluLog.info("Module [%s] settings read and will be loaded.", moduleInfo.getIdentifier());
+            } else {
+                ProjectZuluLog.info("Module [%s] settings read and will be disabled.", moduleInfo.getIdentifier());
+            }
+        }
+        moduleConfig.save();
         Configuration zuluConfig = new Configuration(new File(event.getModConfigurationDirectory(),
                 DefaultProps.configDirectory + DefaultProps.defaultConfigFile));
         Properties.loadFromConfig(modConfigDirectoryFile);
@@ -109,7 +138,16 @@ public class ProjectZulu_Core {
         zuluConfig.save();
 
         proxy.bossHealthTicker();
-        ProjectZulu_Core.proxy.registerAudioLoader();
+        packetPipeline = new PacketPipeline("ProjectZulu");
+
+        for (ModuleInfo moduleInfo : modules) {
+            if (moduleInfo.isEnabled) {
+                moduleInfo.module.registration(CustomEntityManager.INSTANCE);
+                moduleInfo.module.registration(ItemBlockManager.INSTANCE);
+                moduleInfo.module.registration(featureGenerator);
+                moduleInfo.module.preInit(event, modConfigDirectoryFile);
+            }
+        }
 
         ProjectZuluLog.info("Load Entity Models and Render");
         ProjectZulu_Core.proxy.registerModelsAndRender();
@@ -125,13 +163,36 @@ public class ProjectZulu_Core {
 
         ProjectZuluLog.info("Registering Entites");
         CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);
-        packetPipeline = new PacketPipeline("ProjectZulu");
+    }
+
+    private void attemptLoadModule(String classResourceName) {
+        try {
+            Class moduleClass = Class.forName(classResourceName);
+            if (Module.class.isAssignableFrom(moduleClass)) {
+                Module module = (Module) (moduleClass.newInstance());
+                ProjectZuluLog.info("Detected %s module.", module.getIdentifier());
+                modules.add(new ModuleInfo(module));
+            }
+        } catch (ClassNotFoundException e) {
+            ProjectZuluLog.info("Module [%s] missing; will be disabled.", classResourceName);
+        } catch (InstantiationException e) {
+            ProjectZuluLog.severe("Failed to instantiate %s, report to modder.", classResourceName);
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            ProjectZuluLog.severe("Failed to instantiate %s, report to modder.", classResourceName);
+            e.printStackTrace();
+        }
     }
 
     @EventHandler
     public void load(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(ProjectZulu_Core.modInstance, new ZuluGuiHandler());
         packetPipeline.initialise(event);
+        for (ModuleInfo moduleInfo : modules) {
+            if (moduleInfo.isEnabled) {
+                moduleInfo.module.init(event, modConfigDirectoryFile);
+            }
+        }
     }
 
     @EventHandler
@@ -149,5 +210,28 @@ public class ProjectZulu_Core {
         ProjectZuluLog.info("Initializing TerrainFeatures");
         featureGenerator.initialize(modConfigDirectoryFile);
         GameRegistry.registerWorldGenerator(featureGenerator, 1);
+        for (ModuleInfo moduleInfo : modules) {
+            if (moduleInfo.isEnabled) {
+                moduleInfo.module.postInit(event, modConfigDirectoryFile);
+            }
+        }
+    }
+
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
+        for (ModuleInfo moduleInfo : modules) {
+            if (moduleInfo.isEnabled) {
+                moduleInfo.module.serverStarting(event, modConfigDirectoryFile);
+            }
+        }
+    }
+
+    @EventHandler
+    public void serverStart(FMLServerStartedEvent event) {
+        for (ModuleInfo moduleInfo : modules) {
+            if (moduleInfo.isEnabled) {
+                moduleInfo.module.serverStart(event, modConfigDirectoryFile);
+            }
+        }
     }
 }
