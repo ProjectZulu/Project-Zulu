@@ -1,6 +1,6 @@
 [
 {
-  "modid": "projectzulu|core",
+  "modid": "ProjectZulu|Core",
   "name": "Project Zulu",
   "description": "Providing unique blocks, mobs, and structures",
   "version": "${version}",

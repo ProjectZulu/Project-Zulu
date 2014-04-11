@@ -17,14 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.2.7.3"
-group= "com.tarion.projectzulu" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "1.2.8.0"
+group = "com.tarion.projectzulu"
 archivesBaseName = "ProjectZulu"
 
 minecraft {
-	  version = "1.7.2-10.12.0.1047"
-	//version = "1.7.2-10.12.0.1034"
-    //version = "1.7.2-10.12.0.1019"
+	version = "1.7.2-10.12.0.1047"
     assetDir = "eclipse/assets"
 }
 

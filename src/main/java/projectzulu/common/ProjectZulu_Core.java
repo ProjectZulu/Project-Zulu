@@ -40,7 +40,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /*Useful OpenSource reference to Look at: ExtrabiomesXL, Gaurdsman*/
-@Mod(modid = DefaultProps.CoreModId, name = "Project Zulu Core", version = DefaultProps.VERSION_STRING, dependencies = DefaultProps.DesiredBefore)
+@Mod(modid = DefaultProps.CoreModId, name = "Project Zulu Core", dependencies = DefaultProps.DesiredBefore, useMetadata = true)
 public class ProjectZulu_Core {
 
     @Instance(DefaultProps.CoreModId)
@@ -149,7 +149,7 @@ public class ProjectZulu_Core {
             }
         }
 
-        ProjectZuluLog.info("Load Entity Models and Render");
+        ProjectZuluLog.info("Load Entity Moxdels and Render");
         ProjectZulu_Core.proxy.registerModelsAndRender();
 
         ProjectZuluLog.info("Load Entity Properties");
