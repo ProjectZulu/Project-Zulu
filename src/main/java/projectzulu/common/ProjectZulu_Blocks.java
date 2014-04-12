@@ -49,7 +49,7 @@ import projectzulu.common.blocks.itemblockdeclarations.TumbleweedDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.UniversalFlowerPotDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.WaterDropletDeclaration;
 import projectzulu.common.blocks.itemblockdeclarations.WateredDirtDeclaration;
-import projectzulu.common.blocks.itemblockdeclarations.WhiteClothArmor;
+import projectzulu.common.blocks.itemblockdeclarations.WhiteClothArmorDeclaration;
 import projectzulu.common.blocks.terrain.AloeVeraFeature;
 import projectzulu.common.blocks.terrain.CreeperBlossomFeature;
 import projectzulu.common.blocks.terrain.NightBloomFeature;
@@ -101,7 +101,7 @@ public class ProjectZulu_Blocks extends BaseModule {
         manager.addItemBlock(new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),
                 new GoldScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("goldscale")),
                 new IronScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("ironscale")),
-                new DiamondScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("diamondscale")), new WhiteClothArmor(
+                new DiamondScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("diamondscale")), new WhiteClothArmorDeclaration(
                         ProjectZulu_Core.proxy.addArmor("whitedesertcloth")), new RedClothArmorDeclaration(
                         ProjectZulu_Core.proxy.addArmor("reddesertcloth")), new GreenClothArmorDeclaration(
                         ProjectZulu_Core.proxy.addArmor("greendesertcloth")), new BlueClothArmorDeclaration(

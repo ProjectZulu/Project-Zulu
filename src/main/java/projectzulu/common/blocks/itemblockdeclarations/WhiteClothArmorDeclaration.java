@@ -8,11 +8,13 @@ import projectzulu.common.core.itemblockdeclaration.ItemSetDeclaration;
 
 import com.google.common.base.Optional;
 
-public class WhiteClothArmor extends ItemSetDeclaration {
+import cpw.mods.fml.common.registry.GameRegistry;
+
+public class WhiteClothArmorDeclaration extends ItemSetDeclaration {
 
     public final int renderIndex;
 
-    public WhiteClothArmor(int renderIndex) {
+    public WhiteClothArmorDeclaration(int renderIndex) {
         super(new String[] { "WhiteClothHelmet", "WhiteClothChest", "WhiteClothLegs", "WhiteClothBoots" });
         this.renderIndex = renderIndex;
     }
@@ -41,5 +43,21 @@ public class WhiteClothArmor extends ItemSetDeclaration {
 
     @Override
     protected void registerItem(int partIndex) {
+        Item item = null;
+        switch (partIndex) {
+        case 0:
+            item = ItemList.whiteClothHead.get();
+            break;
+        case 1:
+            item = ItemList.whiteClothChest.get();
+            break;
+        case 2:
+            item = ItemList.whiteClothLeg.get();
+            break;
+        case 3:
+            item = ItemList.whiteClothBoots.get();
+            break;
+        }
+        GameRegistry.registerItem(item, name[partIndex]);
     }
 }
