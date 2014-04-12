@@ -105,6 +105,18 @@ public class ObfuscationHelper {
 	    return getFieldFromReflection(fieldName, containterInstance.getClass(), containterInstance, type);
 	}
 	
+    /**
+     * Get Non-Static Field
+     */
+    public static <T> T getFieldFromReflection(String srgName, String sourceName, Object containterInstance,
+            Class<T> type) {
+        try {
+            return getCatchableFieldFromReflection(srgName, containterInstance.getClass(), containterInstance, type);
+        } catch (NoSuchFieldException e) {
+            return getFieldFromReflection(sourceName, containterInstance.getClass(), containterInstance, type);
+        }
+    }
+
     public static <T> T getFieldFromReflection(String fieldName, Class<?> containingClass, Object containterInstance,
             Class<T> type) {
         try {

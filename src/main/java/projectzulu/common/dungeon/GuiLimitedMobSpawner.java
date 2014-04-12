@@ -140,15 +140,11 @@ public class GuiLimitedMobSpawner extends GuiScreen {
                  * Grab "nameToSoundPoolEntriesMapping" : OBFSC: "m" : nameToSoundPoolEntriesMapping --> fields.csv -->
                  * joined.srg --> d
                  */
-                HashMap soundHash;
-                try {
-                    SoundRegistry registry = ObfuscationHelper.getCatchableFieldFromReflection("field_147697_e", mc.getSoundHandler(), SoundRegistry.class);
-                    soundHash = ObfuscationHelper.getCatchableFieldFromReflection("field_148764_a", registry, HashMap.class);
-                } catch (NoSuchFieldException e) {
-                    SoundRegistry registry = ObfuscationHelper.getFieldFromReflection("sndRegistry",
-                            mc.getSoundHandler(), SoundRegistry.class);
-                    soundHash = ObfuscationHelper.getFieldFromReflection("field_148764_a", registry, HashMap.class);
-                }
+                SoundRegistry registry = ObfuscationHelper.getFieldFromReflection("field_147697_e", "sndRegistry",
+                        mc.getSoundHandler(), SoundRegistry.class);
+                HashMap soundHash = ObfuscationHelper.getFieldFromReflection("field_148764_a", "field_148764_a",
+                        registry, HashMap.class);
+
                 if (soundHash != null) {
                     Iterator stringSoundIterator = soundHash.keySet().iterator();
                     while (stringSoundIterator.hasNext()) {

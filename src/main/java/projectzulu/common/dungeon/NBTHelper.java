@@ -296,7 +296,7 @@ public enum NBTHelper {
         ArrayList<NBTNode> getChildTags(NBTBase currentTag, NBTNode currentNode) {
             ArrayList children = new ArrayList();
             NBTTagList nbtTagList = (NBTTagList) currentTag;
-            List listOtags = ObfuscationHelper.getFieldFromReflection("tagList", nbtTagList, List.class);
+            List listOtags = ObfuscationHelper.getFieldFromReflection("field_74747_a", "tagList", nbtTagList, List.class);
             for (int i = 0; i < nbtTagList.tagCount(); i++) {
                 children.add(new NBTNode((NBTBase) listOtags.get(i), currentNode, ""));
             }
@@ -318,7 +318,7 @@ public enum NBTHelper {
         String getValue(NBTBase currentTag) {
             NBTTagList tagList = (NBTTagList) currentTag;
             String stringBuilder = "";
-            List listOtags = ObfuscationHelper.getFieldFromReflection("tagList", tagList, List.class);
+            List listOtags = ObfuscationHelper.getFieldFromReflection("field_74747_a", "tagList", tagList, List.class);
             for (int i = 0; i < tagList.tagCount(); i++) {
                 stringBuilder = stringBuilder + "" + ":" + ((NBTBase) listOtags.get(i)).getId() + ",";
             }
@@ -328,7 +328,7 @@ public enum NBTHelper {
         @Override
         NBTBase getNBTFromString(NBTBase currentNBT, String newValue) {
             NBTTagList oldTagList = (NBTTagList) currentNBT;
-            List listOtags = ObfuscationHelper.getFieldFromReflection("tagList", oldTagList, List.class);
+            List listOtags = ObfuscationHelper.getFieldFromReflection("field_74747_a", "tagList", oldTagList, List.class);
             String[] newValueParts = newValue.split(",");
             NBTTagList newTagList = new NBTTagList();
             for (int i = 0; i < newValueParts.length; i++) {

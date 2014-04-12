@@ -3,6 +3,7 @@ package projectzulu.common.dungeon.spawner.tag;
 import java.util.IllegalFormatException;
 import java.util.List;
 
+import net.minecraft.client.audio.SoundRegistry;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagByteArray;
@@ -59,7 +60,8 @@ public class NBTWriter {
                     tag.appendTag(child);
                 }
                 if (childtag == 9 || childtag == 10) {
-                    List tagList = ObfuscationHelper.getFieldFromReflection("tagList", tag, List.class);
+                    List tagList = ObfuscationHelper
+                            .getFieldFromReflection("field_74747_a", "tagList", tag, List.class);
                     return (NBTBase) tagList.get(listIndex);
                 } else {
                     return tag;
