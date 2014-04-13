@@ -6,6 +6,8 @@ import projectzulu.common.core.itemblockdeclaration.ItemDeclaration;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class CoconutShellDeclaration extends ItemDeclaration {
 
     public CoconutShellDeclaration() {
@@ -20,5 +22,6 @@ public class CoconutShellDeclaration extends ItemDeclaration {
 
     @Override
     protected void registerItem() {
+        GameRegistry.registerItem(ItemList.coconutShell.get(), name);
     }
 }

@@ -6,6 +6,8 @@ import projectzulu.common.core.itemblockdeclaration.ItemDeclaration;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class CoconutMilkFragmentDeclaration extends ItemDeclaration {
 
     public CoconutMilkFragmentDeclaration() {
@@ -20,5 +22,6 @@ public class CoconutMilkFragmentDeclaration extends ItemDeclaration {
 
     @Override
     protected void registerItem() {
+        GameRegistry.registerItem(ItemList.coconutMilkFragment.get(), name);
     }
 }

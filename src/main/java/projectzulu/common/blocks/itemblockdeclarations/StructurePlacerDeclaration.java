@@ -6,6 +6,8 @@ import projectzulu.common.core.itemblockdeclaration.ItemDeclaration;
 
 import com.google.common.base.Optional;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class StructurePlacerDeclaration extends ItemDeclaration {
 
     public StructurePlacerDeclaration() {
@@ -20,5 +22,6 @@ public class StructurePlacerDeclaration extends ItemDeclaration {
 
     @Override
     protected void registerItem() {
+        GameRegistry.registerItem(ItemList.structurePlacer.get(), name);
     }
 }

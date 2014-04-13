@@ -1,10 +1,14 @@
 package projectzulu.common.blocks.itemblockdeclarations;
 
+import net.minecraft.block.Block;
+import projectzulu.common.api.BlockList;
 import projectzulu.common.api.ItemList;
 import projectzulu.common.blocks.ItemFoodProjectZulu;
 import projectzulu.common.core.itemblockdeclaration.ItemDeclaration;
 
 import com.google.common.base.Optional;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class WaterDropletDeclaration extends ItemDeclaration {
 
@@ -20,5 +24,6 @@ public class WaterDropletDeclaration extends ItemDeclaration {
 
     @Override
     protected void registerItem() {
+        GameRegistry.registerItem(ItemList.waterDroplets.get(), name);
     }
 }
