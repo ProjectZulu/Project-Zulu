@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -131,9 +132,9 @@ public class EventHookContainerClass {
                         Entity entity = (Entity) entIterator.next();
                         if (((EntityTreeEnt) entity).getAngerLevel() <= 0
                                 && worldObj.rayTraceBlocks(
-                                        worldObj.getWorldVec3Pool().getVecFromPool(player.posX,
+                                        Vec3.createVectorHelper(player.posX,
                                                 player.posY + player.getEyeHeight(), player.posZ),
-                                        worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY,
+                                        Vec3.createVectorHelper(entity.posX, entity.posY,
                                                 entity.posZ)) == null) {
                             if (!worldObj.isRemote) {
                                 ((EntityTreeEnt) entity).setAttackTarget(player);

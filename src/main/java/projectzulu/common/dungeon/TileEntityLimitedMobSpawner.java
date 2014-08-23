@@ -251,8 +251,7 @@ public class TileEntityLimitedMobSpawner extends TileEntity {
                     int var4 = this.worldObj.getEntitiesWithinAABB(
                             var13.getClass(),
                             AxisAlignedBB
-                                    .getAABBPool()
-                                    .getAABB(xCoord + spawnRangeOffsetX, yCoord + spawnRangeOffsetY,
+                                    .getBoundingBox(xCoord + spawnRangeOffsetX, yCoord + spawnRangeOffsetY,
                                             zCoord + spawnRangeOffsetZ, xCoord + spawnRangeOffsetX + 1,
                                             yCoord + spawnRangeOffsetY + 1, zCoord + spawnRangeOffsetZ + 1)
                                     .expand(spawnRangeHorizontal * 2, spawnRangeVertical * 2 + 2,

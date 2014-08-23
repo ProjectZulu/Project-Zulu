@@ -44,7 +44,7 @@ public class BossHealthDisplayTicker {
         FontRenderer fontRenderer = mc.fontRenderer;
 
         /* Draw Title */
-        ScaledResolution var3 = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+        ScaledResolution var3 = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
         int screenWidth = var3.getScaledWidth();
         byte healthBarHeight = 12;
         fontRenderer.drawStringWithShadow(healthBarTitle, screenWidth / 2 - fontRenderer.getStringWidth(healthBarTitle)
