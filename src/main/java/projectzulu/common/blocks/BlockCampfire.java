@@ -160,7 +160,7 @@ public class BlockCampfire extends Block implements ITempBlock {
      */
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-        return AxisAlignedBB.getAABBPool().getAABB(par2 + this.minX, par3 + this.minY, par4 + this.minZ,
+        return AxisAlignedBB.getBoundingBox(par2 + this.minX, par3 + this.minY, par4 + this.minZ,
                 par2 + this.maxX, par3 + 0.3, par4 + this.maxZ);
     }
 

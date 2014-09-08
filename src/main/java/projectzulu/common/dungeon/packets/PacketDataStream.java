@@ -10,6 +10,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 import projectzulu.common.core.PZPacket;
 import projectzulu.common.core.ProjectZuluLog;
@@ -65,7 +66,7 @@ public abstract class PacketDataStream implements PZPacket {
         } else {
             byte[] var2 = new byte[var1];
             par0DataInputStream.readFully(var2);
-            return CompressedStreamTools.decompress(var2);
+            return CompressedStreamTools.func_152457_a(var2,NBTSizeTracker.field_152451_a);
         }
     }
 

@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.2.8.3"
+version = "1.2.8.4"
 group = "com.tarion.projectzulu"
 archivesBaseName = "ProjectZulu"
 
 minecraft {
-	version = "1.7.2-10.12.0.1047"
+	version = "1.7.10-10.13.0.1208"
     assetDir = "eclipse/assets"
 }
 

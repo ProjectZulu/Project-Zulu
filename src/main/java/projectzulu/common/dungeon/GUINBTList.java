@@ -46,8 +46,7 @@ public class GUINBTList extends GuiScrollingList {
 
     @Override
     protected void elementClicked(int clickedIndex, boolean var2) {
-        ProjectZuluLog.info("Clicked on Tag of Type %s with name %s", nodeList.get(clickedIndex).getData()
-                .func_150283_g(nodeList.get(clickedIndex).getData().getId()), nodeList.get(clickedIndex).getTagName());
+        ProjectZuluLog.info("Clicked on Tag of Type %s with name %s", nodeList.get(clickedIndex).getData().NBTTypes[nodeList.get(clickedIndex).getData().getId()], nodeList.get(clickedIndex).getTagName());
         // if(nodeList.get(clickedIndex).getChildren().size() == 0){
         parent.setSelectedCurentNode(nodeList.get(clickedIndex));
         selectedElement = clickedIndex;

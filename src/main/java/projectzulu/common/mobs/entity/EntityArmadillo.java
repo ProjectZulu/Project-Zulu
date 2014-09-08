@@ -11,6 +11,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import projectzulu.common.api.BlockList;
 import projectzulu.common.core.DefaultProps;
@@ -150,9 +151,8 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 
                 // Condition 3: Can the player see the target
                 canSee = this.worldObj.rayTraceBlocks(
-                        worldObj.getWorldVec3Pool().getVecFromPool(tempE.posX, tempE.posY + tempE.getEyeHeight(),
-                                tempE.posZ), worldObj.getWorldVec3Pool()
-                                .getVecFromPool(this.posX, this.posY, this.posZ)) == null;
+                        Vec3.createVectorHelper(tempE.posX, tempE.posY + tempE.getEyeHeight(),
+                                tempE.posZ), Vec3.createVectorHelper(this.posX, this.posY, this.posZ)) == null;
             }
             /* If any of the conditions above failed, then Armadillo should not be in Cover */
             if (tempE == null || canSee == false || tempE.isUsingItem() == false || isFacing == false

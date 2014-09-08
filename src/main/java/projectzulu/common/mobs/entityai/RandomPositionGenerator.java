@@ -95,7 +95,7 @@ public class RandomPositionGenerator
         }
 
         if (var5) {
-            return par0EntityCreature.worldObj.getWorldVec3Pool().getVecFromPool((double)var6, (double)var7, (double)var8);
+            return Vec3.createVectorHelper((double)var6, (double)var7, (double)var8);
         }
         else {
             return null;
@@ -157,7 +157,7 @@ public class RandomPositionGenerator
         }
 
         if (var5) {
-            return entity.worldObj.getWorldVec3Pool().getVecFromPool((double)var6, (double)var7, (double)var8);
+            return Vec3.createVectorHelper((double)var6, (double)var7, (double)var8);
         }
         else {
             return null;
